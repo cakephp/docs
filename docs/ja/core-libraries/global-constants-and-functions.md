@@ -247,35 +247,24 @@ context は、同じドメイン内で一意にする翻訳文字列の一意の
 ## コア定義定数
 
 以下のほとんどの定数はあなたのアプリケーション内部のパスへの参照です。
-
-::: pieceofcake2 パスの定数
-いくつかのパス定数は、アプリケーションのレイアウトによって値が変わります。
-
-| 定数 | レガシーレイアウト | モダンレイアウト |
-|------|--------------------|------------------|
-| `APP_DIR` | `app` | `src` |
-| `CONFIG` | `app/Config/` | `config/` |
-| `TESTS` | `app/Test/` | `tests/` |
-| `TMP` | `app/tmp/` | `tmp/` |
-| `LOGS` | `app/tmp/logs/` | `logs/` |
-| `WWW_ROOT` | `app/webroot/` | `webroot/` |
-
-フレームワーク本体は `vendor/pieceofcake2/cakephp/` にあります。`CAKE_CORE_INCLUDE_PATH` はその `src/` ディレクトリを、
-`CAKE` は `src/Cake/` を指します。新しく追加された `CORE_ROOT` 定数はフレームワークのルートディレクトリです。
-詳しくは [ディレクトリ構成](/ja/pieceofcake2/directory-structure) を参照してください。
-:::
+ここに示す値はモダンレイアウトの場合のものです。`ROOT` はプロジェクトのルートで、
+フレームワークは Composer によって `vendor/pieceofcake2/cakephp/` にインストールされます。
+レガシーレイアウト (`app/`) では、アプリケーション側の定数は `app/` 以下を指します
+(たとえば `CONFIG` は `app/Config/`、`TESTS` は `app/Test/` です)。
+詳しくは [ディレクトリ構成](/ja/appendices/migrating-to-the-modern-layout) を参照してください。
 
 `constant` **APP**
 
 末尾にスラッシュを含むアプリケーションディレクトリへの絶対パス。
+モダンレイアウトでは `src/` です。
 
 `constant` **APP_DIR**
 
-あなたのアプリケーションのディレクトリ名。`app` かも知れません。
+アプリケーションのディレクトリ名。モダンレイアウトでは `src`、レガシーレイアウトでは `app` です。
 
 `constant` **APPLIBS**
 
-アプリケーションの Lib ディレクトリへのパス。
+アプリケーションの Lib ディレクトリ (`src/Lib/`) へのパス。
 
 `constant` **CACHE**
 
@@ -284,22 +273,27 @@ context は、同じドメイン内で一意にする翻訳文字列の一意の
 
 `constant` **CAKE**
 
-cake ディレクトリへのパス。
+フレームワークの `Cake` ディレクトリ (`vendor/pieceofcake2/cakephp/src/Cake/`) へのパス。
 
 `constant` **CAKE_CORE_INCLUDE_PATH**
 
-ルートの lib ディレクトリへのパス。
+フレームワークの `src` ディレクトリ (`vendor/pieceofcake2/cakephp/src`) へのパス。
 
 `constant` **CONFIG**
 
-app/Config ディレクトリーへのパス。
+設定ディレクトリ (`config/`) へのパス。
 
 ::: info Added in version 2.10.0
 :::
 
 `constant` **CORE_PATH**
 
-ルートディレクトリへの、末尾にディレクトリスラッシュを付加したパス。
+フレームワークの `src` ディレクトリへの、末尾にディレクトリスラッシュを付加したパス。
+
+`constant` **CORE_ROOT**
+
+フレームワークのパッケージのルートディレクトリ (`vendor/pieceofcake2/cakephp`) へのパス。
+Piece of Cake 2 フォークで追加された定数です。
 
 `constant` **CSS**
 
@@ -360,23 +354,23 @@ JavaScript の公開ディレクトリへのウェブパス。
 
 `constant` **LOGS**
 
-ログディレクトリへのパス。
+ログディレクトリ (`logs/`) へのパス。レガシーレイアウトでは `app/tmp/logs/` です。
 
 `constant` **ROOT**
 
-ルートディレクトリへのパス。
+プロジェクトのルートディレクトリへのパス。
 
 `constant` **TESTS**
 
-テストディレクトリへのパス。
+テストディレクトリ (`tests/`) へのパス。
 
 `constant` **TMP**
 
-一時ファイルディレクトリへのパス。
+一時ファイルディレクトリ (`tmp/`) へのパス。
 
 `constant` **VENDORS**
 
-ベンダーディレクトリへのパス。
+Composer の vendor ディレクトリ (`vendor/`) へのパス。
 
 `constant` **WEBROOT_DIR**
 
@@ -384,7 +378,7 @@ JavaScript の公開ディレクトリへのウェブパス。
 
 `constant` **WWW_ROOT**
 
-ウェブルートへのフルパス。
+ウェブルート (`webroot/`) へのフルパス。
 
 ## 時間定義定数
 

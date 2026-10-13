@@ -1,59 +1,47 @@
 # Piece of Cake 2
 
-::: pieceofcake2
-This page is specific to the **pieceofcake2 fork** and is not part of the
-original CakePHP 2.x documentation. Throughout this book, boxes like this one
-mark content that only applies to the fork.
-:::
+[Piece of Cake 2](https://github.com/pieceofcake2) is a community project that
+keeps CakePHP 2 applications running on current PHP versions. It maintains
+[pieceofcake2/cakephp](https://github.com/pieceofcake2/cakephp), a fork of
+CakePHP 2.x that runs on PHP 8.0 and newer, together with an application
+skeleton, the Bake plugin and forks of popular CakePHP 2 plugins.
 
-[pieceofcake2/cakephp](https://github.com/pieceofcake2/cakephp) is a
-community-maintained fork of CakePHP 2.x that provides compatibility with
-PHP 8.0 and newer. It is maintained by the
-[Piece of Cake 2](https://github.com/pieceofcake2) project, which also
-maintains forks of popular CakePHP 2 plugins.
-The original CakePHP 2.x branch
-[reached End of Life in June 2021](https://bakery.cakephp.org/2021/10/02/cakephp_2_eol.html).
+The CakePHP project ended support for CakePHP 2.x in
+[June 2021](https://bakery.cakephp.org/2021/10/02/cakephp_2_eol.html).
+The fork is based on CakePHP 2.10.24 and focuses on PHP compatibility, bug
+fixes and security fixes. It does not add new features.
 
 ::: warning
-**Do not use CakePHP 2.x for new projects.** This fork exists to keep existing
-legacy applications running. For new projects, use
-[CakePHP 5.x](https://book.cakephp.org/5/en/).
+CakePHP 2 is for maintaining existing applications. If you are starting a new
+project, use [CakePHP 5](https://book.cakephp.org/5/en/).
 :::
 
-## Requirements
+## About this book
 
-- PHP 8.0, 8.1, 8.2, 8.3, 8.4, 8.5
-- Composer (installation without Composer is not supported)
-- MySQL 5.6+, PostgreSQL 9.4+, SQLite 3, or Microsoft SQL Server 2022+
+This book is the CakePHP 2 Cookbook, updated to describe CakePHP 2 as it works
+on the fork today: installation with Composer, PHP 8, and the modern directory
+layout used by [pieceofcake2/app](https://github.com/pieceofcake2/app).
+[Changes from the Original Book](/pieceofcake2/changes) lists the pages that
+differ from the original CakePHP 2.x documentation.
 
-The fork is based on CakePHP **2.10.24**. Earlier versions are not supported.
+## Where to start
 
-## Installation
-
-```json
-{
-    "require": {
-        "pieceofcake2/cakephp": "^2.10"
-    }
-}
-```
-
-`pieceofcake2/cakephp` uses Composer's `replace` directive for
-`cakephp/cakephp`, so plugins that depend on `cakephp/cakephp:^2.x` keep working.
-
-## Fork documentation
-
-- [Installation](/pieceofcake2/installation) - requirements, Composer setup and post-installation steps
-- [Upgrade Guide](/pieceofcake2/upgrade) - migrating from CakePHP 2.10.24 and breaking changes
-- [Directory Structure](/pieceofcake2/directory-structure) - legacy (`app/`) and modern (`src/`) layouts, gradual migration to CakePHP 5
-- [Coding Standards](/pieceofcake2/coding-standards) - the CakePHP 5 based standard used by the fork
-- [Security](/pieceofcake2/security) - security fixes and recommended settings
-- [Repositories and Plugins](/pieceofcake2/plugins) - maintained repositories and plugin forks
+- [Installation](/installation) - create a new application or switch an
+  existing one to pieceofcake2/cakephp.
+- [Migrating from CakePHP 2.10](/appendices/migrating-from-cakephp-2-10) -
+  upgrade an application from the original CakePHP 2.10.24 and review the
+  breaking changes.
+- [Migrating to the Modern Layout](/appendices/migrating-to-the-modern-layout) -
+  move from the `app/` layout to the CakePHP 5 style layout, step by step.
+- [Security Fixes](/appendices/security-fixes) - vulnerabilities fixed in the
+  fork and what you need to do.
+- [Maintained Plugins](/plugins/maintained-plugins) - plugins maintained for
+  PHP 8.
 
 ## Resources
 
-- [pieceofcake2/cakephp](https://github.com/pieceofcake2/cakephp) - the framework
+- [pieceofcake2/cakephp](https://github.com/pieceofcake2/cakephp) -
+  [CHANGELOG](https://github.com/pieceofcake2/cakephp/blob/2.x/CHANGELOG.md),
+  [UPGRADE](https://github.com/pieceofcake2/cakephp/blob/2.x/UPGRADE.md)
 - [pieceofcake2/app](https://github.com/pieceofcake2/app) - application skeleton
-- [pieceofcake2/bake](https://github.com/pieceofcake2/bake) - Bake plugin (extracted from core)
-- [CHANGELOG](https://github.com/pieceofcake2/cakephp/blob/2.x/CHANGELOG.md)
-- [UPGRADE](https://github.com/pieceofcake2/cakephp/blob/2.x/UPGRADE.md)
+- [pieceofcake2/docs](https://github.com/pieceofcake2/docs) - the source of this book

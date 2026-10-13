@@ -20,7 +20,7 @@ requested URL it continues to process the request normally.
 ## Using the Helper
 
 There are two steps you have to take before you can use the CacheHelper. First
-in your `APP/Config/core.php` uncomment the Configure write call for
+in your `config/core.php` uncomment the Configure write call for
 `Cache.check`. This will tell CakePHP to check for, and generate view cache
 files when handling requests.
 

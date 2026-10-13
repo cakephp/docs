@@ -1,12 +1,8 @@
-# Upgrade Guide
+# Migrating from CakePHP 2.10
 
-::: pieceofcake2
-This page is specific to the **pieceofcake2 fork** and is not part of the
-original CakePHP 2.x documentation. It describes how to move an application
-from the original CakePHP 2.10.24 to pieceofcake2/cakephp (v2.12.2), and lists
-the breaking changes. The source is
+This guide describes how to move an application from the original CakePHP
+2.10.24 to pieceofcake2/cakephp, and lists the breaking changes. It is based on
 [UPGRADE.md](https://github.com/pieceofcake2/cakephp/blob/2.x/UPGRADE.md).
-:::
 
 ## Prerequisites
 
@@ -23,7 +19,10 @@ Before migrating to this fork, ensure:
 2. **Ensure PHP 7.4 Compatibility**: Your application must be fully working on
    PHP 7.4 before migrating to PHP 8.x
 3. **Update Composer**: Replace `cakephp/cakephp` with `pieceofcake2/cakephp` in
-   your `composer.json`
+   your `composer.json`, and add the `composer/installers` settings so that
+   plugins are installed into `app/Plugin/` (`plugins/` in the modern layout).
+   These settings are required; see
+   [Configuring composer.json](/installation#configuring-composer-json)
 4. **Upgrade PHP**: Update your PHP version to 8.0 or newer
 5. **Test Thoroughly**: Run your application's test suite to ensure compatibility
 
@@ -40,11 +39,11 @@ After installation, install the Bake plugin and copy dispatcher files:
 composer require --dev pieceofcake2/bake
 
 # Copy web dispatcher files
-cp plugins/Bake/Console/Templates/skel/webroot/index.php app/webroot/index.php
-cp plugins/Bake/Console/Templates/skel/webroot/test.php app/webroot/test.php
+cp app/Plugin/Bake/Console/Templates/skel/webroot/index.php app/webroot/index.php
+cp app/Plugin/Bake/Console/Templates/skel/webroot/test.php app/webroot/test.php
 
 # Copy console dispatcher
-cp plugins/Bake/Console/Templates/skel/Console/cake app/Console/cake
+cp app/Plugin/Bake/Console/Templates/skel/Console/cake app/Console/cake
 chmod +x app/Console/cake
 ```
 
@@ -59,8 +58,8 @@ The following files need to be updated:
 
 See [`pieceofcake2/app`](https://github.com/pieceofcake2/app) for the modern
 application skeleton compatible with both CakePHP 2.x and 5.x.
-See also [Installation](/pieceofcake2/installation) and
-[Directory Structure](/pieceofcake2/directory-structure).
+See also [Installation](/installation) and
+[Directory Structure](/appendices/migrating-to-the-modern-layout).
 
 ### Directory Structure Modernization ([PR #21](https://github.com/pieceofcake2/cakephp/pull/21))
 
@@ -292,13 +291,13 @@ CakePlugin::load('Upgrade');
 
 1. Ensure you're using Composer for dependency management
 2. Install the Bake plugin: `composer require --dev pieceofcake2/bake`
-3. Copy updated dispatcher files from `plugins/Bake/Console/Templates/skel/` to
+3. Copy updated dispatcher files from `app/Plugin/Bake/Console/Templates/skel/` to
    your application:
 
    ```bash
-   cp plugins/Bake/Console/Templates/skel/webroot/index.php app/webroot/index.php
-   cp plugins/Bake/Console/Templates/skel/webroot/test.php app/webroot/test.php
-   cp plugins/Bake/Console/Templates/skel/Console/cake app/Console/cake
+   cp app/Plugin/Bake/Console/Templates/skel/webroot/index.php app/webroot/index.php
+   cp app/Plugin/Bake/Console/Templates/skel/webroot/test.php app/webroot/test.php
+   cp app/Plugin/Bake/Console/Templates/skel/Console/cake app/Console/cake
    ```
 
 4. Remove old dispatcher files if present:
@@ -358,20 +357,20 @@ CakePlugin::load('Upgrade');
 
 #### Configuration Format
 
-- **Schema-based configuration**: Use schema mapping instead of multiple
-  databases
+- **Schema**: the `schema` setting selects the SQL Server schema of a
+  connection and defaults to `dbo`. To use tables in several schemas of one
+  database, define one connection per schema:
 
   ```php
-  // Old approach (still works)
-  'database' => 'cakephp_test2'
-
-  // New recommended approach
-  'database' => 'cakephp_test',
-  'schema' => [
-      'default' => 'dbo',
-      'test2' => 'test2',
-      'test_database_three' => 'test3',
-  ]
+  public $default = [
+      'datasource' => 'Database/Sqlserver',
+      'host' => 'localhost',
+      'port' => 1433,
+      'login' => 'user',
+      'password' => 'password',
+      'database' => 'my_app',
+      'schema' => 'dbo',
+  ];
   ```
 
 - **Connection options**: SSL/TLS options now in `options` array
@@ -393,8 +392,7 @@ CakePlugin::load('Upgrade');
 
 **Migration:**
 
-- Update SQL Server configuration to use schema mapping (optional but
-  recommended)
+- Set `schema` if your tables are not in the `dbo` schema
 - Move SSL/TLS options to `options` array if using inline DSN
 - If extending Sqlserver class, update method signatures to match
 
@@ -420,7 +418,7 @@ CakePlugin::load('Upgrade');
 - Existing tokens continue to work
 - New tokens generated with enhanced security
 
-See [Security](/pieceofcake2/security) for details.
+See [Security](/appendices/security-fixes) for details.
 
 ### strftime() Replacement
 
@@ -446,7 +444,7 @@ See [Security](/pieceofcake2/security) for details.
 - Development-time change only
 - Update `phpcs.xml` if you have custom coding standards
 
-See [Coding Standards](/pieceofcake2/coding-standards).
+See [Coding Standards](/contributing/cakephp-coding-conventions).
 
 #### PHPUnit Compatibility
 
@@ -504,15 +502,13 @@ public $components = [
     ]
 ];
 
-// NEW (recommended)
-public $components = [
-    'Cookie' => [
-        'type' => 'aes'  // or 'rijndael'
-    ]
-];
-
-// Or dynamically in your controller
-$this->Cookie->type('aes');
+// NEW (recommended): the type cannot be set in $components,
+// call CookieComponent::type() instead
+public function beforeFilter()
+{
+    parent::beforeFilter();
+    $this->Cookie->type('aes');
+}
 ```
 
 On PHP 8, `'aes'` also needs `Security.useOpenSsl`; see

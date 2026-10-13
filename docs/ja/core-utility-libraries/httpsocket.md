@@ -32,8 +32,6 @@ CakePHP には、リクエストを簡単に行える HttpSocket クラスがあ
 文字列として使用できます。 :
 
 ``` php
-App::uses('HttpSocket', 'Network/Http');
-
 $http = new HttpSocket();
 $response = $http->get('https://cakephp.org');
 
@@ -100,9 +98,6 @@ $response->getHeader('date');
 受信した *Location* ヘッダーに従って、自動的に追加のリクエスを行うことができます。 :
 
 ``` php
-<?php
-App::uses('HttpSocket', 'Network/Http');
-
 $HttpSocket = new HttpSocket();
 $response = $HttpSocket->get('http://example.com/redirecting_url', [], ['redirect' => true]);
 ```
@@ -116,27 +111,29 @@ $response = $HttpSocket->get('http://example.com/redirecting_url', [], ['redirec
 
 `$response` は、設定に従って戻ってくる最後のレスポンスになります。
 
+<a id="http-socket-ssl-options"></a>
+
 ### SSL 証明書の処理
 
 SSL のサービスへのリクエストを作成する場合、 HttpSocket は、ピア検証で SSL 証明書の
 検証を試みます。もし、証明書がピア検証に失敗したり、アクセス先のホスト名と一致しなかった場合、
-接続は失敗し、例外が投げられます。デフォルトで、 HttpSocket は、SSL 証明書を確認するために
-モジラ証明書認証局ファイルを使用します。どのように SSL 証明書を処理するか設定するために
+接続は失敗し、例外が投げられます。`ssl_cafile` を指定しない場合、HttpSocket はシステムの CA 証明書
+(`openssl.cafile` または `openssl.capath`) を使い、見つからなければ
+[composer/ca-bundle](https://github.com/composer/ca-bundle) パッケージに含まれる Mozilla の CA バンドルを使います。
+このバンドルは Composer で最新の状態に保てます。どのように SSL 証明書を処理するか設定するために
 以下のオプションが使えます。
-
-::: pieceofcake2 CA 証明書
-同梱されていた `lib/Cake/Config/cacert.pem` (最終更新 2016 年) は削除されました。
-`ssl_cafile` を指定しない場合、フォークはシステムの CA バンドル (`openssl.cafile` / `openssl.capath`) を使い、
-見つからなければ [composer/ca-bundle](https://github.com/composer/ca-bundle) の Mozilla バンドルを使います。
-このバンドルは Composer で最新の状態に保たれます。
-詳しくは [セキュリティ](/ja/pieceofcake2/security) を参照してください。
-:::
 
 - `ssl_verify_peer` false にセットすると、SSL の検証を無効にします。これは、\*\*非推奨\*\* です。
 - `ssl_verify_host` 証明書を検証する際にホスト名の照合エラーを無視したい場合に false をセットします。
 - `ssl_allow_self_signed` 自己署名証明書を受け入れられるようにするために true をセットします。
   これは、 `ssl_verify_peer` を有効にする必要があります。
 - `ssl_cafile` SSL 証明書を検証するために使用したい証明書認証局ファイルの絶対パスをセットします。
+
+::: pieceofcake2
+2016 年に最終更新された同梱の `cacert.pem` は削除され、
+システムの CA 証明書と `composer/ca-bundle` を使うようになりました。
+詳しくは [脆弱性への対応](/ja/appendices/security-fixes) を参照してください。
+:::
 
 これらのオプションは、コンストラクタの引数として指定します。 :
 
@@ -155,12 +152,11 @@ SSL 証明書の検証は、 2.3 で追加されました。
 ### 独自レスポンスクラスの作成
 
 HttpSocket で使用する独自のレスポンスクラスを作成することができます。以下の内容で
-`app/Lib/Network/Http/YourResponse.php` というファイルを作ることができました。 :
+`src/Lib/Network/Http/YourResponse.php` というファイルを作ることができます。 :
 
 ``` php
-App::uses('HttpResponse', 'Network/Http');
-
-class YourResponse extends HttpResponse
+// src/Lib/Network/Http/YourResponse.php
+class YourResponse extends HttpSocketResponse
 {
 
     public function parseResponse($message)
@@ -174,14 +170,16 @@ class YourResponse extends HttpResponse
 リクエストする前に、 responseClass プロパティを変更する必要があります。 :
 
 ``` php
-App::uses('HttpSocket', 'Network/Http');
-
 $http = new HttpSocket();
 $http->responseClass = 'YourResponse';
 ```
 
+HttpSocket は `App::uses()` で `Network/Http` パッケージとしてクラスを登録します。
+そのため Composer の classmap を使わない場合は `src/Lib/Network/Http/` から探されます。
+`'MyPlugin.YourResponse'` のようにプラグイン記法を使った場合は、プラグインの `Lib/Network/Http/` から探されます。
+
 ::: info Changed in version 2.3
-2.3.0 以降、 `HttpSocketResponse` を継承すべきです。これは、 HTTP PECL 拡張の一般的な問題を回避します。
+2.3.0 以降、 `HttpResponse` ではなく `HttpSocketResponse` を継承すべきです。これは、 HTTP PECL 拡張の一般的な問題を回避します。
 :::
 
 ### 結果のダウンロード
@@ -191,12 +189,10 @@ HttpSocket は、 <span class="title-ref">setContentResponse()</span> と呼ば�
 内容を書き込ませられます。 ファイルをダウンロードするためには、以下のようにします。 :
 
 ``` php
-App::uses('HttpSocket', 'Network/Http');
-
 $http = new HttpSocket();
-$f = fopen(TMP . 'bakery.xml', 'w');
+$f = fopen(TMP . 'comments.xml', 'w');
 $http->setContentResource($f);
-$http->get('https://bakery.cakephp.org/comments.rss');
+$http->get('https://example.com/comments.rss');
 fclose($f);
 ```
 
@@ -212,8 +208,6 @@ HttpSocket は、 HTTP ベーシック認証とダイジェスト認証に対応
 任意の認証システムを利用するためには、 `HttpSocket` インスタンスを設定する必要があります。 :
 
 ``` php
-App::uses('HttpSocket', 'Network/Http');
-
 $http = new HttpSocket();
 $http->configAuth('Basic', 'user', 'password');
 ```
@@ -224,7 +218,7 @@ $http->configAuth('Basic', 'user', 'password');
 ### 独自認証オブジェクトの作成
 
 HttpSocket で利用するための独自の認証方法を作成することができます。
-以下の内容で、 `app/Lib/Network/Http/YourMethodAuthentication.php`
+以下の内容で、 `src/Lib/Network/Http/YourMethodAuthentication.php`
 ファイルを作成できました。 :
 
 ``` php

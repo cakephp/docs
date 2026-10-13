@@ -6,13 +6,10 @@ The CakeText class includes convenience methods for creating and
 manipulating strings and is normally accessed statically. Example:
 `CakeText::uuid()`.
 
-::: info Deprecated in version 2.7
-The `String` class was deprecated in 2.7 in favour of the `CakeText` class. While the `String` class is still available for backwards compatibility, using `CakeText` is recommended as it offers compatibility with PHP7 and HHVM.
-:::
-
 ::: pieceofcake2
-The `String` class is not available in the pieceofcake2 fork (`String` is a
-reserved word since PHP 7). Use `CakeText` instead.
+The `String` class, deprecated since 2.7,
+has been removed because `String` is a reserved word since PHP 7. Replace
+`String::` calls with `CakeText::`.
 :::
 
 If you need `TextHelper` functionalities outside of a `View`,
@@ -26,7 +23,6 @@ class UsersController extends AppController
 
     public function afterLogin()
     {
-        App::uses('CakeText', 'Utility');
         $message = $this->User->find('new_message');
         if (!empty($message)) {
             // notify user of new message
@@ -82,7 +78,7 @@ Cleans up a `CakeText::insert` formatted string with given \$options
 depending on the 'clean' key in \$options. The default method used
 is text but html is also available. The goal of this function is to
 replace all whitespace and unneeded markup around placeholders that
-did not get replaced by Set::insert.
+did not get replaced by `CakeText::insert()`.
 
 You can use the following options in the options array:
 

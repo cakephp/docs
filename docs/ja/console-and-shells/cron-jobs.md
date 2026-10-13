@@ -1,18 +1,12 @@
 # cronjobに登録してシェルを実行する
 
-::: pieceofcake2
-pieceofcake2 フォークのモダンレイアウトでは、プロジェクトルートに移動して `bin/cake` を使います
-（例: `cd /full/path/to/project && bin/cake myshell myparam`）。
-`vendor/bin/cake` はどちらのレイアウトでも使えます。
-:::
-
 通常シェルは、ニュースレターを送ったり、たまにデータベースをクリーンアップしたりすることを、
 cronjobとして実行します。
 
 このように簡単な設定で行えます。 :
 
 ``` text
-*/5  *    *    *    *  cd /full/path/to/app && Console/cake myshell myparam
+*/5  *    *    *    *  cd /full/path/to/my_app && bin/cake myshell myparam
 # *    *    *    *    *  実行するコマンド
 # │    │    │    │    │
 # │    │    │    │    │
@@ -23,5 +17,8 @@ cronjobとして実行します。
 # │    \──────────────────── 時 (0 - 23)
 # \───────────────────────── 分 (0 - 59)
 ```
+
+上の例のように、`bin/cake` を実行する前にプロジェクトルートへ移動してください。
+レガシーレイアウトでは代わりに `app/Console/cake` を使います。
 
 詳しくはこちら: <https://ja.wikipedia.org/wiki/Crontab>

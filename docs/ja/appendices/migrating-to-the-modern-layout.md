@@ -1,13 +1,8 @@
-# ディレクトリ構成
+# モダン構成への移行
 
-::: pieceofcake2
-このページは **pieceofcake2 フォーク** 固有の内容で、本家 CakePHP 2.x のドキュメントには含まれません。
-:::
+Piece of Cake 2 フォークは、2 種類のアプリケーション構成に対応しています。
 
-pieceofcake2 フォークは、2 種類のアプリケーション構成に対応しています。
-
-- **レガシー構成**: `app/` ディレクトリを使う従来の CakePHP 2.x の構成です。このドキュメントの
-  他のページはこの構成で説明しています。
+- **レガシー構成**: `app/` ディレクトリを使う従来の CakePHP 2.x の構成です。
 - **モダン構成**: プロジェクト直下に `config/`、`src/`、`templates/`、`tests/` などを置く
   CakePHP 5.x 風の構成です。[pieceofcake2/app](https://github.com/pieceofcake2/app)
   スケルトンはこの構成を使っています。
@@ -151,6 +146,10 @@ Step 3: CakePHP 5.x 風の構成の CakePHP 5.x
    }
    ```
 
+   これまでプラグインを `app/Plugin/` にインストールしていた場合、`installer-paths` の設定で
+   インストール先が `plugins/` に変わります。`app/Plugin/` のプラグインを削除してから
+   `composer install` を実行し、`plugins/` にインストールし直してください。
+
 2. **ブートストラップ用のファイルを更新します**:
    [pieceofcake2/app](https://github.com/pieceofcake2/app) から `config/define.php`、
    `webroot/index.php`、`webroot/test.php`、`bin/cake` をコピーします。
@@ -195,24 +194,3 @@ Composer のオートロードに対応していないプラグインでは、�
 `composer.json` で CakePHP 5.x を require し、API の変更に合わせてコードを直し、互換性の問題を
 修正します。[CakePHP 5.x 移行ガイド](https://book.cakephp.org/5/ja/appendices/5-0-migration-guide.html)
 を参照してください。
-
-## フレームワーク自身の構成
-
-フレームワークのパッケージ自体の構成も変わりました
-（[PR #21](https://github.com/pieceofcake2/cakephp/pull/21)）。このドキュメントで
-`lib/Cake/...` のようにコア内部のファイルを指している箇所は、次のように読み替えてください。
-
-| 本家 CakePHP 2.10                       | pieceofcake2/cakephp                 |
-|-----------------------------------------|--------------------------------------|
-| `lib/Cake/`                             | `src/Cake/`                          |
-| `lib/Cake/Test/Case/`                   | `tests/TestCase/`                    |
-| `lib/Cake/Test/Fixture/`                | `tests/Fixture/`                     |
-| `lib/Cake/Console/cake`                 | `bin/cake`（`vendor/bin/cake`）      |
-| `lib/Cake/Config/`                      | `config/`                            |
-| `lib/Cake/View/`、`lib/Cake/Templates/` | `templates/`                         |
-| `lib/Cake/VERSION.txt`                  | `VERSION.txt`                        |
-| `lib/Cake/Console/Templates/skel/`      | [pieceofcake2/bake](https://github.com/pieceofcake2/bake) に移動 |
-
-`CORE_ROOT` 定数はフレームワークのルートディレクトリを指します。
-`vendor/bin/cake` は Composer からプロジェクトのルートを検出し、`src/` と `app/` の
-どちらの構成でも動作します。

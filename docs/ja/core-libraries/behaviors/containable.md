@@ -30,7 +30,7 @@ class Post extends AppModel
 $this->Post->Behaviors->load('Containable');
 ```
 
-## Containable の使用
+## Containable の使用 {#using-containable}
 
 Containable がどのように動作するか、いくつかの例を見てみましょう。まずは
 Post というモデルで `find()` を実行した場合の例からはじめます。なお、 Post は
@@ -401,7 +401,7 @@ $this->User->find('all', [
 > なりません。そのため、AppModel で Containable ビヘイビアを付与することを
 > 検討すべきかもしれないということも留意してください。
 
-## ContainableBehavior オプション
+## ContainableBehavior オプション {#containablebehavior-options}
 
 `ContainableBehavior` は、モデルにビヘイビアを追加する際にセットする
 いつかのオプションを持っています。この設定は、Containable の振る舞いを

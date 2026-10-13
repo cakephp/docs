@@ -1,10 +1,10 @@
 # PHPUnit Migration Hints
 
 ::: pieceofcake2
-This page describes migrating from SimpleTest to PHPUnit 3.7. The pieceofcake2 fork
+This page describes migrating from SimpleTest to PHPUnit 3.7. The Piece of Cake 2 fork
 uses PHPUnit 9.6, so class names such as `PHPUnit_Framework_TestSuite` become
 `PHPUnit\Framework\TestSuite`, and some PHPUnit 3.7 APIs shown here no longer exist.
-See the [Upgrade Guide](/pieceofcake2/upgrade) and [Testing](/development/testing).
+See the [Upgrade Guide](/appendices/migrating-from-cakephp-2-10) and [Testing](/development/testing).
 :::
 
 Migrating your test cases to [PHPUnit 3.7](https://www.phpunit.de/manual/current/en/)

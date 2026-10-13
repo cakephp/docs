@@ -5,13 +5,9 @@
 CakeText クラスは文字列の作成や走査に関する便利なクラスです。
 また、スタティックにアクセスすることが可能です。例： `CakeText::uuid()` 。
 
-::: info Deprecated in version 2.7
-`String` クラスは、2.7 で非推奨になりました。 `CakeText` クラスを 推奨します。 `String` クラスは、後方互換のために提供し、 PHP7 や HHVM との 互換性に備えて `CakeText` の使用をお勧めします。
-:::
-
 ::: pieceofcake2
-pieceofcake2 フォークには `String` クラスがありません (PHP 7 以降 `String` は予約語です)。
-代わりに `CakeText` を使ってください。
+2.7 で非推奨になった `String` クラスは、
+PHP 7 以降 `String` が予約語であるため削除されました。`String::` の呼び出しは `CakeText::` に置き換えてください。
 :::
 
 もし、 `View` 以外で `TextHelper` が必要な場合、
@@ -25,7 +21,6 @@ class UsersController extends AppController
 
     public function afterLogin()
     {
-        App::uses('CakeText', 'Utility');
         $message = $this->User->find('new_message');
         if (!empty($message)) {
             // 新しいメッセージをユーザへ通知
@@ -77,7 +72,7 @@ CakeText::insert('My name is :name and I am :age years old.', ['name' => 'Bob', 
 与えられた \$options に 'clean' キーが存在した場合、その指定に従って
 `CakeText::insert` をクリーンアップします。
 デフォルトでは text を利用しますが、html も用意されています。
-この機能の目的は、 Set::insert では取り除けなかったホワイトスペース、
+この機能の目的は、 `CakeText::insert()` では取り除けなかったホワイトスペース、
 および、プレースホルダー周辺で必要がないマークアップを取り除くことにあります。
 
 オプションは次のように指定します。 :

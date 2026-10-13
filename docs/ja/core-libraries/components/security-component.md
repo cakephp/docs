@@ -171,6 +171,8 @@ class WidgetController extends AppController
 リクエストが破棄対象になった時、 `forceSSL()` コールバック関数が呼ばれ、非セキュアなリクエストを
 自動的にセキュアなリクエストにリダイレクトします。
 
+<a id="security-csrf"></a>
+
 ## CSRF 防御
 
 CSRF つまり、クロスサイトリクエストフォージェリ (Cross Site Request Forgery) は、
@@ -182,15 +184,11 @@ CSRF つまり、クロスサイトリクエストフォージェリ (Cross Site
 一度使用されると、再度利用することはできません。有効期限切れのトークンを再利用しようとすると、
 そのリクエストは破棄されます。
 
-::: pieceofcake2 CSRF の脆弱性修正
-pieceofcake2 フォークでは、CakePHP 2.10.24 にある 2 件の CSRF 脆弱性を修正しています。
-
-- CVE-2020-15400 (トークン固定化): 新しいトークンは `Security.salt` を鍵とした
-  HMAC-SHA1 で署名されます。アップグレード前に発行されたトークンも引き続き受け付けます。
-- CVE-2015-8379 (`_method` による回避): GET、HEAD、OPTIONS 以外のリクエストはすべて検証されます。
-  独自の HTTP メソッドや `_method` で上書きされたメソッドも対象です。
-
-コードの変更は不要です。詳しくは [セキュリティ](/ja/pieceofcake2/security) を参照してください。
+::: pieceofcake2
+Piece of Cake 2 フォークでは、CSRF トークンが HMAC で署名されるようになり (CVE-2020-15400)、
+`_method` でメソッドを上書きした場合も含めて GET、HEAD、OPTIONS 以外のすべてのリクエストが
+検証されるようになりました (CVE-2015-8379)。既存のトークンはそのまま使え、コードの変更は不要です。
+詳しくは [セキュリティ](/ja/appendices/security-fixes) を参照してください。
 :::
 
 ### CSRF 防御の利用

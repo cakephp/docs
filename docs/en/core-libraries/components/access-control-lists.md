@@ -214,7 +214,7 @@ for some reason might not be using a database.
 
 By default, CakePHP's ACL is database-driven. To enable INI-based
 ACL, you'll need to tell CakePHP what system you're using by
-updating the following lines in app/Config/core.php:
+updating the following lines in config/core.php:
 
 ``` php
 // Change these lines:
@@ -226,7 +226,7 @@ Configure::write('Acl.classname', 'IniAcl');
 //Configure::write('Acl.database', 'default');
 ```
 
-ARO/ACO permissions are specified in **/app/Config/acl.ini.php**.
+ARO/ACO permissions are specified in **config/acl.ini.php**.
 The basic idea is that AROs are specified in an INI section that
 has three properties: groups, allow, and deny.
 
@@ -310,13 +310,13 @@ retrieve nodes in tree format. The console application is used to
 initialize your database and interact with your ACO and ARO trees.
 
 To get started, first you'll need to make sure your
-`/app/Config/database.php` is present and correctly configured.
+`config/database.php` is present and correctly configured.
 
 Once you've done that, use the CakePHP console to create your ACL
 database tables:
 
 ``` bash
-$ cake schema create DbAcl
+$ bin/cake schema create DbAcl
 ```
 
 Running this command will drop and re-create the tables necessary
@@ -358,7 +358,7 @@ End create.
 > This replaces an older deprecated command, "initdb".
 
 You can also use the SQL file found in
-`app/Config/Schema/db_acl.sql`, but that's nowhere near as fun.
+`config/Schema/db_acl.sql`, but that's nowhere near as fun.
 
 When finished, you should have three new database tables in your
 system: acos, aros, and aros_acos (the join table to create
@@ -369,7 +369,7 @@ permissions information between the two trees).
 > tables, read up on modified database tree traversal. The ACL
 > component uses CakePHP's [Tree](../../core-libraries/behaviors/tree)
 > to manage the trees' inheritances. The model class files for ACL
-> can be found in `lib/Cake/Model/`.
+> can be found in `vendor/pieceofcake2/cakephp/src/Cake/Model/`.
 
 Now that we're all set up, let's work on creating some ARO and ACO
 trees.
@@ -474,7 +474,7 @@ Once we've got the groups, we can use the ACL console
 application to verify the tree structure:
 
 ``` bash
-$ cake acl view aro
+$ bin/cake acl view aro
 
 Aro tree:
 ---------------------------------------------------------------
@@ -588,7 +588,7 @@ The output of that console application command should now be a
 little more interesting. Let's give it a try:
 
 ``` bash
-$ cake acl view aro
+$ bin/cake acl view aro
 
 Aro tree:
 ---------------------------------------------------------------

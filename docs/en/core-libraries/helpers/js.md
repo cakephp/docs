@@ -28,11 +28,11 @@ use.
 ## Using a specific JavaScript engine
 
 First of all download your preferred JavaScript library and place
-it in `app/webroot/js`
+it in `webroot/js`
 
 Then you must include the library in your page. To include it in
 all pages, add this line to the \<head\> section of
-`app/View/Layouts/default.ctp`:
+`templates/Layouts/default.ctp`:
 
 ``` php
 echo $this->Html->script('jquery'); // Include jQuery library
@@ -134,7 +134,7 @@ The `JsHelper` provides a few methods, and acts as a facade for
 the the Engine helper. You should not directly access the Engine
 helper except in rare occasions. Using the facade features of the
 `JsHelper` allows you to leverage the buffering and method
-chaining features built-in; (method chaining only works in PHP5).
+chaining features built-in.
 
 The `JsHelper` by default buffers almost all script code
 generated, allowing you to collect scripts throughout the view,
@@ -153,8 +153,7 @@ to write shorter, more expressive code:
 $this->Js->get('#foo')->event('click', $eventCode);
 ```
 
-Is an example of method chaining. Method chaining is not possible
-in PHP4 and the above sample would be written like:
+Is an example of method chaining. It is equivalent to:
 
 ``` php
 $this->Js->get('#foo');
@@ -392,7 +391,7 @@ indicator effects yourself:
 </html>
 ```
 
-Remember to place the indicator.gif file inside app/webroot/img
+Remember to place the indicator.gif file inside webroot/img
 folder. You may see a situation where the indicator.gif displays
 immediately upon the page load. You need to put in this CSS
 `#busy-indicator { display:none; }` in your main CSS file.

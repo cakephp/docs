@@ -92,7 +92,7 @@ class PostsController extends AppController
     }
 }
 
-// ビューコード - app/View/Posts/json/index.ctp
+// ビューコード - templates/Posts/json/index.ctp
 foreach ($posts as &$post) {
     unset($post['Post']['generated_html']);
 }

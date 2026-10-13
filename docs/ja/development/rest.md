@@ -6,22 +6,22 @@
 マッシュアップされたり、簡単に他のシステムと統合できます。
 
 簡単にあなたの作ったアプリケーションロジックにアクセスさせる方法は色々ありますが、
-REST はその中でもすばらしい方法でしょう。とてもシンプルで、大抵は XML ベース
-(SOAP のようなものではなく、単純な XML のこと) で、HTTP ヘッダによって制御されます。
+REST はその中でもすばらしい方法でしょう。とてもシンプルで、大抵は JSON や XML ベース
+(SOAP のようなものではありません) で、HTTP ヘッダによって制御されます。
 CakePHP を使って REST の API を提供するのはすごく簡単です。
 
 ## 簡単なセットアップ
 
-REST を動かすための手っ取り早い方法は、 app/Config/routes.php ファイルに数行追記することです。
+REST を動かすための手っ取り早い方法は、 `config/routes.php` ファイルに数行追記することです。
 Router オブジェクトは、 `mapResources()` というメソッドを提供していて、
 これはコントローラへの REST アクセスのために、いくつかのデフォルトルートを設定するものです。
-`mapResources()` は、routes.php の最後にある
+`mapResources()` は、 `config/routes.php` の最後にある
 `require CAKE . 'Config' . DS . 'routes.php';` の記述や、
 routes をオーバーライドする他の routes よりも前に呼び出す必要があります。
 例えば、レシピ (recipe) データベースにアクセスする REST は、下記のようにします :
 
 ``` php
-//In app/Config/routes.php...
+// config/routes.php
 
 Router::mapResources('recipes');
 Router::parseExtensions();
@@ -43,9 +43,9 @@ Router::parseExtensions();
 CakePHP のルータクラスは、いくつかの異なる方法で HTTP リクエストメソッドを判定します。
 下記がその判定順序です。
 
-1.  POSTリクエストの中で、 *\_method* が存在する場合それを利用
-2.  X_HTTP_METHOD_OVERRIDE
-3.  REQUEST_METHOD ヘッダ
+1.  `X-HTTP-Method-Override` リクエストヘッダ
+2.  POST リクエストの中で、 *\_method* が存在する場合それを利用
+3.  `REQUEST_METHOD` サーバー変数
 
 POST リクエストの中の、 *\_method* の値を使う方法は、ブラウザを使った REST クライアントの場合に
 便利です。単純に POST メソッドの中で、\_method キーの値に HTTP メソッド名を入れるだけです。
@@ -54,10 +54,9 @@ POST リクエストの中の、 *\_method* の値を使う方法は、ブラウ
 そのアクションに移動します。基本的なコントローラのサンプルは下記のようになります :
 
 ``` php
-// Controller/RecipesController.php
+// src/Controller/RecipesController.php
 class RecipesController extends AppController
 {
-
     public $components = ['RequestHandler'];
 
     public function index()
@@ -130,12 +129,12 @@ CakePHP に標準搭載している JSON ビュー ( [JSONとXMLビュー](../vi
 
 XML データに変換する前にデータを修正したい場合は、 `_serialize` ビュー変数ではなく、
 ビューファイルを使いましょう。
-RecipesController に対するビューファイルを `app/View/recipes/xml` 以下に置きます。
+RecipesController に対するビューファイルを `templates/Recipes/xml` 以下に置きます。
 `Xml` クラスを使えば、このビューファイル内で簡単に素早く XML を出力させることができます。
 下記に index ビューの例を載せます。
 
 ``` php
-// app/View/Recipes/xml/index.ctp
+// templates/Recipes/xml/index.ctp
 // Do some formatting and manipulation on
 // the $recipes array.
 $xml = Xml::fromArray(['response' => $recipes]);
@@ -205,6 +204,8 @@ Router::resourceMap([
 
 デフォルトのリソースマップを上書きする際は、 `mapResources()` メソッドを呼ぶと、
 新しい定義が利用できます。
+
+<a id="custom-rest-routing"></a>
 
 ## カスタム REST ルーティング
 

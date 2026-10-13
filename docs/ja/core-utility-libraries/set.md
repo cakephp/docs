@@ -664,7 +664,7 @@ $results = Set::extract('/User/id', $users);
 | /Comment\[text=/cakephp/i\] | 正規表現で /cakephp/i にマッチする text を持つ全ての Comment を選びます。 |
 | /Comment/@\* | 全てのコメントのキー名を選びます。 現在のところ、単一の「/」を使った 絶対パスのみサポートされています。 バグを発見したら、それを報告してください。 また機能追加の提案も歓迎します。 |
 
-より詳しくSet::extract()について学ぶには、`/lib/Cake/Test/Case/Utility/SetTest.php` の中のtextExcract()関数を参照してください。
+より詳しくSet::extract()について学ぶには、`pieceofcake2/cakephp` リポジトリの `tests/TestCase/Utility/SetTest.php` の中の testExtract() 関数を参照してください。
 
 `static` Set::**filter**($var)
 

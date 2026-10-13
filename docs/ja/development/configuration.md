@@ -10,20 +10,22 @@ CakePHP アプリケーションの設定は非常に簡単です。CakePHP の
 マッピングルール(route)を追加／設定したり、単語の語尾変化
 ルール(inflection)を追加／変更したりできます。
 
-::: pieceofcake2 設定ファイルの場所
-フォークは 2 つのアプリケーション構成に対応しています。このページで `app/Config/...`
-と書かれている設定ファイルは、モダン構成では `config/` にあります。
+アプリケーションの設定ファイルは、プロジェクトの `config/` ディレクトリに置きます。
 
-| | レガシー構成 | モダン構成 |
-|---|---|---|
-| データベース | `app/Config/database.php` | `config/database.php` |
-| コア設定 | `app/Config/core.php` | `config/core.php` |
-| ブートストラップ | `app/Config/bootstrap.php` | `config/bootstrap.php` |
-| スキーマファイル | `app/Config/Schema/` | `config/Schema/` |
+- `config/core.php` - デバッグレベル、エラー処理、セッション、セキュリティ用のソルト、
+  内部キャッシュなどのコア設定
+- `config/bootstrap.php` - アプリケーションの起動処理。キャッシュやログの設定、
+  プラグインの読み込み、独自の inflection など
+- `config/database.php` - データベース接続 (`config/database.php.default` をコピーして作成します)
+- `config/routes.php` - URL のルーティング
+- `config/email.php` - メール送信の設定 (`config/email.php.default` をコピーして作成します)
+- `config/acl.php`、`config/acl.ini.php` - ACL の設定
+- `config/Schema/` - データベースセッションや i18n 用のスキーマファイル
 
-`CONFIG` 定数は、プロジェクトルートに `config/` があればそこを、無ければ `app/Config/`
-を指します。[ディレクトリ構成](/ja/pieceofcake2/directory-structure) も参照してください。
-:::
+`CONFIG` 定数はこのディレクトリを指します。レガシー構成では同じファイルが `app/Config/`
+にあり、プロジェクトのトップレベルに `config/` ディレクトリが無い場合は `CONFIG` がそちらを
+指します。両方の構成については [CakePHP のフォルダ構造](/ja/getting-started/cakephp-folder-structure)
+を参照してください。
 
 <div class="index">
 
@@ -31,24 +33,28 @@ database.php, database.php.default
 
 </div>
 
+<a id="database-configuration"></a>
+
 ## データベース設定
 
-CakePHP では、データベースの詳細設定は `app/Config/database.php`
+CakePHP では、データベースの詳細設定は `config/database.php`
 ファイルに記載されていることを前提としています。
-`app/Config/database.php.default` ファイルにデータベースの設定例が
-記載されています。設定後の内容は、たとえば以下のようになります:
+`config/database.php.default` ファイルにデータベースの設定例が
+記載されています。設定後の内容は、たとえば以下のようになります。
 
 ``` php
+// config/database.php
 class DATABASE_CONFIG
 {
     public $default = [
-        'datasource'  => 'Database/Mysql',
-        'persistent'  => false,
-        'host'        => 'localhost',
-        'login'       => 'cakephpuser',
-        'password'    => 'c4k3roxx!',
-        'database'    => 'my_cakephp_project',
-        'prefix'      => ''
+        'datasource' => 'Database/Mysql',
+        'persistent' => false,
+        'host' => 'localhost',
+        'login' => 'cakephpuser',
+        'password' => 'c4k3roxx!',
+        'database' => 'my_cakephp_project',
+        'prefix' => '',
+        'encoding' => 'utf8mb4',
     ];
 }
 ```
@@ -65,14 +71,16 @@ class DATABASE_CONFIG
 あなたの要求に合うように適切に設定してください。
 
 datasource  
-この設定配列が依存するデータソースの名前。
-例：Database/Mysql, Database/Sqlserver, Database/Postgres, Database/Sqlite
+この設定配列が使うデータソースの名前。
+組み込みのデータベースドライバーは Database/Mysql、Database/Postgres、
+Database/Sqlite、Database/Sqlserver です。いずれも PDO を使うので、対応する PDO 拡張
+(`pdo_mysql`、`pdo_pgsql`、`pdo_sqlite`、`pdo_sqlsrv`) がインストールされている必要があります。
 プラグインに含まれるデータソースを使う場合は `プラグイン記法`
 という書式で指定します。
 
 persistent  
-データベースへの永続的接続を使うかどうか。SQLServer を使用している場合、
-永続的接続を有効にすべきではありません。クラッシュの診断が困難になります。
+データベースへの永続的接続を使うかどうか。Sqlserver データソースは永続的接続に
+対応しておらず、true を指定すると例外が発生します。
 
 host  
 データソースサーバのホスト名（またはIPアドレス）
@@ -91,43 +99,52 @@ prefix (*オプション*)
 prefix を使わない場合は空文字列のままにします。
 
 port (*オプション*)  
-サーバに接続するための TCP ポート番号または Unix ソケット
+サーバに接続するための TCP ポート番号または Unix ソケット。
+SQL Server では、接続時にホスト名の後ろにポート番号が付加されます。
 
 encoding  
-SQL ステートメントをサーバに送る際に使用する文字コード。
-デフォルトは、DB2 以外はそのデータベースのデフォルト値。
-mysql/mysqli 接続で UTF-8 をエンコーディングを使いたい場合、
-'utf8'（ハイフンなし）と指定してください。
+接続で使用する文字コード。デフォルトはそのデータベースのデフォルト値です。
+MySQL で UTF-8 を使いたい場合は、'utf8' または 'utf8mb4'（ハイフンなし）と指定してください。
+文字コードは接続時に PDO の DSN で渡されます (MySQL は `charset=...`、PostgreSQL は
+`options='--client_encoding=...'`)。そのため `SET NAMES` クエリは発行されません。
+SQL Server では 'utf8' を指定するとドライバーの UTF-8 エンコーディングが使われます。
 
-::: pieceofcake2
-フォークでは、`encoding` は接続後に `SET NAMES` を発行するのではなく、PDO の DSN
-(MySQL は `charset=...`、PostgreSQL は `options='--client_encoding=...'`) で渡されます。
-既存の設定はそのまま動きます。
-:::
+flags (*オプション*)  
+PDO のコンストラクタに渡す PDO 属性の配列。PHP 8.1 以降、MySQL と SQLite の PDO
+ドライバーは整数型と浮動小数点型のカラムを PHP の int と float で返します。
+従来どおり文字列で受け取る必要がある場合は
+`'flags' => [PDO::ATTR_STRINGIFY_FETCHES => true]` を指定してください。
 
 schema  
-どのスキーマを使うかを指定（PostgreSQL データベース利用時のみ）
+使用するスキーマ。PostgreSQL (デフォルトは `public`) と
+SQL Server (デフォルトは `dbo`) で使われます。
+
+sslmode (*オプション*)  
+PostgreSQL のみ。DSN に付加する `sslmode` の値です (例: `'require'`)。
+
+options (*オプション*)  
+SQL Server のみ。DSN に付加する接続オプションの配列です
+(例: `['TrustServerCertificate' => 'yes', 'Encrypt' => 'no']`)。
 
 ::: pieceofcake2
-フォークの SQL Server ドライバー (SQL Server 2022 以降) も `schema` を使い (デフォルトは
-`dbo`)、ポートは `port` から取得し、`'TrustServerCertificate' => 'yes'` のような接続オプションを
-`options` 配列で受け付けます。PostgreSQL では、任意の `sslmode` キーが DSN に追加されます。
-[アップグレードガイド](/ja/pieceofcake2/upgrade) を参照してください。
+Sqlserver データソースは SQL Server 2022 以降を対象としています。
+ポートは `port` から読み取り、`schema` のデフォルトは `dbo` で、SSL/TLS の設定は `options`
+配列で指定します。[CakePHP 2.10 からの移行](/ja/appendices/migrating-from-cakephp-2-10) を参照してください。
 :::
 
 unix_socket  
 UNIX のソケットファイル経由での接続をサポートするドライバで使われます。
-PostgreSQL を Unix ソケット経由いたい場合、ホスト(host)の設定値は
+PostgreSQL を Unix ソケット経由で使いたい場合、ホスト(host)の設定値は
 ブランクのままにしておきます。
 
 ssl_key  
-SSL キーファイルへのパス（MySQL のみサポート、PHP 5.3.7 以降が必要）
+SSL キーファイルへのパス。`ssl_cert` と組み合わせて指定します（MySQL のみサポート）
 
 ssl_cert  
-SSL 証明書ファイルへのパス（MySQL のみサポート、PHP 5.3.7 以降が必要）
+SSL 証明書ファイルへのパス。`ssl_key` と組み合わせて指定します（MySQL のみサポート）
 
 ssl_ca  
-SSL CA ファイルへのパス（MySQL のみサポート、PHP 5.3.7 以降が必要）
+SSL CA ファイルへのパス（MySQL のみサポート）
 
 settings  
 キー／値のペアを持つ配列を指定すると、データベースサーバへの
@@ -150,117 +167,128 @@ settings
 に関する正確なネーミングルールを適用することで、自由に Cake の
 能力を引き出すことができ、またいくつかの設定作業を省略できます。
 たとえば、あなたのデータベーステーブルの名前を big_boxes 、
-モデル名を BigBox 、コントローラ名ーを BigBoxesController
+モデル名を BigBox 、コントローラー名を BigBoxesController
 とすることで、すべての機能が自動的に有効になります。慣習として、
 データベーステーブル名はアンダースコア、小文字、複数形にします。
-たとえば bakers, pastry_stores, and savory_cakes のようにします。
+たとえば bakers, pastry_stores, savory_cakes のようにします。
 
-<div class="todo">
+## クラスの読み込みと追加のクラスパス
 
-SQLServer, Postgres,MySQL といった、それぞれのデータベースベンダー
-固有のオプション指定に関する情報を追加するべき。
+CakePHP フレームワークのクラスは Composer のオートローダーで読み込まれるので、
+`App::uses()` を書く必要はありません。アプリケーションのクラスも、
+[pieceofcake2/app](https://github.com/pieceofcake2/app) スケルトンのように
+`composer.json` に classmap を追加すれば同じようにオートロードできます。
 
-</div>
+``` json
+"autoload": {
+    "classmap": ["src/"]
+}
+```
 
-## 追加のクラスパス
+こうしておけば、`src/` にあるコントローラー、モデル、ヘルパーなどのクラスに対する
+`App::uses()` は削除できます。新しいクラスファイルを追加したら、classmap に含まれるように
+毎回 `composer dump-autoload` を実行してください。Composer のオートロードに対応していない
+プラグインでは、引き続き `App::uses()` が必要です
+(例: `App::uses('MyPluginHelper', 'MyPlugin.View/Helper')`)。
 
 ::: pieceofcake2
-フォークでも `App::build()` は使えます。[pieceofcake2/app](https://github.com/pieceofcake2/app)
-スケルトンのように Composer の classmap オートロード
-(`"autoload": {"classmap": ["src/"]}`) を設定すれば、クラスは Composer が見つけるので
-`App::uses()` は不要です。クラスファイルを追加したら `composer dump-autoload` を実行してください。
-フレームワークのクラスには、フォークでは `App::uses()` は一切不要です。
+フレームワークは include path ではなく Composer の classmap で
+読み込まれるようになり、フレームワーク内の `App::uses()` は削除されました。
+`App::uses()` を使っているアプリケーションのコードはそのまま動きます。
 :::
+
+`App::uses()` と `App::build()` は引き続き使えます。`App::uses()` を使った場合、
+CakePHP はアプリケーションディレクトリ (`src/`、レガシー構成では `app/`) からクラスを探します。
+テンプレートは `templates/`、ロケールは `resources/locales/`、プラグインは `plugins/` からも探します。
 
 同一システム上の複数のアプリケーション間で MVC クラスを共有できると
 有用な場合があります。両方のアプリケーションで同一のコントローラーを
-持たせたい場合、CakePHP の bootstrap.php を使ってそれらの追加クラスを
-読み替えさせることができます。
+持たせたい場合、CakePHP の `config/bootstrap.php` を使ってそれらの追加クラスを
+読み込ませることができます。
 
-bootstrap.php の中で `App::build()` を使うと、CakePHP
-がクラスを検索する際の追加パスを定義できます:
+`config/bootstrap.php` の中で `App::build()` を使うと、CakePHP
+がクラスを検索する際の追加パスを定義できます。
 
 ``` php
 App::build([
     'Model' => [
         '/path/to/models',
-        '/next/path/to/models'
+        '/next/path/to/models',
     ],
     'Model/Behavior' => [
         '/path/to/behaviors',
-        '/next/path/to/behaviors'
+        '/next/path/to/behaviors',
     ],
     'Model/Datasource' => [
         '/path/to/datasources',
-        '/next/path/to/datasources'
+        '/next/path/to/datasources',
     ],
     'Model/Datasource/Database' => [
         '/path/to/databases',
-        '/next/path/to/database'
+        '/next/path/to/database',
     ],
     'Model/Datasource/Session' => [
         '/path/to/sessions',
-        '/next/path/to/sessions'
+        '/next/path/to/sessions',
     ],
     'Controller' => [
         '/path/to/controllers',
-        '/next/path/to/controllers'
+        '/next/path/to/controllers',
     ],
     'Controller/Component' => [
         '/path/to/components',
-        '/next/path/to/components'
+        '/next/path/to/components',
     ],
     'Controller/Component/Auth' => [
         '/path/to/auths',
-        '/next/path/to/auths'
+        '/next/path/to/auths',
     ],
     'Controller/Component/Acl' => [
         '/path/to/acls',
-        '/next/path/to/acls'
+        '/next/path/to/acls',
     ],
     'View' => [
         '/path/to/views',
-        '/next/path/to/views'
+        '/next/path/to/views',
     ],
     'View/Helper' => [
         '/path/to/helpers',
-        '/next/path/to/helpers'
+        '/next/path/to/helpers',
     ],
     'Console' => [
         '/path/to/consoles',
-        '/next/path/to/consoles'
+        '/next/path/to/consoles',
     ],
     'Console/Command' => [
         '/path/to/commands',
-        '/next/path/to/commands'
+        '/next/path/to/commands',
     ],
     'Console/Command/Task' => [
         '/path/to/tasks',
-        '/next/path/to/tasks'
+        '/next/path/to/tasks',
     ],
     'Lib' => [
         '/path/to/libs',
-        '/next/path/to/libs'
+        '/next/path/to/libs',
     ],
     'Locale' => [
         '/path/to/locales',
-        '/next/path/to/locales'
+        '/next/path/to/locales',
     ],
     'Vendor' => [
         '/path/to/vendors',
-        '/next/path/to/vendors'
+        '/next/path/to/vendors',
     ],
     'Plugin' => [
         '/path/to/plugins',
-        '/next/path/to/plugins'
+        '/next/path/to/plugins',
     ],
 ]);
 ```
 
 > [!NOTE]
-> あなたのアプリケーションの一番上にある bootstrap.php で、
-> すべての追加パスを設定する必要があります。こうすることで、
-> これ以降のアプリケーションにおいて、これらのパスが
+> 追加パスの設定は、すべて bootstrap.php の先頭で行ってください。
+> こうすることで、アプリケーションのそれ以降の処理でこれらのパスが
 > 有効になります。
 
 <div class="index">
@@ -272,16 +300,16 @@ core.php, configuration
 ## コア（中核部）設定
 
 CakePHP の各アプリケーションには、CakePHP 内部の振る舞いを決めるための
-設定ファイルが含まれます。それは `app/Config/core.php` です。
+設定ファイルが含まれます。それは `config/core.php` です。
 このファイルは設定用クラス変数や、あなたのアプリケーションが
 どう振る舞うかを決めるための定数の定義の集まりです。それぞれの
 変数を見て行く前に、まずは CakePHP の設定レジストリである
-`Configure` を抑えておく必要があります。
+`Configure` を押さえておく必要があります。
 
 ### CakePHP のコア設定
 
 `Configure` クラスは、CakePHP コアの設定用変数群を
-管理するために使われます。これらの変数は `app/Config/core.php`
+管理するために使われます。これらの変数は `config/core.php`
 にあります。それぞれの変数の定義や、それらがあなたの CakePHP
 アプリケーションにどう影響するのかを以下に示します。
 
@@ -296,9 +324,8 @@ CakePHP のデバッグ出力を制御します。
 Error  
 あなたのアプリケーションのエラーを処理するためのエラーハンドラー
 を設定します。デフォルトでは `ErrorHandler::handleError()`
-が使われます。これは、debug \> 0 の場合は `Debugger` を、
-debug = 0 の場合は `CakeLog` でエラーログ出力をしている
-場合にエラーを表示します。
+が使われます。これは、debug \> 0 の場合は `Debugger` を使ってエラーを表示し、
+debug = 0 の場合は `CakeLog` でエラーをログに出力します。
 
 サブキー:
 
@@ -314,21 +341,22 @@ Exception
 コントローラーがないといったフレームワークのエラーも表示します。
 debug = 0 の場合、フレームワークのエラーは強制的に一般的な HTTP
 レベルのエラーに変換されます。例外ハンドリングに関する詳細は
-[Exceptions](../exceptions) セクションを参照してください。
+[Exceptions](exceptions) セクションを参照してください。
 
 <div id="core-configuration-baseurl">
 
 App.baseUrl  
 もしあなたのサーバで mod_rewrite （や、その他の互換モジュール）
 を使いたくない、もしくは使えない場合、CakePHP 組み込みの優れた
-URL のしくみを使うことになります。 `/app/Config/core.php`
-で以下のような行のコメントを外して有効にしてください:
+URL のしくみを使うことになります。 `config/core.php`
+で以下のような行のコメントを外して有効にしてください。
 
 ``` php
 Configure::write('App.baseUrl', env('SCRIPT_NAME'));
 ```
 
-さらに、これらの .htaccess ファイルを削除します:
+さらに、`webroot/.htaccess` ファイルを削除します。レガシー構成の場合は、
+以下の .htaccess ファイルを削除します。
 
     /.htaccess
     /app/.htaccess
@@ -373,7 +401,7 @@ true にすると、サイト全体のキャッシュを無効にします。
 read/write は失敗します。
 
 Cache.check  
-true にすると、ビューのキャシュを有効にします。さらにコントローラー
+true にすると、ビューのキャッシュを有効にします。さらにコントローラー
 の中でも指定する必要がありますが、この変数はこれらの設定の検出
 を行います。
 
@@ -384,7 +412,7 @@ Session
 
 サブキー
 
-- `name` - 使用するクッキーの名前。デフォルトは 'CAKEPHP'。
+- `cookie` - 使用するクッキーの名前。デフォルトは 'CAKEPHP'。
 
 - `timeout` - セッションの有効期間（単位：分）。
   この timeout は CakePHP が制御します。
@@ -392,61 +420,79 @@ Session
 - `cookieTimeout` - セッションクッキーを有効にしたい期間（単位：分）。
 
 - `checkAgent` - セッションの開始時にユーザーエージェント文字列を
-  チェックするかどうか。古い IE 、Chrome Frame を使う場合や、Web
-  ブラウザ機能を持つ一部のデバイスで AJAX を使いたい場合に false
-  にする必要があるかもしれません。
+  チェックするかどうか。セッションの途中でユーザーエージェント文字列が
+  変わるクライアントに対応する場合は false にしてください。
 
 - `defaults` - あなたのセッションの基本構成として使用する
   デフォルト設定。php, cake, cache, database という４種類の
   ビルトイン機構があります。
 
-- `handler` - ユーザー独自のセッションハンドラーとして使えます。  
-  このハンドラーは <span class="title-ref">session_save_handler</span> と一緒に使える callable
-  の配列を期待します。このオプションを有効にすると、ini 配列に
-  <span class="title-ref">session.save_handler</span> が自動的に追加されます。
+- `handler` - ユーザー独自のセッションハンドラーとして使えます。
+  `session_save_handler` と一緒に使える callable の配列か、
+  `CakeSessionHandlerInterface` を実装したクラス名を `engine` キーに持つ配列を指定します。
+  このオプションを有効にすると、ini 配列に `session.save_handler` が自動的に追加されます。
 
 - `autoRegenerate` - この設定を有効にすると、セッションを毎回
   自動生成し、セッション ID が頻繁に変わります。詳細は
   `CakeSession::$requestCountdown` を参照してください。
 
+- `cacheLimiter` - セッションクッキーで使用するキャッシュ制御ヘッダー。
+  指定できる値は [session_cache_limiter()](https://www.php.net/session_cache_limiter)
+  を参照してください。
+
 - `ini` - ini の値として追加で設定したい連想配列。
 
-ビルトインのデフォルトは以下の通りです:
+ビルトインのデフォルトは以下の通りです。
 
 - 'php' - あなたの php.ini で定義されている設定を使う
-- 'cake' - セッションファイルを CakePHP の /tmp ディレクトリに保存する
+- 'cake' - セッションファイルを CakePHP の `tmp/sessions` ディレクトリに保存する
 - 'database' - CakePHP のデータベースセッションを使う
 - 'cache' - セッションの保存に Cache クラスを使う
 
 カスタムセッションハンドラーを定義する場合、
-`app/Model/Datasource/Session/<name>.php` に記載します。
+`src/Model/Datasource/Session/<name>.php` に記載します。
 そのクラスは `CakeSessionHandlerInterface` を
-インプリメント(implements)している必要があります。
-また Session.handler を \<name\> に設定してください。
+実装している必要があります。
+また `Session.handler.engine` を \<name\> に設定してください。
 
-データベースセッションを使うには、cake のシェルコマンド:
-`cake schema create Sessions` を使って
-`app/Config/Schema/sessions.php` を実行します。
+データベースセッションを使うには、cake のシェルコマンド
+`bin/cake schema create Sessions` を使って、
+`config/Schema/sessions.php` のスキーマからテーブルを作成します。
+
+詳しくは [セッション](sessions) を参照してください。
 
 Security.salt  
-セキュリティ関連のハッシュ処理で使われるランダムな文字列
-
-Security.cipherSeed  
-文字列を暗号化／復号化するのに使われるランダムな文字列（数字のみ）
+セキュリティ関連のハッシュ処理で使われるランダムな文字列。CSRF トークンやフォーム改ざん防止用
+トークンの署名、`CookieComponent` のデフォルトの暗号化キーにも使われます。
+アプリケーションごとに一意な値に変更し、秘密にしておいてください。
+スケルトンのデフォルト値のままだと、CakePHP が警告を表示します。
 
 ::: pieceofcake2
-フォークでは `Security.salt` は CSRF トークンの署名 (HMAC) にも使われるので、
-アプリケーションごとに一意な値を秘密にしておいてください。`Security.cipherSeed` は脆弱な
-`Security::cipher()` (`CookieComponent` のデフォルトの暗号化タイプ `'cipher'`) でしか
-使われません。Cookie の暗号化タイプは `'aes'` に変更してください。
-[セキュリティ](/ja/pieceofcake2/security) を参照してください。
+`SecurityComponent` が発行する CSRF トークンは
+`Security.salt` を使った HMAC で署名されるようになりました (CVE-2020-15400)。
+ソルトを変更すると、発行済みのトークンは無効になります。
+[脆弱性への対応](/ja/appendices/security-fixes) を参照してください。
 :::
+
+Security.cipherSeed  
+`Security::cipher()` で文字列を暗号化／復号化するのに使われるランダムな文字列（数字のみ）。
+このメソッドを使うのは `CookieComponent` の暗号化タイプ `'cipher'` だけです。
+このタイプは脆弱で、後方互換性のためだけに残されています。Cookie には `'aes'` タイプを使ってください。
+
+Security.useOpenSsl  
+true にすると、`Security::encrypt()` と `Security::decrypt()` (つまり Cookie の暗号化タイプ
+`'aes'`) が mcrypt ではなく OpenSSL を使います。PHP 8 では mcrypt 拡張が使えないので、
+`config/core.php` に次の行を追加してください。
+
+``` php
+Configure::write('Security.useOpenSsl', true);
+```
 
 Asset.timestamp  
 適切なヘルパーを使っている場合、静的ファイルの URL
 (CSS, JavaScript, 画像) の末尾に個々のファイルの最終更新時刻
 を表すタイムスタンプを追加します。
-有効な値は以下の通りです:
+有効な値は以下の通りです。
 (boolean) false - 何もしない（デフォルト）
 (boolean) true - debug \> 0 の場合にタイムスタンプを付加
 (string) 'force' - debug \>= 0 の場合にタイムスタンプを付加
@@ -458,8 +504,7 @@ CakePHP のアクセス制御リスト(ACL)機能で使われる定数。
 </div>
 
 > [!NOTE]
-> キャッシュの設定は core.php にもあります。
-> - 後日追記します。新しい情報が追加されたらお知らせします。
+> キャッシュの設定も core.php にあります。これについては後述します。
 
 `Configure` クラスは、コアの設定をその場で読み書き
 するのに使われます。これは、たとえばあなたのアプリケーションの
@@ -477,23 +522,27 @@ CakePHP が参照する定数がいくつか存在します。
 
 ### コアのキャッシュ設定
 
-::: pieceofcake2
-フォークでは Xcache と Wincache のキャッシュエンジンが削除されています。使えるエンジンは
-File、Apc (利用可能なら APCu を使用)、Memcached、Memcache、Redis です。
-:::
-
 CakePHP は内部的に `_cake_model_` と `_cake_core_`
 という２つのキャッシュ設定を使います。`_cake_core_` はファイルの
 パスやオブジェクトの格納位置を保存するのに使われ、`_cake_model_`
 はスキーマの定義やデータソースのソース一覧を保存するのに使われます。
-これらはリクエストのたびに参照されますので、APC や Memcached のような、
-高速なキャッシュストレージを使う際の推奨設定になっています。デフォルト
+これらはリクエストのたびに参照されるので、APCu や Memcached のような
+高速なキャッシュストレージを使うことをおすすめします。デフォルト
 では debug \> 0 の場合、いずれの設定も 10 秒おきに有効期限が切れます。
+どちらも `config/core.php` の末尾で定義されています。
 
-すべてのキャシュデータは `Cache` で保存され、
+使用できるキャッシュエンジンは File、Apc (APCu 拡張が読み込まれていれば APCu を使います)、
+Memcached、Memcache、Redis です。
+
+::: pieceofcake2
+Xcache と Wincache のキャッシュエンジンは削除されました。
+これらを使っている設定は、上記のいずれかのエンジンに切り替えてください。
+:::
+
+`Cache` に保存されたすべてのキャッシュデータと同じく、
 `Cache::clear()` を使ってクリアできます。
 
-## クラスの設定
+## Configure クラス
 
 `class` **Configure**
 
@@ -501,7 +550,7 @@ CakePHP では設定が必要な項目はほとんどありませんが、あな
 アプリケーション固有の設定ルールを作ることが有用な場合もあります。
 あなたは過去に、いくつかのファイルの中で変数や定数を定義することで、
 独自の設定値を持たせていたようなケースがあったかもしれません。
-このルールを強制し、これらの値を使うためには、毎回設定ファイルを
+この方法では、これらの値を使うために毎回設定ファイルを
 インクルードする必要がありました。
 
 CakePHP の Configure クラスは、アプリケーションや実行時固有の値を
@@ -516,7 +565,7 @@ CakePHP の Configure クラスは、アプリケーションや実行時固有�
 ないようにしてください。
 
 このクラスは、あなたのアプリケーション中の静的なコンテキストにおいて、
-いかなるところからでも呼び出せるようになっています:
+いかなるところからでも呼び出せるようになっています。
 
 ``` php
 Configure::read('debug');
@@ -530,32 +579,32 @@ param string \$key
 param mixed \$value  
 保存する値
 
-アプリケーションの設定の中で `write()` を使ってデータを格納します:
+アプリケーションの設定の中で `write()` を使ってデータを格納します。
 
 ``` php
-Configure::write('Company.name','Pizza, Inc.');
-Configure::write('Company.slogan','Pizza for your body and soul');
+Configure::write('Company.name', 'Pizza, Inc.');
+Configure::write('Company.slogan', 'Pizza for your body and soul');
 ```
 
 > [!NOTE]
 > `$key` パラメーターで使われる `ドット記法` により、
 > あなたの構成設定値を論理的にグループ化できます。
 
-直前の例は、以下のような単一の呼び出しとしても書けます:
+直前の例は、以下のような単一の呼び出しとしても書けます。
 
 ``` php
 Configure::write(
     'Company',
     [
         'name' => 'Pizza, Inc.',
-        'slogan' => 'Pizza for your body and soul'
-    ]
+        'slogan' => 'Pizza for your body and soul',
+    ],
 );
 ```
 
 `Configure::write('debug', $int)` を使えば、その場で動的に
 デバッグモードと本番モードを行ったり来たりできます。特に、
-AMF や SOAP のやりとりの最中はデバッグ情報がパースエラーの原因と
+JSON や XML のレスポンスではデバッグ情報がパースエラーの原因と
 なりがちなので、それを防ぐのに有効です。
 
 `static` Configure::**read**($key = null)
@@ -566,7 +615,7 @@ param string \$key
 アプリケーションから設定データを読み込むのに使います。デフォルトは
 CakePHP で重要な debug 値です。何らかのキーが指定されたらその
 データを返します。前述の write() の例を元に、そのデータを呼び出して
-みましょう:
+みましょう。
 
 ``` php
 Configure::read('Company.name');    // 'Pizza, Inc.' が返されます
@@ -581,6 +630,14 @@ Configure::read('Company');
 
 \$key を指定しない場合、 Configure にあるすべての値を返します。指定された \$key に関連する
 値が存在しない場合、 null を返します。
+
+`static` Configure::**consume**($key)
+
+param string \$key  
+読み込むキー。 `ドット記法` が使えます。
+
+Configure からキーを読み込み、同時に削除します。値の読み込みと削除を
+1 回の操作で行いたい場合に便利です。
 
 `static` Configure::**check**($key)
 
@@ -598,7 +655,7 @@ key/path が存在し、かつ null でない値を持つかどうかをチェ�
 param string \$key  
 削除するキー。 `ドット記法` が使えます。
 
-アプリケーションの設定から情報を削除します:
+アプリケーションの設定から情報を削除します。
 
 ``` php
 Configure::delete('Company.name');
@@ -618,7 +675,7 @@ param ConfigReaderInterface \$reader
 
 Configure に設定リーダーを接続します。接続されたリーダーは、
 設定ファイルをロードするのに使われます。設定ファイルを読み込む
-方法の詳細は [Loading Configuration Files](#loading-configuration-files) をごらんください。
+方法の詳細は [設定ファイルのロード](#loading-configuration-files) をご覧ください。
 
 `static` Configure::**configured**($name = null)
 
@@ -641,24 +698,27 @@ Configure も歴史的にこれと同じフォーマットのファイルを読�
 なっています。 `IniReader` は ini 形式の設定ファイルを
 読むことができます。ini ファイルの仕様については
 [PHP documentation](https://www.php.net/parse_ini_file) を参照してください。
-コアの設定ファイルリーダーを使うには、そのファイルを
-`Configure::config()` で Configure に接続してください。:
+コアの設定ファイルリーダーを使うには、そのリーダーを
+`Configure::config()` で Configure に接続してください。
 
 ``` php
-App::uses('PhpReader', 'Configure');
-// app/Config から設定ファイルを読み込む
+// CONFIG (config/) から設定ファイルを読み込む
 Configure::config('default', new PhpReader());
 
 // 別のパスから設定ファイルを読み込む
 Configure::config('default', new PhpReader('/path/to/your/config/files/'));
 ```
 
+どちらのリーダーも、デフォルトでは `CONFIG` ディレクトリから読み込みます。
+`Configure::load('MyPlugin.my_file')` のようにプラグイン記法を使うと、
+プラグインの `Config/` ディレクトリから読み込みます。
+
 Configure に複数のリーダーを接続することができます。それぞれの
 リーダーは異なった種類の設定ファイル、もしくは異なったタイプの
 ソースを読みます。Configure に備わっている他のメソッドを使って
 接続されたリーダーとやりとりすることもできます。
 `Configure::configured()` を使って接続されている
-リーダーの別名を取得できます:
+リーダーの別名を取得できます。
 
 ``` php
 // 接続されたリーダーの別名の配列を取得する
@@ -670,8 +730,10 @@ Configure::configured('default');
 
 接続されているリーダーを取り外すこともできます。
 `Configure::drop('default')` はデフォルトリーダーの別名を
-取り外します。これ以降、リーダーを介した設定ファイルへの読み込みは
+取り外します。これ以降、そのリーダーを介した設定ファイルの読み込みは
 失敗します。
+
+<a id="loading-configuration-files"></a>
 
 ### 設定ファイルのロード
 
@@ -687,16 +749,16 @@ param boolean \$merge
 読まれたファイルの中身をマージするか、
 それとも既存の値を上書きするか。
 
-Configure に設定リーダーを接続して、設定ファイルを読み込みます:
+Configure に設定リーダーを接続して、設定ファイルを読み込みます。
 
 ``` php
-// リーダーオブジェクト 'default' を使って my_file.php をロードする
+// リーダーオブジェクト 'default' を使って config/my_file.php をロードする
 Configure::load('my_file', 'default');
 ```
 
 ロードされた設定ファイルは、そのデータを Configure にある既存の
 実行時設定とマージします。また、既存の実行時設定を上書きして
-新しい値を追加することもできます。 `$merge` を true にすると、
+新しい値を追加することもできます。 `$merge` を false にすると、
 値は既存の設定には上書きされません。
 
 ### 設定ファイルを生成／変更する
@@ -715,19 +777,19 @@ param array \$keys
 
 Configure にある全部または一部のデータをダンプして、ファイルまたは
 設定リーダーでサポートされているストレージシステムに格納します。
-シリアライズ化のフォーマットはs \$config として接続されている設定
-リーダーにより決定されます。たとえば 'default' のアダプターは
-`PhpReader` で、生成されたファイルは
+シリアライズのフォーマットは \$config として接続されている設定
+リーダーにより決定されます。たとえば 'default' のアダプターが
+`PhpReader` なら、生成されたファイルは
 `PhpReader` で読み込みが可能な PHP の設定ファイルになります。
 
-'default' リーダーは PhpReader のインスタンスを使い、 Configure
-にあるすべてのデータを <span class="title-ref">my_config.php</span> というファイルに保存します。:
+'default' リーダーが PhpReader のインスタンスだとして、Configure
+にあるすべてのデータを `my_config.php` というファイルに保存します。
 
 ``` php
 Configure::dump('my_config.php', 'default');
 ```
 
-エラーハンドラー設定だけを保存します。:
+エラーハンドラー設定だけを保存します。
 
 ``` php
 Configure::dump('error.php', 'default', ['Error', 'Exception']);
@@ -757,7 +819,7 @@ param mixed \$data
 将来取り出して使えるように、実行時設定の値を保存することもできます。
 configure は現在のリクエストの値しか記憶しないので、何らかの変更した
 値を後続するリクエストでも使いたい場合は、それらを保存しておく
-必要があります。:
+必要があります。
 
 ``` php
 // 'default' キャッシュにある 'user_1234' キーの中の現在の設定を保存する
@@ -779,7 +841,7 @@ param string \$cacheConfig
 データをロードするキャッシュ設定
 
 実行時設定を保存した後は、おそらくそこに再度アクセスして値を取り出す
-ことになります。これは `Configure::restore()` により行います。:
+ことになります。これは `Configure::restore()` により行います。
 
 ``` php
 // キャッシュから実行時設定を取り出す
@@ -788,28 +850,28 @@ Configure::restore('user_1234', 'default');
 
 設定情報を取り出す際は、保存した時に使ったものと同じキャッシュから、
 同じキーを使って取り出すことが重要です。取り出された情報は、
-既存の実行時設定の最上位にマージされます。
+既存の実行時設定の上にマージされます。
 
 ## 独自の設定用リーダーを作成する
 
 設定用リーダーは CakePHP の中で拡張可能な部品です。このため、
 あなたのアプリケーションとプラグインの中で、設定用リーダーを
 新たに作成することも可能です。設定用リーダーは
-`ConfigReaderInterface` をインプリメント(implements)
-する必要があります。このインターフェースでは唯一の必須メソッドとして
-read メソッドが定義されています。たとえば、あなたが本当に XML
-ファイルが好きなら、あなたのアプリケーションのためにシンプルな
-XML 設定リーダを作ることもできます。:
+`ConfigReaderInterface` を実装する必要があります。
+このインターフェースでは `read()` と `dump()` メソッドが定義されています。
+たとえば、あなたが本当に XML ファイルが好きなら、あなたのアプリケーションのために
+シンプルな XML 設定リーダーを作ることもできます。
 
 ``` php
-// app/Lib/Configure/XmlReader.php の中
-App::uses('Xml', 'Utility');
-class XmlReader implements ConfigReaderInterface
+// src/Lib/Configure/MyXmlReader.php
+class MyXmlReader implements ConfigReaderInterface
 {
+    protected $_path;
+
     public function __construct($path = null)
     {
         if (!$path) {
-            $path = APP . 'Config' . DS;
+            $path = CONFIG;
         }
         $this->_path = $path;
     }
@@ -817,47 +879,64 @@ class XmlReader implements ConfigReaderInterface
     public function read($key)
     {
         $xml = Xml::build($this->_path . $key . '.xml');
+
         return Xml::toArray($xml);
     }
 
-    // 2.3 時点では dump() メソッドもまだ必須です
+    // 2.3 以降は dump() メソッドも必須です
     public function dump($key, $data)
     {
-        // code to dump data to file
+        // データをファイルに書き出すコード
     }
 }
 ```
 
-あなたの `app/Config/bootstrap.php` でこのリーダーを接続して
-利用できます:
+`config/bootstrap.php` でこのリーダーを接続して利用できます。
 
 ``` php
-App::uses('XmlReader', 'Configure');
-Configure::config('xml', new XmlReader());
-...
+Configure::config('xml', new MyXmlReader());
+// ...
 
 Configure::load('my_xml');
 ```
 
-設定リーダの `read()` メソッドは、 `$key` という名前のリソースが
+`src/` を Composer の classmap でオートロードしていれば、`composer dump-autoload`
+の後はリーダークラスが自動的に読み込まれます。classmap を使っていない場合は、
+先に `App::uses('MyXmlReader', 'Configure');` でクラスを読み込んでください。
+
+> [!WARNING]
+> 独自の設定クラスに `XmlReader` という名前を付けるのはおすすめしません。
+> PHP には同じ名前の組み込みクラス
+> [XMLReader](https://www.php.net/manual/ja/book.xmlreader.php) があるからです。
+
+設定リーダーの `read()` メソッドは、 `$key` という名前のリソースが
 保持する設定情報の配列を返さなければなりません。
 
-> `Configure` で設定データを読んだり保存したりするクラスで
-> 使われるインターフェースを定義します。
+`interface` **ConfigReaderInterface**
 
-`method` Configure::**read**($key)
+`Configure` で設定データを読んだり保存したりするクラスで
+使われるインターフェースを定義します。
 
-`method` Configure::**dump**($key)
+`method` ConfigReaderInterface::**read**($key)
+
+`method` ConfigReaderInterface::**dump**($key, $data)
 
 ::: info Added in version 2.3
-`ConfigReaderInterface::dump()` は 2.3 で追加されました。設定データをロード／保存／復元する際にエラーが発生すると、 この例外が投げられます。エラーが発生した場合、 `ConfigReaderInterface` の実装はこのエラーを スロー(throw)しなければなりません。
+`ConfigReaderInterface::dump()` は 2.3 で追加されました。
 :::
+
+`exception` **ConfigureException**
+
+設定データをロード／保存／復元する際にエラーが発生すると、この例外が投げられます。
+`ConfigReaderInterface` の実装は、エラーが発生した場合にこの例外を投げる必要があります。
 
 ### ビルトインの設定リーダー
 
 `class` **PhpReader**
 
 `class` **IniReader**
+
+<a id="inflection-configuration"></a>
 
 ## Inflection(語尾変化)設定
 
@@ -868,7 +947,7 @@ CakePHP はそれぞれの部品を関連付けるにあたり、それぞれの
 単数形と複数形を *inflecting(語尾の変化)* によって把握します。
 
 ここで、CakePHP の `Inflector` （複数形、単数形、
-キャメルクラス、アンダースコアへの相互変換を司るクラス）が
+キャメルケース、アンダースコアへの相互変換を司るクラス）が
 思ったように動かないケースを想定してみましょう。これは特に、
 英語話者ではない人たちにとって起こりがちです。もし CakePHP
 があなたの Foci （訳注：focus（焦点）の複数形）や Fish （訳注：
@@ -877,54 +956,48 @@ CakePHP はそれぞれの部品を関連付けるにあたり、それぞれの
 
 ### カスタム inflection のロード
 
-カスタム inflection をロードするには `app/Config/bootstrap.php`
-ファイルの中に `Inflector::rules()` を書きます。:
+カスタム inflection をロードするには `config/bootstrap.php`
+ファイルの中に `Inflector::rules()` を書きます。
 
 ``` php
 Inflector::rules('singular', [
     'rules' => [
         '/^(bil)er$/i' => '\1',
-        '/^(inflec|contribu)tors$/i' => '\1ta'
+        '/^(inflec|contribu)tors$/i' => '\1ta',
     ],
     'uninflected' => ['singulars'],
-    'irregular' => ['spins' => 'spinor']
+    'irregular' => ['spins' => 'spinor'],
 ]);
 ```
 
-または:
+または
 
 ``` php
 Inflector::rules('plural', ['irregular' => ['phylum' => 'phyla']]);
 ```
 
-これらのコードは、指定されたルールを lib/Cake/Utility/Inflector.php
-で定義されている inflection セットにマージし、コアのルールより
-優先度の高いルールとして追加します。
+これらのコードは、指定されたルールをフレームワークの `src/Cake/Utility/Inflector.php`
+(`vendor/pieceofcake2/cakephp/src/Cake/Utility/Inflector.php`) で定義されている
+inflection セットにマージし、コアのルールより優先度の高いルールとして追加します。
 
 ## CakePHP の起動(bootstrap)
 
-::: pieceofcake2
-モダン構成ではブートストラップファイルは `config/bootstrap.php` です。コアの inflection
-ルールはフォークの `src/Cake/Utility/Inflector.php` にあります (`lib/Cake` はもうありません)。
-:::
-
-もし何からの追加設定が必要な場合、app/Config/bootstrap.php
+もし何らかの追加設定が必要な場合、`config/bootstrap.php`
 にある CakePHP の bootstrap ファイルを使います。このファイルは
 CakePHP のコアな起動処理の直後に実行されます。
 
-このファイルは起動時における多くの共通的な処理を行います。:
+このファイルは起動時における多くの共通的な処理に適しています。
 
 - 便利な関数群を定義
 - グローバル定数群の登録
 - 追加のモデル、ビュー、コントローラーへのパスを定義
-- キャッシュ構造の生成
+- キャッシュ設定の作成
 - inflection の構成
 - 設定ファイルの読み込み
 
 何かを bootstrap ファイルに追加する場合は、MVC ソフトウェアの
-デザインパターンをメンテする際に注意が必要です: 追加部分に、
-あなたのコントローラーで使うための独自のフォーマット関数を入れたくなる
-欲望にかられる恐れがあります。
+デザインパターンを守るよう注意してください。コントローラーで使うための
+独自のフォーマット関数をここに入れたくなるかもしれません。
 
 ぜひその誘惑と戦ってください。その先に、必ず良いことがありますよ。
 

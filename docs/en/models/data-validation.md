@@ -1300,9 +1300,6 @@ public $validate = [
 ];
 ```
 
-This validation method uses a complex regular expression that can sometimes
-cause issues with Apache2 on Windows using mod_php.
-
 `static` Validation::**userDefined**(mixed $check, object $object, string $method, array $args = null)
 
 Runs an user-defined validation.
@@ -1331,9 +1328,11 @@ class NlValidation
 }
 ```
 
-This file could be placed in `APP/Validation/` or
-`App/PluginName/Validation/`, but must be imported via App::uses() before
-attempting to use it. In your model validation you could use your NlValidation
+This file could be placed in `src/Validation/NlValidation.php` or in a
+plugin's `Validation/` folder. The class must be loadable when the validation
+runs: with a Composer classmap for `src/` it is loaded automatically, otherwise
+import it with `App::uses('NlValidation', 'Validation')` (or
+`App::uses('NlValidation', 'PluginName.Validation')`) before using it. In your model validation you could use your NlValidation
 class by doing the following:
 
 ``` php
@@ -1353,7 +1352,7 @@ ability to pass off to another validator has been added.
 
 > [!TIP]
 > The Localized Plugin already contains a lot of rules ready to use:
-> <https://github.com/cakephp/localized>
+> <https://github.com/pieceofcake2/localized>
 > Also feel free to contribute with your localized validation rules.
 
-- [Validating Data From The Controller](../data-validation/validating-data-from-the-controller)
+- [Validating Data From The Controller](data-validation/validating-data-from-the-controller)

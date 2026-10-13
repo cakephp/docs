@@ -2,24 +2,14 @@
 
 `class` **CakeEmail**(mixed $config = null)
 
-`CakeEmail` は、メール送信の新しいクラスです。このクラスを使うと、アプリケーションの
-任意の場所からメールを送信できます。コントローラの中で EmailComponent を使うことに加えて、
-シェルやモデルからもメール送信できます。
-
-このクラスは、 `EmailComponent` を置き換えるもので、より柔軟にメール送信できます。
-例えば、既存の SMTP や Mail トランスポートの代わりにメールを送信するための独自のトランスポートを
-作成することができます。
+`CakeEmail` は、メールを送信するためのクラスです。このクラスを使うと、コントローラ、
+シェル、モデルなど、アプリケーションの任意の場所からメールを送信できます。
+既存の SMTP や Mail トランスポートの代わりにメールを送信するための独自のトランスポートを
+作成することもできます。
 
 ## 基本的な使い方
 
-まず最初に、 `App::uses()` を使って、クラスがロードできるようにします。 :
-
-``` php
-App::uses('CakeEmail', 'Network/Email');
-```
-
-CakeEmail の使い方は、 `EmailComponent` の使い方に似ていますが、
-属性の代わりにメソッドを使用します。例:
+`CakeEmail` のインスタンスのメソッドを呼び出して、メッセージを設定して送信します。例:
 
 ``` php
 $Email = new CakeEmail();
@@ -60,17 +50,9 @@ $Email->sender('app@example.com', 'MyApp emailer');
 
 データベースの設定と同様に、メールの設定は、一つのクラスの中に集約することができます。
 
-`EmailConfig` クラスとともに `app/Config/email.php` ファイルを作成してください。
-`app/Config/email.php.default` が、このファイルの参考になります。
-
-::: pieceofcake2 設定ファイルの場所
-`email.php` はアプリケーションの設定ディレクトリから読み込まれます。
-
-- レガシーレイアウト: `app/Config/email.php`
-- モダンレイアウト: `config/email.php`
-
-詳しくは [ディレクトリ構成](/ja/pieceofcake2/directory-structure) を参照してください。
-:::
+`EmailConfig` クラスとともに `config/email.php` ファイル (レガシーレイアウトでは
+`app/Config/email.php`) を作成してください。アプリケーションスケルトンの
+`config/email.php.default` が、このファイルの参考になります。
 
 `CakeEmail` は、設定にアクセスするため `EmailConfig` のインスタンスを作成します。
 もし、設定中に動的にデータをセットしたい場合、コンストラクターを使用することができます。 :
@@ -85,7 +67,7 @@ class EmailConfig
 }
 ```
 
-`app/Config/email.php` の作成は必須ではありません。 `CakeEmail` は、そのファイルを
+`config/email.php` の作成は必須ではありません。 `CakeEmail` は、そのファイルを
 使わずに使用できます。そして、全ての設定を別々にセットするために各々のメソッドを使用したり、
 設定の配列をロードすることができます。
 
@@ -118,7 +100,7 @@ $Email = new CakeEmail(['from' => 'me@example.org', 'transport' => 'MyCustom']);
 > もしくはコンストラクタを使用してください。 `$Email->config(['log' => true]);`
 > を使用する時、 LOG_DEBUG を使用します。 `CakeLog::write()` をご覧ください。
 
-Gmail のような SSL SMTP サーバの設定ができます。設定するためには、 `'ssl://'` のように
+SSL SMTP サーバの設定ができます。設定するためには、 `'ssl://'` のように
 ホストのプレフィックスを付けて、対応するポート番号を設定します。例:
 
 ``` php
@@ -136,22 +118,22 @@ class EmailConfig
 
 接続レベルの暗号化に TLS が使いたい場合は、 `tls://` を使用できます。
 
-> [!WARNING]
-> あなたのグーグルアカウントでこれを動作させるためには安全性の低いアプリへのアクセスを
-> 有効にする必要があります: [安全性の低いアプリがアカウントにアクセスするのを許可する](https://support.google.com/accounts/answer/6010255?hl=ja)
+> [!NOTE]
+> Gmail は SMTP クライアントからの通常のアカウントパスワードによるログインを受け付けません。
+> Google アカウントで生成したアプリパスワードを使ってください。
 
 > [!NOTE]
-> ssl:// や tls:// の機能を使用するためには、 PHP インストール時に SSL 設定を行う
-> 必要があります。
+> ssl:// や tls:// の機能を使用するためには、 `openssl` エクステンションが必要です。
 
-2.3.0 では、 `tls` オプションを使用して STARTTLS SMTP 拡張を有効にできます。 :
+`tls` オプションを使用して STARTTLS SMTP 拡張を有効にすることもできます。
+STARTTLS は通常ポート 587 で提供されています。 :
 
 ``` php
 class EmailConfig
 {
     public $gmail = [
         'host' => 'smtp.gmail.com',
-        'port' => 465,
+        'port' => 587,
         'username' => 'my@gmail.com',
         'password' => 'secret',
         'transport' => 'Smtp',
@@ -215,8 +197,8 @@ class EmailConfig
 
 ### ヘッダーのセット
 
-`CakeEmail` の中に、自由にヘッダーをセットできます。CakeEmail を使用する際、
-独自のヘッダーにプレフィックスの `X-` をつけることを忘れないでください。
+`CakeEmail` の中に、自由にヘッダーをセットできます。 `CakeEmail` は独自のヘッダーに
+`X-` プレフィックスを自動的には付けないため、必要に応じてヘッダー名に含めてください。
 
 `CakeEmail::setHeaders()` と `CakeEmail::addHeaders()` をご覧ください。
 
@@ -225,7 +207,7 @@ class EmailConfig
 メールはしばしば単純なテキストメッセージを超えたものになります。それを容易にするために
 CakePHP は、 [ビューレイヤー](../views) を使用してメールを送信することができます。
 
-メールのテンプレートは、 あなたのアプリケーションの `View` ディレクトリ内の
+メールのテンプレートは、 あなたのアプリケーションの `templates` ディレクトリ内の
 `Emails` と呼ばれる特別なフォルダに置かれます。メールのビューは、
 普通のビューと同様にレイアウトとエレメントを使用します。 :
 
@@ -238,8 +220,9 @@ $Email->template('welcome', 'fancy')
     ->send();
 ```
 
-上記は、ビューとして `app/View/Emails/html/welcome.ctp` を使用し、
-レイアウトとして `app/View/Layouts/Email/html/fancy.ctp` を使用します。
+上記は、ビューとして `templates/Emails/html/welcome.ctp` を使用し、
+レイアウトとして `templates/Layouts/Emails/html/fancy.ctp` を使用します
+(レガシーレイアウトでは `templates/` の代わりに `app/View/` です)。
 以下のように、マルチパートのテンプレートメールを送信することもできます。 :
 
 ``` php
@@ -253,16 +236,10 @@ $Email->template('welcome', 'fancy')
 
 この例では、以下のビューファイルを使用します。
 
-- `app/View/Emails/text/welcome.ctp`
-- `app/View/Layouts/Emails/text/fancy.ctp`
-- `app/View/Emails/html/welcome.ctp`
-- `app/View/Layouts/Emails/html/fancy.ctp`
-
-::: pieceofcake2
-モダンレイアウトでは、メールのテンプレートは `app/View/` ではなく `templates/` に置きます。
-例: `templates/Emails/html/welcome.ctp`、`templates/Layouts/Emails/html/fancy.ctp`。
-詳しくは [ディレクトリ構成](/ja/pieceofcake2/directory-structure) を参照してください。
-:::
+- `templates/Emails/text/welcome.ctp`
+- `templates/Layouts/Emails/text/fancy.ctp`
+- `templates/Emails/html/welcome.ctp`
+- `templates/Layouts/Emails/html/fancy.ctp`
 
 テンプレートメールを送信する時、 `text` 、 `html` と `both` のうちの
 どれかを送信オプションとして指定します。
@@ -313,7 +290,7 @@ $Email->theme('TestTheme');
 
 これは、Blog プラグインを更新せずにあなたのテーマの <span class="title-ref">new_comment</span> テンプレートで上書きできます。
 テンプレートファイルは、以下のパスで作成する必要があります:
-`APP/View/Themed/TestTheme/Blog/Emails/text/new_comment.ctp`.
+`templates/Themed/TestTheme/Blog/Emails/text/new_comment.ctp`.
 
 ### 添付ファイルの送信
 
@@ -377,22 +354,21 @@ CakePHP は、 Mail (デフォルト)、 Debug と SMTP トランスポートを
 これらの送信方法を設定するためには、 `CakeEmail::transport()` メソッドを
 使用するか、設定内で transport を指定する必要があります。
 
-::: pieceofcake2 MailTransport のシグネチャ
-`MailTransport` を継承して `_mail()` をオーバーライドしている場合は、型付きの新しいシグネチャに合わせてください。
+::: pieceofcake2
+`MailTransport::_mail()` のシグネチャに型が付きました。
 `protected function _mail(string $to, string $subject, string $message, array|string $headers = [], string $params = ''): void`
-詳しくは [アップグレードガイド](/ja/pieceofcake2/upgrade) を参照してください。
+`MailTransport` を継承してこのメソッドをオーバーライドしている場合は、シグネチャを合わせてください。
 :::
 
 #### 独自のトランスポートの作成
 
-SwiftMailer のような他のメールシステムを使うために独自のトランスポートを作成することができます。
+他のメールシステムやメール配信サービスを使うために独自のトランスポートを作成することができます。
 トランスポートを作るためには、(Example という名前のトランスポートの場合）最初に
-`app/Lib/Network/Email/ExampleTransport.php` ファイルを作成してください。
+`src/Lib/Network/Email/ExampleTransport.php` ファイルを作成してください。
 作成開始時点のファイルは以下のようになります。 :
 
 ``` php
-App::uses('AbstractTransport', 'Network/Email');
-
+// src/Lib/Network/Email/ExampleTransport.php
 class ExampleTransport extends AbstractTransport
 {
 
@@ -407,10 +383,6 @@ class ExampleTransport extends AbstractTransport
 オプションで、 `config($config)` メソッドも実装できます。 `config()` は、
 send() の前に呼ばれ、ユーザーの設定を受け取ることができます。デフォルトでは、
 このメソッドは、 protected な変数 `$_config` に設定内容をセットします。
-
-::: pieceofcake2
-モダンレイアウトでは、独自のトランスポートは `src/Lib/Network/Email/` に置きます。
-:::
 
 もし、送信前にトランスポート上のメソッドを追加で呼ぶ必要がある場合、
 トランスポートのインスタンスを取得するために `CakeEmail::transportClass()`
@@ -449,8 +421,8 @@ $email->emailPattern($newPattern);
 `EmailConfig` 内で設定を作成したり、 `CakeEmail::deliver()` スタティックメソッドに
 すべての必要なオプションを配列で指定することができます。 例:
 
-``` css
-CakeEmail::deliver('you@example.com', 'Subject', 'Message', array('from' => 'me@example.com'));
+``` php
+CakeEmail::deliver('you@example.com', 'Subject', 'Message', ['from' => 'me@example.com']);
 ```
 
 このメソッドは、 <you@example.com> 宛に、 <me@example.com> から、サブジェクト「Subject」、

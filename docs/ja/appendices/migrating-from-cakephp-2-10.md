@@ -1,10 +1,7 @@
-# アップグレードガイド
+# CakePHP 2.10 からの移行
 
-::: pieceofcake2
-このページは **pieceofcake2 フォーク** 固有の内容で、本家 CakePHP 2.x のドキュメントには含まれません。
-本家 CakePHP 2.10.24 から pieceofcake2/cakephp（v2.12.2）へ移行する手順と、破壊的変更をまとめています。
-原文は [UPGRADE.md](https://github.com/pieceofcake2/cakephp/blob/2.x/UPGRADE.md) です。
-:::
+このガイドでは、本家の CakePHP 2.10.24 から pieceofcake2/cakephp へアプリケーションを移行する手順と、
+破壊的変更を説明します。内容は [UPGRADE.md](https://github.com/pieceofcake2/cakephp/blob/2.x/UPGRADE.md) にもとづいています。
 
 ## 前提条件
 
@@ -21,7 +18,9 @@
 2. **PHP 7.4 での互換性を確保する**: PHP 8.x に移行する前に、アプリケーションが PHP 7.4 で
    完全に動作している必要があります
 3. **Composer の設定を変更する**: `composer.json` の `cakephp/cakephp` を
-   `pieceofcake2/cakephp` に置き換えます
+   `pieceofcake2/cakephp` に置き換え、プラグインが `app/Plugin/`（モダン構成では `plugins/`）にインストールされるよう
+   `composer/installers` の設定を追加します。この設定は必須です。
+   [composer.json の設定](/ja/installation#configuring-composer-json) を参照してください。
 4. **PHP をアップグレードする**: PHP 8.0 以降に更新します
 5. **十分にテストする**: アプリケーションのテストスイートを実行し、互換性を確認します
 
@@ -38,11 +37,11 @@
 composer require --dev pieceofcake2/bake
 
 # Web 用ディスパッチャーをコピー
-cp plugins/Bake/Console/Templates/skel/webroot/index.php app/webroot/index.php
-cp plugins/Bake/Console/Templates/skel/webroot/test.php app/webroot/test.php
+cp app/Plugin/Bake/Console/Templates/skel/webroot/index.php app/webroot/index.php
+cp app/Plugin/Bake/Console/Templates/skel/webroot/test.php app/webroot/test.php
 
 # コンソール用ディスパッチャーをコピー
-cp plugins/Bake/Console/Templates/skel/Console/cake app/Console/cake
+cp app/Plugin/Bake/Console/Templates/skel/Console/cake app/Console/cake
 chmod +x app/Console/cake
 ```
 
@@ -57,8 +56,8 @@ chmod +x app/Console/cake
 
 CakePHP 2.x と 5.x の両方に対応したモダンなアプリケーションスケルトンは
 [`pieceofcake2/app`](https://github.com/pieceofcake2/app) を参照してください。
-[インストール](/ja/pieceofcake2/installation) と
-[ディレクトリ構成](/ja/pieceofcake2/directory-structure) も参照してください。
+[インストール](/ja/installation) と
+[ディレクトリ構成](/ja/appendices/migrating-to-the-modern-layout) も参照してください。
 
 ### ディレクトリ構成のモダン化（[PR #21](https://github.com/pieceofcake2/cakephp/pull/21)）
 
@@ -273,13 +272,13 @@ CakePlugin::load('Upgrade');
 
 1. 依存関係を Composer で管理していることを確認します
 2. Bake プラグインをインストールします: `composer require --dev pieceofcake2/bake`
-3. 更新されたディスパッチャーファイルを `plugins/Bake/Console/Templates/skel/` から
+3. 更新されたディスパッチャーファイルを `app/Plugin/Bake/Console/Templates/skel/` から
    アプリケーションにコピーします。
 
    ```bash
-   cp plugins/Bake/Console/Templates/skel/webroot/index.php app/webroot/index.php
-   cp plugins/Bake/Console/Templates/skel/webroot/test.php app/webroot/test.php
-   cp plugins/Bake/Console/Templates/skel/Console/cake app/Console/cake
+   cp app/Plugin/Bake/Console/Templates/skel/webroot/index.php app/webroot/index.php
+   cp app/Plugin/Bake/Console/Templates/skel/webroot/test.php app/webroot/test.php
+   cp app/Plugin/Bake/Console/Templates/skel/Console/cake app/Console/cake
    ```
 
 4. 古いディスパッチャーファイルがあれば削除します。
@@ -336,19 +335,19 @@ CakePlugin::load('Upgrade');
 
 #### 設定の形式
 
-- **スキーマベースの設定**: 複数のデータベースの代わりにスキーマのマッピングを使います
+- **スキーマ**: `schema` の設定で接続に使う SQL Server のスキーマを指定します。既定値は `dbo` です。
+  1 つのデータベースの複数のスキーマにあるテーブルを使う場合は、スキーマごとに接続を定義します。
 
   ```php
-  // 従来の方法（引き続き動作します）
-  'database' => 'cakephp_test2'
-
-  // 新しく推奨する方法
-  'database' => 'cakephp_test',
-  'schema' => [
-      'default' => 'dbo',
-      'test2' => 'test2',
-      'test_database_three' => 'test3',
-  ]
+  public $default = [
+      'datasource' => 'Database/Sqlserver',
+      'host' => 'localhost',
+      'port' => 1433,
+      'login' => 'user',
+      'password' => 'password',
+      'database' => 'my_app',
+      'schema' => 'dbo',
+  ];
   ```
 
 - **接続オプション**: SSL/TLS のオプションは `options` 配列で指定します
@@ -369,7 +368,7 @@ CakePlugin::load('Upgrade');
 
 **移行:**
 
-- SQL Server の設定をスキーマのマッピングに変更します（任意ですが推奨）
+- テーブルが `dbo` 以外のスキーマにある場合は `schema` を設定します
 - DSN に直接 SSL/TLS オプションを書いている場合は `options` 配列に移します
 - Sqlserver クラスを継承している場合は、メソッドシグネチャを合わせてください
 
@@ -395,7 +394,7 @@ CakePlugin::load('Upgrade');
 - 既存のトークンも引き続き有効です
 - 新しいトークンは強化された方式で生成されます
 
-詳しくは [セキュリティ](/ja/pieceofcake2/security) を参照してください。
+詳しくは [セキュリティ](/ja/appendices/security-fixes) を参照してください。
 
 ### strftime() の置き換え
 
@@ -421,7 +420,7 @@ CakePlugin::load('Upgrade');
 - 開発時のみの変更です
 - 独自のコーディング規約を使っている場合は `phpcs.xml` を更新してください
 
-[コーディング規約](/ja/pieceofcake2/coding-standards) を参照してください。
+[コーディング規約](/ja/contributing/cakephp-coding-conventions) を参照してください。
 
 #### PHPUnit の互換性
 
@@ -480,15 +479,13 @@ public $components = [
     ]
 ];
 
-// 新（推奨）
-public $components = [
-    'Cookie' => [
-        'type' => 'aes'  // または 'rijndael'
-    ]
-];
-
-// コントローラーで動的に設定する場合
-$this->Cookie->type('aes');
+// 新（推奨）: タイプは $components では設定できないため、
+// CookieComponent::type() を呼び出します
+public function beforeFilter()
+{
+    parent::beforeFilter();
+    $this->Cookie->type('aes');
+}
 ```
 
 PHP 8 では `'aes'` を使う場合も `Security.useOpenSsl` の設定が必要です。下記の

@@ -11,7 +11,7 @@
 `useDbConfig` プロパティはモデルクラスを関連するデータベース・テーブルに紐付けるために用いられる、
 データベース・コネクションの名前を指定する文字列になります。
 データーベース設定ファイルに定義されたデータベースコレクションのうちどれか一つを設定できます。
-データベース設定ファイルは /app/Config/database.php に保存します。
+データベース設定ファイルは `config/database.php` に保存します。
 
 `useDbConfig` プロパティの初期値は「default」データベース・コネクションになります。
 
@@ -53,7 +53,7 @@ class Example extends AppModel
 ## tablePrefix
 
 モデルで使われるテーブルの接頭辞 (*prefix*) の名前です。テーブル接頭辞は
-/app/Config/database.php にあるデータベース・コネクションのファイルで初期値が設定されます。
+`config/database.php` にあるデータベース・コネクションのファイルで初期値が設定されます。
 デフォルトでは接頭辞はありません。モデルで `tablePrefix` 属性を設定することで初期値を
 上書きすることができます。
 
@@ -68,7 +68,7 @@ class Example extends AppModel
 
 <a id="model-primaryKey"></a>
 
-## primaryKey
+## primaryKey {#model-primarykey}
 
 各々のテーブルは通常、 `id` という主キーを持ちますが、
 モデルがどのフィールド名を主キーとして使うか変えることができます。
@@ -86,7 +86,7 @@ class Example extends AppModel
 
 <a id="model-displayField"></a>
 
-## displayField
+## displayField {#model-displayfield}
 
 `displayField` 属性はどのデータベースのフィールドがレコードの表題 (*label*) として
 使われるべきかを指定します。この表題はスキャフォールディングと `find('list')` の呼び出しで

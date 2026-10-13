@@ -681,7 +681,7 @@ Currently implemented selectors:
 | /Comment/@\* | Selects the key names of all comments Currently only absolute paths starting with a single '/' are supported. Please report any bugs as you find them. Suggestions for additional features are welcome. |
 
 To learn more about Set::extract() refer to the function testExtract()
-in `/lib/Cake/Test/Case/Utility/SetTest.php`.
+in `tests/TestCase/Utility/SetTest.php` of the `pieceofcake2/cakephp` repository.
 
 `static` Set::**filter**($var)
 

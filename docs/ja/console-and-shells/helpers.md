@@ -28,20 +28,13 @@ $progress->draw();
 
 CakePHP は、いくつかの Shell ヘルパーを用意していますが、あなたのアプリケーションや
 プラグインの中で、新たに作成することができます。例として、装飾的なヘッダーを生成するための
-単純なヘルパーを作成してみましょう。最初に **app/Console/Helper/HeadingHelper.php** を
-作成し、以下のように記述します。 :
-
-::: pieceofcake2
-pieceofcake2 フォークのモダンレイアウトでは `src/Console/Helper/HeadingHelper.php` に作成します。
-`BaseShellHelper` などのフレームワークのクラスは Composer でオートロードされるため、
-`App::uses()` の行は省略できます。
-:::
+単純なヘルパーを作成してみましょう。Shell ヘルパーのクラス名には `ShellHelper` という
+サフィックスを付けます。最初に **src/Console/Helper/HeadingShellHelper.php** を作成し、
+以下のように記述します。 :
 
 ``` php
-<?php
-App::uses("BaseShellHelper", "Console/Helper");
-
-class HeadingHelper extends BaseShellHelper
+// src/Console/Helper/HeadingShellHelper.php
+class HeadingShellHelper extends BaseShellHelper
 {
     public function output($args)
     {
@@ -52,14 +45,16 @@ class HeadingHelper extends BaseShellHelper
 }
 ```
 
+`BaseShellHelper` は Composer のオートローダーで読み込まれるので、`App::uses()` は
+必要ありません。`output()` の引数は 1 つの配列として渡します。
 以下のように、あるシェルコマンドの中でこの新しいヘルパーを使用することができます。 :
 
 ``` php
 // 両側に ### を追加
-$this->helper('heading')->output('It works!');
+$this->helper('heading')->output(['It works!']);
 
 // 両側に ~~~~ を追加
-$this->helper('heading')->output('It works!', '~', 4);
+$this->helper('heading')->output(['It works!', '~', 4]);
 ```
 
 ## 組込ヘルパー
@@ -88,13 +83,16 @@ $this->helper('table')->output($data);
 ### Progress ヘルパー
 
 ProgressHelper は２つの異なる方法で利用されます。シンプルなモードは、
-処理が完了するまでに呼び出されるコールバックを渡すことができます。 :
+処理が完了するまでに呼び出されるコールバックを、オプション配列の最初の要素として
+渡すことができます。 :
 
 ``` php
-$this->helper('progress')->output(function ($progress) {
-    // ここで作業します
-    $progress->increment(20);
-});
+$this->helper('progress')->output([
+    function ($progress) {
+        // ここで作業します
+        $progress->increment(20);
+    },
+]);
 ```
 
 追加のオプションを渡すことで、プログレスバーの制御ができます。

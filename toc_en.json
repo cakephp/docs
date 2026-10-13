@@ -7,6 +7,10 @@
         {
           "text": "Piece of Cake 2",
           "link": "/pieceofcake2"
+        },
+        {
+          "text": "Changes from the Original Book",
+          "link": "/pieceofcake2/changes"
         }
       ]
     },
@@ -549,6 +553,10 @@
         {
           "text": "How to Use Plugins",
           "link": "/plugins/how-to-use-plugins"
+        },
+        {
+          "text": "Maintained Plugins",
+          "link": "/plugins/maintained-plugins"
         }
       ]
     },
@@ -593,6 +601,18 @@
         {
           "text": "Appendices",
           "link": "/appendices"
+        },
+        {
+          "text": "Migrating from CakePHP 2.10",
+          "link": "/appendices/migrating-from-cakephp-2-10"
+        },
+        {
+          "text": "Migrating to the Modern Layout",
+          "link": "/appendices/migrating-to-the-modern-layout"
+        },
+        {
+          "text": "Security Fixes",
+          "link": "/appendices/security-fixes"
         },
         {
           "text": "Migration from 1.2 to 2.0",

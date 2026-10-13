@@ -17,30 +17,37 @@ XSS 攻撃からデータベースを保護する素晴らしいアイデアで�
 
 アプリケーションでドキュメントルートを正しく指定することはコードをセキュアに、
 またアプリケーションを安全に保つために重要なステップの内の一つです。CakePHP のアプリケーションは、
-アプリケーションの `app/webroot` にドキュメントルートを指定する必要があります。
-これによってアプリケーション、設定のファイルが URL を通してアクセスすることができなくなります。
+アプリケーションの `webroot/` ディレクトリ (従来の構成では `app/webroot/`) にドキュメントルートを指定する必要があります。
+これによってアプリケーション、設定のファイル、そして `vendor/` にある Composer のパッケージに URL を通してアクセスすることができなくなります。
 ドキュメントルートの指定の仕方はウェブサーバーごとに異なります。
-WEBサーバー特有の情報についていは [URLリライティング](installation/url-rewriting) ドキュメントを見てください。
+WEBサーバー特有の情報については [URLリライティング](installation/url-rewriting) ドキュメントを見てください。
 
-どの場合においても `app/webroot/` をバーチャルホスト（バーチャルドメイン）のドキュメントルートに
+どの場合においても `webroot/` をバーチャルホスト（バーチャルドメイン）のドキュメントルートに
 設定すべきでしょう。これは webroot ディレクトリの外側のファイルを実行される可能性を取り除きます。
 
-::: pieceofcake2 モダンな構成
-モダンな構成 ([pieceofcake2/app](https://github.com/pieceofcake2/app)) では、
-プロジェクトルートの `webroot/` をドキュメントルートに設定してください。
-プロジェクトルートにはリクエストを転送する `.htaccess` が無いため、この設定は必須です。
-どちらの構成でも、`vendor/` がドキュメントルート配下に入らないようにしてください。
-:::
+## 本番用の依存パッケージのインストール
+
+Bake や DebugKit、PHPUnit などの開発用の依存パッケージを除き、最適化したオートローダーで
+Composer のパッケージをインストールします。
+
+```bash
+composer install --no-dev --optimize-autoloader
+```
+
+`config/bootstrap.php` で開発用のプラグインを読み込んでいる場合は、インストールされているときだけ読み込むようにします。
+
+```php
+// config/bootstrap.php
+if (is_dir(ROOT . DS . 'plugins' . DS . 'DebugKit')) {
+    CakePlugin::load('DebugKit');
+}
+```
 
 ## core.php の更新
 
-::: pieceofcake2
-`core.php` は、従来の構成では `app/Config/core.php`、モダンな構成では `config/core.php` です。
-:::
-
-core.php の更新、とりわけ `debug` 値は非常に重要です。 debug = 0 にすることで、
+`config/core.php` (従来の構成では `app/Config/core.php`) の更新、とりわけ `debug` 値は非常に重要です。 debug = 0 にすることで、
 広くインターネットに晒されることがあってはならない多くの開発用の機能を無効にできます。
-debug の無効化は以下の種々のものごとに変更を与えます:
+debug の無効化は以下の種々のものごとに変更を与えます。
 
 - `pr()` と `debug()` で生成されるデバッグメッセージが無効化されます。
 - CakePHP コアのキャッシュが、開発時の 10 秒ごとの代わりに 999 日ごとに破棄されるようになります。
@@ -54,11 +61,11 @@ debug の無効化は以下の種々のものごとに変更を与えます:
 これは、 本番環境へのデプロイ前に debug \> 0 でアプリケーションをデプロイすることを回避して、
 毎回デバッグレベルを変更することを省略できます。
 
-例えば、Apache の設定で環境変数を設定します。 :
+例えば、Apache の設定で環境変数を設定します。
 
     SetEnv CAKEPHP_DEBUG 2
 
-そうすると `core.php` デバッグレベルを動的に設定できます。 :
+そうすると `config/core.php` でデバッグレベルを動的に設定できます。
 
 ``` php
 if (getenv('CAKEPHP_DEBUG')) {
@@ -72,15 +79,10 @@ if (getenv('CAKEPHP_DEBUG')) {
 
 プラグインの画像や JavaScript、CSS ファイルなどの静的なアセットを扱う場合、
 ディスパッチャを通すことはかなりの非効率です。
-本番環境においては、次のようにシンボリックリンクを張ることを強くお勧めします。 :
-
-    ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css
-
-::: pieceofcake2
-パスはディレクトリ構成に合わせて読み替えてください。モダンな構成では、Composer でインストールしたプラグインは
-`plugins/` に、webroot は `webroot/` にあります。例:
+本番環境においては、次のようにシンボリックリンクを張ることを強くお勧めします。
 
 ```bash
 ln -s ../../plugins/YourPlugin/webroot/css/yourplugin.css webroot/css/yourplugin.css
 ```
-:::
+
+従来の構成では、プラグインは `app/Plugin/` または `plugins/` に、webroot は `app/webroot/` にあります。

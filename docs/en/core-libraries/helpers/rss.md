@@ -14,7 +14,7 @@ After a few simple steps you can simply append the desired
 extension .rss to `posts/index` making your URL `posts/index.rss`.
 Before we jump too far ahead trying to get our webservice up and
 running we need to do a few things. First parseExtensions needs to
-be activated, this is done in `app/Config/routes.php`:
+be activated, this is done in `config/routes.php`:
 
 ``` php
 Router::parseExtensions('rss');
@@ -86,7 +86,7 @@ With all the View variables set we need to create an rss layout.
 ### Layout
 
 An Rss layout is very simple, put the following contents in
-`app/View/Layouts/rss/default.ctp`:
+`templates/Layouts/rss/default.ctp`:
 
 ``` php
 if (!isset($documentData)) {
@@ -110,13 +110,13 @@ can pass variables back to the layout. Which is where our
 our feed.
 
 Next up is view file for my posts/index. Much like the layout file
-we created, we need to create a `View/Posts/rss/` directory and
+we created, we need to create a `templates/Posts/rss/` directory and
 create a new `index.ctp` inside that folder. The contents of the file
 are below.
 
 ### View
 
-Our view, located at `app/View/Posts/rss/index.ctp`, begins by
+Our view, located at `templates/Posts/rss/index.ctp`, begins by
 setting the `$documentData` and `$channelData` variables for the
 layout, these contain all the metadata for our RSS feed. This is
 done by using the `View::set()` method which is analogous to the

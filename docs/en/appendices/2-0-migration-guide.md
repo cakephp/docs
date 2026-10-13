@@ -10,7 +10,7 @@ other pages in this guide for all the new features and API changes.
 > migrate your 1.3 code to 2.0.
 
 ::: pieceofcake2
-In the pieceofcake2 fork, the Upgrade Shell is no longer part of the core. Install
+In the Piece of Cake 2 fork, the Upgrade Shell is no longer part of the core. Install
 the [pieceofcake2/upgrade](https://github.com/pieceofcake2/upgrade) plugin
 (`composer require --dev pieceofcake2/upgrade`) and load it with `CakePlugin::load('Upgrade')`.
 :::
@@ -972,9 +972,9 @@ it is recommended that you migrate to PHPUnit as well. For some additional
 information on how to migrate your tests see PHPUnit migration hints.
 
 ::: pieceofcake2
-The pieceofcake2 fork uses PHPUnit 9.6, not PHPUnit 3.7. PHPUnit classes use
+The Piece of Cake 2 fork uses PHPUnit 9.6, not PHPUnit 3.7. PHPUnit classes use
 namespaced names, e.g. `PHPUnit\Framework\TestSuite` instead of
-`PHPUnit_Framework_TestSuite`. See the [Upgrade Guide](/pieceofcake2/upgrade).
+`PHPUnit_Framework_TestSuite`. See the [Upgrade Guide](/appendices/migrating-from-cakephp-2-10).
 :::
 
 ### No more group tests

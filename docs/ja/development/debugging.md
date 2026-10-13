@@ -7,14 +7,15 @@ CakePHP は IDE やエディタと直接連携するようなツールは提供�
 
 ## 基本的なデバッグ
 
-`function` **debug(mixed $var, boolean $showHtml = null, $showFrom = true)**
+`function` **debug(mixed $var, ?bool $showHtml = null, bool $showFrom = true)**
 
 param mixed \$var  
 出力する内容。配列やオブジェクトを渡してもうまく動作します。
 
-param boolean \$showHTML  
-true をセットしたならエスケープが有効になります。2.0 では、
+param boolean \$showHtml  
+true をセットしたならエスケープが有効になります。
 ウェブリクエストを扱う場合にはデフォルトでエスケープが有効になります。
+コンソールで実行した場合や false を指定した場合は、プレーンテキストで出力されます。
 
 param boolean \$showFrom  
 debug() がどのファイルのどの行で呼ばれたのかを表示します。
@@ -40,7 +41,9 @@ Debugger クラスは PHP のデフォルトのエラーハンドリングを上
 するものに置き換えます。CakePHP ではデフォルトで Debugger クラスのエラーハンドリングが使われます。
 すべてのデバッグ関数と同様に、 `Configure::debug` が 0 より大きい値の場合のみ動作します。
 
-エラーが発生したら、Debugger はページに情報を表示し、かつ、error.log ファイルに出力します。
+debug が有効なときにエラーが発生したら、Debugger はページに情報を表示します。
+debug が 0 の場合は、代わりにエラーログ（デフォルトでは `logs/error.log`）に出力されます。
+詳しくは [エラーハンドリング](../development/errors) を参照してください。
 生成されるエラーレポートにはスタックトレースとエラーが発生した部分のコード抜粋の両方が出力されます。
 「Error」のリンクをクリックすると、スタックトレースが表示され、「Code」のリンクをクリックすると、
 エラーが発生した行が表示されます。
@@ -96,14 +99,10 @@ Car::stop()
 `static` Debugger::**log**($var, $level = 7, $depth = 3)
 
 呼び出されたときに詳細なスタックトレースを生成します。 log() メソッドは Debugger::dump()
-によるものと似たデータを出力しますが、出力バッファにではなく、 debug.log に出力します。
-log() が正常に動作するためには、あなたの app/tmp ディレクトリ（と、その中）はウェブサーバにより
-書き込み可能でなければならないことに気をつけてください。
-
-::: pieceofcake2
-モダン構成では、ログは `app/tmp/logs/` ではなくプロジェクトルートの `logs/` に、
-一時ファイルは `tmp/` に書き込まれます。どちらも書き込み可能にしておく必要があります。
-:::
+によるものと似たデータを出力しますが、出力バッファにではなく、 debug ログ（デフォルトのログ設定では
+`logs/debug.log`）に出力します。log() が正常に動作するためには、`logs/` と `tmp/` ディレクトリ
+（と、その中）がウェブサーバにより書き込み可能でなければならないことに気をつけてください。
+レガシー構成では、ログは `app/tmp/logs/` に書き込まれます。
 
 ::: info Changed in version 2.5.0
 `depth` パラメータが追加されました。
@@ -115,15 +114,18 @@ log() が正常に動作するためには、あなたの app/tmp ディレク�
 どこから呼ばれたかというファイルと行番号が含まれています:
 
 ``` text
-//PostsController::index() の中で
+// PostsController::index() の中で
 pr(Debugger::trace());
 
-//出力
-PostsController::index() - APP/Controller/DownloadsController.php, line 48
-Dispatcher::_invoke() - CORE/lib/Cake/Routing/Dispatcher.php, line 265
-Dispatcher::dispatch() - CORE/lib/Cake/Routing/Dispatcher.php, line 237
-[main] - APP/webroot/index.php, line 84
+// 出力
+PostsController::index() - APP/Controller/PostsController.php, line 48
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 190
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 163
+[main] - ROOT/webroot/index.php, line 61
 ```
+
+トレース中の `APP` はアプリケーションのディレクトリ（モダン構成では `src/`）を、`CORE` は
+フレームワークの `src/` ディレクトリを、`ROOT` はプロジェクトルートを表します。
 
 上記では、コントローラのアクション内で Debugger::trace() を呼ぶことで、スタックトレースを
 生成しています。スタックトレースは下から上へと読み、現在走っている関数（スタックフレーム）の
@@ -132,30 +134,23 @@ Dispatcher::\_invoke() を呼んでいます。その後、\_invoke() メソッ�
 PostsController::index() を呼んでいます。この情報は再帰呼出やスタックが深い場合に、
 trace() の時点でどの関数が現在走っているのか特定できるので、役に立ちます。
 
-`static` Debugger::**excerpt**($path, $line, $context)
+`static` Debugger::**excerpt**($file, $line, $context = 2)
 
-\$path （絶対パス） にあるファイルからの抜粋を取得します。\$line 行目をハイライトし、
-\$line 行目の前後 \$context 行もあわせて取得します:
+\$file （絶対パス） にあるファイルからの抜粋を取得します。\$line 行目をハイライトし、
+\$line 行目の前後 \$context 行もあわせて取得します。各行は `highlight_string()` で
+ハイライトされ、指定した行は `<span class="code-highlight">` で囲まれます:
 
 ``` php
-pr(Debugger::excerpt(ROOT . DS . LIBS . 'debugger.php', 321, 2));
+pr(Debugger::excerpt(APP . 'Controller' . DS . 'PostsController.php', 48, 2));
 
-//下記のように出力されます
-
-[
-    [0] => <code><span style="color: #000000"> * @access public</span></code>
-    [1] => <code><span style="color: #000000"> */</span></code>
-    [2] => <code><span style="color: #000000">    function excerpt($file, $line, $context = 2) {</span></code>
-
-    [3] => <span class="code-highlight"><code><span style="color: #000000">        $data = $lines = [];</span></code></span>
-    [4] => <code><span style="color: #000000">        $data = @explode("\n", file_get_contents($file));</span></code>
-]
+// 5 つの HTML 文字列の配列が出力されます:
+// 46～47 行目、48 行目（<span class="code-highlight"> で囲まれる）、49～50 行目
 ```
 
 このメソッドは内部的に使われているものですが、あなたが独自のエラーメッセージを生成する場合や
 独自の状況でログ出力する場合にも使いやすいものです。
 
-`static` Debugger::**exportVar**($var, $recursion = 0)
+`static` Debugger::**exportVar**($var, $depth = 3)
 
 どんなタイプの変数でもデバッグ出力に使える文字列へと変換します。このメソッドはまた、
 多くの Debugger により内部変数を変換する際に使われているものです。あなた自身の
@@ -165,9 +160,10 @@ Debugger でも使うことができるでしょう。
 この関数は 2.1 以前とは異なる出力内容を生成します。
 :::
 
-`static` Debugger::**invoke**($debugger)
+`static` Debugger::**getInstance**($class = null)
 
-CakePHP Debugger を新しいインスタンスに置き換えます。
+Debugger のシングルトンを返します。クラス名を渡すと、CakePHP Debugger を
+独自の Debugger サブクラスのインスタンスに置き換えます。
 
 `static` Debugger::**getType**($var)
 
@@ -180,7 +176,8 @@ CakePHP Debugger を新しいインスタンスに置き換えます。
 
 アプリケーションをデバッグするもう一つの良い方法はログメッセージです。
 `CakeLog` を使うことで、あなたのアプリケーションでログ出力をさせることができます。
-`Object` を継承するすべてのオブジェクトは、インスタンスメソッド <span class="title-ref">log()</span> を持っており、
+`CakeObject` を継承するすべてのオブジェクト（コントローラ、コンポーネント、モデルなど）は、
+インスタンスメソッド `log()` を持っており、
 ログメッセージを出力するのに使えます:
 
 ``` php
@@ -189,14 +186,10 @@ $this->log('通ったよ', 'debug');
 
 上記では `通ったよ` がデバッグログに出力されます。ログに出力することで、リダイレクトや
 複雑なループを含むメソッドをデバッグしやすくなるでしょう。また、 `CakeLog::write()` を
-使うことで、ログメッセージを書きだすことも可能です。このメソッドは CakeLog がロードされているなら
-static にあなたのアプリケーション内のどこからでも呼び出すことができるのです:
+使うことで、ログメッセージを書きだすことも可能です。フレームワークのクラスはオートロードされるので、
+このメソッドはアプリケーション内のどこからでも static に呼び出すことができます:
 
 ``` php
-// app/Config/bootstrap.php の中で
-App::uses('CakeLog', 'Log');
-
-// あなたのアプリケーションのどこからでも
 CakeLog::write('debug', '通ったよ');
 ```
 
@@ -204,20 +197,24 @@ CakeLog::write('debug', '通ったよ');
 
 DebugKit は便利なデバッグツールをたくさん提供してくれるプラグインです。
 まずは、レンダリングされた HTML 内にツールバーを表示して、あなたのアプリケーションや
-現在のリクエストについての情報を大量に提供してくれます。GitHub の
-[DebugKit](https://github.com/cakephp/debug_kit/tree/2.2) からダウンロードが可能です。
+現在のリクエストについての情報を大量に提供してくれます。
+Piece of Cake 2 プロジェクトがメンテナンスしている、PHP 8 対応版の DebugKit 2.x
+[pieceofcake2/debug_kit](https://github.com/pieceofcake2/debug_kit) を使ってください。
+Composer で開発用の依存パッケージとしてインストールします。
 
-::: pieceofcake2
-フォークでは、PHP 8 に対応した DebugKit 2.x のフォーク
-[pieceofcake2/debug_kit](https://github.com/pieceofcake2/debug_kit) を Composer で
-インストールして使います。
-
-```bash
+``` bash
 composer require --dev pieceofcake2/debug_kit
 ```
 
-[プラグイン](/ja/pieceofcake2/plugins) も参照してください。
-:::
+インストールしたら、`config/bootstrap.php` でプラグインを読み込みます。
+
+``` php
+// config/bootstrap.php
+CakePlugin::load('DebugKit');
+```
+
+ツールバーを有効にする方法はプラグインの README を参照してください。そのほかのメンテナンスされている
+プラグインについては [メンテナンスされているプラグイン](/ja/plugins/maintained-plugins) を参照してください。
 
 ## Xdebug
 

@@ -35,7 +35,7 @@ Cookie コンポーネントがどのように動くかは、コントローラ�
 <td>string $key</td>
 <td>null</td>
 <td><p>この文字列は Cookie の値を暗号化するために使われます。 ランダムで特定されにくい文字列を使うべきです。</p>
-<p>Rijndael 暗号化を使うときは32バイトより長い値にしなければなりません。</p></td>
+<p>rijndael または aes 暗号化を使うときは32バイトより長い値にしなければなりません。デフォルトでは <code>Security.salt</code> の値が使われます。</p></td>
 </tr>
 <tr>
 <td>string $domain</td>
@@ -68,9 +68,10 @@ Cookie コンポーネントがどのように動くかは、コントローラ�
 以下のサンプルコードは、 Cookie コンポーネントをコントローラーにインクルードする方法と、
 セキュアな接続でのみ、 'example.com' というドメインの ‘/bakers/preferences/’
 というパス以下で、1時間だけ有効な 'baker_id' という名前の HTTP のみで有効な
-Cookie の初期設定をするための例です。 :
+Cookie を AES で暗号化して発行するための初期設定の例です。 :
 
 ``` php
+// src/Controller/BakersController.php
 public $components = ['Cookie'];
 
 public function beforeFilter()
@@ -83,7 +84,15 @@ public function beforeFilter()
     $this->Cookie->secure = true;  // セキュアな HTTPS で接続している時のみ発行されます
     $this->Cookie->key = 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^';
     $this->Cookie->httpOnly = true;
+    $this->Cookie->type('aes');
 }
+```
+
+`'aes'` 方式は `Security::encrypt()` を使います。PHP 8 には `mcrypt` 拡張がないため、
+`config/core.php` で OpenSSL による実装を有効にしてください。 :
+
+``` php
+Configure::write('Security.useOpenSsl', true);
 ```
 
 それでは、その他の Cookie コンポーネントのメソッドの使い方を見ていきましょう。
@@ -104,12 +113,10 @@ CookieComponent は Cookie を使った動作をするためにいくつかの�
 
 `method` CookieComponent::**type**($type)
 
-::: pieceofcake2 暗号化方式は 'aes' を使う
-後方互換性のため、デフォルトの暗号化方式は今も `'cipher'` ですが、
-これは脆弱な XOR 暗号なので使用しないでください。`'aes'` を指定してください。
-PHP 8 には `mcrypt` 拡張が同梱されていないため、`'aes'` を OpenSSL で動かすには
-`core.php` に `Configure::write('Security.useOpenSsl', true);` も追加します。
-`'rijndael'` は常に `mcrypt` が必要です。
-暗号化方式を変更すると、既存のクッキーは読めなくなります。
-詳しくは [アップグレードガイド](/ja/pieceofcake2/upgrade) を参照してください。
-:::
+Cookie の値の暗号化方式を設定します。指定できるのは `'cipher'`、`'aes'`、`'rijndael'` です。
+
+> [!WARNING]
+> デフォルトの `'cipher'` は後方互換性のためだけに残されている脆弱な XOR 暗号です。
+> 上の例のように `beforeFilter()` で `type('aes')` を呼び、`Security.useOpenSsl`
+> も有効にしてください。`'rijndael'` には PHP 8 で利用できない `mcrypt` 拡張が必要です。
+> 暗号化方式を変更すると、変更前の方式で書き込まれた Cookie は読めなくなります。

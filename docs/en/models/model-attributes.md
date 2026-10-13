@@ -12,7 +12,7 @@ The `useDbConfig` property is a string that specifies the name of
 the database connection to use to bind your model class to the
 related database table. You can set it to any of the database
 connections defined within your database configuration file. The
-database configuration file is stored in /app/Config/database.php.
+database configuration file is stored in `config/database.php`.
 
 The `useDbConfig` property is defaulted to the 'default' database
 connection.
@@ -56,7 +56,7 @@ class Example extends AppModel
 
 The name of the table prefix used for the model. The table prefix
 is initially set in the database connection file at
-/app/Config/database.php. The default is no prefix. You can
+`config/database.php`. The default is no prefix. You can
 override the default by setting the `tablePrefix` attribute in
 the model.
 
@@ -71,7 +71,7 @@ class Example extends AppModel
 
 <a id="model-primaryKey"></a>
 
-## primaryKey
+## primaryKey {#model-primarykey}
 
 Each table normally has a primary key, `id`. You may change which
 field name the model uses as its primary key. This is common when
@@ -89,7 +89,7 @@ class Example extends AppModel
 
 <a id="model-displayField"></a>
 
-## displayField
+## displayField {#model-displayfield}
 
 The `displayField` attribute specifies which database field
 should be used as a label for the record. The label is used in

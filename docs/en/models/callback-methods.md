@@ -181,7 +181,7 @@ on this record will also be deleted.
 > to fail.
 
 ``` php
-// using app/Model/ProductCategory.php
+// using src/Model/ProductCategory.php
 // In the following example, do not let a product category be deleted if it
 // still contains products.
 // A call of $this->Product->delete($id) from ProductsController.php has set

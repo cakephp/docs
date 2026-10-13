@@ -11,17 +11,11 @@ agnostic schema. You can generate a schema file of your database
 using:
 
 ``` bash
-$ Console/cake schema generate
+$ bin/cake schema generate
 ```
 
-This will generate a schema.php file in your `app/Config/Schema`
-directory.
-
-::: pieceofcake2
-In the pieceofcake2 fork with the modern layout, schema files are read from and written to
-`config/Schema/` instead of `app/Config/Schema/`. (`SchemaShell` itself is now in
-`src/Cake/Console/Command/` of the framework package.)
-:::
+This will generate a schema.php file in your `config/Schema`
+directory (`app/Config/Schema` in the legacy layout).
 
 > [!NOTE]
 > The schema shell will only process tables for which there are
@@ -32,7 +26,7 @@ To later rebuild the database schema from your previously made
 schema.php file run:
 
 ``` bash
-$ Console/cake schema create
+$ bin/cake schema create
 ```
 
 This will drop and create the tables based on the contents of the
@@ -43,7 +37,7 @@ generate a sql file containing the `CREATE TABLE` statements,
 run:
 
 ``` bash
-$ Console/cake schema dump --write filename.sql
+$ bin/cake schema dump --write filename.sql
 ```
 
 Where filename.sql is the desired filename for the sql dump. If you
@@ -123,7 +117,7 @@ public function before($event = [])
 
 The CakeSchema class is the base class for all database schemas. Each schema
 class is able to generate a set of tables. The schema shell console class
-`SchemaShell` in the `lib/Cake/Console/Command` directory interprets command
+`SchemaShell` interprets command
 line, and base schema class can read from the database, or generate the database
 table.
 
@@ -331,7 +325,7 @@ schema file with the schema shell is quite easy. If you already
 have a schema file created running:
 
 ``` bash
-$ Console/cake schema generate
+$ bin/cake schema generate
 ```
 
 Will bring up the following choices:
@@ -351,7 +345,7 @@ can then restore to any of these schema files at any time by
 running:
 
 ``` bash
-$ cake schema update -s 2
+$ bin/cake schema update -s 2
 ```
 
 Where 2 is the snapshot number you wish to run. The schema shell
@@ -381,7 +375,7 @@ would follow these steps:
 
     ``` bash
     $ # once your database has been updated
-    $ Console/cake schema generate
+    $ bin/cake schema generate
     $ git commit -a
     ```
 
@@ -400,8 +394,8 @@ of an error message saying you are missing a table):
 
     ``` bash
     $ git pull
-    $ Console/cake schema create
-    $ Console/cake schema update
+    $ bin/cake schema create
+    $ bin/cake schema update
     ```
 
 All these operations can be done in dry-run mode with a `--dry` option.
@@ -420,7 +414,7 @@ schema file:
 
 ``` bash
 $ git revert HEAD
-$ Console/cake schema update
+$ bin/cake schema update
 ```
 
 Will bring up the following choices:

@@ -1,18 +1,5 @@
 # ACLを制御するシンプルなアプリケーション
 
-::: pieceofcake2 pieceofcake2 フォークでこのチュートリアルを進める場合
-CakePHP をダウンロードする代わりに、[ブログチュートリアル](../blog/blog) 冒頭の説明のとおり Composer で
-プロジェクトを作成してください（`composer create-project pieceofcake2/app acl`、PHP 8.0 以上）。
-モダンレイアウトでのパスの読み替え（`config/core.php`、`src/...`、`templates/...`）もそちらにあります。
-その他の違いは次のとおりです。
-
-- `cake bake` には [pieceofcake2/bake](../../console-and-shells/code-generation-with-bake) プラグインが
-  必要です（`pieceofcake2/app` では開発用の依存に含まれています。`CakePlugin::load('Bake');` でロードします）。
-- コンソールコマンドは `./Console/cake ...` ではなく `bin/cake ...`（モダン）で実行します。
-- `groups` は MySQL 8.0.2 以降で予約語になったため、以下の `CREATE TABLE` 文では
-  `` `groups` `` のようにクォートしてください。
-:::
-
 > [!NOTE]
 > このチュートリアルは初心者向けではありません。もし CakePHP を始めたばかりなら、
 > このチュートリアルに挑戦する前にまずはフレームワークの機能をひととおり体験しておくことを
@@ -29,53 +16,60 @@ CakePHP のある程度の経験と、MVCの概念についての理解、
 
 必要なもの
 
-1.  稼動しているウェブサーバー。 Apache を使っているという前提で書いてありますが、
-    他の種類のサーバーを使用する場合でも、ほぼ同じにいけるはずです。サーバーの設定を
-    少し変える必要があるかもしれませんが、たいていの人は、そのままの設定で CakePHP を
-    動作させることが可能です。
-2.  データベースサーバー。このチュートリアルでは MySQL を利用します。
+1.  PHP 8.0 以上と [Composer](https://getcomposer.org/)。
+2.  ウェブサーバー。このチュートリアルでは、 `bin/cake server` で起動する PHP の
+    ビルトインウェブサーバーで十分です。
+3.  データベースサーバー。このチュートリアルでは MySQL を利用します。
     CakePHP におけるアプリケーションの作成は、まずデータベースを作成することからはじめますので、
     これに必要な SQL の知識を必要とします。
-3.  基本的な PHP の知識。オブジェクト指向のプログラミングについて知っていると
+4.  基本的な PHP の知識。オブジェクト指向のプログラミングについて知っていると
     より良いでしょう。しかし手続き型言語としての知識しかなくても問題はありません。
 
 ## アプリケーションの準備
 
-まず、最新の CakePHP のコピーを取得しましょう。
+まず、Composer で新しいアプリケーションを作成しましょう。 :
 
-最新版をダウンロードするには GitHub の CakePHP プロジェクト(
-<https://github.com/cakephp/cakephp/tags>) にアクセスし、安定版のリリースを
-ダウンロードしてください。このチュートリアルで必要なバージョンは最新の 2.0 リリースです。
+``` bash
+composer create-project pieceofcake2/app acl
+cd acl
+```
 
-[git](https://git-scm.com/) を使ってレポジトリを複製 (*clone*) することもできます。 :
+[ブログチュートリアル](../../tutorials-and-examples/blog/blog) で説明したように、
+`config/database.php.default` を `config/database.php` にコピーしてデータベース接続を設定し、
+`config/core.php` の `Security.salt` と `Security.cipherSeed` の値を変更してください。
 
-    git clone -b 2.x git://github.com/cakephp/cakephp.git
+スケルトンには、開発用の依存パッケージとして [Bake プラグイン](../../console-and-shells/code-generation-with-bake)
+がすでに含まれていて、 `plugins/Bake/` にインストールされています (スケルトンの `composer.json` には
+そのための `installer-paths` の設定があります)。 `config/bootstrap.php` でロードしてください。 :
 
-CakePHP の最新の 2.0 リリースのコピーを取得したら、 `database.php`
-を設定し、 `app/Config/core.php` の Security.salt の値を変更してください。
+``` php
+// config/bootstrap.php
+CakePlugin::load('Bake');
+```
+
 それから、アプリケーションを構築するための簡単なデータベーススキーマを作成しましょう。
 次の SQL 文をデータベースに実行してください:
 
 ``` sql
 CREATE TABLE users (
-    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,
-    password CHAR(40) NOT NULL,
-    group_id INT(11) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    group_id INT NOT NULL,
     created DATETIME,
     modified DATETIME
 );
 
-CREATE TABLE groups (
-    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE `groups` (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     created DATETIME,
     modified DATETIME
 );
 
 CREATE TABLE posts (
-    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    user_id INT(11) NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
     title VARCHAR(255) NOT NULL,
     body TEXT,
     created DATETIME,
@@ -83,22 +77,29 @@ CREATE TABLE posts (
 );
 
 CREATE TABLE widgets (
-    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     part_no VARCHAR(12),
-    quantity INT(11)
+    quantity INT
 );
 ```
+
+MySQL 8.0 では `GROUPS` が予約語なので、自分で書く SQL ではテーブル名をバッククォートで
+囲む必要があります。CakePHP は生成するクエリの中でテーブル名とカラム名をクォートするので、
+`Group` モデルはそのままで動作します。
 
 これらのテーブルはアプリケーションの残りを作成する時に使用します。
 データベースにこのテーブルを作成したら、クッキングを開始しましょう。
 モデルとコントローラ、そしてビューのコードを、
 [Bakeでコード生成](../../console-and-shells/code-generation-with-bake) を使って簡単に作成して下さい。
 
-cake の bake を使うにあたって、「cake bake all」を呼び出すと、先ほど MySQL に作成した
+bake を使うにあたって、 `bin/cake bake all` を呼び出すと、先ほど MySQL に作成した
 4つのテーブルがリストされます。「1 (Group).」を選び、プロンプトに従って下さい。
 その他の3つのテーブルでも同じ手順を繰り返すと、合計4つのコントローラ、モデルそしてビューが
-作成されます。
+作成されます。現在の Bake はビューテンプレートを `src/View/<Controller>/` に書き出します。
+CakePHP はそこにあるテンプレートも見つけますが、アプリケーションのレイアウトをそろえるために
+`templates/<Controller>/` に移動してもかまいません
+([Bakeでコード生成](../../console-and-shells/code-generation-with-bake) を参照)。
 
 ここでスキャフォールド (*Scaffold*) は使わないでください。スキャフォールドの仕組みを
 用いたコントローラを bake すると、ACO の生成に深刻な影響が生じます。
@@ -127,9 +128,9 @@ public function login()
 {
     if ($this->request->is('post')) {
         if ($this->Auth->login()) {
-            return $this->redirect($this->Auth->redirect());
+            return $this->redirect($this->Auth->redirectUrl());
         }
-        $this->Session->setFlash(__('Your username or password was incorrect.'));
+        $this->Flash->error(__('Your username or password was incorrect.'));
     }
 }
 
@@ -140,11 +141,12 @@ public function logout()
 ```
 
 更に、以下の様にビューファイルを
-`app/View/Users/login.ctp` に作成してください:
+`templates/Users/login.ctp` に作成してください:
 
 ``` php
 <?php
-echo $this->Form->create('User', ['action' => 'login']);
+// templates/Users/login.ctp
+echo $this->Form->create('User', ['url' => ['action' => 'login']]);
 echo $this->Form->inputs([
     'legend' => __('Login'),
     'username',
@@ -156,43 +158,52 @@ echo $this->Form->end('Login');
 
 次に、パスワードをデータベースに入る前にハッシュ化するように User モデルを書き換える
 必要があります。平文のパスワードを保存するのは極めて危険であり、また AuthComponent は
-パスワードがハッシュ化されていることを期待します。
-`app/Model/User.php` で以下を追加してください:
+パスワードがハッシュ化されていることを期待します。ここでは、bcrypt でパスワードをハッシュ化する
+`BlowfishPasswordHasher` を使います。 `src/Model/User.php` で以下を追加してください:
 
 ``` php
-App::uses('AuthComponent', 'Controller/Component');
+// src/Model/User.php
 class User extends AppModel
 {
     // 他のコード。
 
     public function beforeSave($options = [])
     {
-        $this->data['User']['password'] = AuthComponent::password(
-          $this->data['User']['password']
-        );
+        if (!empty($this->data['User']['password'])) {
+            $passwordHasher = new BlowfishPasswordHasher();
+            $this->data['User']['password'] = $passwordHasher->hash(
+                $this->data['User']['password']
+            );
+        }
         return true;
     }
 }
 ```
 
 次に行うことは、 `AppController` に変更を加えることです。
-`/app/Controller/AppController.php` が存在しない場合は、作成してください。
+`src/Controller/AppController.php` が存在しない場合は、作成してください。
 コントローラ全体に認証と ACL を行うなら、この `AppController` に対してセットアップを
-行います。次のコードを加えてください:
+行います。bake したコントローラはメッセージの表示に FlashComponent を使うので、
+ここでロードしておきます。次のコードを加えてください:
 
 ``` php
+// src/Controller/AppController.php
 class AppController extends Controller
 {
     public $components = [
         'Acl',
         'Auth' => [
+            'authenticate' => [
+                'Form' => ['passwordHasher' => 'Blowfish'],
+            ],
             'authorize' => [
-                'Actions' => ['actionPath' => 'controllers']
-            ]
+                'Actions' => ['actionPath' => 'controllers'],
+            ],
         ],
-        'Session'
+        'Session',
+        'Flash',
     ];
-    public $helpers = ['Html', 'Form', 'Session'];
+    public $helpers = ['Html', 'Form', 'Flash'];
 
     public function beforeFilter()
     {
@@ -223,11 +234,6 @@ ACL をセットアップし終わってしまう前に、ユーザとグルー�
 public function beforeFilter()
 {
     parent::beforeFilter();
-
-    // CakePHP 2.0
-    $this->Auth->allow('*');
-
-    // CakePHP 2.1以上
     $this->Auth->allow();
 }
 ```
@@ -243,13 +249,14 @@ public function beforeFilter()
 「Error: Database table acos for model Aco was not found.」)が表示されます。
 このエラーを解消するには、スキーマファイルを実行します。シェルで次のコマンドを実行してください:
 
-    ./Console/cake schema create DbAcl
+    bin/cake schema create DbAcl
 
 テーブルのドロップと作成についてプロンプトが表示されます。
 テーブルの破棄および作成を行うには、「yes」を入力してください。
+スキーマファイルはアプリケーションの `config/Schema/db_acl.php` です。
 
-シェルを使えない、あるいはコンソールの使用に問題が生じた場合は、
-/path/to/app/Config/Schema/db_acl.sql の SQL ファイルを実行してください。
+コンソールの使用に問題が生じた場合は、代わりに `config/Schema/db_acl.sql` の
+SQL ファイルを実行してください。
 
 ここまでで、データの投入を行うコントローラの用意と ACL テーブルの初期化を行いました。
 しかしまだ準備は終わっていません。ユーザとグループのモデルに対して、もう少しやることがあります。
@@ -311,7 +318,7 @@ ACL の管理機能を、アプリケーションの一部として作成でき�
 
 コントローラとモデルは初期のデータを追加する用意ができ、 `Group` と `User`
 モデルは ACL テーブルに結び付けられました。
-では <http://example.com/groups/add> と <http://example.com/users/add>
+では <http://localhost:8765/groups/add> と <http://localhost:8765/users/add>
 を開き、bake で焼いたフォームを使ってグループとユーザを追加しましょう。
 次のグループを作成します。
 
@@ -393,7 +400,7 @@ public $actsAs = ['Acl' => ['type' => 'requester', 'enabled' => false]];
 ACO オブジェクトを作成するには、ACL シェルを用いるか、 `AclComponent` を使用します。
 シェルで ACO を作成するには、次のようにします:
 
-    ./Console/cake acl create aco root controllers
+    bin/cake acl create aco root controllers
 
 AclComponent を使う方法は次のようになります:
 
@@ -412,16 +419,21 @@ ACL を使用しないということです。グローバルなルート ACO �
 配列が `actionPath` を必ず含むようにしてください:
 
 ``` php
-class AppController extends Controller {
+class AppController extends Controller
+{
     public $components = [
         'Acl',
         'Auth' => [
+            'authenticate' => [
+                'Form' => ['passwordHasher' => 'Blowfish'],
+            ],
             'authorize' => [
-                'Actions' => ['actionPath' => 'controllers']
-            ]
+                'Actions' => ['actionPath' => 'controllers'],
+            ],
         ],
-        'Session'
+        'Session',
+        'Flash',
     ];
 ```
 
-チュートリアルを続行するには、続けて [Part Two](../../part-two) を見てください。
+チュートリアルを続行するには、続けて [Part Two](part-two) を見てください。

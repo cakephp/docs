@@ -349,7 +349,7 @@ in the API. As mentioned, the PaginatorHelper also offers sorting features
 which can be easily integrated into your table column headers:
 
 ``` php
-// app/View/Posts/index.ctp
+// templates/Posts/index.ctp
 <table>
     <tr>
         <th><?php echo $this->Paginator->sort('id', 'ID'); ?></th>

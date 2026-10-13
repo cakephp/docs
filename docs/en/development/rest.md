@@ -8,14 +8,14 @@ systems.
 
 While other solutions exist, REST is a great way to provide easy
 access to the logic you've created in your application. It's
-simple, usually XML-based (we're talking simple XML, nothing like a
-SOAP envelope), and depends on HTTP headers for direction. Exposing
+simple, usually JSON- or XML-based (nothing like a SOAP envelope),
+and depends on HTTP headers for direction. Exposing
 an API via REST in CakePHP is simple.
 
 ## The Simple Setup
 
 The fastest way to get up and running with REST is to add a few
-lines to your routes.php file, found in app/Config. The Router
+lines to your `config/routes.php` file. The Router
 object features a method called `mapResources()`, that is used to set
 up a number of default routes for REST access to your controllers.
 Make sure `mapResources()` comes before `require CAKE . 'Config' . DS . 'routes.php';`
@@ -24,7 +24,7 @@ If we wanted to allow REST access to a recipe database, we'd do
 something like this:
 
 ``` php
-//In app/Config/routes.php...
+// config/routes.php
 
 Router::mapResources('recipes');
 Router::parseExtensions();
@@ -47,9 +47,9 @@ CakePHP's Router class uses a number of different indicators to
 detect the HTTP method being used. Here they are in order of
 preference:
 
-1.  The *\_method* POST variable
-2.  The X_HTTP_METHOD_OVERRIDE
-3.  The REQUEST_METHOD header
+1.  The `X-HTTP-Method-Override` request header
+2.  The *\_method* POST variable
+3.  The `REQUEST_METHOD` server variable
 
 The *\_method* POST variable is helpful in using a browser as a
 REST client (or anything else that can do POST easily). Just set
@@ -62,10 +62,9 @@ controller actions. A basic controller might look something like
 this:
 
 ``` php
-// Controller/RecipesController.php
+// src/Controller/RecipesController.php
 class RecipesController extends AppController
 {
-
     public $components = ['RequestHandler'];
 
     public function index()
@@ -140,12 +139,12 @@ serialize into XML.
 
 If we wanted to modify the data before it is converted into XML we should not
 define the `_serialize` view variable, and instead use view files. We place
-the REST views for our RecipesController inside `app/View/recipes/xml`. We can also use
+the REST views for our RecipesController inside `templates/Recipes/xml`. We can also use
 the `Xml` for quick-and-easy XML output in those views. Here's what
 our index view might look like:
 
 ``` php
-// app/View/Recipes/xml/index.ctp
+// templates/Recipes/xml/index.ctp
 // Do some formatting and manipulation on
 // the $recipes array.
 $xml = Xml::fromArray(['response' => $recipes]);

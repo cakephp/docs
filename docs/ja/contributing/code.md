@@ -1,162 +1,164 @@
 # コード
 
-パッチと Pull Request はコードを CakePHP に送って貢献するための素晴らしい方法です。
-Pull Request は GitHub で作成することができるもので、パッチファイルをチケットのコメントで
-伝えるよりも推奨される方法です。
+Pull Request は、Piece of Cake 2 フォークにコードを送って貢献するための素晴らしい方法です。
+Pull Request は GitHub で、該当する `pieceofcake2/*` リポジトリに対して作成してください。
+フレームワークであれば [pieceofcake2/cakephp](https://github.com/pieceofcake2/cakephp) です。
+
+始める前に、フォークの目的を確認しておいてください。フォークは PHP 8 への対応を維持し、
+バグとセキュリティ問題を修正し、CakePHP 5 への段階的な移行を支援することを目的としており、
+新機能は追加しません。変更が目的に合うかどうかわからない場合は、まず Issue を作って相談してください。
 
 ## 最初のセットアップ
 
-CakePHP の修正に取りかかる前に自分の環境を整えることをお勧めします。
+フォークの修正に取りかかる前に自分の環境を整えることをお勧めします。
 以下のソフトウェアが必要になります。
 
 - Git
-- PHP 5.3.0 以上
-- ext/mcrypt
-- ext/mbstring
-- PHPUnit 3.7.0 以上 (3.7.38 推奨)
-- MySQL, SQLite, または Postgres
+- PHP 8.0 以上。`mbstring` 拡張 (強く推奨) と、テストに使うデータベースの PDO ドライバー
+- [Composer](https://getcomposer.org)
+- MySQL、PostgreSQL、SQLite、SQL Server のいずれか、またはそれらを動かすための Docker
 
-::: pieceofcake2
-pieceofcake2 フォークの開発には、上記のバージョンではなく PHP 8.0 以上と Composer が必要です。
-PHPUnit 9.6、PHP_CodeSniffer、PHPStan は `composer install` で開発用依存として
-インストールされるので、PHPUnit を別途インストールする必要はありません。
-`ext/mcrypt` は不要です (`ext/mbstring` は強く推奨。無い場合はポリフィルが使われます)。
-対応データベースは MySQL、PostgreSQL、SQLite、SQL Server 2022 以降です。
-:::
+PHPUnit 9.6、CakePHP ルールセット付きの PHP_CodeSniffer、PHPStan はフレームワークの
+開発用依存パッケージなので、Composer がインストールします。
 
-ユーザ情報（自分の名前/ハンドル名とメールアドレス）をセットしてください。 :
+ユーザー情報 (自分の名前/ハンドル名とメールアドレス) をセットしてください。
 
-    git config --global user.name 'Bob Barker'
-    git config --global user.email 'bob.barker@example.com'
+``` bash
+git config --global user.name 'Bob Barker'
+git config --global user.email 'bob.barker@example.com'
+```
 
 > [!NOTE]
 > Git を使うのが初めてなら、無料で素敵なドキュメント
 > [ProGit](https://git-scm.com/book/ja/) をぜひお読みください。
 
-CakePHP のソースコードの clone を GitHub から取得してください。
+フレームワークのソースコードの clone を GitHub から取得してください。
 
 - [GitHub](https://github.com) アカウントを持っていないなら、作成してください。
-- [CakePHP リポジトリ](https://github.com/cakephp/cakephp) の **Fork**
+- [pieceofcake2/cakephp リポジトリ](https://github.com/pieceofcake2/cakephp) の **Fork**
   ボタンをクリックして Fork してください。
 
-Fork できたら、Fork したものを自分のローカルマシンへと clone してください。 :
+Fork できたら、Fork したものを自分のローカルマシンへと clone してください。
 
-    git clone git@github.com:YOURNAME/cakephp.git
-
-オリジナルの CakePHP リポジトリを remote リポジトリとして追加してください。
-これは後で CakePHP リポジトリから変更分を fetch するのに使うことになり、
-こうすることで CakePHP を最新の状態にしておくのです。 :
-
-    cd cakephp
-    git remote add upstream git://github.com/cakephp/cakephp.git
-
-::: pieceofcake2
-フォークの場合は [pieceofcake2/cakephp](https://github.com/pieceofcake2/cakephp)
-を Fork・clone し、これを `upstream` として追加します。そのうえで依存パッケージを
-インストールし、フォークの CI と同じチェックを実行します。
-
-```bash
-git remote add upstream https://github.com/pieceofcake2/cakephp.git
-composer install
-./vendor/bin/phpunit
-./vendor/bin/phpcs
+``` bash
+git clone git@github.com:YOURNAME/cakephp.git
 ```
 
-Docker を使ってデータベースごとにテストを実行する方法
-(`DB=mysql docker-compose exec web ./vendor/bin/phpunit`) もフォークの README に書かれています。
-:::
+元のリポジトリを remote リポジトリとして追加してください。
+これは後で元のリポジトリから変更分を fetch し、最新の状態を保つために使います。
 
-いまや CakePHP はセットアップされましたので
-[データベース接続](../development/configuration#database-configuration) で `$test` を定義すれば、
-[すべてのテストを実行する](../development/testing#running-tests) ことができるでしょう。
+``` bash
+cd cakephp
+git remote add upstream https://github.com/pieceofcake2/cakephp.git
+```
+
+次に依存パッケージをインストールします。
+
+``` bash
+composer install
+```
+
+## テストの実行
+
+フレームワークのテストスイートは
+[pieceofcake2/app](https://github.com/pieceofcake2/app) スケルトンの上で実行します。
+スケルトンは開発用依存パッケージとして Composer が `vendor/pieceofcake2/app` にインストールします。
+テスト用のデータベース設定をそこへコピーしてください。
+
+``` bash
+cp tests/config/database.php vendor/pieceofcake2/app/config/
+```
+
+この設定は、環境変数 `DB` でデータベースを選びます。値は `mysql` (デフォルト)、`mysql80`、
+`pgsql`、`sqlite`、`sqlsrv` のいずれかです。SQLite はインメモリーのデータベースを使うので、
+データベースサーバーは必要ありません。
+
+``` bash
+DB=sqlite vendor/bin/phpunit
+```
+
+その他のデータベースでは、`tests/config/database.php` に書かれた認証情報とデータベース名で
+サーバーを起動し、`DB` をそれに合わせて指定します。
+
+``` bash
+DB=pgsql vendor/bin/phpunit
+```
+
+リポジトリの `compose.yml` には、サポートしているすべてのデータベースサーバーの
+Docker コンテナが定義されているので、これを利用することもできます。
+
+1 つのテストファイルだけを実行するには、そのパスを PHPUnit に渡します。
+
+``` bash
+DB=sqlite vendor/bin/phpunit tests/TestCase/Utility/HashTest.php
+```
+
+コードが [コーディング規約](../contributing/cakephp-coding-conventions) に沿っているかも
+確認してください。
+
+``` bash
+vendor/bin/phpcs
+```
+
+リポジトリの CI は、すべての Pull Request について、サポートしているすべての PHP バージョンと
+データベースでテストスイートを実行し、`phpcs` も実行します。
 
 ## 修正に取りかかる
 
-バグや新機能、改善に取り組むたびに毎回、 トピック・ブランチを作成してください。
+バグの修正や改善に取り組むたびに、トピック・ブランチを作成してください。
 
-ブランチは 修正/改善対象のバージョンをベースにして作成してください。たとえば、
-`2.3` のバグを修正するなら、ブランチのベースとして `2.3` ブランチを使うことになります。
-もしも変更が現在の安定版リリースのバグ修正なら、 `master` ブランチを使ってください。
-こうすることで、あなたの変更を後でマージする際にとても簡単になります。 :
+フォークでメンテナンスしているブランチは `2.x` だけです。このブランチを元にしてください。
 
-``` text
-# 2.3 のバグを修正
+``` bash
 git fetch upstream
-git checkout -b ticket-1234 upstream/2.3
+git checkout -b fix-1234 upstream/2.x
 ```
 
 > [!TIP]
 > ブランチの名前は説明的につけてください。
-> チケット名や機能名を含めるのは良い慣習です。
-> 例) ticket-1234, feature-awesome
+> Issue 番号や修正内容を短く含めるのは良い慣習です。
+> 例) fix-1234, php84-deprecations
 
-上記は upstream (CakePHP) 2.3 ブランチをベースにローカル・ブランチを作成します。
+上記は upstream の `2.x` ブランチをベースにローカル・ブランチを作成します。
 修正に取り組み、必要なだけ commit してください。
-ただし、注意点があります:
+ただし、次の点に注意してください。
 
 - [コーディング規約](../contributing/cakephp-coding-conventions) に従ってください。
-- バグが修正されたこと、もしくは新機能が機能することが判るテストケースを追加してください。
-- 理にかなったコミットを心がけ、コミット文は解りやすく簡潔に書いてください。
+- バグが修正されたこと、もしくは変更が機能することが判るテストケースを追加してください。
+- CakePHP 2 の公開 API を壊さないでください。
+  [後方互換性ガイド](../contributing/backwards-compatibility) を参照してください。
+- 理にかなったコミットを心がけ、コミットメッセージは解りやすく簡潔に書いてください。
 
 ## Pull Request を送信する
 
-変更し終え、 CakePHP へとマージされる準備が整ったら、あなたのブランチを
-更新したくなることでしょう。 :
+変更し終え、マージされる準備が整ったら、ブランチを更新します。
 
-``` text
-git checkout 2.3
+``` bash
 git fetch upstream
-git merge upstream/2.3
-git checkout <branch_name>
-git rebase 2.3
+git rebase upstream/2.x
 ```
 
-これは作業開始以降に CakePHP で行われたすべての変更を fetch + merge します。
-その後に rebase 、つまり現在のコードの先端にあなたの変更を適用します。
-`rebase` 中、コンフリクトに出会うかもしれません。もし rebase が早期終了したら、
-`git status` で、どのファイルがコンフリクト/マージ失敗したのかを見ることができます。
-各コンフリクトを解決させてください。その後、 rebase を continue してください。 :
+これは作業開始以降にリポジトリで行われた変更を fetch し、rebase、つまり現在のコードの先端に
+あなたの変更を適用し直します。`rebase` 中にコンフリクトが起きることもあります。
+rebase が途中で止まったら、`git status` でどのファイルがコンフリクト/マージ失敗したのかを
+確認できます。各コンフリクトを解決してから、rebase を続けてください。
 
-``` text
+``` bash
 git add <filename> # コンフリクトしたファイルごとにこれを行ってください。
 git rebase --continue
 ```
 
-あなたのテストがすべて通過し続けているか確認してください。
-その後、あなたのブランチをあなたの Fork へと push します。 :
+テストがすべて通ることを確認してください。
+その後、ブランチをあなたの Fork へと push します。
 
-``` text
+``` bash
 git push origin <branch-name>
 ```
 
-あなたのブランチが GitHub に上がったら、GitHub で Pull Request を送ってください。
-
-### 変更対象のマージ先を選ぶ
-
-::: pieceofcake2
-pieceofcake2 フォークでメンテナンスしているブランチは **2.x** だけです。
-このブランチを元に作業し、Pull Request の対象にしてください。
-フォークの目的は PHP 8 対応、バグ・セキュリティ修正、CakePHP 5 への移行パスの提供であり、
-新機能の追加は目指していません。
-:::
-
-Pull Request を作る際には、ベースとなるブランチが正しく選ばれているか良く確認してください。
-ひとたび Pull Request を作った後ではもう変更することはできません。
-
-- あなたの変更が **バグ修正** であり、新機能を追加しておらず、
-  現在のリリースに存在している既存の振る舞いを正すだけなら、
-  マージ先として **2.x** を選んでください。
-- あなたの変更が **新機能** もしくはフレームワークへの追加なら、
-  `2.next` ブランチを選んでください。
-- あなたの変更が既存の機能性を壊すものであるなら、あなたのパッチが 2.x にマージされる
-  可能性は低いです。代わりに 4.0 を対象にしてください。
+ブランチが GitHub に上がったら、upstream リポジトリの `2.x` ブランチに対して
+Pull Request を作成してください。何を修正したのか、どのようにテストしたのかを書き、
+関連する Issue があればリンクしてください。
 
 > [!NOTE]
-> あなたが貢献したすべてのコードは MIT License に基づき CakePHP にライセンスされることを
-> 覚えておいてください。 [Cake Software Foundation](https://cakefoundation.org/pages/about)
-> がすべての貢献されたコードの所有者になります。貢献する人は
-> [CakePHP Community Guidelines](https://community.cakephp.org/guidelines)
-> に従うようお願いします。
-
-メンテナンス・ブランチへとマージされたすべてのバグ修正は、
-コアチームにより定期的に次期リリースにもマージされます。
+> フォークに貢献したすべてのコードは、CakePHP のライセンスである MIT License の下で
+> ライセンスされることを覚えておいてください。

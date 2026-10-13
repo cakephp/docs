@@ -27,15 +27,15 @@ $this->Flash->set('This is a message');
 :::
 
 独自の Flash エレメントを作成するためには、 FlashComponent の `__call` マジック
-メソッドで、 `app/View/Elements/Flash` ディレクトリ以下に配置されたエレメントと
+メソッドで、 `templates/Elements/Flash` ディレクトリ以下に配置されたエレメントと
 メソッド名を関連づけることができます。規約により、キャメルケース形式のメソッドは、
 小文字でアンダースコア区切りのエレメント名に置き換えられます。 :
 
 ``` php
-// app/View/Elements/Flash/success.ctp を使用
+// templates/Elements/Flash/success.ctp を使用
 $this->Flash->success('This was successful');
 
-// app/View/Elements/Flash/great_success.ctp を使用
+// templates/Elements/Flash/great_success.ctp を使用
 $this->Flash->greatSuccess('This was greatly successful');
 ```
 
@@ -64,7 +64,7 @@ $this->Flash->success('The user has been saved', [
 // ビューの中で
 <?php echo $this->Flash->render('positive') ?>
 
-<!-- app/View/Elements/Flash/success.ctp の中で -->
+<!-- templates/Elements/Flash/success.ctp の中で -->
 <div id="flash-<?php echo h($key) ?>" class="message-info success">
     <?php echo h($message) ?>: <?php echo h($params['name']) ?>, <?php echo h($params['email']) ?>.
 </div>

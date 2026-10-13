@@ -324,7 +324,8 @@ CakeRequest::acceptLanguage('es-es');
 CakePHP はデフォルトで `CakeResponse` を使います。
 `CakeResponse` は柔軟かつ透過的なクラスです。
 もし、このクラスをアプリケーション固有のクラスに置き換える必要がある場合、
-`app/webroot/index.php` の中で `CakeResponse` を置き換えることができます。
+`webroot/index.php` (従来の `app/` レイアウトでは `app/webroot/index.php`) の中で
+`CakeResponse` を置き換えることができます。
 これにより、アプリケーションのすべてのコントローラが `CakeResponse` の代わりに
 `CustomResponse` を使うようになります。またコントローラの中で `$this->response`
 を設定することでレスポンスインスタンスを置き換えることができます。
@@ -350,6 +351,8 @@ $this->response->type('vcf');
 大抵の場合、追加のコンテンツタイプはコントローラの `~Controller::beforeFilter()`
 コールバックの中で設定したいと思うので、
 `RequestHandlerComponent` が提供するビューの自動切り替え機能を活用できます。
+
+<a id="cake-response-file"></a>
 
 ## ファイルの送信
 
@@ -465,6 +468,8 @@ public function index()
 第一引数に `Last-Modified` ヘッダの値を設定します。
 第二引数に `Expires` ヘッダと `max-age` ディレクティブの値を設定します。
 Cache-Control の `public` ディレクティブも設定されます。
+
+<a id="cake-response-caching"></a>
 
 ## HTTP キャッシュのチューニング
 
@@ -606,6 +611,8 @@ $this->response->vary('Accept-Encoding', 'User-Agent');
 $this->response->vary('Accept-Language');
 ```
 
+<a id="cakeresponse-testing"></a>
+
 ## CakeResponse とテスト
 
 コントローラとコンポーネントのテストが簡単に実施できた時、
@@ -617,7 +624,9 @@ $this->response->vary('Accept-Language');
 ``` php
 public function testSomething()
 {
-    $this->controller->response = $this->getMock('CakeResponse');
+    $this->controller->response = $this->getMockBuilder('CakeResponse')
+        ->onlyMethods(['header'])
+        ->getMock();
     $this->controller->response->expects($this->once())->method('header');
     // ...
 }

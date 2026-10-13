@@ -1,281 +1,76 @@
 # Backwards Compatibility Guide
 
-::: pieceofcake2
-This guide describes the policy of the original CakePHP 2.x releases.
-The pieceofcake2 fork keeps the 2.x API, but to support PHP 8 its releases
-(2.10.24.x, 2.11, 2.12, ...) include changes that can break applications
-upgrading from CakePHP 2.10.24, such as the Composer-only installation, the new
-framework directory layout and the extraction of Bake. Read the
-[Upgrade Guide](/pieceofcake2/upgrade) and the
+Ensuring that you can upgrade your applications easily and smoothly is
+important. The Piece of Cake 2 fork keeps the public API of CakePHP 2 and does
+not add new features. Its changes are limited to PHP compatibility, bug fixes,
+security fixes and support for the migration path to CakePHP 5.
+
+Keeping CakePHP 2 running on PHP 8 still required some changes that affect
+applications, so this page explains what you can expect from releases, and
+what contributors should keep in mind.
+
+## What to Expect from Releases
+
+Most releases contain only bug fixes and compatibility fixes that need no
+changes in your application. Some releases, however, contained changes that do.
+Examples are:
+
+- the removal of the Xcache and Wincache cache engines (2.10.24.3),
+- the requirement to install CakePHP with Composer, and the extraction of Bake
+  and the 1.3 to 2.0 upgrade shell into separate plugins,
+- the new framework directory layout (2.11.0),
+- Composer classmap autoloading for the framework and applications (2.12.0).
+
+These changes are not limited to a particular kind of version number: a
+release such as 2.10.24.3 also contained some. Before you update, read the
 [CHANGELOG](https://github.com/pieceofcake2/cakephp/blob/2.x/CHANGELOG.md)
-before upgrading.
-:::
-
-Ensuring that you can upgrade your applications easily and smoothly is important
-to us. That's why we only break compatibility at major release milestones.
-You might be familiar with [semantic versioning](https://semver.org/), which is
-the general guideline we use on all CakePHP projects. In short, semantic
-versioning means that only major releases (such as 2.0, 3.0, 4.0) can break
-backwards compatibility. Minor releases (such as 2.1, 3.1, 3.2) may introduce
-new features, but are not allowed to break compatibility. Bug fix releases
-(such as 2.1.2, 3.0.1) do not add new features, but fix bugs or enhance
-performance only.
-
-> [!NOTE]
-> CakePHP started following semantic versioning in 2.0.0. These rules do not
-> apply to 1.x.
-
-To clarify what changes you can expect in each release tier we have more
-detailed information for developers using CakePHP, and for developers working on
-CakePHP that helps set expectations of what can be done in minor releases. Major
-releases can have as many breaking changes as required.
+entries of every release between your current version and the new one, then run
+your application's test suite.
 
 ## Migration Guides
 
-For each major and minor release, the CakePHP team will provide a migration
-guide. These guides explain the new features and any breaking changes that are
-in each release. They can be found in the [Appendices](../appendices) section of the
-cookbook.
+Changes that require you to change your application are described, with
+migration steps, in the
+[UPGRADE guide](https://github.com/pieceofcake2/cakephp/blob/2.x/UPGRADE.md)
+of the framework and in
+[Migrating from CakePHP 2.10](/appendices/migrating-from-cakephp-2-10). They
+also explain how to move an application from the original CakePHP
+2.10.24 to the fork.
+
+The migration guides for the original CakePHP releases, up to 2.10, can be
+found in the [Appendices](../appendices) section of this book.
 
 ## Using CakePHP
 
-If you are building your application with CakePHP, the following guidelines
-explain the stability you can expect.
+If you are building your application with CakePHP, the public API is the part
+you can rely on most: creating instances of framework classes, calling their
+public methods, reading and writing their public properties, and extending them
+while overriding public methods with the same signature.
 
-### Interfaces
+Code that depends on the internals of the framework is more likely to be
+affected by fixes. This includes code that calls or overrides protected
+methods, or reads or overrides protected properties, of framework classes.
+Classes marked with the `@internal` API doc tag have no backwards compatibility
+promises at all.
 
-Outside of major releases, interfaces provided by CakePHP will **not** have any
-existing methods changed and new methods will **not** be added to any existing
-interfaces.
-
-### Classes
-
-Classes provided by CakePHP can be constructed and have their public methods and
-properties used by application code and outside of major releases backwards
-compatibility is ensured.
-
-> [!NOTE]
-> Some classes in CakePHP are marked with the `@internal` API doc tag. These
-> classes are **not** stable and do not have any backwards compatibility
-> promises.
-
-In minor releases (3.x.0), new methods may be added to classes, and existing
-methods may have new arguments added. Any new arguments will have default
-values, but if you've overidden methods with a differing signature you may see
-errors. Methods that have new arguments added will be documented in the
-migration guide for that release.
-
-The following table outlines several use cases and what compatibility you can
-expect from CakePHP:
-
-<table style="width:82%;">
-<colgroup>
-<col style="width: 44%" />
-<col style="width: 37%" />
-</colgroup>
-<thead>
-<tr>
-<th>If you...</th>
-<th>Backwards compatibility?</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Typehint against the class</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Create a new instance</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Extend the class</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Access a public property</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Call a public method</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td colspan="2"><strong>Extend a class and...</strong></td>
-</tr>
-<tr>
-<td>Call a protected method</td>
-<td>No<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></td>
-</tr>
-<tr>
-<td>Override a protected property</td>
-<td>No<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></td>
-</tr>
-<tr>
-<td>Override a protected method</td>
-<td>No<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></td>
-</tr>
-<tr>
-<td>Access a protected property</td>
-<td>No<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></td>
-</tr>
-<tr>
-<td>Call a public method</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Override a public method</td>
-<td>Yes<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></td>
-</tr>
-<tr>
-<td>Override a public property</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Add a public property</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Add a public method</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Add an argument to an overridden method</td>
-<td>No<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></td>
-</tr>
-<tr>
-<td>Add a default argument to an existing method</td>
-<td>Yes</td>
-</tr>
-</tbody>
-</table>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1"><p>Your code <em>may</em> be broken by minor releases. Check the migration guide for details.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Your code <em>may</em> be broken by minor releases. Check the migration guide for details.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Your code <em>may</em> be broken by minor releases. Check the migration guide for details.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>Your code <em>may</em> be broken by minor releases. Check the migration guide for details.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>Your code <em>may</em> be broken by minor releases. Check the migration guide for details.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>Your code <em>may</em> be broken by minor releases. Check the migration guide for details.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
+If your application overrides framework methods, keep their signatures
+unchanged. In particular, adding native type declarations to an overriding
+method can cause fatal errors when the framework's method has none.
 
 ## Working on CakePHP
 
-If you are helping make CakePHP even better please keep the following guidelines
-in mind when adding/changing functionality:
+If you are contributing to the fork, keep the following guidelines in mind:
 
-In a minor release you can:
+- Do not remove or rename public classes, interfaces, methods or properties.
+- Do not add required arguments to existing methods. If you need a new
+  argument, add it with a default value at the end of the argument list.
+- Do not reduce the visibility of methods or properties, and do not make
+  classes or methods `final` or `abstract`.
+- Do not add native return types to methods that applications may override,
+  since overriding methods without them would then cause fatal errors.
+- Avoid removing or renaming protected methods and properties. Applications
+  extend framework classes often.
 
-<table style="width:82%;">
-<colgroup>
-<col style="width: 44%" />
-<col style="width: 37%" />
-</colgroup>
-<thead>
-<tr>
-<th colspan="2">In a minor release can you...</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td colspan="2"><strong>Classes</strong></td>
-</tr>
-<tr>
-<td>Remove a class</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Remove an interface</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Remove a trait</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Make final</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Make abstract</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Change name</td>
-<td>Yes<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></td>
-</tr>
-<tr>
-<td colspan="2"><strong>Properties</strong></td>
-</tr>
-<tr>
-<td>Add a public property</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Remove a public property</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Add a protected property</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Remove a protected property</td>
-<td>Yes<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></td>
-</tr>
-<tr>
-<td colspan="2"><strong>Methods</strong></td>
-</tr>
-<tr>
-<td>Add a public method</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Remove a public method</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Add a protected method</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Move member to parent class</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Remove a protected method</td>
-<td>Yes<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></td>
-</tr>
-<tr>
-<td>Reduce visibility</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Change method name</td>
-<td>Yes<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></td>
-</tr>
-<tr>
-<td>Add default value to existing argument</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Add argument with default value</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Add required argument</td>
-<td>No</td>
-</tr>
-</tbody>
-</table>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1"><p>You can change a class/method name as long as the old name remains available. This is generally avoided unless renaming has significant benefit.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Avoid whenever possible. Any removals need to be documented in the migration guide.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Avoid whenever possible. Any removals need to be documented in the migration guide.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>You can change a class/method name as long as the old name remains available. This is generally avoided unless renaming has significant benefit.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
+If a change that affects applications cannot be avoided, for example because a
+newer PHP version or a security fix requires it, describe it in `CHANGELOG.md`
+and the migration steps in `UPGRADE.md`, as earlier releases did.

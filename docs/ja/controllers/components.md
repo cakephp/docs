@@ -10,7 +10,7 @@ CakePHP には、様々な共通のタスクを支援するための素晴らし
 [コンポーネント](../core-libraries/toc-components) を参照してください。
 ここでは、独自のコンポーネントを作成する方法を紹介します。
 
-## コンポーネントの設定
+## コンポーネントの設定 {#configuring-components}
 
 コアコンポーネントの多くは設定を必要としています。コンポーネントが設定を必要としている例は、
 [認証](../core-libraries/components/authentication) や
@@ -19,17 +19,19 @@ CakePHP には、様々な共通のタスクを支援するための素晴らし
 `$components` 配列かコントローラの `beforeFilter()` メソッドで行われます。 :
 
 ``` php
-class PostsController extends AppController {
+class PostsController extends AppController
+{
     public $components = [
         'Auth' => [
             'authorize' => ['controller'],
             'loginAction' => [
                 'controller' => 'users',
-                'action' => 'login'
-            ]
+                'action' => 'login',
+            ],
         ],
-        'Cookie' => ['name' => 'CookieMonster']
+        'Cookie' => ['name' => 'CookieMonster'],
     ];
+}
 ```
 
 これは `$components` 配列でコンポーネントを設定している例です。
@@ -44,7 +46,7 @@ public function beforeFilter()
     $this->Auth->authorize = ['controller'];
     $this->Auth->loginAction = [
         'controller' => 'users',
-        'action' => 'login'
+        'action' => 'login',
     ];
 
     $this->Cookie->name = 'CookieMonster';
@@ -69,7 +71,7 @@ public $components = [
 置き換えたい時に便利です。 :
 
 ``` php
-// app/Controller/PostsController.php
+// src/Controller/PostsController.php
 class PostsController extends AppController
 {
     public $components = [
@@ -79,8 +81,7 @@ class PostsController extends AppController
     ];
 }
 
-// app/Controller/Component/MyAuthComponent.php
-App::uses('AuthComponent', 'Controller/Component');
+// src/Controller/Component/MyAuthComponent.php
 class MyAuthComponent extends AuthComponent
 {
     // コア AuthComponent を上書きするコードを追加して
@@ -101,7 +102,8 @@ class MyAuthComponent extends AuthComponent
 コントローラに読込んだ場合、以下のようにアクセスすることができます。 :
 
 ``` php
-class PostsController extends AppController {
+class PostsController extends AppController
+{
     public $components = ['Session', 'Cookie'];
 
     public function delete()
@@ -111,6 +113,7 @@ class PostsController extends AppController {
             return $this->redirect(['action' => 'index']);
         }
     }
+}
 ```
 
 > [!NOTE]
@@ -144,17 +147,12 @@ $this->OneTimer->getTime();
 これから、コントローラの様々な箇所で使うための共有ロジックを集約するためのコンポーネントを作成します。
 
 はじめに、新しいコンポーネントファイルとクラスを作成します。
-`/app/Controller/Component/MathComponent.php` にファイルを作成して下さい。
-コンポーネントの基本構造は以下のようになります。 :
-
-::: pieceofcake2
-pieceofcake2 フォークのモダンレイアウトでは `src/Controller/Component/MathComponent.php` に作成します。
-`Component` や `AuthComponent` などのフレームワークのクラスは Composer でオートロードされるため、
-これらに対する `App::uses()` は省略できます。
-:::
+`src/Controller/Component/MathComponent.php` にファイルを作成して下さい
+(従来の `app/` レイアウトでは `app/Controller/Component/` に作成します)。
+コンポーネントの基本構造は以下のようになります。
 
 ``` php
-App::uses('Component', 'Controller');
+// src/Controller/Component/MathComponent.php
 class MathComponent extends Component
 {
     public function doComplexOperation($amount1, $amount2)
@@ -191,9 +189,10 @@ public $components = ['Math', 'Session'];
 public $components = [
     'Math' => [
         'precision' => 2,
-        'randomGenerator' => 'srand'
+        'randomGenerator' => 'srand',
     ],
-    'Session', 'Auth'
+    'Session',
+    'Auth',
 ];
 ```
 
@@ -208,8 +207,7 @@ public $components = [
 `$components` 変数を使って読み込む場合と同じです。 :
 
 ``` php
-// app/Controller/Component/CustomComponent.php
-App::uses('Component', 'Controller');
+// src/Controller/Component/CustomComponent.php
 class CustomComponent extends Component
 {
     // 実装中のコンポーネントが使っている他のコンポーネント
@@ -223,14 +221,12 @@ class CustomComponent extends Component
     public function bar()
     {
         // ...
-   }
+    }
 }
 
-// app/Controller/Component/ExistingComponent.php
-App::uses('Component', 'Controller');
+// src/Controller/Component/ExistingComponent.php
 class ExistingComponent extends Component
 {
-
     public function foo()
     {
         // ...
@@ -242,7 +238,7 @@ class ExistingComponent extends Component
 > コントローラから読み込んだコンポーネントと違い、コンポーネントからコンポーネントを読み込んだ場合は、
 > コールバックが呼ばれないことに注意して下さい。
 
-## コンポーネント API
+## コンポーネント API {#component-api}
 
 `class` **Component**
 

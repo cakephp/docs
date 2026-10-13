@@ -9,7 +9,7 @@ Use [Cake Response File](../controllers/request-response#cake-response-file) ins
 Media views allow you to send binary files to the user. For example, you may
 wish to have a directory of files outside of the webroot to prevent users from
 direct linking them. You can use the Media view to pull the file from a special
-folder within /app/, allowing you to perform authentication before delivering
+folder in your project, allowing you to perform authentication before delivering
 the file to the user.
 
 To use the Media view, you need to tell your controller to use the MediaView
@@ -22,13 +22,13 @@ class ExampleController extends AppController
     public function download()
     {
         $this->viewClass = 'Media';
-        // Download app/outside_webroot_dir/example.zip
+        // Download outside_webroot_dir/example.zip in the project root
         $params = [
-            'id'        => 'example.zip',
-            'name'      => 'example',
-            'download'  => true,
+            'id' => 'example.zip',
+            'name' => 'example',
+            'download' => true,
             'extension' => 'zip',
-            'path'      => APP . 'outside_webroot_dir' . DS
+            'path' => ROOT . DS . 'outside_webroot_dir' . DS,
         ];
         $this->set($params);
     }
@@ -36,23 +36,23 @@ class ExampleController extends AppController
 ```
 
 Here's an example of rendering a file whose mime type is not included in the
-MediaView's `$mimeType` array. We are also using a relative path which will
-default to your `app/webroot` folder:
+MediaView's `$mimeType` array. The file is in the `webroot/files` folder,
+which is available as `WWW_ROOT . 'files'`:
 
 ``` php
 public function download()
 {
     $this->viewClass = 'Media';
-    // Render app/webroot/files/example.docx
+    // Render webroot/files/example.docx
     $params = [
-        'id'        => 'example.docx',
-        'name'      => 'example',
+        'id' => 'example.docx',
+        'name' => 'example',
         'extension' => 'docx',
-        'mimeType'  => [
+        'mimeType' => [
             'docx' => 'application/vnd.openxmlformats-officedocument' .
-                '.wordprocessingml.document'
+                '.wordprocessingml.document',
         ],
-        'path'      => 'files' . DS
+        'path' => WWW_ROOT . 'files' . DS,
     ];
     $this->set($params);
 }
@@ -80,7 +80,8 @@ be downloaded.
 
 `path`  
 The folder name, including the final directory separator. The path
-should be absolute but can be relative to the `app/webroot` folder.
+should be absolute. A relative path is resolved against the `APP` directory
+(`src/`, or `app/` in the legacy layout), not against the webroot.
 
 `mimeType`  
 An array with additional mime types to be merged with MediaView

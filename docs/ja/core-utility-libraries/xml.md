@@ -2,40 +2,30 @@
 
 `class` **Xml**
 
-Xml クラスはすべてリファクタリングされました。 PHP 5 には
-[SimpleXML](https://www.php.net/simplexml) と
-[DOMDocument](https://www.php.net/domdocument) があり、
-CakePHP で XML パーサーを再実装する必要がないからです。
-新しい Xml クラスは配列から SimpleXMLElement や DOMDocument
+PHP には [SimpleXML](https://www.php.net/simplexml) と
+[DOMDocument](https://www.php.net/domdocument) があるため、
+CakePHP で XML パーサーを独自に実装する必要はありません。
+Xml クラスは配列から SimpleXMLElement や DOMDocument
 または逆方向への基本的な変換を行います。
 
 ## Xml クラスへのデータのインポート
 
-CakePHP 1.3 では、 Xml クラスへデータをインポートするために、コンストラクタへ
-配列、 XML 文字列、 URL やファイルパスを渡すことができました。
-CakePHP 2.0 では、 `Xml::build()` を使うことで可能になります。
-Xml オブジェクトが返るまでの間、 SimpleXMLElement または DOMDocument
-オブジェクトを返します。オブジェクトのクラスはオプションのパラメータに依存し、
-既定では SimpleEMLElement を返します。以下のサンプルは URL から
+データをインポートするには `Xml::build()` を使います。
+`return` オプションに応じて、SimpleXMLElement (デフォルト) または DOMDocument
+オブジェクトを返します。以下のサンプルは URL から
 データをインポートする方法を示しています。 :
 
 ``` php
-// はじめにユーティリティクラスをロードします。
-App::uses('Xml', 'Utility');
-
-// 今までの方法:
-$xml = new Xml('https://bakery.cakephp.org/articles.rss');
-
-// SimpleXML を使った新しい方法:
-$xml = Xml::build('https://bakery.cakephp.org/articles.rss');
+// SimpleXML を使う
+$xml = Xml::build('https://example.com/articles.rss');
 // このとき、 $xml は SimpleXMLElement のインスタンスです。
 
 // もしくは
-$xml = Xml::build('https://bakery.cakephp.org/articles.rss', ['return' => 'simplexml']);
+$xml = Xml::build('https://example.com/articles.rss', ['return' => 'simplexml']);
 // このときも、 $xml は SimpleXMLElement のインスタンスです。
 
-// DOMDocument を使った新しい方法:
-$xml = Xml::build('https://bakery.cakephp.org/articles.rss', ['return' => 'domdocument']);
+// DOMDocument を使う
+$xml = Xml::build('https://example.com/articles.rss', ['return' => 'domdocument']);
 // このとき、 $xml は DOMDocument のインスタンスです。
 ```
 
@@ -60,8 +50,12 @@ $xml = Xml::build($text);
 $xml = Xml::build('/home/awesome/unicorns.xml');
 
 // リモートにあるファイル
-$xml = Xml::build('https://bakery.cakephp.org/articles.rss');
+$xml = Xml::build('https://example.com/articles.rss');
 ```
+
+> [!WARNING]
+> `<` を含まない文字列はファイルパスか URL として扱われ、そのファイルや URL が読み込まれます。
+> ユーザーが入力したデータは、XML の内容であることを確認してから `Xml::build()` に渡してください。
 
 配列を使っても Xml オブジェクトを作成できます。 :
 
@@ -70,8 +64,8 @@ $data = [
     'post' => [
         'id' => 1,
         'title' => 'Best post',
-        'body' => ' ... '
-    ]
+        'body' => ' ... ',
+    ],
 ];
 $xml = Xml::build($data);
 ```
@@ -79,7 +73,7 @@ $xml = Xml::build($data);
 入力が正しくない場合、 Xml クラスは例外をスローします。 :
 
 ``` php
-$xmlString = 'What is XML?'
+$xmlString = 'What is XML?';
 try {
     $xmlObject = Xml::build($xmlString); // ここで例外をスローする
 } catch (XmlException $e) {
@@ -94,16 +88,9 @@ try {
 
 ## XML 文字列から配列への変換
 
-XML から配列への変換は Xml クラスを使うのと同じくらい簡単です。
-既定では SimpleXML オブジェクトが返り値として得られます。 :
+XML から配列への変換も Xml クラスを使えば簡単です。 :
 
 ``` php
-// 今までの方法:
-$xmlString = '<?xml version="1.0"?><root><child>value</child></root>';
-$xmlObject = new Xml($xmlString);
-$xmlArray = $xmlObject->toArray();
-
-// 新しい方法:
 $xmlString = '<?xml version="1.0"?><root><child>value</child></root>';
 $xmlArray = Xml::toArray(Xml::build($xmlString));
 ```
@@ -113,12 +100,6 @@ XML が正しくなければ例外がスローされます。
 ## 配列から XML 文字列への変換
 
 ``` php
-// 今までの方法:
-$xmlArray = ['root' => ['child' => 'value']];
-$xmlObject = new Xml($xmlArray, ['format' => 'tags']);
-$xmlString = $xmlObject->toString();
-
-// 新しい方法:
 $xmlArray = ['root' => ['child' => 'value']];
 $xmlObject = Xml::fromArray($xmlArray, ['format' => 'tags']); // Xml::build() を使うこともできます
 $xmlString = $xmlObject->asXML();
@@ -141,14 +122,10 @@ Xml クラスは例外をスローします。以下は正しくない例です�
 ];
 ```
 
-> [!WARNING]
-> 既定のフォーマットオプションは <span class="title-ref">attributes</span> から <span class="title-ref">tags</span> に変更されました。
-> これは既存の XML 文書とより互換性のある Xml クラスを生成できるようにするための変更です。
-> この変更に依存するコードがある場合は気をつけてください。新しいバージョンでは、タグと要素、
-> 値を混合した配列を作成することができます。タグを作るにはこのフォーマットを使うだけです。
-> (デフォルトでタグが作成されるので特に何もする必要はありません。)
-> <span class="title-ref">@</span> をキーの先頭につけることで属性が生成できます。 テキストノードを表すときは
-> <span class="title-ref">@</span> をキーとして用います。
+既定のフォーマットは `tags` で、配列の各キーが子要素になります。
+タグと属性、値を混合した配列を作成することもできます。
+`@` をキーの先頭につけると属性が生成されます。テキストノードを表すときは
+`@` をキーとして用います。
 
 ``` php
 $xmlArray = [
@@ -171,26 +148,12 @@ $xmlString = $xmlObject->asXML();
 
 という値が格納されています。
 
-> [!NOTE]
-> 配列の構造は変更されました。子要素はサブツリーにあります。同じツリーにはありません。
-> 加えて、文字列は `Inflector` によって変更されません。
-> 以下の例を見てください。
+子要素は親要素のサブツリーに入れ子にします。キーはそのまま要素名として使われ、
+`Inflector` によって変更されることはありません。繰り返す要素は数値添字の配列で表します。
+以下の例を見てください。
 
 ``` php
-$oldArray = [
-    'Projects' => [
-        [
-            'Project' => ['id' => 1, 'title' => 'Project 1'],
-            'Industry' => ['id' => 1, 'name' => 'Industry 1']
-        ],
-        [
-            'Project' => ['id' => 2, 'title' => 'Project 2'],
-            'Industry' => ['id' => 2, 'name' => 'Industry 2']
-        ]
-    ]
-];
-
-$newArray = [
+$data = [
     'projects' => [
         'project' => [
             [
@@ -206,7 +169,7 @@ $newArray = [
 ];
 ```
 
-どちらの例も、以下のような XML になります。 :
+この配列は、以下のような XML になります。 :
 
 ``` php
 <?xml version="1.0"?>
@@ -246,7 +209,7 @@ $xmlArray = [
 ];
 $xml1 = Xml::fromArray($xmlArray);
 
-$xmlArray(
+$xmlArray = [
     'root' => [
         'tag' => [
             'xmlns:pref' => 'https://cakephp.org',
@@ -256,7 +219,7 @@ $xmlArray(
             ]
         ]
     ]
-);
+];
 $xml2 = Xml::fromArray($xmlArray);
 ```
 
@@ -264,7 +227,7 @@ $xml2 = Xml::fromArray($xmlArray);
 
 ``` php
 <?xml version="1.0"?>
-<root xmlns="https://cakephp.org"><child>value</child>
+<root xmlns="https://cakephp.org"><child>value</child></root>
 
 
 <?xml version="1.0"?>
@@ -273,23 +236,17 @@ $xml2 = Xml::fromArray($xmlArray);
 
 ### 子要素の作成
 
-CakePHP 2.0 の Xml クラスはコンテンツの操作をするメソッドを提供しません。
-これらの操作は SimpleXMLElement または DOMDocument を使ってしなければなりません。
-CakePHP はそれをカバーしてくれます。以下のように、CakePHP で子要素を作成するためには
-いくつか段階を踏みます。 :
+Xml クラスはコンテンツの操作をするメソッドを提供しません。
+これらの操作は SimpleXMLElement または DOMDocument を使って行います。
+以下は子要素を作成する例です。 :
 
 ``` php
-// CakePHP 1.3
-$myXmlOriginal = '<?xml version="1.0"?><root><child>value</child></root>';
-$xml = new Xml($myXmlOriginal, ['format' => 'tags']);
-$xml->children[0]->createNode('young', 'new value');
-
-// CakePHP 2.0 - SimpleXML を使用
+// SimpleXML を使用
 $myXmlOriginal = '<?xml version="1.0"?><root><child>value</child></root>';
 $xml = Xml::build($myXmlOriginal);
-$xml->root->addChild('young', 'new value');
+$xml->addChild('young', 'new value');
 
-// CakePHP 2.0 - DOMDocument を使用
+// DOMDocument を使用
 $myXmlOriginal = '<?xml version="1.0"?><root><child>value</child></root>';
 $xml = Xml::build($myXmlOriginal, ['return' => 'domdocument']);
 $child = $xml->createElement('young', 'new value');
@@ -310,6 +267,16 @@ factory クラスまたは変換クラスです。
 
 XML の文字列やファイルパス、 URL 、配列を与えて
 SimpleXMLElement または DOMDocument を初期化します。
+次のオプションを指定できます。
+
+- `return` SimpleXMLElement を返す `'simplexml'` (デフォルト) か、
+  DOMDocument を返す `'domdocument'` を指定します。
+- `loadEntities` `<!ENTITY` 定義を読み込むかどうかです。セキュリティ上の理由からデフォルトは `false` です。
+  信頼できる XML を扱う場合にだけ有効にしてください。
+- `readFile` ローカルのファイルパスを読み込むかどうかです。デフォルトは `true` です。
+- `parseHuge` `LIBXML_PARSEHUGE` を有効にします。デフォルトは `true` です。
+
+入力が配列の場合は、`Xml::fromArray()` のオプション (`format` や `pretty` など) も指定できます。
 
 文字列から XML を作成する:
 
@@ -332,7 +299,7 @@ $xml = Xml::build('/path/to/an/xml/file.xml');
 リモート URL から作成する:
 
 ``` php
-$xml = Xml::build('http://example.com/example.xml');
+$xml = Xml::build('https://example.com/example.xml');
 ```
 
 配列から作成する:

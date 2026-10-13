@@ -17,16 +17,10 @@ CakePHP のキャッシュは、主に `Cache` クラスを使用します。
   しかしながら、ディスクストレージがとても安価なので、まれに書き込まれるような
   大きなオブジェクトや要素の登録にファイルがよく使われます。
   2.3 以降、デフォルトのキャッシュエンジンになりました。
-- `ApcCache` APC キャッシュは、PHP の [APC](https://www.php.net/manual/book.apcu) または
-  [APCu](https://www.php.net/apcu) 拡張を使用します。
-  これらの拡張は、ウェブサーバー中の共有メモリーにオブジェクトを保存します。
+- `ApcCache` APC キャッシュは、PHP の [APCu](https://www.php.net/apcu) 拡張を使用します。
+  エンジン名は互換性のため `Apc` のままです。
+  APCu は、ウェブサーバー中の共有メモリーにオブジェクトを保存します。
   これはとても高速で、アトミックな読み書き機能を利用することができます。
-  CakePHP 2.0 から 2.2 までは、(利用可能であれば) デフォルトのキャッシュになりました。
-- `Wincache` Wincache は、 [Wincache](https://www.php.net/wincache) 拡張を使用します。
-  Wincache は APC と同等の機能やパフォーマンスですが、 Windows と Microsoft IIS に
-  最適化しています。
-- `XcacheEngine` [Xcache](https://en.wikipedia.org/wiki/List_of_PHP_accelerators#XCache)
-  は、APC と同等の機能を持つ PHP 拡張です。
 - `MemcacheEngine` [Memcache](https://www.php.net/memcache) 拡張を使用します。
   Memcache は、複数サーバに分散されたとても速いキャッシュシステムを提供し、
   アトミックな操作を提供します。
@@ -36,11 +30,10 @@ CakePHP のキャッシュは、主に `Cache` クラスを使用します。
   (2.2.3 以上) を使用します。Redis は、memcache と同様に高速で永続化した
   キャッシュシステムを提供し、アトミックな操作を提供します。
 
-::: pieceofcake2 削除されたキャッシュエンジン
-pieceofcake2 フォークでは `Wincache` と `Xcache` エンジンが削除されています。
-利用できるエンジンは `File`、`Apc` (APCu)、`Memcache`、`Memcached`、`Redis` です。
-Wincache や Xcache を使っていた場合は、APCu、Memcached、Redis のいずれかに移行してください。
-詳しくは [アップグレードガイド](/ja/pieceofcake2/upgrade) を参照してください。
+::: pieceofcake2
+Piece of Cake 2 フォークでは、Xcache と Wincache エンジンが削除されました。
+これらを使っていた場合は、APCu (`Apc`)、Memcached、Redis のいずれかに移行してください。
+詳しくは [アップグレードガイド](/ja/appendices/migrating-from-cakephp-2-10) を参照してください。
 :::
 
 ::: info Changed in version 2.3
@@ -59,10 +52,10 @@ Memcached エンジンが追加されました。そして Memcache エンジン
 
 ## Cache クラスの設定
 
-Cache クラスの設定は、どこでもできます。しかし、一般的には、 `app/Config/bootstrap.php`
+Cache クラスの設定は、どこでもできます。しかし、一般的には、 `config/bootstrap.php`
 の中で Cache の設定を行います。あなたが必要なだけ、キャッシュの設定を追加できます。
 そして、複数のキャッシュエンジンを利用できます。CakePHP は、２つの内部的なキャッシュの設定を
-`app/Config/core.php` で行います。もし、 APC や Memcache を使用している場合、
+`config/core.php` で行います。もし、 APC や Memcache を使用している場合、
 コアのキャッシュにはユニークなキーをセットしておくべきです。これは、複数アプリケーションで
 別のアプリのキャッシュデータを上書きしてしまうのを避けるためです。
 
@@ -93,7 +86,7 @@ Cache::config('long', [
 ]);
 ```
 
-`app/Config/bootstrap.php` に上記のコードを記述することで、Cache 設定が
+`config/bootstrap.php` に上記のコードを記述することで、Cache 設定が
 2 つ追加されます。 'short' と 'long' という設定名で、 `Cache::write()`
 と `Cache::read()` の `$config` パラメータで指定します。
 
@@ -107,11 +100,11 @@ Cache::config('long', [
 
 ## Cache のためのストレージエンジンの作成
 
-`app/Lib` 内や、プラグインの `$plugin/Lib` 内に独自の `Cache` アダプターを
+`src/Lib` 内や、プラグインの `$plugin/Lib` 内に独自の `Cache` アダプターを
 用意できます。アプリケーションやプラグインのキャッシュエンジンは、コアのエンジンと
 差し替えられます。 Cache アダプターは、Cache ディレクトリ内に置かなければなりません。
 `MyCustomCacheEngine` と名付けたキャッシュエンジンがあったとすると、
-アプリケーションのライブラリとして `app/Lib/Cache/Engine/MyCustomCacheEngine.php`
+アプリケーションのライブラリとして `src/Lib/Cache/Engine/MyCustomCacheEngine.php`
 に配置されるか、プラグインの一部として
 `$plugin/Lib/Cache/Engine/MyCustomCacheEngine.php` に配置されます。
 プラグインの Cache 設定は、ドット記法を使用する必要があります。 :
@@ -124,7 +117,7 @@ Cache::config('custom', [
 ```
 
 > [!NOTE]
-> アプリケーションやプラグインのキャッシュエンジンは、 `app/Config/bootstrap.php`
+> アプリケーションやプラグインのキャッシュエンジンは、 `config/bootstrap.php`
 > で設定すべきです。もし、core.php にそれらの設定をしたとしても、正しく動作しません。
 
 独自のキャッシュエンジンは、 いくつかの初期化メソッドと抽象メソッドが定義された
@@ -179,7 +172,7 @@ class Post extends AppModel
 あなたの訓練になります。
 
 2.5 から、 `Cache::remember()` を使用することで、もっとシンプルに
-上記を実現することができます。 PHP 5.3 以上を使用している場合、 `remember()`
+上記を実現することができます。 `remember()`
 メソッドは、以下のように使用します。 :
 
 ``` php
@@ -251,7 +244,7 @@ Cache::config('site_home', [
 削除するために、キャッシュエンジンに通知することができます。 :
 
 ``` php
-// Model/Post.php
+// src/Model/Post.php
 
 public function afterSave($created, $options = [])
 {
@@ -268,7 +261,7 @@ public function afterSave($created, $options = [])
 取得するのに使用します。 :
 
 ``` php
-// Model/Post.php
+// src/Model/Post.php
 
 /**
  * 前例の別のバリエーション。同じグループに属する全てのキャッシュを消去します。
@@ -389,8 +382,8 @@ add メソッドは、2.8.0 で追加されました。
 
 `static` Cache::**clear**($check, $config = 'default')
 
-指定したキャッシュの設定に関する全てのキャッシュの値を破棄します。 Apc、Memcache、
-Wincache のようなエンジンの場合、キャッシュの削除にキャッシュ設定のプレフィックスを
+指定したキャッシュの設定に関する全てのキャッシュの値を破棄します。 Apc や Memcache
+のようなエンジンの場合、キャッシュの削除にキャッシュ設定のプレフィックスを
 使用します。各キャッシュ設定には、それぞれ異なるプレフィックスを設定してください。
 
 `method` Cache::**clearGroup**($group, $config = 'default')
@@ -415,7 +408,7 @@ return
 キャッシュに結果が格納されます。
 
 例えば、問い合わせの結果をキャッシュしたい時、 `remember` を使用して、
-シンプルに実現できます。PHP 5.3 以上を使用している場合、 :
+シンプルに実現できます。 :
 
 ``` php
 class Articles extends AppModel

@@ -1,40 +1,48 @@
 # インストール
 
-CakePHP は素早く簡単にインストールできます。
-最小構成で必要なものは、ウェブサーバと CakePHP のコピー、それだけです!
+CakePHP は [Composer](https://getcomposer.org) を使ってインストールします。
+最小構成で必要なものは、ウェブサーバと PHP、Composer です。
 このマニュアルでは主に(最も一般的である) Apache でのセットアップに主眼を置いていますが、
-CakePHP を lighttpd や Microsoft IIS のような様々なウェブサーバで走らせるよう設定することもできます。
+CakePHP を nginx や lighttpd、Microsoft IIS のような様々なウェブサーバで走らせるよう設定することもできます。
+
+> [!WARNING]
+> CakePHP 2 は既存アプリケーションの保守のためのものです。
+> 新しくプロジェクトを始める場合は [CakePHP 5](https://book.cakephp.org/5/ja/) を使ってください。
 
 ## システム要件
 
 - HTTPサーバー。例: Apache。mod_rewriteが推奨されますが、必須ではありません。
-- PHP 5.3.0 以上 (CakePHP バージョン 2.6 以下は、 PHP 5.2.8 以上をサポートします) 。
-  CakePHP バージョン 2.8.0 以上は PHP 7 をサポートします。 PHP 7.1 以上を使用するためには、
-  PECL 経由で mcrypt をインストールする必要があります。詳しくは、
-  [Security](core-utility-libraries/security) をご覧ください。
+- PHP 8.0、8.1、8.2、8.3、8.4、8.5
+- [Composer](https://getcomposer.org)
 
 技術的にはデータベースエンジンは必ずしも必要ではありませんが、ほとんどのアプリケーションはこれを活用することが想像できます。
-CakePHPは種々のデータベース・ストレージのエンジンをサポートしています：
+CakePHPは種々のデータベース・ストレージのエンジンをサポートしています。
 
-- MySQL (4以上)
-- PostgreSQL
-- Microsoft SQL Server
-- SQLite
+- MySQL 5.6、5.7、8.0 以上 (`pdo_mysql`)
+- PostgreSQL 9.4 以上 (`pdo_pgsql`)
+- SQLite 3 (`pdo_sqlite`)
+- Microsoft SQL Server 2022 以上 (`pdo_sqlsrv`)
 
 > [!NOTE]
 > 組み込みのドライバは全てPDOを必要とします。
 > 正しいPDO拡張モジュールがインストールされているか必ず確かめてください。
 
-::: pieceofcake2 システム要件
-pieceofcake2 フォークのシステム要件は次のとおりです。
+CakePHP は次の PHP 拡張モジュールも使用します。
 
-- PHP 8.0〜8.5
-- Composer (Composer を使わないインストールはサポートしていません)
-- MySQL 5.6 以上、PostgreSQL 9.4 以上、SQLite 3、Microsoft SQL Server 2022 以上 (それぞれ対応する PDO 拡張が必要)
-- `mbstring` 拡張を強く推奨します。`intl` と `openssl` は任意です
-  (`mbstring` や `intl` が無い場合は Symfony の polyfill が使われます)
+- `mbstring` は強く推奨します。無い場合は Symfony の polyfill が使われます。
+  polyfill には `mb_encode_mimeheader()` が無いため、`CakeEmail` はメールヘッダーのエンコードに
+  `Multibyte::mimeEncode()` を使います。
+- `intl` は任意です。非推奨となった `strftime()` の代わりに日付の書式化に使われます。
+  無い場合は Symfony の polyfill が使われます。
+- `openssl` は任意ですが、SSL/TLS 接続と [Security](core-utility-libraries/security)
+  による AES 暗号化には必要です。
 
-フォークは CakePHP 2.10.24 をベースにしています。詳しくは [インストール](/ja/pieceofcake2/installation) を参照してください。
+::: pieceofcake2
+PHP 8.0 以上が必要です。CakePHP は Composer の
+オートローダーからのみ読み込まれます (`CAKE_CORE_INCLUDE_PATH` や `include_path` による設定は廃止されました)。
+フォークは CakePHP 2.10.24 をベースにしています。それより古い 2.x を使っている場合は、
+[アップグレードガイド](/ja/appendices/migrating-from-cakephp-2-10) に従い、先に PHP 7.4 上で
+`cakephp/cakephp` 2.10.24 に上げてください。
 :::
 
 ## ライセンス
@@ -43,191 +51,232 @@ CakePHPはMIT Licenseの元にライセンスされています。
 これは著作権(*copyright*)の提示が全く改変されていない状態で残されているという条件の元で、ソースコードを自由に更新、配布、再公開できることを意味します。
 また、自由にCakePHPを宣伝やクローズソースのアプリケーションに組み込むこともできます。
 
-## CakePHPのダウンロード
+## Composer のインストール
 
-CakePHP の最新版を手に入れるには、主に二つの方法があります。
-ウェブサイトからアーカイブ(zip/tar.gz/tar.bz2)としてダウンロードする、あるいは git リポジトリからコードをチェックアウトする方法のいずれかにより取得できます。
+Composer をまだ入れていない場合は、[公式の Composer ドキュメント](https://getcomposer.org/download/)
+に従ってインストールしてください。Windows では
+[Composer の Windows インストーラ](https://github.com/composer/windows-setup/releases/) を使えます。
+このマニュアルの例では、`composer` コマンドに `PATH` が通っているものとします。
 
-最新のアーカイブをダウンロードするには、 <https://cakephp.org> のウェブサイトに行き、
-"Download" というリンクに従って進みます。
+## 新しいアプリケーションの作成
 
-CakePHP の最新のリリースは [GitHub](https://github.com/cakephp/cakephp) でホスティングされています。
-GitHubにはCakePHP自身、また多くのCakePHPプラグインが含まれています。
-CakePHPのリリースは [GitHub tags](https://github.com/cakephp/cakephp/tags) で入手できます。
-
-他の手段を用いて、バグ修正や日ごとに行われる細かな機能追加が含まれた、できたてホヤホヤのコードを手に入れることができます。
-これらは [GitHub](https://github.com/cakephp/cakephp) からレポジトリを複製することでアクセスすることができます :
-
-    git clone -b 2.x git://github.com/cakephp/cakephp.git
-
-::: pieceofcake2 Composer でのインストール
-pieceofcake2 フォークは Composer でのみインストールできます。`cakephp/cakephp` のアーカイブや
-git リポジトリを取得する方法は使えません。アプリケーションの `composer.json` にフォークを追加します
-(`cakephp/cakephp` を `replace` します)。
+アプリケーションのスケルトンは [pieceofcake2/app](https://github.com/pieceofcake2/app)
+パッケージとして提供されています。Composer の `create-project` コマンドで新しいアプリケーションを作成します。
 
 ```bash
-composer require pieceofcake2/cakephp
+composer create-project pieceofcake2/app my_app
 ```
 
-新しいディレクトリ構成のアプリケーションには [pieceofcake2/app](https://github.com/pieceofcake2/app)
-スケルトンを使ってください。`app/` を使う従来の構成 (legacy) の既存アプリケーションでは、ディスパッチャファイル
-(`app/webroot/index.php`、`app/webroot/test.php`、`app/Console/cake`) の更新も必要です。
-インストール後の手順は [インストール](/ja/pieceofcake2/installation) を参照してください。
-:::
+`my_app` ディレクトリが作られ、CakePHP (`pieceofcake2/cakephp`) が `vendor/` にインストールされます。
+開発用の依存パッケージとして [Bake](console-and-shells/code-generation-with-bake) と
+[DebugKit](https://github.com/pieceofcake2/debug_kit) プラグインもインストールされます。
+スケルトンのディレクトリ構成は次のとおりです。
+
+```text
+my_app/
+    bin/cake            コンソール
+    config/             設定ファイル
+    logs/               ログファイル
+    plugins/            Composer でインストールしたプラグイン
+    resources/locales/  翻訳ファイル
+    src/                コントローラ、モデル、ヘルパー、シェル
+    templates/          ビューテンプレート、レイアウト、エレメント
+    tests/              テストとフィクスチャ
+    tmp/                キャッシュ、セッション
+    vendor/             CakePHP を含む Composer パッケージ
+    webroot/            ドキュメントルート
+```
+
+詳しくは [CakePHP のフォルダ構造](getting-started/cakephp-folder-structure) を参照してください。
+
+続いて設定を済ませます。
+
+1. `config/database.php.default` を `config/database.php` にコピーし、データベースの接続設定を記入します。
+   [データベース設定](development/configuration#database-configuration) を参照してください。
+2. `config/core.php` の `Security.salt` と `Security.cipherSeed` の値を変更します。
+   スケルトンに入っている値は誰でも知っているサンプル値なので、実際のアプリケーションでは使わないでください。
+
+スケルトンの `composer.json` には、[composer.json の設定](#configuring-composer-json) で説明するプラグイン用の設定が
+すでに含まれています。ファイルを編集するときも、この設定は残しておいてください。
+
+## 既存のアプリケーションへの導入
+
+Composer で `cakephp/cakephp` を使っているアプリケーションでは、`composer.json` の `require` にある
+`cakephp/cakephp` を `pieceofcake2/cakephp` に置き換えます。
+また、[composer.json の設定](#configuring-composer-json) で説明する `config` と `extra` の設定が無ければ追加します。
+そのうえで `composer update` を実行します。`pieceofcake2/cakephp` は `cakephp/cakephp` を
+置き換える (replace する) パッケージとして宣言されているので、`cakephp/cakephp` 2.x に依存する
+プラグインやパッケージもそのままインストールでき、動作します。両方のパッケージを同時に require しないでください。
+
+CakePHP は Composer のオートローダーからのみ読み込まれるため、アプリケーションのディスパッチャファイル
+(`index.php`、`test.php`、コンソールの `cake` スクリプト) を新しいものに置き換える必要があります。
+
+モダンな構成のアプリケーションでは、[pieceofcake2/app](https://github.com/pieceofcake2/app)
+スケルトンから `config/define.php`、`bin/cake`、`webroot/index.php`、`webroot/test.php` をコピーします。
+
+従来の `app/` 構成のアプリケーションでは、アプリケーションのテンプレートを含む Bake プラグインをインストールし、
+そこからディスパッチャファイルをコピーします。
+
+```bash
+composer require --dev pieceofcake2/bake
+
+cp app/Plugin/Bake/Console/Templates/skel/webroot/index.php app/webroot/index.php
+cp app/Plugin/Bake/Console/Templates/skel/webroot/test.php app/webroot/test.php
+cp app/Plugin/Bake/Console/Templates/skel/Console/cake app/Console/cake
+chmod +x app/Console/cake
+
+# Windows 用バッチファイルと PHP ラッパーは使われなくなりました
+rm -f app/Console/cake.bat app/Console/cake.php
+```
+
+従来の構成では、[composer.json の設定](#configuring-composer-json) にある `installer-paths` によって、
+Composer が CakePHP のプラグインを `app/Plugin/` にインストールします。
+
+従来の構成のアプリケーションは、あとからディレクトリ単位で少しずつモダンな構成に移行できます。
+2 つの構成の対応関係は [CakePHP のフォルダ構造](getting-started/cakephp-folder-structure) を、
+CakePHP 2.10.24 からのその他の変更点は [アップグレードガイド](/ja/appendices/migrating-from-cakephp-2-10) を参照してください。
+
+## composer.json の設定 {#configuring-composer-json}
+
+CakePHP アプリケーションの最小限の `composer.json` は次のようになります。
+
+```json
+{
+    "name": "example/my-app",
+    "type": "project",
+    "require": {
+        "php": ">=8.0",
+        "pieceofcake2/cakephp": "^2.12"
+    },
+    "autoload": {
+        "classmap": ["src/"]
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    },
+    "extra": {
+        "installer-paths": {
+            "plugins/{$name}/": ["type:cakephp-plugin"]
+        }
+    }
+}
+```
+
+`config` と `extra` の設定は必須です。
+
+- CakePHP 2 のプラグインは `cakephp-plugin` タイプの Composer パッケージとして公開されており、
+  [composer/installers](https://github.com/composer/installers) パッケージによってインストールされます。
+  `installer-paths` の設定により、プラグインは `CakePlugin::load()` が探す `plugins/<Name>/` にインストールされます。
+  この設定が無いとプラグインは別のディレクトリにインストールされ、CakePHP から見つけられません。
+- Composer 2.2 以降では、`composer/installers` のように Composer プラグインとして動作するパッケージを
+  `config.allow-plugins` で許可する必要があります。許可していないと Composer は確認を求めるか実行を拒否し、
+  プラグインが `plugins/` にインストールされません。
+
+従来の `app/` の構成のアプリケーションでは、プラグインを `app/Plugin/` にインストールします。
+
+```json
+"extra": {
+    "installer-paths": {
+        "app/Plugin/{$name}/": ["type:cakephp-plugin"]
+    }
+}
+```
+
+CakePHP は `src/Plugin/` または `app/Plugin/` と、プロジェクト直下の `plugins/` からプラグインを探すため、
+従来の構成のアプリケーションで `plugins/` を使い続けることもできます。
+
+`classmap` の設定は任意です。`src/` にあるアプリケーションのクラスを Composer でオートロードできるようになり、
+`App::uses()` が不要になります。新しいクラスファイルを追加したら `composer dump-autoload` を実行してください。
+クラスを `App::uses()` で読み込むアプリケーションでは省略できます。
+詳しくは [応用インストール](installation/advanced-installation) を参照してください。
 
 ## パーミッション
 
-CakePHP は、幾つかの操作のために `app/tmp` ディレクトリを使用します。
+CakePHP は、幾つかの操作のために `tmp/` ディレクトリを使用します。
 モデルのdescriptionや、ビューのキャッシュ、セッション情報などです。
+ログファイルは `logs/` に書き込まれます。
 
-従って、 CakePHP のインストール時の `app/tmp` ディレクトリと、そのサブディレクトリ全てに、ウェブサーバーのユーザによる書き込み権限があることを確認してください。
+従って、`tmp/` と `logs/` ディレクトリ、およびそのサブディレクトリ全てに、ウェブサーバーのユーザによる書き込み権限があることを確認してください。
+従来の構成では、これらは `app/tmp/` と `app/tmp/logs/` です。
 
-一般的な課題として、app/tmp ディレクトリとサブディレクトリは、ウェブサーバとコマンドラインユーザの両方で書き込み権限が必要なことがあります。
-UNIXシステム上で ウェブサーバユーザとコマンドラインユーザが異なる場合、パーミッションのプロパティ設定を確保するために、あなたのプロジェクト内で一度だけ以下のコマンドを実行してください。 :
+一般的な課題として、これらのディレクトリは、ウェブサーバとコマンドラインユーザの両方で書き込み権限が必要なことがあります。
+UNIXシステム上で ウェブサーバユーザとコマンドラインユーザが異なる場合、パーミッションのプロパティ設定を確保するために、あなたのプロジェクト内で一度だけ以下のコマンドを実行してください。
 
 ``` text
 HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
-setfacl -R -m u:${HTTPDUSER}:rwx app/tmp
-setfacl -R -d -m u:${HTTPDUSER}:rwx app/tmp
+setfacl -R -m u:${HTTPDUSER}:rwx tmp logs
+setfacl -R -d -m u:${HTTPDUSER}:rwx tmp logs
 ```
 
-::: pieceofcake2 ディレクトリ構成
-書き込み権限が必要なディレクトリは、アプリケーションのディレクトリ構成によって異なります。
+## 開発用サーバ
 
-- 従来の構成 (legacy): `app/tmp` (ログは `app/tmp/logs`)
-- モダンな構成 (modern): プロジェクトルートの `tmp/` と `logs/`
+アプリケーションを手早く試すには、PHP のビルトインウェブサーバを使うのが簡単です。
+`server` シェルで起動できます。
 
-[ディレクトリ構成](/ja/pieceofcake2/directory-structure) を参照してください。
-:::
+```bash
+bin/cake server -p 8765
+```
 
-## 設定
+これで <http://localhost:8765/> でアプリケーションにアクセスできます。
+ホスト名は `-H`、ドキュメントルートは `-d` で変更できます。
+`-p` を省略するとポート 80 で待ち受けるため、通常は管理者権限が必要になります。
 
-CakePHP のインストールは、ウェブサーバのドキュメントルートに放り込むだけの簡単インストールから、好きなだけ複雑かつ柔軟に設定することまでもできます。
-このセクションでは、CakePHPの３種類の主なインストール方法: 開発、運用、応用について説明します。
+> [!WARNING]
+> ビルトインサーバは開発専用です。運用環境では決して使わないでください。
 
-- 開発(*Development*): 簡単にはじめることができますが、アプリケーションのURLには、CakePHPをインストールしたディレクトリ名が入ります。
-  他の設定と比べるとセキュリティ面はやや弱くなります。
-- 運用(*Production*): ウェブサーバのドキュメントルートを設定できる必要がありますが、URLをクリーンにでき、セキュリティを固くできます。
-- 応用(*Advanced*): 幾つかの設定により、CakePHPの重要な各ディレクトリをファイルシステムの異なる場所に配置することができるので、
-  多くのCakePHPアプリケーションがひとつのCakePHPコアライブラリのフォルダを共有することなどが可能です。
+## ウェブサーバの設定
 
-::: pieceofcake2
-pieceofcake2 フォークでは CakePHP 本体は Composer によって `vendor/` にインストールされます。
-そのため、以下で説明するアーカイブを展開した構成 (`app/` の隣に `lib/` がある構成) や、
-`include_path` で 1 つのコアを複数アプリケーションで共有する方法は当てはまりません。
-「運用」で説明しているように、ウェブサーバのドキュメントルートをアプリケーションの webroot に設定してください。
-従来の構成では `app/webroot/`、モダンな構成ではプロジェクトルートの `webroot/` です。
-:::
+運用環境では (開発時でも Apache などのウェブサーバを使う場合は)、ウェブサーバのドキュメントルートを
+アプリケーションの `webroot/` ディレクトリ (従来の構成では `app/webroot/`) に設定します。
+こうするとウェブからアクセスできるのは `webroot/` 内のファイルだけになり、設定ファイルやソースコード、
+`vendor/` はドキュメントルートの外に置かれます。
 
-## 開発(*Development*)
-
-開発用のインストールは CakePHP をセットアップする最も早い方法です。
-この例では CakePHP をインストールし、 [http://www.example.com/cake\\2\\0/](http://www.example.com/cake\_2\_0/) でアクセスできるようにする方法を説明します。
-ドキュメントルートは `/var/www/html` であると仮定します。
-
-CakePHP のアーカイブを `/var/www/html` に展開してください。
-ドキュメントルートに、ダウンロードしたリリースの名前がついたフォルダ(例えば cake_2.0.0)が取得できます。
-このフォルダを cake_2_0 という名前にリネームしてください。
-ファイルシステム上の開発用の設定は次のようになります :
-
-    /var/www/html/
-        cake_2_0/
-            app/
-            lib/
-            plugins/
-            vendors/
-            .htaccess
-            index.php
-            README
-
-もしウェブサーバが適切に設定されていれば、 [http://www.example.com/cake\\2\\0/](http://www.example.com/cake\_2\_0/) で CakePHP アプリケーションがアクセス可能になっているはずです。
-
-### 複数のアプリケーションから一つのCakePHPを使用する
-
-多数のアプリケーションを開発している場合、それらがCakePHPのコアファイルを共有するのは理にかなっているといえます。そのようにするには、いくつか方法があります。いちばん簡単なのが、PHPの `include_path` を使う方法です。そのためにまずは、CakePHPを適当なディレクトリに複製します。この例では
-`/home/mark/projects` ディレクトリにします。 :
-
-    git clone -b 2.x git://github.com/cakephp/cakephp.git /home/mark/projects/cakephp
-
-このコマンドを実行すると、CakePHP のファイルが `/home/mark/projects` ディレクトリの中に複製されます。gitを使用したくない場合は、zip形式でのダウンロードも可能で、残りの手順も同じです。次は、 `php.ini` を探して編集する必要があります。\*nix系のシステムならたいていは
-`/etc/php.ini` にあります。もしくは `php -i` コマンドを実行して 'Loaded Configuration File' を確認してください。ini ファイルを見つけたら、 `include_path` の設定を変更して `/home/mark/projects/cakephp/lib` が含まれるようにしてください。例としては次のようになります。 :
+アプリケーションを `/var/www/my_app` にインストールした場合、Apache のバーチャルホストは次のようになります。
 
 ``` text
-include_path = .:/home/mark/projects/cakephp/lib:/usr/local/php/lib/php
+<VirtualHost *:80>
+    ServerName www.example.com
+    DocumentRoot /var/www/my_app/webroot
+
+    <Directory /var/www/my_app/webroot>
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
 ```
 
-ウェブサーバを再起動した後、 `phpinfo()` で変更が反映されているのを確認してください。
-
-> [!NOTE]
-> Windowsでは、インクルードパスの区切りは : ではなく ; になります。
-
-`include_path` の設定が完了したので、アプリケーションはCakePHPのファイルを見つけられるようになりました。
-
-## 運用(*Production*)
-
-運用向けのインストールは CakePHP をセットアップするより柔軟な方法です。
-この方法を使うと、ドメイン全体を単一の CakePHP アプリケーションのように振舞わせることができます。
-この例では CakePHP を任意のファイルシステムの場所にインストールし、 <http://www.example.com> でアクセスできるようにする方法を説明します。
-このインストールにおいては Apache ウェブサーバの `DocumentRoot` の設定を正しいものに変更する必要が出てくるかもしれないことに注意してください。
-
-CakePHP のアーカイブを好きなディレクトリに展開してください。
-この例において、CakePHP をインストールすると決めたディレクトリは /cake_install であると仮定します。
-ファイルシステム上の運用向けの設定は次のようになります :
-
-``` text
-/cake_install/
-    app/
-        webroot/ (このディレクトリを ``DocumentRoot`` ディレクティブとしてセットします)
-    lib/
-    plugins/
-    vendors/
-    .htaccess
-    index.php
-    README
-```
-
-Apache を使用する場合は、そのドメインの `DocumentRoot` ディレクティブを次のように設定してください :
-
-    DocumentRoot /cake_install/app/webroot
-
-::: pieceofcake2 モダンな構成
-モダンな構成 ([pieceofcake2/app](https://github.com/pieceofcake2/app)) では `webroot/` がプロジェクトルートにあり、
-リクエストを転送する `.htaccess` や `index.php` がプロジェクトルートにありません。
-そのため、ドキュメントルートを `webroot/` に設定する必要があります。
-
-```text
-DocumentRoot /cake_install/webroot
-```
-:::
-
+`webroot/` の `.htaccess` がすべてのリクエストを `index.php` に書き換えるので、
+mod_rewrite を有効にし、`AllowOverride` でそれを許可しておく必要があります。
 もしウェブサーバが適切に設定されていれば、 <http://www.example.com> で CakePHP アプリケーションがアクセス可能になっているはずです。
 
-## 応用インストールと URL リライティング
+nginx、lighttpd、IIS での設定や mod_rewrite のトラブルシューティングについては
+[URLリライティング](installation/url-rewriting) を参照してください。
+アプリケーションのディレクトリを別の場所に配置したい場合は [応用インストール](installation/advanced-installation) を参照してください。
 
-- [応用インストール](installation/advanced-installation)
-- [URLリライティング](installation/url-rewriting)
+公開する前には [デプロイ](deployment) も読んでおいてください。
 
 ## 動作確認
 
 それでは、実際に CakePHP を動作させてみましょう。
-セットアップの種類にもよりますが、 <http://example.com/> または [http://example.com/cake\\2\\0/](http://example.com/cake\_2\_0/) をブラウザで開いてみましょう。
-この時点では、CakePHP のデフォルトのホーム画面と、現在のデータベース接続の状態が表示されるはずです。
+アプリケーションの URL、たとえば開発用サーバなら <http://localhost:8765/>、
+あるいは <http://www.example.com/> をブラウザで開いてみましょう。
+この時点では、CakePHP のデフォルトのホーム画面が表示され、`tmp/` ディレクトリに書き込めるか、
+キャッシュが動作しているか、データベースに接続できるかが確認できます。
 
 おめでとうございます!
 [CakePHP の最初のアプリケーションを作る](getting-started)
 準備ができました。
 
 動きませんか？
-もし PHP のタイムゾーンに関連するエラーが出るなら、 `app/Config/core.php` の中のとある一行のコメントを外してください :
+もし PHP のタイムゾーンに関連するエラーが出るなら、 `config/core.php` の中のとある一行のコメントを外し、
+サーバのタイムゾーンを設定してください。
 
-::: pieceofcake2
-モダンな構成では、このファイルは `config/core.php` です。
-:::
-
-``` text
+``` php
 /**
  * Uncomment this line and correct your server timezone to fix
  * any date & time related errors.
  */
-    date_default_timezone_set('UTC');
+date_default_timezone_set('UTC');
 ```

@@ -10,7 +10,7 @@ plugin configuration and routing. Perhaps you want to load all plugins
 automatically, while specifying custom routes and bootstrap files for
 certain plugins.
 
-No problem:
+No problem. In `config/bootstrap.php`:
 
 ``` php
 CakePlugin::loadAll([
@@ -22,7 +22,9 @@ CakePlugin::loadAll([
 
 With this style of configuration, you no longer need to manually
 include() or require() a plugin's configuration or routes file--It happens
-automatically at the right time and place. The exact same parameters could
+automatically at the right time and place. CakePHP loads the plugin's
+`Config/bootstrap.php` and `Config/routes.php` files, for example
+`plugins/Blog/Config/routes.php`. The exact same parameters could
 have also been supplied to the load() method, which would have loaded only those
 three plugins, and not the rest.
 
@@ -34,7 +36,7 @@ Load the bootstrap file from all plugins, and additionally the routes from the B
 ``` php
 CakePlugin::loadAll([
     ['bootstrap' => true],
-    'Blog' => ['routes' => true]
+    'Blog' => ['routes' => true],
 ]);
 ```
 
@@ -49,7 +51,7 @@ code needed to load all plugins using this:
 ``` php
 // Loads all plugins including any possible routes and bootstrap files
 CakePlugin::loadAll([
-    ['routes' => true, 'bootstrap' => true, 'ignoreMissing' => true]
+    ['routes' => true, 'bootstrap' => true, 'ignoreMissing' => true],
 ]);
 ```
 
@@ -57,7 +59,9 @@ Some plugins additionally need to create one or more tables in your database. In
 those cases, they will often include a schema file which you can
 call from the cake shell like this:
 
-    user@host$ cake schema create --plugin ContactManager
+``` bash
+bin/cake schema create --plugin ContactManager
+```
 
 Most plugins will indicate the proper procedure for configuring
 them and setting up the database in their documentation. Some
@@ -73,9 +77,9 @@ CakePlugin::loadAll([
     'Blog' => [
         'bootstrap' => [
             'config1',
-            'config2'
-        ]
-    ]
+            'config2',
+        ],
+    ],
 ]);
 ```
 
@@ -85,13 +89,12 @@ has been loaded:
 ``` php
 function aCallableFunction($pluginName, $config)
 {
-
 }
 
 CakePlugin::loadAll([
     'Blog' => [
-        'bootstrap' => 'aCallableFunction'
-    ]
+        'bootstrap' => 'aCallableFunction',
+    ],
 ]);
 ```
 

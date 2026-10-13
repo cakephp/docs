@@ -1,13 +1,5 @@
 # シンプルな認証と承認のアプリケーション
 
-::: pieceofcake2
-pieceofcake2 フォークのモダンレイアウトでは、以下の `app/...` のパスの代わりに `src/Model/User.php`、
-`src/Controller/UsersController.php`、`templates/Users/` を使います
-（[ブログチュートリアル](../blog/blog) 冒頭のボックスを参照）。bake でコードを生成するには
-[pieceofcake2/bake](../../console-and-shells/code-generation-with-bake) プラグインが必要です。
-`BlowfishPasswordHasher` などフレームワークのクラスに対する `App::uses()` の行は省略できます。
-:::
-
 [ブログチュートリアル](../../tutorials-and-examples/blog/blog) の例の続きで、ユーザーログインを基に、
 一定の URL へのアクセスを安全にしたいとしましょう。その他の要件として、ブログに複数の
 執筆者 (*authors*) がいて、それぞれが各々の意思により投稿を作成、編集、削除でき、
@@ -36,7 +28,7 @@ CREATE TABLE users (
 検証 (*validating*) する責任を持つ、ユーザーモデルを作成することです:
 
 ``` php
-// app/Model/User.php
+// src/Model/User.php
 class User extends AppModel
 {
     public $validate = [
@@ -63,13 +55,11 @@ class User extends AppModel
 }
 ```
 
-UsersController もまた作成しましょう。以下のコードは基本的な CakePHP にバンドルされた
-コード生成ユーティリティで <span class="title-ref">焼き上がった</span> (*baked*) UsersController クラスに該当します:
+UsersController もまた作成しましょう。以下のコードは
+[Bake プラグイン](../../console-and-shells/code-generation-with-bake) で「焼き上げた」(*baked*) 基本的な UsersController クラスに該当します:
 
 ``` php
-// app/Controller/UsersController.php
-App::uses('AppController', 'Controller');
-
+// src/Controller/UsersController.php
 class UsersController extends AppController
 {
 
@@ -157,7 +147,7 @@ class UsersController extends AppController
 このチュートリアルの目的に沿って、add.ctp だけを示します:
 
 ``` php
-<!-- app/View/Users/add.ctp -->
+<!-- templates/Users/add.ctp -->
 <div class="users form">
 <?php echo $this->Form->create('User'); ?>
     <fieldset>
@@ -181,10 +171,10 @@ class UsersController extends AppController
 到達することが許可されているかの認証に責任を持ちます。
 
 このコンポーネントをアプリケーションに追加するには、
-`app/Controller/AppController.php` ファイルを開いて、以下の行を追加してください:
+`src/Controller/AppController.php` ファイルを開いて、以下の行を追加してください:
 
 ``` php
-// app/Controller/AppController.php
+// src/Controller/AppController.php
 class AppController extends Controller
 {
     //...
@@ -231,7 +221,7 @@ users テーブルで規約を用いたので、設定することが多くあ�
 users の add 関数にアクセスすること、実装にログインとログアウトアクションを伝えましょう:
 
 ``` php
-// app/Controller/UsersController.php
+// src/Controller/UsersController.php
 
 public function beforeFilter()
 {
@@ -257,14 +247,11 @@ public function logout()
 }
 ```
 
-パスワードのハッシュ化はまだされていません。 `app/Model/User.php` のモデルファイルを
+パスワードのハッシュ化はまだされていません。 `src/Model/User.php` のモデルファイルを
 開いて、以下のものを追加してください:
 
 ``` php
-// app/Model/User.php
-
-App::uses('AppModel', 'Model');
-App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
+// src/Model/User.php
 
 class User extends AppModel {
 
@@ -286,15 +273,14 @@ public function beforeSave($options = [])
 
 > [!NOTE]
 > BlowfishPasswordHasher は SimplePasswordHasher より強いハッシュアルゴリズム(bcrypt)
-> を使い、ユーザーソルトごとに提供します。SimplePasswordHasher は CakePHP version 3.0
-> で削除されます。
+> を使い、ユーザーソルトごとに提供します。
 
 これで、ユーザーが保存されるときは毎回 BlowfishPasswordHasher クラスを用いてパスワードが
 ハッシュ化されます。あとはログイン関数用のビューテンプレートファイルだけです。
-`app/View/Users/login.ctp` ファイルを開いて、以下の行を追加してください:
+`templates/Users/login.ctp` ファイルを開いて、以下の行を追加してください:
 
 ``` php
-//app/View/Users/login.ctp
+// templates/Users/login.ctp
 
 <div class="users form">
 <?php echo $this->Flash->render('auth'); ?>
@@ -338,14 +324,14 @@ logoutUrl にユーザーをリダイレクトさせます。この URL は `Aut
 これをするために、posts テーブルを多少書き換えて User モデルへの参照を追加する必要があります:
 
 ``` sql
-ALTER TABLE posts ADD COLUMN user_id INT(11);
+ALTER TABLE posts ADD COLUMN user_id INT UNSIGNED;
 ```
 
 また、作成された投稿に、現在ログインしているユーザーを参照として保存するために、
 PostsController での小さな変更が必要です:
 
 ``` php
-// app/Controller/PostsController.php
+// src/Controller/PostsController.php
 public function add()
 {
     if ($this->request->is('post')) {
@@ -368,7 +354,7 @@ Auth コンポーネントの `user()` 関数は現在ログインしている�
 もう一度 AppController クラスを開いて Auth の設定にちょっとばかりのオプションを追加しましょう:
 
 ``` php
-// app/Controller/AppController.php
+// src/Controller/AppController.php
 
 public $components = [
     'Flash',
@@ -412,7 +398,7 @@ public function isAuthorized($user)
 あります。 `PostsController.php` のファイルを開き、以下の内容を追加してください:
 
 ``` php
-// app/Controller/PostsController.php
+// src/Controller/PostsController.php
 
 public function isAuthorized($user)
 {
@@ -442,7 +428,7 @@ add アクションへのアクセス、条件的に edit と delete を許可�
 それではその関数を実装していきましょう:
 
 ``` php
-// app/Model/Post.php
+// src/Model/Post.php
 
 public function isOwnedBy($post, $user)
 {

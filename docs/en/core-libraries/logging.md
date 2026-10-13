@@ -22,14 +22,14 @@ You can also use `CakeLog::write()` directly. See [Writing To Logs](#writing-to-
 
 Log stream handlers can be part of your application, or part of plugins. If for
 example you had a database logger called `DatabaseLog` as part of your
-application, it would be placed in `app/Lib/Log/Engine/DatabaseLog.php`. If
+application, it would be placed in `src/Lib/Log/Engine/DatabaseLog.php`. If
 you had a database logger as part of a plugin, it would be placed in
-`app/Plugin/LoggingPack/Lib/Log/Engine/DatabaseLog.php`. When configured,
+`plugins/LoggingPack/Lib/Log/Engine/DatabaseLog.php`. When configured,
 `CakeLog` will attempt to load Configuring log streams, which is done by
 calling `CakeLog::config()`. Configuring our DatabaseLog would look like:
 
 ``` php
-// for app/Lib
+// for src/Lib
 CakeLog::config('otherFile', [
     'engine' => 'Database',
     'model' => 'LogEntry',
@@ -49,7 +49,7 @@ locate and load the log handler. All of the other configuration
 properties are passed to the log stream's constructor as an array. :
 
 ``` php
-App::uses('BaseLog', 'Log/Engine');
+// src/Lib/Log/Engine/DatabaseLog.php
 
 class DatabaseLog extends BaseLog
 {
@@ -107,7 +107,7 @@ As of 2.4 `FileLog` engine takes a few new options:
 > which includes the suffix twice at the end.
 
 > [!NOTE]
-> Always configure loggers in `app/Config/bootstrap.php`
+> Always configure loggers in `config/bootstrap.php`
 > Trying to use Application or plugin loggers in core.php
 > will cause issues, as application paths are not yet configured.
 >
@@ -143,25 +143,16 @@ As its name implies, FileLog writes log messages to files. The type
 of log message being written determines the name of the file the
 message is stored in. If a type is not supplied, LOG_ERROR is used,
 which writes to the error log. The default log location is
-`app/tmp/logs/$type.log`:
+`logs/$type.log` (the directory in the `LOGS` constant). In the legacy
+`app/` layout, it is `app/tmp/logs/$type.log`:
 
 ``` php
 // Executing this inside a CakePHP class
 $this->log("Something didn't work!");
 
-// Results in this being appended to app/tmp/logs/error.log
+// Results in this being appended to logs/error.log
 // 2007-11-02 10:22:02 Error: Something didn't work!
 ```
-
-::: pieceofcake2 Log directory
-FileLog writes to the directory in the `LOGS` constant. Its default depends on
-the application layout:
-
-- Legacy layout: `app/tmp/logs/`
-- Modern layout: `logs/` at the project root (separate from `tmp/`)
-
-See [Directory Structure](/pieceofcake2/directory-structure).
-:::
 
 You can specify a custom log name using the first parameter. The
 default built-in FileLog class will treat this log name as the file
@@ -171,7 +162,7 @@ you wish to write logs to:
 // called statically
 CakeLog::write('activity', 'A special message for activity logging');
 
-// Results in this being appended to app/tmp/logs/activity.log (rather than error.log)
+// Results in this being appended to logs/activity.log (rather than error.log)
 // 2007-11-02 10:22:02 Activity: A special message for activity logging
 ```
 
@@ -259,7 +250,7 @@ CakeLog does not auto-configure itself anymore. As a result, log files will not 
 auto-created anymore if no stream is listening.
 Make sure you have at least one `default` stream set up if you want to
 listen to all types and levels. Usually, you can just set the core `FileLog` class
-to output into `app/tmp/logs/`:
+to output into `logs/`:
 
 ``` php
 CakeLog::config('default', [
@@ -286,7 +277,7 @@ to an unknown scope, loggers that handle that level of message will log the
 message. For example:
 
 ``` php
-// Configure tmp/logs/shop.log to receive the two configured types (log levels), but only
+// Configure logs/shop.log to receive the two configured types (log levels), but only
 // those with `orders` and `payments` as scope
 CakeLog::config('shop', [
     'engine' => 'FileLog',
@@ -295,7 +286,7 @@ CakeLog::config('shop', [
     'file' => 'shop.log',
 ]);
 
-// Configure tmp/logs/payments.log to receive the two configured types, but only
+// Configure logs/payments.log to receive the two configured types, but only
 // those with `payments` as scope
 CakeLog::config('payments', [
     'engine' => 'SyslogLog',

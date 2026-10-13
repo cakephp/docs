@@ -51,8 +51,7 @@ orders. You'd like to notify the rest of the application that an order has been
 created. To keep your Order model clean you could use events:
 
 ``` php
-// Cart/Model/Order.php
-App::uses('CakeEvent', 'Event');
+// plugins/Cart/Model/Order.php
 class Order extends AppModel
 {
 
@@ -101,7 +100,6 @@ listeners in priority order. You can access the global manager using a static me
 
 ``` php
 // In any configuration file or piece of code that executes before the event
-App::uses('CakeEventManager', 'Event');
 CakeEventManager::instance()->attach(
     $aCallback,
     'Model.Order.afterPlace'
@@ -169,9 +167,7 @@ allows you concentrate the statistics logic in one place and react to events as
 necessary. Our `UserStatistics` listener might start out like:
 
 ``` php
-// In app/Lib/Event/UserStatistic.php
-App::uses('CakeEventListener', 'Event');
-
+// In src/Lib/Event/UserStatistic.php
 class UserStatistic implements CakeEventListener
 {
 
@@ -201,28 +197,25 @@ of the `CakeEventListener` interface. Internally, the event manager will use
 ### Registering Global Listeners
 
 As shown in the example above, event listeners are conventionally placed in
-`app/Lib/Event`. Following this convention allows you to easily locate your
-listener classes. It is also recommended that you attach global listeners during
+`src/Lib/Event`. Following this convention allows you to easily locate your
+listener classes. Classes under `src/` are autoloaded by Composer's classmap,
+so run `composer dump-autoload` after adding a new listener class. It is also recommended that you attach global listeners during
 your application bootstrap process:
 
-``` text
-// In app/Config/bootstrap.php
+``` php
+// In config/bootstrap.php
 
 // Load the global event listeners.
-require_once APP . 'Config' . DS . 'events.php'
+require_once CONFIG . 'events.php';
 ```
 
 An example events bootstrap file for our cart application could look like:
 
 ``` php
-// In app/Config/events.php
-
-// Load event listeners
-App::uses('UserStatistic', 'Lib/Event');
-App::uses('ProductStatistic', 'Lib/Event');
-App::uses('CakeEventManager', 'Event');
+// In config/events.php
 
 // Attach listeners.
+// UserStatistic and ProductStatistic are autoloaded from src/Lib/Event.
 CakeEventManager::instance()->attach(new UserStatistic());
 CakeEventManager::instance()->attach(new ProductStatistic());
 ```
@@ -235,7 +228,6 @@ wanted to put any orders into the log files, we could use a simple anonymous
 function to do so:
 
 ``` php
-// Anonymous functions require PHP 5.3+
 $this->Order->getEventManager()->attach(function($event) {
     CakeLog::write(
         'info',
@@ -480,7 +472,7 @@ $this->getEventManager()->attach([$this, 'doSomething'], 'My.event');
 // Detaching the function
 $this->getEventManager()->detach([$this, 'doSomething'], 'My.event');
 
-// Attaching an anonymous function (PHP 5.3+ only);
+// Attaching an anonymous function
 $myFunction = function($event) { ... };
 $this->getEventManager()->attach($myFunction, 'My.event');
 

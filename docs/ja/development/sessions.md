@@ -16,7 +16,7 @@ CakePHP は PHP 標準の `session` 機能上に、ユーティリティ機能�
 - `Session.cookieTimeout` - 任意のセッション継続時間を *分* 単位で指定します。
   もしこれが未定義の場合、 `Session.timeout` の値が使用されます。これは、
   セッションクッキーに影響を与え、PHP 自体により処理されています。
-- `Session.checkAgent` - ユーザーエージェントはチェックされるべきです。
+- `Session.checkAgent` - リクエストごとにユーザーエージェントをチェックするかどうか。
   ユーザーエージェントがセッションとマッチしない場合、そのセッションは破棄されます。
 - `Session.autoRegenerate` - この設定を有効にするとセッションとセッション ID の
   自動更新が有効になります。この値はリクエストの継続的な追跡にセッションの
@@ -49,7 +49,8 @@ Configure::write('Session', [
 ]);
 ```
 
-2.0 において、セッションクッキーパスのデフォルトは `/` です。これを変更する場合は
+セッションクッキーのパスのデフォルトはアプリケーションのベースパスです (ドキュメントルートで
+動かしている場合は `/`)。これを変更する場合は
 `session.cookie_path` ini フラグにアプリケーションのディレクトリパス
 を指定することが出来ます:
 
@@ -104,8 +105,9 @@ Configure::write('Session', [
 上記は 'php' 設定のタイムアウトとクッキー名を上書きします。ビルトイン設定は:
 
 - `php` - php.ini ファイルの標準設定に沿ってセッションを保存します。
-- `cake` - セッションをファイルとして `app/tmp/sessions` に保存します。
-  ホストの設定がホームディレクトリ以外の書き込みを禁止している場合、有効なオプションです。
+- `cake` - セッションをファイルとして `tmp/sessions` (レガシー構成では `app/tmp/sessions`)
+  に保存します。PHP 全体のセッションディレクトリではなく、アプリケーションの中に
+  セッションファイルを置きたい場合に便利です。
 - `database` ビルトインデータベースのセッションを使用します。詳しくは下記をご覧下さい。
 - `cache` - ビルトインキャッシュのセッションを使用します。詳しくは下記をご覧下さい。
 
@@ -113,12 +115,12 @@ Configure::write('Session', [
 
 セッションハンドラーはセッション config 配列でも定義出来ます。定義するとセッション保存に
 使用したいクラスやオブジェクトに様々な `session_save_handler` の値をマップ可能です。
-'handler' の使用には二つの方法があります。一つ目は 5 つの呼び出し可能な (callable) 配列を
+'handler' の使用には二つの方法があります。一つ目は 6 つの呼び出し可能な (callable) 配列を
 一つ用意する方法です。これは都度 `session_set_save_handler` に適用されます:
 
 ``` php
 Configure::write('Session', [
-    'userAgent' => false,
+    'checkAgent' => false,
     'cookie' => 'my_cookie',
     'timeout' => 600,
     'handler' => [
@@ -130,19 +132,22 @@ Configure::write('Session', [
         ['Foo', 'gc'],
     ],
     'ini' => [
-        'cookie_secure' => 1,
-        'use_trans_sid' => 0
-    ]
+        'session.cookie_secure' => 1,
+        'session.use_trans_sid' => 0,
+    ],
 ]);
 ```
+
+この形式は `session_set_save_handler()` にそのまま渡されます。この関数に callable を
+個別に渡す形式は PHP 8.4 で非推奨になったので、新しく書くコードでは二つ目の方法を使ってください。
 
 二つ目の方法は 'engine' キーを定義することです。このキーは
 `CakeSessionHandlerInterface` を実装するクラス名にするべきです。
 このインターフェースを実装すると CakeSession がハンドラーのメソッドを自動で
 マップすることを可能にします。コアのキャッシュとデータベースのセッション
-ハンドラー両方はこのメソッドでセッション保存を行います。ハンドラーの
-追加設定はハンドラーの配列内に設置されるべきです。そうすることで
-ハンドラー内部の外からこれらの値を読み込めるようになります。
+ハンドラー両方はこの方法でセッション保存を行います。ハンドラーの
+追加設定はハンドラーの配列内に置いてください。そうすることで
+ハンドラーの内部からこれらの値を読み込めるようになります。
 
 またプラグイン内部からセッションハンドラーを使用することも出来ます。
 エンジンを `MyPlugin.PluginSessionHandler` といった形で設定します。
@@ -153,23 +158,24 @@ Configure::write('Session', [
 
 このインターフェースは CakePHP 内部の全カスタムセッションハンドラーで使用されます。
 単純にクラス内にインターフェースを実装し `Session.handler.engine` を作成した
-クラス名にセットします。 CakePHP はそのハンドラーを
-`app/Model/Datasource/Session/$classname.php` 内部から読み込みます。例えば
+クラス名にセットします。クラスは `src/Model/Datasource/Session/$classname.php`
+(レガシー構成では `app/Model/Datasource/Session/`) に置きます。例えば
 `AppSessionHandler` というクラス名なら、
-`app/Model/Datasource/Session/AppSessionHandler.php` となります。
+`src/Model/Datasource/Session/AppSessionHandler.php` となります。Composer の classmap で
+オートロードしている場合は classmap からクラスが見つかり、そうでない場合は CakePHP が
+このディレクトリから読み込みます。
+
+CakePHP はハンドラーを `SessionHandlerAdapter` を介して PHP に登録します。このアダプターは
+`session.use_strict_mode` にも対応しており、受け取ったセッション ID は、ハンドラーの `read()`
+がその ID に対して空でない文字列を返したときだけ受け入れられます。未知の ID に対して `read()`
+は `''` を返し、一度も書き込まれていないセッションの `destroy()` は `true` を返すようにしてください。
+コアの `CacheSession` と `DatabaseSession` もそのように実装されています。
 
 ::: pieceofcake2
-モダン構成では、ハンドラーは `src/Model/Datasource/Session/AppSessionHandler.php` に置きます。
-
-フォークは `CakeSessionHandlerInterface` のハンドラーを `SessionHandlerAdapter` で包んでおり、
-このアダプターは `session.use_strict_mode` (PHP 8.6 からデフォルトで有効) にも対応しています。
-受け取ったセッション ID は、ハンドラーの `read()` が空でない文字列を返したときだけ受け入れられます。
-未知の ID に対して `read()` は `''` を返し、一度も書き込まれていないセッションの `destroy()` は
-`true` を返すようにしてください (コアの `CacheSession` と `DatabaseSession` も同様です)。
-
-上記の `handler` に callable の配列を指定する方式は `session_set_save_handler()` に
-そのまま渡されますが、この callable 形式のシグネチャは PHP 8.4 で非推奨になっています。
-`engine` を指定する方式を使ってください。
+セッションハンドラーが、PHP 8.6 でデフォルトで有効になる
+`session.use_strict_mode` に対応しました。未知のセッション ID は拒否されて新しい ID が発行されるので、
+未知の ID に対して `read()` が空でない値を返したり、`destroy()` が失敗したりする独自ハンドラーは
+修正が必要です。
 :::
 
 ### データーベースセッション
@@ -191,7 +197,7 @@ Configure::write('Session', [
 `CustomSession` というモデルにデータベースへのセッション情報の保存を任せます。
 
 完全に独自のセッションハンドラーは必要ないけれど、データベースのセッションストレージが
-必要な場合、以下のコードのように単純化できます。 :
+必要な場合、以下のコードのように単純化できます。
 
 ``` php
 Configure::write('Session', [
@@ -199,7 +205,7 @@ Configure::write('Session', [
 ]);
 ```
 
-この設定では、少なくとも以下の項目を追加したデータベーステーブルが必要です。 :
+この設定では、少なくとも以下の項目を持つデータベーステーブルが必要です。
 
 ``` sql
 CREATE TABLE `cake_sessions` (
@@ -210,28 +216,19 @@ CREATE TABLE `cake_sessions` (
 );
 ```
 
-デフォルトアプリのスケルトン内で提供されているスキーマファイルを元に
-schema シェルを実行して、このテーブルを作成できます。 :
+アプリケーションのスケルトンに含まれているスキーマファイル `config/Schema/sessions.php`
+を元に schema シェルを実行して、このテーブルを作成することもできます。
 
 ``` bash
-$ Console/cake schema create sessions
+$ bin/cake schema create sessions
 ```
-
-::: pieceofcake2
-モダン構成では、スキーマファイルは `config/Schema/sessions.php`、コンソールは `bin/cake` です
-(`bin/cake schema create sessions`)。
-:::
 
 ### キャッシュセッション
 
-::: pieceofcake2
-フォークでは Xcache キャッシュエンジンは削除されています。代わりに APC (APCu)、
-Memcached、Memcache、Redis を使ってください。
-:::
-
-キャッシュクラスはセッションの格納にも使用されます。これはキャッシュ内の
-セッションを APC, memcache, または Xcache のように格納することを可能に
-します。キャッシュセッションの使用ではいくつか注意する点があります。
+キャッシュクラスはセッションの格納にも使用できます。これにより、APCu、Memcached、
+Redis のようなキャッシュにセッションを格納できます。キャッシュセッションの使用には
+注意点があります。キャッシュの容量を使い切ると、レコードが追い出されてセッションが
+失われ始めます。
 
 セッションを元としたキャッシュを使うためセッション config を以下のように設定します:
 
@@ -270,17 +267,15 @@ Configure::write('Session', [
 ## カスタムセッションハンドラーの作成
 
 カスタムセッションハンドラーの作成は CakePHP で容易に出来ます。
-この例で、セッションをキャッシュ (apc) とデータベースの両方に
-格納するセッションハンドラーを作成します。これは apc による、
-キャッシュ限度を超過した際の消失について心配が不要な、最善で
-高速な IO をもたらします。
+この例では、セッションをキャッシュ (APCu) とデータベースの両方に
+格納するセッションハンドラーを作成します。APCu の高速な IO を活かしつつ、
+キャッシュがいっぱいになってセッションが消えることを心配せずに済みます。
 
-まずカスタムクラスを作成し `app/Model/Datasource/Session/ComboSession.php`
-として保存する必要があります。クラスは以下のようになります:
+まずカスタムクラスを作成し `src/Model/Datasource/Session/ComboSession.php`
+として保存する必要があります。クラスは以下のようになります。
 
 ``` php
-App::uses('DatabaseSession', 'Model/Datasource/Session');
-
+// src/Model/Datasource/Session/ComboSession.php
 class ComboSession extends DatabaseSession implements CakeSessionHandlerInterface
 {
     public $cacheKey;
@@ -328,7 +323,7 @@ class ComboSession extends DatabaseSession implements CakeSessionHandlerInterfac
 重複して定義することを避けています。それぞれのオペレーションを `Cache`
 オペレーションでラップします。これで高速なキャッシュからセッションを取得しつつ、
 キャッシュ限度の考慮を不要にしています。このセッションハンドラーを使うのもまた簡単です。
-`core.php` のセッションブロックを以下のように設定します:
+`config/core.php` のセッションブロックを以下のように設定します。
 
 ``` php
 Configure::write('Session', [
@@ -336,11 +331,11 @@ Configure::write('Session', [
     'handler' => [
         'engine' => 'ComboSession',
         'model' => 'Session',
-        'cache' => 'apc'
-    ]
+        'cache' => 'apc',
+    ],
 ]);
 
-// apc キャッシュ config を追加すること
+// apc キャッシュ設定を追加すること (APCu を使います)
 Cache::config('apc', ['engine' => 'Apc']);
 ```
 
@@ -353,14 +348,14 @@ Cache::config('apc', ['engine' => 'Apc']);
 アプリケーション内のコンテキストにより、セッションへのアクセスを提供するクラスが異なります。
 コントローラーでは `SessionComponent` を使用します。
 ビューでは `SessionHelper` を使用します。どこからでも使用可能な
-`CakeSession` をでセッションにアクセスすることも出来ます。他のインターフェースと同じく、
+`CakeSession` でセッションにアクセスすることも出来ます。他のインターフェースと同じく、
 `CakeSession` はシンプルな CRUD インターフェースを提供します。
 
 `static` CakeSession::**read**($key)
 
 `Set::classicExtract()` 互換記法を用いてセッションから値を読み込みます:
 
-``` css
+``` php
 CakeSession::read('Config.language');
 ```
 
@@ -368,7 +363,7 @@ CakeSession::read('Config.language');
 
 `$key` はドット区切りで `$value` の書き込み先を指定します:
 
-``` css
+``` php
 CakeSession::write('Config.language', 'eng');
 ```
 
@@ -376,7 +371,7 @@ CakeSession::write('Config.language', 'eng');
 
 セッションからデータ削除が必要なら削除も可能です:
 
-``` css
+``` php
 CakeSession::delete('Config.language');
 ```
 

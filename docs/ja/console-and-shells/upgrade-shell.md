@@ -1,81 +1,52 @@
-# Upgrade シェル
+<a id="upgrade-shell"></a>
+
+# アップグレードシェル
+
+アップグレードシェルは、CakePHP 1.3 から 2.0 へのアプリケーションのアップグレードで必要な
+機械的な作業のほとんどを行います。ファイルを 2.0 の配置に移動し、削除された API、
+ヘルパーの呼び出し、定数などを書き換えます。このシェルは
+[pieceofcake2/upgrade](https://github.com/pieceofcake2/upgrade) プラグインで提供されています。
 
 ::: pieceofcake2
-pieceofcake2 フォークでは `UpgradeShell` はコアから削除され、
-[pieceofcake2/upgrade](https://github.com/pieceofcake2/upgrade) プラグインに移されました
-（`composer require --dev pieceofcake2/upgrade` を実行し、`CakePlugin::load('Upgrade');` でロードします）。
-なお、フォーク自体は CakePHP 2.10.24 で動作しているアプリケーションのみをサポートしており、
-以下のダウンロードやコピーの手順はフォークには当てはまりません（インストールは Composer のみ）。
-ほとんどのアプリケーションではこのシェルは不要です。[アップグレードガイド](/ja/pieceofcake2/upgrade) を参照してください。
+`UpgradeShell` はコアから削除され、pieceofcake2/upgrade
+プラグインに移動しました。ほとんどのアプリケーションでは必要ありません。
 :::
 
-upgrade シェルは、 CakePHP アプリケーションを 1.3 から 2.0 へアップグレードするのに役立ちます。
+このシェルはレガシーな `app/` レイアウトのアプリケーションを対象とするので、以下の例では
+`vendor/bin/cake` から実行しています。プラグインを開発用の依存パッケージとしてインストールし、
+`app/Config/bootstrap.php` でロードします。 :
 
-全てのアップグレード工程を実行するには:
+``` bash
+composer require --dev pieceofcake2/upgrade
+```
 
-    ./Console/cake upgrade all
+`composer.json` に [Composer でのプラグインのインストール](/ja/plugins/how-to-install-plugins#composer)
+で説明している `installer-paths` の設定があれば、プラグインは `plugins/Upgrade/` にインストールされます。
 
-まず --dry-run でファイルの更新せずにシェルの予行演習を確認したい場合:
+``` php
+// app/Config/bootstrap.php
+CakePlugin::load('Upgrade');
+```
 
-    ./Console/cake upgrade all --dry-run
+始める前に、アプリケーションのバックアップを取るか、バージョン管理システムにコミットしておいてください。
+すべてのアップグレード手順を実行するには、次のようにします。 :
 
-コマンドを実行してプラグインをアップグレードするには:
+    vendor/bin/cake upgrade all
 
-    ./Console/cake upgrade all --plugin YourPluginName
+ファイルを変更せずにシェルが何をするのか確認したい場合は、まず `--dry-run` を付けて実行してください。 :
 
-アップグレード工程をそれぞれ個別に実行できます。
-コマンドを実行して全ての利用可能な工程を見るには:
+    vendor/bin/cake upgrade all --dry-run
 
-    ./Console/cake upgrade --help
+プラグインをアップグレードするには、次のコマンドを実行します。 :
 
-詳しくは [API ドキュメント](https://api.cakephp.org/2.x/class-UpgradeShell.html)
-を参照してください。
+    vendor/bin/cake upgrade all --plugin YourPluginName
 
-## アプリのアップグレード
+各アップグレード手順 (`tests`, `locations`, `i18n`, `helpers`, `basics`, `request`,
+`configure`, `constants`, `controller_redirects`, `components`, `exceptions`) は
+個別に実行することもできます。利用できる手順とオプションの一覧は、次のコマンドで確認できます。 :
 
-これから upgrade シェルを使った CakePHP 1.3 アプリの 2.x へのアップグレードの手伝いを
-案内します。 1.3 アプリの構造は、おそらく以下のようになっています。 :
+    vendor/bin/cake upgrade --help
 
-    mywebsite/
-        app/             <- アプリ
-        cake/            <- CakePHP の 1.3 バージョン
-        plugins/
-        vendors/
-        .htaccess
-        index.php
-
-最初に CakePHP の最新バージョンを `mywebsite` の外のフォルダに、 `cakephp` という
-名前でダウンロードか `git clone` してください。ダウンロードした `app` フォルダを
-既存の app フォルダに上書きはしません。このタイミングで既存のフォルダをバックアップしましょう。
-例： `cp -R app app-backup` 。
-
-新しい CakePHP バージョンをアプリにセットアップするために `cakephp/lib` フォルダを
-`mywebsite/lib` にコピーしてください。例: `cp -R ../cakephp/lib .` 。
-コピーの代わりにシンボリックリンクしても良いです。 例: `ln -s /var/www/cakephp/lib` 。
-
-upgrade シェルを実行する前に、新しいコンソールスクリプトが必要です。
-`cakephp/app/Console` フォルダを `mywebsite/app` にコピーしてください。
-例: `cp -R ../cakephp/app/Console ./app` 。
-
-フォルダ構成は、以下のようになっているはずです :
-
-    mywebsite/
-        app/              <- アプリ
-            Console/      <- コピーされた app/Console フォルダ
-        app-backup/       <- アプリのバックアップ
-        cake/             <- CakePHP の 1.3 バージョン
-        lib/              <- CakePHP の 2.x バージョン
-            Cake/
-        plugins/
-        vendors/
-        .htaccess
-        index.php
-
-`app` フォルダ内に `cd` することで upgrade シェルが実行できます。
-コマンドを実行する:
-
-    ./Console/cake upgrade all
-
-これは、 2.x へアプリをアップグレードするのに **最も** 役に立ちます。アップグレードされた
-`app` フォルダ内を確認してください。もし、全てがうまくいったらお祝いしつつ
-`mywebsite/cake` を削除しましょう。 2.x にようこそ!
+アップグレードシェルが扱うのは 1.3 から 2.0 への変更だけです。こうして変換したアプリケーションを
+Piece of Cake 2 フォークで動かすには、さらに CakePHP 2.10.24 まで更新する必要があります。
+[CakePHP 2.10 からの移行](/ja/appendices/migrating-from-cakephp-2-10) と付録の移行ガイドを参照してください。

@@ -347,7 +347,8 @@ tasks such as:
 
 CakePHP uses `CakeResponse` by default. `CakeResponse` is a flexible and
 transparent class. If you need to override it with your own application-specific class,
-you can replace `CakeResponse` in `app/webroot/index.php`.
+you can replace `CakeResponse` in `webroot/index.php` (`app/webroot/index.php`
+in the legacy `app/` layout).
 This will make all the controllers in your application use `CustomResponse`
 instead of `CakeResponse`. You can also replace the response
 instance by setting `$this->response` in your controllers. Overriding the
@@ -657,7 +658,9 @@ test and makes testing controllers easier:
 ``` php
 public function testSomething()
 {
-    $this->controller->response = $this->getMock('CakeResponse');
+    $this->controller->response = $this->getMockBuilder('CakeResponse')
+        ->onlyMethods(['header'])
+        ->getMock();
     $this->controller->response->expects($this->once())->method('header');
     // ...
 }

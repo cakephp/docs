@@ -19,7 +19,7 @@ URL がリクエストされると、CakePHP はそのリクエストされた�
 ## 使い方
 
 Cache ヘルパーを使用する前に2つのステップをこなさなければなりません。まず一つ目に
-`APP/Config/core.php` にある Configure write で `Cache.check` をコールしている部分の
+`config/core.php` にある Configure write で `Cache.check` をコールしている部分の
 コメントを外して下さい。
 そうするとリクエストを取り扱うときビューキャッシュファイルを確認したり、生成したりするようになります。
 

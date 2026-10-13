@@ -1,7 +1,7 @@
 # Data Sanitization
 
-The `Sanitize` class is deprecated as of 2.4, and will be removed in CakePHP
-3.0. Instead of using the Sanitize class you can accomplish the same tasks using
+The `Sanitize` class is deprecated as of 2.4 and does not exist in CakePHP 3.0
+and later. Instead of using the Sanitize class you can accomplish the same tasks using
 other parts of CakePHP, native PHP functions, or other libraries.
 
 ## Input filtering

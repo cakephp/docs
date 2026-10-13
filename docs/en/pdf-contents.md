@@ -19,4 +19,3 @@ orphan
 
 ## Indices and tables
 
-- [Genindex](#genindex)

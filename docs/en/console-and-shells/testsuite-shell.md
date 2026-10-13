@@ -1,7 +1,16 @@
 # Test shell
 
 Once you've started writing [Tests](../development/testing) you can run them
-using the test shell.
+using the test shell:
+
+``` bash
+bin/cake test app AllTests
+```
+
+The test shell runs PHPUnit 9.6, which you install as a development dependency
+with Composer (`composer require --dev phpunit/phpunit:^9.6`). The
+pieceofcake2/app skeleton already includes it, and you can also run the tests
+with `vendor/bin/phpunit`.
 
 For more information on basic usage of the test shell see
 [Run Tests From Command Line](../development/testing#run-tests-from-command-line).

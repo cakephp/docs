@@ -31,7 +31,7 @@ Blog、Post、Comment はすべてモデルの例で、それぞれが互いに�
 以下は CakePHP におけるモデル定義の簡単な例です。 :
 
 ``` php
-App::uses('AppModel', 'Model');
+// src/Model/Ingredient.php
 class Ingredient extends AppModel
 {
     public $name = 'Ingredient';
@@ -45,31 +45,32 @@ Ingredient モデルはアプリケーション用のモデルである AppModel
 AppModel は CakePHP 内部の Model クラスを extend しています。
 つまり Ingredient クラスに上記の機能を与えているのはコアの Model クラスです。
 
-中間クラスの AppModel は独自に作成しない限りは空のクラスであり、
-CakePHP のコアフォルダから取り込まれます。
-AppModel をオーバーライドすることで、アプリケーション内の全てのモデルで利用可能な
-機能を定義することができます。この場合、独自の `AppModel.php` ファイルを
-他の全てのモデルと同様に Model フォルダに置きます。
-[Bake](console-and-shells/code-generation-with-bake)
-を使用してプロジェクトを作成すると、自動的にこのファイルが生成されます。
+`composer.json` で `src/` を classmap に指定していれば
+([pieceofcake2/app](https://github.com/pieceofcake2/app) スケルトンの設定です)、
+AppModel は Composer によって自動的に読み込まれます。
+classmap を使わない場合は、ファイルの先頭に `App::uses('AppModel', 'Model');` を書いて、
+必要なときにクラスが読み込まれるようにしてください。
+
+中間クラスの AppModel はアプリケーションの `src/Model/AppModel.php` にあり、
+最初は空のクラスです。CakePHP のコアには AppModel が含まれていないため、
+アプリケーション側で用意する必要があります。アプリケーションスケルトンには最初から含まれています。
+AppModel にメソッドを追加することで、アプリケーション内の全てのモデルで利用可能な
+機能を定義することができます。
 
 複数のモデルに同様のロジックを適用する方法に関しては
 [Behaviors](models/behaviors) も参照してください。
 
 Ingredient モデルの話に戻りましょう。これを動作させるには、
-`/app/Model/` ディレクトリに PHP のファイルを作成します。
+`src/Model/` ディレクトリに PHP のファイルを作成します。
+レガシーレイアウトでは `app/Model/` です
+([CakePHP のフォルダ構造](/ja/getting-started/cakephp-folder-structure) を参照してください)。
 クラス名と同じファイル名をつけることになっています。
 この例の場合は `Ingredient.php` です。
-
-::: pieceofcake2
-モデルのファイルは、レガシーレイアウトでは `app/Model/`、モダンレイアウトでは
-`src/Model/` に置きます。`composer.json` で `src/` を classmap に指定していれば、
-`App::uses('AppModel', 'Model');` の行は省略できます。
-詳しくは [ディレクトリ構成](/ja/pieceofcake2/directory-structure) を参照してください。
-:::
+Composer の classmap を使っている場合は、新しいクラスファイルを追加したら
+`composer dump-autoload` を実行してください。
 
 > [!NOTE]
-> CakePHP は対応するファイルが /app/Model に見つからない場合、
+> CakePHP は対応するファイルが `src/Model/` に見つからない場合、
 > 動的にモデルオブジェクトを生成します。
 > モデルのファイルに正しい名前をつけなければ
 > (つまり ingredient.php や Ingredients.php などとしたら)

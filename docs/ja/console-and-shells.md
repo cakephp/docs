@@ -11,7 +11,7 @@ CakePHP には元々たくさんのコンソールアプリケーションが備
 これらの中には（ACL や i18n のように）他の CakePHP の機能と組合せて使うものも
 あれば、仕事をより早く片付けるための、より一般的なものもあります。
 
-## CakePHP のコンソール
+## CakePHP のコンソール {#the-cakephp-console}
 
 このセクションでは、コマンドラインにおける CakePHP をご紹介します。
 もし過去に cron ジョブやコマンドライン・スクリプトから自分の CakePHP の
@@ -35,86 +35,63 @@ bash からコンソールプログラムを動かしてみましょう。これ
 bash プロンプトにログインしており、CakePHP アプリケーションのルートにいること
 を想定しています。
 
-CakePHP アプリケーションの中には `Console` というディレクトリがあり、
-この中にアプリケーションのためのすべてのシェルやタスクを格納します。
-またここには以下の実行ファイルがあります。 :
+CakePHP アプリケーションのプロジェクトルートには `bin/cake` という実行ファイルがあります。
+アプリケーションのシェルとタスクは `src/Console/Command/` と
+`src/Console/Command/Task/` に格納します。
 
 ``` bash
-$ cd /path/to/cakephp/app
-$ ./Console/cake
+$ cd /path/to/my_app
+$ bin/cake
 ```
 
-::: pieceofcake2 コンソールの実行ファイル
-pieceofcake2 フォークでは、`cake` 実行ファイルとシェルの置き場所はアプリケーションのレイアウトによって異なります。
+Composer はフレームワーク自体の実行ファイルも `vendor/bin/cake` としてインストールします。
+こちらは Composer のオートローダーからプロジェクトルートを特定し、`src/` があればそれを、
+なければ `app/` をアプリケーションディレクトリとして使うので、どちらのアプリケーション
+レイアウトでも動作します。レガシーレイアウトでは実行ファイルは `app/Console/cake`、
+シェルの置き場所は `app/Console/Command/` です。2 つのレイアウトの違いは
+[CakePHP のフォルダ構造](/ja/getting-started/cakephp-folder-structure) を参照してください。
 
-| レイアウト | 実行ファイル | シェル / タスク |
-|---|---|---|
-| レガシー | `app/Console/cake` | `app/Console/Command/`, `app/Console/Command/Task/` |
-| モダン | `bin/cake` | `src/Console/Command/`, `src/Console/Command/Task/` |
+引数なしでコンソールを起動すると、以下のメッセージが表示されます。
 
-Composer がインストールする `vendor/bin/cake` はどちらのレイアウトでも使えます。`composer.json`
-の場所からプロジェクトルートを特定し、`src/` があればそれを、なければ `app/` をアプリケーション
-ディレクトリとして使います。レガシーレイアウトでは Bake プラグインから新しい `app/Console/cake`
-をコピーする必要があります。`cake.bat` と `cake.php` は削除されました。
-詳しくは [インストール](/ja/pieceofcake2/installation) を参照してください。
-:::
-
-システムのパスの中にコアとなる cake 実行ファイル（を含むディレクトリ）を
-追加するのもよいでしょう。これでどこにいても cake コマンドが使えるように
-なり、新しいプロジェクトを生成する際にも便利です。 `cake` をシステム全体
-で使えるようにするやり方は [Adding Cake To Your Path](#adding-cake-to-your-path) にあります。
-
-引数なしでコンソールを起動すると、以下のメッセージが表示されます
-（訳注：便宜上、一部和訳しています）:
-
-    Welcome to CakePHP v2.0.0 Console
+    Welcome to CakePHP v2.12.2 Console
     ---------------------------------------------------------------
-    App : app
-    Path: /path/to/cakephp/app/
+    App : src
+    Path: /path/to/my_app/src/
     ---------------------------------------------------------------
-    現在のパス:
+    Current Paths:
 
-     -app: app
-     -working: /path/to/cakephp/app
-     -root: /path/to/cakephp/
-     -core: /path/to/cakephp/core
+     -app: src
+     -working: /path/to/my_app/src
+     -root: /path/to/my_app
+     -core: /path/to/my_app/vendor/pieceofcake2/cakephp/src
+     -webroot: /path/to/my_app/webroot
 
-    パスの変更:
+    Changing Paths:
 
-    作業パスは自分のアプリケーションパスと同じである必要があります。
-    パスを変更するには '-app' を使います。
-    例: -app cakephpへの相対パス または -app /cakephpへの絶対パス
+    Your working path should be the same as your application path. To change your path use the '-app' param.
+    Example: -app relative/path/to/myapp or -app /absolute/path/to/myapp
 
-    利用できるシェル:
+    Available Shells:
 
-     acl [CORE]                              i18n [CORE]
-     api [CORE]                              import [app]
-     bake [CORE]                             schema [CORE]
-     command_list [CORE]                     testsuite [CORE]
-     console [CORE]                          upgrade [CORE]
+    [CORE] acl, api, command_list, completion, console, i18n, schema, server, test, testsuite
 
-    コマンドを実行するには 'cake シェル名 [引数]' にようにタイプします。
-    'cake シェル名 help' で特定のコマンドに対するヘルプが表示されます。
+    To run an app or core command, type cake shell_name [args]
+    To run a plugin command, type cake Plugin.shell_name [args]
+    To get help on a specific command, type cake shell_name --help
 
 ::: pieceofcake2
-pieceofcake2 フォークでは、`bake` と `upgrade` はコアのシェルではなくなりました。Bake は
-[pieceofcake2/bake](https://github.com/pieceofcake2/bake) プラグイン、1.3 から 2.0 への
-アップグレードシェルは [pieceofcake2/upgrade](https://github.com/pieceofcake2/upgrade)
-プラグインとして提供されています。必要な場合はプラグインとしてインストールし、ロードしてください。
+`bake` と `upgrade` はコアのシェルではなくなりました。
+必要な場合は [pieceofcake2/bake](https://github.com/pieceofcake2/bake) や
+[pieceofcake2/upgrade](https://github.com/pieceofcake2/upgrade) をプラグインとしてインストールしてください。
 :::
 
 先頭部分にはパスに関連する情報が表示されます。これはファイルシステム上の
-異なる場所からコンソールを動かしている場合に便利です。
-
-CakePHP コンソールを自分のシステムパスに追加しているユーザが多ければ、cake
-コンソールには簡単にアクセスできます。表示されているのは working, root,
-app, core のパスで、それぞれコンソールの場所が変更されていてもその位置を
-確認できます。作業したい app フォルダを変更するには単にそこへのパスをcake
-コマンドに知らせてやるだけです。次に app フォルダの設定例を示しますが、その際
-コンソールのフォルダをあなたの `PATH` に追加してあるとものとみなしています。 :
+異なる場所からコンソールを動かしている場合に便利です。working, root, app, core,
+webroot の各パスが表示されるので、コンソールがどこに変更を加えるのかを確認できます。
+作業したい app フォルダを変更するには、`-app` オプションでそのパスを指定します。
 
 ``` bash
-$ cake -app /path/to/cakephp/app
+$ vendor/bin/cake -app /path/to/my_app/src
 ```
 
 指定するパスは、現在の作業ディレクトリへの相対パスでも絶対パスでも構いません。
@@ -123,57 +100,30 @@ $ cake -app /path/to/cakephp/app
 
 ### システムパスに cake を追加
 
+コンソールの実行ファイルはプロジェクトごとに存在するので、システム全体にインストールする
+`cake` コマンドはありません。プロジェクトルートで `bin/cake` (または `vendor/bin/cake`)
+を実行してください。単に `cake` と入力したい場合は、そのプロジェクトで作業する間だけ
+プロジェクトの `bin` ディレクトリを `PATH` に追加します。\*nix システム (Linux, macOS)
+では次のようにします。
+
+``` bash
+export PATH="$PATH:/path/to/my_app/bin"
+```
+
 ::: pieceofcake2
-pieceofcake2 フォークには `lib/Cake/Console/cake` はありません。フレームワークの実行ファイルは
-パッケージ内の `bin/cake` で、Composer によってプロジェクトの `vendor/bin/cake` として配置されます。
-プロジェクトルートから `vendor/bin/cake`（モダンレイアウトでは `bin/cake`）を実行するか、
-以下の手順のパスの代わりにプロジェクトの `vendor/bin` ディレクトリを `PATH` に追加してください。
+`lib/Cake/Console/cake`、`cake.bat`、`cake.php` は
+削除されました。コンソールは `bin/cake` (または `vendor/bin/cake`) から起動し、
+Composer のオートローダーが必要です。
 :::
-
-\*nix システム (linux, MacOSX) をお使いの場合は、以下の手順により
-cake の実行ファイルへのパスをシステムパスに追加します。
-
-1.  CakePHP がインストールされている場所に cake の実行ファイルがあることを確認します。
-    例えば、以下の場所になります
-
-    `/Users/mark/cakephp/lib/Cake/Console/cake`
-
-2.  自分のホームディレクトリにある `.bashrc` もしくは `.bash_profile` をエディタで開き、
-    以下を追加します。 :
-
-        export PATH="$PATH:/Users/mark/cakephp/lib/Cake/Console"
-
-3.  bash の設定ファイルをリロードするか、もしくは新しい端末を開きます。
-    どこにいても `cake` は動くはずです。
-
-Windows Vista もしくは 7 をお使いの場合は、以下の手順に従ってください。
-
-1.  CakePHP がインストールされている場所に cake の実行ファイルがあることを確認します。
-    `C:\xampp\htdocs\cakephp\lib\Cake\Console`
-
-2.  マイコンピュータからシステムのプロパティを開きます。ショートカットを使う場合は
-    Windows キー + Pause もしくは Windows キー + Break です。デスクトップからの場合は
-    コンピュータで右クリックしてプロパティを開き、システムの詳細設定をクリックします。
-
-3.  詳細設定タブから環境変数を開きます。
-
-4.  システム環境変数の中のPathをダブルクリックして修正します。
-
-5.  `cake` のインストールパス文字列を;で区切って追加します。その結果は以下のようになります。 :
-
-    ``` php
-    %SystemRoot%\system32;%SystemRoot%;C:\xampp\htdocs\cakephp\Cake\lib\Console;
-    ```
-
-6.  これで Ok をクリックすれば、 `cake` がどこからでも動くようになるはずです。
 
 ## シェルの作成
 
 早速コンソールで動くシェルを作ってみましょう。この例ではシンプルな hello world
-シェルを作ります。お使いのアプリケーションの `Console/Command` ディレクトリで
+シェルを作ります。お使いのアプリケーションの `src/Console/Command` ディレクトリで
 `HelloShell.php` を作ってください。その中に以下のコードを書きます。 :
 
 ``` php
+// src/Console/Command/HelloShell.php
 class HelloShell extends AppShell
 {
     public function main()
@@ -187,16 +137,16 @@ class HelloShell extends AppShell
 付けたものとします。このシェルの中に `main()` メソッドを作成します。シェルが
 追加コマンド（引数）なしで起動された場合、このメソッドが呼ばれます。この後、
 多少コマンドを追加していきますが、現時点では単にシェルを起動してみましょう。
-自分のアプリケーションディレクトリ (app) で、以下を実行します。 :
+プロジェクトのルートディレクトリで、以下を実行します。 :
 
-    Console/cake hello
+    bin/cake hello
 
 以下の出力が行われます。 :
 
-    Welcome to CakePHP v2.0.0 Console
+    Welcome to CakePHP v2.12.2 Console
     ---------------------------------------------------------------
-    App : app
-    Path: /Users/markstory/Sites/cake_dev/app/
+    App : src
+    Path: /Users/markstory/Sites/my_app/src/
     ---------------------------------------------------------------
     Hello world.
 
@@ -204,7 +154,7 @@ class HelloShell extends AppShell
 与えられない場合、常に呼ばれる特別なメソッドです。HelloShell は `AppShell` を
 拡張していますね。 [App Controller](controllers#app-controller) と同様に、AppShell はあなたの共通関数や
 ロジックのすべてを含む基本的なクラスを提供します。AppShell は
-`app/Console/Command/AppShell.php` を作ることにより定義されます。もしこれが
+`src/Console/Command/AppShell.php` を作ることにより定義されます。もしこれが
 存在しない場合、CakePHP はビルトインされたものを使います。main メソッドの使い方が
 ある程度わかったら、次は以下のように別のコマンドを追加してみましょう。 :
 
@@ -223,7 +173,7 @@ class HelloShell extends AppShell
 }
 ```
 
-このファイルを作って `Console/cake hello hey_there あなたの名前` を実行
+このファイルを作って `bin/cake hello hey_there あなたの名前` を実行
 すると、ご自分の名前が表示されるはずです。public メソッドのうち頭に `_` が
 付かないものは、コマンドラインから呼び出せます。
 直前の例の `hey_there` メソッドの中では `$this->args` を使っています。
@@ -265,7 +215,7 @@ class UserShell extends AppShell
 
 より高度なコンソールアプリケーションを開発する場合には、
 多くのシェル間で共有される再利用可能なクラスとして機能を構成したいでしょう。
-タスクによりコマンドをクラスに展開できます。たとえば `bake` は、
+タスクによりコマンドをクラスに展開できます。たとえば Bake プラグインの `bake` シェルは、
 そのほとんどがタスクにより作られています。 `$tasks`
 プロパティを使ってシェルのタスクを定義できます。 :
 
@@ -277,9 +227,9 @@ class UserShell extends AppShell
 ```
 
 プラグインからタスクを使うには、標準の `プラグイン記法` を使用します。
-タスクは `Console/Command/Task/` に、クラスにちなんで名付けられたファイルに
+タスクは `src/Console/Command/Task/` に、クラスにちなんで名付けられたファイルに
 格納されます。たとえば新たに 'FileGenerator' タスクを作成したい場合は
-`Console/Command/Task/FileGeneratorTask.php` を作成することになります。
+`src/Console/Command/Task/FileGeneratorTask.php` を作成することになります。
 
 各タスクは、少なくとも `execute()` メソッドを実装する必要があります。タスクが
 呼び出された時、ShellDispatcher はこのメソッドを呼び出します。タスククラスは
@@ -300,10 +250,10 @@ class FileGeneratorTask extends Shell
 [コンポーネント](controllers/components) と同様に再利用可能な部品としてタスクを利用できます。 :
 
 ``` php
-// Console/Command/SeaShell.php に作成
+// src/Console/Command/SeaShell.php
 class SeaShell extends AppShell
 {
-    public $tasks = ['Sound']; // Console/Command/Task/SoundTask.php に作成
+    public $tasks = ['Sound']; // src/Console/Command/Task/SoundTask.php
     public function main()
     {
         $this->Sound->execute();
@@ -314,7 +264,7 @@ class SeaShell extends AppShell
 また、コマンドラインからタスクに直接アクセスすることができます。 :
 
 ``` bash
-$ cake sea sound
+$ bin/cake sea sound
 ```
 
 > [!NOTE]
@@ -329,10 +279,10 @@ $ cake sea sound
 以下のようにすると \$tasks で宣言されなかったタスクをロードすることができます。 :
 
 ``` php
-$Project = $this->Tasks->load('Project');
+$FileGenerator = $this->Tasks->load('FileGenerator');
 ```
 
-これによりタスクをロードして ProjectTask インスタンスを返します。
+これによりタスクをロードして FileGeneratorTask インスタンスを返します。
 プラグインからタスクをロードすることもできます。 :
 
 ``` php
@@ -628,8 +578,8 @@ $parser->addOption('connection', [
 ]);
 ```
 
-この例の場合、シェルを起動する際に `cake myshell --connection=other`,
-`cake myshell --connection other`, `cake myshell -c other`
+この例の場合、シェルを起動する際に `bin/cake myshell --connection=other`,
+`bin/cake myshell --connection other`, `bin/cake myshell -c other`
 のいずれかで引数を指定できます。またブール型のスイッチも作れますが、
 これらのスイッチは値を消費せず、またその存在はパースされた引数の中
 だけとなります。 :
@@ -638,7 +588,7 @@ $parser->addOption('connection', [
 $parser->addOption('no-commit', ['boolean' => true]);
 ```
 
-このオプション指定の場合、 `cake myshell --no-commit something` のように
+このオプション指定の場合、 `bin/cake myshell --no-commit something` のように
 コールされると no-commit 引数が true になり、'something' は位置引数と見なされます。
 ビルトインオプションの `--help`, `--verbose`, `--quiet` もこの
 仕組みを利用しています。
@@ -718,7 +668,7 @@ if ($this->param('verbose')) {
 
 コンソールアプリケーションはサブコマンドから構成されることも多いのですが、
 サブコマンド側で特別なオプション解析や独自ヘルプを持ちたいこともあります。
-この完全な例が `bake` です。Bake は多くの別々のタスクから構成されますが、
+この完全な例が Bake プラグインの `bake` シェルです。Bake は多くの別々のタスクから構成されますが、
 各タスクはそれぞれ独自のヘルプとオプションを持っています。
 `ConsoleOptionParser` を使ってサブコマンドを定義し、それらに固有のオプション
 パーサを提供できるので、シェルはそれぞれのタスクについてコマンドをどう
@@ -737,8 +687,8 @@ $parser->addSubcommand('model', [
 この方法でサブコマンドを追加することには２つの利点があります。
 まず生成されたヘルプの中で簡単にサブコマンドを文書化できること、そして
 サブコマンドのヘルプに簡単にアクセスできることです。前述のやり方で生成
-したサブコマンドを使って `cake myshell --help` とやると、サブコマンドの
-一覧が出ます。また `cake myshell model --help` とやると、model タスクだけの
+したサブコマンドを使って `bin/cake myshell --help` とやると、サブコマンドの
+一覧が出ます。また `bin/cake myshell model --help` とやると、model タスクだけの
 ヘルプが表示されます。
 
 サブコマンドを定義する際は、以下のオプションが使えます:
@@ -810,14 +760,14 @@ ConsoleOptionParser を追加することにより、一貫性のある方法で
 シェルからも、 `--help` または -`h` オプションを使うことでヘルプを参照
 できます。:
 
-    cake bake --help
-    cake bake -h
+    bin/cake bake --help
+    bin/cake bake -h
 
-このいずれでも bake のヘルプを生成します。シェルがサブコマンドをサポートしている
+このいずれでも [Bake プラグイン](console-and-shells/code-generation-with-bake) の `bake` シェルのヘルプを生成します。シェルがサブコマンドをサポートしている
 場合は、それらに関するヘルプを同様の書式で取得可能です。 :
 
-    cake bake model --help
-    cake bake model -h
+    bin/cake bake model --help
+    bin/cake bake model -h
 
 これは bake の model タスクに関するヘルプを表示します。
 
@@ -827,8 +777,8 @@ ConsoleOptionParser を追加することにより、一貫性のある方法で
 ヘルプを機械がパースできる形式で取得できると便利です。ConsoleOptionParser
 に以下の引数を追加することで、ヘルプをxmlで出力できます。 :
 
-    cake bake --help xml
-    cake bake -h xml
+    bin/cake bake --help xml
+    bin/cake bake -h xml
 
 この例は生成されたヘルプ、オプション、引数そして選択されたシェルのサブコマンド
 に関するドキュメントを XML で返します。XML ドキュメントの例としては以下のように

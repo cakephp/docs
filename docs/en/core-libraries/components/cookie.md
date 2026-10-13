@@ -38,7 +38,7 @@ allows you to define how the CookieComponent works.
 <td>string $key</td>
 <td>null</td>
 <td><p>This string is used to encrypt the value written to the cookie. The string should be random and difficult to guess.</p>
-<p>When using rijndael or aes encryption, this value must be longer than 32 bytes.</p></td>
+<p>When using rijndael or aes encryption, this value must be longer than 32 bytes. Defaults to the value of <code>Security.salt</code>.</p></td>
 </tr>
 <tr>
 <td>string $domain</td>
@@ -72,9 +72,11 @@ The following snippet of controller code shows how to include the
 CookieComponent and set up the controller variables needed to write
 a cookie named 'baker_id' for the domain 'example.com' which needs
 a secure connection, is available on the path
-'/bakers/preferences/', expires in one hour and is HTTP only:
+'/bakers/preferences/', expires in one hour, is HTTP only and is
+encrypted with AES:
 
 ``` php
+// src/Controller/BakersController.php
 public $components = ['Cookie'];
 
 public function beforeFilter()
@@ -89,6 +91,14 @@ public function beforeFilter()
     $this->Cookie->httpOnly = true;
     $this->Cookie->type('aes');
 }
+```
+
+The `'aes'` type uses `Security::encrypt()`. PHP 8 does not provide
+the `mcrypt` extension, so enable the OpenSSL implementation in
+`config/core.php`:
+
+``` php
+Configure::write('Security.useOpenSsl', true);
 ```
 
 Next, let's look at how to use the different methods of the Cookie
@@ -110,12 +120,12 @@ The CookieComponent offers a number of methods for working with Cookies.
 
 `method` CookieComponent::**type**($type)
 
-::: pieceofcake2 Use 'aes' encryption
-The default encryption type is still `'cipher'` for backwards compatibility,
-but it is a weak XOR cipher and should not be used. Set the type to `'aes'`.
-Because PHP 8 does not ship the `mcrypt` extension, `'aes'` also needs
-`Configure::write('Security.useOpenSsl', true);` in `core.php` so that it uses
-OpenSSL. `'rijndael'` always requires `mcrypt`. Changing the type invalidates
-existing cookies.
-See the [upgrade guide](/pieceofcake2/upgrade).
-:::
+Sets the encryption type used for cookie values. The available types are
+`'cipher'`, `'aes'` and `'rijndael'`.
+
+> [!WARNING]
+> The default type is `'cipher'` only for backwards compatibility. It is a
+> weak XOR cipher, so always call `type('aes')` in your `beforeFilter()` as
+> shown above, together with `Security.useOpenSsl`. `'rijndael'` requires the
+> `mcrypt` extension, which is not available on PHP 8. Changing the type
+> invalidates cookies written with the previous type.

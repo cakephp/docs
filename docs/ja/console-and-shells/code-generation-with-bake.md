@@ -1,38 +1,50 @@
 # Bakeでコード生成
 
-::: pieceofcake2 Bake は別プラグイン
-pieceofcake2 フォークでは Bake はコアから削除され、
-[pieceofcake2/bake](https://github.com/pieceofcake2/bake) プラグインとして提供されています。
-開発用の依存としてインストールし、`cake bake` を実行する前にロードしてください。
-
-```bash
-composer require --dev pieceofcake2/bake
-```
-
-```php
-// app/Config/bootstrap.php（レガシー）または config/bootstrap.php（モダン）
-CakePlugin::load('Bake');
-```
-
-実行は `app/Console/cake bake`（レガシー）または `bin/cake bake`（モダン）です。
-`vendor/bin/cake bake` はどちらのレイアウトでも使えます。
-[プラグイン](/ja/pieceofcake2/plugins) も参照してください。
-:::
-
 CakePHP の Bake は、あなたがやることを代わりに CakePHP にまかせることができます。
 Bake は CakePHP の基本的な素材(モデル、ビュー、コントローラ)を作れます。
 Bake では、簡単にフル機能をそなえたアプリケーションを作ることができますが
 そういったスケルトンクラスについてはここでは話しません。
 また Scaffold アプリケーションを試してみるのに、bake を使ってみるのもいいでしょう。
 
-一般的な CakePHP コンソールの使い方に関する [The Cakephp Console](../console-and-shells#the-cakephp-console)
-セクションを参照してください。セットアップ環境に依っては、 cake スクリプトに
-実行権限を設定したり `./Console/cake bake` として、呼び出したりする必要があります。
+## Bake のインストール
+
+Bake は [pieceofcake2/bake](https://github.com/pieceofcake2/bake) プラグインで提供されています。
+pieceofcake2/app スケルトンから作成したアプリケーションには、開発用の依存パッケージとして
+すでに含まれています。それ以外の場合は Composer でインストールします。 :
+
+``` bash
+composer require --dev pieceofcake2/bake
+```
+
+Composer はプラグインを `plugins/Bake/` にインストールします。これには
+[Composer でのプラグインのインストール](/ja/plugins/how-to-install-plugins#composer) で説明している
+`composer.json` の `allow-plugins` と `installer-paths` の設定が必要です。pieceofcake2/app
+スケルトンにはすでに設定されています。プラグインは `config/bootstrap.php` でロードしてください。 :
+
+``` php
+// config/bootstrap.php
+CakePlugin::load('Bake');
+```
+
+Bake は開発用の依存パッケージなので、 `composer install --no-dev` でデプロイした環境には
+インストールされません。インストールされていないプラグインをロードすると
+`MissingPluginException` が発生するので、この行はプラグインがインストールされている環境でだけ
+実行されるようにしてください。
+
+::: pieceofcake2
+Bake はコアに含まれなくなりました。 `bake` コマンドを使うには、
+pieceofcake2/bake プラグインをインストールしてロードする必要があります。
+:::
+
+## Bake の実行
+
+一般的な CakePHP コンソールの使い方に関する [CakePHP のコンソール](../console-and-shells#the-cakephp-console)
+セクションを参照してください。Bake はプロジェクトルートで `bin/cake bake` として実行します。
 cake スクリプトは PHP CLI (command line interface) で実行されます。
 スクリプト実行に問題があれば、PHP CLI がインストールされていることと、
-適切なモジュール (たとえば MySQL など) がインストールされていることを確認してください。
-また、データベースのホストが 'localhost' で問題がある場合は、代わりに
-'127.0.0.1' を試してみてください。 これは PHP CLI で起こる問題です。
+適切な拡張モジュール (たとえば `pdo_mysql` など) が有効になっていることを確認してください。
+また、データベースのホストが 'localhost' でコマンドラインから接続できない場合は、代わりに
+'127.0.0.1' を試してみてください。
 
 はじめて Bake を実行する時に、まだデータベースの設定ファイルがなければ、
 それを作るように促されます。
@@ -41,8 +53,8 @@ cake スクリプトは PHP CLI (command line interface) で実行されます�
 
 ``` text
 ---------------------------------------------------------------
-App : app
-Path: /path-to/project/app
+App : src
+Path: /path-to/project/src/
 ---------------------------------------------------------------
 Interactive Bake Shell
 ---------------------------------------------------------------
@@ -61,68 +73,91 @@ What would you like to Bake? (D/M/V/C/P/F/T/Q)
 代わりに、次のようにコマンドラインから直接これらのコマンドを実行することが出来ます。 :
 
 ``` bash
-$ cake bake db_config
-$ cake bake model
-$ cake bake view
-$ cake bake controller
-$ cake bake project
-$ cake bake fixture
-$ cake bake test
-$ cake bake plugin plugin_name
-$ cake bake all
+$ bin/cake bake db_config
+$ bin/cake bake model
+$ bin/cake bake view
+$ bin/cake bake controller
+$ bin/cake bake project
+$ bin/cake bake fixture
+$ bin/cake bake test
+$ bin/cake bake plugin plugin_name
+$ bin/cake bake all
 ```
 
+すべてのサブコマンドとオプションは `bin/cake bake --help` で確認できます。たとえば
+`--connection` (`-c`) で使用するデータベース接続を、 `--theme` (`-t`) で bake のテーマを指定できます。
+
 ::: info Changed in version 2.5
-`bake test` で作成されたテストファイルは、空のテストメソッドであることを注意するために [PHPunit の markTestIncomplete()](https://phpunit.de/manual/3.7/ja/incomplete-and-skipped-tests.html) の呼び出しを含みます。2.5 より前には、空のテストは暗黙のうちにパスしていました。
+`bake test` で作成されたテストファイルは、空のテストメソッドであることを注意するために PHPUnit の `markTestIncomplete()` の呼び出しを含みます。2.5 より前には、空のテストは暗黙のうちにパスしていました。
 :::
+
+### 生成されるファイルの場所
+
+Bake はモデルを `src/Model/` に、コントローラを `src/Controller/` に書き出します。
+現在の Bake プラグインはそれ以外のファイルについてはレガシーレイアウトの場所を使うので、
+モダンレイアウトでは生成されたファイルを次のように移動してください。
+
+| ファイルの種類 | Bake の出力先 | 移動先 |
+|---|---|---|
+| ビューテンプレート | `src/View/<Controller>/` | `templates/<Controller>/` |
+| テストケース | `tests/Case/<Type>/` | `tests/TestCase/<Type>/` |
+| フィクスチャ | `src/Test/Fixture/` | `tests/Fixture/` |
+
+CakePHP は `src/View/` にあるビューテンプレートも見つけるので、bake したビューは移動する前でも
+動作します。テストケースとフィクスチャは `tests/TestCase/` と `tests/Fixture/` にないと
+見つかりません (`tests/TestCase/` が存在する場合)。レガシーレイアウトでは、すべてのファイルが
+通常の `app/` 以下のディレクトリに書き出されるので、移動する必要はありません。
+
+`bake project` は Bake プラグインに含まれているレガシーな `app/` スケルトンをコピーします。
+モダンレイアウトで新しいアプリケーションを始める場合は、代わりに
+`composer create-project pieceofcake2/app` を使ってください
+([インストール](../installation) を参照)。
 
 ## bakeテンプレートから生成されるデフォルトのHTMLを変更する
 
-::: pieceofcake2
-pieceofcake2 フォークには `lib/Cake/Console/Templates/` はありません。デフォルトの bake テンプレート
-（`default/`）とアプリケーションのスケルトン（`skel/`）は Bake プラグインの `Console/Templates/`
-ディレクトリにあります。独自の bake テーマは `app/Console/Templates/[themename]/`（レガシー）または
-`src/Console/Templates/[themename]/`（モダン）に置いてください。
-:::
+bake コマンドで生成されるデフォルトの HTML 出力を変更したい場合は、
+bake のテーマを作成します。デフォルトのテンプレートは Bake プラグインの
+`plugins/Bake/Console/Templates/default/` ディレクトリにあります。
 
-bake コマンドで生成されるデフォルトの HTML 出力を変更したい場合、
-次のようなステップでやります。
+- `actions/` - コントローラのアクション
+- `classes/` - コントローラ、モデル、フィクスチャ、テストのクラス
+- `views/` - ビューテンプレート (`index.ctp`, `view.ctp`, `form.ctp`)
+
+Bake は、アプリケーションの `src/Console/Templates/` と、ロード済みの各プラグインの
+`Console/Templates/` からテーマを探します。
 
 ### カスタムビューを作る
 
-1.  lib/Cake/Console/Templates/default/views に移動します。
-2.  その中に、4つのファイルがあります。
-3.  それらのファイルを app/Console/Templates/\[themename\]/views にコピーします。
+1.  `plugins/Bake/Console/Templates/default/views` に移動します。
+2.  その中に、3つのファイルがあります。
+3.  それらのファイルを `src/Console/Templates/[themename]/views` にコピーします。
 4.  ビューを "bake" で構築する方法を制御するために HTML 出力に変更を加えます。
 
 `[themename]` は、自分で自由につけれる bake のテーマ名です。
 bake のテーマ名はユニークである必要がありますので、'default' は使わないでください。
+複数のテーマがある場合は、Bake がどれを使うか尋ねます。 `--theme` オプションで指定することもできます。 :
+
+``` bash
+bin/cake bake view Posts --theme myTheme
+```
+
+レガシーレイアウトでは、テーマは `app/Console/Templates/[themename]/` に置きます。
 
 ### カスタムプロジェクトを作る
 
-1.  lib/Cake/Console/Templates/skel に移動します。
+1.  `plugins/Bake/Console/Templates/skel` に移動します。
 2.  その中に、アプリケーションのベースとなるファイルがあります。
-3.  それらのファイルを app/Console/Templates/skel にコピーします。
+3.  それらのファイルを `src/Console/Templates/skel` にコピーします。
 4.  ビューを "bake" で構築する方法を制御するために HTML 出力に変更を加えます。
 5.  project タスクにスケルトンのパスをパラメータとして渡します。
 
 <!-- -->
 
-    cake bake project --skel Console/Templates/skel
+    bin/cake bake project --skel src/Console/Templates/skel
 
-<div class="note">
-
-<div class="title">
-
-Note
-
-</div>
-
-- `cake bake project` は、スケルトンのパスをパラメータで渡して
-  特定の project タスクを実行します。
-- テンプレートのパスはコマンドラインのカレントパスからの相対パスです。
-- スケルトンまでのフルパスを入力すれば、複数のテンプレートを使用することも含み
-  自分が使いたいテンプレートがあるディレクトリを任意に指定できます。
-  (CakePHP がビューのように skel フォルダのオーバーライドをサポートし始めるまでは)
-
-</div>
+> [!NOTE]
+> - `bin/cake bake project` は、スケルトンのパスをパラメータで渡して
+>   特定の project タスクを実行します。
+> - テンプレートのパスはコマンドラインのカレントパスからの相対パスです。
+> - スケルトンまでのフルパスを入力すれば、複数のテンプレートを使用することも含み
+>   自分が使いたいテンプレートがあるディレクトリを任意に指定できます。

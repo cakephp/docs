@@ -8,7 +8,7 @@
 
 メディアビューを使うとユーザにバイナリーファイルを送ることができます。例えば、
 ユーザーが直接参照できないようにするために webroot ディレクトリの外にディレクトリを
-配置したいとします。メディアビューを使うと /app/ 以下の特定のフォルダからファイルを持ってきて、
+配置したいとします。メディアビューを使うとプロジェクト内の特定のフォルダからファイルを持ってきて、
 認証してからファイルを渡すといったことができます。
 
 メディアビューを使うためにはデフォルトビューの代わりにメディアビューを使うことをコントローラの
@@ -21,13 +21,13 @@ class ExampleController extends AppController
     public function download()
     {
         $this->viewClass = 'Media';
-        //  app/outside_webroot_dir/example.zip をダウンロードする
+        // プロジェクトルートの outside_webroot_dir/example.zip をダウンロードする
         $params = [
-            'id'        => 'example.zip',
-            'name'      => 'example',
-            'download'  => true,
+            'id' => 'example.zip',
+            'name' => 'example',
+            'download' => true,
             'extension' => 'zip',
-            'path'      => APP . 'outside_webroot_dir' . DS
+            'path' => ROOT . DS . 'outside_webroot_dir' . DS,
         ];
         $this->set($params);
     }
@@ -35,22 +35,22 @@ class ExampleController extends AppController
 ```
 
 ここではメディアビューの `$mimeType` に登録されていないmimeタイプのファイルを描画する例を
-示します。また、デフォルトの `app/webroot` ディレクトリへの相対パスを使っています。 :
+示します。ファイルは `webroot/files` フォルダにあり、 `WWW_ROOT . 'files'` で指定できます。
 
 ``` php
 public function download()
 {
     $this->viewClass = 'Media';
-    // Render app/webroot/files/example.docx
+    // webroot/files/example.docx を描画する
     $params = [
-        'id'        => 'example.docx',
-        'name'      => 'example',
+        'id' => 'example.docx',
+        'name' => 'example',
         'extension' => 'docx',
-        'mimeType'  => [
+        'mimeType' => [
             'docx' => 'application/vnd.openxmlformats-officedocument' .
-                '.wordprocessingml.document'
+                '.wordprocessingml.document',
         ],
-        'path'      => 'files' . DS
+        'path' => WWW_ROOT . 'files' . DS,
     ];
     $this->set($params);
 }
@@ -74,8 +74,9 @@ mime タイプがリストにない場合 (または mimeType パラメータで
 一致しない場合)、ファイルはダウンロードされません。
 
 `path`  
-ディレクトリセパレータで終わるフォルダ名です。パスは絶対パスにすべきですが、
-`app/webroot` フォルダからの相対パスも可能です。
+ディレクトリセパレータで終わるフォルダ名です。パスは絶対パスにすべきです。
+相対パスを指定した場合は、webroot ではなく `APP` ディレクトリ (`src/`、従来のレイアウトでは
+`app/`) からの相対パスとして扱われます。
 
 `mimeType`  
 追加の mime タイプを含む配列です。この配列は、MediaView が受け付けられる

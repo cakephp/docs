@@ -1,440 +1,236 @@
 # Documentation
 
-::: pieceofcake2
-This book is the pieceofcake2 fork of the CakePHP 2.x Cookbook. Its source is
-hosted at [pieceofcake2/docs](https://github.com/pieceofcake2/docs) (branch
-`2.x`); send issues and pull requests for it there, not to cakephp/docs.
-The fork's documentation is written in **Markdown** and built with VitePress,
-not reStructuredText/Sphinx, and changes pushed to `2.x` are deployed to
-GitHub Pages by GitHub Actions (there is no Jenkins build). Only English (`en`)
-and Japanese (`ja`) are maintained. Mark any content that applies only to the
-fork with a `::: pieceofcake2` container; the repository's README explains how
-to run the site locally.
-:::
-
 Contributing to the documentation is simple. The files are hosted on
-<https://github.com/cakephp/docs>. Feel free to fork the repo, add your
-changes/improvements/translations and give back by issuing a pull request.
-You can even edit the docs online with GitHub, without ever downloading the
-files -- the "Improve this Doc" button on any given page will direct you to
-GitHub's online editor for that page.
+<https://github.com/pieceofcake2/docs>, in the `2.x` branch. Feel free to fork
+the repo, add your changes/improvements/translations and give back by opening a
+pull request. You can even edit the docs online with GitHub, without ever
+downloading the files: the "Edit this page on GitHub" link at the bottom of
+every page will direct you to GitHub's online editor for that page.
 
-The CakePHP documentation is
-[continuously integrated](https://en.wikipedia.org/wiki/Continuous_integration),
-so you can check the status of the [various builds](https://ci.cakephp.org)
-on the Jenkins server at any time.
+The documentation is written in Markdown and built with
+[VitePress](https://vitepress.dev). Changes merged into the `2.x` branch are
+deployed to <https://pieceofcake2.github.io/docs/> automatically by GitHub
+Actions.
+
+To preview your changes locally, run the development server from the root of
+the repository. It needs `git`, `node`, `npm` and `rsync`:
+
+``` bash
+./bin/dev-server.sh
+```
+
+The script fetches the site theme, copies the documentation into it and starts
+VitePress at <http://localhost:5173>.
+
+## Repository Layout
+
+- `docs/en/` contains the English pages, and `docs/ja/` the Japanese pages. The
+  structure of both folders is the same: a page at `docs/en/foo/bar.md` has its
+  translation at `docs/ja/foo/bar.md`.
+- `toc_en.json` and `toc_ja.json` define the sidebar of each language. When you
+  add a page, add it to both files.
+- `config.js` contains the site configuration, such as the navigation bar and
+  the version banner.
+
+English pages are served from the root of the site (`/installation`), and
+Japanese pages from `/ja/` (`/ja/installation`).
 
 ## Translations
 
-Email the docs team (docs at cakephp dot org) or hop on IRC
-(#cakephp on freenode) to discuss any translation efforts you would
-like to participate in.
+The documentation is maintained in English and Japanese. You should always
+consider the English version as the authoritative version. When you change an
+English page, update the Japanese page too if you can, or mention in your pull
+request that the translation still needs to be updated.
 
-### New Translation Language
+### Translator Tips
 
-We want to provide translations that are as complete as possible. However, there
-may be times where a translation file is not up-to-date. You should always
-consider the English version as the authoritative version.
-
-If your language is not in the current languages, please contact us through
-Github and we will consider creating a skeleton folder for it. The following
-sections are the first one you should consider translating as these
-files don't change often:
-
-- index.rst
-- cakephp-overview.rst
-- getting-started.rst
-- installation.rst
-- /installation folder
-- /getting-started folder
-- /tutorials-and-examples folder
-
-### Reminder for Docs Administrators
-
-The structure of all language folders should mirror the English folder
-structure. If the structure changes for the English version, we should apply
-those changes in the other languages.
-
-For example, if a new English file is created in **en/file.rst**, we should:
-
-- Add the file in all other languages : **fr/file.rst**, **zh/file.rst**, ...
-
-- Delete the content, but keeping the `title`, `meta` information and
-  eventual `toc-tree` elements. The following note will be added while nobody
-  has translated the file:
-
-  ``` text
-  File Title
-  ##########
-
-  .. note::
-      The documentation is not currently supported in XX language for this
-      page.
-
-      Please feel free to send us a pull request on
-      `Github <https://github.com/cakephp/docs>`_ or use the **Improve This Doc**
-      button to directly propose your changes.
-
-      You can refer to the English version in the select top menu to have
-      information about this page's topic.
-
-  // If toc-tree elements are in the English version
-  .. toctree::
-      :maxdepth: 1
-
-      one-toc-file
-      other-toc-file
-
-  .. meta::
-      :title lang=xx: File Title
-      :keywords lang=xx: title, description,...
-  ```
-
-### Translator tips
-
-- Browse and edit in the language you want the content to be
-  translated to - otherwise you won't see what has already been
-  translated.
-- Feel free to dive right in if your chosen language already
-  exists on the book.
-- Use [Informal Form](https://en.wikipedia.org/wiki/Register_(linguistics)).
+- Browse and edit in the language you want the content to be translated to -
+  otherwise you won't see what has already been translated.
 - Translate both the content and the title at the same time.
-- Do compare to the English content before submitting a correction
-  (if you correct something, but don't integrate an 'upstream' change
-  your submission won't be accepted).
-- If you need to write an English term, wrap it in `<em>` tags.
-  E.g. "asdf asdf *Controller* asdf" or "asdf asdf Kontroller
-  (*Controller*) asfd" as appropriate.
+- Do compare to the English content before submitting a correction (if you
+  correct something, but don't integrate an 'upstream' change your submission
+  won't be accepted).
+- Keep the structure of the page, the code samples and the anchors the same as
+  in the English page, so that links between pages keep working in both
+  languages.
+- Use the same terms as the existing pages of your language.
 - Do not submit partial translations.
-- Do not edit a section with a pending change.
 - Do not use
   [html entities](https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references)
   for accented characters, the book uses UTF-8.
-- Do not significantly change the markup (HTML) or add new content
-- If the original content is missing some info, submit an edit for
-  that first.
+- If the original content is missing some info, submit an edit for that first.
 
 ## Documentation Formatting Guide
 
-::: pieceofcake2
-The reStructuredText syntax described in this section applies to the upstream
-Cookbook. The pieceofcake2 docs are Markdown files rendered by VitePress, so
-follow the Markdown style of the existing pages instead.
-:::
-
-The new CakePHP documentation is written with
-[ReST formatted text](https://en.wikipedia.org/wiki/ReStructuredText). ReST
-(Re Structured Text) is a plain text markup syntax similar to markdown, or
-textile. To maintain consistency it is recommended that when adding to the
-CakePHP documentation you follow the guidelines here on how to format and
-structure your text.
+The pages are plain Markdown with a few VitePress extensions. To maintain
+consistency, follow the guidelines here when you add to the documentation, and
+look at the existing pages for examples.
 
 ### Line Length
 
-Lines of text should be wrapped at 80 columns. The only exception should be
-long URLs, and code snippets.
+Lines of text should be wrapped at about 80 columns. The only exceptions are
+long URLs, tables and code snippets.
 
-### Headings and Sections
+### Headings
 
-Section headers are created by underlining the title with punctuation characters
-at least the length of the text.
+Each page starts with a single `#` heading, the page title. Use `##` for
+sections, `###` for subsections and `####` for sub-subsections. Headings should
+not be nested more than 4 levels deep, and should be preceded and followed by a
+blank line.
 
-- `#` Is used to denote page titles.
-- `=` Is used for sections in a page.
-- `-` Is used for subsections.
-- `~` Is used for sub-subsections
-- `^` Is used for sub-sub-sections.
+VitePress generates an anchor for every heading from its text, for example
+`## Running Tests` gets the anchor `#running-tests`. Japanese headings do not
+produce the same anchor, so when a Japanese page needs the same anchor as the
+English page, add it explicitly before the heading:
 
-Headings should not be nested more than 5 levels deep. Headings should be
-preceded and followed by a blank line.
+``` md
+<a id="running-tests"></a>
 
-### Paragraphs
-
-Paragraphs are simply blocks of text, with all the lines at the same level of
-indentation. Paragraphs should be separated by more than one empty line.
+## テストの実行
+```
 
 ### Inline Markup
 
-- One asterisk: *text* for emphasis (italics)
-  We'll use it for general highlighting/emphasis.
-  - `*text*`.
-- Two asterisks: **text** for strong emphasis (boldface)
-  We'll use it for working directories, bullet list subject, table names and
-  excluding the following word "table".
-  - `**/config/Migrations**`, `**articles**`, etc.
-- Two backquotes: `text` for code samples
-  We'll use it for names of method options, names of table columns, object
-  names, excluding the following word "object" and for method/function
-  names -- include "()".
-  - ``cascadeCallbacks``, ``true``, ``id``,
-    ``PagesController``, ``config()``, etc.
-
-If asterisks or backquotes appear in running text and could be confused with
-inline markup delimiters, they have to be escaped with a backslash.
-
-Inline markup has a few restrictions:
-
-- It **may not** be nested.
-- Content may not start or end with whitespace: `* text*` is wrong.
-- Content must be separated from surrounding text by non-word characters. Use a
-  backslash escaped space to work around that: `onelong\ *bolded*\ word`.
+- One asterisk, `*text*`, for emphasis (italics).
+- Two asterisks, `**text**`, for strong emphasis (bold). Use it sparingly.
+- Backquotes, `` `text` ``, for code: method and function names (include
+  `()`), class names, option names, table columns, file names and paths, for
+  example `PagesController`, `find()`, `config/core.php`.
 
 ### Lists
 
-List markup is very similar to markdown. Unordered lists are indicated by
-starting a line with a single asterisk and a space. Numbered lists can be
-created with either numerals, or `#` for auto numbering:
+Unordered lists start each item with `-` and a space. Numbered lists use
+`1.`, `2.`, and so on. Indent nested lists and the continuation lines of an
+item by two spaces (three for numbered lists):
 
-    * This is a bullet
-    * So is this. But this line
-      has two lines.
+``` md
+- This is a bullet
+- So is this. But this line
+  has two lines.
 
-    1. First line
-    2. Second line
-
-    #. Automatic numbering
-    #. Will save you some time.
-
-Indented lists can also be created, by indenting sections and separating them
-with an empty line:
-
-    * First line
-    * Second line
-
-        * Going deeper
-        * Whoah
-
-    * Back to the first level.
-
-Definition lists can be created by doing the following:
-
-    term
-        definition
-    CakePHP
-        An MVC framework for PHP
-
-Terms cannot be more than one line, but definitions can be multi-line and all
-lines should be indented consistently.
+1. First line
+2. Second line
+```
 
 ### Links
 
-There are several kinds of links, each with their own uses.
+Links to external documents use the usual Markdown syntax:
 
-#### External Links
-
-Links to external documents can be with the following:
-
-``` text
-`External Link <http://example.com>`_
+``` md
+[External Link](https://example.com)
 ```
 
-The above would generate a link pointing to <http://example.com>
+Links to other pages of the documentation omit the `.md` extension. You can use
+a path relative to the current page, or an absolute path from the root of the
+language. Absolute paths start with `/` in English pages and with `/ja/` in
+Japanese pages:
 
-#### Links to Other Pages
-
-> Other pages in the documentation can be linked to using the `:doc:` role.
-> You can link to the specified document using either an absolute or relative
-> path reference. You should omit the `.rst` extension. For example, if
-> the reference `` :doc:`form ``<span class="title-ref"> appears in the document </span><span class="title-ref">core-helpers/html</span><span class="title-ref">,
-> then the link references </span><span class="title-ref">core-helpers/form</span><span class="title-ref">. If the reference was
-> </span><span class="title-ref">:doc:</span>/core-helpers`` `, it would always reference ``/core-helpers\`\`
-> regardless of where it was used.
-
-#### Cross Referencing Links
-
-> You can cross reference any arbitrary title in any document using the
-> `:ref:` role. Link label targets must be unique across the entire
-> documentation. When creating labels for class methods, it's best to use
-> `class-method` as the format for your link label.
->
-> The most common use of labels is above a title. Example:
->
->     .. _label-name:
->
->     Section heading
->     ---------------
->
->     More content here.
->
-> Elsewhere you could reference the above section using `` :ref:`label-name ``<span class="title-ref">.
-> The link's text would be the title that the link preceded. You can also
-> provide custom link text using </span><span class="title-ref">:ref:\`Link text \<label-name\></span>\`\`.
-
-#### Prevent Sphinx to Output Warnings
-
-Sphinx will output warnings if a file is not referenced in a toc-tree. It's
-a great way to ensure that all files have a link directed to them, but
-sometimes, you don't need to insert a link for a file, eg. for our
-<span class="title-ref">epub-contents</span> and <span class="title-ref">pdf-contents</span> files. In those cases, you can add
-`:orphan:` at the top of the file, to suppress warnings that the file is not
-in the toc-tree.
-
-### Describing Classes and their Contents
-
-The CakePHP documentation uses the [phpdomain](https://pypi.python.org/pypi/sphinxcontrib-phpdomain) to provide custom
-directives for describing PHP objects and constructs. Using these directives
-and roles is required to give proper indexing and cross referencing features.
-
-### Describing Classes and Constructs
-
-Each directive populates the index, and or the namespace index.
-
-> This directive declares a new PHP global variable.
-
-> Defines a new global function outside of a class.
-
-> This directive declares a new PHP constant, you can also use it nested
-> inside a class directive to create class constants.
-
-> This directive declares a new Exception in the current namespace. The
-> signature can include constructor arguments.
-
-> Describes a class. Methods, attributes, and constants belonging to the class
-> should be inside this directive's body:
->
-> ``` text
-> .. php:class:: MyClass
->
->     Class description
->
->    .. php:method:: method($argument)
->
->    Method description
-> ```
->
-> Attributes, methods and constants don't need to be nested. They can also just
-> follow the class declaration:
->
-> ``` text
-> .. php:class:: MyClass
->
->     Text about the class
->
-> .. php:method:: methodName()
->
->     Text about the method
-> ```
->
-> <div class="seealso">
->
-> `php:method`, `php:attr`, `php:const`
->
-> </div>
-
-> Describe a class method, its arguments, return value, and exceptions:
->
-> ``` text
-> .. php:method:: instanceMethod($one, $two)
->
->     :param string $one: The first parameter.
->     :param string $two: The second parameter.
->     :returns: An array of stuff.
->     :throws: InvalidArgumentException
->
->    This is an instance method.
-> ```
-
-> Describe a static method, its arguments, return value and exceptions,
-> see `php:method` for options.
-
-> Describe an property/attribute on a class.
-
-#### Prevent Sphinx to Output Warnings
-
-Sphinx will output warnings if a function is referenced in multiple files. It's
-a great way to ensure that you did not add a function two times, but
-sometimes, you actually want to write a function in two or more files, eg.
-<span class="title-ref">debug object</span> is referenced in <span class="title-ref">/development/debugging</span> and in
-<span class="title-ref">/core-libraries/global-constants-and-functions</span>. In this case, you can add
-`:noindex:` under the function debug to suppress warnings. Keep only
-one reference **without** `:no-index:` to still have the function referenced:
-
-``` php
-.. php:function:: debug(mixed $var, boolean $showHtml = null, $showFrom = true)
-    :noindex:
+``` md
+[Controllers](../controllers)
+[Testing](/development/testing)
+[テスト](/ja/development/testing)
 ```
 
-#### Cross Referencing
+To link to a section, add the anchor of its heading:
 
-The following roles refer to PHP objects and links are generated if a
-matching directive is found:
+``` md
+[Running Tests](/development/testing#running-tests)
+```
 
-> Reference a PHP function.
+### Describing Classes and Their Contents
 
-> Reference a global variable whose name has `$` prefix.
+There are no special directives for classes and methods. Pages describe a class
+and its methods with a line in this form, followed by the description:
 
-> Reference either a global constant, or a class constant. Class constants
-> should be preceded by the owning class:
->
->     DateTime has an :php:const:`DateTime::ATOM` constant.
+``` md
+`class` **Cache**
 
-> Reference a class by name:
->
->     :php:class:`ClassName`
+`static` Cache::**read**($key, $config = 'default')
 
-> Reference a method of a class. This role supports both kinds of methods:
->
-> ``` php
-> :php:meth:`DateTime::setDate`
-> :php:meth:`Classname::staticMethod`
-> ```
+`Cache::read()` is used to read the cached value stored under `$key` ...
+```
 
-> Reference a property on an object:
->
-> ``` text
-> :php:attr:`ClassName::$propertyName`
-> ```
-
-> Reference an exception.
+Refer to classes and methods in running text with backquotes, for example
+`Cache::read()`.
 
 ### Source Code
 
-Literal code blocks are created by ending a paragraph with `::`. The literal
-block must be indented, and like all paragraphs be separated by single lines:
+Code samples are fenced code blocks with a language name, so that they are
+highlighted. Use `php` for PHP code, `bash` for shell commands, and `text` for
+output or anything that should not be highlighted:
 
-    This is a paragraph::
+```` md
+``` php
+$cloud = Cache::read('cloud');
+```
+````
 
-        while ($i--) {
-            doStuff()
-        }
+PHP code samples follow the [Coding Standards](cakephp-coding-conventions).
+Start a sample with a comment that gives its file name when it helps the
+reader, using the modern application layout, for example
+`// src/Controller/PostsController.php`.
 
-    This is regular text again.
-
-Literal text is not modified or formatted, save that one level of indentation
-is removed.
+You can group alternatives, such as the same command for different tools, with
+a `::: code-group` container.
 
 ### Notes and Warnings
 
 There are often times when you want to inform the reader of an important tip,
-special note or a potential hazard. Admonitions in sphinx are used for just
-that. There are fives kinds of admonitions.
+special note or a potential hazard. Use one of these alerts:
 
-- `.. tip::` Tips are used to document or re-iterate interesting or important
-  information. The content of the directive should be written in complete
-  sentences and include all appropriate punctuation.
-- `.. note::` Notes are used to document an especially important piece of
-  information. The content of the directive should be written in complete
-  sentences and include all appropriate punctuation.
-- `.. warning::` Warnings are used to document potential stumbling blocks, or
-  information pertaining to security. The content of the directive should be
-  written in complete sentences and include all appropriate punctuation.
-- `.. versionadded:: X.Y.Z` "Version added" admonitions are used to display notes
-  specific to new features added at a specific version, `X.Y.Z` being the version on
-  which the said feature was added.
-- `.. deprecated:: X.Y.Z` As opposed to "version added" admonitions, "deprecated"
-  admonition are used to notify of a deprecated feature, `X.Y.Z` being the version on
-  which the said feature was deprecated.
+``` md
+> [!TIP]
+> This is a helpful tid-bit you probably forgot.
 
-All admonitions are made the same:
+> [!NOTE]
+> You should pay attention here.
 
-``` text
-.. note::
-
-    Indented and preceded and followed by a blank line. Just like a
-    paragraph.
-
-This text is not part of the note.
+> [!WARNING]
+> It could be dangerous.
 ```
+
+- Tips are used to document or re-iterate interesting or important information.
+- Notes are used to document an especially important piece of information.
+- Warnings are used to document potential stumbling blocks, or information
+  pertaining to security.
+
+Write the content of alerts in complete sentences, with all appropriate
+punctuation.
+
+To mark when a feature was added, changed or deprecated in CakePHP 2, use an
+`info` container with a title:
+
+``` md
+::: info Added in version 2.6.3
+This awesome feature was added on version 2.6.3
+:::
+
+::: info Deprecated in version 2.6.3
+This old feature was deprecated on version 2.6.3
+:::
+```
+
+The `tip`, `warning` and `danger` containers can also be used with a custom
+title in the same way.
+
+#### Change Notes for the Fork
+
+When the Piece of Cake 2 fork behaves differently from the original CakePHP
+2.10.24 in a way that a reader migrating an application must know, for example
+a removed feature, a changed default or a changed method signature, add a short
+note in a `pieceofcake2` container next to the text it applies to:
+
+``` md
+::: pieceofcake2
+The Xcache and Wincache cache engines
+were removed.
+:::
+```
+
+The default title is "Piece of Cake 2 fork"; you can give another one after
+the container name, as with `::: pieceofcake2 Cache engines`. Keep these notes
+to one to three sentences. Everything else, including the current paths and
+commands, belongs in the normal text of the page.
 
 #### Samples
 
@@ -451,6 +247,17 @@ This text is not part of the note.
 This awesome feature was added on version 2.6.3
 :::
 
-::: info Deprecated in version 2.6.3
-This old feature was deprecated on version 2.6.3
+::: pieceofcake2
+The Xcache and Wincache cache engines
+were removed.
 :::
+
+### Including Other Files
+
+A page can include part of another Markdown file with VitePress's `@include`
+directive, written as an HTML comment. This is used, for example, to show the
+same section on two pages; see `docs/en/core-libraries.md` for examples. A line
+range in braces after the file name, such as `{28,97}`, includes only those
+lines. If you edit a file that is included elsewhere, search the repository for
+`@include` and check that the line ranges in the including files still select
+the same section.

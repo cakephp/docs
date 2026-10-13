@@ -8,8 +8,9 @@ Published at https://pieceofcake2.github.io/docs/
 
 This repository is a fork of the `2.x` branch of
 [cakephp/docs](https://github.com/cakephp/docs/tree/2.x) (the CakePHP Cookbook).
-Content specific to the fork is marked in the documentation with a
-`::: pieceofcake2` box.
+The book describes CakePHP 2 as it works on the fork today (Composer, PHP 8,
+the modern directory layout). Differences from the original book are listed on
+[Changes from the Original Book](https://pieceofcake2.github.io/docs/pieceofcake2/changes).
 
 The theme lives in [pieceofcake2/docs-skeleton](https://github.com/pieceofcake2/docs-skeleton)
 (a fork of cakephp/docs-skeleton) and is cloned at build time.
@@ -27,20 +28,25 @@ Requires `git`, `node`, `npm` and `rsync`.
 Pushes to the `2.x` branch are deployed to GitHub Pages by
 `.github/workflows/deploy.yml`.
 
-## Writing fork-specific content
+## Editing Guidelines
 
-Wrap anything that differs from the original CakePHP 2.x documentation in a
-`pieceofcake2` container so readers can tell it apart:
+- Write the pages so that they describe the current state. Do not add separate
+  "fork-specific" pages or disclaimers; edit the original page instead.
+- Use the modern directory layout (`src/`, `templates/`, `config/`, `bin/cake`)
+  in text and examples. Mention the legacy `app/` layout only where it helps.
+- Code samples follow the [coding standard](https://pieceofcake2.github.io/docs/contributing/cakephp-coding-conventions)
+  (CakePHP 5 codesniffer).
+- When the fork behaves differently from the original CakePHP 2.10.24 in a way
+  that a migrating user must know, add a short change note:
 
-```md
-::: pieceofcake2
-pieceofcake2/cakephp requires PHP 8.0 or newer.
-:::
+  ```md
+  ::: pieceofcake2
+  The Xcache and Wincache engines were removed.
+  :::
+  ```
 
-::: pieceofcake2 Custom title
-...
-:::
-```
+- Update both `docs/en` and `docs/ja`, and add the change to
+  `docs/*/pieceofcake2/changes.md`.
 
 ## License
 

@@ -16,35 +16,35 @@ CakePHP では下記の典型的な描画シナリオに対応するためのい
 ## ビューテンプレート
 
 CakePHP のビューレイヤーはユーザとの対話の手段です。ほとんどの場合、ビューは
-(X)HTML ドキュメントをブラウザーに返します。
-しかし、ときには Flash オブジェクトへ AMF データを提供したり、SOAP を介して
-リモートアプリケーションに返答したり、CSV ファイルを出力する必要があるかもしれません。
+HTML ドキュメントをブラウザーに返します。
+しかし、ときには JSON や XML でリモートアプリケーションに返答したり、
+CSV ファイルを出力する必要があるかもしれません。
 
 デフォルトでは、CakePHP のビューファイルはプレーンな PHP で書かれ、その拡張子は
 .ctp (CakePHP Template) です。ビューファイルにはコントローラーから受け取った
 データの取得に必要なロジックが書かれています。もし Twig や Smarty のような
-テンプレート言語を使たいのであれば、ビューのサブクラスがテンプレート言語と CakePHP の
-橋渡しをしてくれるでしょう。
+テンプレート言語を使いたいのであれば、ビューのサブクラスがテンプレート言語と CakePHP の
+橋渡しをしてくれるでしょう。Twig の場合は
+[TwigView プラグイン](https://github.com/pieceofcake2/twig-view) がそのようなビュークラスを提供しています。
 
-ビューファイルは、 `/app/View/` にあるコントローラ名のフォルダに、
+ビューファイルは、 `templates/` にあるコントローラ名のフォルダに、
 関連するアクション名で保存されます。例えば、Products コントローラの "view()"
-アクションのビューファイルは通常、 `/app/View/Products/view.ctp` となります。
+アクションのビューファイルは通常、 `templates/Products/view.ctp` となります。
 
-::: pieceofcake2 テンプレートの配置場所
-pieceofcake2 フォークのモダンレイアウトでは、テンプレート（`.ctp` ファイル）は PHP クラスと分けて配置します。
+テンプレートファイル (`.ctp`) は、ビューレイヤーの PHP クラスとは別の場所に置きます。
+従来の `app/` レイアウトのアプリケーションでは、どちらも `app/View/` 以下に置きます。
 
-| | レガシー | モダン |
+| | モダンレイアウト | 従来の `app/` レイアウト |
 |---|---|---|
-| ビューテンプレート | `app/View/Products/view.ctp` | `templates/Products/view.ctp` |
-| レイアウト | `app/View/Layouts/` | `templates/Layouts/` |
-| エレメント | `app/View/Elements/` | `templates/Elements/` |
-| ヘルパー | `app/View/Helper/` | `src/View/Helper/` |
-| ビュークラス | `app/View/PdfView.php` | `src/View/PdfView.php` |
+| ビューテンプレート | `templates/Products/view.ctp` | `app/View/Products/view.ctp` |
+| レイアウト | `templates/Layouts/` | `app/View/Layouts/` |
+| エレメント | `templates/Elements/` | `app/View/Elements/` |
+| ヘルパー | `src/View/Helper/` | `app/View/Helper/` |
+| ビュークラス | `src/View/` | `app/View/` |
 
-この章で `.ctp` ファイルの場所として `app/View/...` と書かれている箇所は、モダンレイアウトでは
-`templates/...` と読み替えてください。プラグイン内のテンプレートは引き続きプラグインの `View/`
-ディレクトリに置きます。[ディレクトリ構成](/ja/pieceofcake2/directory-structure) を参照してください。
-:::
+プラグイン内のテンプレートは、常にプラグイン自身の `View/` ディレクトリに置きます。
+たとえば `plugins/Contacts/View/Contacts/index.ctp` です。対応関係の全体は
+[CakePHP のフォルダ構造](/ja/getting-started/cakephp-folder-structure) を参照してください。
 
 CakePHP のビューレイヤーはいくつかの異なるパーツによって作り上げられています。
 各パーツはそれぞれ役割を持っており、この章で説明していきます。
@@ -59,7 +59,7 @@ CakePHP のビューレイヤーはいくつかの異なるパーツによって
   カプセル化します。とりわけ、CakePHP のヘルパーはフォームの構築や AJAX 機能の構築、
   モデルデータのページ切替、RSS フィードの提供などの手助けをしてくれます。
 
-### ビューの継承
+### ビューの継承 {#extending-views}
 
 ::: info Added in version 2.1
 :::
@@ -72,7 +72,7 @@ CakePHP のビューレイヤーはいくつかの異なるパーツによって
 実現できます。
 
 ``` php
-// app/View/Common/view.ctp
+// templates/Common/view.ctp
 <h1><?php echo $this->fetch('title'); ?></h1>
 <?php echo $this->fetch('content'); ?>
 
@@ -92,7 +92,7 @@ CakePHP が作る特別なブロックで、ビューの継承で捕捉されな
 
 ``` php
 <?php
-// app/View/Posts/view.ctp
+// templates/Posts/view.ctp
 $this->extend('/Common/view');
 
 $this->assign('title', $post);
@@ -132,6 +132,8 @@ $this->extend('/Common/index');
 > [!NOTE]
 > `content` をブロック名として使うことは避けるべきです。
 > CakePHP は継承されたビューの中で捕捉されていないコンテンツとして扱ってしまいます。
+
+<a id="view-blocks"></a>
 
 ## ビューブロックを使う
 
@@ -225,7 +227,7 @@ fetch を使うとブロックが存在するかどうかによってブロッ�
 切り替えることができます。
 
 ``` php
-// in app/View/Layouts/default.ctp
+// in templates/Layouts/default.ctp
 <?php if ($this->fetch('menu')): ?>
 <div class="menu">
     <h3>Menu options</h3>
@@ -288,13 +290,13 @@ $this->Html->script('carousel', ['block' => 'scriptBottom']);
 echo $this->fetch('scriptBottom');
 ```
 
-## レイアウト
+## レイアウト {#view-layouts}
 
 レイアウトはビューをラップする表示用コードを含みます。すべてのビューから見えて欲しいものは
 レイアウトに配置されるべきです。
 
-レイアウトファイルは `/app/View/Layouts` に配置されるべきです。新しいデフォルトレイアウトを
-`/app/View/Layouts/default.ctp` に作成することで CakePHP のデフォルトレイアウトは
+レイアウトファイルは `templates/Layouts` に配置されるべきです。新しいデフォルトレイアウトを
+`templates/Layouts/default.ctp` に作成することで CakePHP のデフォルトレイアウトは
 上書きされます。一旦新しいデフォルトレイアウトが作られると、ページが描画されるときに
 コントローラによって描画されたビューコードが新しいデフォルトレイアウトの内部に配置されるように
 なります。
@@ -359,7 +361,7 @@ CSS ファイルが含まれるのは便利です。
 > レイアウト中で `$this->fetch('title')` を、
 > ビューで `$this->assign('title', 'page title')` を使用してください。
 
-好きなだけレイアウトを作ることが出来ます。レイアウトは、 `app/View/Layouts`
+好きなだけレイアウトを作ることが出来ます。レイアウトは、 `templates/Layouts`
 ディレクトリにファイルを作って、コントローラアクションの中かビューの
 `~View::$layout` プロパティを切り替えるだけで作成できます。 :
 
@@ -422,7 +424,7 @@ class UsersController extends AppController
 }
 ```
 
-## エレメント
+## エレメント {#view-elements}
 
 多くのアプリケーションには様々なページで、時には異なるレイアウトのページで、
 繰り返し必要とされる表示用コードの小さなブロックがあります。CakePHP は再利用が必要な
@@ -433,7 +435,7 @@ class UsersController extends AppController
 エレメントはビューの中で繰り返し描画される箇所の可読性を改善するために使えます。
 アプリケーション内のコンテンツの一部を再利用する手助けとなります。
 
-エレメントは `/app/View/Elements/` フォルダの中に .ctp の拡張子を持つ名前で配置されます。
+エレメントは `templates/Elements/` フォルダの中に .ctp の拡張子を持つ名前で配置されます。
 次の例はビューのelementメソッドを使って出力しています。 :
 
 ``` php
@@ -452,10 +454,10 @@ echo $this->element('helpbox', [
 
 エレメントファイルの内部では、引数で渡されたすべての変数をパラメータ配列のメンバとして利用できます。
 (ビューファイルにおけるコントローラの `Controller::set()` メソッドと同様の動作です。)
-上記の例では `/app/View/Elements/helpbox.ctp` の中で `$helptext` 変数が使えます。 :
+上記の例では `templates/Elements/helpbox.ctp` の中で `$helptext` 変数が使えます。 :
 
-``` text
-// app/View/Elements/helpbox.ctp の内部
+``` php
+// templates/Elements/helpbox.ctp の内部
 echo $helptext; //"Oh, this text is very helpful." と出力されます
 ```
 
@@ -519,13 +521,13 @@ class PostsController extends AppController
 ``` php
 <h2>Latest Posts</h2>
 <?php
-  $posts = $this->requestAction(
+$posts = $this->requestAction(
     'posts/index/sort:created/direction:asc/limit:5'
-  );
+);
 ?>
 <ol>
 <?php foreach ($posts as $post): ?>
-      <li><?php echo $post['Post']['title']; ?></li>
+    <li><?php echo $post['Post']['title']; ?></li>
 <?php endforeach; ?>
 </ol>
 ```
@@ -550,14 +552,14 @@ echo $this->element('helpbox', [], ['cache' => true]);
 echo $this->element(
     'helpbox',
     ['var' => $var],
-    ['cache' => ['key' => 'first_use', 'config' => 'view_long']
-];
+    ['cache' => ['key' => 'first_use', 'config' => 'view_long']]
+);
 
 echo $this->element(
     'helpbox',
-    ['var' => $differenVar],
-    ['cache' => ['key' => 'second_use', 'config' => 'view_long']
-];
+    ['var' => $differentVar],
+    ['cache' => ['key' => 'second_use', 'config' => 'view_long']]
+);
 ```
 
 上の例では、2つの element() の結果が別々にキャッシュされていることが保証されています。
@@ -609,7 +611,7 @@ echo $this->element('Contacts.helpbox');
 アプリケーションにカスタムビューのレンダリングロジックを追加する必要があります。
 CakePHP のビュークラスのほとんどのコンポーネントと同様に、いくつかの規則があります。:
 
-- ビュークラスは `App/View` に配置してください。例) `App/View/PdfView.php`
+- ビュークラスは `src/View` に配置してください。例) `src/View/PdfView.php`
 - ビュークラス名には `View` をつけてください。 例) `PdfView`
 - ビュークラス名を参照するときは、 `View` サフィックスを省略する必要があります。
   例) `$this->viewClass = 'Pdf';`
@@ -617,9 +619,7 @@ CakePHP のビュークラスのほとんどのコンポーネントと同様に
 また、正しく動作するように、 `View` を継承しましょう。 :
 
 ``` php
-// In App/View/PdfView.php
-
-App::uses('View', 'View');
+// In src/View/PdfView.php
 class PdfView extends View
 {
     public function render($view = null, $layout = null)

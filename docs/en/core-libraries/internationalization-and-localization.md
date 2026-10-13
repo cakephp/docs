@@ -47,7 +47,13 @@ generate your pot file(s), all you need to do is run the
 which will look for where you've used a translate function in your
 code and generate your pot file(s) for you. You can and should
 re-run this console task any time you change the translations in
-your code.
+your code. In the modern layout your templates live outside `src/`,
+so pass both directories and the output directory explicitly when you
+run the task from the project root:
+
+``` bash
+bin/cake i18n extract --paths src,templates --output resources/locales
+```
 
 The pot file(s) themselves are not used by CakePHP, they are the
 templates used to create or update your
@@ -56,27 +62,21 @@ the translations. CakePHP will look for your po files in the following
 location:
 
 ``` text
-/app/Locale/<locale>/LC_MESSAGES/<domain>.po
+resources/locales/<locale>/LC_MESSAGES/<domain>.po
 ```
 
 The default domain is 'default', therefore your locale folder would
 look something like this:
 
 ``` text
-/app/Locale/eng/LC_MESSAGES/default.po (English)
-/app/Locale/fra/LC_MESSAGES/default.po (French)
-/app/Locale/por/LC_MESSAGES/default.po (Portuguese)
+resources/locales/eng/LC_MESSAGES/default.po (English)
+resources/locales/fra/LC_MESSAGES/default.po (French)
+resources/locales/por/LC_MESSAGES/default.po (Portuguese)
 ```
 
-::: pieceofcake2 Locale directory
-The pieceofcake2 fork looks for locale files in both locations:
-
-- Legacy layout: `app/Locale/<locale>/LC_MESSAGES/<domain>.po`
-- Modern layout: `resources/locales/<locale>/LC_MESSAGES/<domain>.po`
-
-Plugin translations still go in the plugin's `Locale/` directory.
-See [Directory Structure](/pieceofcake2/directory-structure).
-:::
+In the legacy `app/` layout, the locale folder is `app/Locale/` instead.
+CakePHP searches both locations, see
+[Directory Structure](/appendices/migrating-to-the-modern-layout).
 
 To create or edit your po files it's recommended that you do *not*
 use your favorite editor. To create a po file for the first time it
@@ -103,12 +103,12 @@ you want to translate long paragraphs, or even whole pages - you
 should consider implementing a different solution. e.g. :
 
 ``` php
-// App Controller Code.
+// src/Controller/AppController.php
 public function beforeFilter()
 {
     $locale = Configure::read('Config.language');
-    if ($locale && file_exists(APP . 'View' . DS . $locale . DS . $this->viewPath . DS . $this->view . $this->ext)) {
-        // e.g. use /app/View/fra/Pages/tos.ctp instead of /app/View/Pages/tos.ctp
+    if ($locale && file_exists(ROOT . DS . 'templates' . DS . $locale . DS . $this->viewPath . DS . $this->view . $this->ext)) {
+        // e.g. use templates/fra/Pages/tos.ctp instead of templates/Pages/tos.ctp
         $this->viewPath = $locale . DS . $this->viewPath;
     }
 }
@@ -132,8 +132,8 @@ use these LC_TIME files.
 Just place LC_TIME file in its respective locale directory:
 
 ``` text
-/app/Locale/fra/LC_TIME (French)
-/app/Locale/por/LC_TIME (Portuguese)
+resources/locales/fra/LC_TIME (French)
+resources/locales/por/LC_TIME (Portuguese)
 ```
 
 You can find these files for few popular languages from the official [Localized](https://github.com/cakephp/localized)
@@ -157,16 +157,19 @@ find your translation file.
 Your translation file for this example should go into:
 
 ``` text
-/app/Plugin/DebugKit/Locale/<locale>/LC_MESSAGES/<domain>.po
+plugins/DebugKit/Locale/<locale>/LC_MESSAGES/<domain>.po
 ```
 
 And for other languages than the default:
 
 ``` text
-/app/Plugin/DebugKit/Locale/eng/LC_MESSAGES/debug_kit.po (English)
-/app/Plugin/DebugKit/Locale/fra/LC_MESSAGES/debug_kit.po (French)
-/app/Plugin/DebugKit/Locale/por/LC_MESSAGES/debug_kit.po (Portuguese)
+plugins/DebugKit/Locale/eng/LC_MESSAGES/debug_kit.po (English)
+plugins/DebugKit/Locale/fra/LC_MESSAGES/debug_kit.po (French)
+plugins/DebugKit/Locale/por/LC_MESSAGES/debug_kit.po (Portuguese)
 ```
+
+Plugins keep their translations in their own `Locale/` directory in both
+layouts.
 
 The reason for that is that CakePHP will use the lower cased and underscored
 plugin name to compare it to the translation domain and is going to look into
@@ -281,12 +284,12 @@ class User extends AppModel
 
     public $validate = [
         'username' => [
-                'length' => [
+            'length' => [
                 'rule' => ['between', 2, 10],
-                'message' => 'Username should be between %d and %d characters'
-            ]
-        ]
-    ]
+                'message' => 'Username should be between %d and %d characters',
+            ],
+        ],
+    ];
 }
 ```
 

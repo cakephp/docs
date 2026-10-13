@@ -1,5 +1,11 @@
 # URL Rewriting
 
+In all of the examples on this page, the web server's document root points to
+the application's `webroot/` directory (`app/webroot/` in the legacy layout),
+as described in [Installation](../installation#configuring-the-web-server).
+Every request for a file that does not exist in `webroot/` is passed to
+`webroot/index.php`.
+
 ## Apache and mod_rewrite (and .htaccess)
 
 While CakePHP is built to work with mod_rewrite out of the box–and
@@ -7,43 +13,25 @@ usually does–we've noticed that a few users struggle with getting
 everything to play nicely on their systems.
 
 Here are a few things you might try to get it running correctly.
-First look at your httpd.conf. (Make sure you are editing the system
-httpd.conf rather than a user- or site-specific httpd.conf.)
-
-These files can vary between different distributions and Apache versions.
-You may also take a look at <https://wiki.apache.org/httpd/DistrosDefaultLayout> for further information.
+First look at your Apache configuration. The location of these files varies
+between distributions; make sure you are editing the configuration that
+belongs to your site, for example the virtual host file.
 
 1.  Make sure that an .htaccess override is allowed and that
     AllowOverride is set to All for the correct DocumentRoot. You
     should see something similar to:
 
     ``` text
-    # Each directory to which Apache has access can be configured with respect
-    # to which services and features are allowed and/or disabled in that
-    # directory (and its subdirectories).
-    #
-    # First, we configure the "default" to be a very restrictive set of
-    # features.
-    #
-    <Directory />
+    <Directory /var/www/my_app/webroot>
         Options FollowSymLinks
         AllowOverride All
-    #    Order deny,allow
-    #    Deny from all
+        Require all granted
     </Directory>
     ```
 
-    For users having apache 2.4 and above, you need to modify the configuration
-    file for your `httpd.conf` or virtual host configuration to look like the
-    following:
-
-    ``` html
-    <Directory /var/www/>
-         Options FollowSymLinks
-         AllowOverride All
-         Require all granted
-    </Directory>
-    ```
+    On Debian and Ubuntu, virtual hosts are configured in
+    `/etc/apache2/sites-available/`. Make sure that `AllowOverride None` is
+    changed to `AllowOverride All` for your document root.
 
 2.  Make sure you are loading mod_rewrite correctly. You should
     see something like:
@@ -51,60 +39,18 @@ You may also take a look at <https://wiki.apache.org/httpd/DistrosDefaultLayout>
         LoadModule rewrite_module libexec/apache2/mod_rewrite.so
 
     In many systems these will be commented out by default, so you may
-    just need to remove the leading \# symbols.
+    just need to remove the leading \# symbols. On Debian and Ubuntu, run
+    `a2enmod rewrite` instead.
 
     After you make changes, restart Apache to make sure the settings
     are active.
 
-    Verify that your .htaccess files are actually in the right
-    directories. Some operating systems treat files that start
-    with '.' as hidden and therefore won't copy them.
+3.  Verify that the `.htaccess` file is actually in `webroot/`. Some
+    operating systems and tools treat files that start with '.' as hidden
+    and therefore won't copy them. The `.htaccess` file of the application
+    skeleton looks like this:
 
-3.  Make sure your copy of CakePHP comes from the downloads section of
-    the site or our Git repository, and has been unpacked correctly, by
-    checking for .htaccess files.
-
-    CakePHP root directory (must be copied to your document;
-    redirects everything to your CakePHP app):
-
-    ``` html
-    <IfModule mod_rewrite.c>
-       RewriteEngine on
-       RewriteRule    ^$ app/webroot/    [L]
-       RewriteRule    (.*) app/webroot/$1 [L]
-    </IfModule>
-    ```
-
-    CakePHP app directory (will be copied to the top directory of your
-    application by bake):
-
-    ``` html
-    <IfModule mod_rewrite.c>
-       RewriteEngine on
-       RewriteRule    ^$    webroot/    [L]
-       RewriteRule    (.*) webroot/$1    [L]
-    </IfModule>
-    ```
-
-    CakePHP webroot directory (will be copied to your application's web
-    root by bake):
-
-    ``` html
-    <IfModule mod_rewrite.c>
-        RewriteEngine On
-        RewriteCond %{REQUEST_FILENAME} !-d
-        RewriteCond %{REQUEST_FILENAME} !-f
-        RewriteRule ^(.*)$ index.php [QSA,L]
-    </IfModule>
-    ```
-
-    ::: pieceofcake2 Modern layout
-    In the modern layout ([pieceofcake2/app](https://github.com/pieceofcake2/app)),
-    only `webroot/.htaccess` exists. There is no `.htaccess` at the project root
-    or in `src/`, so set the `DocumentRoot` to the `webroot/` directory at the
-    project root. The skeleton's `webroot/.htaccess` is:
-
-    ``` html
+    ``` text
     <IfModule mod_rewrite.c>
         RewriteEngine On
         RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
@@ -114,69 +60,45 @@ You may also take a look at <https://wiki.apache.org/httpd/DistrosDefaultLayout>
     </IfModule>
     ```
 
-    The legacy layout (`app/`) keeps the three `.htaccess` files shown above.
-    :::
+    The second line passes the HTTP `Authorization` header on to PHP, which is
+    needed for HTTP Basic and Digest authentication when PHP runs as FastCGI.
 
-    If your CakePHP site still has problems with mod_rewrite, you might
-    want to try modifying settings for Virtual Hosts. On Ubuntu,
-    edit the file /etc/apache2/sites-available/default (location is
-    distribution-dependent). In this file, ensure that
-    `AllowOverride None` is changed to `AllowOverride All`, so you have:
+    Legacy `app/` applications also have an `.htaccess` file in the project
+    root and in `app/` that forward requests to `app/webroot/`. They are only
+    used when the document root is not set to `app/webroot/`.
 
-    ``` html
-    <Directory />
-        Options FollowSymLinks
-        AllowOverride All
-    </Directory>
-    <Directory /var/www>
-        Options Indexes FollowSymLinks MultiViews
-        AllowOverride All
-        Order Allow,Deny
-        Allow from all
-    </Directory>
-    ```
+    If you are installing CakePHP into a user directory
+    (<http://example.com/~username/my_app/>), or any other URL structure
+    that already utilizes mod_rewrite, you'll need to add a `RewriteBase`
+    statement to the `.htaccess` file in `webroot/`. This can be added to the
+    same section with the RewriteEngine directive, so for example, your webroot
+    .htaccess file would look like:
 
-    On Mac OSX, another solution is to use the tool
-    [virtualhostx](https://clickontyler.com/virtualhostx/)
-    to make a Virtual Host to point to your folder.
-
-    For many hosting services (GoDaddy, 1and1), your web server is
-    actually being served from a user directory that already uses
-    mod_rewrite. If you are installing CakePHP into a user directory
-    (<http://example.com/~username/cakephp/>), or any other URL structure
-    that already utilizes mod_rewrite, you'll need to add RewriteBase
-    statements to the .htaccess files CakePHP uses (/.htaccess,
-    /app/.htaccess, /app/webroot/.htaccess).
-
-    This can be added to the same section with the RewriteEngine
-    directive, so for example, your webroot .htaccess file would look
-    like:
-
-    ``` html
+    ``` text
     <IfModule mod_rewrite.c>
         RewriteEngine On
-        RewriteBase /path/to/cake/app
+        RewriteBase /~username/my_app
         RewriteCond %{REQUEST_FILENAME} !-d
         RewriteCond %{REQUEST_FILENAME} !-f
-        RewriteRule ^(.*)$ index.php [QSA,L]
+        RewriteRule ^ index.php [L]
     </IfModule>
     ```
 
     The details of those changes will depend on your setup, and can
     include additional things that are not related to CakePHP. Please refer
-    to Apache's online documentation for more information.
+    to [Apache's documentation](https://httpd.apache.org/docs/current/mod/mod_rewrite.html)
+    for more information.
 
 4.  (Optional) To improve production setup, you should prevent invalid assets
     from being parsed by CakePHP. Modify your webroot .htaccess to something like:
 
-    ``` html
+    ``` text
     <IfModule mod_rewrite.c>
         RewriteEngine On
-        RewriteBase /path/to/cake/app
         RewriteCond %{REQUEST_FILENAME} !-d
         RewriteCond %{REQUEST_FILENAME} !-f
-        RewriteCond %{REQUEST_URI} !^/(app/webroot/)?(img|css|js)/(.*)$
-        RewriteRule ^(.*)$ index.php [QSA,L]
+        RewriteCond %{REQUEST_URI} !^/(img|css|js)/(.*)$
+        RewriteRule ^ index.php [L]
     </IfModule>
     ```
 
@@ -191,27 +113,27 @@ You may also take a look at <https://wiki.apache.org/httpd/DistrosDefaultLayout>
 ## Pretty URLs on nginx
 
 nginx does not make use of .htaccess files like Apache, so it is necessary to
-create those rewritten URLs in the site-available configuration. Depending upon
+create those rewritten URLs in the site configuration. Depending upon
 your setup, you will have to modify this, but at the very least,
-you will need PHP running as a FastCGI instance.
+you will need PHP running with PHP-FPM.
 
-``` php
+``` text
 server {
-    listen   80;
+    listen 80;
     server_name www.example.com;
-    rewrite ^(.*) http://example.com$1 permanent;
+    return 301 http://example.com$request_uri;
 }
 
 server {
-    listen   80;
+    listen 80;
     server_name example.com;
 
     # root directive should be global
-    root   /var/www/example.com/public/app/webroot/;
-    index  index.php;
+    root /var/www/my_app/webroot;
+    index index.php;
 
-    access_log /var/www/example.com/log/access.log;
-    error_log /var/www/example.com/log/error.log;
+    access_log /var/log/nginx/my_app.access.log;
+    error_log /var/log/nginx/my_app.error.log;
 
     location / {
         try_files $uri $uri/ /index.php?$args;
@@ -219,49 +141,33 @@ server {
 
     location ~ \.php$ {
         try_files $uri =404;
-        include /etc/nginx/fastcgi_params;
-        fastcgi_pass    127.0.0.1:9000;
-        fastcgi_index   index.php;
+        include fastcgi_params;
+        fastcgi_pass unix:/run/php/php-fpm.sock;
+        fastcgi_index index.php;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     }
 }
 ```
 
-::: pieceofcake2
-For the modern layout, point `root` at the `webroot/` directory at the project
-root instead, e.g. `root /var/www/example.com/public/webroot/;`.
-:::
-
-If for some exotic reason you cannot change your root directory and need to run
-your project from a subfolder like example.com/subfolder/, you will have to
-inject "/webroot" in each request.
-
-``` text
-location ~ ^/(subfolder)/(.*)? {
-   index  index.php;
-
-   set $new_uri /$1/webroot/$2;
-   try_files $new_uri $new_uri/ /$1/index.php?$args;
-
-   ... php handling ...
-}
-```
+For the legacy layout, set `root` to the `app/webroot` directory instead.
 
 > [!NOTE]
-> Recent configuration of PHP-FPM is set to listen to php-fpm socket instead of TCP port 9000 on address 127.0.0.1. If you get 502 bad gateway error from above configuration, try replacing fastcgi_pass from TCP port to socket path (eg: fastcgi_pass unix:/var/run/php5-fpm.sock;).
+> The path of the PHP-FPM socket depends on your distribution and PHP
+> version, for example `/run/php/php8.3-fpm.sock`. If PHP-FPM listens on a TCP
+> port instead, use `fastcgi_pass 127.0.0.1:9000;`. A 502 Bad Gateway error
+> usually means that `fastcgi_pass` does not match the PHP-FPM configuration.
 
-## URL Rewrites on IIS7 (Windows hosts)
+## URL Rewrites on IIS (Windows hosts)
 
-IIS7 does not natively support .htaccess files. While there are
-add-ons that can add this support, you can also import htaccess
-rules into IIS to use CakePHP's native rewrites. To do this, follow
-these steps:
+IIS does not natively support .htaccess files. Instead, you can use the
+[URL Rewrite module](https://www.iis.net/downloads/microsoft/url-rewrite) to
+get the same rewrites. To do this, follow these steps:
 
-1.  Use [Microsoft's Web Platform Installer](https://www.microsoft.com/web/downloads/platform.aspx) to install the URL
-    [Rewrite Module 2.0](https://www.iis.net/downloads/microsoft/url-rewrite) or download it directly ([32-bit](https://www.microsoft.com/en-us/download/details.aspx?id=5747) / [64-bit](https://www.microsoft.com/en-us/download/details.aspx?id=7435)).
-2.  Create a new file called web.config in your CakePHP root folder.
-3.  Using Notepad or any XML-safe editor, copy the following
-    code into your new web.config file...
+1.  Install the [URL Rewrite module](https://www.iis.net/downloads/microsoft/url-rewrite).
+2.  Point the site's physical path to the application's `webroot/` directory
+    and create a new file called web.config in it.
+3.  Using any XML-safe editor, copy the following code into your new
+    web.config file:
 
 ``` xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -269,25 +175,13 @@ these steps:
     <system.webServer>
         <rewrite>
             <rules>
-                <rule name="Rewrite requests to test.php"
-                  stopProcessing="true">
-                    <match url="^test.php(.*)$" ignoreCase="false" />
-                    <action type="Rewrite" url="app/webroot/test.php{R:1}" />
-                </rule>
-                <rule name="Exclude direct access to app/webroot/*"
-                  stopProcessing="true">
-                    <match url="^app/webroot/(.*)$" ignoreCase="false" />
-                    <action type="None" />
-                </rule>
-                <rule name="Rewrite routed access to assets(img, css, files, js, favicon)"
-                  stopProcessing="true">
-                    <match url="^(img|css|files|js|favicon.ico)(.*)$" />
-                    <action type="Rewrite" url="app/webroot/{R:1}{R:2}"
-                      appendQueryString="false" />
-                </rule>
                 <rule name="Rewrite requested file/folder to index.php"
                   stopProcessing="true">
                     <match url="^(.*)$" ignoreCase="false" />
+                    <conditions logicalGrouping="MatchAll">
+                        <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
+                        <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
+                    </conditions>
                     <action type="Rewrite" url="index.php"
                       appendQueryString="true" />
                 </rule>
@@ -298,19 +192,14 @@ these steps:
 ```
 
 Once the web.config file is created with the correct IIS-friendly
-rewrite rules, CakePHP's links, CSS, JavaScipt, and rerouting should work
+rewrite rules, CakePHP's links, CSS, JavaScript, and rerouting should work
 correctly.
-
-::: pieceofcake2
-These rules assume the legacy layout. For the modern layout, `webroot/` is at the
-project root: use `webroot/` instead of `app/webroot/` in the rules, or point the
-site's physical path at `webroot/`.
-:::
 
 ## URL-Rewriting on lighttpd
 
 Lighttpd does not support .htaccess functions, so you can remove all .htaccess files.
-In the lighttpd configuration, make sure you've activated "mod_rewrite". Add a line:
+In the lighttpd configuration, set `server.document-root` to the `webroot/`
+directory and make sure you've activated "mod_rewrite". Add a line:
 
 ``` text
 url.rewrite-if-not-file =(
@@ -322,7 +211,7 @@ url.rewrite-if-not-file =(
 
 The required UrlToolkit rule (for URL rewriting) to use CakePHP with Hiawatha is:
 
-``` css
+``` text
 UrlToolkit {
    ToolkitID = cakephp
    RequestURI exists Return

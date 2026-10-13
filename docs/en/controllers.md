@@ -17,17 +17,12 @@ handles.
 
 Your application's controllers extend the `AppController` class, which in turn
 extends the core `Controller` class. The `AppController`
-class can be defined in `/app/Controller/AppController.php` and it should
+class is defined in `src/Controller/AppController.php` and it should
 contain methods that are shared between all of your application's controllers.
-
-::: pieceofcake2 File locations
-The pieceofcake2 fork supports two application layouts. Controllers and components go in:
-
-- Legacy: `app/Controller/`, `app/Controller/Component/`
-- Modern: `src/Controller/`, `src/Controller/Component/`
-
-See [Directory structure](/pieceofcake2/directory-structure).
-:::
+Your own controllers go in `src/Controller/` and components in
+`src/Controller/Component/`. If your application still uses the legacy `app/`
+layout, use `app/Controller/` and `app/Controller/Component/` instead; see
+[CakePHP Folder Structure](/getting-started/cakephp-folder-structure).
 
 Controllers provide a number of methods that handle requests. These are called
 *actions*. By default, each public method in
@@ -44,9 +39,10 @@ As stated in the introduction, the `AppController` class is the
 parent class to all of your application's controllers.
 `AppController` itself extends the `Controller` class included in the
 CakePHP core library. `AppController` is defined in
-`/app/Controller/AppController.php` as follows:
+`src/Controller/AppController.php` as follows:
 
 ``` php
+// src/Controller/AppController.php
 class AppController extends Controller
 {
 }
@@ -86,6 +82,31 @@ public function beforeFilter()
 }
 ```
 
+<a id="autoloading-classes"></a>
+
+### Loading classes
+
+The examples in this book don't start with `App::uses()` statements. CakePHP's
+own classes are autoloaded by Composer, and the application skeleton
+([pieceofcake2/app](https://github.com/pieceofcake2/app)) registers your
+application classes with a Composer classmap in `composer.json`:
+
+``` json
+"autoload": {
+    "classmap": ["src/"]
+}
+```
+
+With this setting you don't need `App::uses()` for your controllers, models,
+components, behaviors, helpers and shells. Run `composer dump-autoload` whenever
+you add a new class file, so that Composer picks it up.
+
+If your application doesn't use a classmap (for example an older application in
+the `app/` layout), keep loading your own classes with `App::uses()` as before,
+for example `App::uses('AppController', 'Controller');` at the top of each
+controller file. Plugin classes that aren't autoloaded by Composer also still
+need `App::uses()`, for example `App::uses('MyPluginHelper', 'MyPlugin.View/Helper');`.
+
 ## Request parameters
 
 When a request is made to a CakePHP application, CakePHP's `Router` and
@@ -105,10 +126,10 @@ to write.
 By convention, CakePHP renders a view with an inflected version of the action
 name. Returning to our online bakery example, our RecipesController might contain the
 `view()`, `share()`, and `search()` actions. The controller would be found
-in `/app/Controller/RecipesController.php` and contain:
+in `src/Controller/RecipesController.php` and contain:
 
 ``` php
-# /app/Controller/RecipesController.php
+// src/Controller/RecipesController.php
 
 class RecipesController extends AppController
 {
@@ -129,16 +150,11 @@ class RecipesController extends AppController
 }
 ```
 
-The view files for these actions would be `app/View/Recipes/view.ctp`,
-`app/View/Recipes/share.ctp`, and `app/View/Recipes/search.ctp`. The
+The view files for these actions would be `templates/Recipes/view.ctp`,
+`templates/Recipes/share.ctp`, and `templates/Recipes/search.ctp`. The
 conventional view file name is the lowercased and underscored version of the
-action name.
-
-::: pieceofcake2
-In the modern layout of the pieceofcake2 fork, view files are in `templates/` instead of
-`app/View/`, e.g. `templates/Recipes/view.ctp`. The same applies to the examples below
-(`templates/Posts/custom_file.ctp`). Templates inside a plugin stay in the plugin's `View/` directory.
-:::
+action name. In the legacy `app/` layout, view files are in `app/View/`
+instead of `templates/`.
 
 Controller actions generally use `~Controller::set()` to create a
 context that `View` uses to render the view. Because of the
@@ -235,8 +251,8 @@ class PostsController extends AppController
 }
 ```
 
-This would render `app/View/Posts/custom_file.ctp` instead of
-`app/View/Posts/my_action.ctp`
+This would render `templates/Posts/custom_file.ctp` instead of
+`templates/Posts/my_action.ctp`.
 
 You can also render views inside plugins using the following syntax:
 `$this->render('PluginName.PluginController/custom_file')`.
@@ -252,8 +268,8 @@ class PostsController extends AppController
 }
 ```
 
-    
-This would render `app/Plugin/Users/View/UserDetails/custom_file.ctp`
+This would render `plugins/Users/View/UserDetails/custom_file.ctp`. Templates
+inside a plugin stay in the plugin's own `View/` directory.
 
 ### Flow Control
 

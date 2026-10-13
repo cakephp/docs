@@ -269,36 +269,26 @@ the modified array.
 ## Core Definition Constants
 
 Most of the following constants refer to paths in your application.
-
-::: pieceofcake2 Path constants
-Several path constants depend on the application layout:
-
-| Constant | Legacy layout | Modern layout |
-|----------|---------------|---------------|
-| `APP_DIR` | `app` | `src` |
-| `CONFIG` | `app/Config/` | `config/` |
-| `TESTS` | `app/Test/` | `tests/` |
-| `TMP` | `app/tmp/` | `tmp/` |
-| `LOGS` | `app/tmp/logs/` | `logs/` |
-| `WWW_ROOT` | `app/webroot/` | `webroot/` |
-
-The framework itself lives in `vendor/pieceofcake2/cakephp/`: `CAKE_CORE_INCLUDE_PATH`
-points to its `src/` directory and `CAKE` to `src/Cake/`. The new `CORE_ROOT`
-constant is the framework's root directory.
-See [Directory Structure](/pieceofcake2/directory-structure).
-:::
+The values shown are those of the modern application layout, where `ROOT`
+is your project root and the framework is installed by Composer in
+`vendor/pieceofcake2/cakephp/`. In the legacy `app/` layout, the
+application constants point into `app/` instead (for example `CONFIG` is
+`app/Config/` and `TESTS` is `app/Test/`); see
+[Directory Structure](/appendices/migrating-to-the-modern-layout).
 
 `constant` **APP**
 
 Absolute path to your application directory, including a trailing slash.
+In the modern layout this is `src/`.
 
 `constant` **APP_DIR**
 
-Equals `app` or the name of your application directory.
+The name of your application directory: `src` in the modern layout, or
+`app` in the legacy layout.
 
 `constant` **APPLIBS**
 
-Path to the application's Lib directory.
+Path to the application's Lib directory (`src/Lib/`).
 
 `constant` **CACHE**
 
@@ -307,22 +297,29 @@ multi-server setup.
 
 `constant` **CAKE**
 
-Path to the cake directory.
+Path to the framework's `Cake` directory
+(`vendor/pieceofcake2/cakephp/src/Cake/`).
 
 `constant` **CAKE_CORE_INCLUDE_PATH**
 
-Path to the root lib directory.
+Path to the framework's `src` directory
+(`vendor/pieceofcake2/cakephp/src`).
 
 `constant` **CONFIG**
 
-Path to the app/Config directory.
+Path to the configuration directory (`config/`).
 
 ::: info Added in version 2.10.0
 :::
 
 `constant` **CORE_PATH**
 
-Path to the root directory with ending directory slash.
+Path to the framework's `src` directory, with a trailing slash.
+
+`constant` **CORE_ROOT**
+
+Path to the root directory of the framework package
+(`vendor/pieceofcake2/cakephp`). The Piece of Cake 2 fork added this constant.
 
 `constant` **CSS**
 
@@ -383,23 +380,24 @@ Use config value `App.jsBaseUrl` instead.
 
 `constant` **LOGS**
 
-Path to the logs directory.
+Path to the logs directory (`logs/`). In the legacy layout this is
+`app/tmp/logs/`.
 
 `constant` **ROOT**
 
-Path to the root directory.
+Path to the root directory of your project.
 
 `constant` **TESTS**
 
-Path to the tests directory.
+Path to the tests directory (`tests/`).
 
 `constant` **TMP**
 
-Path to the temporary files directory.
+Path to the temporary files directory (`tmp/`).
 
 `constant` **VENDORS**
 
-Path to the vendors directory.
+Path to the Composer vendor directory (`vendor/`).
 
 `constant` **WEBROOT_DIR**
 
@@ -407,7 +405,7 @@ Equals `webroot` or the name of your webroot directory.
 
 `constant` **WWW_ROOT**
 
-Full path to the webroot.
+Full path to the webroot (`webroot/`).
 
 ## Timing Definition Constants
 

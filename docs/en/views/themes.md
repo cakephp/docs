@@ -24,28 +24,23 @@ You can also set or change the theme name within an action or within the
 $this->theme = 'AnotherExample';
 ```
 
-Theme view files need to be within the `/app/View/Themed/` folder. Within the
+Theme view files need to be within the `templates/Themed/` folder. Within the
 themed folder, create a folder using the same name as your theme name. For
-example, the above theme would be found in `/app/View/Themed/AnotherExample`.
-
-::: pieceofcake2
-In the pieceofcake2 fork's modern layout, themes live in `templates/Themed/` instead of
-`app/View/Themed/` (e.g. `templates/Themed/Example/Posts/edit.ctp`,
-`templates/Themed/Example/webroot/css/main.css`). The rest of this page applies with that prefix.
-:::
+example, the above theme would be found in `templates/Themed/AnotherExample`.
+In the legacy `app/` layout, themes live in `app/View/Themed/` instead.
 
 > [!NOTE]
 > It is important to remember that CakePHP expects CamelCase theme names.
 
-Beyond that, the folder structure within the `/app/View/Themed/Example/` folder is
-exactly the same as `/app/View/`.
+Beyond that, the folder structure within the `templates/Themed/Example/` folder is
+exactly the same as `templates/`.
 
 For example, the view file for an edit action of a Posts controller would reside
-at `/app/View/Themed/Example/Posts/edit.ctp`. Layout files would reside in
-`/app/View/Themed/Example/Layouts/`.
+at `templates/Themed/Example/Posts/edit.ctp`. Layout files would reside in
+`templates/Themed/Example/Layouts/`.
 
 If a view file can't be found in the theme, CakePHP will try to locate the view
-file in the `/app/View/` folder. This way, you can create master view files
+file in the `templates/` folder. This way, you can create master view files
 and simply override them on a case-by-case basis within your theme folder.
 
 ## Theme assets
@@ -60,7 +55,7 @@ the application's webroot. See below for more information.
 To use the new theme webroot create directories like:
 
 ``` text
-app/View/Themed/<themeName>/webroot<path_to_file>
+templates/Themed/<themeName>/webroot<path_to_file>
 ```
 
 in your theme. The Dispatcher will handle finding the correct theme assets in
@@ -71,14 +66,14 @@ correct paths automatically. Like view files, if a file isn't in the theme
 folder, it will default to the main webroot folder:
 
 ``` php
-//When in a theme with the name of 'purple_cupcake'
+// When in a theme with the name of 'purple_cupcake'
 $this->Html->css('main.css');
 
-//creates a path like
+// creates a path like
 /theme/purple_cupcake/css/main.css
 
-//and links to
-app/View/Themed/PurpleCupcake/webroot/css/main.css
+// and links to
+templates/Themed/PurpleCupcake/webroot/css/main.css
 ```
 
 ## Increasing performance of plugin and theme assets
@@ -88,14 +83,9 @@ than serving those assets without invoking PHP. And while the core team has
 taken steps to make plugin and theme asset serving as fast as possible, there
 may be situations where more performance is required. In these situations it's
 recommended that you either symlink or copy out plugin/theme assets to
-directories in `app/webroot` with paths matching those used by CakePHP.
+directories in `webroot` with paths matching those used by CakePHP.
 
-- `app/Plugin/DebugKit/webroot/js/my_file.js` becomes
-  `app/webroot/debug_kit/js/my_file.js`
-- `app/View/Themed/Navy/webroot/css/navy.css` becomes
-  `app/webroot/theme/Navy/css/navy.css`
-
-::: pieceofcake2
-In the modern layout the web root is `webroot/` and Composer-installed plugins are in `plugins/`,
-so e.g. `plugins/DebugKit/webroot/js/my_file.js` becomes `webroot/debug_kit/js/my_file.js`.
-:::
+- `plugins/DebugKit/webroot/js/my_file.js` becomes
+  `webroot/debug_kit/js/my_file.js`
+- `templates/Themed/Navy/webroot/css/navy.css` becomes
+  `webroot/theme/Navy/css/navy.css`

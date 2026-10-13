@@ -1,45 +1,29 @@
 # Welcome
 
 ::: warning Unsupported Version
-You are viewing documentation for an **unsupported version** of CakePHP. For the most recent stable version, please visit the [official documentation](https://book.cakephp.org/).
+CakePHP 2 reached its end of life upstream and is no longer supported by the
+CakePHP project. This book is for **pieceofcake2/cakephp**, the Piece of Cake 2
+fork that keeps CakePHP 2 applications running on PHP 8. If you are starting a
+new project, use [CakePHP 5](https://book.cakephp.org/5/en/) instead.
 :::
 
-::: pieceofcake2
-This is the CakePHP 2.x Cookbook adapted for **pieceofcake2/cakephp**, a
-community-maintained fork of CakePHP 2.x that runs on PHP 8.0 and newer.
-Boxes like this one mark where the fork differs from the original book.
-See [About the pieceofcake2 Fork](/pieceofcake2) for an overview.
-:::
+This is the CakePHP 2 Cookbook, updated for the Piece of Cake 2 fork. See
+[Changes from the Original Book](/pieceofcake2/changes) for what differs from
+the original CakePHP 2.x documentation.
 
 The CakePHP cookbook is an openly developed and community editable documentation
 project. We hope to maintain a high level of quality, validity and accuracy for
-the documentation. Notice the "Improve this Doc" button in the upper right-hand
-corner; it will direct you to the GitHub online editor of the active page,
+the documentation. Notice the "Edit this page on GitHub" link at the bottom of
+each page; it will direct you to the GitHub online editor of the active page,
 allowing you to easily contribute any additions, deletions, or corrections to
-the documentation.
-
-<div>
-
-**Read the Book Anywhere**
-
-![image](/read-the-book.jpg)
-
-Enjoy the CakePHP cookbook almost anywhere. Available as both a PDF and
-EPUB, you can now read it on more devices, as well as offline.
-
-- [PDF](../_downloads/en/CakePHPCookbook.pdf)
-- [EPUB](../_downloads/en/CakePHPCookbook.epub)
-- [Original Source](https://github.com/cakephp/docs)
-
-::: pieceofcake2
-PDF and EPUB downloads are not provided for this edition of the book.
-The links above are kept from the original Cookbook and do not work on this site.
-The source of this edition is [pieceofcake2/docs](https://github.com/pieceofcake2/docs).
-:::
-
-</div>
+the documentation. The source of this book is
+[pieceofcake2/docs](https://github.com/pieceofcake2/docs).
 
 ## Getting Started
+
+### Installation
+
+[Install CakePHP](installation) with Composer and set up your web server.
 
 ### Build a Blog
 

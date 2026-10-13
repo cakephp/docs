@@ -28,20 +28,12 @@ $progress->draw();
 
 While CakePHP comes with a few shell helpers you can create more in your
 application or plugins. As an example, we'll create a simple helper to generate
-fancy headings. First create the **app/Console/Helper/HeadingHelper.php** and put
-the following in it:
-
-::: pieceofcake2
-In the pieceofcake2 fork with the modern layout, use `src/Console/Helper/HeadingHelper.php`.
-Framework classes such as `BaseShellHelper` are autoloaded by Composer, so the `App::uses()`
-line is optional.
-:::
+fancy headings. Shell helper classes use the `ShellHelper` suffix. First create
+**src/Console/Helper/HeadingShellHelper.php** and put the following in it:
 
 ``` php
-<?php
-App::uses("BaseShellHelper", "Console/Helper");
-
-class HeadingHelper extends BaseShellHelper
+// src/Console/Helper/HeadingShellHelper.php
+class HeadingShellHelper extends BaseShellHelper
 {
     public function output($args)
     {
@@ -52,14 +44,16 @@ class HeadingHelper extends BaseShellHelper
 }
 ```
 
-We can then use this new helper in one of our shell commands by calling it:
+`BaseShellHelper` is loaded by Composer's autoloader, so no `App::uses()` call
+is needed. The arguments of `output()` are passed as a single array. We can
+then use this new helper in one of our shell commands by calling it:
 
 ``` php
 // With ### on either side
-$this->helper('heading')->output('It works!');
+$this->helper('heading')->output(['It works!']);
 
 // With ~~~~ on either side
-$this->helper('heading')->output('It works!', '~', 4);
+$this->helper('heading')->output(['It works!', '~', 4]);
 ```
 
 ## Built-In Helpers
@@ -89,13 +83,16 @@ $this->helper('table')->output($data);
 ### Progress Helper
 
 The ProgressHelper can be used in two different ways. The simple mode lets you
-provide a callback that is invoked until the progress is complete:
+provide a callback, as the first element of the options array, that is invoked
+until the progress is complete:
 
 ``` php
-$this->helper('progress')->output(function ($progress) {
-    // Do work here.
-    $progress->increment(20);
-});
+$this->helper('progress')->output([
+    function ($progress) {
+        // Do work here.
+        $progress->increment(20);
+    },
+]);
 ```
 
 You can control the progress bar more by providing additional options:

@@ -13,7 +13,6 @@ class UsersController extends AppController
 
     public function afterLogin()
     {
-        App::uses('CakeNumber', 'Utility');
         $storageUsed = $this->Auth->user('storage_used');
         if ($storageUsed > 5000000) {
             // ユーザーの使用量の通知

@@ -3,9 +3,8 @@
 このセクションで、典型的な CakePHP アプリケーションのデモンストレーションを行い、
 全てのピースがどう組み合わさっていくかを学ぶことができます。
 
-その他にも、既存のアプリケーションやコンポーネントについて、非公式の CakePHP プラグイン倉庫
-[CakePackages](https://plugins.cakephp.org/) や、
-[Bakery](https://bakery.cakephp.org/) を参考にすることもできます。
+このバージョンの CakePHP で使えるプラグインについては、
+[メンテナンスされているプラグイン](/ja/plugins/maintained-plugins) を参照してください。
 
 - [ブログチュートリアル](tutorials-and-examples/blog/blog)
 - [ブログチュートリアル - レイヤーの追加](tutorials-and-examples/blog/part-two)

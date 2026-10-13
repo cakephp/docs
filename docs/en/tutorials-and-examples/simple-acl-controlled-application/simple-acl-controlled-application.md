@@ -1,18 +1,5 @@
 # Simple Acl controlled Application
 
-::: pieceofcake2 Following this tutorial with the pieceofcake2 fork
-Instead of downloading CakePHP, create the project with Composer
-(`composer create-project pieceofcake2/app acl`, PHP 8.0 or later) as described at the top of the
-[Blog Tutorial](../blog/blog), which also lists the equivalent modern-layout paths
-(`config/core.php`, `src/...`, `templates/...`). Other differences:
-
-- `cake bake` requires the [pieceofcake2/bake](../../console-and-shells/code-generation-with-bake)
-  plugin (it is already a dev dependency of `pieceofcake2/app`; load it with `CakePlugin::load('Bake');`).
-- Run console commands as `bin/cake ...` (modern) instead of `./Console/cake ...`.
-- `groups` is a reserved word in MySQL 8.0.2 and later, so quote it as `` `groups` `` in the
-  `CREATE TABLE` statement below.
-:::
-
 > [!NOTE]
 > This isn't a beginner level tutorial. If you are just starting out with
 > CakePHP we would advise you to get a better overall experience of the
@@ -30,56 +17,62 @@ This tutorial is a brief introduction to the
 
 What you will need
 
-1.  A running web server. We're going to assume you're using Apache,
-    though the instructions for using other servers should be very
-    similar. We might have to play a little with the server
-    configuration, but most folks can get CakePHP up and running without
-    any configuration at all.
-2.  A database server. We're going to be using MySQL in this
+1.  PHP 8.0 or greater and [Composer](https://getcomposer.org/).
+2.  A web server. PHP's built-in web server, started with `bin/cake server`,
+    is enough for this tutorial.
+3.  A database server. We're going to be using MySQL in this
     tutorial. You'll need to know enough about SQL in order to create a
     database: CakePHP will be taking the reins from there.
-3.  Basic PHP knowledge. The more object-oriented programming you've
+4.  Basic PHP knowledge. The more object-oriented programming you've
     done, the better: but fear not if you're a procedural fan.
 
 ## Preparing our Application
 
-First, let's get a copy of fresh CakePHP code.
+First, let's create a new application with Composer:
 
-To get a fresh download, visit the CakePHP project at GitHub:
-<https://github.com/cakephp/cakephp/tags> and download the stable
-release. For this tutorial you need the latest 2.0 release.
+``` bash
+composer create-project pieceofcake2/app acl
+cd acl
+```
 
-You can also clone the repository using
-[git](https://git-scm.com/):
+Copy `config/database.php.default` to `config/database.php` and set up your
+database connection, and change the values of `Security.salt` and
+`Security.cipherSeed` in your `config/core.php`, as described in the
+[Blog Tutorial](../../tutorials-and-examples/blog/blog).
 
-    git clone -b 2.x git://github.com/cakephp/cakephp.git
+The skeleton already contains the [Bake plugin](../../console-and-shells/code-generation-with-bake)
+as a development dependency, installed in `plugins/Bake/` (the skeleton's
+`composer.json` already has the `installer-paths` setting for this). Load it in
+`config/bootstrap.php`:
 
-Once you've got a copy of CakePHP latest 2.0 release,
-setup your `database.php` config file, and change
-the value of Security.salt in your `app/Config/core.php`.
+``` php
+// config/bootstrap.php
+CakePlugin::load('Bake');
+```
+
 From there we will build a simple database schema to build our
 application on. Execute the following SQL statements into your database:
 
 ``` sql
 CREATE TABLE users (
-    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,
-    password CHAR(40) NOT NULL,
-    group_id INT(11) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    group_id INT NOT NULL,
     created DATETIME,
     modified DATETIME
 );
 
-CREATE TABLE groups (
-    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE `groups` (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     created DATETIME,
     modified DATETIME
 );
 
 CREATE TABLE posts (
-    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    user_id INT(11) NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
     title VARCHAR(255) NOT NULL,
     body TEXT,
     created DATETIME,
@@ -87,12 +80,16 @@ CREATE TABLE posts (
 );
 
 CREATE TABLE widgets (
-    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     part_no VARCHAR(12),
-    quantity INT(11)
+    quantity INT
 );
 ```
+
+`GROUPS` is a reserved word in MySQL 8.0, so the table name must be quoted
+with backticks in your own SQL. CakePHP quotes table and column names in the
+queries it generates, so the `Group` model works without further changes.
 
 These are the tables we will be using to build the rest of our
 application. Once we have the table structure in the database we
@@ -100,10 +97,14 @@ can start cooking. Use
 [Code Generation with Bake](../../console-and-shells/code-generation-with-bake) to quickly
 create your models, controllers, and views.
 
-To use cake bake, call `cake bake all` and this will list the 4
+To use bake, call `bin/cake bake all` and this will list the 4
 tables you inserted into MySQL. Select "1. Group", and follow the
 prompts. Repeat for the other 3 tables, and this will have
 generated the 4 controllers, models and your views for you.
+Bake currently writes the view templates to `src/View/<Controller>/`. CakePHP
+finds them there, but you can move them to `templates/<Controller>/` to keep the
+application layout consistent (see
+[Code Generation with Bake](../../console-and-shells/code-generation-with-bake)).
 
 Avoid using Scaffold here. The generation of the ACOs will be
 seriously affected if you bake the controllers with the Scaffold
@@ -138,7 +139,7 @@ public function login()
         if ($this->Auth->login()) {
             return $this->redirect($this->Auth->redirectUrl());
         }
-        $this->Session->setFlash(__('Your username or password was incorrect.'));
+        $this->Flash->error(__('Your username or password was incorrect.'));
     }
 }
 
@@ -149,11 +150,12 @@ public function logout()
 ```
 
 Then create the following view file for login at
-`app/View/Users/login.ctp`:
+`templates/Users/login.ctp`:
 
 ``` php
 <?php
-echo $this->Form->create('User', ['action' => 'login']);
+// templates/Users/login.ctp
+echo $this->Form->create('User', ['url' => ['action' => 'login']]);
 echo $this->Form->inputs([
     'legend' => __('Login'),
     'username',
@@ -165,43 +167,53 @@ echo $this->Form->end('Login');
 
 Next we'll have to update our User model to hash passwords before they go into
 the database. Storing plaintext passwords is extremely insecure and
-AuthComponent will expect that your passwords are hashed. In
-`app/Model/User.php` add the following:
+AuthComponent will expect that your passwords are hashed. We use
+`BlowfishPasswordHasher`, which hashes passwords with bcrypt. In
+`src/Model/User.php` add the following:
 
 ``` php
-App::uses('AuthComponent', 'Controller/Component');
+// src/Model/User.php
 class User extends AppModel
 {
     // other code.
 
     public function beforeSave($options = [])
     {
-        $this->data['User']['password'] = AuthComponent::password(
-          $this->data['User']['password']
-        );
+        if (!empty($this->data['User']['password'])) {
+            $passwordHasher = new BlowfishPasswordHasher();
+            $this->data['User']['password'] = $passwordHasher->hash(
+                $this->data['User']['password']
+            );
+        }
         return true;
     }
 }
 ```
 
 Next we need to make some modifications to `AppController`. If
-you don't have `/app/Controller/AppController.php`, create it. Since we want our entire
+you don't have `src/Controller/AppController.php`, create it. Since we want our entire
 site controlled with Auth and Acl, we will set them up in
-`AppController`:
+`AppController`. The baked controllers use the FlashComponent for their
+messages, so we load it here as well:
 
 ``` php
+// src/Controller/AppController.php
 class AppController extends Controller
 {
     public $components = [
         'Acl',
         'Auth' => [
+            'authenticate' => [
+                'Form' => ['passwordHasher' => 'Blowfish'],
+            ],
             'authorize' => [
-                'Actions' => ['actionPath' => 'controllers']
-            ]
+                'Actions' => ['actionPath' => 'controllers'],
+            ],
         ],
-        'Session'
+        'Session',
+        'Flash',
     ];
-    public $helpers = ['Html', 'Form', 'Session'];
+    public $helpers = ['Html', 'Form', 'Flash'];
 
     public function beforeFilter()
     {
@@ -233,11 +245,6 @@ and users. In **both** your `GroupsController` and your
 public function beforeFilter()
 {
     parent::beforeFilter();
-
-    // For CakePHP 2.0
-    $this->Auth->allow('*');
-
-    // For CakePHP 2.1 and up
     $this->Auth->allow();
 }
 ```
@@ -256,14 +263,14 @@ table error ("Error: Database table acos for model Aco was not
 found."). To remove these errors we need to run a schema file. In a
 shell run the following:
 
-    ./Console/cake schema create DbAcl
+    bin/cake schema create DbAcl
 
 This schema will prompt you to drop and create the tables. Say yes
-to dropping and creating the tables.
+to dropping and creating the tables. The schema file is
+`config/Schema/db_acl.php` in your application.
 
-If you don't have shell access, or are having trouble using the
-console, you can run the sql file found in
-/path/to/app/Config/Schema/db_acl.sql.
+If you are having trouble using the console, you can run the SQL file
+`config/Schema/db_acl.sql` instead.
 
 With the controllers setup for data entry, and the Acl tables
 initialized we are ready to go right? Not entirely, we still have a
@@ -327,8 +334,8 @@ delete a user/group the Aro table is updated.
 Our controllers and models are now prepared for adding some initial
 data, and our `Group` and `User` models are bound to the Acl
 table. So add some groups and users using the baked forms by
-browsing to <http://example.com/groups/add> and
-<http://example.com/users/add>. I made the following groups:
+browsing to <http://localhost:8765/groups/add> and
+<http://localhost:8765/users/add>. I made the following groups:
 
 - administrators
 - managers
@@ -411,7 +418,7 @@ few ways to manually create ACO's though. You can create ACO
 objects from the Acl shell or You can use the `AclComponent`.
 Creating Acos from the shell looks like:
 
-    ./Console/cake acl create aco root controllers
+    bin/cake acl create aco root controllers
 
 While using the AclComponent would look like:
 
@@ -433,16 +440,21 @@ path when looking up controllers/actions. In `AppController` ensure
 that your `$components` array contains the `actionPath` defined earlier:
 
 ``` php
-class AppController extends Controller {
+class AppController extends Controller
+{
     public $components = [
         'Acl',
         'Auth' => [
+            'authenticate' => [
+                'Form' => ['passwordHasher' => 'Blowfish'],
+            ],
             'authorize' => [
-                'Actions' => ['actionPath' => 'controllers']
-            ]
+                'Actions' => ['actionPath' => 'controllers'],
+            ],
         ],
-        'Session'
+        'Session',
+        'Flash',
     ];
 ```
 
-Continue to [Part Two](../../part-two) to continue the tutorial.
+Continue to [Part Two](part-two) to continue the tutorial.

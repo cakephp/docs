@@ -14,7 +14,7 @@ CakePHP takes the monotony out of web development. It provides you
 with all the tools you need to get started coding and what you
 need to get done: the logic specific to your application. Instead
 of reinventing the wheel every time you begin a new project,
-check out a copy of CakePHP and get started with the logic of
+install CakePHP with Composer and get started with the logic of
 your application.
 
 CakePHP has an active
@@ -22,19 +22,21 @@ CakePHP has an active
 and community, bringing great value to the project. In addition to
 keeping you from wheel-reinventing, using CakePHP means your
 application's core is well tested and is being constantly
-improved.
+improved. CakePHP 2 is no longer developed by the CakePHP project; the
+[Piece of Cake 2](/pieceofcake2) fork keeps it tested and running on current
+PHP versions.
 
 Here's a quick list of features you'll enjoy when using CakePHP:
 
 - Active, friendly [Cakephp Official Communities](../cakephp-overview/where-to-get-help#cakephp-official-communities)
 - Flexible [licensing](https://en.wikipedia.org/wiki/MIT_License)
-- Compatible with versions PHP 5.2.8 and greater
+- Compatible with PHP 8.0 to 8.5
 - Integrated
   [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)
   for database interaction
 - Application
   [scaffolding](https://en.wikipedia.org/wiki/Scaffold_(programming))
-- Code generation
+- Code generation with the [Bake](../console-and-shells/code-generation-with-bake) plugin
 - [MVC](https://en.wikipedia.org/wiki/Model-view-controller)
   architecture
 - Request dispatcher with clean, custom URLs and routes
@@ -51,11 +53,10 @@ Here's a quick list of features you'll enjoy when using CakePHP:
 - Data sanitization
 - Flexible [caching](https://en.wikipedia.org/wiki/Web_cache)
 - Localization
-- Works from any web site directory, with little to no
-  [Apache](https://httpd.apache.org/) configuration involved
+- Installation and dependency management with
+  [Composer](https://getcomposer.org)
 
 ::: pieceofcake2
-The pieceofcake2 fork requires PHP 8.0 or newer (PHP 8.0 to 8.5 are supported).
-Code generation (Bake) is provided by the separate `pieceofcake2/bake` plugin.
-See [About the pieceofcake2 Fork](/pieceofcake2).
+Bake is no longer part of the core. Install
+it with `composer require --dev pieceofcake2/bake`.
 :::

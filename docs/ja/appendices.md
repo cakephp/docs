@@ -4,7 +4,7 @@
 
 ::: pieceofcake2
 以下の移行ガイドは本家 CakePHP の各リリースについて説明したものです。
-CakePHP 2.10.24 から pieceofcake2 フォークへ移行する方法は [アップグレードガイド](/ja/pieceofcake2/upgrade) を参照してください。
+CakePHP 2.10.24 から Piece of Cake 2 フォークへ移行する方法は [アップグレードガイド](/ja/appendices/migrating-from-cakephp-2-10) を参照してください。
 先に PHP 7.4 上で CakePHP 2.10.24 へアップグレードしておく必要があります。
 :::
 

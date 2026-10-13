@@ -38,87 +38,66 @@ program from bash. This example assumes that the user is currently
 logged into a bash prompt and is currently at the root of a CakePHP
 application.
 
-CakePHP applications contain a `Console` directory that contains
-all the shells and tasks for an application. It also comes with an
-executable:
+A CakePHP application has a `bin/cake` executable in its project root.
+The shells and tasks of your application live in `src/Console/Command/` and
+`src/Console/Command/Task/`:
 
 ``` bash
-$ cd /path/to/cakephp/app
-$ Console/cake
+$ cd /path/to/my_app
+$ bin/cake
 ```
 
-::: pieceofcake2 Console executable
-In the pieceofcake2 fork, where the `cake` executable and your shells live depends on the
-application layout:
-
-| Layout | Executable | Shells / tasks |
-|---|---|---|
-| Legacy | `app/Console/cake` | `app/Console/Command/`, `app/Console/Command/Task/` |
-| Modern | `bin/cake` | `src/Console/Command/`, `src/Console/Command/Task/` |
-
-`vendor/bin/cake` (installed by Composer) works with both layouts: it locates the project root
-from `composer.json` and uses `src/` as the application directory if it exists, otherwise `app/`.
-Legacy applications must copy an updated `app/Console/cake` from the Bake plugin; `cake.bat` and
-`cake.php` were removed. See [Installation](/pieceofcake2/installation).
-:::
-
-It's often wise to add the core cake executable to your system path
-so you can use the cake command anywhere. This comes in handy when you are
-creating new projects. See [Adding Cake To Your Path](#adding-cake-to-your-path) for how to make `cake`
-available systemwide.
+Composer also installs the framework's own executable as `vendor/bin/cake`.
+It finds the project root from Composer's autoloader and uses `src/` as the
+application directory if it exists, otherwise `app/`, so it works for both
+application layouts. In the legacy layout the executable is
+`app/Console/cake` and shells live in `app/Console/Command/`. See
+[CakePHP Folder Structure](/getting-started/cakephp-folder-structure) for the differences
+between the two layouts.
 
 Running the Console with no arguments produces this help message:
 
-    Welcome to CakePHP v2.0.0 Console
+    Welcome to CakePHP v2.12.2 Console
     ---------------------------------------------------------------
-    App : app
-    Path: /path/to/cakephp/app/
+    App : src
+    Path: /path/to/my_app/src/
     ---------------------------------------------------------------
     Current Paths:
 
-     -app: app
-     -working: /path/to/cakephp/app
-     -root: /path/to/cakephp/
-     -core: /path/to/cakephp/core
+     -app: src
+     -working: /path/to/my_app/src
+     -root: /path/to/my_app
+     -core: /path/to/my_app/vendor/pieceofcake2/cakephp/src
+     -webroot: /path/to/my_app/webroot
 
     Changing Paths:
 
-    your working path should be the same as your application path
-    to change your path use the '-app' param.
-    Example: -app relative/path/to/cakephp/app or -app /absolute/path/to/cakephp/app
+    Your working path should be the same as your application path. To change your path use the '-app' param.
+    Example: -app relative/path/to/myapp or -app /absolute/path/to/myapp
 
     Available Shells:
 
-     acl [CORE]                              i18n [CORE]
-     api [CORE]                              import [app]
-     bake [CORE]                             schema [CORE]
-     command_list [CORE]                     testsuite [CORE]
-     console [CORE]                          upgrade [CORE]
+    [CORE] acl, api, command_list, completion, console, i18n, schema, server, test, testsuite
 
-    To run a command, type 'cake shell_name [args]'
-    To get help on a specific command, type 'cake shell_name help'
+    To run an app or core command, type cake shell_name [args]
+    To run a plugin command, type cake Plugin.shell_name [args]
+    To get help on a specific command, type cake shell_name --help
 
 ::: pieceofcake2
-In the pieceofcake2 fork, `bake` and `upgrade` are no longer core shells. Bake is provided by the
-[pieceofcake2/bake](https://github.com/pieceofcake2/bake) plugin and the 1.3 to 2.0 upgrade shell
-by [pieceofcake2/upgrade](https://github.com/pieceofcake2/upgrade). Install and load them
-as plugins if you need them.
+`bake` and `upgrade` are no longer core shells. Install
+[pieceofcake2/bake](https://github.com/pieceofcake2/bake) or
+[pieceofcake2/upgrade](https://github.com/pieceofcake2/upgrade) as plugins if you need them.
 :::
 
 The first information printed relates to paths. This is especially
 helpful if you're running the console from different parts of the
-filesystem.
-
-Since many users add the CakePHP console to their system's path so it can
-be accessed easily. Printing out the working, root, app, and core
+filesystem. Printing out the working, root, app, core and webroot
 paths allows you to see where the console will be making changes.
 To change the app folder you wish to work with, you can supply its
-path as the first argument to the cake command. This next example
-shows how to specify an app folder, assuming you've already added
-the console folder to your `PATH`:
+path with the `-app` option:
 
 ``` bash
-$ cake -app /path/to/cakephp/app
+$ vendor/bin/cake -app /path/to/my_app/src
 ```
 
 The path supplied can be relative to the current working directory
@@ -128,52 +107,31 @@ or supplied as an absolute path.
 
 ### Adding cake to your system path
 
+The console executable belongs to each project, so there is no global `cake`
+command to install. Run `bin/cake` (or `vendor/bin/cake`) from the project
+root. If you would like to type `cake` instead, add the project's `bin`
+directory to your `PATH` while you work on the project, for example on
+\*nix systems (Linux, macOS):
+
+``` bash
+export PATH="$PATH:/path/to/my_app/bin"
+```
+
 ::: pieceofcake2
-In the pieceofcake2 fork, `lib/Cake/Console/cake` no longer exists. The framework's executable is
-`bin/cake` in the package, which Composer exposes as `vendor/bin/cake` in your project.
-Run it from the project root (`vendor/bin/cake`, or `bin/cake` in the modern layout),
-or add your project's `vendor/bin` directory to `PATH` instead of the paths shown below.
+`lib/Cake/Console/cake`, `cake.bat` and `cake.php` were
+removed. The console is started through `bin/cake` (or `vendor/bin/cake`), which requires
+Composer's autoloader.
 :::
-
-If you are on a \*nix system (linux, MacOSX) the following steps will let you add the
-cake executable to your system path.
-
-1.  Locate where your CakePHP install, and cake executable are. For example
-    `/Users/mark/cakephp/lib/Cake/Console/cake`
-
-2.  Edit your `.bashrc` or `.bash_profile` file in your home directory, and add the following:
-
-        export PATH="$PATH:/Users/mark/cakephp/lib/Cake/Console"
-
-3.  Reload the bash configuration or open a new terminal, and `cake` should work anywhere.
-
-If you are on Windows Vista or 7, you should follow the steps below.
-
-1.  Locate where your CakePHP install and cake executable are. For example
-    `C:\xampp\htdocs\cakephp\lib\Cake\Console`
-
-2.  Open System Properties window from My Computer. You want to try the shortcut Windows Key + Pause or Windows Key + Break. Or, from the Desktop, right-click My Computer, click Properties then click Advanced System Settings link in the left column
-
-3.  Go under Advanced tab and click on Environment Variables button
-
-4.  In the System Variables portion, reach Path variable and double-click on it to Edit
-
-5.  Add the `cake` install path string followed by a semi colon. Result example:
-
-    ``` php
-    %SystemRoot%\system32;%SystemRoot%;C:\xampp\htdocs\cakephp\lib\Cake\Console;
-    ```
-
-6.  Click Ok and `cake` should work anywhere.
 
 ## Creating a shell
 
 Let's create a shell for use in the Console. For this example,
-we'll create a simple Hello world shell. In your applications
-`Console/Command` directory create `HelloShell.php`. Put the following
+we'll create a simple Hello world shell. In your application's
+`src/Console/Command` directory create `HelloShell.php`. Put the following
 code inside it:
 
 ``` php
+// src/Console/Command/HelloShell.php
 class HelloShell extends AppShell
 {
     public function main()
@@ -186,17 +144,17 @@ class HelloShell extends AppShell
 The conventions for shell classes are that the class name should match
 the file name, with the suffix of Shell. In our shell we created a `main()` method.
 This method is called when a shell is called with no additional commands. We'll add
-some more commands in a bit, but for now let's just run our shell. From your application
-directory, run:
+some more commands in a bit, but for now let's just run our shell. From your project
+root directory, run:
 
-    Console/cake hello
+    bin/cake hello
 
 You should see the following output:
 
-    Welcome to CakePHP v2.0.0 Console
+    Welcome to CakePHP v2.12.2 Console
     ---------------------------------------------------------------
-    App : app
-    Path: /Users/markstory/Sites/cake_dev/app/
+    App : src
+    Path: /Users/markstory/Sites/my_app/src/
     ---------------------------------------------------------------
     Hello world.
 
@@ -204,7 +162,7 @@ As mentioned before, the `main()` method in shells is a special method called
 whenever there are no other commands or arguments given to a shell. You may have also
 noticed that HelloShell is extending `AppShell`. Much like [App Controller](controllers#app-controller), AppShell
 gives you a base class to contain all your common functions or logic. You can define an AppShell,
-by creating `app/Console/Command/AppShell.php`. If you don't have one, CakePHP will use the
+by creating `src/Console/Command/AppShell.php`. If you don't have one, CakePHP will use the
 built-in one. Since our main method wasn't very interesting let's add another command
 that does something:
 
@@ -223,7 +181,7 @@ class HelloShell extends AppShell
 }
 ```
 
-After saving this file you should be able to run `Console/cake hello hey_there your-name`
+After saving this file you should be able to run `bin/cake hello hey_there your-name`
 and see your name printed out. Any public method not prefixed by an `_` is allowed to be
 called from the command line. In our `hey_there` method we also used `$this->args`, this
 property contains an array of all the positional arguments provided to a command. You can
@@ -263,8 +221,8 @@ stored in the database.
 
 There will be times when building more advanced console applications, you'll want
 to compose functionality into re-usable classes that can be shared across many shells.
-Tasks allow you to extract commands into classes. For example the `bake` is made
-almost entirely of tasks. You define a shell's tasks by using the `$tasks` property:
+Tasks allow you to extract commands into classes. For example the `bake` shell of the
+Bake plugin is made almost entirely of tasks. You define a shell's tasks by using the `$tasks` property:
 
 ``` php
 class UserShell extends AppShell
@@ -274,9 +232,9 @@ class UserShell extends AppShell
 ```
 
 You can use tasks from plugins using the standard `plugin syntax`.
-Tasks are stored in `Console/Command/Task/` in files named after
+Tasks are stored in `src/Console/Command/Task/` in files named after
 their classes. So if we were to create a new 'FileGenerator' task, you would create
-`Console/Command/Task/FileGeneratorTask.php`.
+`src/Console/Command/Task/FileGeneratorTask.php`.
 
 Each task must at least implement an `execute()` method. The ShellDispatcher,
 will call this method when the task is invoked. A task class looks like:
@@ -296,10 +254,10 @@ A shell can also access its tasks as properties, which makes tasks great for
 making re-usable chunks of functionality similar to [Components](controllers/components):
 
 ``` php
-// found in Console/Command/SeaShell.php
+// src/Console/Command/SeaShell.php
 class SeaShell extends AppShell
 {
-    public $tasks = ['Sound']; // found in Console/Command/Task/SoundTask.php
+    public $tasks = ['Sound']; // src/Console/Command/Task/SoundTask.php
     public function main()
     {
         $this->Sound->execute();
@@ -310,7 +268,7 @@ class SeaShell extends AppShell
 You can also access tasks directly from the command line:
 
 ``` bash
-$ cake sea sound
+$ bin/cake sea sound
 ```
 
 > [!NOTE]
@@ -326,10 +284,10 @@ You can load tasks on the fly using the Task collection object. You can load tas
 were not declared in \$tasks this way:
 
 ``` php
-$Project = $this->Tasks->load('Project');
+$FileGenerator = $this->Tasks->load('FileGenerator');
 ```
 
-Would load and return a ProjectTask instance. You can load tasks from plugins using:
+Would load and return a FileGeneratorTask instance. You can load tasks from plugins using:
 
 ``` php
 $ProgressBar = $this->Tasks->load('ProgressBar.ProgressBar');
@@ -635,8 +593,8 @@ $parser->addOption('connection', [
 ]);
 ```
 
-The above would allow you to use either `cake myshell --connection=other`,
-`cake myshell --connection other`, or `cake myshell -c other`
+The above would allow you to use either `bin/cake myshell --connection=other`,
+`bin/cake myshell --connection other`, or `bin/cake myshell -c other`
 when invoking the shell. You can also create boolean switches, these switches do not
 consume values, and their presence just enables them in the
 parsed parameters. :
@@ -645,7 +603,7 @@ parsed parameters. :
 $parser->addOption('no-commit', ['boolean' => true]);
 ```
 
-With this option, when calling a shell like `cake myshell --no-commit something`
+With this option, when calling a shell like `bin/cake myshell --no-commit something`
 the no-commit param would have a value of true, and 'something'
 would be a treated as a positional argument.
 The built-in `--help`, `--verbose`, and `--quiet` options
@@ -728,7 +686,7 @@ Since the boolean options are always defined as `true` or
 
 Console applications are often made of subcommands, and these subcommands
 may require special option parsing and have their own help. A perfect
-example of this is `bake`. Bake is made of many separate tasks that all
+example of this is the `bake` shell of the Bake plugin. Bake is made of many separate tasks that all
 have their own help and options. `ConsoleOptionParser` allows you to
 define subcommands and provide command specific option parsers so the
 shell knows how to parse commands for its tasks:
@@ -747,8 +705,8 @@ in our shell. Adding subcommands in this way has two advantages.
 First it lets your shell easily document its subcommands in the
 generated help, and it also allows easy access to the subcommand
 help. With the above subcommand created you could call
-`cake myshell --help` and see the list of subcommands, and
-also run `cake myshell model --help` to view the help for
+`bin/cake myshell --help` and see the list of subcommands, and
+also run `bin/cake myshell model --help` to view the help for
 just the model task.
 
 When defining a subcommand you can use the following options:
@@ -819,14 +777,15 @@ With the addition of ConsoleOptionParser getting help from shells is done
 in a consistent and uniform way. By using the `--help` or -`h` option you
 can view the help for any core shell, and any shell that implements a ConsoleOptionParser:
 
-    cake bake --help
-    cake bake -h
+    bin/cake bake --help
+    bin/cake bake -h
 
-Would both generate the help for bake. If the shell supports subcommands
+Would both generate the help for the `bake` shell of the
+[Bake plugin](console-and-shells/code-generation-with-bake). If the shell supports subcommands
 you can get help for those in a similar fashion:
 
-    cake bake model --help
-    cake bake model -h
+    bin/cake bake model --help
+    bin/cake bake model -h
 
 This would get you the help specific to bake's model task.
 
@@ -837,8 +796,8 @@ with CakePHP shells, it's nice to have help available in a machine parse-able
 format. The ConsoleOptionParser can provide help in xml by setting an
 additional argument:
 
-    cake bake --help xml
-    cake bake -h xml
+    bin/cake bake --help xml
+    bin/cake bake -h xml
 
 The above would return an XML document with the generated help, options,
 arguments and subcommands for the selected shell. A sample XML document

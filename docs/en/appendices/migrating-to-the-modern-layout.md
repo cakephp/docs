@@ -1,14 +1,9 @@
-# Directory Structure
+# Migrating to the Modern Layout
 
-::: pieceofcake2
-This page is specific to the **pieceofcake2 fork** and is not part of the
-original CakePHP 2.x documentation.
-:::
-
-The pieceofcake2 fork supports two application layouts:
+The Piece of Cake 2 fork supports two application layouts:
 
 - **Legacy layout**: the traditional CakePHP 2.x layout with an `app/`
-  directory, as described in the rest of this book.
+  directory.
 - **Modern layout**: a CakePHP 5.x-style layout with `config/`, `src/`,
   `templates/`, `tests/` and so on at the project root. The
   [pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton uses it.
@@ -157,6 +152,10 @@ Step 3: CakePHP 5.x with CakePHP 5.x-style structure
    }
    ```
 
+   If your plugins were installed into `app/Plugin/`, the `installer-paths`
+   setting now points to `plugins/`. Remove the plugins from `app/Plugin/` and
+   run `composer install` to install them into `plugins/`.
+
 2. **Update the bootstrap files**: copy `config/define.php`,
    `webroot/index.php`, `webroot/test.php` and `bin/cake` from
    [pieceofcake2/app](https://github.com/pieceofcake2/app).
@@ -201,24 +200,3 @@ With the folder structure already in place, the upgrade to CakePHP 5.x is
 limited to code changes: require CakePHP 5.x in `composer.json`, update code
 for the API changes, and fix compatibility issues. See the
 [CakePHP 5.x Migration Guide](https://book.cakephp.org/5/en/appendices/5-0-migration-guide.html).
-
-## Framework layout
-
-The framework package itself has also been restructured
-([PR #21](https://github.com/pieceofcake2/cakephp/pull/21)). This matters when
-the book refers to files inside the core, such as `lib/Cake/...`:
-
-| Original CakePHP 2.10                          | pieceofcake2/cakephp                 |
-|------------------------------------------------|--------------------------------------|
-| `lib/Cake/`                                    | `src/Cake/`                          |
-| `lib/Cake/Test/Case/`                          | `tests/TestCase/`                    |
-| `lib/Cake/Test/Fixture/`                       | `tests/Fixture/`                     |
-| `lib/Cake/Console/cake`                        | `bin/cake` (`vendor/bin/cake`)       |
-| `lib/Cake/Config/`                             | `config/`                            |
-| `lib/Cake/View/`, `lib/Cake/Templates/`        | `templates/`                         |
-| `lib/Cake/VERSION.txt`                         | `VERSION.txt`                        |
-| `lib/Cake/Console/Templates/skel/`             | moved to [pieceofcake2/bake](https://github.com/pieceofcake2/bake) |
-
-The `CORE_ROOT` constant points to the framework root directory.
-`vendor/bin/cake` detects the project root from Composer and works with both the
-`src/` and `app/` layouts.

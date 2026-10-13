@@ -1,49 +1,51 @@
 # Installation
 
-CakePHP is fast and easy to install. The minimum requirements are a webserver
-and a copy of CakePHP, that's it! While this manual focuses primarily on setting
-up on Apache (because it's the most commonly used), you can configure CakePHP to
-run on a variety of web servers such as lighttpd or Microsoft IIS.
+CakePHP is installed with [Composer](https://getcomposer.org). The minimum
+requirements are a web server, PHP and Composer. While this manual focuses
+primarily on setting up on Apache (because it's the most commonly used), you
+can configure CakePHP to run on a variety of web servers such as nginx,
+lighttpd or Microsoft IIS.
+
+> [!WARNING]
+> CakePHP 2 is meant for maintaining existing applications. If you are starting
+> a new project, use [CakePHP 5](https://book.cakephp.org/5/en/) instead.
 
 ## Requirements
 
 - HTTP Server. For example: Apache. mod_rewrite is preferred, but by no means
   required.
-- PHP 5.3.0 or greater (CakePHP version 2.6 and below support PHP 5.2.8 and
-  above). CakePHP version 2.8.0 and above support PHP 7. To use PHP above 7.1
-  you may need to install mcrypt via PECL. See
-  [Security](core-utility-libraries/security) for more information.
+- PHP 8.0, 8.1, 8.2, 8.3, 8.4 or 8.5.
+- [Composer](https://getcomposer.org).
 
 Technically a database engine isn't required, but we imagine that most
 applications will utilize one. CakePHP supports a variety of database storage
 engines:
 
-- MySQL (4 or greater)
-- PostgreSQL
-- Microsoft SQL Server
-- SQLite
+- MySQL 5.6, 5.7 or 8.0+ (`pdo_mysql`)
+- PostgreSQL 9.4+ (`pdo_pgsql`)
+- SQLite 3 (`pdo_sqlite`)
+- Microsoft SQL Server 2022+ (`pdo_sqlsrv`)
 
 > [!NOTE]
 > All built-in drivers require PDO. You should make sure you have the correct
 > PDO extensions installed.
 
-> [!WARNING]
-> CakePHP 2.x is end-of-life and in maintenance mode (critical bugfixes only).
-> As such, functionality added in PHP 7.1+ functionality is not well
-> supported. You will likely have to disable deprecations using (`E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED`). We recommended you run PHP 5.6 or greater
-> for your applications. Earlier PHP versions are end-of-life, and
-> provide an increased security risk.
+CakePHP also uses the following PHP extensions:
 
-::: pieceofcake2 Requirements
-The pieceofcake2 fork has different requirements:
+- `mbstring` is strongly recommended. Without it, a Symfony polyfill is used.
+  The polyfill does not provide `mb_encode_mimeheader()`, so `CakeEmail` falls
+  back to `Multibyte::mimeEncode()` to encode mail headers.
+- `intl` is optional. It is used for date formatting in place of the
+  deprecated `strftime()`; a Symfony polyfill is used when it is missing.
+- `openssl` is optional, but required for SSL/TLS connections and for AES
+  encryption with [Security](core-utility-libraries/security).
 
-- PHP 8.0 to 8.5
-- Composer (installation without Composer is not supported)
-- MySQL 5.6+, PostgreSQL 9.4+, SQLite 3, or Microsoft SQL Server 2022+, with the matching PDO extension
-- `mbstring` is strongly recommended; `intl` and `openssl` are optional
-  (Symfony polyfills are used when `mbstring` / `intl` are missing)
-
-The fork is based on CakePHP 2.10.24. See [Installation](/pieceofcake2/installation).
+::: pieceofcake2
+PHP 8.0 or newer is required, and
+CakePHP is loaded only through Composer's autoloader (`CAKE_CORE_INCLUDE_PATH`
+and `include_path` setups were removed). The fork is based on CakePHP 2.10.24; if your application runs an
+older 2.x release, first upgrade it to `cakephp/cakephp` 2.10.24 on PHP 7.4,
+as described in the [Upgrade Guide](/appendices/migrating-from-cakephp-2-10).
 :::
 
 ## License
@@ -53,217 +55,259 @@ modify, distribute and republish the source code on the condition that the
 copyright notices are left intact. You are also free to incorporate CakePHP
 into any commercial or closed source application.
 
-## Downloading CakePHP
+## Installing Composer
 
-There are two main ways to get a fresh copy of CakePHP. You can either download
-an archived copy (zip/tar.gz/tar.bz2) from the main website, or check out the
-code from the git repository.
+If you don't have Composer yet, install it as described in the
+[official Composer documentation](https://getcomposer.org/download/). On
+Windows you can use the
+[Composer Windows installer](https://github.com/composer/windows-setup/releases/).
+The examples in this book assume that the `composer` command is in your
+`PATH`.
 
-To download the latest major release of CakePHP, visit the main website
-<https://cakephp.org> and follow the "Download" link.
+## Creating a New Application
 
-All current releases of CakePHP are hosted on
-[GitHub](https://github.com/cakephp/cakephp). GitHub houses both CakePHP itself
-as well as many other plugins for CakePHP. The CakePHP releases are available at
-[GitHub tags](https://github.com/cakephp/cakephp/tags).
-
-Alternatively you can get fresh off the press code, with all the bug-fixes and
-up to the minute enhancements. These can be accessed from GitHub by cloning the
-[GitHub](https://github.com/cakephp/cakephp) repository:
-
-    git clone -b 2.x git://github.com/cakephp/cakephp.git
-
-::: pieceofcake2 Install with Composer
-The pieceofcake2 fork can only be installed with Composer. Archive downloads and
-git checkouts of `cakephp/cakephp` do not apply. Require the fork in your
-application's `composer.json` (it `replace`s `cakephp/cakephp`):
+The [pieceofcake2/app](https://github.com/pieceofcake2/app) package is the
+application skeleton. Create a new application with Composer's
+`create-project` command:
 
 ```bash
-composer require pieceofcake2/cakephp
+composer create-project pieceofcake2/app my_app
 ```
 
-For a new application layout, use the [pieceofcake2/app](https://github.com/pieceofcake2/app)
-skeleton. Existing `app/` (legacy layout) applications must also update their
-dispatcher files (`app/webroot/index.php`, `app/webroot/test.php`, `app/Console/cake`).
-See [Installation](/pieceofcake2/installation) for the post-install steps.
-:::
+This creates a `my_app` directory, installs CakePHP (`pieceofcake2/cakephp`)
+into `vendor/`, and installs the [Bake](console-and-shells/code-generation-with-bake)
+and [DebugKit](https://github.com/pieceofcake2/debug_kit) plugins as
+development dependencies. The skeleton uses the following layout:
+
+```text
+my_app/
+    bin/cake            console
+    config/             configuration
+    logs/               log files
+    plugins/            plugins installed by Composer
+    resources/locales/  translation files
+    src/                controllers, models, helpers, shells
+    templates/          view templates, layouts and elements
+    tests/              tests and fixtures
+    tmp/                cache, sessions
+    vendor/             Composer packages, including CakePHP
+    webroot/            document root
+```
+
+See [CakePHP Folder Structure](getting-started/cakephp-folder-structure) for
+details.
+
+Next, finish the configuration:
+
+1. Copy `config/database.php.default` to `config/database.php` and enter your
+   database connection settings. See
+   [Database Configuration](development/configuration#database-configuration).
+2. In `config/core.php`, change the values of `Security.salt` and
+   `Security.cipherSeed`. The skeleton ships with well-known example values
+   that must not be used in a real application.
+
+The skeleton's `composer.json` already contains the plugin settings described
+in [Configuring composer.json](#configuring-composer-json). Keep them when you
+edit the file.
+
+## Adding CakePHP to an Existing Application
+
+If your application already uses Composer with `cakephp/cakephp`, replace it
+with `pieceofcake2/cakephp` in the `require` section of your `composer.json`,
+and add the `config` and `extra` settings described in
+[Configuring composer.json](#configuring-composer-json) if they are missing.
+Then run `composer update`. `pieceofcake2/cakephp` declares that it replaces
+`cakephp/cakephp`, so plugins and packages that require `cakephp/cakephp`
+2.x keep installing and working. Do not require both packages at the same
+time.
+
+CakePHP is loaded only through Composer's autoloader, so the dispatcher files of
+your application (`index.php`, `test.php` and the `cake` console script) must
+be replaced by current versions.
+
+For an application that uses the modern layout, copy `config/define.php`,
+`bin/cake`, `webroot/index.php` and `webroot/test.php` from the
+[pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton.
+
+For an application that still uses the legacy `app/` layout, install the Bake
+plugin, which contains the application templates, and copy the dispatcher
+files from it:
+
+```bash
+composer require --dev pieceofcake2/bake
+
+cp app/Plugin/Bake/Console/Templates/skel/webroot/index.php app/webroot/index.php
+cp app/Plugin/Bake/Console/Templates/skel/webroot/test.php app/webroot/test.php
+cp app/Plugin/Bake/Console/Templates/skel/Console/cake app/Console/cake
+chmod +x app/Console/cake
+
+# The Windows batch file and the PHP wrapper are no longer used
+rm -f app/Console/cake.bat app/Console/cake.php
+```
+
+In the legacy layout, Composer installs CakePHP plugins into `app/Plugin/`
+with the `installer-paths` setting shown in
+[Configuring composer.json](#configuring-composer-json).
+
+You can move a legacy application to the modern layout later, one directory
+at a time. See [CakePHP Folder Structure](getting-started/cakephp-folder-structure) for
+the mapping between the two layouts, and the
+[Upgrade Guide](/appendices/migrating-from-cakephp-2-10) for the other changes compared to
+CakePHP 2.10.24.
+
+## Configuring composer.json {#configuring-composer-json}
+
+A minimal `composer.json` for a CakePHP application looks like this:
+
+```json
+{
+    "name": "example/my-app",
+    "type": "project",
+    "require": {
+        "php": ">=8.0",
+        "pieceofcake2/cakephp": "^2.12"
+    },
+    "autoload": {
+        "classmap": ["src/"]
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    },
+    "extra": {
+        "installer-paths": {
+            "plugins/{$name}/": ["type:cakephp-plugin"]
+        }
+    }
+}
+```
+
+The `config` and `extra` settings are required:
+
+- CakePHP 2 plugins are published as Composer packages of type
+  `cakephp-plugin` and are installed by the
+  [composer/installers](https://github.com/composer/installers) package. The
+  `installer-paths` setting tells it to install them into
+  `plugins/<Name>/`, which is where `CakePlugin::load()` looks for them.
+  Without this mapping, plugins end up in a different directory and CakePHP
+  cannot find them.
+- Since Composer 2.2, packages that run Composer plugins, such as
+  `composer/installers`, must be allowed in `config.allow-plugins`.
+  Otherwise Composer asks for confirmation or refuses to run them, and the
+  plugins are not installed in `plugins/`.
+
+In an application that uses the legacy `app/` layout, install plugins into
+`app/Plugin/` instead:
+
+```json
+"extra": {
+    "installer-paths": {
+        "app/Plugin/{$name}/": ["type:cakephp-plugin"]
+    }
+}
+```
+
+CakePHP looks for plugins in `src/Plugin/` or `app/Plugin/` and in `plugins/`
+at the project root, so a legacy application can also keep using `plugins/`.
+
+The `classmap` setting is optional. It lets Composer autoload your own classes
+in `src/`, so you don't need `App::uses()` for them; run `composer dump-autoload`
+after adding a new class file. Applications that load their classes with
+`App::uses()` can leave it out. See
+[Advanced Installation](installation/advanced-installation) for more details.
 
 ## Permissions
 
-CakePHP uses the `app/tmp` directory for a number of different operations. A
+CakePHP uses the `tmp/` directory for a number of different operations. A
 few examples would be Model descriptions, cached views and session information.
+Log files are written to `logs/`.
 
-As such, make sure the directory `app/tmp` and all its subdirectories in your
-CakePHP installation are writable by the web server user.
+As such, make sure the `tmp/` and `logs/` directories and all their
+subdirectories are writable by the web server user. In the legacy layout,
+these are `app/tmp/` and `app/tmp/logs/`.
 
-One common issue is that the app/tmp directories and subdirectories must be
-writable both by the web server and the command line user. On a UNIX system, if
-your web server user is different from your command line user, you can run the
-following commands just once in your project to ensure that permissions will be
-setup properly:
+One common issue is that these directories must be writable both by the web
+server and the command line user. On a UNIX system, if your web server user is
+different from your command line user, you can run the following commands just
+once in your project to ensure that permissions will be setup properly:
 
 ``` text
 HTTPDUSER=`ps aux | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1`
-setfacl -R -m u:${HTTPDUSER}:rwx app/tmp
-setfacl -R -d -m u:${HTTPDUSER}:rwx app/tmp
+setfacl -R -m u:${HTTPDUSER}:rwx tmp logs
+setfacl -R -d -m u:${HTTPDUSER}:rwx tmp logs
 ```
 
-::: pieceofcake2 Directory layout
-The writable directories depend on your application layout:
+## Development Server
 
-- Legacy layout: `app/tmp` (logs in `app/tmp/logs`)
-- Modern layout: `tmp/` and `logs/` at the project root
+The quickest way to try your application is PHP's built-in web server, which
+you can start with the `server` shell:
 
-See [Directory Structure](/pieceofcake2/directory-structure).
-:::
+```bash
+bin/cake server -p 8765
+```
 
-## Setup
+Your application is then available at <http://localhost:8765/>. Use `-H` to
+change the host name and `-d` to change the document root. Without `-p`,
+the server listens on port 80, which usually requires administrator rights.
 
-Setting up CakePHP can be as simple as slapping it in your web server's document
-root, or as complex and flexible as you wish. This section will cover the three
-main installation types for CakePHP: development, production, and advanced.
+> [!WARNING]
+> The built-in server is meant for development only. Never use it in a
+> production environment.
 
-- Development: easy to get going, URLs for the application include the CakePHP
-  installation directory name, and less secure.
-- Production: Requires the ability to configure the web server's document root,
-  clean URLs, very secure.
-- Advanced: With some configuration, allows you to place key CakePHP
-  directories in different parts of the filesystem, possibly sharing a single
-  CakePHP core library folder amongst many CakePHP applications.
+## Configuring the Web Server
 
-::: pieceofcake2
-With the pieceofcake2 fork, CakePHP is installed into `vendor/` by Composer, so
-the archive-based layouts below (with `lib/` next to `app/`) and sharing one core
-checkout through `include_path` do not apply. Point the web server's document root
-at the application's webroot as described under Production: `app/webroot/` for the
-legacy layout, or `webroot/` at the project root for the modern layout.
-:::
+In production, and also in development if you use Apache or another web
+server, set the web server's document root to the application's `webroot/`
+directory (`app/webroot/` in the legacy layout). Only the files in `webroot/`
+are then reachable from the web, while your configuration, source code and
+`vendor/` stay outside of the document root.
 
-## Development
-
-A development installation is the fastest method to setup CakePHP. This example
-will help you install a CakePHP application and make it available at
-[http://www.example.com/cake\\2\\0/](http://www.example.com/cake\_2\_0/). We assume for the purposes of this example
-that your document root is set to `/var/www/html`.
-
-Unpack the contents of the CakePHP archive into `/var/www/html`. You now have
-a folder in your document root named after the release you've downloaded (e.g.
-cake_2.0.0). Rename this folder to cake_2_0. Your development setup will look
-like this on the file system:
-
-    /var/www/html/
-        cake_2_0/
-            app/
-            lib/
-            plugins/
-            vendors/
-            .htaccess
-            index.php
-            README
-
-If your web server is configured correctly, you should now find your CakePHP
-application accessible at [http://www.example.com/cake\\2\\0/](http://www.example.com/cake\_2\_0/).
-
-### Using one CakePHP Checkout for multiple Applications
-
-If you are developing a number of applications, it often makes sense to have
-them share the same CakePHP core checkout. There are a few ways in which you can
-accomplish this. Often the easiest is to use PHP's `include_path`. To start
-off, clone CakePHP into a directory. For this example, we'll use
-`/home/mark/projects`:
-
-    git clone -b 2.x git://github.com/cakephp/cakephp.git /home/mark/projects/cakephp
-
-This will clone CakePHP into your `/home/mark/projects` directory. If you
-don't want to use git, you can download a zipball and the remaining steps will
-be the same. Next you'll have to locate and modify your `php.ini`. On \*nix
-systems this is often in `/etc/php.ini`, but using `php -i` and looking for
-'Loaded Configuration File', you can find the actual location. Once you've found
-the correct ini file, modify the `include_path` configuration to include
-`/home/mark/projects/cakephp/lib`. An example would look like:
+Assuming you installed the application into `/var/www/my_app`, an Apache
+virtual host looks like this:
 
 ``` text
-include_path = .:/home/mark/projects/cakephp/lib:/usr/local/php/lib/php
+<VirtualHost *:80>
+    ServerName www.example.com
+    DocumentRoot /var/www/my_app/webroot
+
+    <Directory /var/www/my_app/webroot>
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
 ```
 
-After restarting your webserver, you should see the changes reflected in
-`phpinfo()`.
+The `.htaccess` file in `webroot/` rewrites all requests to `index.php`, so
+mod_rewrite must be enabled and `AllowOverride` must allow it. If your web
+server is configured correctly, you should now find your CakePHP application
+accessible at <http://www.example.com>.
 
-> [!NOTE]
-> If you are on Windows, separate include paths with ; instead of :
+For nginx, lighttpd, IIS and for troubleshooting mod_rewrite, see
+[URL Rewriting](installation/url-rewriting). If you need to place the
+directories of your application in other locations, see
+[Advanced Installation](installation/advanced-installation).
 
-Having finished setting up your `include_path` your applications should be
-able to find CakePHP automatically.
-
-## Production
-
-A production installation is a more flexible way to setup CakePHP. Using this
-method allows an entire domain to act as a single CakePHP application. This
-example will help you install CakePHP anywhere on your filesystem and make it
-available at <http://www.example.com>. Note that this installation may require the
-rights to change the `DocumentRoot` on Apache webservers.
-
-Unpack the contents of the CakePHP archive into a directory of your choice. For
-the purposes of this example, we assume you chose to install CakePHP into
-/cake_install. Your production setup will look like this on the filesystem:
-
-``` text
-/cake_install/
-    app/
-        webroot/ (this directory is set as the ``DocumentRoot``
-         directive)
-    lib/
-    plugins/
-    vendors/
-    .htaccess
-    index.php
-    README
-```
-
-Developers using Apache should set the `DocumentRoot` directive for the domain
-to:
-
-    DocumentRoot /cake_install/app/webroot
-
-::: pieceofcake2 Modern layout
-In the modern layout ([pieceofcake2/app](https://github.com/pieceofcake2/app)),
-`webroot/` is at the project root and there is no `.htaccess` or `index.php` at the
-project root to forward requests, so the document root must be set to it:
-
-```text
-DocumentRoot /cake_install/webroot
-```
-:::
-
-If your web server is configured correctly, you should now find your CakePHP
-application accessible at <http://www.example.com>.
-
-## Advanced Installation and URL Rewriting
-
-- [Advanced Installation](installation/advanced-installation)
-- [URL Rewriting](installation/url-rewriting)
+Before you go live, also read [Deployment](deployment).
 
 ## Fire It Up
 
-Alright, let's see CakePHP in action. Depending on which setup you used, you
-should point your browser to <http://example.com/> or
-[http://www.example.com/cake\\2\\0/](http://www.example.com/cake\_2\_0/). At this point, you'll be presented with
-CakePHP's default home, and a message that tells you the status of your current
-database connection.
+Alright, let's see CakePHP in action. Point your browser to the URL of your
+application, for example <http://localhost:8765/> when you use the development
+server or <http://www.example.com/>. At this point, you'll be presented with
+CakePHP's default home, which tells you whether the `tmp/` directory is
+writable, whether caching works and whether CakePHP can connect to your
+database.
 
 Congratulations! You are ready to [create your first CakePHP application](getting-started).
 
 Not working? If you're getting timezone related errors from PHP uncomment one
-line in `app/Config/core.php`:
+line in `config/core.php` and set your server's timezone:
 
-::: pieceofcake2
-In the modern layout this file is `config/core.php`.
-:::
-
-``` text
+``` php
 /**
  * Uncomment this line and correct your server timezone to fix
  * any date & time related errors.
  */
-    date_default_timezone_set('UTC');
+date_default_timezone_set('UTC');
 ```

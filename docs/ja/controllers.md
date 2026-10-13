@@ -14,18 +14,12 @@ RecipesController と IngredientsController を作るでしょう。
 
 アプリケーションのコントローラは `AppController` クラスを継承し、そしてそれは
 `Controller` クラスを継承しています。 `AppController` クラスは
-`/app/Controller/AppController.php` に定義し、アプリケーションのコントローラ全体で
+`src/Controller/AppController.php` に定義し、アプリケーションのコントローラ全体で
 共有されるメソッドを含めるようにしましょう。
-
-::: pieceofcake2 ファイルの配置場所
-pieceofcake2 フォークは 2 種類のアプリケーションレイアウトをサポートしています。
-コントローラとコンポーネントの置き場所は次のとおりです。
-
-- レガシー: `app/Controller/`, `app/Controller/Component/`
-- モダン: `src/Controller/`, `src/Controller/Component/`
-
-[ディレクトリ構成](/ja/pieceofcake2/directory-structure) を参照してください。
-:::
+独自のコントローラは `src/Controller/` に、コンポーネントは `src/Controller/Component/` に置きます。
+従来の `app/` レイアウトのアプリケーションでは、代わりに `app/Controller/` と
+`app/Controller/Component/` を使います。詳しくは
+[CakePHP のフォルダ構造](/ja/getting-started/cakephp-folder-structure) を参照してください。
 
 コントローラは、リクエストを操作するための *アクション* と呼ばれるいくつかのメソッドを提供します。
 デフォルトで、コントローラ上のすべての public メソッドはアクションとなり、URL からアクセスが出来ます。
@@ -39,9 +33,10 @@ pieceofcake2 フォークは 2 種類のアプリケーションレイアウト�
 冒頭で述べたように、 `AppController` クラスはアプリケーションのすべてのコントローラの
 親クラスとなります。 `AppController` はそれ自身、CakePHP のコアライブラリに含まれる
 `Controller` クラスを継承しています。
-`AppController` は `/app/Controller/AppController.php` に次のように定義されます。 :
+`AppController` は `src/Controller/AppController.php` に次のように定義されます。
 
 ``` php
+// src/Controller/AppController.php
 class AppController extends Controller
 {
 }
@@ -77,6 +72,31 @@ public function beforeFilter()
 }
 ```
 
+<a id="autoloading-classes"></a>
+
+### クラスの読み込み
+
+このマニュアルのサンプルコードには `App::uses()` を書いていません。CakePHP 自身のクラスは
+Composer によってオートロードされます。また、アプリケーションスケルトン
+([pieceofcake2/app](https://github.com/pieceofcake2/app)) では、 `composer.json` の
+classmap 設定でアプリケーションのクラスを登録しています。
+
+``` json
+"autoload": {
+    "classmap": ["src/"]
+}
+```
+
+この設定があれば、コントローラ、モデル、コンポーネント、ビヘイビア、ヘルパー、シェルに
+`App::uses()` は必要ありません。新しいクラスファイルを追加したときは、Composer に認識させるために
+`composer dump-autoload` を実行してください。
+
+classmap を使っていないアプリケーション (たとえば `app/` レイアウトの古いアプリケーション) では、
+これまでどおり `App::uses()` で自分のクラスを読み込みます。たとえば、各コントローラファイルの先頭に
+`App::uses('AppController', 'Controller');` と書きます。Composer でオートロードされない
+プラグインのクラスも、 `App::uses('MyPluginHelper', 'MyPlugin.View/Helper');` のように
+`App::uses()` で読み込む必要があります。
+
 ## リクエストパラメータ
 
 CakePHP アプリケーションにリクエストがあった時、CakePHP の `Router` クラスと
@@ -94,11 +114,11 @@ CakePHP アプリケーションにリクエストがあった時、CakePHP の 
 
 CakePHP は規約に従って、アクション名のビューを描画します。オンラインベーカリーのサンプルに
 戻ってみてみると、 RecipesController は `view()`, `share()`, `search()` アクションが
-含まれています。このコントローラは `/app/Controller/RecipesController.php` にあり、
-次のようなコードになっています。 :
+含まれています。このコントローラは `src/Controller/RecipesController.php` にあり、
+次のようなコードになっています。
 
 ``` php
-# /app/Controller/RecipesController.php
+// src/Controller/RecipesController.php
 
 class RecipesController extends AppController
 {
@@ -119,15 +139,10 @@ class RecipesController extends AppController
 }
 ```
 
-これらのアクションのビューは `app/View/Recipes/view.ctp` 、
-`app/View/Recipes/share.ctp` 、 `app/View/Recipes/search.ctp` にあります。
+これらのアクションのビューは `templates/Recipes/view.ctp` 、
+`templates/Recipes/share.ctp` 、 `templates/Recipes/search.ctp` にあります。
 規約に従ったビューのファイル名は、アクション名を小文字にしてアンダースコアでつないだものです。
-
-::: pieceofcake2
-pieceofcake2 フォークのモダンレイアウトでは、ビューファイルは `app/View/` ではなく `templates/` に置きます
-（例: `templates/Recipes/view.ctp`）。以下の例も同様です（`templates/Posts/custom_file.ctp`）。
-プラグイン内のテンプレートは、引き続きプラグインの `View/` ディレクトリに置きます。
-:::
+従来の `app/` レイアウトでは、ビューファイルは `templates/` ではなく `app/View/` に置きます。
 
 通常、コントローラのアクションは `View` クラスがビューを描画するために使うコンテキストを
 作るために `~Controller::set()` を使います。CakePHP の規約に従うと、手動でビューを
@@ -168,6 +183,8 @@ class RecipesController extends AppController
 
 アプリケーションでコントローラを効率的に使うために、CakePHP のコントローラから提供される
 いくつかのコアな属性やメソッドを説明しましょう。
+
+<a id="controller-life-cycle"></a>
 
 ## リクエストライフサイクルコールバック
 
@@ -217,8 +234,8 @@ class PostsController extends AppController
 }
 ```
 
-これは `app/View/Posts/my_action.ctp` の代わりに
-`app/View/Posts/custom_file.ctp` を描画します。
+これは `templates/Posts/my_action.ctp` の代わりに
+`templates/Posts/custom_file.ctp` を描画します。
 
 また、次のような書式で、プラグイン内のビューを描画することもできます。
 `$this->render('PluginName.PluginController/custom_file')`
@@ -235,7 +252,8 @@ class PostsController extends AppController
 }
 ```
 
-これは `app/Plugin/Users/View/UserDetails/custom_file.ctp` を描画します。
+これは `plugins/Users/View/UserDetails/custom_file.ctp` を描画します。
+プラグイン内のテンプレートは、プラグイン自身の `View/` ディレクトリに置きます。
 
 ### フローコントロール
 

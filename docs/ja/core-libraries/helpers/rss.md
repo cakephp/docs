@@ -13,7 +13,7 @@ CakePHP で posts/index の xml/rss バージョンはすぐに作成できま�
 いくつかの簡単なステップの後、 `posts/index` に拡張子 (.rss) を追加し、
 `posts/index.rss` という URL を作成します。このウェブサービスを
 公開して実行する前にいくつか行う必要があります。最初に parseExtensions を
-有効にします。これは `app/Config/routes.php` で行います。 :
+有効にします。これは `config/routes.php` で行います。 :
 
 ``` php
 Router::parseExtensions('rss');
@@ -81,7 +81,7 @@ public function index()
 
 ### レイアウト
 
-RSS レイアウトはとてもシンプルです。 `app/View/Layouts/rss/default.ctp` 内に
+RSS レイアウトはとてもシンプルです。 `templates/Layouts/rss/default.ctp` 内に
 以下の内容を記述します。 :
 
 ``` php
@@ -106,12 +106,12 @@ CakePHP では、あなたのビューからレイアウトに変数を渡すこ
 得られます。
 
 次に posts/index のビューファイルを作成します。私たちが作成したレイアウトファイルのように
-`View/Posts/rss/` ディレクトリを作成し、そのフォルダの中に `index.ctp` を
+`templates/Posts/rss/` ディレクトリを作成し、そのフォルダの中に `index.ctp` を
 作成する必要があります。ファイルの内容は以下の通りです。
 
 ### ビュー
 
-私たちのビューは、 `app/View/Posts/rss/index.ctp` に置かれ、
+私たちのビューは、 `templates/Posts/rss/index.ctp` に置かれ、
 レイアウトのための `$documentData` と `$channelData` 変数を設定を始めます。
 これらの変数は、RSS フィードのためのすべてのメタデータを持っています。
 これは、 `Controller::set()` メソッドと同様の `View::set()`

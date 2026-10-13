@@ -164,7 +164,7 @@ public function dateFormatBeforeSave($dateString)
 > そうしないとsaveは失敗します。
 
 ``` php
-// app/Model/ProductCategory.php を使用する。
+// src/Model/ProductCategory.php を使用する。
 // 以下の例では、プロダクトをまだ保有してる場合、
 // プロダクトのカテゴリを削除しないようにします。
 // ProductsController.phpからの$this->Product->delete($id)の呼び出しでは、

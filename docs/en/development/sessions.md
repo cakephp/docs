@@ -54,7 +54,8 @@ Configure::write('Session', [
 ]);
 ```
 
-Session cookie paths default to `/` in 2.0, to change this you can use the
+Session cookie paths default to the application's base path (`/` when the
+application is served from the document root). To change this you can use the
 `session.cookie_path` ini flag to the directory path of your application:
 
 ``` php
@@ -110,9 +111,9 @@ The above overrides the timeout and cookie name for the 'php' session
 configuration. The built-in configurations are:
 
 - `php` - Saves sessions with the standard settings in your php.ini file.
-- `cake` - Saves sessions as files inside `app/tmp/sessions`. This is a
-  good option when on hosts that don't allow you to write outside your own home
-  dir.
+- `cake` - Saves sessions as files inside `tmp/sessions` (`app/tmp/sessions`
+  in the legacy layout). This is a good option when you want session files kept
+  with the application instead of in PHP's global session directory.
 - `database` - Use the built-in database sessions. See below for more information.
 - `cache` - Use the built-in cache sessions. See below for more information.
 
@@ -121,12 +122,12 @@ configuration. The built-in configurations are:
 Session handlers can also be defined in the session config array. When defined
 they allow you to map the various `session_save_handler` values to a class or
 object you want to use for session saving. There are two ways to use the
-'handler'. The first is to provide an array with 5 callables. These callables
+'handler'. The first is to provide an array with 6 callables. These callables
 are then applied to `session_set_save_handler`:
 
 ``` php
 Configure::write('Session', [
-    'userAgent' => false,
+    'checkAgent' => false,
     'cookie' => 'my_cookie',
     'timeout' => 600,
     'handler' => [
@@ -138,11 +139,15 @@ Configure::write('Session', [
         ['Foo', 'gc'],
     ],
     'ini' => [
-        'cookie_secure' => 1,
-        'use_trans_sid' => 0
-    ]
+        'session.cookie_secure' => 1,
+        'session.use_trans_sid' => 0,
+    ],
 ]);
 ```
+
+This form is passed directly to `session_set_save_handler()`. Passing
+separate callables to that function is deprecated as of PHP 8.4, so prefer the
+second form for new code.
 
 The second mode is to define an 'engine' key. This key should be a class name
 that implements `CakeSessionHandlerInterface`. Implementing this interface
@@ -160,25 +165,24 @@ something like `MyPlugin.PluginSessionHandler`. This will load and use the
 This interface is used for all custom session handlers inside CakePHP, and can
 be used to create custom user land session handlers. Simply implement the
 interface in your class and set `Session.handler.engine` to the class name
-you've created. CakePHP will attempt to load the handler from inside
-`app/Model/Datasource/Session/$classname.php`. So if your class name is
+you've created. Put the class in `src/Model/Datasource/Session/$classname.php`
+(`app/Model/Datasource/Session/` in the legacy layout). So if your class name is
 `AppSessionHandler` the file should be
-`app/Model/Datasource/Session/AppSessionHandler.php`.
+`src/Model/Datasource/Session/AppSessionHandler.php`. With Composer classmap
+autoloading the class is found from the classmap; otherwise CakePHP loads it
+from that directory.
+
+CakePHP registers your handler with PHP through `SessionHandlerAdapter`, which
+also handles `session.use_strict_mode`: an incoming session ID is accepted only
+when your `read()` returns a non-empty string for it. Make `read()` return `''`
+for unknown IDs, and make `destroy()` return `true` for sessions that were never
+written, as the core `CacheSession` and `DatabaseSession` do.
 
 ::: pieceofcake2
-In the modern layout, put the handler in
-`src/Model/Datasource/Session/AppSessionHandler.php`.
-
-The fork wraps `CakeSessionHandlerInterface` handlers in `SessionHandlerAdapter`,
-which also supports `session.use_strict_mode` (enabled by default since PHP 8.6):
-an incoming session ID is accepted only when your `read()` returns a non-empty
-string. Make `read()` return `''` for unknown IDs and `destroy()` return `true`
-for sessions that were never written, as the core `CacheSession` and
-`DatabaseSession` do.
-
-The array-of-callables form of `handler` shown above is passed directly to
-`session_set_save_handler()`, whose callable signature is deprecated as of
-PHP 8.4; prefer the `engine` form.
+Session handlers support
+`session.use_strict_mode`, which PHP 8.6 enables by default. Unknown session IDs
+are rejected and a new ID is generated, so a custom handler whose `read()` returns
+a non-empty value for unknown IDs, or whose `destroy()` fails for them, must be updated.
 :::
 
 ### Database sessions
@@ -222,26 +226,16 @@ CREATE TABLE `cake_sessions` (
 ```
 
 You can also use the schema shell to create this table using the schema file
-provided in the default app skeleton:
+`config/Schema/sessions.php` provided in the app skeleton:
 
 ``` bash
-$ Console/cake schema create sessions
+$ bin/cake schema create sessions
 ```
-
-::: pieceofcake2
-In the modern layout the schema file is `config/Schema/sessions.php` and the
-console is `bin/cake`: `bin/cake schema create sessions`.
-:::
 
 ### Cache Sessions
 
-::: pieceofcake2
-The Xcache cache engine has been removed in the fork. Use APC (APCu),
-Memcached, Memcache or Redis instead.
-:::
-
 The Cache class can be used to store sessions as well. This allows you to store
-sessions in a cache like APC, memcache, or Xcache. There are some caveats to
+sessions in a cache like APCu, Memcached or Redis. There are some caveats to
 using cache sessions, in that if you exhaust the cache space, sessions will
 start to expire as records are evicted.
 
@@ -283,16 +277,15 @@ Configure::write('Session', [
 
 Creating a custom session handler is straightforward in CakePHP. In this
 example we'll create a session handler that stores sessions both in the Cache
-(apc) and the database. This gives us the best of fast IO of apc,
+(APCu) and the database. This gives us the best of fast IO of APCu,
 without having to worry about sessions evaporating when the cache fills up.
 
 First we'll need to create our custom class and put it in
-`app/Model/Datasource/Session/ComboSession.php`. The class should look
+`src/Model/Datasource/Session/ComboSession.php`. The class should look
 something like:
 
 ``` php
-App::uses('DatabaseSession', 'Model/Datasource/Session');
-
+// src/Model/Datasource/Session/ComboSession.php
 class ComboSession extends DatabaseSession implements CakeSessionHandlerInterface
 {
     public $cacheKey;
@@ -340,7 +333,7 @@ Our class extends the built-in `DatabaseSession` so we don't have to duplicate
 all of its logic and behavior. We wrap each operation with a `Cache`
 operation. This lets us fetch sessions from the fast cache, and not have to
 worry about what happens when we fill the cache. Using this session handler is
-also easy. In your `core.php` make the session block look like the following:
+also easy. In your `config/core.php` make the session block look like the following:
 
 ``` php
 Configure::write('Session', [
@@ -348,11 +341,11 @@ Configure::write('Session', [
     'handler' => [
         'engine' => 'ComboSession',
         'model' => 'Session',
-        'cache' => 'apc'
-    ]
+        'cache' => 'apc',
+    ],
 ]);
 
-// Make sure to add a apc cache config
+// Make sure to add an apc cache config (uses APCu)
 Cache::config('apc', ['engine' => 'Apc']);
 ```
 
@@ -375,7 +368,7 @@ session, `CakeSession` provides a simple CRUD interface.
 You can read values from the session using `Set::classicExtract()`
 compatible syntax:
 
-``` css
+``` php
 CakeSession::read('Config.language');
 ```
 
@@ -383,7 +376,7 @@ CakeSession::read('Config.language');
 
 `$key` should be the dot separated path you wish to write `$value` to:
 
-``` css
+``` php
 CakeSession::write('Config.language', 'eng');
 ```
 
@@ -391,7 +384,7 @@ CakeSession::write('Config.language', 'eng');
 
 When you need to delete data from the session, you can use delete:
 
-``` css
+``` php
 CakeSession::delete('Config.language');
 ```
 

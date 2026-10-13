@@ -9,7 +9,7 @@
 たくさんあります。もしかすると、あるプラグインに対して独自の routes ファイルや
 bootstrap ファイルを定義しながら、全てのプラグインを自動的にロードしたいかもしれません。
 
-大丈夫です:
+大丈夫です。 `config/bootstrap.php` に次のように書きます。
 
 ``` php
 CakePlugin::loadAll([
@@ -21,6 +21,8 @@ CakePlugin::loadAll([
 
 この設定方法に従うと、プラグインの設定や routes ファイルを手動で include() や
 require() する必要はありません。適切なタイミングと場所で自動的に行われます。
+CakePHP はプラグインの `Config/bootstrap.php` と `Config/routes.php` を読み込みます。
+たとえば `plugins/Blog/Config/routes.php` です。
 また、正確に同じパラメータが load() メソッドに設定されます。
 ３つのプラグインのみがロードされ、残りのプラグインはロードされません。
 
@@ -33,7 +35,7 @@ require() する必要はありません。適切なタイミングと場所で�
 ``` php
 CakePlugin::loadAll([
     ['bootstrap' => true],
-    'Blog' => ['routes' => true]
+    'Blog' => ['routes' => true],
 ]);
 ```
 
@@ -48,15 +50,17 @@ CakePHP 2.3.0 は、プラグインをロードする時に、routes ファイ�
 ``` php
 // Loads all plugins including any possible routes and bootstrap files
 CakePlugin::loadAll([
-    ['routes' => true, 'bootstrap' => true, 'ignoreMissing' => true]
+    ['routes' => true, 'bootstrap' => true, 'ignoreMissing' => true],
 ]);
 ```
 
 さらに、いくつかのプラグインでは、あなたのデータベースに一つ以上のテーブルを
 作成する必要があります。これらの場合に、しばしば、以下のような cake シェルから呼び出す
-schema ファイルを用意しています。 :
+schema ファイルを用意しています。
 
-    user@host$ cake schema create --plugin ContactManager
+``` bash
+bin/cake schema create --plugin ContactManager
+```
 
 ほとんどのプラグインは、文書中でプラグインの設定やデータベースの設定の適切な手順を示します。
 いくつかのプラグインは、他よりも多くの設定を必要とします。
@@ -71,9 +75,9 @@ CakePlugin::loadAll([
     'Blog' => [
         'bootstrap' => [
             'config1',
-            'config2'
-        ]
-    ]
+            'config2',
+        ],
+    ],
 ]);
 ```
 
@@ -82,13 +86,12 @@ CakePlugin::loadAll([
 ``` php
 function aCallableFunction($pluginName, $config)
 {
-
 }
 
 CakePlugin::loadAll([
     'Blog' => [
-        'bootstrap' => 'aCallableFunction'
-    ]
+        'bootstrap' => 'aCallableFunction',
+    ],
 ]);
 ```
 

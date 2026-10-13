@@ -18,11 +18,14 @@ Completion シェルは、開発者が補完スクリプトの作成を支援す
 最初のステップは、利用可能なシェルコマンドをプラグイン名が必要な場合は付加して出力します。
 (出力結果は、このコマンド自身や他のサブコマンド全てがスペースで区切られています。) 例:
 
-    ./Console/cake Completion commands
+    bin/cake Completion commands
 
 実行結果:
 
-    acl api bake command_list completion console i18n schema server test testsuite upgrade
+    Bake.bake acl api command_list completion console i18n schema server test testsuite
+
+プラグインが提供するシェルには、プラグイン名が前に付きます。上の出力は
+[Bake プラグイン](code-generation-with-bake) をロードしたアプリケーションの例です。
 
 あなたの補完スクリプトは、一連のリストから関連するコマンドを選ぶことができます。
 (このコマンドや以下のサブコマンドなど)
@@ -32,7 +35,7 @@ Completion シェルは、開発者が補完スクリプトの作成を支援す
 いったん気に入ったコマンドが選ばれると、次の段階として subCommands に入ります。そして、
 与えられたシェルコマンドのために利用可能なサブコマンドを出力します。例:
 
-    ./Console/cake Completion subcommands bake
+    bin/cake Completion subcommands Bake.bake
 
 実行結果:
 
@@ -44,7 +47,7 @@ Completion シェルは、開発者が補完スクリプトの作成を支援す
 与えられた (サブ) コマンドのためのオプションを出力します。 (Shell から継承された
 デフォルトのオプションを含みます。) 例:
 
-    ./Console/cake Completion options bake
+    bin/cake Completion options Bake.bake
 
 実行結果:
 
@@ -104,5 +107,5 @@ _cake()
     return 0;
 }
 
-complete -F _cake cake Console/cake
+complete -F _cake cake bin/cake
 ```

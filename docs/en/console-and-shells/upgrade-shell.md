@@ -2,83 +2,55 @@
 
 # Upgrade shell
 
+The upgrade shell does most of the mechanical work of upgrading an application
+from CakePHP 1.3 to 2.0: it moves files to their 2.0 locations and rewrites
+removed APIs, helper calls, constants and so on. It is provided by the
+[pieceofcake2/upgrade](https://github.com/pieceofcake2/upgrade) plugin.
+
 ::: pieceofcake2
-In the pieceofcake2 fork, `UpgradeShell` has been removed from the core and moved to the
-[pieceofcake2/upgrade](https://github.com/pieceofcake2/upgrade) plugin
-(`composer require --dev pieceofcake2/upgrade`, then `CakePlugin::load('Upgrade');`).
-Note that the fork itself only supports applications already running on CakePHP 2.10.24,
-and the download/copy steps below do not apply to it (the fork is installed with Composer only).
-Most applications will never need this shell. See [Upgrade guide](/pieceofcake2/upgrade).
+`UpgradeShell` was removed from the core and moved to the
+pieceofcake2/upgrade plugin. Most applications never need it.
 :::
 
-The upgrade shell will do most of the work to upgrade your CakePHP application
-from 1.3 to 2.0.
+The shell works on applications in the legacy `app/` layout, so the examples below run it
+through `vendor/bin/cake`. Install the plugin as a development dependency and load it in
+`app/Config/bootstrap.php`:
 
-To run all upgrade steps:
+``` bash
+composer require --dev pieceofcake2/upgrade
+```
 
-    ./Console/cake upgrade all
+Composer installs it into `plugins/Upgrade/` when your `composer.json` has the
+`installer-paths` setting described in
+[Installing a plugin with Composer](/plugins/how-to-install-plugins#composer).
+
+``` php
+// app/Config/bootstrap.php
+CakePlugin::load('Upgrade');
+```
+
+Make a backup of your application (or commit it to version control) before you
+start. To run all upgrade steps:
+
+    vendor/bin/cake upgrade all
 
 If you would like to see what the shell will do without modifying files perform
-a dry run first with --dry-run:
+a dry run first with `--dry-run`:
 
-    ./Console/cake upgrade all --dry-run
+    vendor/bin/cake upgrade all --dry-run
 
 To upgrade your plugin run the command:
 
-    ./Console/cake upgrade all --plugin YourPluginName
+    vendor/bin/cake upgrade all --plugin YourPluginName
 
-You are able to run each upgrade step individually. To see all the steps
-available run the command:
+You are able to run each upgrade step individually (`tests`, `locations`,
+`i18n`, `helpers`, `basics`, `request`, `configure`, `constants`,
+`controller_redirects`, `components` and `exceptions`). To see all the steps
+and options available run the command:
 
-    ./Console/cake upgrade --help
+    vendor/bin/cake upgrade --help
 
-Or visit the [API docs](https://api.cakephp.org/2.x/class-UpgradeShell.html) for more info.
-
-## Upgrade Your App
-
-Here is a guide to help you upgrade your CakePHP 1.3 app to 2.x using the
-upgrade shell. Your 1.3 app structure will likely look like this:
-
-    mywebsite/
-        app/             <- Your App
-        cake/            <- 1.3 Version of CakePHP
-        plugins/
-        vendors/
-        .htaccess
-        index.php
-
-The first step is to download or `git clone` the new version of CakePHP into
-another folder outside of your `mywebsite` folder, we'll call it `cakephp`.
-We don't want the downloaded `app` folder to overwrite your app folder. Now is
-a good time to make a backup of your app folder, eg.: `cp -R app app-backup`.
-
-Copy the `cakephp/lib` folder to your `mywebsite/lib` to setup the new
-CakePHP version in your app, eg.: `cp -R ../cakephp/lib .`. Symlinking is a
-good alternative to copy as well, eg.: `ln -s /var/www/cakephp/lib`.
-
-Before we can run the upgrade shell we need the new console scripts as well.
-Copy the `cakephp/app/Console` folder into your `mywebsite/app`, eg.:
-`cp -R ../cakephp/app/Console ./app`.
-
-Your folder structure should look like this now:
-
-    mywebsite/
-        app/              <- Your App
-            Console/      <- Copied app/Console Folder
-        app-backup/       <- Backup Copy of Your App
-        cake/             <- 1.3 Version of CakePHP
-        lib/              <- 2.x Version of CakePHP
-            Cake/
-        plugins/
-        vendors/
-        .htaccess
-        index.php
-
-Now we can run the upgrade shell by `cd`'ing into your `app` folder and
-running the command:
-
-    ./Console/cake upgrade all
-
-This will do **most** of the work to upgrade your app to 2.x. Check things over
-in your upgraded `app` folder. If everything looks good then congratulate
-yourself and delete your `mywebsite/cake` folder. Welcome to 2.x!
+The upgrade shell only covers the 1.3 to 2.0 changes. An application converted
+this way must then be brought up to CakePHP 2.10.24 before it can run on the
+Piece of Cake 2 fork; see [Migrating from CakePHP 2.10](/appendices/migrating-from-cakephp-2-10) and the
+migration guides in the appendices.

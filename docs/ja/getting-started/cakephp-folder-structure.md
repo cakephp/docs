@@ -1,142 +1,132 @@
 # CakePHP のフォルダ構造
 
-CakePHP をダウンロードして展開すると、次のようなファイルとフォルダが含まれているはずです:
+[pieceofcake2/app](https://github.com/pieceofcake2/app) スケルトンから新しいアプリケーションを作成すると
+([インストール](../installation) を参照)、次のようなファイルとフォルダが含まれているはずです。
 
-- app
-- lib
-- vendors
+- bin
+- config
+- logs
 - plugins
-- .htaccess
-- index.php
-- README
+- resources
+- src
+- templates
+- tests
+- tmp
+- vendor
+- webroot
+- composer.json
 
-主要な三つのフォルダに注目してください:
+主要なフォルダに注目してください。
 
-- *app* フォルダは、作成するプログラムが入る場所です。
+- *src*、*config*、*templates* フォルダは、作成するプログラムが入る場所です。
   あなたのアプリケーションのファイルはここに入れます。
-- *lib* フォルダは、開発チームが作成したプログラムが入る場所です。
+- *vendor* フォルダは Composer が管理します。CakePHP 本体 (`vendor/pieceofcake2/cakephp`) と、
+  Composer で追加した外部の PHP ライブラリが入ります。
   このフォルダの中のファイルを勝手に編集 **しない** と誓ってください。
   これはコア (心臓部分) で、ここをいじってしまうと、私たちはもう助けを差し伸べることができません。
   代わりに [Application Extensions](../getting-started/cakephp-structure#application-extensions) の修正方法を調べてください。
-- 最後の *vendors* フォルダは、あなたが必要とする外部作成の PHP ライブラリを置いて、
-  CakePHP アプリケーションで使用できるようにする場所です。
+- *webroot* フォルダは、アプリケーションのドキュメントルートです。
 
-::: pieceofcake2 ディレクトリ構成
-pieceofcake2 フォークでは、展開するアーカイブも `lib/` フォルダもありません。
-CakePHP は Composer によって `vendor/pieceofcake2/cakephp` にインストールされ (フレームワークのコードは `src/Cake/`)、
-外部ライブラリも `vendor/` に入ります。アプリケーションのディレクトリ構成は次の 2 種類をサポートしています。
+## アプリケーションのフォルダ
 
-**従来の構成 (legacy)** (このページで説明している構成):
+アプリケーションのフォルダについて詳しく見てみましょう。
 
-```text
-your-project/
-├── app/            (Config/, Controller/, Model/, View/, Test/, tmp/, webroot/ など)
-├── plugins/        (Composer でインストールしたプラグイン)
-├── vendor/         (Composer。pieceofcake2/cakephp もここ)
-└── composer.json
-```
-
-**モダンな構成 (modern)** (CakePHP 5 風。[pieceofcake2/app](https://github.com/pieceofcake2/app) を参照):
-
-```text
-your-project/
-├── bin/cake
-├── config/         (設定ファイル)
-├── src/            (PHP コードすべて: Controller/, Model/, View/Helper/, Console/, Lib/)
-├── templates/      (.ctp ビューファイルすべて)
-├── resources/locales/
-├── tests/          (TestCase/, Fixture/)
-├── plugins/
-├── vendor/
-├── logs/
-├── tmp/
-├── webroot/        (ドキュメントルート)
-└── composer.json
-```
-
-詳細と移行対応表は [ディレクトリ構成](/ja/pieceofcake2/directory-structure) を参照してください。
-:::
-
-## App フォルダ
-
-アプリケーション開発の大部分は、CakePHP の *app* フォルダ内で行われます。
-*app* の内部フォルダについて調べてみましょう。
-
-::: pieceofcake2 モダンな構成
-モダンな構成では、これらのフォルダは次の場所にあります。
-
-| 従来の構成 (`app/`)        | モダンな構成                 |
-|--------------------------|------------------------------|
-| `app/Config`             | `config/`                    |
-| `app/Console`            | `src/Console/`               |
-| `app/Controller`         | `src/Controller/`            |
-| `app/Lib`                | `src/Lib/`                   |
-| `app/Locale`             | `resources/locales/`         |
-| `app/Model`              | `src/Model/`                 |
-| `app/Plugin`             | `plugins/` (Composer で管理) |
-| `app/Test`               | `tests/` (`TestCase/`, `Fixture/`) |
-| `app/tmp`                | `tmp/` (ログは `logs/`)      |
-| `app/Vendor`             | `vendor/` (Composer で管理)  |
-| `app/View` (`.ctp` ファイル) | `templates/`             |
-| `app/View/Helper`        | `src/View/Helper/`           |
-| `app/webroot`            | `webroot/`                   |
-
-フレームワークはどちらの構成も自動的に判別します。
-:::
-
-Config  
-CakePHP が使用する（数個の）設定ファイルが入る場所です。
-データベース接続の詳細、ブートストラップ、コアの設定ファイルなどがここに入ります。
-
-Console  
-アプリケーションのコンソールコマンドやコンソールタスクを含みます。このディレクトリは、
-bake の出力をカスタマイズするための `Templates` ディレクトリも含みます。
+bin  
+コンソールスクリプト `cake` が入ります。CakePHP やアプリケーションのシェルを実行します
+(例: `bin/cake server`、`bin/cake test`)。
 詳しくは、 [シェルとタスクとコンソール](../console-and-shells) をご覧ください。
 
-Controller  
-アプリケーションのコントローラとコンポーネントが入ります。
+config  
+CakePHP が使用する（数個の）設定ファイルが入る場所です。
+データベース接続の詳細、ブートストラップ、コアの設定ファイルなどがここに入ります。
+`config/define.php` では、アプリケーションの各フォルダのパスを定義します。
 
-Lib  
-サードパーティ、外部ベンダからのライブラリではなく、ファーストパーティのライブラリが入ります。
-これはベンダライブラリと内部ライブラリの構成を分割することを可能にします。
+logs  
+CakePHP のログファイルが書き込まれます。[ロギング](../core-libraries/logging) を参照してください。
 
-Locale  
+plugins  
+プラグインパッケージが入ります。Composer でインストールしたプラグインはここに置かれます。
+
+resources/locales  
 国際化のための文字ファイルが入ります。
 
-Model  
-アプリケーションのモデル、ビヘイビア、データソースが入ります。
+src  
+アプリケーションの PHP コードが入ります。
 
-Plugin  
-プラグインパッケージが入ります。
+- `src/Console/Command` には、アプリケーションのコンソールコマンド (シェル) と、
+  `Task/` にコンソールタスクが入ります。`src/Console/Templates` には、
+  bake の出力をカスタマイズするためのテンプレートを置けます。
+- `src/Controller` には、アプリケーションのコントローラと、`Component/` にコンポーネントが入ります。
+- `src/Lib` には、サードパーティ、外部ベンダからのライブラリではなく、ファーストパーティのライブラリが入ります。
+  これはベンダライブラリと内部ライブラリの構成を分割することを可能にします。
+- `src/Model` には、アプリケーションのモデルと、`Behavior/` と `Datasource/` にビヘイビアとデータソースが入ります。
+- `src/View/Helper` には、アプリケーションのヘルパーが入ります。
 
-Test  
+templates  
+表示用のファイルはここに置きます。ビューのファイルはコントローラごとのフォルダ
+(例: `templates/Posts/index.ctp`) に、エレメントは `Elements/`、エラーページは `Errors/`、
+レイアウトは `Layouts/`、メールのテンプレートは `Emails/` に置きます。
+
+tests  
 このディレクトリは、アプリケーションの全てのテストケースやフィクスチャを含みます。
-`Test/Case` ディレクトリは、あなたのアプリケーションを反映し、あなたのアプリケーションの
-クラスごとに１つかそれ以上のテストケースを含むべきです。
+`tests/TestCase` ディレクトリは、あなたのアプリケーションを反映し、あなたのアプリケーションの
+クラスごとに１つかそれ以上のテストケースを含むべきです。フィクスチャは `tests/Fixture` に置きます。
 テストケースやフィクスチャの詳細は、 [テスト](../development/testing) をご覧ください。
 
 tmp  
 CakePHP が一時的なデータを保管する場所です。保管される実際のデータは、CakePHP の
-設定しだいですが、このフォルダは通常、モデルの内容デ ータや、ログの保管に使用されます。
+設定しだいですが、このフォルダは通常、モデルの内容データや、ビューのキャッシュの保管に使用されます。
 時にはセッション情報も入ります。
 
 確実にこのフォルダが存在し、書き込み可能であるようにしてください。
 そうしないと、アプリケーションのパフォーマンスは激しく影響をうけることになります。
 デバッグモードでは、CakePHP がそうなっているかどうかを警告してくれます。
 
-Vendor  
-外部（サードパーティ）で作成されたクラスやライブラリは、ここに置いてください。
-そうすることで、App::import('vendor', 'name') で簡単にアクセス できるようになります。
-注意深く見ている人は、これは重複しているのではないか、と言うかもしれません。
-ディレクトリ構造のいちばん上にも *vendors* フォルダがあるからです。
-この二つのフォルダの違いは、複数のアプリケーションを動作させて、
-より複雑なシステムセットアップをする場合のことを考える際に取り扱います。
-
-View  
-表示用のファイルはここに置きます。エレメント、エラーページ、ヘルパー、レイアウト、
-ビューのファイルなどです。
+vendor  
+CakePHP 本体を含む、Composer でインストールしたパッケージが入ります。
+外部のライブラリは `composer require` で追加すると、`vendor/autoload.php` を通してオートロードされます。
+ここにあるファイルを手で編集したり追加したりしないでください。
 
 webroot  
 運用時 (*production*) 用のセットアップでは、このフォルダがアプリケーションの
 ドキュメントルートになります。CSS スタイルシートや画像、JavaScript ファイルを入れるための
 フォルダもあります。
+
+## 従来の `app/` 構成
+
+CakePHP 2 の古いバージョンで作成したアプリケーションでは、すべてのコードが `app/` フォルダにあります。
+CakePHP はこの構成もサポートしており、アプリケーションがどちらの構成を使っているかを判別します。
+フォルダの対応は次のとおりです。
+
+| 従来の構成 (`app/`)         | モダンな構成                        |
+|---------------------------|------------------------------------|
+| `app/Config`              | `config/`                          |
+| `app/Console`             | `src/Console/`                     |
+| `app/Console/cake`        | `bin/cake`                         |
+| `app/Controller`          | `src/Controller/`                  |
+| `app/Lib`                 | `src/Lib/`                         |
+| `app/Locale`              | `resources/locales/`               |
+| `app/Model`               | `src/Model/`                       |
+| `app/Plugin`              | `plugins/`                         |
+| `app/Test/Case`、`app/Test/Fixture` | `tests/TestCase/`、`tests/Fixture/` |
+| `app/tmp`                 | `tmp/`                             |
+| `app/tmp/logs`            | `logs/`                            |
+| `app/Vendor`              | `vendor/` (Composer で管理)         |
+| `app/View` (`.ctp` ファイル) | `templates/`                     |
+| `app/View/Helper`         | `src/View/Helper/`                 |
+| `app/webroot`             | `webroot/`                         |
+
+### モダンな構成への移行
+
+従来の構成のアプリケーションは、CakePHP 2 のまま動かしながら少しずつモダンな構成に移行できます。
+
+1. [pieceofcake2/app](https://github.com/pieceofcake2/app) スケルトンから `config/define.php`、`bin/cake`、
+   `webroot/index.php`、`webroot/test.php` をコピーします。`config/define.php` では `APP_DIR` が `src` に設定されています。
+2. 上の表に従ってファイルを移動します。たとえば設定ファイル、`src/` の PHP コード、テンプレート、テストの順に移動します。
+   `App::uses()` を含め、コード自体を変更する必要はありません。テストスイートは `Test/Case/` と
+   `tests/TestCase/` のどちらからもテストを見つけるので、テストはしばらく `app/Test/` に置いたままでも構いません。
+3. プラグインや外部ライブラリは `app/Plugin/` や `app/Vendor/` に置かず、Composer でインストールします。
+4. 必要に応じて `composer.json` の `autoload` に `"classmap": ["src/"]` を追加して `composer dump-autoload` を実行すると、
+   アプリケーションのクラスに対する `App::uses()` を取り除けます。
+
+モダンな構成は CakePHP 5 と同じ構成なので、先に移行しておくと、フォルダの再編成と後のコードのアップグレードを分けて進められます。

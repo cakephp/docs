@@ -21,11 +21,14 @@ For the first step commands outputs the available Shell Commands, including
 plugin name when applicable. (All returned possibilities, for this and the other
 sub commands, are separated by a space.) For example:
 
-    ./Console/cake Completion commands
+    bin/cake Completion commands
 
 Returns:
 
-    acl api bake command_list completion console i18n schema server test testsuite upgrade
+    Bake.bake acl api command_list completion console i18n schema server test testsuite
+
+Shells provided by plugins are prefixed with the plugin name. The output above
+is for an application that loads the [Bake plugin](code-generation-with-bake).
 
 Your completion script can select the relevant commands from that list to
 continue with. (For this and the following sub commands.)
@@ -36,7 +39,7 @@ Once the preferred command has been chosen subCommands comes in as the second
 step and outputs the possible sub command for the given shell command. For
 example:
 
-    ./Console/cake Completion subcommands bake
+    bin/cake Completion subcommands Bake.bake
 
 Returns:
 
@@ -48,7 +51,7 @@ As the third and final options outputs options for the given (sub) command as
 set in getOptionParser. (Including the default options inherited from Shell.)
 For example:
 
-    ./Console/cake Completion options bake
+    bin/cake Completion options Bake.bake
 
 Returns:
 
@@ -108,5 +111,5 @@ _cake()
     return 0;
 }
 
-complete -F _cake cake Console/cake
+complete -F _cake cake bin/cake
 ```

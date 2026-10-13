@@ -62,7 +62,7 @@ class BakeriesController extends AppController
 ```
 
 If you need to enable a helper for all controllers, add the name of
-the helper to the `$helpers` array in `/app/Controller/AppController.php` (or
+the helper to the `$helpers` array in `src/Controller/AppController.php` (or
 create it if not present). Remember to include the default Html and
 Form helpers:
 
@@ -101,18 +101,17 @@ replace `$this->Html` or another common Helper reference with a custom
 implementation:
 
 ``` php
-// app/Controller/PostsController.php
+// src/Controller/PostsController.php
 class PostsController extends AppController
 {
     public $helpers = [
         'Html' => [
-            'className' => 'MyHtml'
-        ]
+            'className' => 'MyHtml',
+        ],
     ];
 }
 
-// app/View/Helper/MyHtmlHelper.php
-App::uses('HtmlHelper', 'View/Helper');
+// src/View/Helper/MyHtmlHelper.php
 class MyHtmlHelper extends HtmlHelper
 {
     // Add your code to override the core HtmlHelper
@@ -173,28 +172,20 @@ view rendering process. See the [Helper Api](#helper-api) and the
 
 ## Creating Helpers
 
-If a core helper (or one showcased on GitHub or in the Bakery)
-doesn't fit your needs, helpers are easy to create.
+If a core helper (or one provided by a plugin, such as those listed in
+[Repositories and Plugins](/plugins/maintained-plugins)) doesn't fit your needs,
+helpers are easy to create.
 
 Let's say we wanted to create a helper that could be used to output
 a specifically crafted CSS-styled link you needed many different
 places in your application. In order to fit your logic into
 CakePHP's existing helper structure, you'll need to create a new
-class in `/app/View/Helper`. Let's call our helper LinkHelper. The
-actual PHP class file would look something like this:
-
-::: pieceofcake2
-In the pieceofcake2 fork with the modern layout, helpers go in `src/View/Helper/`
-(e.g. `src/View/Helper/LinkHelper.php`). Framework classes such as `Helper` and `HtmlHelper`
-are autoloaded by Composer, so `App::uses()` for them is optional. `App::uses()` for your own
-classes such as `AppHelper` is only unnecessary if your application classes are autoloaded
-by Composer (see [Directory structure](/pieceofcake2/directory-structure)).
-:::
+class in `src/View/Helper` (`app/View/Helper` in the legacy `app/` layout).
+Let's call our helper LinkHelper. The actual PHP class file would look
+something like this:
 
 ``` php
-/* /app/View/Helper/LinkHelper.php */
-App::uses('AppHelper', 'View/Helper');
-
+// src/View/Helper/LinkHelper.php
 class LinkHelper extends AppHelper
 {
     public function makeEdit($title, $url)
@@ -208,6 +199,12 @@ class LinkHelper extends AppHelper
 > Helpers must extend either `AppHelper` or `Helper` or implement all the callbacks
 > in the [Helper Api](#helper-api).
 
+As with other application classes, the helper is found by Composer's classmap
+autoloading, so no `App::uses()` statement is needed. Run
+`composer dump-autoload` after adding the file. If your application doesn't
+use classmap autoloading, add `App::uses('AppHelper', 'View/Helper');` at the
+top of the file; see [Loading classes](../controllers#autoloading-classes).
+
 ### Including other Helpers
 
 You may wish to use some functionality already existing in another
@@ -215,9 +212,7 @@ helper. To do so, you can specify helpers you wish to use with a
 `$helpers` array, formatted just as you would in a controller:
 
 ``` php
-/* /app/View/Helper/LinkHelper.php (using other helpers) */
-App::uses('AppHelper', 'View/Helper');
-
+// src/View/Helper/LinkHelper.php (using other helpers)
 class LinkHelper extends AppHelper
 {
     public $helpers = ['Html'];
@@ -239,7 +234,7 @@ class LinkHelper extends AppHelper
 ### Using your Helper
 
 Once you've created your helper and placed it in
-`/app/View/Helper/`, you'll be able to include it in your
+`src/View/Helper/`, you'll be able to include it in your
 controllers using the special variable `~Controller::$helpers`:
 
 ``` php
@@ -263,11 +258,10 @@ helper:
 All helpers extend a special class, AppHelper (just like models
 extend AppModel and controllers extend AppController). To create
 functionality that would be available to all helpers, create
-`/app/View/Helper/AppHelper.php`:
+`src/View/Helper/AppHelper.php`:
 
 ``` php
-App::uses('Helper', 'View');
-
+// src/View/Helper/AppHelper.php
 class AppHelper extends Helper
 {
     public function customMethod()

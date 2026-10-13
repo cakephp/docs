@@ -716,8 +716,7 @@ can be one of the following values:
 - `numeric` for sorting values as their numeric equivalents.
 - `string` for sorting values as their string value.
 - `natural` for sorting values in a human friendly way. Will
-  sort `foo10` below `foo2` as an example. Natural sorting
-  requires PHP 5.4 or greater.
+  sort `foo10` below `foo2` as an example.
 
 ::: info Added in version 2.8
 The `$type` option now supports an array and the `ignoreCase` option enabled case-insensitive sorting.

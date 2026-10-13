@@ -9,7 +9,7 @@ highlighting key words in blocks of text, and gracefully
 truncating long stretches of text.
 
 ::: info Changed in version 2.1
-Several `TextHelper` methods have been moved into the `String` class to allow easier use outside of the `View` layer. Within a view, these methods are accessible via the TextHelper class. You can call one as you would call a normal helper method: `$this->Text->method($args);`.
+Several `TextHelper` methods have been moved into the `CakeText` class (called `String` before 2.7) to allow easier use outside of the `View` layer. Within a view, these methods are accessible via the TextHelper class. You can call one as you would call a normal helper method: `$this->Text->method($args);`.
 :::
 
 `method` TextHelper::**autoLinkEmails**(string $text, array $options=[])
@@ -20,4 +20,4 @@ Several `TextHelper` methods have been moved into the `String` class to allow ea
 
 `method` TextHelper::**autoParagraph**(string $text)
 
-<!--@include: ../../core-utility-libraries/string.md{120,136}-->
+<!--@include: ../../core-utility-libraries/string.md{117,135}-->

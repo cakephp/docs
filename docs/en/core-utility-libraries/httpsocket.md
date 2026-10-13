@@ -34,8 +34,6 @@ so you can continue using the `$http->response` as array and the return of
 request methods as string:
 
 ``` php
-App::uses('HttpSocket', 'Network/Http');
-
 $http = new HttpSocket();
 $response = $http->get('https://cakephp.org');
 
@@ -102,8 +100,6 @@ an extra request can be automatically done according to the received *Location* 
 
 ``` php
 <?php
-App::uses('HttpSocket', 'Network/Http');
-
 $HttpSocket = new HttpSocket();
 $response = $HttpSocket->get('http://example.com/redirecting_url', [], ['redirect' => true]);
 ```
@@ -123,17 +119,12 @@ The returned `$response` will be the final one, according to the settings.
 When making requests to SSL services HttpSocket will attempt to validate the SSL
 certifcate using peer validation. If the certificate fails peer validation or
 does not match the hostname being accessed the connection will fail, and an
-exception will be thrown. By default HttpSocket will use the mozilla certificate
-authority file to verify SSL certificates. You can use the following options to
+exception will be thrown. Unless you set `ssl_cafile`, HttpSocket uses the
+system's CA certificates (`openssl.cafile` or `openssl.capath`) and falls back
+to the Mozilla CA bundle provided by the
+[composer/ca-bundle](https://github.com/composer/ca-bundle) package, which you
+keep up to date with Composer. You can use the following options to
 configure how SSL certificates are handled:
-
-::: pieceofcake2 CA certificates
-The bundled `lib/Cake/Config/cacert.pem` (last updated in 2016) has been removed.
-When `ssl_cafile` is not set, the fork uses the system CA bundle
-(`openssl.cafile` / `openssl.capath`) and falls back to the Mozilla bundle from
-[composer/ca-bundle](https://github.com/composer/ca-bundle), which is kept up to
-date through Composer. See [Security](/pieceofcake2/security).
-:::
 
 - `ssl_verify_peer` Set to false to disable SSL verification. This is
   **not recommended**.
@@ -143,6 +134,12 @@ date through Composer. See [Security](/pieceofcake2/security).
   accepted. This requires `ssl_verify_peer` to be enabled.
 - `ssl_cafile` Set to the absolute path of the Certificate Authority file that
   you wish to use for verifying SSL certificates.
+
+::: pieceofcake2
+The bundled `cacert.pem` file, last updated
+in 2016, was removed in favor of the system CA certificates and
+`composer/ca-bundle`. See [Security Fixes](/appendices/security-fixes).
+:::
 
 These options are provided as constructor arguments:
 
@@ -162,12 +159,11 @@ SSL certificate validation was added in 2.3.
 ### Creating a custom response class
 
 You can create your own response class to use with HttpSocket. You could create
-the file `app/Lib/Network/Http/YourResponse.php` with the content:
+the file `src/Lib/Network/Http/YourResponse.php` with the content:
 
 ``` php
-App::uses('HttpResponse', 'Network/Http');
-
-class YourResponse extends HttpResponse
+// src/Lib/Network/Http/YourResponse.php
+class YourResponse extends HttpSocketResponse
 {
 
     public function parseResponse($message)
@@ -181,14 +177,17 @@ class YourResponse extends HttpResponse
 Before your request you'll need to change the responseClass property:
 
 ``` php
-App::uses('HttpSocket', 'Network/Http');
-
 $http = new HttpSocket();
 $http->responseClass = 'YourResponse';
 ```
 
+HttpSocket registers the class with `App::uses()` in the `Network/Http`
+package, so without a Composer classmap it is looked up in
+`src/Lib/Network/Http/`, or in a plugin's `Lib/Network/Http/` folder when you
+use plugin syntax such as `'MyPlugin.YourResponse'`.
+
 ::: info Changed in version 2.3
-As of 2.3.0 you should extend `HttpSocketResponse` instead. This avoids a common issue with the HTTP PECL extension.
+As of 2.3.0 you should extend `HttpSocketResponse` instead of `HttpResponse`. This avoids a common issue with the HTTP PECL extension.
 :::
 
 ### Downloading the results
@@ -198,12 +197,10 @@ with this method, the content will be written to this resource, using
 <span class="title-ref">fwrite()</span>. To you download a file, you can do:
 
 ``` php
-App::uses('HttpSocket', 'Network/Http');
-
 $http = new HttpSocket();
-$f = fopen(TMP . 'bakery.xml', 'w');
+$f = fopen(TMP . 'comments.xml', 'w');
 $http->setContentResource($f);
-$http->get('https://bakery.cakephp.org/comments.rss');
+$http->get('https://example.com/comments.rss');
 fclose($f);
 ```
 
@@ -220,8 +217,6 @@ like OAuth. To use any authentication system you need to configure the
 `HttpSocket` instance:
 
 ``` php
-App::uses('HttpSocket', 'Network/Http');
-
 $http = new HttpSocket();
 $http->configAuth('Basic', 'user', 'password');
 ```
@@ -232,7 +227,7 @@ authentication using `user` and `password` as the credentials.
 ### Creating a custom authentication object
 
 You can now create your own authentication method to use with HttpSocket. You
-could create the file `app/Lib/Network/Http/YourMethodAuthentication.php` with the
+could create the file `src/Lib/Network/Http/YourMethodAuthentication.php` with the
 content:
 
 ``` php

@@ -20,7 +20,9 @@ routes.php
 
 ## Routes Configuration
 
-Routes in an application are configured in `app/Config/routes.php`.
+Routes in an application are configured in `config/routes.php`
+(`app/Config/routes.php` in the legacy `app/` layout, see
+[CakePHP Folder Structure](/getting-started/cakephp-folder-structure)).
 This file is included by the `Dispatcher` when handling routes
 and allows you to define application specific routes you want used. Routes
 declared in this file are processed top to bottom when incoming requests
@@ -63,9 +65,11 @@ equivalent to calling view(25) on the PostsController, for
 example. The default routing also provides routes for plugins,
 and prefix routes should you choose to use those features.
 
-The built-in routes live in `Cake/Config/routes.php`. You can
-disable the default routing by removing them from your application's
-`routes.php` file.
+The built-in routes live in the framework's `config/routes.php`
+(`vendor/pieceofcake2/cakephp/config/routes.php`). Your application's
+`config/routes.php` loads them with the line
+`require CAKE . 'Config' . DS . 'routes.php';` at the end of the file. You can
+disable the default routing by removing that line.
 
 <div class="index">
 
@@ -79,7 +83,7 @@ disable the default routing by removing them from your application's
 
 Defining your own routes allows you to define how your application
 will respond to a given URL. Define your own routes in the
-`app/Config/routes.php` file using the `Router::connect()`
+`config/routes.php` file using the `Router::connect()`
 method.
 
 The `connect()` method takes up to three parameters: the URL you
@@ -120,7 +124,7 @@ Router::connect(
 );
 ```
 
-This route is found in the routes.php file distributed with CakePHP.
+This route is found in the `config/routes.php` file of the application skeleton.
 This route matches any URL starting with `/pages/` and
 hands it to the `display()` action of the `PagesController();`
 The request /pages/products would be mapped to
@@ -312,13 +316,13 @@ argument of `Router::connect()` you can define which route
 elements should also be made available as passed arguments:
 
 ``` php
-// SomeController.php
+// src/Controller/BlogController.php
 public function view($articleId = null, $slug = null)
 {
     // some code here...
 }
 
-// routes.php
+// config/routes.php
 Router::connect(
     '/blog/:id-:slug', // E.g. /blog/3-CakePHP_Rocks
     ['controller' => 'blog', 'action' => 'view'],
@@ -336,7 +340,7 @@ in the url array like below and CakePHP will know how to form the URL
 as defined in the routes:
 
 ``` php
-// view.ctp
+// In a view template, e.g. templates/Blog/index.ctp
 // this will return a link to /blog/3-CakePHP_Rocks
 echo $this->Html->link('CakePHP Rocks', [
     'controller' => 'blog',
@@ -401,7 +405,7 @@ special URL such as `/admin/users/edit/5`. In CakePHP, prefix routing
 can be enabled from within the core configuration file by setting
 the prefixes with Routing.prefixes. Note that prefixes, although
 related to the router, are to be configured in
-`app/Config/core.php`:
+`config/core.php`:
 
 ``` php
 Configure::write('Routing.prefixes', ['admin']);
@@ -411,7 +415,7 @@ In your controller, any action with an `admin_` prefix will be
 called. Using our users example, accessing the URL
 `/admin/users/edit/5` would call the method `admin_edit` of our
 `UsersController` passing 5 as the first parameter. The view file
-used would be `app/View/Users/admin_edit.ctp`
+used would be `templates/Users/admin_edit.ctp`.
 
 You can map the URL /admin to your `admin_index` action of pages
 controller using following route:
@@ -564,7 +568,7 @@ more information.
 ### Using Additional Conditions When Matching Routes
 
 When creating routes you might want to restrict certain URL's based on specific
-request/environment settings. A good example of this is [Rest](../rest)
+request/environment settings. A good example of this is [Rest](rest)
 routing. You can specify additional conditions in the `$defaults` argument for
 `Router::connect()`. By default CakePHP exposes 3 environment
 conditions, but you can add more using [Custom Route Classes](#custom-route-classes). The built-in
@@ -616,9 +620,12 @@ parameters to go into the passed arguments as well.
 If you were to visit the previously mentioned URL, and you
 had a controller action that looked like:
 
-``` text
-CalendarsController extends AppController {
-    public function view($arg1, $arg2) {
+``` php
+// src/Controller/CalendarsController.php
+class CalendarsController extends AppController
+{
+    public function view($arg1, $arg2)
+    {
         debug(func_get_args());
     }
 }
@@ -693,7 +700,7 @@ name as an index. If named parameters are omitted, they will not be set.
 
 Some summarizing examples for default routes might prove helpful:
 
-``` php
+``` text
 URL to controller action mapping using default routes:
 
 URL: /monkeys/jump
@@ -977,8 +984,9 @@ HTTP status of 302.
 
 If you have fully customized all your routes, and want to avoid any
 possible duplicate content penalties from search engines, you can
-remove the default routes that CakePHP offers by deleting them from your
-application's routes.php file.
+remove the default routes that CakePHP offers by deleting the
+`require CAKE . 'Config' . DS . 'routes.php';` line from your application's
+`config/routes.php` file.
 
 This will cause CakePHP to serve errors, when users try to visit
 URLs that would normally be provided by CakePHP but have not
@@ -990,22 +998,21 @@ been connected explicitly.
 
 Custom route classes allow you to extend and change how individual
 routes parse requests and handle reverse routing. A custom route class
-should be created in `app/Routing/Route` and should extend
+should be created in `src/Routing/Route` and should extend
 `CakeRoute` and implement one or both of `match()`
 and/or `parse()`. `parse()` is used to parse requests and
 `match()` is used to handle reverse routing.
 
 You can use a custom route class when making a route by using the
-`routeClass` option, and loading the file containing your route
-before trying to use it:
+`routeClass` option. Application classes in `src/` are autoloaded through
+Composer's classmap, so run `composer dump-autoload` after adding the file:
 
 ``` php
-App::uses('SlugRoute', 'Routing/Route');
-
+// config/routes.php
 Router::connect(
-     '/:slug',
-     ['controller' => 'posts', 'action' => 'view'],
-     ['routeClass' => 'SlugRoute']
+    '/:slug',
+    ['controller' => 'posts', 'action' => 'view'],
+    ['routeClass' => 'SlugRoute']
 );
 ```
 

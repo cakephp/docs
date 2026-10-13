@@ -13,9 +13,12 @@ routes.php
 
 </div>
 
+<a id="routes-configuration"></a>
+
 ## ルーティングの設定
 
-ルーティングの設定は `app/Config/routes.php` でできます。
+ルーティングの設定は `config/routes.php` で行います。従来の `app/` レイアウトの場合は
+`app/Config/routes.php` です。詳しくは [CakePHP のフォルダ構造](/ja/getting-started/cakephp-folder-structure) を参照してください。
 このファイルは必要なルートを制御し特定のルートを指定することを許可するときに `Dispatcher` によってインクルードされます。
 リクエストが一致した時にこのファイルの中で宣言されているルートが最初から最後まで生成されます。
 この意味はルーティングの設定はどのようにルートがパースされるかにちて影響を与えるということです。
@@ -52,8 +55,10 @@ http://example.com/controller/action/param1/param2/param3
 たとえば、デフォルトのルーティングはプラグインへのルーティングも提供します。
 そのために、プレフィックスを使うプラグインや機能に合わせて選択します。
 
-あらかじめ用意されているルーティングの設定は、 `Cake/Config/routes.php` にあります。
-デフォルト設定を `routes.php` を削除することによって無効化できます。
+あらかじめ用意されているルーティングの設定は、フレームワーク側の
+`vendor/pieceofcake2/cakephp/config/routes.php` にあります。アプリケーションの
+`config/routes.php` の末尾にある `require CAKE . 'Config' . DS . 'routes.php';` の行で読み込まれるので、
+この行を削除すればデフォルトルーティングを無効化できます。
 
 <div class="index">
 
@@ -61,10 +66,12 @@ http://example.com/controller/action/param1/param2/param3
 
 </div>
 
+<a id="connecting-routes"></a>
+
 ## ルーティングによる接続
 
 ルーティングを設定することで、与えられたURLに対してどのようにアプリが反応するのか決められます。
-`app/Config/routes.php` でルーティングを `Router::connect()` メソッドを使って設定できます。
+`config/routes.php` でルーティングを `Router::connect()` メソッドを使って設定できます。
 
 `connect()` メソッドは３つの引数をとります。それは、ルーティングするURL、ルーティングする対象のデフォルトの値、
 正規表現でどのURLの構成要素と何の条件が一致するかを表現します。
@@ -97,7 +104,7 @@ Router::connect(
 );
 ```
 
-CakePHP によってあらかじめ作られている routes.php ファイルでこのルーティングは見つけられます。
+このルーティングは、アプリケーションスケルトンの `config/routes.php` にあらかじめ書かれています。
 このルートは `/pages/` ではじまるすべてのURLに一致し、それを
 `PagesController();` の `display()` アクションに渡します。
 この場合、 /pages/products へのリクエストは、 `PagesController->display('products')` に送られます。.
@@ -164,6 +171,8 @@ URLを生成するときにもルーティングは使われます。
 デフォルトでは、すべての命名されて渡された引数は、テンプレートと照合して展開されます。
 しかしながら、必要なときにどうやってどの命名された引数がパースされて `Router::connectNamed()`
 を使うのかを設定できます。
+
+<a id="route-elements"></a>
 
 ### ルーティングのための要素
 
@@ -260,13 +269,13 @@ index() へのリクエストをそれが属するコントローラーに `$thi
 `Router::connect()` の第３引数でどのルーティング要素が引数として利用可能なのか定義できます。 :
 
 ``` php
-// SomeController.php
+// src/Controller/BlogController.php
 public function view($articleId = null, $slug = null)
 {
     // some code here...
 }
 
-// routes.php
+// config/routes.php
 Router::connect(
     '/blog/:id-:slug', // E.g. /blog/3-CakePHP_Rocks
     ['controller' => 'blog', 'action' => 'view'],
@@ -283,7 +292,7 @@ Router::connect(
 Cakeは知ることができます。 :
 
 ``` php
-// view.ctp
+// ビューテンプレート（例: templates/Blog/index.ctp）の中で
 // これは /blog/3-CakePHP_Rocks　へのリンクを返します。
 echo $this->Html->link('CakePHP Rocks', [
     'controller' => 'blog',
@@ -332,13 +341,15 @@ admin routing, prefix routing
 
 </div>
 
+<a id="prefix-routing"></a>
+
 ### プレフィックスルーティング
 
 多くのアプリケーションは特権を持ったユーザーが変更を加えられるよう
 管理者領域を必要としている。 これはしばしば、特別な `/admin/users/edit/5` のようなURLを通してなされます。
 CakePHP ではプレフィックスルーティングをコア設定ファイルで設定可能です。
 このプレフィックスがルーターにどのように関連づけられているかは、
-`app/Config/core.php` で設定されます。 :
+`config/core.php` で設定されます。 :
 
 ``` php
 Configure::write('Routing.prefixes', ['admin']);
@@ -346,7 +357,7 @@ Configure::write('Routing.prefixes', ['admin']);
 
 コントローラーでは、すべての `admin_` プレフィックス付きのアクションが呼ばれることがあるでしょう。
 このユーザーの例を使うと、 `/admin/users/edit/5` にアクセスしたとき、 `UsersController` の `admin_edit`
-メソッドを5を第一引数として渡しながら呼びます。このとき `app/View/Users/admin_edit.ctp` にあるビューファイルを呼びます。
+メソッドを5を第一引数として渡しながら呼びます。このとき `templates/Users/admin_edit.ctp` にあるビューファイルが使われます。
 /admin へのアクセスを page コントローラーの `admin_index` アクションに以下のルーティング設定を使ってマップします。:
 
 ``` php
@@ -442,7 +453,7 @@ file extensions
 
 </div>
 
-### 拡張子
+### 拡張子 {#file-extensions}
 
 違う拡張子のファイルをルーティングで扱うためには、もう一行ルーティングの設定ファイルに追加します。:
 
@@ -482,10 +493,12 @@ $this->Html->link(
 コンテンツタイプに合わせた自動的な振り分けがされます。
 RequestHandlerComponent に詳細があります。
 
+<a id="route-conditions"></a>
+
 ### ルーティング条件に一致したときの追加の条件
 
 ルーティングをリクエストと環境の設定によって決まったURLのみに限定したいときがあるでしょう。
-これのよいたとえは、 [Rest](../rest) ルーティングです。
+これのよいたとえは、 [Rest](rest) ルーティングです。
 `$defaults` 引数で `Router::connect()` のための追加の条件を特定できます。
 デフォルトの CakePHP では３っつの環境条件があります。でも [Custom Route Classes](#custom-route-classes) を使ってもっと追加できます。
 あらかじめ用意されているオプションは、 :
@@ -514,6 +527,8 @@ passed arguments
 
 </div>
 
+<a id="passed-arguments"></a>
+
 ## 渡された引数
 
 渡された引数は追加の引数かリクエストを生成するときに使用されるパスセグメントです。
@@ -530,9 +545,12 @@ passed arguments
 
 前のURLにアクセスしたい場合は、コントローラーアクションでこのようにします。 :
 
-``` text
-CalendarsController extends AppController {
-    public function view($arg1, $arg2) {
+``` php
+// src/Controller/CalendarsController.php
+class CalendarsController extends AppController
+{
+    public function view($arg1, $arg2)
+    {
         debug(func_get_args());
     }
 }
@@ -585,6 +603,8 @@ named parameters
 
 </div>
 
+<a id="named-parameters"></a>
+
 ## 名前付きパラメーター
 
 パラメーターに名前をつけてURLとして値を送れます。
@@ -601,7 +621,7 @@ PostsController の view()　を呼びます。そのアクションでは、 ti
 
 デフォルトルーティングの例をいくつかまとめて出します。:
 
-``` php
+``` text
 URL to controller action mapping using default routes:
 
 URL: /monkeys/jump
@@ -723,7 +743,7 @@ $this->passedArgs['models'] = [
 ];
 ```
 
-### 名前付きパラメーターの制御
+### 名前付きパラメーターの制御 {#controlling-named-parameters}
 
 名前付きパラメーターの設定をルーティングごとまたは、全て一度に設定することができます。
 `Router::connectNamed()` ですべての設定を一土に変えられます。
@@ -821,7 +841,7 @@ Router::url([
 /posts/index?page=1#top
 ```
 
-## リダイレクトルーティング
+## リダイレクトルーティング {#redirect-routing}
 
 リダイレクトルーティングは入ってくるルーティングに HTTP ステータスの 30x リダイレクトを発行し違うURLに転送することができます。
 これはクライアントアプリケーションにリソースが移動したことを同じコンテンツに対して２つのURLが存在することを知らせずに伝えるために使えます。
@@ -847,34 +867,35 @@ Router::redirect(
 Router::redirect('/posts/*', 'https://google.com', ['status' => 302]);
 ```
 
-これは、 `/posts/*` から `https://google.com` へwith a
-HTTP 302　ステータスを出しながらリダイレクトさせます。
+これは、 `/posts/*` を HTTP ステータス 302 で `https://google.com` へリダイレクトさせます。
+
+<a id="disabling-default-routes"></a>
 
 ## デフォルトルーティングの無効化
 
 フルカスタマイズされたルーティングをして、重複するコンテンツによる検索エンジンのペナルティを回避していた場合、  
-routes.php から削除することで、Cakeのデフォルトルーティングを削除することができます。
+`config/routes.php` から `require CAKE . 'Config' . DS . 'routes.php';` の行を削除することで、CakePHP のデフォルトルーティングを削除できます。
 
 これは CakePHP 通常提供するURLに明示的にアクセスしなかった時にがエラーを吐く原因になります。
 
-## カスタムルーティングクラス
+## カスタムルーティングクラス {#custom-route-classes}
 
 カスタムルーティングクラスは個別のルーティングが リクエストをパースしてリバースルーティングを扱えるようにします。
-カスタムルーティングクラスは `app/Routing/Route` に作られ、
+カスタムルーティングクラスは `src/Routing/Route` に作成し、
 `CakeRoute` を拡張して、 `match()` と `parse()` の一方もしくは両方を使います。
 `parse()` はリクエストをパースするために使われ、
 `match()` はリバースルーティングの制御に使われます。
 
-カスタムルーティングクラスを `routeClass` オプションを使って設定する時と
-、ルーティング設定を含むファイルをルーティングするまえに読み込むことで使えます。:
+ルートを定義するときに `routeClass` オプションを指定すると、カスタムルーティングクラスを使えます。
+`src/` 以下のアプリケーションクラスは Composer の classmap でオートロードされるので、
+ファイルを追加したら `composer dump-autoload` を実行してください。 :
 
 ``` php
-App::uses('SlugRoute', 'Routing/Route');
-
+// config/routes.php
 Router::connect(
-     '/:slug',
-     ['controller' => 'posts', 'action' => 'view'],
-     ['routeClass' => 'SlugRoute']
+    '/:slug',
+    ['controller' => 'posts', 'action' => 'view'],
+    ['routeClass' => 'SlugRoute']
 );
 ```
 

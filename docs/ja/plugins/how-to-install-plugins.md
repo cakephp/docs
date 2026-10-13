@@ -1,22 +1,49 @@
 # プラグインのインストール
 
-CakePHP プラグインのインストール方法は４つあります:
+CakePHP プラグインは、通常 Composer でインストールします。Composer パッケージとして
+公開されていないプラグインは、アプリケーションにコピーするか、Git を使って追加します。
 
-- Composer 経由
-- マニュアル
-- Git サブモジュール
-- Git クローン
+後で、 [プラグインを有効化](#enable-plugins) するのを忘れないでください。
 
-後で、 [Enable Plugins](#enable-plugins) するのを忘れないでください。
+プラグインはプロジェクトルートの `plugins/` ディレクトリにインストールします。
+CakePHP は `plugins/` と、アプリケーションの `Plugin/` ディレクトリ (従来の `app/` レイアウトでは
+`app/Plugin/`) の両方からプラグインを探すため、 `plugins/` はどちらのレイアウトでも使えます。
 
-::: pieceofcake2
-pieceofcake2 フォークでは、プラグインは Composer でインストールすることを推奨します。まず
-[プラグイン](/ja/pieceofcake2/plugins) で PHP 8 対応のフォーク（例: `pieceofcake2/debug_kit`）があるか確認してください。
-プラグインは `app/Plugin/` とプロジェクトルートの `plugins/` から探されるため、`plugins/` はどちらの
-レイアウトでも使え、モダンレイアウトでは標準の場所です。Composer で `cakephp-plugin` タイプの
-パッケージをそこにインストールするには、`composer.json` に `installer-paths` を設定します。
+## Composer
 
-```json
+もし、あなたが Composer という名前の依存関係管理ツールに馴染みがないなら、
+[Composer documentation](https://getcomposer.org/doc/00-intro.md)
+を読んでおいてください。
+
+プラグインをインストールする前に、 [リポジトリとプラグイン](/ja/plugins/maintained-plugins) で
+PHP 8 対応のフォークがあるかどうかを確認してください。たとえば DebugKit プラグインを
+インストールするには、次のコマンドを実行します。
+
+``` bash
+composer require --dev pieceofcake2/debug_kit
+```
+
+または、プロジェクトの `composer.json` に依存関係を追加して `composer update` を実行します。
+
+``` json
+{
+    "require-dev": {
+        "pieceofcake2/debug_kit": "^2.2"
+    }
+}
+```
+
+> [!NOTE]
+> この例のように、開発環境のみでプラグインを使う場合は "require-dev" を使ってください。
+> 本番環境でも必要なプラグインは "require" に追加します。
+
+CakePHP 2 のプラグインはタイプが `cakephp-plugin` のパッケージとして公開されており、
+[composer/installers](https://github.com/composer/installers) によって `vendor/` ではなく
+プラグイン用のディレクトリにインストールされます。各プラグインを `plugins/<Name>/` に
+インストールするには、 `composer.json` に次の設定が必要です。
+[pieceofcake2/app](https://github.com/pieceofcake2/app) スケルトンには最初から含まれています。
+
+``` json
 {
     "config": {
         "allow-plugins": {
@@ -31,84 +58,71 @@ pieceofcake2 フォークでは、プラグインは Composer でインストー
 }
 ```
 
-手動や Git でインストールする場合も、モダンレイアウトでは `app/Plugin/` の代わりに `plugins/` を使います。
-:::
+Composer 2.2 以降では、 `config.allow-plugins` に記載した Composer プラグインしか実行されないため、
+`composer/installers` をここで許可する必要があります。許可していないとプラグインは `vendor/` に
+インストールされます。また、 `installer-paths` を設定しないと、 `composer/installers` は
+プロジェクトルートの `Plugin/` ディレクトリにプラグインを置きます。どちらの場合も
+`CakePlugin::load()` はプラグインを見つけられません。
 
-## マニュアル
-
-マニュアルでプラグインをインストールするには、 app/Plugin/ フォルダの中に
-プラグインのフォルダを設置してください。もし 'ContactManager' という名前の
-プラグインをインストールする場合、 app/Plugin/ の中に 'ContactManager'
-という名前のフォルダを設置し、その下にプラグインの View, Model, Controller,
-webroot やその他のディレクトリを設置します。
-
-## Composer
-
-もし、あなたが Composer という名前の依存関係管理ツールに馴染みがないなら、
-[Composer documentation](https://getcomposer.org/doc/00-intro.md)
-を読んでおいてください。
-
-Composer 経由で、架空のプラグイン 'ContactManager' をインストールするには、
-プロジェクトの `composer.json` に依存関係を追加してください。 :
+従来の `app/` の構成のアプリケーションでは、インストール先を `app/Plugin/` にします。
 
 ``` json
-{
-    "require": {
-        "cakephp/contact-manager": "1.2.*"
+"extra": {
+    "installer-paths": {
+        "app/Plugin/{$name}/": ["type:cakephp-plugin"]
     }
 }
 ```
 
-もし、CakePHP プラグインのタイプが `cakephp-plugin` となっている場合、
-Composer は、一般的な vendors フォルダの代わりに /Plugin ディレクトリ内に
-プラグインをインストールします。
+## マニュアル
 
-> [!NOTE]
-> もし、開発環境のみプラグインをインクルードしたい場合、
-> "require-dev" の使用を検討してください。
-
-あるいは、 [Composer コマンドラインツールの
-require コマンド](https://getcomposer.org/doc/03-cli.md#require)
-を使用してプラグインをインストールできます。 :
-
-    php composer.phar require cakephp/contact-manager:1.2.*
+Composer で入手できないプラグインをインストールするには、 `plugins/` フォルダの中に
+プラグインのフォルダをコピーしてください。もし 'ContactManager' という名前の
+プラグインをインストールする場合、 `plugins/` の中に 'ContactManager'
+という名前のフォルダを設置し、その下にプラグインの View, Model, Controller,
+webroot やその他のディレクトリを設置します。
 
 ## Git クローン
 
 もし、インストールしたいプラグインを Git リポジトリで管理されている場合、
-クローンすることでインストールできます。仮想のプラグイン 'Contactmanager' が
-GitHub 上で管理されていると仮定しましょう。 app/Plugin フォルダ内で
-以下のコマンドを実行してクローンすることができます。 :
+クローンすることでインストールできます。仮想のプラグイン 'ContactManager' が
+GitHub 上で管理されていると仮定しましょう。 `plugins/` フォルダ内で
+以下のコマンドを実行してクローンすることができます。
 
-    git clone git://github.com/cakephp/contact-manager.git ContactManager
+``` bash
+git clone https://github.com/example/contact-manager.git ContactManager
+```
 
 ## Git サブモジュール
 
 もし、インストールしたいプラグインが Git リポジトリで管理されている場合、
 クローンせず、Git サブモジュールとして統合することもできます。
-app フォルダ内で以下のコマンドを実行してください。 :
+プロジェクトのルートフォルダで以下のコマンドを実行してください。
 
-    git submodule add git://github.com/cakephp/contact-manager.git Plugin/ContactManager
-    git submodule init
-    git submodule update
+``` bash
+git submodule add https://github.com/example/contact-manager.git plugins/ContactManager
+git submodule update --init
+```
+
+<a id="enable-plugins"></a>
 
 ## プラグインの有効化
 
-プラグインは、 `app/Config/bootstrap.php` 内で、手動でロードする必要があります。
+プラグインは、 `config/bootstrap.php` (従来の `app/` レイアウトでは `app/Config/bootstrap.php`)
+内で、手動でロードする必要があります。
 
-::: pieceofcake2
-pieceofcake2 フォークのモダンレイアウトでは、プラグインは `config/bootstrap.php` でロードします。
-Composer のオートロードに対応していないプラグインでは、これまでどおり `App::uses()` でクラスを
-読み込む必要があります（例: `App::uses('MyPluginHelper', 'MyPlugin.View/Helper');`）。
-:::
-
-一つずつロードするか、もしくは一度に全てをロードすることができます。 :
+一つずつロードするか、もしくは一度に全てをロードすることができます。
 
 ``` php
-CakePlugin::loadAll(); // Loads all plugins at once
-CakePlugin::load('ContactManager'); // Loads a single plugin
+CakePlugin::loadAll(); // すべてのプラグインを一度にロードする
+CakePlugin::load('ContactManager'); // 一つのプラグインをロードする
 ```
 
 `loadAll()` は、指定したプラグインの設定を許容しつつ、全ての利用可能なプラグインを
 ロードします。 `load()` は、似た動作をしますが、明示的に指定したプラグインのみ
 ロードします。
+
+Composer でオートロードされるプラグインのクラスは、そのまま使えます。
+Composer のオートロードに対応していないプラグインでは、これまでどおり
+`App::uses('MyPluginHelper', 'MyPlugin.View/Helper');` のように `App::uses()` で
+クラスを読み込みます。どちらに当たるかはプラグインのドキュメントで確認してください。

@@ -17,7 +17,7 @@ provide stackable services or routines for every request. We call them
 
 ## Configuring Filters
 
-Filters are usually configured in the `bootstrap.php` file, but you could easily
+Filters are usually configured in the `config/bootstrap.php` file, but you could easily
 load them from any other configuration file before the request is dispatched.
 Adding and removing filters is done through the <span class="title-ref">Configure</span> class, using the
 special key `Dispatcher.filters`. By default CakePHP comes with a couple filter
@@ -25,9 +25,10 @@ classes already enabled for all requests, let's take a look at how they are
 added:
 
 ``` php
+// config/bootstrap.php
 Configure::write('Dispatcher.filters', [
     'AssetDispatcher',
-    'CacheDispatcher'
+    'CacheDispatcher',
 ]);
 ```
 
@@ -53,21 +54,26 @@ attaching filters that do not involve the special `DispatcherFilter` classes:
 Configure::write('Dispatcher.filters', [
     'my-filter' => [
         'callable' => [$classInstance, 'methodName'],
-        'on' => 'after'
-    ]
+        'on' => 'after',
+    ],
 ]);
 ```
 
 As shown above, you can pass any valid PHP [callback](https://www.php.net/callback)
 type, as you may remember, a <span class="title-ref">callback</span> is anything that PHP can execute with
 `call_user_func`. We do make a little exception, if a string is provided it will
-be treated as a class name, not as a possible function name. This of course
-gives the ability to PHP 5.3 users to attach anonymous functions as filters:
+be treated as a class name, not as a possible function name. This also lets
+you attach anonymous functions as filters:
 
 ``` php
 Configure::write('Dispatcher.filters', [
-   'my-filter' => ['callable' => function($event) {...}, 'on' => 'before'],
-   //more filters here
+    'my-filter' => [
+        'callable' => function ($event) {
+            // ...
+        },
+        'on' => 'before',
+    ],
+    // more filters here
 ]);
 ```
 
@@ -82,17 +88,19 @@ any other in the list, select lower priority numbers as needed:
 
 ``` php
 Configure::write('Dispatcher.filters', [
-   'my-filter' => [
-        'callable' => function($event) {...},
+    'my-filter' => [
+        'callable' => function ($event) {
+            // ...
+        },
         'on' => 'before',
-        'priority' => 5
+        'priority' => 5,
     ],
     'other-filter' => [
         'callable' => [$class, 'method'],
         'on' => 'after',
-        'priority' => 1
+        'priority' => 1,
     ],
-   //more filters here
+    // more filters here
 ]);
 ```
 
@@ -100,7 +108,8 @@ Obviously, when defining priorities the order in which filters are declared does
 not matter but for those having the same. When defining filters as class names
 there is no option to define priority in-line, we will get into that soon.
 Finally, CakePHP's plugin notation can be used to define filters located in
-plugins:
+plugins. The filter class is then loaded from the plugin's `Routing/Filter`
+directory, e.g. `plugins/MyPlugin/Routing/Filter/MyFilter.php`:
 
 ``` php
 Configure::write('Dispatcher.filters', [
@@ -117,14 +126,16 @@ classes you can do that by providing an array of settings:
 
 ``` php
 Configure::write('Dispatcher.filters', [
-    'MyAssetFilter' => ['service' => 'google.com']
+    'MyAssetFilter' => ['service' => 'google.com'],
 ]);
 ```
 
 When the filter key is a valid classname, the value can be an array of
 parameters that are passed to the dispatch filter. By default the base class
 will assign these settings to the `$settings` property after merging them with
-the defaults in the class.
+the defaults in the class. The Dispatcher detects this form with
+`class_exists()`, so the filter class must already be autoloadable
+(run `composer dump-autoload` after adding it to `src/`).
 
 ::: info Changed in version 2.5
 You can now provide constructor settings to dispatch filters in 2.5.
@@ -138,10 +149,9 @@ Let's create a simple filter to respond to a specific URL with a 'Hello World'
 text:
 
 ``` php
-App::uses('DispatcherFilter', 'Routing');
+// src/Routing/Filter/HelloWorldFilter.php
 class HelloWorldFilter extends DispatcherFilter
 {
-
     public $priority = 9;
 
     public function beforeDispatch(CakeEvent $event)
@@ -158,14 +168,15 @@ class HelloWorldFilter extends DispatcherFilter
 }
 ```
 
-This class should be saved in a file in `app/Routing/Filter/HelloWorldFilter.php`
-and configured in the bootstrap file according to how it was explained in the
-previous section. There is plenty to explain here, let's begin with the
+This class should be saved in a file in `src/Routing/Filter/HelloWorldFilter.php`
+and configured in `config/bootstrap.php` according to how it was explained in the
+previous section. Application classes in `src/` are autoloaded through
+Composer's classmap, so run `composer dump-autoload` after adding the file. There is plenty to explain here, let's begin with the
 `$priority` value.
 
 As mentioned before, when using filter classes you can only define the order in
 which they are run using the `$priority` property in the class, default value is
-10 if the property is declared, this means that it will get executed <span id="after">after</span>\_ the
+10 if the property is declared, this means that it will get executed *after* the
 Router class has parsed the request. We do not want this to happen in our
 previous example, because most probably you do not have any controller set up
 for answering to that URL, hence we chose 9 as our priority.
@@ -188,10 +199,9 @@ Let's now create another filter for altering response headers in any public
 page, in our case it would be anything served from the `PagesController`:
 
 ``` php
-App::uses('DispatcherFilter', 'Routing');
+// src/Routing/Filter/HttpCacheFilter.php
 class HttpCacheFilter extends DispatcherFilter
 {
-
     public function afterDispatch(CakeEvent $event)
     {
         $request = $event->data['request'];
@@ -217,17 +227,17 @@ callback.
 
 ## Inline Filters
 
-Our last example will use an anonymous function (only available on PHP 5.3+) to
+Our last example will use an anonymous function to
 serve a list of posts in JSON format, we encourage you to do so using
 controllers and the `JsonView` class, but let's imagine you need to save a
 few milliseconds for this mission-critical API endpoint:
 
 ``` php
-$postsList = function($event) {
+// config/bootstrap.php
+$postsList = function ($event) {
     if ($event->data['request']->url !== 'posts/recent.json') {
         return;
     }
-    App::uses('ClassRegistry', 'Utility');
     $postModel = ClassRegistry::init('Post');
     $event->data['response']->body(json_encode($postModel->find('recent')));
     $event->stopPropagation();
@@ -240,8 +250,8 @@ Configure::write('Dispatcher.filters', [
     'recent-posts' => [
         'callable' => $postsList,
         'priority' => 9,
-        'on'=> 'before'
-    ]
+        'on' => 'before',
+    ],
 ]);
 ```
 

@@ -1,227 +1,185 @@
 # Advanced Installation
 
-## Installing CakePHP with PEAR Installer
+This page covers details of the Composer setup and how to place the directories
+of your application in different locations. For a standard installation, see
+[Installation](../installation).
 
-::: pieceofcake2
-The pieceofcake2 fork is not published as a PEAR package. Use Composer instead.
-:::
+## Composer Setup
 
-CakePHP publishes a PEAR package that you can install using the PEAR installer.
-Installing with the PEAR installer can simplify sharing CakePHP libraries
-across multiple applications. To install CakePHP with PEAR you'll need to do the
-following:
+CakePHP and its plugins are installed with Composer, and the dispatcher files
+(`webroot/index.php`, `webroot/test.php` and `bin/cake`) load Composer's
+autoloader before CakePHP itself. A `composer.json` for a CakePHP application
+looks like the one in the [pieceofcake2/app](https://github.com/pieceofcake2/app)
+skeleton:
 
-    pear channel-discover pear.cakephp.org
-    pear install cakephp/CakePHP
-
-> [!NOTE]
-> On some systems installing libraries with PEAR will require `sudo`.
-
-After installing CakePHP with PEAR, if PEAR is configured correctly you should
-be able to use the `cake` command to create a new application. Since CakePHP
-will be located on PHP's `include_path` you won't need to make any other
-changes.
-
-## Installing CakePHP with Composer
-
-::: pieceofcake2
-For the pieceofcake2 fork, this section is outdated:
-
-- PHP 8.0 or newer is required, and Composer is the only supported installation method.
-- Require `pieceofcake2/cakephp` instead of `cakephp/cakephp`. Composer's default
-  `vendor/` directory at the project root is used.
-- `CAKE_CORE_INCLUDE_PATH` is no longer used. The dispatcher files load
-  `vendor/autoload.php`, and framework classes are autoloaded through Composer's classmap.
-- Bake is not part of the core. Install `pieceofcake2/bake` to use `cake bake`, or start from the
-  [pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton.
-
-See [Installation](/pieceofcake2/installation).
-:::
-
-Before starting you should make sure that you have got an up to date PHP
-version:
-
-``` bash
-php -v
-```
-
-You should at least have got installed PHP 5.3.0 (CLI) or higher.
-Your webserver's PHP version must also be of 5.3.0 or higher, and should best be
-the same version your command line interface (CLI) PHP version is of.
-
-### Installing Composer
-
-Composer is a dependency management tool for PHP 5.3+. It solves many of the
-problems the PEAR installer has, and simplifies managing multiple versions of
-libraries. [Packagist](https://packagist.org/) is the main repository of
-Composer installable packages. Since CakePHP also publishes releases to
-Packagist, you can install CakePHP using [Composer](https://getcomposer.org).
-
-- Installing Composer on Linux and Mac OS X
-
-  1.  Run the installer script as described in the
-      [official Composer documentation](https://getcomposer.org/download/)
-      and follow the instructions to install Composer.
-
-  2.  Execute the following command to move the composer.phar to a directory
-      that is in your path:
-
-          mv composer.phar /usr/local/bin/composer
-
-- Installing Composer on Windows
-
-  For Windows systems, you can download Composer's Windows installer
-  [here](https://github.com/composer/windows-setup/releases/). Further
-  instructions for Composer's Windows installer can be found within the
-  README [here](https://github.com/composer/windows-setup).
-
-### Create a CakePHP Project
-
-Before installing CakePHP you'll need to setup a `composer.json` file. A
-composer.json file for a CakePHP application would look like the following:
-
-``` json
+```json
 {
-    "name": "example-app",
+    "name": "example/my-app",
+    "type": "project",
     "require": {
-        "cakephp/cakephp": "2.10.*"
+        "php": ">=8.0",
+        "pieceofcake2/cakephp": "^2.12"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.6",
+        "pieceofcake2/bake": "^1.0",
+        "pieceofcake2/debug_kit": "^2.2"
+    },
+    "autoload": {
+        "classmap": ["src/"]
     },
     "config": {
-        "vendor-dir": "Vendor/"
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    },
+    "extra": {
+        "installer-paths": {
+            "plugins/{$name}/": ["type:cakephp-plugin"]
+        }
     }
 }
 ```
 
-Save this JSON into `composer.json` in the APP directory of your project.
-Next download the composer.phar file into your project. After you've downloaded
-Composer, install CakePHP. In the same directory as your `composer.json` run
-the following:
-
-``` bash
-$ php composer.phar install
-```
-
-Once Composer has finished running you should have a directory structure that looks like:
-
-    example-app/
-        composer.phar
-        composer.json
-        Vendor/
-            bin/
-            autoload.php
-            composer/
-            cakephp/
-
-You are now ready to generate the rest of your application skeleton:
-
-``` bash
-$ Vendor/bin/cake bake project <path to project>
-```
-
-By default `bake` will hard-code `CAKE_CORE_INCLUDE_PATH`. To
-make your application more portable you should modify `webroot/index.php`,
-changing `CAKE_CORE_INCLUDE_PATH` to be a relative path:
-
-``` text
-define(
-    'CAKE_CORE_INCLUDE_PATH',
-    ROOT . DS . APP_DIR . DS . 'Vendor' . DS . 'cakephp' . DS . 'cakephp' . DS . 'lib'
-);
-```
-
-> [!NOTE]
-> If you are planning to create unit tests for your application you'll also
-> need to make the above change to `webroot/test.php`
-
-If you're installing any other libraries with Composer, you'll need to setup
-the autoloader, and work around an issue in Composer's autoloader. In your
-`Config/bootstrap.php` file add the following:
-
-``` text
-// Load Composer autoload.
-require APP . 'Vendor/autoload.php';
-
-// Remove and re-prepend CakePHP's autoloader as Composer thinks it is the
-// most important.
-// See: http://goo.gl/kKVJO7
-spl_autoload_unregister(['App', 'load']);
-spl_autoload_register(['App', 'load'], true, true);
-```
-
-You should now have a functioning CakePHP application installed via Composer. Be
-sure to keep the composer.json and composer.lock file with the rest of your
+Be sure to keep `composer.json` and `composer.lock` with the rest of your
 source code.
 
-## Sharing CakePHP Libraries with multiple Applications
+### The `replace` Directive
 
-::: pieceofcake2
-With the pieceofcake2 fork, the core is installed per application by Composer, and
-`CAKE_CORE_INCLUDE_PATH` is no longer used, so sharing one core across applications
-as described below does not apply. `ROOT`, `APP_DIR` and `WEBROOT_DIR` can still be
-customised: in the dispatcher files for the legacy layout, or in `config/define.php`
-for the modern layout. See [Directory Structure](/pieceofcake2/directory-structure).
-:::
+`pieceofcake2/cakephp` declares `"replace": {"cakephp/cakephp": "^2.0"}`.
+Composer therefore treats it as `cakephp/cakephp`, and plugins that require
+`cakephp/cakephp` 2.x install and work without changes. Do not require both
+packages at the same time.
 
-There may be some situations where you wish to place CakePHP's directories on
-different places on the filesystem. This may be due to a shared host
-restriction, or maybe you just want a few of your apps to share the same CakePHP
-libraries. This section describes how to spread your CakePHP directories across
-a filesystem.
+### Plugin Location
 
-First, realize that there are three main parts to a CakePHP application:
+Packages of type `cakephp-plugin` are installed by `composer/installers`. The
+`installer-paths` setting above installs them into `plugins/` at the project
+root, where CakePHP looks for plugins in both layouts (the legacy
+`app/Plugin/` directory is searched as well). Plugins still have to be loaded with
+`CakePlugin::load()` in `config/bootstrap.php`. See
+[How To Install Plugins](../plugins/how-to-install-plugins).
 
-1.  The core CakePHP libraries, in /lib/Cake.
-2.  Your application code, in /app.
-3.  The application's webroot, usually in /app/webroot.
+### Autoloading Your Classes
 
-Each of these directories can be located anywhere on your file system, with the
-exception of the webroot, which needs to be accessible by your web server. You
-can even move the webroot folder out of the app folder as long as you tell
-CakePHP where you've put it.
+CakePHP's own classes are autoloaded through Composer's classmap, so you don't
+need `App::uses()` for them. Your application classes can still be loaded with
+`App::uses()`, or you can let Composer load them by adding the `classmap`
+autoload setting shown above. With the classmap you can remove `App::uses()`
+calls from your controllers, models, helpers and shells.
 
-To configure your CakePHP installation, you'll need to make some changes to the
-following files.
+Composer's classmap is a fixed list of files, so run the following each time
+you add a new class file:
 
-- /app/webroot/index.php
-- /app/webroot/test.php (if you use the
-  [Testing](../development/testing) feature.)
+```bash
+composer dump-autoload
+```
 
-There are three constants that you'll need to edit: `ROOT`, `APP_DIR`, and
-`CAKE_CORE_INCLUDE_PATH`.
+Plugins that don't support Composer autoloading still need `App::uses()`, for
+example `App::uses('MyPluginHelper', 'MyPlugin.View/Helper');`.
 
-- `ROOT` should be set to the path of the directory that contains your app
-  folder.
-- `APP_DIR` should be set to the (base)name of your app folder.
-- `CAKE_CORE_INCLUDE_PATH` should be set to the path of your CakePHP
-  libraries folder.
+If Composer warns about an ambiguous class resolution, for example because a
+class such as `AppController` exists both in your application and in a package,
+exclude the package's file in `composer.json`:
 
-Let's run through an example so you can see what an advanced installation might
-look like in practice. Imagine that I wanted to set up CakePHP to work as
-follows:
-
-- The CakePHP core libraries will be placed in /usr/lib/cake.
-- My application's webroot directory will be /var/www/mysite/.
-- My application's app directory will be /home/me/myapp.
-
-Given this type of setup, I would need to edit my webroot/index.php file (which
-will end up at /var/www/mysite/index.php, in this example) to look like the
-following:
-
-``` text
-// /app/webroot/index.php (partial, comments removed)
-
-if (!defined('ROOT')) {
-    define('ROOT', DS . 'home' . DS . 'me');
-}
-
-if (!defined('APP_DIR')) {
-    define ('APP_DIR', 'myapp');
-}
-
-if (!defined('CAKE_CORE_INCLUDE_PATH')) {
-    define('CAKE_CORE_INCLUDE_PATH', DS . 'usr' . DS . 'lib');
+```json
+{
+    "autoload": {
+        "classmap": ["src/"],
+        "exclude-from-classmap": [
+            "vendor/pieceofcake2/app/src/Controller/AppController.php",
+            "vendor/pieceofcake2/app/src/Model/AppModel.php"
+        ]
+    }
 }
 ```
+
+::: pieceofcake2
+CakePHP is loaded only through Composer's
+autoloader. `CAKE_CORE_INCLUDE_PATH`, `include_path` setups and sharing one
+CakePHP core between several applications are no longer supported; each
+application installs CakePHP into its own `vendor/` directory.
+:::
+
+## Placing Directories in Other Locations
+
+There may be some situations where you wish to place your application's
+directories in different places on the filesystem, for example because of a
+shared host restriction. A CakePHP application has three main parts:
+
+1. CakePHP itself and the other Composer packages, in `vendor/`.
+2. Your application code and configuration, in `src/`, `config/`,
+   `templates/` and so on, at the project root (`ROOT`).
+3. The application's webroot, usually in `webroot/`.
+
+The webroot is the only part that needs to be accessible by your web server.
+You can move it out of the project directory as long as you tell CakePHP where
+you've put it.
+
+The paths are defined as constants in `config/define.php`, which
+`webroot/index.php`, `webroot/test.php` and `bin/cake` load first:
+
+- `ROOT` is the project directory. By default, the directory above `config/`.
+- `APP_DIR` is the name of the directory that contains your PHP code
+  (`src`).
+- `WEBROOT_DIR` is the name of the webroot directory (`webroot`).
+- `WWW_ROOT` is the full path to the webroot directory.
+- `VENDORS` is the full path to Composer's vendor directory.
+
+Constants you don't define there are set by CakePHP, which detects the layout:
+`CONFIG` (`ROOT/config/`), `TMP` (`ROOT/tmp/`), `LOGS` (`ROOT/logs/`) and
+`TESTS` (`ROOT/tests/`). You can define these in `config/define.php` as well if
+you need different locations.
+
+Let's run through an example. Imagine that you wanted to set up CakePHP to
+work as follows:
+
+- The project directory, including `config/`, `src/` and `vendor/`, will be
+  `/home/me/myapp`.
+- The webroot directory will be `/var/www/mysite/`.
+
+First, copy the contents of `webroot/` to `/var/www/mysite/` and set the webroot
+constants in `config/define.php`:
+
+```php
+// /home/me/myapp/config/define.php (partial)
+
+if (!defined('WEBROOT_DIR')) {
+    define('WEBROOT_DIR', 'mysite');
+}
+
+if (!defined('WWW_ROOT')) {
+    define('WWW_ROOT', DS . 'var' . DS . 'www' . DS . 'mysite' . DS);
+}
+```
+
+Then edit `/var/www/mysite/index.php` (and `test.php`, if you use the
+[Testing](../development/testing) feature) so that they load this file from the
+project directory. Replace `dirname(__DIR__) . DS . 'config' . DS . 'define.php'`
+in both places where it appears:
+
+```php
+// /var/www/mysite/index.php (partial)
+
+$defineFile = DS . 'home' . DS . 'me' . DS . 'myapp' . DS . 'config' . DS . 'define.php';
+
+if (!is_file($defineFile)) {
+    trigger_error(
+        'Configuration file "config' . DS . 'define.php" could not be loaded. ' .
+        'Please ensure this file exists and is readable.',
+        E_USER_ERROR,
+    );
+}
+require_once $defineFile;
+```
+
+`ROOT` is still derived from the location of `config/define.php`, so it points
+to `/home/me/myapp`, and `bin/cake` uses the same settings.
+
+In the legacy `app/` layout, the same constants (`ROOT`, `APP_DIR`,
+`WEBROOT_DIR`, `WWW_ROOT`) are defined at the top of `app/webroot/index.php`
+and `app/webroot/test.php` instead.
 
 It is recommended to use the `DS` constant rather than slashes to delimit file
 paths. This prevents any missing file errors you might get as a result of using

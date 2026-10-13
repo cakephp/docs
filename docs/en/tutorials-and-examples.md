@@ -3,10 +3,8 @@
 In this section, you can walk through typical CakePHP applications
 to see how all of the pieces come together.
 
-Alternatively, you can refer to the non-official CakePHP plugin repository
-[CakePackages](https://plugins.cakephp.org/) and the
-[Bakery](https://bakery.cakephp.org/) for existing applications
-and components.
+For ready-made plugins that work with this version of CakePHP, see
+[Maintained Plugins](/plugins/maintained-plugins).
 
 - [Blog Tutorial](tutorials-and-examples/blog/blog)
 - [Blog Tutorial - Adding a layer](tutorials-and-examples/blog/part-two)

@@ -1,33 +1,5 @@
 # Blog Tutorial
 
-::: pieceofcake2 Following this tutorial with the pieceofcake2 fork
-This tutorial downloads CakePHP as an archive and uses the legacy `app/` layout. The pieceofcake2 fork
-can only be installed with Composer and needs **PHP 8.0 or later** (not PHP 5.2.8). Instead of the
-"Getting CakePHP" steps below, create a project from the application skeleton (modern layout):
-
-```bash
-composer create-project pieceofcake2/app blog
-cd blog
-```
-
-Point your web server's document root at the `webroot/` directory, or use the built-in development
-server: `bin/cake server -p 8765`. Then follow the tutorial with these paths:
-
-| Tutorial (legacy) | Modern layout |
-|---|---|
-| `app/tmp` | `tmp/` (logs are in `logs/`) |
-| `app/Config/database.php.default`, `app/Config/core.php` | `config/database.php.default`, `config/core.php` |
-| `app/Model/Post.php` | `src/Model/Post.php` |
-| `app/Controller/PostsController.php` | `src/Controller/PostsController.php` |
-| `app/View/Posts/index.ctp` | `templates/Posts/index.ctp` |
-| `app/View/Layouts/default.ctp` | `templates/Layouts/default.ctp` |
-
-Database notes: the MySQL driver needs the `pdo_mysql` extension. On PHP 8.1+, PDO returns integer
-and float columns as PHP `int`/`float` instead of strings; `config/database.php.default` shows the
-`PDO::ATTR_STRINGIFY_FETCHES` flag to restore the old behavior if needed.
-See [Installation](/pieceofcake2/installation) and [Directory structure](/pieceofcake2/directory-structure).
-:::
-
 Welcome to CakePHP. You're probably checking out this tutorial
 because you want to learn more about how CakePHP works. It's our
 aim to increase productivity and make coding more enjoyable: we
@@ -40,65 +12,69 @@ list, add, edit, and delete blog posts.
 
 Here's what you'll need:
 
-1.  A running web server. We're going to assume you're using Apache,
-    though the instructions for using other servers should be very
-    similar. We might have to play a little with the server
-    configuration, but most folks can get CakePHP up and running without
-    any configuration at all. Make sure you have PHP 5.2.8 or greater.
-2.  A database server. We're going to be using MySQL server in this
+1.  PHP 8.0 or greater and
+    [Composer](https://getcomposer.org/).
+2.  A web server. For this tutorial PHP's built-in web server, started
+    through the CakePHP console, is enough. If you use Apache or another
+    server instead, point its document root at the application's `webroot/`
+    directory.
+3.  A database server. We're going to be using MySQL server in this
     tutorial. You'll need to know enough about SQL in order to create a
     database: CakePHP will be taking the reins from there. Since we're using MySQL,
     also make sure that you have `pdo_mysql` enabled in PHP.
-3.  Basic PHP knowledge. The more object-oriented programming you've
+4.  Basic PHP knowledge. The more object-oriented programming you've
     done, the better: but fear not if you're a procedural fan.
-4.  Finally, you'll need a basic knowledge of the MVC programming pattern.
+5.  Finally, you'll need a basic knowledge of the MVC programming pattern.
     A quick overview can be found in
-    [Understanding Model-View-Controller](../../cakephp-overview/understanding-model-view-controller). Don't worry,
+    [Understanding Model-View-Controller](/cakephp-overview/understanding-model-view-controller). Don't worry,
     it's only half a page or so.
 
 Let's get started!
 
 ## Getting CakePHP
 
-First, let's get a copy of fresh CakePHP code.
+First, let's create a new application with Composer. The
+[pieceofcake2/app](https://github.com/pieceofcake2/app) application skeleton
+installs CakePHP for you:
 
-To get a fresh download, visit the CakePHP project on GitHub:
-<https://github.com/cakephp/cakephp/tags>
-and download the latest release of 2.0
+``` bash
+composer create-project pieceofcake2/app blog
+cd blog
+```
 
-You can also clone the repository using
-[git](https://git-scm.com/):
+Once finished, your directory setup should look something like the following:
 
-    git clone -b 2.x git://github.com/cakephp/cakephp.git
-
-Regardless of how you downloaded it, place the code inside of your
-DocumentRoot. Once finished, your directory setup should look
-something like the following:
-
-    /path_to_document_root
-        /app
-        /lib
+    /blog
+        /bin
+        /config
+        /logs
         /plugins
-        /vendors
-        .htaccess
-        index.php
-        README
+        /resources
+        /src
+        /templates
+        /tests
+        /tmp
+        /vendor
+        /webroot
+        composer.json
 
-Now might be a good time to learn a bit about how CakePHP's directory
-structure works: check out the
-[CakePHP Folder Structure](../../getting-started/cakephp-folder-structure) section.
+CakePHP itself is installed in `vendor/pieceofcake2/cakephp`. You'll write your
+PHP classes in `src/`, your view templates in `templates/` and your
+configuration in `config/`. Now might be a good time to learn a bit about how
+CakePHP's directory structure works: check out the
+[CakePHP Folder Structure](/getting-started/cakephp-folder-structure) section.
 
 ### Tmp directory permissions
 
-Next we'll need to make the `app/tmp` directory writable by the webserver.
-The best way to do this is to find out what user your webserver
-runs as. You can run `<?php echo exec('whoami'); ?>` inside any PHP file your
-webserver can execute. You should see a username printed. Change the ownership of
-the `app/tmp` directory to that user. The final command you run
-(in \*nix) might look something like this:
+Next we'll need to make the `tmp` and `logs` directories writable by the
+webserver. When you use the built-in web server as in this tutorial, it runs
+as your own user and there is nothing to do. For other web servers, find out
+what user your webserver runs as and change the ownership of the
+directories to that user. The final command you run (in \*nix) might look
+something like this:
 
 ``` bash
-$ chown -R www-data app/tmp
+$ chown -R www-data tmp logs
 ```
 
 If for some reason CakePHP can't write to that directory, you'll see
@@ -135,12 +111,12 @@ INSERT INTO posts (title, body, created)
 The choices on table and column names are not arbitrary. If you
 follow CakePHP's database naming conventions, and CakePHP's class naming
 conventions (both outlined in
-[CakePHP Conventions](../../getting-started/cakephp-conventions)), you'll be able to take
+[CakePHP Conventions](/getting-started/cakephp-conventions)), you'll be able to take
 advantage of a lot of free functionality and avoid configuration.
 CakePHP is flexible enough to accommodate even the worst legacy
 database schema, but adhering to convention will save you time.
 
-Check out [CakePHP Conventions](../../getting-started/cakephp-conventions) for more
+Check out [CakePHP Conventions](/getting-started/cakephp-conventions) for more
 information, but suffice it to say that naming our table 'posts'
 automatically hooks it to our Post model, and having fields called
 'modified' and 'created' will be automagically managed by CakePHP.
@@ -152,8 +128,12 @@ connect to it. For many, this is the first and last time you
 configure anything.
 
 A copy of CakePHP's database configuration file is found in
-`/app/Config/database.php.default`. Make a copy of this file in
-the same directory, but name it `database.php`.
+`config/database.php.default`. Make a copy of this file in
+the same directory, but name it `database.php`:
+
+``` bash
+cp config/database.php.default config/database.php
+```
 
 The config file should be pretty straightforward: just replace the
 values in the `$default` array with those that apply to your
@@ -161,24 +141,32 @@ setup. A sample completed configuration array might look something
 like the following:
 
 ``` php
+// config/database.php
 public $default = [
     'datasource' => 'Database/Mysql',
     'persistent' => false,
     'host' => 'localhost',
-    'port' => '',
     'login' => 'cakeBlog',
     'password' => 'c4k3-rUl3Z',
     'database' => 'cake_blog_tutorial',
-    'schema' => '',
     'prefix' => '',
-    'encoding' => 'utf8'
+    'encoding' => 'utf8mb4',
 ];
 ```
 
-Once you've saved your new `database.php` file, you should be
-able to open your browser and see the CakePHP welcome page. It should
-also tell you that your database connection file was found, and
-that CakePHP can successfully connect to the database.
+`utf8mb4` is MySQL's full UTF-8 character set and the default character set
+of MySQL 8.0.
+
+Once you've saved your new `database.php` file, start the development server
+from the project root:
+
+``` bash
+bin/cake server -p 8765
+```
+
+Then open <http://localhost:8765/> in your browser and you should see the
+CakePHP welcome page. It should also tell you that your database connection
+file was found, and that CakePHP can successfully connect to the database.
 
 > [!NOTE]
 > Remember that you'll need to have PDO, and pdo_mysql enabled in
@@ -186,14 +174,14 @@ that CakePHP can successfully connect to the database.
 
 ## Optional Configuration
 
-There are a few other items that can be configured. Most developers
-complete these laundry-list items, but they're not required for
-this tutorial. One is defining a custom string (or "salt") for use
-in security hashes. The second is defining a custom number (or
-"seed") for use in encryption.
+There are a few other items that can be configured. One is defining a
+custom string (or "salt") for use in security hashes. The second is defining a
+custom number (or "seed") for use in encryption. The application skeleton
+ships with well-known example values, and while debug mode is on CakePHP shows
+a notice on every page until you change them.
 
 The security salt is used for generating hashes. Change the default
-`Security.salt` value in `/app/Config/core.php`. The replacement value
+`Security.salt` value in `config/core.php`. The replacement value
 should be long, hard to guess and be as random as you can make it:
 
 ``` php
@@ -204,7 +192,7 @@ Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
 ```
 
 The cipher seed is used for encrypt/decrypt strings. Change the default
-`Security.cipherSeed` value by editing `/app/Config/core.php`. The
+`Security.cipherSeed` value by editing `config/core.php`. The
 replacement value should be a large random integer:
 
 ``` php
@@ -214,14 +202,14 @@ replacement value should be a large random integer:
 Configure::write('Security.cipherSeed', '7485712659625147843639846751');
 ```
 
-## A Note on mod_rewrite
+## Using Apache
 
-Occasionally new users will run into mod_rewrite issues. For example
-if the CakePHP welcome page looks a little funny (no images or CSS styles),
-it probably means mod_rewrite is not functioning on your system. Please refer
-to one of the sections below about URL rewriting for your webserver to get
-you up and running:
+The built-in web server is meant for development only. To run the application
+with Apache, point the virtual host's `DocumentRoot` at the `webroot/`
+directory and make sure `mod_rewrite` is enabled; `webroot/.htaccess`
+contains the rewrite rules. If the CakePHP welcome page looks a little funny
+(no images or CSS styles), it probably means mod_rewrite is not functioning on
+your system. See [URL Rewriting](/installation/url-rewriting) for
+details and for other web servers.
 
-- [URL Rewriting](../../installation/url-rewriting)
-
-Now continue to [Blog Tutorial - Adding a layer](../../tutorials-and-examples/blog/part-two) to start building your first CakePHP application.
+Now continue to [Blog Tutorial - Adding a layer](/tutorials-and-examples/blog/part-two) to start building your first CakePHP application.

@@ -117,7 +117,7 @@ save(array $data = null, array $params = [])
 - `counterCache` (2.4 以降) カウンターキャッシュの更新を制御するための真偽値。(任意)
 - `atomic` (2.6 以降) ひとつのトランザクション内でレコードを保存したいことを示すための真偽値。
 
-モデルのコールバックについての詳細は [こちら](../callback-methods) を
+モデルのコールバックについての詳細は [こちら](callback-methods) を
 参照してください。
 
 > [!TIP]
@@ -566,7 +566,7 @@ public function add()
 以下のコードを見て下さい。 :
 
 ``` php
-// Controller/CourseMembershipController.php
+// src/Controller/CourseMembershipController.php
 class CourseMembershipsController extends AppController
 {
     public $uses = ['CourseMembership'];
@@ -589,7 +589,7 @@ class CourseMembershipsController extends AppController
     }
 }
 
-// View/CourseMemberships/add.ctp
+// templates/CourseMemberships/add.ctp
 
 <?php echo $this->Form->create('CourseMembership'); ?>
     <?php echo $this->Form->input('Student.first_name'); ?>
@@ -670,7 +670,7 @@ Student と Course をそれぞれ別々に作りたい場合もあるでしょ�
 フィールドを次のように作ります。 :
 
 ``` php
-// View/CourseMemberships/add.ctp
+// templates/CourseMemberships/add.ctp
 
 <?php echo $this->Form->create('CourseMembership'); ?>
     <?php
@@ -724,6 +724,8 @@ POST されると以下のようなデータが渡ってきます。 :
 
 このデータを使えば <span class="title-ref">saveAssociated</span> は Student の ID と Course の ID を
 CourseMembership モデルに保存してくれます。
+
+<a id="saving-habtm"></a>
 
 ### 関連データを保存する (HABTM)
 

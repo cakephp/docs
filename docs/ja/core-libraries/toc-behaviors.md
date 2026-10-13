@@ -5,9 +5,9 @@
 いくつかの組込みビヘイビアを備えています。
 
 ビヘイビアの作成方法と使い方については学ぶには
-[ビヘイビア](../models/behaviors) を読んでください。
+[ビヘイビア](/ja/models/behaviors) を読んでください。
 
-- [ACL](../core-libraries/behaviors/acl)
-- [Containable](../core-libraries/behaviors/containable)
-- [Translate](../core-libraries/behaviors/translate)
-- [Tree](../core-libraries/behaviors/tree)
+- [ACL](/ja/core-libraries/behaviors/acl)
+- [Containable](/ja/core-libraries/behaviors/containable)
+- [Translate](/ja/core-libraries/behaviors/translate)
+- [Tree](/ja/core-libraries/behaviors/tree)

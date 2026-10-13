@@ -5,21 +5,16 @@
 [Security ライブラリ](https://api.cakephp.org/2.x/class-Security.html) は、
 データのハッシュ化や暗号化などのメソッドなどの基本的なセキュリティ分野を取り扱います。
 
-> [!NOTE]
-> Security によって提供される暗号化機能は、非推奨な `mcrypt` 拡張に依存します。
-> `Security.useOpenSsl` に設定することによってこの振る舞いを変更できます。もし
-> PHP=\>7.1 でデフォルトの設定を使用している場合、PECL 経由で `mcrypt` を
-> インストールする必要があります。
-
-::: pieceofcake2
-PHP 8 には `mcrypt` 拡張が同梱されていません。pieceofcake2 フォークでは
-`core.php` に `Configure::write('Security.useOpenSsl', true);` を追加し、
-`Security::encrypt()` と `Security::decrypt()` が OpenSSL を使うようにしてください。
-`Security::rijndael()` は常に `mcrypt` を必要とします。また `Security::cipher()`
-（`CookieComponent` のデフォルトの `'cipher'` タイプが使用）は安全ではありません。
-代わりに `encrypt()`/`decrypt()` や Cookie の `'aes'` タイプを使ってください。
-詳しくは [セキュリティ](/ja/pieceofcake2/security) を参照してください。
-:::
+> [!IMPORTANT]
+> デフォルトでは、`Security::encrypt()` と `Security::decrypt()` は `mcrypt` エクステンションを使います。
+> `mcrypt` は PHP 7.2 以降 PHP に同梱されていないため、`config/core.php` で OpenSSL を有効にしてください。
+>
+> ``` php
+> Configure::write('Security.useOpenSsl', true);
+> ```
+>
+> OpenSSL による実装は `mcrypt` と同じ形式で暗号化するため、以前に暗号化した値も復号できます。
+> `Security::rijndael()` には OpenSSL による実装がなく、常に `mcrypt` が必要です。
 
 ## Security API
 
@@ -42,6 +37,8 @@ $nosecret = Security::cipher($secret, 'my_key');
 > `cipher()` は、 **脆弱な** XOR 暗号を利用しています。従って、
 > 重要で機密性の高いデータへ **使うべきではありません** 。
 > このメソッドは、後方互換性のためだけに残されています。
+> `CookieComponent` のデフォルトの暗号化タイプ `'cipher'` もこのメソッドを使っているため、
+> 代わりに `'aes'` タイプを使ってください ([脆弱性への対応](/ja/appendices/security-fixes) を参照してください)。
 
 `static` Security::**rijndael**($text, $key, $mode)
 
@@ -55,8 +52,9 @@ param string \$mode
 モード。'encrypt' もしくは 'decrypt'
 
 rijndael-256 暗号を使って、テキストを暗号化・復号します。
-このメソッドを使うには [mcrypt extension](https://www.php.net/mcrypt)
-がインストールされている必要があります。 :
+このメソッドを使うには PECL から [mcrypt エクステンション](https://pecl.php.net/package/mcrypt)
+をインストールしておく必要があります。新しく書くコードでは、`Security.useOpenSsl` を有効にして
+`Security::encrypt()` と `Security::decrypt()` を使うことをお勧めします。使い方は次のとおりです。 :
 
 ``` php
 // データを暗号化
@@ -100,8 +98,8 @@ $result = Security::encrypt($value, $key);
 ::: info Added in version 2.5
 :::
 
-::: info Added in version 2.10.8
-非推奨な `mcrypt` 拡張の代わりに `Security.useOpenSsl` を設定して OpenSSL を利用してください。
+::: info Changed in version 2.10.8
+`Security.useOpenSsl` を設定すると、`mcrypt` エクステンションの代わりに OpenSSL を利用します。
 :::
 
 `static` Security::**decrypt**($cipher, $key, $hmacSalt = null)
@@ -132,8 +130,8 @@ $result = Security::decrypt($cipher, $key);
 ::: info Added in version 2.5
 :::
 
-::: info Added in version 2.10.8
-非推奨な `mcrypt` 拡張の代わりに `Security.useOpenSsl` を設定して OpenSSL を利用してください。
+::: info Changed in version 2.10.8
+`Security.useOpenSsl` を設定すると、`mcrypt` エクステンションの代わりに OpenSSL を利用します。
 :::
 
 `static` Security::**hash**( $string, $type = NULL, $salt = false )

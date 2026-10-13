@@ -41,33 +41,33 @@ pot ファイルを生成するためにしなければならないことは、
 [i18n コンソールタスク](../console-and-shells/i18n-shell) の実行です。
 これは、あなたのコード内の翻訳関数が使われている場所を探し、pot ファイルを生成します。
 あなたのコードの翻訳が変更があった時にこのコンソールタスクを再実行してください。
+モダンレイアウトではテンプレートが `src/` の外にあるため、プロジェクトのルートで実行するときは
+対象のディレクトリと出力先を明示してください。
+
+``` bash
+bin/cake i18n extract --paths src,templates --output resources/locales
+```
 
 pot ファイル自身は、 CakePHP では使用しません。それらのファイルは、翻訳を含む
 [po ファイル](https://en.wikipedia.org/wiki/Gettext) を作成したり更新するための
 テンプレートです。CakePHP は、以下の場所にある po ファイルを参照します。 :
 
 ``` text
-/app/Locale/<locale>/LC_MESSAGES/<domain>.po
+resources/locales/<locale>/LC_MESSAGES/<domain>.po
 ```
 
 デフォルトのドメインは 'default' です。従って、あなたのロケールフォルダは、
 以下のようになります。 :
 
 ``` text
-/app/Locale/eng/LC_MESSAGES/default.po (英語)
-/app/Locale/fra/LC_MESSAGES/default.po (フランス語)
-/app/Locale/por/LC_MESSAGES/default.po (ポルトガル語)
+resources/locales/eng/LC_MESSAGES/default.po (英語)
+resources/locales/fra/LC_MESSAGES/default.po (フランス語)
+resources/locales/por/LC_MESSAGES/default.po (ポルトガル語)
 ```
 
-::: pieceofcake2 ロケールディレクトリ
-pieceofcake2 フォークは、次のどちらの場所からもロケールファイルを読み込みます。
-
-- レガシーレイアウト: `app/Locale/<locale>/LC_MESSAGES/<domain>.po`
-- モダンレイアウト: `resources/locales/<locale>/LC_MESSAGES/<domain>.po`
-
-プラグインの翻訳ファイルは、これまでどおりプラグインの `Locale/` ディレクトリに置きます。
-詳しくは [ディレクトリ構成](/ja/pieceofcake2/directory-structure) を参照してください。
-:::
+レガシーレイアウト (`app/`) では、ロケールフォルダは `app/Locale/` になります。
+CakePHP はどちらの場所も検索します。詳しくは
+[ディレクトリ構成](/ja/appendices/migrating-to-the-modern-layout) を参照してください。
 
 po ファイルの作成や編集は、あなたの好きなエディタを使用することは、 **お勧めしません** 。
 最初に po ファイルを作成するときは、 pot ファイルを適切な場所にコピーし、
@@ -91,12 +91,12 @@ po ファイルは、短いメッセージの翻訳には便利ですが、長�
 他の方法で実装することを検討してください。例えば、 :
 
 ``` php
-// App Controller Code.
+// src/Controller/AppController.php
 public function beforeFilter()
 {
     $locale = Configure::read('Config.language');
-    if ($locale && file_exists(APP . 'View' . DS . $locale . DS . $this->viewPath . DS . $this->view . $this->ext)) {
-        // e.g. use /app/View/fra/Pages/tos.ctp instead of /app/View/Pages/tos.ctp
+    if ($locale && file_exists(ROOT . DS . 'templates' . DS . $locale . DS . $this->viewPath . DS . $this->view . $this->ext)) {
+        // 例: templates/Pages/tos.ctp の代わりに templates/fra/Pages/tos.ctp を使う
         $this->viewPath = $locale . DS . $this->viewPath;
     }
 }
@@ -120,8 +120,8 @@ LC_TIME ファイルを使用します。
 それぞれのロケールディレクトリ直下に LC_TIME ファイルを配置します。 :
 
 ``` text
-/app/Locale/fra/LC_TIME (フランス語)
-/app/Locale/por/LC_TIME (ポルトガル語)
+resources/locales/fra/LC_TIME (フランス語)
+resources/locales/por/LC_TIME (ポルトガル語)
 ```
 
 いくつかの主要な言語のこれらのファイルは、公式の
@@ -144,16 +144,18 @@ CakePHP があなたの翻訳ファイルを見つけられません。
 上記の例のためのあなたの翻訳ファイルは、以下の様になります。 :
 
 ``` text
-/app/Plugin/DebugKit/Locale/<locale>/LC_MESSAGES/<domain>.po
+plugins/DebugKit/Locale/<locale>/LC_MESSAGES/<domain>.po
 ```
 
 そして、他の言語の場合は、 :
 
 ``` text
-/app/Plugin/DebugKit/Locale/eng/LC_MESSAGES/debug_kit.po (英語)
-/app/Plugin/DebugKit/Locale/fra/LC_MESSAGES/debug_kit.po (フランス語)
-/app/Plugin/DebugKit/Locale/por/LC_MESSAGES/debug_kit.po (ポルトガル語)
+plugins/DebugKit/Locale/eng/LC_MESSAGES/debug_kit.po (英語)
+plugins/DebugKit/Locale/fra/LC_MESSAGES/debug_kit.po (フランス語)
+plugins/DebugKit/Locale/por/LC_MESSAGES/debug_kit.po (ポルトガル語)
 ```
+
+プラグインの翻訳ファイルは、どちらのレイアウトでもプラグイン自身の `Locale/` ディレクトリに置きます。
 
 CakePHP が翻訳ドメインと比較のためにプラグイン名を小文字化してアンダースコア区切りにして
 使用します。もし、与えられた翻訳ファイルにマッチする場合、プラグインの中を参照します。
@@ -258,12 +260,12 @@ class User extends AppModel
 
     public $validate = [
         'username' => [
-                'length' => [
+            'length' => [
                 'rule' => ['between', 2, 10],
-                'message' => 'Username should be between %d and %d characters'
-            ]
-        ]
-    ]
+                'message' => 'Username should be between %d and %d characters',
+            ],
+        ],
+    ];
 }
 ```
 

@@ -137,7 +137,7 @@ class CategoriesController extends AppController
 シンプルなモデルの定義例です。 :
 
 ``` php
-// app/Model/Category.php
+// src/Model/Category.php
 class Category extends AppModel
 {
     public $actsAs = ['Tree'];

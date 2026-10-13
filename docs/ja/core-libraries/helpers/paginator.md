@@ -354,7 +354,7 @@ $this->helpers['Paginator'] = ['ajax' => 'CustomJs'];
 してますので、これをテーブルの見出しの中に簡単に組み込めるようになっています。
 
 ``` php
-// app/View/Posts/index.ctp
+// templates/Posts/index.ctp
 <table>
     <tr>
         <th><?php echo $this->Paginator->sort('id', 'ID'); ?></th>

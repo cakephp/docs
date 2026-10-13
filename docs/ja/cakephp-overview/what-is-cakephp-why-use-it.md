@@ -11,24 +11,26 @@
 
 CakePHP は、ウェブ開発から単調な作業を取り除きます。
 また、本当にするべきコーディング、つまり、アプリケーション固有のロジックに関するコーディングを始めるためのツールがすべて準備されています。
-新しいプロジェクトを始める時には、毎回、車輪の再開発をする代わりに、CakePHP のコピーをチェックアウトして、アプリケーションの本質部分の開発にすぐに取り掛かれます。
+新しいプロジェクトを始める時には、毎回、車輪の再開発をする代わりに、CakePHP を Composer でインストールして、アプリケーションの本質部分の開発にすぐに取り掛かれます。
 
 CakePHP にはアクティブな
 [開発チーム](https://github.com/cakephp/cakephp/contributors) とコミュニティが存在し、プロジェクトに貢献しています。
 CakePHP を使用する、ということは、車輪の再開発を避けるだけでなく、あなたが開発するアプリケーションのコア部分がよくテストされ、常に改良されている、ということになります。
+CakePHP 2 は CakePHP プロジェクトでは開発が終了していますが、[Piece of Cake 2](/ja/pieceofcake2) フォークが
+テストを続け、現在の PHP のバージョンで動作するように保守しています。
 
-CakePHP の使用で益を受ける幾つかの点をざっと挙げると次のようなものがあります：
+CakePHP の使用で益を受ける幾つかの点をざっと挙げると次のようなものがあります。
 
 - アクティブ、フレンドリーな [Cakephp Official Communities](../cakephp-overview/where-to-get-help#cakephp-official-communities)
 - フレキシブルな [ライセンス](https://ja.wikipedia.org/wiki/MIT_License)
-- PHP 5.2.8 以上との互換性をもつ
+- PHP 8.0〜8.5 との互換性をもつ
 - データベースとのやり取りのための、
   [CRUD](https://ja.wikipedia.org/wiki/CRUD)
   が統合済み
 - アプリケーションの
   [足場組み](https://en.wikipedia.org/wiki/Scaffold_(programming))
   (*scaffolding*)
-- コード生成
+- [Bake](../console-and-shells/code-generation-with-bake) プラグインによるコード生成
 - [MVC](https://en.wikipedia.org/wiki/Model-view-controller)
   アーキテクチャ
 - クリーンでカスタマイズ可能な URL とルーティングを用いるリクエストディスパッチャー
@@ -44,11 +46,9 @@ CakePHP の使用で益を受ける幾つかの点をざっと挙げると次の
 - データのサニタイズ
 - 柔軟な [キャッシュ](https://en.wikipedia.org/wiki/Web_cache)
 - ローカライゼーション
-- どんなウェブサイトのディレクトリ構造からでも動作。最小限の
-  [Apache](https://httpd.apache.org/) の設定、または設定なしで可能。
+- [Composer](https://getcomposer.org) によるインストールと依存関係の管理
 
 ::: pieceofcake2
-pieceofcake2 フォークには PHP 8.0 以上が必要です (PHP 8.0〜8.5 をサポート)。
-コード生成 (Bake) は別パッケージの `pieceofcake2/bake` プラグインで提供されます。
-[pieceofcake2 フォークについて](/ja/pieceofcake2) を参照してください。
+Bake はコアに含まれなくなりました。
+`composer require --dev pieceofcake2/bake` でインストールしてください。
 :::

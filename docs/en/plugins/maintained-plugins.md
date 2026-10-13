@@ -1,9 +1,4 @@
-# Repositories and Plugins
-
-::: pieceofcake2
-This page is specific to the **pieceofcake2 fork** and is not part of the
-original CakePHP 2.x documentation.
-:::
+# Maintained Plugins
 
 The [Piece of Cake 2](https://github.com/pieceofcake2) project maintains the
 framework fork together with related repositories and forks of popular
@@ -82,7 +77,7 @@ CakePHP 2 plugins. All maintained plugins are compatible with PHP 8.x.
 
 Install plugins with Composer and load them as usual with `CakePlugin::load()`.
 See each repository's README for the package name and setup. With the
-[modern layout](/pieceofcake2/directory-structure), Composer installs plugins
+[modern layout](/appendices/migrating-to-the-modern-layout), Composer installs plugins
 into `plugins/` through the `installer-paths` setting.
 
 Plugins that don't support Composer autoloading still need `App::uses()` for

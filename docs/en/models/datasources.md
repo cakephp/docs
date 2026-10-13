@@ -4,39 +4,81 @@ DataSources are the link between models and the source of data that
 models represent. In many cases, the data is retrieved from a
 relational database such as MySQL, PostgreSQL or Microsoft SQL Server. CakePHP is
 distributed with several database-specific datasources (see the
-class files in `lib/Cake/Model/Datasource/Database`), a summary
-of which is listed here for your convenience:
+class files in `src/Cake/Model/Datasource/Database` of the
+`pieceofcake2/cakephp` package). All of them use PDO, so the matching PDO
+extension must be installed:
 
-- Mysql
-- Postgres
-- Sqlite
-- Sqlserver
+| Datasource | Supported versions | PHP extension |
+|----|----|----|
+| `Database/Mysql` | MySQL 5.6, 5.7, 8.0+ (MariaDB is also detected) | `pdo_mysql` |
+| `Database/Postgres` | PostgreSQL 9.4+ | `pdo_pgsql` |
+| `Database/Sqlite` | SQLite 3 | `pdo_sqlite` |
+| `Database/Sqlserver` | Microsoft SQL Server 2022+ | `pdo_sqlsrv` |
 
 > [!NOTE]
-> You can find additional community contributed datasources in the
-> [CakePHP DataSources repository on GitHub](https://github.com/cakephp/datasources/tree/2.0).
+> You can find additional datasources (CSV/TSV files, arrays and more) in the
+> [Datasources plugin](https://github.com/pieceofcake2/datasources).
 
 When specifying a database connection configuration in
-`app/Config/database.php`, CakePHP transparently uses the corresponding
+`config/database.php` (`app/Config/database.php` in the legacy layout),
+CakePHP transparently uses the corresponding
 database datasource for all model operations. So, even though you might not have
 known about datasources, you've been using them all along.
 
-::: pieceofcake2 Supported databases
-The pieceofcake2 fork supports MySQL 5.6, 5.7 and 8.0+ (`pdo_mysql`),
-PostgreSQL 9.4+ (`pdo_pgsql`), SQLite 3 (`pdo_sqlite`) and Microsoft SQL Server
-2022+ (`pdo_sqlsrv`). Notable differences:
+## Connection Settings
 
-- The driver classes are in `src/Cake/Model/Datasource/Database`.
-- The connection config is `app/Config/database.php` (legacy layout) or
-  `config/database.php` (modern layout).
-- The `encoding` setting is now passed in the PDO DSN instead of running
-  `SET NAMES` after connecting, and PostgreSQL `sslmode` is optional.
-  No configuration change is needed.
-- New driver methods: `getVersion()` (MySQL, PostgreSQL), `getServerType()`,
-  `utf8mb4Supported()` and `integerDisplayWidthDeprecated()` (MySQL). Custom
-  drivers that extend these classes may need to implement them.
+The application skeleton ships `config/database.php.default`; copy it to
+`config/database.php` and edit the connections. Each connection is a public
+property of the `DATABASE_CONFIG` class:
 
-See the [upgrade guide](/pieceofcake2/upgrade).
+``` php
+// config/database.php
+class DATABASE_CONFIG
+{
+    public $default = [
+        'datasource' => 'Database/Mysql',
+        'persistent' => false,
+        'host' => 'localhost',
+        'login' => 'user',
+        'password' => 'password',
+        'database' => 'database_name',
+        'prefix' => '',
+        'encoding' => 'utf8mb4',
+    ];
+}
+```
+
+The `encoding` setting is passed to the driver when the connection is opened:
+for MySQL it is added to the DSN as `charset=...`, and for PostgreSQL as
+`options='--client_encoding=...'`. You can still change the encoding of an open
+connection with `setEncoding()`.
+
+For PostgreSQL, the `sslmode` setting (`disable`, `allow`, `prefer`,
+`require`, ...) is added to the DSN only when you set it. If you leave it out,
+the default of the PostgreSQL client library applies.
+
+The `flags` setting is an array of PDO attributes passed to the PDO
+constructor. On PHP 8.1 and later, `pdo_mysql` and `pdo_sqlite` return
+integer and float columns as PHP `int` and `float` instead of strings. If your
+application relies on the old behavior (for example strict comparisons with
+strings), set `PDO::ATTR_STRINGIFY_FETCHES`:
+
+``` php
+public $default = [
+    'datasource' => 'Database/Mysql',
+    // ...
+    'flags' => [
+        PDO::ATTR_STRINGIFY_FETCHES => true,
+    ],
+];
+```
+
+::: pieceofcake2
+The `encoding` setting is passed in the
+DSN instead of running `SET NAMES` after connecting, and PostgreSQL `sslmode`
+no longer defaults to `allow`. The MySQL and PostgreSQL drivers have new
+methods such as `getVersion()`, which custom drivers extending them may need
+to implement. See the [migration guide](/appendices/migrating-from-cakephp-2-10).
 :::
 
 All of the above sources derive from a base `DboSource` class, which
@@ -88,11 +130,10 @@ A common reason you would want to write your own datasource is when you would
 like to access a 3rd party API using the usual `Model::find()/save()/delete()`
 methods. Let's write a datasource that will access a fictitious remote JSON
 based API. We'll call it `FarAwaySource` and we'll put it in
-`app/Model/Datasource/FarAwaySource.php`:
+`src/Model/Datasource/FarAwaySource.php`:
 
 ``` php
-App::uses('HttpSocket', 'Network/Http');
-
+// src/Model/Datasource/FarAwaySource.php
 class FarAwaySource extends DataSource
 {
 
@@ -103,7 +144,7 @@ class FarAwaySource extends DataSource
 
 /**
  * Our default config options. These options will be customized in our
- * ``app/Config/database.php`` and will be merged in the ``__construct()``.
+ * ``config/database.php`` and will be merged in the ``__construct()``.
  */
     public $config = [
         'apiKey' => '',
@@ -259,7 +300,7 @@ class FarAwaySource extends DataSource
 }
 ```
 
-We can then configure the datasource in our `app/Config/database.php` file
+We can then configure the datasource in our `config/database.php` file
 by adding something like this:
 
 ``` php
@@ -320,7 +361,7 @@ $this->MyModel->delete(42);
 You can also package Datasources into plugins.
 
 Simply place your datasource file into
-`Plugin/[YourPlugin]/Model/Datasource/[YourSource].php`
+`plugins/[YourPlugin]/Model/Datasource/[YourSource].php`
 and refer to it using the plugin notation:
 
 ``` php
@@ -334,43 +375,51 @@ public $faraway = [
 
 The Sqlserver datasource depends on
 [Microsoft's PHP extension called pdo_sqlsrv](https://github.com/Microsoft/msphpsql).
-This PHP Extension is not included in the base installation of PHP and must be
-installed separately. The SQL Server Native Client must also be installed for
-the extension to work.
+This PHP extension is not included in the base installation of PHP and must be
+installed separately, together with the Microsoft ODBC Driver for SQL Server.
+Both are available for Linux, macOS and Windows.
 
 So if the Sqlserver Datasource errors out with:
 
     Error: Database connection "Sqlserver" is missing, or could not be created.
 
-First check if the SQL Server PHP extension pdo_sqlsrv and the SQL Server Native
-Client are installed properly.
+First check if the `pdo_sqlsrv` extension and the ODBC driver are installed
+properly.
 
-::: pieceofcake2
-The pieceofcake2 fork supports SQL Server 2022+ and is tested with
-`pdo_sqlsrv` and the Microsoft ODBC Driver for SQL Server on Linux, so Windows
-is not required. The configuration has new options:
+A SQL Server connection looks like this:
 
 ``` php
 public $default = [
     'datasource' => 'Database/Sqlserver',
+    'persistent' => false,
     'host' => 'localhost',
-    'port' => 1433, // appended to the server name
+    'port' => 1433,
     'login' => 'sa',
     'password' => 'secret',
     'database' => 'cakephp',
+    'schema' => 'dbo',
     'encoding' => 'utf8',
-    'schema' => [ // schema mapping (default: 'dbo')
-        'default' => 'dbo',
-    ],
-    'options' => [ // extra DSN options such as SSL/TLS
+    'options' => [
         'TrustServerCertificate' => 'yes',
         'Encrypt' => 'no',
     ],
 ];
 ```
 
-If you extend the `Sqlserver` class, note that `describe()` now declares an
-`array` return type and `insertMulti()` returns `bool`.
-See the [upgrade guide](/pieceofcake2/upgrade).
+- `port` is appended to the server name in the DSN (`server=localhost,1433`).
+- `schema` is the schema that holds your tables. It defaults to `dbo`. To use
+  tables in several schemas of the same database, define one connection per
+  schema with a different `schema` value instead of creating several databases.
+- `options` is a list of additional DSN keywords, such as the SSL/TLS settings
+  `Encrypt` and `TrustServerCertificate`.
+- `encoding` set to `utf8` makes the driver use UTF-8 for strings.
+- `persistent` must be `false`; the `pdo_sqlsrv` driver does not support
+  persistent connections.
+
+::: pieceofcake2
+The SQL Server datasource gained the
+`port` and `options` settings and defaults `schema` to `dbo`. If you extend the
+`Sqlserver` class, `describe()` now declares an `array` return type and
+`insertMulti()` returns `bool`. See the [migration guide](/appendices/migrating-from-cakephp-2-10).
 :::
 

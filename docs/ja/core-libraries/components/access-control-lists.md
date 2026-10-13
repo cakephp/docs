@@ -216,7 +216,7 @@ ACO と ARO をその場で作れるからです。INI ベースの ACL につ�
 いただければと思います。
 
 デフォルトでは、CakePHP の ACL はデータベース駆動型です。
-INI ベースの ACL を有効にする場合は、app/Config/core.php にある
+INI ベースの ACL を有効にする場合は、config/core.php にある
 以下の行を更新することで、CakePHP にどのシステムを使っている
 のかを知らせてやる必要があります。 :
 
@@ -230,7 +230,7 @@ Configure::write('Acl.classname', 'IniAcl');
 //Configure::write('Acl.database', 'default');
 ```
 
-ARO/ACO のパーミッションは **/app/Config/acl.ini.php** の中で
+ARO/ACO のパーミッションは **config/acl.ini.php** の中で
 指定されています。基本的な考え方として、ARO は INI セクション
 の中で指定され、groups, allow, deny という３つのプロパティ
 を持ちます。
@@ -316,14 +316,14 @@ CakePHP のデータベース ACL は、コアのモデル、および CakePHP �
 コンソール・アプリケーションはデータベースを初期化し、
 ACO と ARO ツリーを使えるようにします。
 
-作業を始めるにあたって、まずは `/app/Config/database.php` が存在して
+作業を始めるにあたって、まずは `config/database.php` が存在して
 かつ適切に設定されていることを確認してください。
 
 これが終わったら、CakePHP のコンソールを使ってあなたの ACL
 のデータベーステーブルを作ります:
 
 ``` bash
-$ cake schema create DbAcl
+$ bin/cake schema create DbAcl
 ```
 
 このコマンドにより、ACO と ARO の情報をツリー構造で保存するために
@@ -365,7 +365,7 @@ End create.
 > これは、以前使われていて廃止された "initdb" というコマンドに
 > 代わるものです。
 
-`app/Config/Schema/db_acl.sql` という SQL ファイルを使うことも
+`config/Schema/db_acl.sql` という SQL ファイルを使うことも
 できなくはないですが、これは決して楽しいものではありません。
 
 ここまで終わったら、あなたのシステム上に acos, aros, aros_acos
@@ -377,7 +377,7 @@ End create.
 > ついて興味があれば、変更されたデータベースツリーを解析してみて
 > ください。ACL コンポーネントは CakePHP の
 > [Tree](../../core-libraries/behaviors/tree) を使ってツリーの継承を
-> 管理しています。ACL のモデルクラスのファイルは `lib/Cake/Model/`
+> 管理しています。ACL のモデルクラスのファイルは `vendor/pieceofcake2/cakephp/src/Cake/Model/`
 > の中にあります。
 
 これですべての準備ができました。それでは ARO と ACO を作って
@@ -488,7 +488,7 @@ public function any_action()
 確かめてみます。 :
 
 ``` bash
-$ cake acl view aro
+$ bin/cake acl view aro
 
 Aro tree:
 ---------------------------------------------------------------
@@ -602,7 +602,7 @@ public function any_action()
 ものになります。早速見てみましょう:
 
 ``` bash
-$ cake acl view aro
+$ bin/cake acl view aro
 
 Aro tree:
 ---------------------------------------------------------------
@@ -749,7 +749,7 @@ $this->Acl->deny(
 AclComponent を使ってチェックすることにより、設定内容の
 バリデーションについて説明します。
 
-### パーミッションをチェックする: ACL コンポーネント
+### パーミッションをチェックする: ACL コンポーネント {#checking-permissions}
 
 AclComponent を使ってドワーフ(Dwarf)やエルフ(Elf)が武器庫から
 何も移動できないことを確認してみましょう。この時点で、私たちは

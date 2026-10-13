@@ -10,9 +10,9 @@ FlashHelper は、 [FlashComponent](../../core-libraries/components/flash) に�
 `$_SESSION` にセットされたフラッシュメッセージを表示するために使用します。
 [FlashComponent](../../core-libraries/components/flash) と FlashHelper は、
 主にフラッシュメッセージを表示するためのエレメントを使用します。 Flash エレメントは、
-`app/View/Elements/Flash` ディレクトリの配下に配置されます。
-CakePHP の App テンプレートに `success.ctp` と `error.ctp` があることを
-確認してください。
+`templates/Elements/Flash` ディレクトリの配下に配置されます。
+CakePHP 本体には `default.ctp`、`success.ctp`、`error.ctp` のエレメントが用意されています。
+同じ名前のファイルをこのディレクトリに作成すると、それらを上書きできます。
 
 FlashHelper は、非推奨となった `SessionHelper` の `flash()` メソッドを
 置き換えるヘルパーです。

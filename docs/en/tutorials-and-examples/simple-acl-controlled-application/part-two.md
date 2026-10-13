@@ -1,13 +1,5 @@
 # Simple Acl controlled Application - part 2
 
-::: pieceofcake2
-With the pieceofcake2 fork, use the PHP 8 compatible
-[pieceofcake2/acl_extras](https://github.com/pieceofcake2/acl_extras) fork of AclExtras. Install it
-with Composer as described in its README (see [Plugins](/pieceofcake2/plugins)), load it in
-`config/bootstrap.php` (modern) or `app/Config/bootstrap.php` (legacy), and run the commands
-below as `bin/cake AclExtras.AclExtras aco_sync`.
-:::
-
 ## An Automated tool for creating ACOs
 
 As mentioned before, there is no pre-built way to input all of our
@@ -15,31 +7,38 @@ controllers and actions into the Acl. However, we all hate doing
 repetitive things like typing in what could be hundreds of actions
 in a large application.
 
-For this purpose exists a very handy plugin available on GitHub, called
-[AclExtras](https://github.com/markstory/acl_extras/) which can
-be downloaded in [The GitHub Downloads page](https://github.com/markstory/acl_extras/zipball/master).
-We're going to briefly describe how to use it to generate all our ACO's
+For this purpose exists a very handy plugin called
+[AclExtras](https://github.com/pieceofcake2/acl_extras).
+We're going to briefly describe how to use it to generate all our ACO's.
 
-First grab a copy of the plugin and unzipped or clone it using git into
-<span class="title-ref">app/Plugin/AclExtras</span>. Then activate the plugin in your <span class="title-ref">app/Config/boostrap.php</span>
-file as shown below:
+Install the plugin with Composer. It is published on Packagist as
+`markstory/acl_extras`:
+
+``` bash
+composer require markstory/acl_extras
+```
+
+Composer installs it into `plugins/AclExtras/`, because the skeleton's
+`composer.json` already has the `installer-paths` setting described in
+[Installing a plugin with Composer](/plugins/how-to-install-plugins#composer).
+Then activate the plugin in your `config/bootstrap.php` file as shown below:
 
 ``` php
-//app/Config/boostrap.php
+// config/bootstrap.php
 // ...
 CakePlugin::load('AclExtras');
 ```
 
 Finally execute the following command in the CakePHP console:
 
-    ./Console/cake AclExtras.AclExtras aco_sync
+    bin/cake AclExtras.AclExtras aco_sync
 
 You can get a complete guide for all available commands like this:
 
-    ./Console/cake AclExtras.AclExtras -h
-    ./Console/cake AclExtras.AclExtras aco_sync -h
+    bin/cake AclExtras.AclExtras -h
+    bin/cake AclExtras.AclExtras aco_sync -h
 
-Once populated your <span class="title-ref">acos</span> table proceed to create your application permissions.
+Once populated your `acos` table proceed to create your application permissions.
 
 ## Setting up permissions
 
@@ -48,7 +47,7 @@ be providing one. To allow ARO's access to ACO's from the shell interface use
 the AclShell. For more information on how to use it consult the AclShell help
 which can be accessed by running:
 
-    ./Console/cake acl --help
+    bin/cake acl --help
 
 Note: \* needs to be quoted ('\*')
 
@@ -62,7 +61,7 @@ $this->Acl->allow($aroAlias, $acoAlias);
 We are going to add in a few allow/deny statements now. Add the
 following to a temporary function in your `UsersController` and
 visit the address in your browser to run them (e.g.
-<http://localhost/cake/app/users/initdb>). If you do a
+<http://localhost:8765/users/initDB>). If you do a
 `SELECT * FROM aros_acos` you should see a whole pile of 1's and
 -1's. Once you've confirmed your permissions are set, remove the
 function:
@@ -97,7 +96,7 @@ public function initDB()
     $this->Acl->allow($group, 'controllers/Widgets/edit');
 
     // allow basic users to log out
-    $this->Acl->allow($group, 'controllers/users/logout');
+    $this->Acl->allow($group, 'controllers/Users/logout');
 
     // we add an exit to avoid an ugly "missing views" error message
     echo "all done";
@@ -155,10 +154,11 @@ application.
 Our application is now under access control, and any attempt to
 view non-public pages will redirect you to the login page. However,
 we will need to create a login view before anyone can login. Add
-the following to `app/View/Users/login.ctp` if you haven't done
+the following to `templates/Users/login.ctp` if you haven't done
 so already:
 
 ``` php
+<!-- templates/Users/login.ctp -->
 <h2>Login</h2>
 <?php
 echo $this->Form->create('User', [
@@ -172,22 +172,29 @@ echo $this->Form->input('User.password');
 echo $this->Form->end('Login');
 ```
 
-If a user is already logged in, redirect him by adding this to your
-UsersController:
+If a user is already logged in, redirect him by updating the `login()`
+action of your UsersController:
 
 ``` php
 public function login()
 {
-    if ($this->Session->read('Auth.User')) {
-        $this->Session->setFlash('You are logged in!');
+    if ($this->Auth->user()) {
+        $this->Flash->success(__('You are logged in!'));
         return $this->redirect('/');
+    }
+    if ($this->request->is('post')) {
+        if ($this->Auth->login()) {
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+        $this->Flash->error(__('Your username or password was incorrect.'));
     }
 }
 ```
 
 You should now be able to login and everything should work
 auto-magically. When access is denied Auth messages will be
-displayed if you added the `echo $this->Session->flash('auth')`
+displayed if you add `echo $this->Flash->render('auth');` to your layout
+(`templates/Layouts/default.ctp`).
 
 ## Logout
 
@@ -196,11 +203,11 @@ the time to fill it. In `UsersController::logout()` add the
 following:
 
 ``` php
-$this->Session->setFlash('Good-Bye');
-$this->redirect($this->Auth->logout());
+$this->Flash->success(__('Good-Bye'));
+return $this->redirect($this->Auth->logout());
 ```
 
-This sets a Session flash message and logs out the User using
+This sets a flash message and logs out the User using
 Auth's logout method. Auth's logout method basically deletes the
 Auth Session Key and returns a URL that can be used in a redirect.
 If there is other session data that needs to be deleted as well add

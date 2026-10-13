@@ -14,31 +14,19 @@ the details on how to use these tools later on.
 
 Controllers, helpers and models each have a parent class you can use to define
 application-wide changes. AppController (located at
-`/app/Controller/AppController.php`), AppHelper (located at
-`/app/View/Helper/AppHelper.php`) and AppModel (located at
-`/app/Model/AppModel.php`) are great places to put methods you want to share
-between all controllers, helpers or models.
-
-::: pieceofcake2 Directory layout
-The locations depend on your application layout:
-
-| File                        | Legacy layout                        | Modern layout                    |
-|-----------------------------|--------------------------------------|----------------------------------|
-| AppController               | `app/Controller/AppController.php`   | `src/Controller/AppController.php` |
-| AppHelper                   | `app/View/Helper/AppHelper.php`      | `src/View/Helper/AppHelper.php`  |
-| AppModel                    | `app/Model/AppModel.php`             | `src/Model/AppModel.php`         |
-| Routes                      | `app/Config/routes.php`              | `config/routes.php`              |
-| Layouts / Elements          | `app/View/Layouts/`, `app/View/Elements/` | `templates/Layouts/`, `templates/Elements/` |
-
-See [Directory Structure](/pieceofcake2/directory-structure).
-:::
+`src/Controller/AppController.php`), AppHelper (located at
+`src/View/Helper/AppHelper.php`) and AppModel (located at
+`src/Model/AppModel.php`) are great places to put methods you want to share
+between all controllers, helpers or models. In the legacy `app/` layout, these
+files are in `app/Controller/`, `app/View/Helper/` and `app/Model/`.
 
 Although routes aren't classes or files, they play a role in
 requests made to CakePHP. Route definitions tell CakePHP how to map
 URLs to controller actions. The default behavior assumes that the
 URL `/controller/action/var1/var2` maps to
-Controller::action(\$var1, \$var2), but you can use routes to
-customize URLs and how they are interpreted by your application.
+Controller::action(\$var1, \$var2), but you can use routes, defined in
+`config/routes.php`, to customize URLs and how they are interpreted by your
+application.
 
 Some features in an application merit packaging as a whole. A
 plugin is a package of models, controllers and views that
@@ -51,7 +39,8 @@ be a good fit for CakePHP plugins.
 A Component is a class that aids in controller logic. If you have
 some logic you want to share between controllers (or applications),
 a component is usually a good fit. As an example, the core
-EmailComponent class makes creating and sending emails a snap.
+AuthComponent class makes adding login and access control to all of your
+controllers a snap.
 Rather than writing a controller method in a single controller that
 performs this logic, you can package the logic so it can be
 shared.
@@ -103,11 +92,11 @@ know what they do. You can find the details in the models chapter.
 A Helper is a class that aids in view logic. Much like a component
 used among controllers, helpers allow presentational logic to be
 accessed and shared between views. One of the core helpers,
-JsHelper, makes AJAX requests within views much easier and comes with
-support for jQuery (default), Prototype and Mootools.
+FormHelper, makes building forms that work with your models much easier.
 
 Most applications have pieces of view code that are used
 repeatedly. CakePHP facilitates view code reuse with layouts and
 elements. By default, every view rendered by a controller is placed
 inside a layout. Elements are used when small snippets of content
-need to be reused in multiple views.
+need to be reused in multiple views. Layouts are stored in `templates/Layouts/`
+and elements in `templates/Elements/`.

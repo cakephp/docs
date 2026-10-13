@@ -18,7 +18,7 @@ CakePHP では、このようなケースについて、実行サイクルに対
 
 ## フィルターを設定する
 
-フィルターは通常 `bootstrap.php` ファイルの中で設定されますが、
+フィルターは通常 `config/bootstrap.php` ファイルの中で設定されますが、
 リクエストがディスパッチされる（制御が移る）前であれば、どの設定ファイル
 からでも気軽にロードして構いません。フィルターの追加や削除は、 <span class="title-ref">Configure</span>
 クラスの中で特別な `Dispatcher.filters` キーを使って行われます。
@@ -27,9 +27,10 @@ CakePHP にはデフォルトで２つのフィルタークラスが備わって
 されているのかを見てみましょう。:
 
 ``` php
+// config/bootstrap.php
 Configure::write('Dispatcher.filters', [
     'AssetDispatcher',
-    'CacheDispatcher'
+    'CacheDispatcher',
 ]);
 ```
 
@@ -57,8 +58,8 @@ Configure::write('Dispatcher.filters', [
 Configure::write('Dispatcher.filters', [
     'my-filter' => [
         'callable' => [$classInstance, 'methodName'],
-        'on' => 'after'
-    ]
+        'on' => 'after',
+    ],
 ]);
 ```
 
@@ -66,13 +67,18 @@ Configure::write('Dispatcher.filters', [
 であれば、何でも渡すことができます。覚えていると思いますが、 <span class="title-ref">callback</span>
 は PHP が `call_user_func` で実行することのできるものすべでです。
 ただ小さな例外があります。もし文字列が渡されると、それは関数名としては
-見てもらえず、クラス名として扱われます。ただし PHP 5.3 以降を使っている
-場合は、無名関数であればもちろんフィルターとして指定可能です。:
+見てもらえず、クラス名として扱われます。無名関数もフィルターとして
+指定できます。:
 
 ``` php
 Configure::write('Dispatcher.filters', [
-   'my-filter' => ['callable' => function($event) {...}, 'on' => 'before'],
-   // さらにフィルターを記載可能
+    'my-filter' => [
+        'callable' => function ($event) {
+            // ...
+        },
+        'on' => 'before',
+    ],
+    // さらにフィルターを記載可能
 ]);
 ```
 
@@ -88,25 +94,28 @@ Configure::write('Dispatcher.filters', [
 
 ``` php
 Configure::write('Dispatcher.filters', [
-   'my-filter' => [
-        'callable' => function($event) {...},
+    'my-filter' => [
+        'callable' => function ($event) {
+            // ...
+        },
         'on' => 'before',
-        'priority' => 5
+        'priority' => 5,
     ],
     'other-filter' => [
         'callable' => [$class, 'method'],
         'on' => 'after',
-        'priority' => 1
+        'priority' => 1,
     ],
-   // さらなるフィルター定義
+    // さらなるフィルター定義
 ]);
 ```
 
-宣言するフィルターの優先順位を定義する場合、同一の優先度を持つものの
-扱いが問題となります。フィルターをクラス名として定義する場合、インライン
-で優先度を定義するオプションは現時点では存在しませんが、これは近日中に
-実装される予定です。またついに、CakePHP のプラグイン機能を使ってプラグイン
-の中にあるフィルターの定義ができるようになりました。:
+優先度を指定した場合、宣言の順序が意味を持つのは同じ優先度のフィルター同士
+だけです。フィルターをクラス名として定義する場合は、ここで優先度を指定する
+ことはできません。これについては後ほど説明します。最後に、CakePHP の
+プラグイン記法を使って、プラグインの中にあるフィルターを指定することも
+できます。フィルタークラスはプラグインの `Routing/Filter` ディレクトリ、
+たとえば `plugins/MyPlugin/Routing/Filter/MyFilter.php` から読み込まれます。:
 
 ``` php
 Configure::write('Dispatcher.filters', [
@@ -124,14 +133,17 @@ Configure::write('Dispatcher.filters', [
 
 ``` php
 Configure::write('Dispatcher.filters', [
-    'MyAssetFilter' => ['service' => 'google.com']
+    'MyAssetFilter' => ['service' => 'google.com'],
 ]);
 ```
 
 フィルターのキーが有効なクラス名の場合、その値としてディスパッチフィルター
 に渡すパラメーターの配列を指定することも可能です。デフォルトでは、ベース
 クラスの中でこれらの設定がデフォルト値とマージされ、その後それらの値が
-`$settings` プロパティにセットされます。
+`$settings` プロパティにセットされます。ディスパッチャーはこの書き方を
+`class_exists()` で判定するため、フィルタークラスがすでにオートロード可能で
+なければなりません。`src/` にクラスを追加したら `composer dump-autoload` を
+実行してください。
 
 ::: info Changed in version 2.5
 2.5 から、コンストラクタの設定をディスパッチフィルターに渡すことが できるようになりました。
@@ -145,10 +157,9 @@ Configure::write('Dispatcher.filters', [
 を返すようなシンプルなフィルターを作ってみましょう。:
 
 ``` php
-App::uses('DispatcherFilter', 'Routing');
+// src/Routing/Filter/HelloWorldFilter.php
 class HelloWorldFilter extends DispatcherFilter
 {
-
     public $priority = 9;
 
     public function beforeDispatch(CakeEvent $event)
@@ -165,15 +176,17 @@ class HelloWorldFilter extends DispatcherFilter
 }
 ```
 
-このクラスを `app/Routing/Filter/HelloWorldFilter.php` ファイルとして保存し、
-前節で説明したような要領で bootstrap ファイルの中で設定する必要があります。
+このクラスを `src/Routing/Filter/HelloWorldFilter.php` ファイルとして保存し、
+前節で説明したような要領で `config/bootstrap.php` の中で設定する必要があります。
+`src/` 以下のアプリケーションクラスは Composer の classmap でオートロードされるので、
+ファイルを追加したら `composer dump-autoload` を実行してください。
 ここで説明すべきことはたくさんあるのですが、まずは `$priority` 値から
 見てみましょう。
 
 前述のように、フィルタークラスを使う場合は、そのクラスの中で `$priority`
 プロパティを使って実行順序を定義することしかできません。このプロパティが
 宣言されている場合、そのデフォルト値は 10 なので、Router クラスがリクエスト
-をパースした <span id="後に">後に</span>\_ 実行されるということになります。直前の例では、これは
+をパースした *後に* 実行されるということになります。直前の例では、これは
 望ましくない動作です。なぜなら、この URL に答えるようなコントローラーを
 用意していることは、まずありえないからです。そのため、私たちは優先度として
 9 を選ぶことになります。
@@ -199,10 +212,9 @@ class HelloWorldFilter extends DispatcherFilter
 から提供されるものであれば何でも構いません。:
 
 ``` php
-App::uses('DispatcherFilter', 'Routing');
+// src/Routing/Filter/HttpCacheFilter.php
 class HttpCacheFilter extends DispatcherFilter
 {
-
     public function afterDispatch(CakeEvent $event)
     {
         $request = $event->data['request'];
@@ -228,18 +240,18 @@ class HttpCacheFilter extends DispatcherFilter
 
 ## インラインフィルター
 
-最後にお見せする例では、無名関数（PHP 5.3+ のみで利用可能）を使って JSON
+最後にお見せする例では、無名関数を使って JSON
 フォーマットでポストされたデータの一覧を返します。これは本来コントローラーと
 `JsonView` クラスを使って行なうべきですが、たとえばミッション
 クリティカルな API のエンドポイントで、なんとか数 ms でも節約しなければ
 ならないようなケースを想像してみてください。:
 
 ``` php
-$postsList = function($event) {
+// config/bootstrap.php
+$postsList = function ($event) {
     if ($event->data['request']->url !== 'posts/recent.json') {
         return;
     }
-    App::uses('ClassRegistry', 'Utility');
     $postModel = ClassRegistry::init('Post');
     $event->data['response']->body(json_encode($postModel->find('recent')));
     $event->stopPropagation();
@@ -252,8 +264,8 @@ Configure::write('Dispatcher.filters', [
     'recent-posts' => [
         'callable' => $postsList,
         'priority' => 9,
-        'on'=> 'before'
-    ]
+        'on' => 'before',
+    ],
 ]);
 ```
 

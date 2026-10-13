@@ -106,14 +106,11 @@ classes you would typically use in a CakePHP application:
 - The Helper class **BestEverHelper** would be found in a file
   named **BestEverHelper.php**
 
-Each file would be located in the appropriate folder in your app folder.
-
-::: pieceofcake2
-In the modern layout, PHP class files go under `src/` instead of `app/`
-(e.g. `src/Controller/`, `src/Model/`, `src/View/Helper/`). If your `composer.json`
-autoloads them with `"classmap": ["src/"]`, run `composer dump-autoload` after adding
-a new class file. See [Directory Structure](/pieceofcake2/directory-structure).
-:::
+Each file would be located in the appropriate folder in your `src/` folder, for
+example `src/Controller/`, `src/Controller/Component/`, `src/Model/`,
+`src/Model/Behavior/`, `src/View/` and `src/View/Helper/`. If your
+`composer.json` autoloads these files with `"classmap": ["src/"]`, run
+`composer dump-autoload` after adding a new class file.
 
 ## Model and Database Conventions
 
@@ -172,7 +169,7 @@ CREATE TABLE posts_tags (
 
 Rather than using an auto-increment key as the primary key, you may
 also use char(36). CakePHP will then use a unique 36 character UUID
-(String::uuid) whenever you save a new record using the Model::save
+(`CakeText::uuid()`) whenever you save a new record using the Model::save
 method.
 
 ## View Conventions
@@ -180,10 +177,10 @@ method.
 View template files are named after the controller functions they
 display, in an underscored form. The getReady() function of the
 PeopleController class will look for a view template in
-/app/View/People/get_ready.ctp.
+`templates/People/get_ready.ctp`.
 
 The basic pattern is
-/app/View/Controller/underscored_function_name.ctp.
+`templates/Controller/underscored_function_name.ctp`.
 
 By naming the pieces of your application using CakePHP conventions,
 you gain functionality without the hassle and maintenance tethers
@@ -191,19 +188,13 @@ of configuration. Here's a final example that ties the conventions
 together:
 
 - Database table: "people"
-- Model class: "Person", found at /app/Model/Person.php
+- Model class: "Person", found at `src/Model/Person.php`
 - Controller class: "PeopleController", found at
-  /app/Controller/PeopleController.php
-- View template, found at /app/View/People/index.ctp
+  `src/Controller/PeopleController.php`
+- View template, found at `templates/People/index.ctp`
 
-::: pieceofcake2 Modern layout
-In the modern layout the same files are located at:
-
-- Model class: `src/Model/Person.php`
-- Controller class: `src/Controller/PeopleController.php`
-- View template: `templates/People/index.ctp`
-  (the pattern is `templates/Controller/underscored_function_name.ctp`)
-:::
+In the legacy `app/` layout, these files are in `app/Model/`,
+`app/Controller/` and `app/View/People/`.
 
 Using these conventions, CakePHP knows that a request to
 <http://example.com/people/> maps to a call on the index() function

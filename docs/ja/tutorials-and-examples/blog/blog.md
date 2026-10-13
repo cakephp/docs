@@ -1,34 +1,5 @@
 # ブログチュートリアル
 
-::: pieceofcake2 pieceofcake2 フォークでこのチュートリアルを進める場合
-このチュートリアルは CakePHP をアーカイブでダウンロードし、レガシーの `app/` レイアウトを使う前提で
-書かれています。pieceofcake2 フォークは Composer でのみインストールでき、**PHP 8.0 以上**が必要です
-（PHP 5.2.8 ではありません）。以下の「CakePHP のダウンロード」の手順の代わりに、アプリケーション
-スケルトンからプロジェクトを作成してください（モダンレイアウト）。
-
-```bash
-composer create-project pieceofcake2/app blog
-cd blog
-```
-
-ウェブサーバのドキュメントルートは `webroot/` ディレクトリに向けるか、開発用の組み込みサーバ
-`bin/cake server -p 8765` を使います。そのうえで、以下のようにパスを読み替えてチュートリアルを進めてください。
-
-| チュートリアル（レガシー） | モダンレイアウト |
-|---|---|
-| `app/tmp` | `tmp/`（ログは `logs/`） |
-| `app/Config/database.php.default`, `app/Config/core.php` | `config/database.php.default`, `config/core.php` |
-| `app/Model/Post.php` | `src/Model/Post.php` |
-| `app/Controller/PostsController.php` | `src/Controller/PostsController.php` |
-| `app/View/Posts/index.ctp` | `templates/Posts/index.ctp` |
-| `app/View/Layouts/default.ctp` | `templates/Layouts/default.ctp` |
-
-データベースについて: MySQL ドライバには `pdo_mysql` 拡張が必要です。PHP 8.1 以降の PDO は、整数や
-浮動小数点数のカラムを文字列ではなく PHP の `int`/`float` として返します。必要であれば、
-`config/database.php.default` にある `PDO::ATTR_STRINGIFY_FETCHES` フラグで以前の動作に戻せます。
-[インストール](/ja/pieceofcake2/installation) と [ディレクトリ構成](/ja/pieceofcake2/directory-structure) も参照してください。
-:::
-
 CakePHP をさっそく使ってみましょう。このチュートリアルを読んでいるのは、
 CakePHP の動作に関してさらに学びたいと思っているからだと思います。
 私たちは、生産性を高め、コーディングがさらに楽しいものになることを目指しています。
@@ -40,60 +11,64 @@ CakePHP の動作に関してさらに学びたいと思っているからだと
 
 必要なもの:
 
-1.  動作しているウェブサーバ。Apache を使っているという前提で書いてありますが、
-    他の種類のサーバを使用する場合でも、ほぼ同じにいけるはずです。サーバの設定を
-    少し変える必要があるかもしれませんが、たいていの人は、そのままの設定で CakePHP を
-    動作させることが可能です。PHP 5.3.0 以上が動作していることを確認してください。
-2.  データベースサーバ。このチュートリアルで MySQL を使用します。
+1.  PHP 8.0 以上と [Composer](https://getcomposer.org/)。
+2.  ウェブサーバ。このチュートリアルでは、CakePHP のコンソールから起動する PHP の
+    ビルトインウェブサーバで十分です。Apache などのサーバを使う場合は、ドキュメントルートを
+    アプリケーションの `webroot/` ディレクトリに設定してください。
+3.  データベースサーバ。このチュートリアルで MySQL を使用します。
     データベースを作成できる程度の SQL の知識が必要です。その先は CakePHP が面倒を
     みてくれます。MySQL を使用するので、PHP で `pdo_mysql` が有効になっていることを
     確認してください。
-3.  PHP の基本的な知識。オブジェクト指向プログラミングに慣れていれば非常に有利ですが、
+4.  PHP の基本的な知識。オブジェクト指向プログラミングに慣れていれば非常に有利ですが、
     手続き型に慣れているという人でも心配する必要はありません。
-4.  最後に、MVC プログラミングに関する基本的な知識が必要です。概要については、
-    [MVC(\*Model-View-Controller\*)を理解する](../../cakephp-overview/understanding-model-view-controller) を見てください。
+5.  最後に、MVC プログラミングに関する基本的な知識が必要です。概要については、
+    [MVC(\*Model-View-Controller\*)を理解する](/ja/cakephp-overview/understanding-model-view-controller) を見てください。
     半ページぐらいの説明ですので、心配はご無用です。
 
 それでは、はじめましょう！
 
-## CakePHP のダウンロード
+## CakePHP の取得
 
-まずは、最新の CakePHP のコードをダウンロードしてきましょう。
+まずは、Composer で新しいアプリケーションを作成しましょう。
+[pieceofcake2/app](https://github.com/pieceofcake2/app) アプリケーションスケルトンが
+CakePHP もインストールしてくれます。 :
 
-最新の CakePHP をダウンロードするには、GitHub にある CakePHP プロジェクトを見てみましょう:
-<https://github.com/cakephp/cakephp/tags>
-そして、2.0 の最新リリースをダウンロードします。
+``` bash
+composer create-project pieceofcake2/app blog
+cd blog
+```
 
-または、 [git](https://git-scm.com/) を使ってレポジトリを clone することもできます。 :
+完了すると、ディレクトリは次のようになります:
 
-    git clone -b 2.x git://github.com/cakephp/cakephp.git
-
-どちらにしても、ダウンロードしたコードを DocumentRoot 内に配置してください。
-そうすると、ディレクトリは次のようになります:
-
-    /path_to_document_root
-        /app
-        /lib
+    /blog
+        /bin
+        /config
+        /logs
         /plugins
-        /vendors
-        .htaccess
-        index.php
-        README
+        /resources
+        /src
+        /templates
+        /tests
+        /tmp
+        /vendor
+        /webroot
+        composer.json
 
+CakePHP 本体は `vendor/pieceofcake2/cakephp` にインストールされます。PHP のクラスは
+`src/` に、ビューテンプレートは `templates/` に、設定は `config/` に書きます。
 CakePHP のディレクトリ構造について少し学んでおきましょう:
-[CakePHP のフォルダ構造](../../getting-started/cakephp-folder-structure) のセクションをチェックしてください。
+[CakePHP のフォルダ構造](/ja/getting-started/cakephp-folder-structure) のセクションをチェックしてください。
 
 ### Tmp ディレクトリのパーミッション
 
-次に、 `app/tmp` ディレクトリをウェブサーバから書き込めるように設定します。
-これを行うためのいちばんいい方法は、ウェブサーバを動作させているユーザーを見つけることです。
-次のコード `<?php echo exec('whoami'); ?>` を任意の PHP ファイルに記述して、
-ウェブサーバで実行してみましょう。すると、ウェブサーバを実行しているユーザの名前が
-表示されるはずです。そのユーザーに `app/tmp` ディレクトリの所有権を変更します。
+次に、 `tmp` と `logs` ディレクトリをウェブサーバから書き込めるように設定します。
+このチュートリアルのようにビルトインウェブサーバを使う場合は、サーバは自分のユーザーで
+動作するので、何もする必要はありません。他のウェブサーバを使う場合は、ウェブサーバを
+動作させているユーザーを調べ、そのユーザーにディレクトリの所有権を変更します。
 実行するコマンドは (\*nixで) このようになります:
 
 ``` bash
-$ chown -R www-data app/tmp
+$ chown -R www-data tmp logs
 ```
 
 何らかの理由で CakePHP がそのディレクトリに書き込めない場合は、キャッシュデータが
@@ -127,12 +102,12 @@ INSERT INTO posts (title,body,created)
 
 テーブル名とフィールド名は適当に選んだわけではありません。CakePHP のデータベース命名規約と
 クラスの命名規約に従っておくと、（どちらも、
-[CakePHP の規約](../../getting-started/cakephp-conventions) の中で説明されています）たくさんの機能を
+[CakePHP の規約](/ja/getting-started/cakephp-conventions) の中で説明されています）たくさんの機能を
 自由に使うことができ、設定作業をする必要がなくなります。CakePHP はフレキシブルなので、
 最悪な従来型のデータベーススキーマにも対応することができますが、規約に従えば、
 時間を節約することができます。
 
-詳細は、 [CakePHP の規約](../../getting-started/cakephp-conventions) を参照してください。簡単に言うと、
+詳細は、 [CakePHP の規約](/ja/getting-started/cakephp-conventions) を参照してください。簡単に言うと、
 'posts' というテーブル名にしておけば、自動的に Post モデルが呼び出され、'modified' と
 'created' というフィールドがあると、自動的にCakePHP が管理するようになります。
 
@@ -141,43 +116,54 @@ INSERT INTO posts (title,body,created)
 どんどん進みましょう。データベースがどこにあって、どうやって接続するかを CakePHP に教えます。
 多くの人にとって、設定 (*configure*) をする最初で最後の機会です。
 
-CakePHP のデータベース設定ファイルの元は、 `/app/Config/database.php.default` の中に
+CakePHP のデータベース設定ファイルの元は、 `config/database.php.default` の中に
 あります。同一ディレクトリ上にこのファイルのコピーを作り、 `database.php`
-という名前にしてください。
+という名前にしてください。 :
+
+``` bash
+cp config/database.php.default config/database.php
+```
 
 この設定ファイルの中身は一目瞭然です。 `$default` 配列の値を自分のセットアップに合わせて
 変更するだけです。完全な設定の配列の例は次のようなものになるでしょう:
 
 ``` php
+// config/database.php
 public $default = [
     'datasource' => 'Database/Mysql',
     'persistent' => false,
     'host' => 'localhost',
-    'port' => '',
     'login' => 'cakeBlog',
     'password' => 'c4k3-rUl3Z',
     'database' => 'cake_blog_tutorial',
-    'schema' => '',
     'prefix' => '',
-    'encoding' => 'utf8'
+    'encoding' => 'utf8mb4',
 ];
 ```
 
-新しくできた `database.php` ファイルを保存したら、ブラウザを開いて、CakePHP の
-welcome ページを見てください。データベース接続のファイルがあり、そしてデータベースに
-接続できる、というメッセージが表示されるはずです。
+`utf8mb4` は MySQL で UTF-8 を完全に扱える文字セットで、MySQL 8.0 のデフォルトの文字セットです。
+
+新しくできた `database.php` ファイルを保存したら、プロジェクトルートで開発用サーバを起動します。 :
+
+``` bash
+bin/cake server -p 8765
+```
+
+ブラウザで <http://localhost:8765/> を開いて、CakePHP の welcome ページを見てください。
+データベース接続のファイルがあり、そしてデータベースに接続できる、というメッセージが
+表示されるはずです。
 
 > [!NOTE]
 > PDO と pdo_mysql が php.ini で有効になっている必要があることを覚えておいてください。
 
 ## 追加の設定
 
-設定できる項目があといくつかあります。たいていの開発者はこれらの詳細なリストも仕上げますが、
-このチュートリアルに必要不可欠、というわけではありません。ひとつは、セキュリティハッシュ用の
+設定できる項目があといくつかあります。ひとつは、セキュリティハッシュ用の
 カスタム文字列(「salt」ともいう)です。二つ目は、カスタム番号 (「seed」ともいう) を暗号化用に
-定義するということです。
+定義するということです。アプリケーションスケルトンには誰でも知っている例の値が入っているので、
+デバッグモードが有効な間は、これらを変更するまで CakePHP がすべてのページで通知を表示します。
 
-セキュリティ用の salt は、ハッシュの生成に用いられます。 `/app/Config/core.php` を
+セキュリティ用の salt は、ハッシュの生成に用いられます。 `config/core.php` を
 編集し、デフォルトの `Security.salt` の値を変更してください。
 この値は、ランダムで長い文字列にします。そうすることで推測がより困難になります。 :
 
@@ -189,7 +175,7 @@ Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
 ```
 
 サイファシード(*cipher seed*) は暗号化・復号化のための文字列です。
-`/app/Config/core.php` を編集して `Security.cipherSeed` をデフォルト値から
+`config/core.php` を編集して `Security.cipherSeed` をデフォルト値から
 変更してください。この値は、大きくてランダムな整数でなければなりません:
 
 ``` php
@@ -199,15 +185,15 @@ Configure::write('Security.salt', 'pl345e-P45s_7h3*S@l7!');
 Configure::write('Security.cipherSeed', '7485712659625147843639846751');
 ```
 
-## mod_rewrite について
+## Apache を使う場合
 
-新しいユーザは mod_rewrite でつまずくことがよくあります。例えば CakePHP の
-welcome ページが少しおかしくなったりします (画像が表示されない、CSS が効いていない)。
-これはおそらく、システム上の mod_rewrite が機能していないということです。
-以下のいずれかの項目を参照して、URL リライティングが有効になるように設定してください。
-
-- [URLリライティング](../../installation/url-rewriting)
+ビルトインウェブサーバは開発専用です。Apache でアプリケーションを動かす場合は、
+バーチャルホストの `DocumentRoot` を `webroot/` ディレクトリに設定し、 `mod_rewrite` が
+有効になっていることを確認してください。リライトルールは `webroot/.htaccess` にあります。
+CakePHP の welcome ページが少しおかしい (画像が表示されない、CSS が効いていない) 場合は、
+おそらくシステム上の mod_rewrite が機能していません。詳細や他のウェブサーバについては
+[URLリライティング](/ja/installation/url-rewriting) を参照してください。
 
 はじめての CakePHP アプリケーションを構築しはじめるには、続けて
-[ブログチュートリアル - レイヤーの追加](../../tutorials-and-examples/blog/part-two)
+[ブログチュートリアル - レイヤーの追加](/ja/tutorials-and-examples/blog/part-two)
 を見てください。

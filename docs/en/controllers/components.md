@@ -23,17 +23,19 @@ Configuration for these components, and for components in general, is usually do
 method:
 
 ``` php
-class PostsController extends AppController {
+class PostsController extends AppController
+{
     public $components = [
         'Auth' => [
             'authorize' => ['controller'],
             'loginAction' => [
                 'controller' => 'users',
-                'action' => 'login'
-            ]
+                'action' => 'login',
+            ],
         ],
-        'Cookie' => ['name' => 'CookieMonster']
+        'Cookie' => ['name' => 'CookieMonster'],
     ];
+}
 ```
 
 The previous fragment of code would be an example of
@@ -51,7 +53,7 @@ public function beforeFilter()
     $this->Auth->authorize = ['controller'];
     $this->Auth->loginAction = [
         'controller' => 'users',
-        'action' => 'login'
+        'action' => 'login',
     ];
 
     $this->Cookie->name = 'CookieMonster';
@@ -78,7 +80,7 @@ replace `$this->Auth` or another common Component reference with a custom
 implementation:
 
 ``` php
-// app/Controller/PostsController.php
+// src/Controller/PostsController.php
 class PostsController extends AppController
 {
     public $components = [
@@ -88,9 +90,7 @@ class PostsController extends AppController
     ];
 }
 
-// app/Controller/Component/MyAuthComponent.php
-App::uses('AuthComponent', 'Controller/Component');
-
+// src/Controller/Component/MyAuthComponent.php
 class MyAuthComponent extends AuthComponent
 {
     // Add your code to override the core AuthComponent
@@ -113,7 +113,8 @@ the `CookieComponent` in your controller, you could access
 them like so:
 
 ``` php
-class PostsController extends AppController {
+class PostsController extends AppController
+{
     public $components = ['Session', 'Cookie'];
 
     public function delete()
@@ -123,6 +124,7 @@ class PostsController extends AppController {
             return $this->redirect(['action' => 'index']);
         }
     }
+}
 ```
 
 > [!NOTE]
@@ -163,12 +165,12 @@ We could create a component to house this shared logic for use in
 many different controllers.
 
 The first step is to create a new component file and class. Create
-the file in `app/Controller/Component/MathComponent.php`. The basic
-structure for the component would look something like this:
+the file in `src/Controller/Component/MathComponent.php` (`app/Controller/Component/`
+in the legacy `app/` layout). The basic structure for the component would look
+something like this:
 
 ``` php
-App::uses('Component', 'Controller');
-
+// src/Controller/Component/MathComponent.php
 class MathComponent extends Component
 {
     public function doComplexOperation($amount1, $amount2)
@@ -181,12 +183,6 @@ class MathComponent extends Component
 > [!NOTE]
 > All components must extend `Component`. Failing to do this
 > will trigger an exception.
-
-::: pieceofcake2
-In the pieceofcake2 fork with the modern layout, create the file in
-`src/Controller/Component/MathComponent.php`. Framework classes such as `Component` and
-`AuthComponent` are autoloaded by Composer, so `App::uses()` for them is optional.
-:::
 
 ### Including your component in your controllers
 
@@ -215,9 +211,10 @@ the Component:
 public $components = [
     'Math' => [
         'precision' => 2,
-        'randomGenerator' => 'srand'
+        'randomGenerator' => 'srand',
     ],
-    'Session', 'Auth'
+    'Session',
+    'Auth',
 ];
 ```
 
@@ -233,9 +230,7 @@ In this case you can include other components in your component the exact same
 way you include them in controllers - using the `$components` var:
 
 ``` php
-// app/Controller/Component/CustomComponent.php
-App::uses('Component', 'Controller');
-
+// src/Controller/Component/CustomComponent.php
 class CustomComponent extends Component
 {
     // the other component your component uses
@@ -249,15 +244,12 @@ class CustomComponent extends Component
     public function bar()
     {
         // ...
-   }
+    }
 }
 
-// app/Controller/Component/ExistingComponent.php
-App::uses('Component', 'Controller');
-
+// src/Controller/Component/ExistingComponent.php
 class ExistingComponent extends Component
 {
-
     public function foo()
     {
         // ...

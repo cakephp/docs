@@ -30,7 +30,7 @@ associated with another.
 Here is a simple example of a model definition in CakePHP:
 
 ``` php
-App::uses('AppModel', 'Model');
+// src/Model/Ingredient.php
 class Ingredient extends AppModel
 {
     public $name = 'Ingredient';
@@ -42,35 +42,34 @@ functionality you need to create queries and to save and delete data. These
 methods come from CakePHP's Model class by the magic of inheritance. The
 Ingredient model extends the application model, AppModel, which in turn extends
 CakePHP's internal Model class. It is this core Model class that bestows the
-functionality onto your Ingredient model. `App::uses('AppModel', 'Model')`
-ensures that the model is loaded when it is needed.
+functionality onto your Ingredient model.
 
-The intermediate class, AppModel, is empty. If you haven't created your own, it
-is taken from the CakePHP core folder. Overriding the AppModel allows you to
-define functionality that should be made available to all models within your
-application. To do so, you need to create your own `AppModel.php` file that
-resides in the Model folder, as do all other models in your application.
-Creating a project using
-[Bake](console-and-shells/code-generation-with-bake) will automatically
-generate this file for you.
+If your `composer.json` has a classmap for `src/` (as in the
+[pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton), `AppModel`
+is loaded automatically by Composer. Without a classmap, add
+`App::uses('AppModel', 'Model');` at the top of the file so that the class is
+loaded when it is needed.
+
+The intermediate class, AppModel, lives in your application in
+`src/Model/AppModel.php` and starts out empty. The CakePHP core does not ship
+an `AppModel`, so your application must provide one; the application skeleton
+already contains it. Adding methods to AppModel allows you to define
+functionality that should be made available to all models within your
+application.
 
 See also [Behaviors](models/behaviors) for more information on how to
 apply similar logic to multiple models.
 
 Back to our Ingredient model. In order to work on it, create the PHP file in the
-`/app/Model/` directory. By convention, it should have the same name as the
-class, which for this example will be `Ingredient.php`.
-
-::: pieceofcake2
-Model files go in `app/Model/` in the legacy layout and in `src/Model/` in the
-modern layout. If your `composer.json` has a classmap for `src/`, the
-`App::uses('AppModel', 'Model');` line can be omitted.
-See [Directory structure](/pieceofcake2/directory-structure).
-:::
+`src/Model/` directory (`app/Model/` in the legacy layout, see
+[CakePHP Folder Structure](/getting-started/cakephp-folder-structure)). By convention, it
+should have the same name as the class, which for this example will be
+`Ingredient.php`. When you use a Composer classmap, run
+`composer dump-autoload` after adding a new class file.
 
 > [!NOTE]
 > CakePHP will dynamically create a model object for you if it cannot find a
-> corresponding file in /app/Model. This also means that if your model file
+> corresponding file in `src/Model/`. This also means that if your model file
 > isn't named correctly (for instance, if it is named ingredient.php or
 > Ingredients.php rather than Ingredient.php), CakePHP will use an instance of
 > AppModel rather than your model file (which CakePHP assumes is missing). If

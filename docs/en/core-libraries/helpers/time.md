@@ -19,7 +19,7 @@ A common use of the Time Helper is to offset the date and time to match a
 user's time zone. Lets use a forum as an example. Your forum has many users who
 may post messages at any time from any part of the world. An easy way to
 manage the time is to save all dates and times as GMT+0 or UTC. Uncomment the
-line `date_default_timezone_set('UTC');` in `app/Config/core.php` to ensure
+line `date_default_timezone_set('UTC');` in `config/core.php` to ensure
 your application's time zone is set to GMT+0.
 
 Next add a time zone field to your users table and make the necessary
@@ -42,4 +42,4 @@ echo $this->Time->format(
 Most of the Time Helper methods have a \$timezone parameter. The \$timezone parameter
 accepts a valid timezone identifier string or an instance of <span class="title-ref">DateTimeZone</span> class.
 
-<!--@include: ../../core-utility-libraries/time.md{28,97}-->
+<!--@include: ../../core-utility-libraries/time.md{28,102}-->

@@ -49,8 +49,7 @@ CakePHP は、jQuery などの一般的な JavaScript フレームワークに�
 綺麗に保つためにイベントを使用できます。 :
 
 ``` php
-// Cart/Model/Order.php
-App::uses('CakeEvent', 'Event');
+// plugins/Cart/Model/Order.php
 class Order extends AppModel
 {
 
@@ -97,7 +96,6 @@ $events = $this->getEventManager();
 
 ``` php
 // In any configuration file or piece of code that executes before the event
-App::uses('CakeEventManager', 'Event');
 CakeEventManager::instance()->attach(
     $aCallback,
     'Model.Order.afterPlace'
@@ -163,9 +161,7 @@ UserStatistic クラスがあると仮定しましょう。これは、リスナ
 `UserStatistics` リスナーは以下のように開始します。 :
 
 ``` php
-// In app/Lib/Event/UserStatistic.php
-App::uses('CakeEventListener', 'Event');
-
+// In src/Lib/Event/UserStatistic.php
 class UserStatistic implements CakeEventListener
 {
 
@@ -194,28 +190,25 @@ $this->Order->getEventManager()->attach($statistics);
 
 ### グローバルリスナーの登録
 
-上記の例に見られるように、イベントリスナーは慣例的に `app/Lib/Event` に配置されます。
-この規約に従うことで、リスナークラスの設置が容易になります。また、アプリケーションの
+上記の例に見られるように、イベントリスナーは慣例的に `src/Lib/Event` に配置されます。
+この規約に従うことで、リスナークラスの設置が容易になります。`src/` 以下のクラスは Composer の
+クラスマップでオートロードされるため、リスナークラスを追加したら `composer dump-autoload` を実行してください。また、アプリケーションの
 ブートストラッププロセスの間にグローバルリスナーのアタッチを推奨します。 :
 
-``` text
-// In app/Config/bootstrap.php
+``` php
+// In config/bootstrap.php
 
 // Load the global event listeners.
-require_once APP . 'Config' . DS . 'events.php'
+require_once CONFIG . 'events.php';
 ```
 
 カートアプリのイベントのブートストラップファイルの例は以下の通りです。 :
 
 ``` php
-// In app/Config/events.php
-
-// Load event listeners
-App::uses('UserStatistic', 'Lib/Event');
-App::uses('ProductStatistic', 'Lib/Event');
-App::uses('CakeEventManager', 'Event');
+// In config/events.php
 
 // Attach listeners.
+// UserStatistic and ProductStatistic are autoloaded from src/Lib/Event.
 CakeEventManager::instance()->attach(new UserStatistic());
 CakeEventManager::instance()->attach(new ProductStatistic());
 ```
@@ -227,7 +220,6 @@ CakeEventManager::instance()->attach(new ProductStatistic());
 ログファイルに注文を書き込みたかったとすると、そのためには無名関数が使えました。 :
 
 ``` php
-// Anonymous functions require PHP 5.3+
 $this->Order->getEventManager()->attach(function($event) {
     CakeLog::write(
         'info',
@@ -247,6 +239,8 @@ foreach ($events as $callable) {
     $eventManager->attach($callable, 'Model.Order.afterPlace');
 }
 ```
+
+<a id="event-priorities"></a>
 
 ### プライオリティの設置
 
@@ -464,7 +458,7 @@ $this->getEventManager()->attach([$this, 'doSomething'], 'My.event');
 // Detaching the function
 $this->getEventManager()->detach([$this, 'doSomething'], 'My.event');
 
-// Attaching an anonymous function (PHP 5.3+ only);
+// Attaching an anonymous function
 $myFunction = function($event) { ... };
 $this->getEventManager()->attach($myFunction, 'My.event');
 

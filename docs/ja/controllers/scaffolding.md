@@ -18,8 +18,8 @@ CakePHP のスキャフォールディングはとても素晴らしいです。
 足場にすぎないということを心に留めて置いてください。足場はプロジェクトの初期段階でとにかく
 早く動かすために粗いつくりになっています。柔軟性があるというよりも、とにかく動かすための
 一時的な方法だと言えるでしょう。もしロジックやビューを自分でカスタマイズしたいと思い始めたら、
-コードを書くために足場を使うのをやめるタイミングだと言えます。次の章で説明する CakePHP の
-[Bake コンソール](../console-and-shells) は、すばらしい次の一歩で、現在の足場と
+コードを書くために足場を使うのをやめるタイミングだと言えます。[Bake プラグイン](../console-and-shells/code-generation-with-bake)
+は、すばらしい次の一歩で、現在の足場と
 同じ結果になるコードを生成します。
 
 スキャフォールディングはウェブアプリケーションの開発初期に必要なコードを得るためのすばらしい方法です。
@@ -38,7 +38,7 @@ class CategoriesController extends AppController
 }
 ```
 
-(`app/Model/Category.php` に) 基本的な Category モデルクラスを既に作成していたとすると、
+(`src/Model/Category.php` に) 基本的な Category モデルクラスを既に作成していたとすると、
 準備は以上となります。
 新しい足場を見るために <http://example.com/categories> へアクセスしてみて下さい。
 
@@ -77,7 +77,7 @@ class User extends AppModel
 
 ## Scaffolding を使って単純な管理インターフェイスを作成する
 
-もし `app/Config/core.php` にて管理ルーティングを有効にする場合、
+もし `config/core.php` にて管理ルーティングを有効にする場合、
 `Configure::write('Routing.prefixes', ['admin']);`
 とすることで管理者インターフェイスを生成するためにスキャフォールディングを使えるようになります。
 
@@ -102,7 +102,7 @@ public $scaffold = 'admin';
 ``` php
 public function admin_view($id = null)
 {
-  // custom code here
+    // custom code here
 }
 ```
 
@@ -117,17 +117,14 @@ public function admin_view($id = null)
 特定のコントローラ (例えば PostsController) のために独自の足場のビューは
 次のように置き換えるべきです。 :
 
-    app/View/Posts/scaffold.index.ctp
-    app/View/Posts/scaffold.form.ctp
-    app/View/Posts/scaffold.view.ctp
+    templates/Posts/scaffold.index.ctp
+    templates/Posts/scaffold.form.ctp
+    templates/Posts/scaffold.view.ctp
 
 すべてのコントローラのために独自の足場のビューは次のように置き換えられるべきです。 :
 
-    app/View/Scaffolds/index.ctp
-    app/View/Scaffolds/form.ctp
-    app/View/Scaffolds/view.ctp
+    templates/Scaffolds/index.ctp
+    templates/Scaffolds/form.ctp
+    templates/Scaffolds/view.ctp
 
-::: pieceofcake2
-pieceofcake2 フォークのモダンレイアウトでは、これらのファイルを `app/View/` ではなく `templates/` 以下に置きます
-（例: `templates/Posts/scaffold.index.ctp`、`templates/Scaffolds/index.ctp`）。
-:::
+従来の `app/` レイアウトでは、 `templates/` の代わりに `app/View/` を使います。

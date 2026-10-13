@@ -1,43 +1,42 @@
 # ACL を制御するシンプルなアプリケーション - パート2
 
-::: pieceofcake2
-pieceofcake2 フォークでは、AclExtras の PHP 8 対応フォークである
-[pieceofcake2/acl_extras](https://github.com/pieceofcake2/acl_extras) を使ってください。
-README に従って Composer でインストールし（[プラグイン](/ja/pieceofcake2/plugins) を参照）、
-`config/bootstrap.php`（モダン）または `app/Config/bootstrap.php`（レガシー）でロードしたうえで、
-以下のコマンドを `bin/cake AclExtras.AclExtras aco_sync` のように実行します。
-:::
-
 ## ACO の作成を自動化するツール
 
 前述した通り、全てのコントローラとアクションを ACL にあらかじめ入力し、構築しておく方法はありません。
 しかしながら、大きなアプリケーションにとてもたくさんのアクションがある場合、これを一々登録するというのは面倒です。
 
-この目的のために、 [AclExtras](https://github.com/markstory/acl_extras/)
-という名のとても便利なプラグインが存在し、
-[GitHubのダウンロードページ](https://github.com/markstory/acl_extras/zipball/master) からダウンロードすることで、入手することができます。
+この目的のために、 [AclExtras](https://github.com/pieceofcake2/acl_extras)
+という名のとても便利なプラグインが存在します。
 全ての ACO を生成するための使用方法を簡単に説明しましょう。
 
-まず、プラグインのコピーを入手し、 <span class="title-ref">app/Plugin/AclExtras</span> に解凍、または git を用いて
-複製 (*clone*) してください。次に、次に示すように <span class="title-ref">app/Config/boostrap.php</span>
-ファイル中でプラグインを有効にしてください:
+プラグインは Composer でインストールします。Packagist では `markstory/acl_extras`
+という名前で公開されています。 :
+
+``` bash
+composer require markstory/acl_extras
+```
+
+スケルトンの `composer.json` には
+[Composer でのプラグインのインストール](/ja/plugins/how-to-install-plugins#composer) で説明している
+`installer-paths` の設定がすでにあるので、プラグインは `plugins/AclExtras/` にインストールされます。
+次に、次に示すように `config/bootstrap.php` ファイル中でプラグインを有効にしてください:
 
 ``` php
-//app/Config/boostrap.php
+// config/bootstrap.php
 // ...
 CakePlugin::load('AclExtras');
 ```
 
 最後に CakePHP のコンソールで以下のコマンドを実行してください:
 
-    ./Console/cake AclExtras.AclExtras aco_sync
+    bin/cake AclExtras.AclExtras aco_sync
 
 全ての利用可能なコマンドについての完全な説明を次のようにして得ることができます:
 
-    ./Console/cake AclExtras.AclExtras -h
-    ./Console/cake AclExtras.AclExtras aco_sync -h
+    bin/cake AclExtras.AclExtras -h
+    bin/cake AclExtras.AclExtras aco_sync -h
 
-<span class="title-ref">acos</span> テーブルが埋め尽くされたら、アプリケーションのパーミッションを作成する作業に移りましょう。
+`acos` テーブルが埋め尽くされたら、アプリケーションのパーミッションを作成する作業に移りましょう。
 
 ## パーミッションの設定
 
@@ -45,7 +44,7 @@ CakePlugin::load('AclExtras');
 ARO に対して ACO へのアクセスをシェルインターフェースを用いて許可するには、AclShell を使用してください。
 使用方法の詳しい情報は、次を実行して見ることができる AclShell のヘルプを参照してください:
 
-    ./Console/cake acl --help
+    bin/cake acl --help
 
 注意: アスタリスクは「'\*'」というように、シングルクォーテーションで囲ってください
 
@@ -57,7 +56,7 @@ $this->Acl->allow($aroAlias, $acoAlias);
 
 いくつかの「許可」「拒否」の指定を行ってみましょう。 `UsersController` の中に
 一時的に利用する関数を作成し、ブラウザでそのアクションを実行するアドレス(例えば、
-<http://localhost/cake/app/users/initdb>) へ接続してください。
+<http://localhost:8765/users/initDB>) へ接続してください。
 `SELECT * FROM aros_acos` を実行すると、結果に 1 と -1 がたくさん含まれているはずです。
 パーミッションがセットできたことを確認したら、作成した関数を削除してください:
 
@@ -138,9 +137,10 @@ $this->Auth->allow('display');
 これでアプリケーションがアクセス制御下におかれましたので、パブリックでないページの表示に対する
 アクセスはログインページにリダイレクトされるようになりました。
 しかし、先にログインを行うまえに、それ用のビューを作成しなければなりません。
-もし `app/View/Users/login.ctp` をまだ作成していないなら、次のコードを設置してください:
+もし `templates/Users/login.ctp` をまだ作成していないなら、次のコードを設置してください:
 
 ``` php
+<!-- templates/Users/login.ctp -->
 <h2>Login</h2>
 <?php
 echo $this->Form->create('User', [
@@ -154,22 +154,28 @@ echo $this->Form->input('User.password');
 echo $this->Form->end('Login');
 ```
 
-ユーザーが既にログインしていたら、以下を Users コントローラに追加してリダイレクトさせるように
-しましょう:
+ユーザーが既にログインしていたら、Users コントローラの `login()` アクションを次のように
+書き換えてリダイレクトさせるようにしましょう:
 
 ``` php
 public function login()
 {
-    if ($this->Session->read('Auth.User')) {
-        $this->Session->setFlash('You are logged in!');
-        $this->redirect('/', null, false);
+    if ($this->Auth->user()) {
+        $this->Flash->success(__('You are logged in!'));
+        return $this->redirect('/');
+    }
+    if ($this->request->is('post')) {
+        if ($this->Auth->login()) {
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+        $this->Flash->error(__('Your username or password was incorrect.'));
     }
 }
 ```
 
 これでログインを行うことができ、全てが自動的にうまく機能するようになりました。
-アクセスが拒否された時、 `echo $this->Session->flash('auth')` が追加されていれば、
-認証メッセージが画面に表示されます。
+アクセスが拒否された時、レイアウト (`templates/Layouts/default.ctp`) に
+`echo $this->Flash->render('auth');` を追加しておけば、認証メッセージが画面に表示されます。
 
 ## ログアウト
 
@@ -178,11 +184,11 @@ public function login()
 `UsersController::logout()` に次の行を追加してください:
 
 ``` php
-$this->Session->setFlash('Good-Bye');
-$this->redirect($this->Auth->logout());
+$this->Flash->success(__('Good-Bye'));
+return $this->redirect($this->Auth->logout());
 ```
 
-これはセッションフラッシュメッセージをセットし、Auth の logout メソッドを使用して
+これはフラッシュメッセージをセットし、Auth の logout メソッドを使用して
 User をログアウトさせます。Auth の logout メソッドは基本的に Auth の Session キーを削除し、
 リダイレクトすべきURLを返します。他のセッションデータを削除したい場合は、ここにコードを
 追加してください。

@@ -1,28 +1,73 @@
 # Coding Standards
 
-CakePHP developers will use the following coding standards.
+CakePHP developers will use the following coding standards. It is the CakePHP
+coding standard of CakePHP 5, which is based on
+[PSR-12](https://www.php-fig.org/psr/psr-12/), with a few exclusions for code
+that has no namespaces and uses the CakePHP 2 naming conventions. The code
+samples in this book follow it as well.
 
-It is recommended that others developing CakeIngredients follow the same
-standards.
+It is recommended that others developing applications and plugins follow the
+same standard: your code then looks like the framework code, and a later move
+to CakePHP 5 needs fewer formatting changes.
 
-You can use the [CakePHP Code Sniffer](https://github.com/cakephp/cakephp-codesniffer) to check that your code
-follows required standards.
-
-::: pieceofcake2 Coding standard used by the fork
-The pieceofcake2 fork does **not** use the CakePHP 2 standard described on this
-page. Its code is checked with
+The standard is checked automatically by
+[PHP_CodeSniffer](https://github.com/PHPCSStandards/PHP_CodeSniffer) with the
+`CakePHP` ruleset of
 [cakephp/cakephp-codesniffer](https://github.com/cakephp/cakephp-codesniffer)
-`^5.0`, i.e. the `CakePHP` ruleset of CakePHP 5 (based on PSR-12), with a few
-CakePHP 2 specific exclusions in the fork's `phpcs.xml` (no namespaces,
-no required type declarations, no line length check, etc.).
-The main differences from the rules below are 4-space indentation instead of
-tabs, short array syntax `[]` instead of `[]`, and opening braces of
-classes and methods on their own line. The
-[pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton ships the same
-sniffer, so you can run `vendor/bin/phpcs` in your application.
-Code samples in this book follow the fork's style.
-See [Coding Standards](/pieceofcake2/coding-standards) for details.
-:::
+5.x and a project `phpcs.xml` file. Where this page and the result of `phpcs`
+disagree, `phpcs` is authoritative. If you maintain code written for the
+original CakePHP 2 standard, see
+[Differences from the Original CakePHP 2 Standard](#differences-from-the-original-cakephp-2-standard).
+
+## Checking Your Code
+
+The framework and the [pieceofcake2/app](https://github.com/pieceofcake2/app)
+application skeleton install the sniffer as a development dependency. To add it to an
+existing application, run:
+
+``` bash
+composer require --dev cakephp/cakephp-codesniffer:^5.0
+```
+
+Composer asks whether to allow the `dealerdirect/phpcodesniffer-composer-installer`
+plugin, which registers the CakePHP ruleset with PHP_CodeSniffer. Allow it, or
+add it to `composer.json` yourself:
+
+``` json
+{
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}
+```
+
+Then add a `phpcs.xml` file to the root of your project (see
+[A phpcs.xml for your application](#a-phpcs-xml-for-your-application)).
+PHP_CodeSniffer reads it automatically, so you can run the checks without any
+arguments:
+
+``` bash
+# Report violations
+vendor/bin/phpcs
+
+# Fix the violations that can be fixed automatically
+vendor/bin/phpcbf
+
+# Check only part of the code
+vendor/bin/phpcs src/Controller
+```
+
+Neither the framework nor the skeleton defines Composer scripts such as
+`cs-check` or `cs-fix`; call `phpcs` and `phpcbf` directly. The framework's
+continuous integration runs
+`vendor/bin/phpcs` on every pull request, so run it before you submit your
+changes.
+
+`phpcbf` fixes most whitespace, array syntax, brace placement and quoting
+issues. Rules such as missing doc comments, method names or unused variables
+have to be fixed by hand.
 
 ## Language
 
@@ -30,29 +75,13 @@ All code and comments should be written in English.
 
 ## Adding New Features
 
-No new features should be added, without having their own tests – which
-should be passed before committing them to the repository.
+No new features should be added without their own tests, which should pass
+before the change is committed to the repository. The same applies to bug
+fixes: add a test that fails without the fix.
 
-## Indentation
+## Indentation and Whitespace
 
-::: pieceofcake2
-The fork indents with **4 spaces**, not tabs (PSR-12; also set in the fork's
-`.editorconfig`).
-:::
-
-One tab will be used for indentation.
-
-So, indentation should look like this:
-
-``` text
-// base level
-    // level 1
-        // level 2
-    // level 1
-// base level
-```
-
-Or:
+Indent with four spaces. Tabs are not allowed:
 
 ``` php
 $booleanVariable = true;
@@ -65,13 +94,68 @@ if ($booleanVariable) {
 }
 ```
 
-In cases where you're using a multi-line function call use the following guidelines:
+Files use Unix line endings (LF), end with a single newline, and have no
+trailing whitespace. The framework and the application skeleton ship an
+`.editorconfig` file with these settings, which most editors pick up.
 
-- Opening parenthesis of a multi-line function call must be the last content on the line.
-- Only one argument is allowed per line in a multi-line function call.
-- Closing parenthesis of a multi-line function call must be on a line by itself.
+The sniffer also checks blank lines:
 
-As an example, instead of using the following formatting:
+- Do not use more than one blank line in a row.
+- Do not put a blank line right after the opening brace or right before the
+  closing brace of a class or method.
+- Separate methods with one blank line.
+- Put a blank line before a `return` statement, unless it is the first
+  statement of its block.
+
+## Line Length
+
+Line length is not checked: the framework's `phpcs.xml` excludes the
+`Generic.Files.LineLength` sniff because much of the CakePHP 2 code base has
+long lines. Keep lines readable anyway; around 120 characters is a good limit
+for new code.
+
+## Arrays
+
+Use the short array syntax. Multi-line arrays have one element per line and a
+trailing comma after the last element. Single-line arrays have no trailing
+comma:
+
+``` php
+$users = ['John', 'Hans', 'Arne'];
+
+$options = [
+    'conditions' => ['Article.published' => true],
+    'order' => ['Article.created' => 'DESC'],
+    'limit' => 20,
+];
+```
+
+Use `[$a, $b] = $pair;` instead of `list($a, $b) = $pair;`.
+
+## Function Calls
+
+Functions are called without a space between the function name and the
+opening parenthesis, with one space after each comma, and with one space on
+both sides of the assignment operator:
+
+``` php
+$var = foo($bar, $bar2, $bar3);
+```
+
+When a call does not fit on one line, put each argument on its own line. The
+opening parenthesis is the last thing on the first line, the closing
+parenthesis is on a line by itself, and the last argument has a trailing comma:
+
+``` php
+$matches = array_intersect_key(
+    $this->_listeners,
+    array_flip(
+        preg_grep($matchPattern, array_keys($this->_listeners), 0),
+    ),
+);
+```
+
+instead of:
 
 ``` php
 $matches = array_intersect_key($this->_listeners,
@@ -79,121 +163,103 @@ $matches = array_intersect_key($this->_listeners,
                     array_keys($this->_listeners), 0)));
 ```
 
-Use this instead:
+Always use parentheses when you create an object, even without arguments:
 
 ``` php
-$matches = array_intersect_key(
-    $this->_listeners,
-    array_flip(
-        preg_grep($matchPattern, array_keys($this->_listeners), 0)
-    )
-);
+$dispatcher = new Dispatcher();
 ```
-
-## Line Length
-
-::: pieceofcake2
-The fork's `phpcs.xml` excludes the line length sniff
-(`Generic.Files.LineLength`), so these limits are a recommendation only and
-are not checked.
-:::
-
-It is recommended to keep lines at approximately 100 characters long for better code readability.
-Lines must not be longer than 120 characters.
-
-In short:
-
-- 100 characters is the soft limit.
-- 120 characters is the hard limit.
 
 ## Control Structures
 
-Control structures are for example "`if`", "`for`", "`foreach`",
-"`while`", "`switch`" etc. Below, an example with "`if`":
-
-``` text
-if ((expr_1) || (expr_2)) {
-    // action_1;
-} elseif (!(expr_3) && (expr_4)) {
-    // action_2;
-} else {
-    // default_action;
-}
-```
-
-- In the control structures there should be 1 (one) space before the
-  first parenthesis and 1 (one) space between the last parenthesis and
-  the opening bracket.
-- Always use curly brackets in control structures, even if they are not
-  needed. They increase the readability of the code, and they give you
-  fewer logical errors.
-- Opening curly brackets should be placed on the same line as the
-  control structure. Closing curly brackets should be placed on new
-  lines, and they should have same indentation level as the control
-  structure. The statement included in curly brackets should begin on a
-  new line, and code contained within it should gain a new level of
-  indentation.
-- Inline assignments should not be used inside of the control structures.
-
-::: pieceofcake2
-The fork's `phpcs.xml` excludes the assignment-in-condition sniff, so
-inline assignments such as `while ($row = $result->fetch())` are allowed in
-the fork's code.
-:::
+Control structures are for example `if`, `for`, `foreach`, `while` and
+`switch`. Below is an example with `if`:
 
 ``` php
-// wrong = no brackets, badly placed statement
-if (expr) statement;
-
-// wrong = no brackets
-if (expr)
-    statement;
-
-// good
-if (expr) {
-    statement;
-}
-
-// wrong = inline assignment
-if ($variable = class::function()) {
-    statement;
-}
-
-// good
-$variable = class::function();
-if ($variable) {
-    statement;
+if (($expr1) || ($expr2)) {
+    // action 1
+} elseif (!($expr3) && ($expr4)) {
+    // action 2
+} else {
+    // default action
 }
 ```
+
+- Put one space between the keyword and the opening parenthesis, and one space
+  between the closing parenthesis and the opening brace.
+- Always use curly braces, even when they are not needed. They make the code
+  easier to read and lead to fewer logic errors.
+- The opening brace goes on the same line as the control structure. The
+  closing brace goes on its own line, at the same indentation level as the
+  control structure. The statements inside the braces start on a new line and
+  are indented one more level.
+- Use `elseif`, not `else if`.
+- Use `&&` and `||`, not `and` and `or`.
+- Do not call `count()` or a similar function in the condition of a `for`
+  loop. Assign the result to a variable first.
+
+``` php
+// wrong: no braces, statement on the same line
+if ($expr) statement();
+
+// wrong: no braces
+if ($expr)
+    statement();
+
+// good
+if ($expr) {
+    statement();
+}
+
+// wrong: count() in the loop condition
+for ($i = 0; $i < count($items); $i++) {
+}
+
+// good
+$count = count($items);
+for ($i = 0; $i < $count; $i++) {
+}
+```
+
+Assignments inside a condition are allowed, and are common in the CakePHP 2
+code base:
+
+``` php
+while ($row = $result->fetch()) {
+    // ...
+}
+```
+
+Keep them to simple cases like this one. If an assignment in a condition could
+be mistaken for a comparison, assign the value on a separate line.
 
 ### Ternary Operator
 
-::: pieceofcake2
-The CakePHP 5 standard requires the null coalescing operator where it
-applies: write `$options['variable'] ?? true` instead of
-`isset($options['variable']) ? $options['variable'] : true`.
-It also requires the short ternary `$a ?: $b` instead of `$a ? $a : $b`.
-:::
+Ternary operators are permissible when the entire ternary operation fits on
+one line. Longer ternaries should be split into `if`/`else` statements.
+Ternary operators should never be nested.
 
-Ternary operators are permissible when the entire ternary operation fits
-on one line. Longer ternaries should be split into `if else`
-statements. Ternary operators should not ever be nested. Optionally
-parentheses can be used around the condition check of the ternary for
-clarity:
+Use the null coalescing operator when you check whether a value is set, and the
+short ternary operator when you fall back to another value. The sniffer reports
+the long forms:
 
 ``` php
-// Good, simple and readable
-$variable = isset($options['variable']) ? $options['variable'] : true;
+// good
+$variable = $options['variable'] ?? true;
+$title = $title ?: 'Untitled';
 
-// Nested ternaries are bad
+// reported by the sniffer
+$variable = isset($options['variable']) ? $options['variable'] : true;
+$title = $title ? $title : 'Untitled';
+
+// nested ternaries are bad
 $variable = isset($options['variable']) ? isset($options['othervar']) ? true : false : false;
 ```
 
-### View Files
+### Template Files
 
-In view files (.ctp files) developers should use keyword control structures.
-Keyword control structures are easier to read in complex view files. Control
-structures can either be contained in a larger PHP block, or in separate PHP
+In template files (`.ctp` files in `templates/`), use the alternative syntax
+for control structures. It is easier to read in templates that mix PHP and
+HTML. The control structures can be in a larger PHP block, or in separate PHP
 tags:
 
 ``` php
@@ -208,115 +274,112 @@ endif;
 <?php endif; ?>
 ```
 
-We allow PHP closing tags (`?>`) at the end of .ctp files.
+A closing PHP tag (`?>`) is allowed at the end of `.ctp` files. The
+`phpcs.xml` of the application skeleton does not check `templates/`, so these
+rules are not enforced there.
 
 ## Comparison
 
-Always try to be as strict as possible. If a none strict test is deliberate it might be wise to
-comment it as such to avoid confusing it for a mistake.
+Always be as strict as possible. If a non-strict comparison is deliberate,
+add a comment so that it is not mistaken for a mistake.
 
-For testing if a variable is null, it is recommended to use a strict check:
+To check whether a variable is null, use a strict check:
 
 ``` php
 if ($value === null) {
-      // ...
+    // ...
 }
 ```
 
-The value to check against should be placed on the right side:
+Put the value you compare against on the right side. "Yoda" comparisons are
+reported by the sniffer:
 
 ``` php
-// not recommended
+// not allowed
 if (null === $this->foo()) {
     // ...
 }
 
-// recommended
+// good
 if ($this->foo() === null) {
     // ...
 }
 ```
 
-## Function Calls
+## Class and Method Definitions
 
-Functions should be called without space between function's name and
-starting bracket. There should be one space between every parameter of a
-function call:
+The opening brace of a class or method goes on its own line. Declare the
+visibility of every property, method and class constant, and do not use the
+`var` keyword:
 
 ``` php
-$var = foo($bar, $bar2, $bar3);
-```
-
-As you can see above there should be one space on both sides of equals
-sign (=).
-
-## Method Definition
-
-::: pieceofcake2
-Following PSR-12, the opening brace of a **class or method** goes on its own
-line (control structures keep the brace on the same line). Multi-line arrays,
-function calls and declarations require a trailing comma.
-
-```php
-class Foo
+class Article extends AppModel
 {
-    public function someFunction($arg1, $arg2 = '')
+    /**
+     * Number of articles on a page.
+     *
+     * @var int
+     */
+    public const PER_PAGE = 20;
+
+    /**
+     * Default find options.
+     *
+     * @var array
+     */
+    protected $_defaults = [];
+
+    /**
+     * Connects to the given data source.
+     *
+     * @param array|string $dns Connection settings or a DSN string.
+     * @param bool $persistent Whether to use a persistent connection.
+     * @return bool
+     */
+    public function connection($dns, $persistent = false)
     {
-        if (expr) {
-            statement;
+        if (is_array($dns)) {
+            $dnsInfo = $dns;
+        } else {
+            $dnsInfo = BD::parseDNS($dns);
         }
 
-        return $var;
+        if (!$dnsInfo || !$dnsInfo['phpType']) {
+            return $this->addError();
+        }
+
+        return true;
     }
 }
 ```
-:::
 
-Example of a method definition:
+Parameters with a default value should be placed last in the function
+definition. Try to make your functions return something, at least `true` or
+`false`, so it can be determined whether the call was successful.
+
+Closures and arrow functions follow the same rules. Write arrow functions
+without a space after `fn`:
 
 ``` php
-public function someFunction($arg1, $arg2 = '')
-{
-    if (expr) {
-        statement;
-    }
-    return $var;
-}
+$callback = function ($item) use ($prefix) {
+    return $prefix . $item;
+};
+$ids = array_map(fn($row) => $row['Article']['id'], $rows);
 ```
 
-Parameters with a default value, should be placed last in function
-definition. Try to make your functions return something, at least `true`
-or `false`, so it can be determined whether the function call was
-successful:
+### Type Declarations
 
-``` php
-public function connection($dns, $persistent = false)
-{
-    if (is_array($dns)) {
-        $dnsInfo = $dns;
-    } else {
-        $dnsInfo = BD::parseDNS($dns);
-    }
+CakePHP 2 APIs do not use native parameter, property or return type
+declarations, so they are not required. The framework's `phpcs.xml` excludes the
+type hint rules of the CakePHP 5 standard, and `declare(strict_types=1)` is not
+required either. Describe the types in the DocBlock instead.
 
-    if (!($dnsInfo) || !($dnsInfo['phpType'])) {
-        return $this->addError();
-    }
-    return true;
-}
-```
+The application `phpcs.xml` excludes only the parameter and property type
+rules. A method therefore needs either a native return type or a `@return`
+annotation, and test methods in `tests/TestCase/` need native return types,
+which PHPUnit 9 requires for methods such as `setUp(): void` anyway.
 
-There are spaces on both side of the equals sign.
-
-### Typehinting
-
-::: pieceofcake2
-The fork's `phpcs.xml` excludes the `SlevomatCodingStandard.TypeHints` rules of
-the CakePHP 5 standard, so native parameter, return and property type
-declarations and `declare(strict_types=1)` are not required. DocBlock types are
-still expected.
-:::
-
-Arguments that expect objects or arrays can be typehinted:
+You can still type hint arguments that expect objects or arrays:
 
 ``` php
 /**
@@ -325,6 +388,7 @@ Arguments that expect objects or arrays can be typehinted:
  * @param Model $Model The model to use.
  * @param array $array Some array value.
  * @param bool $boolean Some boolean value.
+ * @return void
  */
 public function foo(Model $Model, array $array, $boolean)
 {
@@ -333,28 +397,28 @@ public function foo(Model $Model, array $array, $boolean)
 
 Here `$Model` must be an instance of `Model` and `$array` must be an `array`.
 
-Note that if you want to allow `$array` to be also an instance of `ArrayObject`
-you should not typehint as `array` accepts only the primitive type:
+If you want to allow `$array` to also be an instance of `ArrayObject`, do not
+type hint it as `array`, because `array` accepts only the primitive type:
 
 ``` php
 /**
  * Some method description.
  *
- * @param array|ArrayObject $array Some array value.
+ * @param ArrayObject|array $array Some array value.
+ * @return void
  */
 public function foo($array)
 {
 }
 ```
 
+If you override a framework method, keep its signature. Adding native types to
+an overriding method causes fatal errors when the parent method has none.
+
 ## Method Chaining
 
-::: pieceofcake2
-In the fork, chained calls are indented with 4 spaces, not a tab.
-:::
-
-Method chaining should have multiple methods spread across separate lines, and
-indented with one tab:
+Method chaining should have multiple methods spread across separate lines,
+indented by four spaces:
 
 ``` php
 $email->from('foo@example.com')
@@ -365,37 +429,41 @@ $email->from('foo@example.com')
 
 ## DocBlocks
 
-All comment blocks, with the exception of the first block in a file, should
-always be preceded by a newline.
+Every method and function needs a DocBlock, except in test cases. All comment
+blocks, with the exception of the first block in a file, should be preceded by
+a newline.
+
+Inside a DocBlock, put one blank line between the description and the tags,
+and no blank lines between the tags. DocBlocks for properties must use the
+multi-line form; one-line comments such as `/** @var string */` are reported.
 
 ### File Header DocBlock
 
-All PHP files should contain a file header DocBlock,
-which should look like this:
+The framework files start with a file header DocBlock like this one:
 
 ``` php
 <?php
 /**
-* CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
-* Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
-*
-* Licensed under The MIT License
-* For full copyright and license information, please see the LICENSE.txt
-* Redistributions of files must retain the above copyright notice.
-*
-* @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
-* @link          https://cakephp.org CakePHP(tm) Project
-* @since         X.Y.Z
-* @license       https://www.opensource.org/licenses/mit-license.php MIT License
-*/
+ * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+ * @link          https://cakephp.org CakePHP(tm) Project
+ * @since         X.Y.Z
+ * @license       https://www.opensource.org/licenses/mit-license.php MIT License
+ */
 ```
 
 The included [phpDocumentor](https://phpdoc.org) tags are:
 
-- [@copyright](https://phpdoc.org/docs/latest/references/phpdoc/tags/copyright.html)
-- [@link](https://phpdoc.org/docs/latest/references/phpdoc/tags/link.html)
-- [@since](https://phpdoc.org/docs/latest/references/phpdoc/tags/since.html)
-- [@license](https://phpdoc.org/docs/latest/references/phpdoc/tags/license.html)
+- [@copyright](https://docs.phpdoc.org/guide/references/phpdoc/tags/copyright.html)
+- [@link](https://docs.phpdoc.org/guide/references/phpdoc/tags/link.html)
+- [@since](https://docs.phpdoc.org/guide/references/phpdoc/tags/since.html)
+- [@license](https://docs.phpdoc.org/guide/references/phpdoc/tags/license.html)
 
 ### Class DocBlocks
 
@@ -408,26 +476,32 @@ Class DocBlocks should look like this:
  * Long description of class.
  * Can use multiple lines.
  *
- * @deprecated 3.0.0 Deprecated in 2.6.0. Will be removed in 3.0.0. Use Bar instead.
+ * @property Comment $Comment
+ * @deprecated 2.12.0 Use Bar instead.
  * @see Bar
- * @link https://book.cakephp.org/2.0/en/foo.html
+ * @link https://pieceofcake2.github.io/docs/foo
  */
 class Foo
 {
-
 }
 ```
 
-Class DocBlocks may contain the following [phpDocumentor](https://phpdoc.org) tags:
+Class DocBlocks may contain the following
+[phpDocumentor](https://phpdoc.org) tags:
 
-- [@deprecated](https://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html)
-  Using the `@version <vector> <description>` format, where `version` and `description` are mandatory.
-- [@internal](https://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html)
-- [@link](https://phpdoc.org/docs/latest/references/phpdoc/tags/link.html)
-- [@property](https://phpdoc.org/docs/latest/references/phpdoc/tags/property.html)
-- [@see](https://phpdoc.org/docs/latest/references/phpdoc/tags/see.html)
-- [@since](https://phpdoc.org/docs/latest/references/phpdoc/tags/since.html)
-- [@uses](https://phpdoc.org/docs/latest/references/phpdoc/tags/uses.html)
+- [@deprecated](https://docs.phpdoc.org/guide/references/phpdoc/tags/deprecated.html)
+  Using the `@deprecated <version> <description>` format, where `version` and
+  `description` are mandatory.
+- [@internal](https://docs.phpdoc.org/guide/references/phpdoc/tags/internal.html)
+- [@link](https://docs.phpdoc.org/guide/references/phpdoc/tags/link.html)
+- [@property](https://docs.phpdoc.org/guide/references/phpdoc/tags/property.html)
+- [@see](https://docs.phpdoc.org/guide/references/phpdoc/tags/see.html)
+- [@since](https://docs.phpdoc.org/guide/references/phpdoc/tags/since.html)
+- [@uses](https://docs.phpdoc.org/guide/references/phpdoc/tags/uses.html)
+
+`@property` is useful in CakePHP 2 to document the models, components and
+helpers that are attached to a class at runtime, so that IDEs and static
+analysis tools know about them.
 
 ### Property DocBlocks
 
@@ -435,28 +509,30 @@ Property DocBlocks should look like this:
 
 ``` php
 /**
- * @var string|null Description of property.
+ * Description of property.
  *
- * @deprecated 3.0.0 Deprecated as of 2.5.0. Will be removed in 3.0.0. Use $_bla instead.
+ * @var string|null
+ * @deprecated 2.12.0 Use $_bla instead.
  * @see Bar::$_bla
- * @link https://book.cakephp.org/2.0/en/foo.html#properties
  */
 protected $_bar = null;
 ```
 
-Property DocBlocks may contain the following [phpDocumentor](https://phpdoc.org) tags:
+Property DocBlocks may contain the following
+[phpDocumentor](https://phpdoc.org) tags:
 
-- [@deprecated](https://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html)
-  Using the `@version <vector> <description>` format, where `version` and `description` are mandatory.
-- [@internal](https://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html)
-- [@link](https://phpdoc.org/docs/latest/references/phpdoc/tags/link.html)
-- [@see](https://phpdoc.org/docs/latest/references/phpdoc/tags/see.html)
-- [@since](https://phpdoc.org/docs/latest/references/phpdoc/tags/since.html)
-- [@var](https://phpdoc.org/docs/latest/references/phpdoc/tags/var.html)
+- [@deprecated](https://docs.phpdoc.org/guide/references/phpdoc/tags/deprecated.html)
+  Using the `@deprecated <version> <description>` format, where `version` and
+  `description` are mandatory.
+- [@internal](https://docs.phpdoc.org/guide/references/phpdoc/tags/internal.html)
+- [@link](https://docs.phpdoc.org/guide/references/phpdoc/tags/link.html)
+- [@see](https://docs.phpdoc.org/guide/references/phpdoc/tags/see.html)
+- [@since](https://docs.phpdoc.org/guide/references/phpdoc/tags/since.html)
+- [@var](https://docs.phpdoc.org/guide/references/phpdoc/tags/var.html)
 
 ### Method/Function DocBlocks
 
-Method and functions DocBlocks should look like this:
+Method and function DocBlocks should look like this:
 
 ``` php
 /**
@@ -465,79 +541,67 @@ Method and functions DocBlocks should look like this:
  * Long description of method.
  * Can use multiple lines.
  *
- * @param string $param2 first parameter.
+ * @param string $param1 First parameter.
  * @param array|null $param2 Second parameter.
  * @return array An array of cakes.
  * @throws Exception If something goes wrong.
- *
- * @link https://book.cakephp.org/2.0/en/foo.html#bar
- * @deprecated 3.0.0 Deprecated as of 2.5.0. Will be removed in 3.0.0. Use Bar::baz instead.
+ * @link https://pieceofcake2.github.io/docs/foo#bar
+ * @deprecated 2.12.0 Use Bar::baz instead.
  * @see Bar::baz
  */
- public function bar($param1, $param2 = null)
- {
- }
+public function bar($param1, $param2 = null)
+{
+}
 ```
 
-Method and function DocBLocks may contain the following [phpDocumentor](https://phpdoc.org) tags:
+Method and function DocBlocks may contain the following
+[phpDocumentor](https://phpdoc.org) tags:
 
-- [@deprecated](https://phpdoc.org/docs/latest/references/phpdoc/tags/deprecated.html)
-  Using the `@version <vector> <description>` format, where `version` and `description` are mandatory.
-- [@internal](https://phpdoc.org/docs/latest/references/phpdoc/tags/internal.html)
-- [@link](https://phpdoc.org/docs/latest/references/phpdoc/tags/link.html)
-- [@param](https://phpdoc.org/docs/latest/references/phpdoc/tags/param.html)
-- [@return](https://phpdoc.org/docs/latest/references/phpdoc/tags/return.html)
-- [@throws](https://phpdoc.org/docs/latest/references/phpdoc/tags/throws.html)
-- [@see](https://phpdoc.org/docs/latest/references/phpdoc/tags/see.html)
-- [@since](https://phpdoc.org/docs/latest/references/phpdoc/tags/since.html)
-- [@uses](https://phpdoc.org/docs/latest/references/phpdoc/tags/uses.html)
+- [@deprecated](https://docs.phpdoc.org/guide/references/phpdoc/tags/deprecated.html)
+  Using the `@deprecated <version> <description>` format, where `version` and
+  `description` are mandatory.
+- [@internal](https://docs.phpdoc.org/guide/references/phpdoc/tags/internal.html)
+- [@link](https://docs.phpdoc.org/guide/references/phpdoc/tags/link.html)
+- [@param](https://docs.phpdoc.org/guide/references/phpdoc/tags/param.html)
+- [@return](https://docs.phpdoc.org/guide/references/phpdoc/tags/return.html)
+- [@throws](https://docs.phpdoc.org/guide/references/phpdoc/tags/throws.html)
+- [@see](https://docs.phpdoc.org/guide/references/phpdoc/tags/see.html)
+- [@since](https://docs.phpdoc.org/guide/references/phpdoc/tags/since.html)
+- [@uses](https://docs.phpdoc.org/guide/references/phpdoc/tags/uses.html)
+
+If a method only overrides a parent method without changing its documentation,
+you can write `@inheritDoc` (without braces) as the only content of the
+DocBlock.
 
 ### Variable Types
 
 Variable types for use in DocBlocks:
 
-Type  
-Description
+| Type     | Description |
+|----------|-------------|
+| mixed    | A variable with undefined (or multiple) type. |
+| int      | Integer type variable (whole number). |
+| float    | Float type (point number). |
+| bool     | Logical type (true or false). |
+| string   | String type (any value in `" "` or `' '`). |
+| null     | Null type. Usually used in conjunction with another type. |
+| array    | Array type. |
+| object   | Object type. A specific class name should be used if possible. |
+| resource | Resource type (returned by for example `fopen()`). |
+| callable | Callable function. |
 
-mixed  
-A variable with undefined (or multiple) type.
+Use the short type names (`int`, `bool`), not `integer` or `boolean`.
+Remember that when you specify the type as mixed, you should indicate whether
+it is unknown, or what the possible types are.
 
-int  
-Integer type variable (whole number).
-
-float  
-Float type (point number).
-
-bool  
-Logical type (true or false).
-
-string  
-String type (any value in " " or ' ').
-
-null  
-Null type. Usually used in conjunction with another type.
-
-array  
-Array type.
-
-object  
-Object type. A specific class name should be used if possible.
-
-resource  
-Resource type (returned by for example mysql_connect()).
-Remember that when you specify the type as mixed, you should indicate
-whether it is unknown, or what the possible types are.
-
-callable  
-Callable function.
-
-You can also combine types using the pipe char:
+You can also combine types using the pipe character. Put `null` last:
 
     int|bool
+    string|null
 
 For more than two types it is usually best to just use `mixed`.
 
-When returning the object itself, e.g. for chaining, one should use `$this` instead:
+When returning the object itself, e.g. for chaining, use `$this`:
 
 ``` php
 /**
@@ -551,26 +615,45 @@ public function foo()
 }
 ```
 
+## Strings
+
+Use single quotes for strings that contain no variables or escape sequences.
+Use double quotes only when you need interpolation or escape sequences:
+
+``` php
+$name = 'Article';
+$message = "Saved {$count} articles\n";
+```
+
 ## Including Files
 
-`include`, `require`, `include_once` and `require_once` do not have parentheses:
+`include`, `require`, `include_once` and `require_once` are written without
+parentheses:
 
-``` text
-// wrong = parentheses
+``` php
+// wrong: parentheses
 require_once('ClassFileName.php');
 require_once ($class);
 
-// good = no parentheses
+// good: no parentheses
 require_once 'ClassFileName.php';
 require_once $class;
 ```
 
-When including files with classes or libraries, use only and always the
-[require_once](https://www.php.net/require_once) function.
+In most cases you do not need to include class files at all. Classes are
+loaded by Composer's autoloader, or with `App::uses()` for classes that the
+autoloader does not know about, such as plugin classes. When you include files
+with classes or libraries, always use `require_once`.
 
 ## PHP Tags
 
-Always use long tags (`<?php ?>`) Instead of short tags (`<? ?>`).
+Always use long tags (`<?php`) instead of short tags (`<?`). The short echo
+tag `<?=` may be used in templates.
+
+## Error Suppression
+
+Avoid the `@` error suppression operator. The sniffer reports it as a
+warning. Check for the error condition instead, or handle the error.
 
 ## Naming Convention
 
@@ -578,8 +661,9 @@ Always use long tags (`<?php ?>`) Instead of short tags (`<? ?>`).
 
 Write all functions in camelBack:
 
-``` javascript
-function longFunctionName() {
+``` php
+function longFunctionName()
+{
 }
 ```
 
@@ -595,29 +679,27 @@ class ExampleClass
 
 ### Variables
 
-::: pieceofcake2
-The fork requires short array syntax: write `['John', 'Hans', 'Arne']`
-instead of `['John', 'Hans', 'Arne']`
-(`Generic.Arrays.DisallowLongArraySyntax`).
-:::
-
-Variable names should be as descriptive as possible, but also as short
-as possible. All variables should start with a lowercase letter, and
-should be written in camelBack in case of multiple words. Variables
-referencing objects should in some way associate to the class the
-variable is an object of. Example:
+Variable names should be as descriptive as possible, but also as short as
+possible. Normal variables should start with a lowercase letter, and should be
+written in camelBack in case of multiple words. Variables referencing objects
+should in some way associate to the class the variable is an object of.
+CakePHP 2 also uses variables named after a class, such as `$Model` for a model
+instance, and the sniffer allows them:
 
 ``` php
 $user = 'John';
 $users = ['John', 'Hans', 'Arne'];
 
 $dispatcher = new Dispatcher();
+$Model = ClassRegistry::init('Article');
 ```
 
 ### Member Visibility
 
-Use PHP5's private and protected keywords for methods and variables. Additionally,
-protected method or variable names start with a single underscore (`_`). Example:
+Use PHP's `private` and `protected` keywords for methods and variables.
+Additionally, protected method or variable names start with a single
+underscore (`_`). Public method names must not start with an underscore. For
+example:
 
 ``` php
 class A
@@ -626,12 +708,13 @@ class A
 
     protected function _iAmAProtectedMethod()
     {
-       /* ... */
+        /* ... */
     }
 }
 ```
 
-Private methods or variable names start with double underscore (`__`). Example:
+Private methods or variable names start with a double underscore (`__`). For
+example:
 
 ``` php
 class A
@@ -647,24 +730,30 @@ class A
 
 Try to avoid private methods or variables, though, in favor of protected ones.
 The latter can be accessed or modified by subclasses, whereas private ones
-prevent extension or re-use. Private visibility also makes testing much more difficult.
+prevent extension or re-use. Private visibility also makes testing much more
+difficult.
+
+Controller actions with a routing prefix, such as `admin_index()`, are not in
+camelBack. The `phpcs.xml` files of the framework and the application skeleton allow
+these names in controllers.
 
 ### Example Addresses
 
-For all example URL and mail addresses use "example.com", "example.org"
-and "example.net", for example:
+For all example URL and mail addresses use "example.com", "example.org" and
+"example.net", for example:
 
 - Email: <someone@example.com>
-- WWW: <http://www.example.com>
-- FTP: <ftp://ftp.example.com>
+- WWW: `https://www.example.com`
+- FTP: `ftp://ftp.example.com`
 
-The "example.com" domain name has been reserved for this (see `2606`) and is recommended
-for use in documentation or as examples.
+The "example.com" domain name has been reserved for this (see
+[RFC 2606](https://www.rfc-editor.org/rfc/rfc2606)) and is recommended for use
+in documentation or as examples.
 
 ### Files
 
-File names which do not contain classes should be lowercased and underscored, for
-example:
+File names which do not contain classes should be lowercased and underscored,
+for example:
 
     long_file_name.php
 
@@ -672,40 +761,207 @@ example:
 
 For casting we use:
 
-Type  
-Description
+| Type     | Description |
+|----------|-------------|
+| (bool)   | Cast to boolean. |
+| (int)    | Cast to integer. |
+| (float)  | Cast to float. |
+| (string) | Cast to string. |
+| (array)  | Cast to array. |
+| (object) | Cast to object. |
 
-(bool)  
-Cast to boolean.
-
-(int)  
-Cast to integer.
-
-(float)  
-Cast to float.
-
-(string)  
-Cast to string.
-
-(array)  
-Cast to array.
-
-(object)  
-Cast to object.
-
-Please use `(int)$var` instead of `intval($var)` and `(float)$var` instead of `floatval($var)` when applicable.
+Write the cast without a space before the value, and use the short forms:
+`(int)$var`, not `(integer) $var`. Use `(int)$var` instead of `intval($var)`
+and `(float)$var` instead of `floatval($var)` when applicable.
 
 ### Constants
 
 Constants should be defined in capital letters:
 
-``` text
+``` php
 define('CONSTANT', 1);
 ```
 
-If a constant name consists of multiple words, they should be separated
-by an underscore character, for example:
+If a constant name consists of multiple words, they should be separated by an
+underscore character, for example:
 
-``` text
+``` php
 define('LONG_NAMED_CONSTANT', 2);
 ```
+
+Class constants must declare their visibility:
+
+``` php
+class Article extends AppModel
+{
+    public const STATUS_PUBLISHED = 1;
+}
+```
+
+## Other Rules
+
+The CakePHP ruleset contains more checks than this page can list. Some that
+often come up in CakePHP 2 code:
+
+- `sizeof()` is reported; use `count()`.
+- Unused local variables and duplicated assignments are reported.
+- Useless parentheses, for example around a single variable, are reported.
+- Deprecated PHP functions are reported.
+
+Run `vendor/bin/phpcs -s` to see the name of the sniff that reported a
+violation. You can look up the sniff in the
+[CakePHP ruleset](https://github.com/cakephp/cakephp-codesniffer/blob/5.x/CakePHP/ruleset.xml).
+
+## The Exclusions Used for CakePHP 2
+
+The CakePHP 5 standard assumes namespaced code with native type declarations.
+The framework's
+[`phpcs.xml`](https://github.com/pieceofcake2/cakephp/blob/2.x/phpcs.xml)
+therefore excludes these rules:
+
+| Rules | Why |
+|-------|-----|
+| `PSR1.Classes.ClassDeclaration.MissingNamespace`, `PSR1.Files.SideEffects.FoundWithSymbols`, `Squiz.Classes.ClassFileName.NoMatch` | Classes live in the global namespace and may be loaded with `App::uses()`, which PSR-1 sees as a side effect. File names follow CakePHP 2 conventions. |
+| `SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFullyQualifiedNameWithoutNamespace`, `SlevomatCodingStandard.Namespaces.FullyQualifiedClassNameInAnnotation.NonFullyQualifiedClassName` | Without namespaces, `use` statements and fully qualified names in annotations are not needed. |
+| `SlevomatCodingStandard.TypeHints` | CakePHP 2 APIs do not use native type declarations. |
+| `Zend.NamingConventions.ValidVariableName.StringVarNotCamelCaps`, `Zend.NamingConventions.ValidVariableName.PublicHasUnderscore`, `Zend.NamingConventions.ValidVariableName.PublicVarHasUnderscore` | CakePHP 2 uses names such as `$Model` and `$_locale`, and public properties with an underscore prefix. |
+| `SlevomatCodingStandard.ControlStructures.AssignmentInCondition.AssignmentInCondition` | `while ($row = $result->fetch())` is a common CakePHP 2 pattern. |
+| `CakePHP.Commenting.FunctionComment.SpacingAfter`, `Generic.Files.LineLength` | Blank lines after doc comments are allowed, and line length is not checked. |
+
+It also adds `Generic.Formatting.MultipleStatementAlignment` with a
+`maxPadding` of 1, so that `=` signs of consecutive assignments are not padded
+with extra spaces for alignment, and relaxes some rules only for specific paths. For example,
+non-camelBack method names are allowed in controllers and shells (for
+prefixed actions such as `admin_index()`), several classes per file and
+missing doc comments are allowed in tests, and the `DATABASE_CONFIG` class name
+is allowed in `database.php`.
+
+## A phpcs.xml for Your Application
+
+The [pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton ships the
+following `phpcs.xml` for the modern directory layout. It uses the same
+exclusions as the framework, except that it excludes only the parameter and
+property type rules and requires native return types in `tests/TestCase/`:
+
+``` xml
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
+    <config name="php_version" value="80000"/>
+
+    <arg value="ps"/>
+    <arg name="colors"/>
+    <arg name="parallel" value="100"/>
+    <arg name="extensions" value="php,php.default"/>
+
+    <file>./config</file>
+    <file>./src</file>
+    <file>./tests</file>
+
+    <rule ref="CakePHP">
+        <!-- ===== Namespace and Class Rules ===== -->
+        <!-- CakePHP2 uses App::uses() instead of namespaces -->
+        <exclude name="PSR1.Classes.ClassDeclaration.MissingNamespace"/>
+        <!-- CakePHP2 uses App::uses() which PSR1 considers side effects -->
+        <exclude name="PSR1.Files.SideEffects.FoundWithSymbols"/>
+        <!-- Don't enforce filename matching class name (CakePHP2 has specific conventions) -->
+        <exclude name="Squiz.Classes.ClassFileName.NoMatch"/>
+
+        <!-- ===== Namespace/Import Rules ===== -->
+        <!-- Allow fully qualified class names without namespace (CakePHP2 uses global namespace) -->
+        <exclude name="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFullyQualifiedNameWithoutNamespace"/>
+        <!-- Don't require fully qualified class names in annotations (CakePHP2 has no namespaces) -->
+        <exclude name="SlevomatCodingStandard.Namespaces.FullyQualifiedClassNameInAnnotation.NonFullyQualifiedClassName"/>
+
+        <!-- ===== Type Hints Rules ===== -->
+        <!-- Exclude type hints rules as CakePHP2 doesn't support PHP 7+ type declarations -->
+        <exclude name="SlevomatCodingStandard.TypeHints.PropertyTypeHint"/>
+        <exclude name="SlevomatCodingStandard.TypeHints.ParameterTypeHint"/>
+        <exclude name="SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing"/>
+
+        <!-- ===== Variable Naming Rules ===== -->
+        <!-- Allow CakePHP2 style variable naming ($Model, $LinkModel, $_locale, etc.) -->
+        <exclude name="Zend.NamingConventions.ValidVariableName.StringVarNotCamelCaps"/>
+        <!-- Allow underscore in public properties (CakePHP2 convention) -->
+        <exclude name="Zend.NamingConventions.ValidVariableName.PublicHasUnderscore"/>
+        <!-- Allow double underscore public properties (CakePHP2 internal convention) -->
+        <exclude name="Zend.NamingConventions.ValidVariableName.PublicVarHasUnderscore"/>
+
+        <!-- ===== Control Structure Rules ===== -->
+        <!-- Allow assignment in conditions (common pattern in CakePHP2: while ($row = $result->fetch())) -->
+        <exclude name="SlevomatCodingStandard.ControlStructures.AssignmentInCondition.AssignmentInCondition"/>
+
+        <!-- ===== Formatting Rules ===== -->
+        <!-- Allow blank lines after function comments (CakePHP2 style) -->
+        <exclude name="CakePHP.Commenting.FunctionComment.SpacingAfter"/>
+        <!-- Exclude line length checks for CakePHP2 -->
+        <exclude name="Generic.Files.LineLength"/>
+    </rule>
+
+    <!-- Include additional whitespace checking rule -->
+    <rule ref="Generic.Formatting.MultipleStatementAlignment">
+        <properties>
+            <property name="maxPadding" value="1"/>
+        </properties>
+    </rule>
+
+    <rule ref="CakePHP.Commenting.FunctionComment.Missing">
+        <exclude-pattern>tests/TestCase/*</exclude-pattern>
+    </rule>
+
+    <!-- Allow multiple classes in test files only (CakePHP2 test pattern) -->
+    <rule ref="PSR1.Classes.ClassDeclaration.MultipleClasses">
+        <exclude-pattern>tests/TestCase/*</exclude-pattern>
+    </rule>
+
+    <!-- Allow non-camelCase method names in Controllers (CakePHP2 action naming convention) -->
+    <rule ref="PSR1.Methods.CamelCapsMethodName.NotCamelCaps">
+        <exclude-pattern>src/Controller/*</exclude-pattern>
+        <exclude-pattern>src/Console/Command/*</exclude-pattern>
+        <exclude-pattern>src/Model/Behavior/*</exclude-pattern>
+    </rule>
+
+    <!-- Require return type hints for Test/Case only -->
+    <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint">
+        <include-pattern>tests/TestCase/*</include-pattern>
+    </rule>
+
+    <rule ref="Squiz.Classes.ValidClassName.NotPascalCase">
+        <exclude-pattern>config/database.php</exclude-pattern>
+    </rule>
+
+    <rule ref="Squiz.PHP.NonExecutableCode.Unreachable">
+        <exclude-pattern>config/acl.ini.php</exclude-pattern>
+    </rule>
+</ruleset>
+```
+
+If your application uses the legacy `app/` layout, change the `<file>`
+entries and the patterns to the legacy paths, for example `./app/Config`,
+`./app/Controller`, `./app/Model` and `./app/Test` instead of `./config`,
+`./src` and `./tests`, and `app/Controller/*` and `app/Test/Case/*` instead of
+`src/Controller/*` and `tests/TestCase/*`.
+
+To introduce the standard into an existing application, run `phpcbf` once
+and commit the result separately from other changes, then fix the remaining
+violations step by step. You can check a single directory at a time by passing
+its path to `phpcs`.
+
+## Differences from the Original CakePHP 2 Standard
+
+If you maintain code written for the original CakePHP 2 standard, these are
+the changes you will notice most:
+
+| Original CakePHP 2 standard | Current standard |
+|-----------------------------|------------------|
+| Indentation with one tab | Indentation with four spaces |
+| `array()` | `[]` |
+| Opening brace of classes and methods on the same line | Opening brace of classes and methods on its own line |
+| No trailing commas | Trailing comma in multi-line arrays, calls and declarations |
+| 100 characters soft and 120 characters hard line limit | Line length is not checked |
+| No assignments in conditions | Assignments in conditions are allowed |
+| `isset($a) ? $a : $b` | `$a ?? $b` |
+| `$a ? $a : $b` | `$a ?: $b` |
+| `else if` discouraged | `else if` not allowed; use `elseif` |
+| Visibility of class constants optional | Visibility required on constants, properties and methods |
+| `/** @var string */` allowed on properties | Multi-line property DocBlocks |

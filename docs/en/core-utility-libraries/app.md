@@ -18,10 +18,11 @@ CakePHP expects to find it.
 
 For instance if you'd like to use your own HttpSocket class, put it under:
 
-    app/Lib/Network/Http/HttpSocket.php
+    src/Lib/Network/Http/HttpSocket.php
 
-Once you've done this App will load your override file instead of the file
-inside CakePHP.
+and register it with `App::uses()` as described in
+[Overriding classes in CakePHP](#overriding-classes-in-cakephp). App will then
+load your override file instead of the file inside CakePHP.
 
 ## Loading classes
 
@@ -30,23 +31,29 @@ inside CakePHP.
 rtype  
 void
 
-Classes are lazily loaded in CakePHP, however before the autoloader
-can find your classes you need to tell App, where it can find the files.
-By telling App which package a class can be found in, it can properly locate
-the file and load it the first time a class is used.
+Classes are lazily loaded in CakePHP. CakePHP's own classes are loaded by
+Composer's classmap autoloader, so you never need to declare them. The same
+applies to your application classes when your `composer.json` has a classmap
+for them, as in the application skeleton:
 
-::: pieceofcake2 Composer autoloading
-In the pieceofcake2 fork, framework classes are loaded by Composer's classmap
-autoloader, so `App::uses()` is no longer needed for core classes such as
-`CakeTime`, `HttpSocket` or `Xml`. You still need it for:
+``` json
+"autoload": {
+    "classmap": ["src/"]
+}
+```
 
-- application classes, unless your `composer.json` has a classmap for them
-  (for example `"classmap": ["src/"]` in the modern layout; run
-  `composer dump-autoload` after adding a class)
-- plugin classes, unless the plugin supports Composer autoloading
+With a classmap, run `composer dump-autoload` after adding a new class file.
 
-Existing `App::uses()` calls keep working.
-See the [upgrade guide](/pieceofcake2/upgrade).
+`App::uses()` is needed for classes that Composer does not know about: your
+application classes when you don't use a classmap, and classes of plugins that
+don't support Composer autoloading. By telling App which package a class can be
+found in, it can properly locate the file and load it the first time a class
+is used.
+
+::: pieceofcake2
+Framework classes are loaded by Composer's
+classmap autoloader and no longer call `App::uses()` for each other. Existing
+`App::uses()` calls keep working. See the [migration guide](/appendices/migrating-from-cakephp-2-10).
 :::
 
 Some examples for common types of classes are:
@@ -55,7 +62,7 @@ Console Commands
 `App::uses('AppShell', 'Console/Command');`
 
 Console Tasks  
-`App::uses('BakeTask', 'Console/Command/Task');`
+`App::uses('ImportTask', 'Console/Command/Task');`
 
 Controllers  
 `App::uses('PostsController', 'Controller');`
@@ -87,9 +94,10 @@ Utilities
 So basically the second param should simply match the folder path of the class file in core or app.
 
 > [!NOTE]
-> Loading vendors usually means you are loading packages that do not follow
-> conventions. For most vendor packages using `App::import()` is
-> recommended.
+> Third-party libraries are normally installed and autoloaded with Composer,
+> so you don't need `App::uses()` or `App::import()` for them. For the few
+> files that are not available through Composer and do not follow
+> conventions, use `App::import()`.
 
 ### Loading files from plugins
 
@@ -98,11 +106,11 @@ core classes except you must specify the plugin you are loading
 from:
 
 ``` php
-// Load the class Comment in app/Plugin/PluginName/Model/Comment.php
+// Load the class Comment in plugins/PluginName/Model/Comment.php
 App::uses('Comment', 'PluginName.Model');
 
 // Load the class CommentComponent in
-// app/Plugin/PluginName/Controller/Component/CommentComponent.php
+// plugins/PluginName/Controller/Component/CommentComponent.php
 App::uses('CommentComponent', 'PluginName.Controller/Component');
 ```
 
@@ -188,23 +196,9 @@ App::build([
 ```
 
 If reset is set to true, all loaded plugins will be forgotten and they will
-be needed to be loaded again.
-
-Examples:
-
-``` php
-App::build(['controllers' => ['/full/path/to/controllers/']]);
-//becomes
-App::build(['Controller' => ['/full/path/to/Controller/']]);
-
-App::build(['helpers' => ['/full/path/to/views/helpers/']]);
-//becomes
-App::build(['View/Helper' => ['/full/path/to/View/Helper/']]);
-```
-
-::: info Changed in version 2.0
-`App::build()` will not merge app paths with core paths anymore.
-:::
+be needed to be loaded again. Package names are the folder names, such as
+`Controller` or `View/Helper`. `App::build()` does not merge app paths with
+core paths.
 
 <a id="app-build-register"></a>
 
@@ -257,13 +251,9 @@ You can also search only within a plugin's objects by using the plugin dot synta
 App::objects('MyPlugin.Model');
 ```
 
-::: info Changed in version 2.0
-:::
-
-1.  Returns `[]` instead of false for empty results or invalid types
-2.  Does not return core objects anymore, `App::objects('core')` will
-    return `[]`.
-3.  Returns the complete class name
+`App::objects()` returns the complete class names. It returns `[]` for empty
+results or invalid types, and it does not return core objects
+(`App::objects('core')` returns `[]`).
 
 ## Locating plugins
 
@@ -316,58 +306,60 @@ $Users = new UsersController();
 $Users->constructClasses();
 ```
 
-**All classes that were loaded in the past using App::import('Core', \$class) will need to be
-loaded using App::uses() referring to the correct package. This change has provided large
-performance gains to the framework.**
+Keep in mind:
 
-::: info Changed in version 2.0
-:::
-
-- The method no longer looks for classes recursively, it strictly uses the values for the
-  paths defined in `App::build()`
-- It will not be able to load `App::import('Component', 'Component')` use
-  `App::uses('Component', 'Controller');`.
-- Using `App::import('Lib', 'CoreClass');` to load core classes is no longer possible.
+- The method does not look for files recursively, it strictly uses the
+  paths defined in `App::build()`.
+- It cannot load core classes; they are autoloaded.
 - Importing a non-existent file, supplying a wrong type or package name, or
   null values for `$name` and `$file` parameters will result in a false return
   value.
-- `App::import('Core', 'CoreClass')` is no longer supported, use
-  `App::uses()` instead and let the class autoloading do the rest.
-- Loading Vendor files does not look recursively in the vendors folder, it
-  will also not convert the file to underscored anymore as it did in the
-  past.
+- Loading Vendor files does not look recursively in the vendors folder, and
+  the file name is not converted to underscored form.
 
 ## Overriding classes in CakePHP
 
 You can override almost every class in the framework, exceptions are the
 `App` and `Configure` classes. Whenever you like to
-perform such overriding, just add your class to your `app/Lib` folder mimicking
-the internal structure of the framework. Some examples to follow:
+perform such overriding, add your class to your `src/Lib` folder
+(`app/Lib` in the legacy layout) mimicking the internal structure of the
+framework, and register it with `App::uses()` before the class is first used,
+for example in `config/bootstrap.php`. Some examples to follow:
 
-- To override the `Dispatcher` class, create `app/Lib/Routing/Dispatcher.php`
-- To override the `CakeRoute` class, create `app/Lib/Routing/Route/CakeRoute.php`
-- To override the `Model` class, create `app/Lib/Model/Model.php`
+- To override the `Dispatcher` class, create `src/Lib/Routing/Dispatcher.php`
+  and call `App::uses('Dispatcher', 'Routing');`
+- To override the `CakeRoute` class, create `src/Lib/Routing/Route/CakeRoute.php`
+  and call `App::uses('CakeRoute', 'Routing/Route');`
+- To override the `Model` class, create `src/Lib/Model/Model.php`
+  and call `App::uses('Model', 'Model');`
 
-When you load the overridden classes now, the files in `app/Lib` will be loaded
-instead of the built-in core ones.
+`App::load()` is registered in front of Composer's autoloader. For classes
+registered with `App::uses()`, it searches your application's folders,
+including `src/Lib`, before the core, so your files are loaded instead of the
+built-in core ones. Without the `App::uses()` call the
+core class is loaded by Composer. If your `composer.json` has a classmap for
+`src/`, exclude the override files with `exclude-from-classmap` to avoid
+Composer's "Ambiguous class resolution" warning.
 
 ::: pieceofcake2
-In the pieceofcake2 fork, the framework no longer calls `App::uses()` for its
-own classes; they are loaded through Composer's classmap. `App::load()` only
-searches `app/Lib` for classes registered with `App::uses()`, so an override
-is used only if the matching `App::uses()` call (for example
-`App::uses('HttpSocket', 'Network/Http');`) runs before the class is first
-loaded. In the modern layout the folder is `src/Lib` instead of `app/Lib`.
-Check your overrides after upgrading.
+Because the framework no longer calls
+`App::uses()` for its own classes, an override in `src/Lib` is used only when
+your application registers it with `App::uses()`. Check your overrides after
+upgrading.
 :::
 
 ## Loading Vendor Files
+
+Libraries installed with Composer are autoloaded and need no extra code. This
+section applies to files that you copy into your project by hand. Put them in
+the `vendors/` directory of your project (`app/Vendor/` in the legacy layout),
+which Composer does not manage.
 
 You can use `App::uses()` to load classes in vendors directories. It follows
 the same conventions as loading other files:
 
 ``` php
-// Load the class Geshi in app/Vendor/Geshi.php
+// Load the class Geshi in vendors/Geshi.php
 App::uses('Geshi', 'Vendor');
 ```
 
@@ -376,8 +368,8 @@ with `App::build()`:
 
 ``` php
 // Load the class ClassInSomePackage in
-// app/Vendor/SomePackage/ClassInSomePackage.php
-App::build(['Vendor' => [APP . 'Vendor' . DS . 'SomePackage' . DS]]);
+// vendors/SomePackage/ClassInSomePackage.php
+App::build(['Vendor' => [ROOT . DS . 'vendors' . DS . 'SomePackage' . DS]]);
 App::uses('ClassInSomePackage', 'Vendor');
 ```
 
@@ -387,7 +379,7 @@ the file name or does not contain classes. You can load those files using
 files from a number of path structures. These vendor files could be located in
 any of the vendor folders.
 
-To load **app/Vendor/geshi.php**:
+To load **vendors/geshi.php**:
 
 ``` php
 App::import('Vendor', 'geshi');
@@ -397,19 +389,19 @@ App::import('Vendor', 'geshi');
 > The geshi file must be a lower-case file name as CakePHP will not
 > find it otherwise.
 
-To load **app/Vendor/flickr/flickr.php**:
+To load **vendors/flickr/flickr.php**:
 
 ``` php
 App::import('Vendor', 'flickr', ['file' => 'flickr/flickr.php']);
 ```
 
-To load **app/Vendor/some.name.php**:
+To load **vendors/some.name.php**:
 
 ``` php
 App::import('Vendor', 'SomeName', ['file' => 'some.name.php']);
 ```
 
-To load **app/Vendor/services/well.named.php**:
+To load **vendors/services/well.named.php**:
 
 ``` php
 App::import(
@@ -419,7 +411,7 @@ App::import(
 );
 ```
 
-To load **app/Plugin/Awesome/Vendor/services/well.named.php**:
+To load **plugins/Awesome/Vendor/services/well.named.php**:
 
 ``` php
 App::import(
@@ -429,7 +421,7 @@ App::import(
 );
 ```
 
-To load **app/Plugin/Awesome/Vendor/Folder/Foo.php**:
+To load **plugins/Awesome/Vendor/Folder/Foo.php**:
 
 ``` php
 App::import(
@@ -438,8 +430,7 @@ App::import(
     ['file' => 'Folder' . DS . 'Foo.php']);
 ```
 
-It wouldn't make a difference if your vendor files are inside your /vendors
-directory. CakePHP will automatically find it.
+Vendor files in `src/Vendor/` are found as well.
 
 To load **vendors/vendorName/libFile.php**:
 

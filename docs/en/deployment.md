@@ -17,31 +17,40 @@ any security keys) are private and unique as well!
 
 Setting the document root correctly on your application is an important step to
 keeping your code secure and your application safer. CakePHP applications
-should have the document root set to the application's `app/webroot`. This
-makes the application and configuration files inaccessible through a URL.
-Setting the document root is different for different webservers. See the
-[URL Rewriting](installation/url-rewriting) documentation for webserver specific
-information.
+should have the document root set to the application's `webroot/` directory
+(`app/webroot/` in the legacy layout). This makes the application and
+configuration files, as well as the Composer packages in `vendor/`,
+inaccessible through a URL. Setting the document root is different for
+different webservers. See the [URL Rewriting](installation/url-rewriting)
+documentation for webserver specific information.
 
-In all cases you will want to set the virtual host/domain's document to be
-`app/webroot/`. This removes the possibility of files outside of the webroot
+In all cases you will want to set the virtual host/domain's document root to be
+`webroot/`. This removes the possibility of files outside of the webroot
 directory being executed.
 
-::: pieceofcake2 Modern layout
-In the modern layout ([pieceofcake2/app](https://github.com/pieceofcake2/app)),
-set the document root to `webroot/` at the project root. There is no `.htaccess`
-at the project root that forwards requests, so this is required, not optional.
-In both layouts, make sure `vendor/` is not inside the document root.
-:::
+## Install dependencies for production
+
+Install the Composer packages without the development dependencies, such as
+Bake, DebugKit and PHPUnit, and with an optimized autoloader:
+
+```bash
+composer install --no-dev --optimize-autoloader
+```
+
+If your `config/bootstrap.php` loads development-only plugins, load them only
+when they are installed, for example:
+
+```php
+// config/bootstrap.php
+if (is_dir(ROOT . DS . 'plugins' . DS . 'DebugKit')) {
+    CakePlugin::load('DebugKit');
+}
+```
 
 ## Update core.php
 
-::: pieceofcake2
-`core.php` is `app/Config/core.php` in the legacy layout and `config/core.php`
-in the modern layout.
-:::
-
-Updating core.php, specifically the value of `debug` is extremely important.
+Updating `config/core.php` (`app/Config/core.php` in the legacy layout),
+specifically the value of `debug` is extremely important.
 Turning debug = 0 disables a number of development features that should never be
 exposed to the Internet at large. Disabling debug changes the following types of
 things:
@@ -66,7 +75,7 @@ For example, you can set an environment variable in your Apache configuration:
 
     SetEnv CAKEPHP_DEBUG 2
 
-And then you can set the debug level dynamically in `core.php`:
+And then you can set the debug level dynamically in `config/core.php`:
 
 ``` php
 if (getenv('CAKEPHP_DEBUG')) {
@@ -82,13 +91,9 @@ Since handling static assets, such as images, JavaScript and CSS files of plugin
 through the Dispatcher is incredibly inefficient, it is strongly recommended to symlink
 them for production. For example like this:
 
-    ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css
-
-::: pieceofcake2
-Adjust the paths to your layout. In the modern layout, Composer-installed plugins
-are in `plugins/` and the webroot is `webroot/`, for example:
-
 ```bash
 ln -s ../../plugins/YourPlugin/webroot/css/yourplugin.css webroot/css/yourplugin.css
 ```
-:::
+
+In the legacy layout, plugins are in `app/Plugin/` or `plugins/` and the
+webroot is `app/webroot/`.

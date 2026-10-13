@@ -23,8 +23,8 @@ of a project in order to get started. It isn't meant to be
 completely flexible, it's meant as a temporary way to get up and
 going. If you find yourself really wanting to customize your logic
 and your views, it's time to pull your scaffolding down in order to
-write some code. CakePHP's [bake console](../console-and-shells), covered in the next
-section, is a great next step: it generates all the code that would
+write some code. The [Bake plugin](../console-and-shells/code-generation-with-bake)
+is a great next step: it generates all the code that would
 produce the same result as the most current scaffold.
 
 Scaffolding is a great way of getting the early parts of developing
@@ -48,7 +48,7 @@ class CategoriesController extends AppController
 ```
 
 Assuming you've created even the most basic Category model class
-file (in `app/Model/Category.php`), you're ready to go. Visit
+file (in `src/Model/Category.php`), you're ready to go. Visit
 <http://example.com/categories> to see your new scaffold.
 
 > [!NOTE]
@@ -91,7 +91,7 @@ class User extends AppModel
 
 ## Creating a simple admin interface with scaffolding
 
-If you have enabled admin routing in your `app/Config/core.php` with
+If you have enabled admin routing in your `config/core.php` with
 `Configure::write('Routing.prefixes', ['admin']);`, you can
 use scaffolding to generate an admin interface.
 
@@ -118,7 +118,7 @@ override individual methods and replace them with your own:
 ``` php
 public function admin_view($id = null)
 {
-  // custom code here
+    // custom code here
 }
 ```
 
@@ -135,17 +135,14 @@ such a customization may be useful during prototyping iterations.
 Custom scaffolding views for a specific controller
 (PostsController in this example) should be placed like so:
 
-    app/View/Posts/scaffold.index.ctp
-    app/View/Posts/scaffold.form.ctp
-    app/View/Posts/scaffold.view.ctp
+    templates/Posts/scaffold.index.ctp
+    templates/Posts/scaffold.form.ctp
+    templates/Posts/scaffold.view.ctp
 
 Custom scaffolding views for all controllers should be placed like so:
 
-    app/View/Scaffolds/index.ctp
-    app/View/Scaffolds/form.ctp
-    app/View/Scaffolds/view.ctp
+    templates/Scaffolds/index.ctp
+    templates/Scaffolds/form.ctp
+    templates/Scaffolds/view.ctp
 
-::: pieceofcake2
-In the modern layout of the pieceofcake2 fork, put these files under `templates/` instead of
-`app/View/` (e.g. `templates/Posts/scaffold.index.ctp`, `templates/Scaffolds/index.ctp`).
-:::
+In the legacy `app/` layout, use `app/View/` instead of `templates/`.

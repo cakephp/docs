@@ -643,7 +643,7 @@ unset($validator['username']);
 unset($validator['password']['required']);
 ```
 
-## コア・バリデーションルール
+## コア・バリデーションルール {#core-validation-rules}
 
 `class` **Validation**
 
@@ -1298,10 +1298,6 @@ public $validate = [
 ];
 ```
 
-このバリデーションメソッドは複雑な正規表現を使っているため、
-Windows + Apache2 + mod_php の組み合わせだと問題が起こる
-ことがあります。
-
 `static` Validation::**userDefined**(mixed $check, object $object, string $method, array $args = null)
 
 ユーザ定義のバリデーションを行います。
@@ -1330,9 +1326,12 @@ class NlValidation
 }
 ```
 
-このファイルは `APP/Validation/` や `App/PluginName/Validation/`
-に置かれる可能性がありますが、利用する前に App::uses() 経由で
-インポートしておく必要があります。その後、あなたのモデルの
+このファイルは `src/Validation/NlValidation.php` やプラグインの `Validation/`
+フォルダに置きます。バリデーションの実行時にクラスを読み込める必要があります。
+`src/` を Composer の classmap に指定していれば自動的に読み込まれます。
+そうでない場合は、利用する前に `App::uses('NlValidation', 'Validation')`
+(プラグインの場合は `App::uses('NlValidation', 'PluginName.Validation')`)
+でインポートしておいてください。その後、あなたのモデルの
 バリデーションで、以下のように NlValidation を利用できます。 :
 
 ``` php
@@ -1352,8 +1351,8 @@ public $validate = [
 
 > [!TIP]
 > ローカライズされたプラグインでも、すでに多くのルールが利用
-> できるようになっています: <https://github.com/cakephp/localized>
+> できるようになっています: <https://github.com/pieceofcake2/localized>
 > さらに、あなたがローカライズしたバリデーションルールも、
 > ぜひご提供ください。
 
-- [Validating Data From The Controller](../data-validation/validating-data-from-the-controller)
+- [Validating Data From The Controller](data-validation/validating-data-from-the-controller)

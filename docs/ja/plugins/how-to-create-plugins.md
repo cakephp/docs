@@ -2,29 +2,28 @@
 
 動作サンプルとして、 [プラグインの使い方](../plugins/how-to-use-plugins) セクションを参考に ContactManager
 プラグインを作りましょう。 先ず始めに、プラグインの基本ディレクトリ構成を準備します。
-それはこのようになります。 :
+それはこのようになります。
 
-    /app
-        /Plugin
-            /ContactManager
-                /Controller
-                    /Component
-                /Model
-                    /Behavior
-                /View
-                    /Helper
-                    /Layouts
+    /plugins
+        /ContactManager
+            /Controller
+                /Component
+            /Model
+                /Behavior
+            /View
+                /Helper
+                /Layouts
 
-プラグインフォルダーの名前は、 ‘'\*\*ContactManager\*\*'‘ となります。 プラグインと同じ
+プラグインフォルダーの名前は、 **ContactManager** となります。 プラグインと同じ
 名前のフォルダになることが重要です。
 
-::: pieceofcake2
-pieceofcake2 フォークのモダンレイアウトでは、プラグインは `app/Plugin/ContactManager/` ではなく
-`plugins/ContactManager/` に置きます。プラグイン *内部* の構成（`Controller/`、`Model/`、`View/`、
-`Config/`、`webroot/` など）は変わりません。プラグインのテストのみ、`Test/Case/` と `Test/Fixture/` の代わりに
-`tests/TestCase/` と `tests/Fixture/` も使えます。ひな形として
-[pieceofcake2/plugin](https://github.com/pieceofcake2/plugin) を利用できます。
-:::
+プラグインはプロジェクトルートの `plugins/` ディレクトリに置きます (従来の `app/` レイアウトの
+アプリケーションでは `app/Plugin/` も使えます)。アプリケーション本体とは異なり、プラグインの
+*内部* は CakePHP 2 の構成のままです。PHP のクラスは `Controller/` や `Model/` などに置き、
+テンプレートは `View/Helper/` と並べて `View/` に置きます。プラグインのテストには
+`Test/Case/` と `Test/Fixture/`、または `tests/TestCase/` と `tests/Fixture/` のどちらも使えます。
+新しくプラグインを作るときは、 [pieceofcake2/plugin](https://github.com/pieceofcake2/plugin)
+スケルトンをひな形にするとよいでしょう。
 
 プラグインフォルダー内では、CakePHP アプリケーションのような構成が多くあるのに気づくと
 思いますが、 それが基本的な構成です。 使わないフォルダには、何も入れる必要はありません。
@@ -41,7 +40,8 @@ pieceofcake2 フォークのモダンレイアウトでは、プラグインは 
 > ContacktManager の例ではこうなります。
 
 ``` php
-// /app/Plugin/ContactManager/Controller/ContactManagerAppController.php の中で
+// plugins/ContactManager/Controller/ContactManagerAppController.php の中で
+App::uses('AppController', 'Controller');
 
 class ContactManagerAppController extends AppController
 {
@@ -49,32 +49,43 @@ class ContactManagerAppController extends AppController
 ```
 
 ``` php
-// /app/Plugin/ContactManager/Model/ContactManagerAppModel.php の中で
+// plugins/ContactManager/Model/ContactManagerAppModel.php の中で
+App::uses('AppModel', 'Model');
 
 class ContactManagerAppModel extends AppModel
 {
 }
 ```
 
+アプリケーションの `src/` ディレクトリにあるクラスとは異なり、プラグインのクラスは
+アプリケーションの Composer classmap には含まれません。プラグインのクラスは CakePHP 自身の
+クラスローダーで読み込まれるため、プラグイン内のコードでは、依存するクラスを `App::uses()` で
+宣言しておきます。こうしておけば、classmap オートロードを使っていないアプリケーションでも
+プラグインが動作します。
+
 もしこれらの特別なクラスの定義を忘れると、”Missing Controller” エラーがでます。
 
-プラグインの作成は、cake シェルを使えば非常に簡単です。
+プラグインの作成は、 [Bake プラグイン](https://github.com/pieceofcake2/bake) を使えば非常に簡単です。
 
-プラグインを bake するのは以下のコマンドになります。 :
+プラグインを bake するのは以下のコマンドになります。
 
-    user@host$ cake bake plugin ContactManager
+``` bash
+bin/cake bake plugin ContactManager
+```
 
-そうすると、いつも通りの bake ができます。 例えば controllers を bake するには:
+そうすると、いつも通りの bake ができます。 例えば controllers を bake するには、次のようにします。
 
-    user@host$ cake bake controller Contacts --plugin ContactManager
+``` bash
+bin/cake bake controller Contacts --plugin ContactManager
+```
 
-もしコマンドラインで問題があれば、
+Bake のインストール方法と使い方は、
 [Bakeでコード生成](../console-and-shells/code-generation-with-bake)
-のチャプターを参照してください
+のチャプターを参照してください。
 
 > [!WARNING]
 > プラグインは、コードの分離のための名前空間は機能しません。
-> 古いバージョンの PHP には名前空間が無いためです。
+> CakePHP 2 のクラスには名前空間が無いためです。
 > プラグインの中で、同じクラスやファイル名を使用できません。
 > ２つの異なるプラグインであってもです。
 > プラグイン名をクラスやファイル名にプレフィックスをつけて
@@ -83,14 +94,14 @@ class ContactManagerAppModel extends AppModel
 ## プラグインコントローラ
 
 ContactManager プラグインのコントローラーは、
-/app/Plugin/ContactManager/Controller/ に設置されます。 主にやりたい事は
+`plugins/ContactManager/Controller/` に設置されます。 主にやりたい事は
 contacts の管理ですので、このプラグインには ContactsController が必要です。
 
-そこで ContactsController を /app/Plugin/ContactManager/Controller に設置し、
-このように書きます。 :
+そこで ContactsController を `plugins/ContactManager/Controller` に設置し、
+このように書きます。
 
 ``` php
-// app/Plugin/ContactManager/Controller/ContactsController.php の中で
+// plugins/ContactManager/Controller/ContactsController.php の中で
 
 class ContactsController extends ContactManagerAppController
 {
@@ -119,13 +130,13 @@ class ContactsController extends ContactManagerAppController
 にアクセスします。 Contact モデルをまだ定義してないので、 “Missing Model”
 エラーがでるはずです。
 
-## プラグインモデル
+## プラグインモデル {#plugin-models}
 
-プラグインのモデルは /app/Plugin/ContactManager/Model に設置されます。
+プラグインのモデルは `plugins/ContactManager/Model` に設置されます。
 プラグインの ContactsController は既に定義してあるので、そのモデルを作成します。 :
 
 ``` php
-// /app/Plugin/ContactManager/Model/Contact.php の中で
+// plugins/ContactManager/Model/Contact.php の中で
 
 class Contact extends ContactManagerAppModel
 {
@@ -142,7 +153,7 @@ class Contact extends ContactManagerAppModel
 例えば:
 
 ``` php
-// /app/Plugin/ContactManager/Model/Contact.php の中で
+// plugins/ContactManager/Model/Contact.php の中で
 
 class Contact extends ContactManagerAppModel
 {
@@ -153,14 +164,14 @@ class Contact extends ContactManagerAppModel
 プラグインの接頭語との連携の無い配列キーを参照したいなら、代わりのシンタックスを使います。 :
 
 ``` php
-// /app/Plugin/ContactManager/Model/Contact.php の中で
+// plugins/ContactManager/Model/Contact.php の中で
 
 class Contact extends ContactManagerAppModel
 {
     public $hasMany = [
         'AltName' => [
-            'className' => 'ContactManager.AltName'
-        ]
+            'className' => 'ContactManager.AltName',
+        ],
     ];
 }
 ```
@@ -168,12 +179,12 @@ class Contact extends ContactManagerAppModel
 ## プラグインビュー
 
 ビューは通常のアプリケーション内での動作として振る舞います。
-/app/Plugin/\[PluginName\]/View/ フォルダー内に設置するだけです。
+`plugins/[PluginName]/View/` フォルダー内に設置するだけです。
 ContactManager プラグインでは、ContactsController::index()
 アクションのビューが必要になるので、 このような内容になります。 :
 
-``` text
-<!-- /app/Plugin/ContactManager/View/Contacts/index.ctp: -->
+``` html
+<!-- plugins/ContactManager/View/Contacts/index.ctp: -->
 <h1>Contacts</h1>
 <p>Following is a sortable list of your contacts</p>
 <!-- A sortable list of contacts would go here....-->
@@ -186,40 +197,38 @@ ContactManager プラグインでは、ContactsController::index()
 ### アプリケーション内でのプラグインビューのオーバーライド
 
 プラグインのビューはあるパスを使ってオーバーライドできます。 ContactManager
-という名のプラグインがあるなら、 “app/View/Plugin/\[Plugin\]/\[Controller\]/\[view\].ctp”
+という名のプラグインがあるなら、 `templates/Plugin/[Plugin]/[Controller]/[view].ctp`
+(従来の `app/` レイアウトでは `app/View/Plugin/...`)
 というテンプレートを作成することでオーバーライドできます。 Contacts コントローラーには
-このファイルを作ります。 :
+このファイルを作ります。
 
-    /app/View/Plugin/ContactManager/Contacts/index.ctp
+    templates/Plugin/ContactManager/Contacts/index.ctp
 
 このファイルを作れば、
-”/app/Plugin/ContactManager/View/Contacts/index.ctp”
+`plugins/ContactManager/View/Contacts/index.ctp`
 を上書きできます。
-
-::: pieceofcake2
-モダンレイアウトでは `templates/Plugin/ContactManager/Contacts/index.ctp` を使います。
-:::
 
 ## プラグインアセット
 
 プラグインのウェブアセット（php ファイルではない）は、 プラグインの
 ’webroot’ ディレクトリを通して受け取られます。 :
 
-    app/Plugin/ContactManager/webroot/
-                                        css/
-                                        js/
-                                        img/
-                                        flash/
-                                        pdf/
+    plugins/ContactManager/webroot/
+                                   css/
+                                   js/
+                                   img/
+                                   pdf/
 
 通常の webroot と同じようにどのディレクトリにどんなファイルでも置くことができます。
 
 ただ、プラグインの静的アセットや画像や JavaScript または CSS は、 ディスパチャーを
 経由しますが、非常に効率が悪くなることを覚えておいてください。 ですので、本番環境では
 それらにシンボリックリンクを張っておくことを強くおすすめします。
-例えばこのようにします。 :
+例えばこのようにします。
 
-    ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css
+``` bash
+ln -s ../../plugins/YourPlugin/webroot/css/yourplugin.css webroot/css/yourplugin.css
+```
 
 ### プラグイン内のアセットへのリンク
 
@@ -227,7 +236,7 @@ ContactManager プラグインでは、ContactsController::index()
 を頭に付けるだけで、アプリケーションの webroot として動作します。
 
 例えば、’/contact_manager/js/some_file.js’ へのリンクは、
-‘app/Plugin/ContactManager/webroot/js/some_file.js’ で受け取れます。
+`plugins/ContactManager/webroot/js/some_file.js` で受け取れます。
 
 > [!NOTE]
 > アセットのパスの前に **/your_plugin/** に付けるのが重要です。
@@ -236,6 +245,10 @@ ContactManager プラグインでは、ContactsController::index()
 ::: info Changed in version 2.1
 アセットのリクエストには `プラグイン記法` を使用してください。 View での利用方法:
 :::
+
+``` php
+echo $this->Html->css('ContactManager.style');
+```
 
 ## コンポーネント、ヘルパーとビヘイビア
 
@@ -265,12 +278,12 @@ public $components = ['ContactManager.Example'];
 同じテクニックはヘルパーとビヘイビアにも使えます。
 
 > [!NOTE]
-> AppHelper を探すヘルパーを作った場合、自動で利用は出来ません。
-> Uses に定義する必要があります。:
+> プラグインの AppController や AppModel と同じく、プラグインのヘルパーが依存するクラスも
+> `App::uses()` で宣言してください。そうすれば、classmap オートロードを使っていない
+> アプリケーションでもプラグインが動作します。
 >
 > ``` php
-> // Declare use of AppHelper for your Plugin's Helper
->
+> // プラグインのヘルパーで AppHelper を使うことを宣言する
 > App::uses('AppHelper', 'View/Helper');
 > ```
 
@@ -279,7 +292,7 @@ public $components = ['ContactManager.Example'];
 この例は、プラグインを作るための一つの良い開始方法であって、他にも色んな方法があります。
 通常のルールでは、つまりアプリケーションでできることは、プラグインでもできます。
 
-まずは、’Vendor’ にサードパーティのライブラリを設置し、 cake console に新しい shell
+まずは、Composer でサードパーティのライブラリを導入し、 cake console に新しい shell
 を追加します。 さらに、利用者が自動で出来る、プラグインの機能をテストするためのテストケースを
 作成する事を忘れないでください。
 
@@ -290,7 +303,7 @@ ContactManager の例だと、ContactsController 内に add/remove/edit/delete
 
 ## プラグイン Tips
 
-一度、プラグインを /app/Plugin にインストールすると、
+一度、プラグインを `plugins/` にインストールすると、
 /plugin_name/controller_name/action というURLでアクセスできます。
 ContactManager の例だと、ContactsController には
 /contact_manager/contacts でアクセスできます。
@@ -299,8 +312,8 @@ CakePHP アプリケーションで動作するプラグインの最後の tips 
 
 - \[Plugin\]AppController と \[Plugin\]AppModel が無ければ、
   プラグインコントローラにアクセスしようとすると、 missing Controller エラーになります。
-- プラグインのレイアウトは定義可能で、app/Plugin/\[Plugin\]/View/Layouts に含まれます。
-  一方でプラグインは、デフォルトは /app/View/Layouts フォルダからレイアウトを利用します。
+- プラグインのレイアウトは定義可能で、 `plugins/[Plugin]/View/Layouts` に含まれます。
+  一方でプラグインは、デフォルトは `templates/Layouts` フォルダからレイアウトを利用します。
 - コントローラ内で `$this->requestAction('/plugin_name/controller_name/action');`
   と書くと 内部プラグインとコミュニケーションができます。
 - requestAction を使う際は、コントローラ名とモデル名がユニークであることを確認してください。
@@ -310,13 +323,27 @@ CakePHP アプリケーションで動作するプラグインの最後の tips 
 
 ## プラグインの公開
 
-あなたのプラグインを [plugins.cakephp.org](https://plugins.cakephp.org) に追加できますし、
-[awesome-cakephp list](https://github.com/FriendsOfCake/awesome-cakephp)
-に申し込みできます。
+プラグインを共有するには、 `composer.json` ファイルを作成し、あなたのプラグインを
+[packagist.org](https://packagist.org/) に公開します。
+これで Composer を通して簡単にあなたのプラグインが使用できるようになります。
+パッケージの `type` を `cakephp-plugin` にし、アプリケーションのプラグインディレクトリに
+インストールされるように `composer/installers` を require に追加して、 `installer-name` に
+プラグインのフォルダ名を指定します。
 
-また、composer.json ファイルを作成し、あなたのプラグインを
-[packagist.org](https://packagist.org/) に公開してみたくありませんか。
-これは Composer を通して簡単にあなたのプラグインが使用できる方法です。
+``` json
+{
+    "name": "foo-bar/cakephp-logging",
+    "type": "cakephp-plugin",
+    "require": {
+        "php": ">=8.0",
+        "composer/installers": "*",
+        "pieceofcake2/cakephp": "^2.12"
+    },
+    "extra": {
+        "installer-name": "Logging"
+    }
+}
+```
 
 パッケージ名にセマンティックな意味のある名前を選んでください。これは、理想を言えば、
 "cakephp" をフレームワークとして依存関係を設定するべきです。
@@ -327,4 +354,5 @@ CakePHP 名前空間 (cakephp) を **使用しない** でください。
 
 もし、あなたの GitHub アカウントが "FooBar" で "Logging" プラグインを作成する場合、
 <span class="title-ref">foo-bar/cakephp-logging</span> と名付けるといいでしょう。
-そして、CakePHP 自身の "Localized" プラグンは、 <span class="title-ref">cakephp/localized</span> で見つけられます。
+そして、CakePHP 自身の "Localized" プラグインは、 <span class="title-ref">cakephp/localized</span> で見つけられます。
+その PHP 8 対応フォークは [pieceofcake2/localized](https://github.com/pieceofcake2/localized) でメンテナンスされています。

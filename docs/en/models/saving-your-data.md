@@ -128,7 +128,7 @@ as keys:
   a transaction.
 
 More information about model callbacks is available
-[here](../callback-methods)
+[here](callback-methods)
 
 > [!TIP]
 > If you don't want the `modified` field to be automatically updated when saving some
@@ -344,7 +344,7 @@ $data = [
 
 <a id="Model-saveAssociated"></a>
 
-## Model::saveAssociated(array \$data = null, array \$options = [])
+## Model::saveAssociated(array \$data = null, array \$options = []) {#model-saveassociated}
 
 Method used to save multiple model associations at once. The following
 options may be used:
@@ -592,7 +592,7 @@ him to log a student's attendance on a course with days attended and grade. Take
 a look at the following code. :
 
 ``` php
-// Controller/CourseMembershipController.php
+// src/Controller/CourseMembershipController.php
 class CourseMembershipsController extends AppController
 {
     public $uses = ['CourseMembership'];
@@ -615,7 +615,7 @@ class CourseMembershipsController extends AppController
     }
 }
 
-// View/CourseMemberships/add.ctp
+// templates/CourseMemberships/add.ctp
 
 <?php echo $this->Form->create('CourseMembership'); ?>
     <?php echo $this->Form->input('Student.first_name'); ?>
@@ -697,7 +697,7 @@ of existing students and courses from pick lists or ID entry and
 then the two meta-fields for the CourseMembership, e.g. :
 
 ``` php
-// View/CourseMemberships/add.ctp
+// templates/CourseMemberships/add.ctp
 
 <?php echo $this->Form->create('CourseMembership'); ?>
     <?php

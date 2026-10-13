@@ -16,9 +16,10 @@ CakePHP のフレームワークのほぼすべてのクラスは、あなた独
 
 例えば、あなた独自の HttpSocket クラスを用いたいなら以下のように配置します:
 
-    app/Lib/Network/Http/HttpSocket.php
+    src/Lib/Network/Http/HttpSocket.php
 
-一度このようにやりさえすれば、 App は CakePHP 内部のファイルの代わりにあなたが再定義したファイルを
+そして後述の「CakePHP のクラスをオーバーライドする」で説明しているように
+`App::uses()` で登録すると、 App は CakePHP 内部のファイルの代わりにあなたが再定義したファイルを
 ロードします。
 
 ## クラスのローディング
@@ -28,23 +29,27 @@ CakePHP のフレームワークのほぼすべてのクラスは、あなた独
 rtype  
 void
 
-CakePHP ではクラスは遅延ロードされますが、オートローダがクラスを発見出来るためには、
-どこでファイルを見つけられるのかをまず App に伝えなくてはなりません。
+CakePHP ではクラスは遅延ロードされます。CakePHP 自身のクラスは Composer の classmap
+オートローダで読み込まれるため、宣言する必要はありません。アプリケーションスケルトンのように
+`composer.json` でアプリケーションのクラスを classmap に指定している場合も同様です。
+
+``` json
+"autoload": {
+    "classmap": ["src/"]
+}
+```
+
+classmap を使う場合は、新しいクラスファイルを追加したら `composer dump-autoload` を実行してください。
+
+`App::uses()` が必要なのは、Composer が把握していないクラスです。つまり classmap を使っていない場合の
+アプリケーションのクラスと、Composer のオートロードに対応していないプラグインのクラスです。
 どのパッケージでクラスを発見できるのかを App に伝えることで、あるクラスを初めて使用するときに
 適切にファイルを見つけることができるのです。
 
-::: pieceofcake2 Composer オートロード
-pieceofcake2 フォークでは、フレームワークのクラスは Composer の classmap
-オートローダで読み込まれます。そのため `CakeTime`、`HttpSocket`、`Xml` などの
-コアクラスに `App::uses()` は不要です。次の場合は引き続き必要です。
-
-- アプリケーションのクラス（`composer.json` に classmap を設定している場合は不要。
-  例えばモダンレイアウトでは `"classmap": ["src/"]`。クラスを追加したら
-  `composer dump-autoload` を実行してください）
-- プラグインのクラス（プラグインが Composer オートロードに対応している場合は不要）
-
-既存の `App::uses()` 呼び出しはそのまま動作します。
-詳しくは [アップグレードガイド](/ja/pieceofcake2/upgrade) を参照してください。
+::: pieceofcake2
+フレームワークのクラスは Composer の classmap オートローダで読み込まれ、
+クラス同士で `App::uses()` を呼び出さなくなりました。既存の `App::uses()` 呼び出しはそのまま動作します。
+詳しくは [CakePHP 2.10 からの移行](/ja/appendices/migrating-from-cakephp-2-10) を参照してください。
 :::
 
 一般的なクラスの例をいくつか挙げます:
@@ -53,7 +58,7 @@ Console Commands
 `App::uses('AppShell', 'Console/Command');`
 
 Console Tasks  
-`App::uses('BakeTask', 'Console/Command/Task');`
+`App::uses('ImportTask', 'Console/Command/Task');`
 
 Controllers  
 `App::uses('PostsController', 'Controller');`
@@ -86,8 +91,9 @@ Utilities
 一致させなくてはなりません。
 
 > [!NOTE]
-> ベンダーのローディングは通常、規則に従わないパッケージのローディングを意味します。
-> 多くのベンダーのパッケージに対しては `App::import()` の使用が推奨されます。
+> サードパーティのライブラリは通常 Composer でインストールしてオートロードするため、
+> `App::uses()` や `App::import()` は必要ありません。Composer で入手できず、
+> 規則にも従っていない一部のファイルには `App::import()` を使ってください。
 
 ### プラグイン内のファイルをロードする
 
@@ -95,10 +101,10 @@ Utilities
 core のクラスのローディングとまったく同じように動作します:
 
 ``` php
-// app/Plugin/PluginName/Model/Comment.php にある Comment クラスをロードする
+// plugins/PluginName/Model/Comment.php にある Comment クラスをロードする
 App::uses('Comment', 'PluginName.Model');
 
-// app/Plugin/PluginName/Controller/Component/CommentComponent.php にある
+// plugins/PluginName/Controller/Component/CommentComponent.php にある
 // CommentComponent クラスをロードする
 App::uses('CommentComponent', 'PluginName.Controller/Component');
 ```
@@ -183,23 +189,10 @@ App::build([
 ```
 
 reset が true に設定されている場合、ロードされたすべてのプラグインは忘れ去られ、
-それらは再びロードされる必要があります。
+それらは再びロードされる必要があります。パッケージ名は `Controller` や `View/Helper` のような
+フォルダ名です。 `App::build()` は app のパスと core のパスをマージしません。
 
-例:
-
-``` php
-App::build(['controllers' => ['/full/path/to/controllers/']]);
-//このようになりました
-App::build(['Controller' => ['/full/path/to/Controller/']]);
-
-App::build(['helpers' => ['/full/path/to/views/helpers/']]);
-//このようになりました
-App::build(['View/Helper' => ['/full/path/to/View/Helper/']]);
-```
-
-::: info Changed in version 2.0
-`App::build()` はもはや app のパスと core のパスをマージしません
-:::
+<a id="app-build-register"></a>
 
 ### アプリケーションに新しいパッケージを追加する
 
@@ -247,12 +240,8 @@ App::objects('Controller');
 App::objects('MyPlugin.Model');
 ```
 
-::: info Changed in version 2.0
-:::
-
-1.  結果が空の場合や型が不正な場合に false の代わりに `[]` を返します
-2.  `App::objects('core')` は、もはやコアオブジェクトを返さずに `[]` を返します
-3.  完全なクラス名を返します
+`App::objects()` は完全なクラス名を返します。結果が空の場合や型が不正な場合は `[]` を返し、
+コアオブジェクトは返しません (`App::objects('core')` は `[]` を返します)。
 
 ## プラグインの配置
 
@@ -306,60 +295,63 @@ $Users->constructClasses();
 App::uses() を用いた、正しいパッケージを参照したロードが必要になりました。
 この変更は、フレームワークに大きなパフォーマンスの向上をもたらしました。**
 
-::: info Changed in version 2.0
-:::
+次の点に注意してください。
 
-- このメソッドはもはや再帰的にクラスを検索しなくなり、 `App::build()`
-  に定義されているパスの値を厳格に使用します
-- クラスをロードするための `App::import('Component', 'Component')` は使用不可になる予定。
-  `App::uses('Component', 'Controller');` を用いて下さい。
-- コアクラスをロードするためには `App::import('Lib', 'CoreClass');` はもはや使用不可です。
+- このメソッドはファイルを再帰的に検索せず、 `App::build()`
+  に定義されているパスの値を厳格に使用します。
+- コアクラスはオートロードされるため、このメソッドではロードできません。
 - 存在しないファイルのインポート、あるいは `$name` および `$file` のパラメータとして誤った型や
   パッケージ名や NULL値を渡すと、戻り値は false になります。
-- `App::import('Core', 'CoreClass')` はもはやサポートされません。 `App::uses()`
-  を用い、残りの部分はクラスのオートローディングにやらせます。
-- ベンダーファイルのローディングはベンダーフォルダを再帰的に探索しません。かつてのようにファイル名を
-  アンダースコアに変換することも、もうありません。
+- ベンダーファイルのローディングはベンダーフォルダを再帰的に探索せず、
+  ファイル名をアンダースコア形式に変換することもありません。
 
 ## CakePHP のクラスをオーバーライドする
 
 フレームワークのほぼすべてのクラスはオーバーライドすることができます。例外は `App` と
 `Configure` クラスです。そのようにオーバーライドを実行したいならばどんな場合であれ、
-フレームワークの内部構造を真似て `app/Lib` フォルダにクラスを追加する、ただそれだけです。
+フレームワークの内部構造を真似て `src/Lib` フォルダ (レガシーレイアウトでは `app/Lib`) にクラスを追加し、
+そのクラスが最初に使われる前に `App::uses()` で登録します。登録は `config/bootstrap.php` などで行います。
 いくつかの例を挙げます:
 
-- `Dispatcher` クラスをオーバーライドするためには `app/Lib/Routing/Dispatcher.php` を作成します
-- `CakeRoute` クラスをオーバーライドするためには `app/Lib/Routing/Route/CakeRoute.php` を作成します
-- `Model` クラスをオーバーライドするためには `app/Lib/Model/Model.php` を作成します
+- `Dispatcher` クラスをオーバーライドするためには `src/Lib/Routing/Dispatcher.php` を作成し、
+  `App::uses('Dispatcher', 'Routing');` を呼び出します
+- `CakeRoute` クラスをオーバーライドするためには `src/Lib/Routing/Route/CakeRoute.php` を作成し、
+  `App::uses('CakeRoute', 'Routing/Route');` を呼び出します
+- `Model` クラスをオーバーライドするためには `src/Lib/Model/Model.php` を作成し、
+  `App::uses('Model', 'Model');` を呼び出します
 
-置き換えたファイルをロードすると、 `app/Lib` のファイルが組み込みのコアクラスの代わりにロードされます。
+`App::load()` は Composer のオートローダより前に登録されています。 `App::uses()` で登録されたクラスについては、
+`src/Lib` を含むアプリケーションのフォルダをコアより先に探すため、組み込みのコアクラスの代わりに
+あなたのファイルがロードされます。 `App::uses()` を呼び出さなかった場合は、Composer によってコアのクラスがロードされます。
+`composer.json` で `src/` を classmap に指定している場合は、Composer の "Ambiguous class resolution"
+警告を避けるため、オーバーライドするファイルを `exclude-from-classmap` で除外してください。
 
 ::: pieceofcake2
-pieceofcake2 フォークでは、フレームワーク自身のクラスに対する `App::uses()` 呼び出しが
-削除され、Composer の classmap で読み込まれます。`App::load()` が `app/Lib` を探すのは
-`App::uses()` で登録されたクラスだけなので、オーバーライドが使われるのは、対応する
-`App::uses()`（例: `App::uses('HttpSocket', 'Network/Http');`）がそのクラスの
-最初の読み込みより前に実行された場合に限られます。モダンレイアウトでは
-`app/Lib` の代わりに `src/Lib` を使います。アップグレード後はオーバーライドが
-効いているか確認してください。
+フレームワークが自身のクラスに対して `App::uses()` を呼び出さなくなったため、
+`src/Lib` に置いたオーバーライドは、アプリケーションが `App::uses()` で登録した場合にだけ使われます。
+アップグレード後はオーバーライドが効いているか確認してください。
 :::
 
 ## Vendor ファイルをローディングする
+
+Composer でインストールしたライブラリはオートロードされるため、特別なコードは不要です。
+この節は、手作業でプロジェクトにコピーしたファイルを対象としています。それらのファイルは、
+Composer が管理しないプロジェクトの `vendors/` ディレクトリ (レガシーレイアウトでは `app/Vendor/`) に置きます。
 
 `App::uses()` をベンダーのディレクトリ内のクラスをロードするのに使うことが出来ます。
 これは他のファイルを読み込むのと同じ規則に従います:
 
 ``` php
-// app/Vendor/Geshi.php 内の Geshi クラスをロードする
+// vendors/Geshi.php 内の Geshi クラスをロードする
 App::uses('Geshi', 'Vendor');
 ```
 
 サブディレクトリ内のクラスをロードするには、それらのパスを `App::build()` で追加する必要があります:
 
 ``` php
-// app/Vendor/SomePackage/ClassInSomePackage.php 内の
+// vendors/SomePackage/ClassInSomePackage.php 内の
 // ClassInSomePackage クラスをロードする
-App::build(['Vendor' => [APP . 'Vendor' . DS . 'SomePackage' . DS]]);
+App::build(['Vendor' => [ROOT . DS . 'vendors' . DS . 'SomePackage' . DS]]);
 App::uses('ClassInSomePackage', 'Vendor');
 ```
 
@@ -368,7 +360,7 @@ App::uses('ClassInSomePackage', 'Vendor');
 次の例では、いくつかのパス構造からベンダーファイルをロードする方法を示しています。
 これらのベンダーファイルは、ベンダーのフォルダのいずれかに配置することができます。
 
-**app/Vendor/geshi.php** をロードする:
+**vendors/geshi.php** をロードする:
 
 ``` php
 App::import('Vendor', 'geshi');
@@ -377,19 +369,19 @@ App::import('Vendor', 'geshi');
 > [!NOTE]
 > CakePHP が他のファイルを見出してしまわないために、geshi のファイル名は、小文字でなくてはなりません。
 
-**app/Vendor/flickr/flickr.php** をロードする:
+**vendors/flickr/flickr.php** をロードする:
 
 ``` php
 App::import('Vendor', 'flickr', ['file' => 'flickr/flickr.php']);
 ```
 
-**app/Vendor/some.name.php** をロードする:
+**vendors/some.name.php** をロードする:
 
 ``` php
 App::import('Vendor', 'SomeName', ['file' => 'some.name.php']);
 ```
 
-**app/Vendor/services/well.named.php** をロードする:
+**vendors/services/well.named.php** をロードする:
 
 ``` php
 App::import(
@@ -399,7 +391,7 @@ App::import(
 );
 ```
 
-**app/Plugin/Awesome/Vendor/services/well.named.php** をロードする:
+**plugins/Awesome/Vendor/services/well.named.php** をロードする:
 
 ``` php
 App::import(
@@ -409,7 +401,7 @@ App::import(
 );
 ```
 
-**app/Plugin/Awesome/Vendor/Folder/Foo.php** をロードする:
+**plugins/Awesome/Vendor/Folder/Foo.php** をロードする:
 
 ``` php
 App::import(
@@ -418,8 +410,7 @@ App::import(
     ['file' => 'Folder' . DS . 'Foo.php']);
 ```
 
-ベンダーファイルが /vendors ディレクトリ内にあるかどうかに違いはありません。
-CakePHP は自動的にそれを見出します。
+`src/Vendor/` にあるベンダーファイルも同様に見つけられます。
 
 **vendors/vendorName/libFile.php** をロードする:
 

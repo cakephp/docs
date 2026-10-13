@@ -243,12 +243,10 @@ in without using cookies.
 Because authentication objects are pluggable, you can create custom
 authentication objects in your application or plugins. If for example you wanted
 to create an OpenID authentication object. In
-`app/Controller/Component/Auth/OpenidAuthenticate.php` you could put the
+`src/Controller/Component/Auth/OpenidAuthenticate.php` you could put the
 following:
 
 ``` php
-App::uses('BaseAuthenticate', 'Controller/Component/Auth');
-
 class OpenidAuthenticate extends BaseAuthenticate
 {
     public function authenticate(CakeRequest $request, CakeResponse $response)
@@ -332,7 +330,7 @@ element is rendered else a 403 HTTP status code is returned.
 
 In order to display the session error messages that Auth generates, you need to
 add the following code to your layout. Add the following two lines to the
-`app/View/Layouts/default.ctp` file in the body section preferable before the
+`templates/Layouts/default.ctp` file in the body section preferable before the
 content_for_layout line. :
 
 ``` php
@@ -411,8 +409,6 @@ When creating new user records you can hash a password in the `beforeSave`
 callback of your model using appropriate password hasher class:
 
 ``` php
-App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
-
 class User extends AppModel
 {
     public function beforeSave($options = [])
@@ -465,8 +461,6 @@ with any other authentication strategies, it's also recommended that you store
 the digest password in a separate column, from the normal password hash:
 
 ``` php
-App::uses('DigestAuthenticate', 'Controller/Component/Auth');
-
 class User extends AppModel
 {
     public function beforeSave($options = [])
@@ -496,12 +490,10 @@ password hashes, based on the RFC for digest authentication.
 
 Custom password hasher classes need to extend the `AbstractPasswordHasher`
 class and need to implement the abstract methods `hash()` and `check()`.
-In `app/Controller/Component/Auth/CustomPasswordHasher.php` you could put the
+In `src/Controller/Component/Auth/CustomPasswordHasher.php` you could put the
 following:
 
 ``` php
-App::uses('AbstractPasswordHasher', 'Controller/Component/Auth');
-
 class CustomPasswordHasher extends AbstractPasswordHasher
 {
     public function hash($password)
@@ -660,12 +652,10 @@ The core authorize objects support the following configuration keys.
 Because authorize objects are pluggable, you can create custom authorize
 objects in your application or plugins. If for example you wanted to
 create an LDAP authorize object. In
-`app/Controller/Component/Auth/LdapAuthorize.php` you could put the
+`src/Controller/Component/Auth/LdapAuthorize.php` you could put the
 following:
 
 ``` php
-App::uses('BaseAuthorize', 'Controller/Component/Auth');
-
 class LdapAuthorize extends BaseAuthorize
 {
     public function authorize($user, CakeRequest $request)

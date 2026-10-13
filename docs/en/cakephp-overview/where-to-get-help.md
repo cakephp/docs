@@ -1,37 +1,47 @@
 # Where to Get Help
 
-::: pieceofcake2
-The resources below are for the original CakePHP project, where CakePHP 2.x has
-reached end of life. For problems specific to the pieceofcake2 fork (for example
-PHP 8 compatibility), use the
-[pieceofcake2/cakephp issue tracker](https://github.com/pieceofcake2/cakephp/issues).
-:::
+CakePHP 2 has reached its end of life in the CakePHP project. The resources
+below are a mix of places for the Piece of Cake 2 fork and for CakePHP in
+general.
+
+## Piece of Cake 2 on GitHub
+
+<https://github.com/pieceofcake2>
+
+The fork of CakePHP 2, the application skeleton and the maintained plugins
+are developed on GitHub. If you find a bug or a PHP 8 compatibility problem,
+open an issue in the repository it belongs to, for example
+[pieceofcake2/cakephp](https://github.com/pieceofcake2/cakephp/issues) for the
+framework, [pieceofcake2/app](https://github.com/pieceofcake2/app/issues) for
+the application skeleton, or
+[pieceofcake2/docs](https://github.com/pieceofcake2/docs/issues) for this
+book. Please include your PHP version, the error message and, if possible,
+minimal code to reproduce the problem.
 
 ## The Official CakePHP website
 
 <https://cakephp.org>
 
 The Official CakePHP website is always a great place to visit. It features links
-to oft-used developer tools, screencasts, donation opportunities, and downloads.
+to the current versions of CakePHP, developer tools, and community resources.
 
 ## The Cookbook
 
-<https://book.cakephp.org>
+<https://pieceofcake2.github.io/docs/>
 
 This manual should probably be the first place you go to get answers. As with
 many other open source projects, we get new folks regularly. Try your best to
 answer your questions on your own first. Answers may come slower, but will
-remain longer – and you'll also be lightening our support load. Both the manual
-and the API have an online component.
+remain longer – and you'll also be lightening our support load. The Cookbooks
+for current versions of CakePHP are at <https://book.cakephp.org>.
 
 ## The Bakery
 
 <https://bakery.cakephp.org>
 
 The CakePHP Bakery is a clearing house for all things regarding CakePHP.
-Check it out for tutorials, case studies, and code examples. Once you're
-acquainted with CakePHP, log on and share your knowledge with the community and
-gain instant fame and fortune.
+Check it out for news, tutorials, case studies, and code examples. Many of the
+older articles were written for CakePHP 2.
 
 ## The API
 
@@ -41,34 +51,17 @@ Straight to the point and straight from the core developers, the CakePHP API
 (Application Programming Interface) is the most comprehensive documentation
 around for all the nitty gritty details of the internal workings of the
 framework. It's a straight forward code reference, so bring your propeller hat.
+The API reference documents the original CakePHP 2.x; see the
+[Upgrade Guide](/appendices/migrating-from-cakephp-2-10) for what has changed in the fork.
 
 ## The Test Cases
 
 If you ever feel the information provided in the API is not sufficient, check
 out the code of the test cases provided with CakePHP. They can serve as
-practical examples for function and data member usage for a class. :
-
-    lib/Cake/Test/Case
-
-::: pieceofcake2
-In the pieceofcake2 fork, the framework's test cases are in `tests/TestCase/`
-(`vendor/pieceofcake2/cakephp/tests/TestCase/` when installed with Composer).
-:::
-
-## The IRC channel
-
-**IRC Channels on irc.freenode.net:**
-
-- [\#cakephp](irc://irc.freenode.net/cakephp) -- General
-  Discussion
-- [\#cakephp-docs](irc://irc.freenode.net/cakephp-docs) --Documentation
-- [\#cakephp-bakery](irc://irc.freenode.net/cakephp-bakery) --Bakery
-
-If you're stumped, give us a holler in the CakePHP IRC channel.
-Someone from the [development team](https://github.com/cakephp?tab=members)
-is usually there, especially during the daylight hours for North and South
-America users. We'd love to hear from you, whether you need some help, want to
-find users in your area, or would like to donate your brand new sports car.
+practical examples for function and data member usage for a class. The test
+cases are in the `tests/TestCase` directory of the
+[pieceofcake2/cakephp](https://github.com/pieceofcake2/cakephp/tree/2.x/tests/TestCase)
+repository.
 
 <a id="cakephp-official-communities"></a>
 
@@ -118,12 +111,6 @@ enable existing users of stackoverflow to find your questions.
 
 - [CakePHP JAPAN Facebook Group](https://www.facebook.com/groups/304490963004377/)
 
-### Portuguese
-
-- [Portuguese CakePHP Google Group](https://groups.google.com/group/cakephp-pt)
-
 ### Spanish
 
 - [Spanish CakePHP Slack Channel](https://cakesf.slack.com/messages/spanish/)
-- [Spanish CakePHP IRC Channel](irc://irc.freenode.net/cakephp-es)
-- [Spanish CakePHP Google Group](https://groups.google.com/group/cakephp-esp)

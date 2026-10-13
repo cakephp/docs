@@ -1,55 +1,42 @@
 # Piece of Cake 2
 
-::: pieceofcake2
-このページは **pieceofcake2 フォーク** 固有の内容で、本家 CakePHP 2.x のドキュメントには含まれません。
-このドキュメント全体で、このような枠で囲まれた部分はフォークにのみ当てはまる内容です。
-:::
+[Piece of Cake 2](https://github.com/pieceofcake2) は、CakePHP 2 のアプリケーションを現在の PHP で
+動かし続けるためのコミュニティプロジェクトです。PHP 8.0 以降で動作する CakePHP 2.x のフォーク
+[pieceofcake2/cakephp](https://github.com/pieceofcake2/cakephp) を中心に、アプリケーションスケルトン、
+Bake プラグイン、主要な CakePHP 2 プラグインのフォークをメンテナンスしています。
 
-[pieceofcake2/cakephp](https://github.com/pieceofcake2/cakephp) は、CakePHP 2.x を PHP 8.0 以降で
-動作させるためのコミュニティメンテナンス版フォークです。
-[Piece of Cake 2](https://github.com/pieceofcake2) プロジェクトがメンテナンスしており、
-主要な CakePHP 2 プラグインのフォークも提供しています。本家 CakePHP 2.x は
-[2021年6月にサポートを終了](https://bakery.cakephp.org/2021/10/02/cakephp_2_eol.html)しています。
+CakePHP プロジェクトによる CakePHP 2.x のサポートは
+[2021年6月に終了](https://bakery.cakephp.org/2021/10/02/cakephp_2_eol.html)しました。
+このフォークは CakePHP 2.10.24 をベースに、PHP への対応、バグ修正、セキュリティ修正を行っています。
+新しい機能は追加しません。
 
 ::: warning
-**新規プロジェクトで CakePHP 2.x を使わないでください。** このフォークは既存のレガシーアプリケーションを
-動かし続けるためのものです。新規プロジェクトには [CakePHP 5.x](https://book.cakephp.org/5/ja/) を使ってください。
+CakePHP 2 は既存のアプリケーションを保守するためのものです。新しくプロジェクトを始める場合は
+[CakePHP 5](https://book.cakephp.org/5/ja/) を使ってください。
 :::
 
-## 動作要件
+## このドキュメントについて
 
-- PHP 8.0, 8.1, 8.2, 8.3, 8.4, 8.5
-- Composer（Composer を使わないインストールはサポートしません）
-- MySQL 5.6 以降、PostgreSQL 9.4 以降、SQLite 3、Microsoft SQL Server 2022 以降
+このドキュメントは、CakePHP 2 のクックブックを、フォーク上で現在動いている CakePHP 2 に合わせて
+更新したものです。Composer でのインストール、PHP 8、[pieceofcake2/app](https://github.com/pieceofcake2/app)
+で使っているモダンなディレクトリ構成を前提に説明しています。本家の CakePHP 2.x のドキュメントと
+異なるページは [本家ドキュメントからの変更点](/ja/pieceofcake2/changes) にまとめています。
 
-このフォークは CakePHP **2.10.24** をベースにしています。それより前のバージョンはサポートしません。
+## はじめに読むページ
 
-## インストール
-
-```json
-{
-    "require": {
-        "pieceofcake2/cakephp": "^2.10"
-    }
-}
-```
-
-`pieceofcake2/cakephp` は Composer の `replace` で `cakephp/cakephp` を置き換えるため、
-`cakephp/cakephp:^2.x` に依存するプラグインもそのまま動作します。
-
-## フォークのドキュメント
-
-- [インストール](/ja/pieceofcake2/installation) - 動作要件、Composer での導入、インストール後の作業
-- [アップグレードガイド](/ja/pieceofcake2/upgrade) - CakePHP 2.10.24 からの移行と破壊的変更
-- [ディレクトリ構成](/ja/pieceofcake2/directory-structure) - レガシー（`app/`）とモダン（`src/`）の構成、CakePHP 5 への段階的な移行
-- [コーディング規約](/ja/pieceofcake2/coding-standards) - フォークが採用している CakePHP 5 ベースの規約
-- [セキュリティ](/ja/pieceofcake2/security) - セキュリティ修正と推奨設定
-- [リポジトリとプラグイン](/ja/pieceofcake2/plugins) - メンテナンス中のリポジトリとプラグインのフォーク
+- [インストール](/ja/installation) - 新しいアプリケーションを作る、または既存のアプリケーションを
+  pieceofcake2/cakephp に切り替えます。
+- [CakePHP 2.10 からの移行](/ja/appendices/migrating-from-cakephp-2-10) - 本家の CakePHP 2.10.24 から
+  アプリケーションを移行する手順と、破壊的変更を説明します。
+- [モダン構成への移行](/ja/appendices/migrating-to-the-modern-layout) - `app/` の構成から
+  CakePHP 5 と同じ形の構成へ、段階的に移る方法を説明します。
+- [脆弱性への対応](/ja/appendices/security-fixes) - フォークで修正した脆弱性と、必要な対応を説明します。
+- [メンテナンスされているプラグイン](/ja/plugins/maintained-plugins) - PHP 8 向けにメンテナンスしているプラグインの一覧です。
 
 ## リソース
 
-- [pieceofcake2/cakephp](https://github.com/pieceofcake2/cakephp) - フレームワーク本体
+- [pieceofcake2/cakephp](https://github.com/pieceofcake2/cakephp) -
+  [CHANGELOG](https://github.com/pieceofcake2/cakephp/blob/2.x/CHANGELOG.md)、
+  [UPGRADE](https://github.com/pieceofcake2/cakephp/blob/2.x/UPGRADE.md)
 - [pieceofcake2/app](https://github.com/pieceofcake2/app) - アプリケーションスケルトン
-- [pieceofcake2/bake](https://github.com/pieceofcake2/bake) - Bake プラグイン（コアから分離）
-- [CHANGELOG](https://github.com/pieceofcake2/cakephp/blob/2.x/CHANGELOG.md)
-- [UPGRADE](https://github.com/pieceofcake2/cakephp/blob/2.x/UPGRADE.md)
+- [pieceofcake2/docs](https://github.com/pieceofcake2/docs) - このドキュメントのソース

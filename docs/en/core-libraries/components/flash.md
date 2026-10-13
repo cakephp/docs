@@ -29,14 +29,14 @@ Flash messages now stack. Successive calls to `set()` or `__call()` with the sam
 
 To create custom Flash elements, FlashComponent's `__call` magic
 method allows you use a method name that maps to an element located under
-the `app/View/Elements/Flash` directory. By convention, camelcased
+the `templates/Elements/Flash` directory. By convention, camelcased
 methods will map to the lowercased and underscored element name:
 
 ``` php
-// Uses app/View/Elements/Flash/success.ctp
+// Uses templates/Elements/Flash/success.ctp
 $this->Flash->success('This was successful');
 
-// Uses app/View/Elements/Flash/great_success.ctp
+// Uses templates/Elements/Flash/great_success.ctp
 $this->Flash->greatSuccess('This was greatly successful');
 ```
 
@@ -67,7 +67,7 @@ $this->Flash->success('The user has been saved', [
 // In your View
 <?php echo $this->Flash->render('positive') ?>
 
-<!-- In app/View/Elements/Flash/success.ctp -->
+<!-- In templates/Elements/Flash/success.ctp -->
 <div id="flash-<?php echo h($key) ?>" class="message-info success">
     <?php echo h($message) ?>: <?php echo h($params['name']) ?>, <?php echo h($params['email']) ?>.
 </div>

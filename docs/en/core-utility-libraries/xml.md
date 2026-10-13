@@ -2,38 +2,28 @@
 
 `class` **Xml**
 
-The Xml class was all refactored. PHP 5 implements a
-[SimpleXML](https://www.php.net/simplexml) and
-[DOMDocument](https://www.php.net/domdocument), so that CakePHP doesn't need to
-re-implement an XML parser. The new XML class will transform an array into a
+PHP provides [SimpleXML](https://www.php.net/simplexml) and
+[DOMDocument](https://www.php.net/domdocument), so CakePHP doesn't need to
+implement its own XML parser. The Xml class transforms an array into
 SimpleXMLElement or DOMDocument objects, and vice versa.
 
 ## Importing data to Xml class
 
-In CakePHP 1.3 you can pass an array, XML as string, URL or file path to the
-constructor of the Xml class in order to import data. In CakePHP 2.0 you can do
-it by using `Xml::build()`. Unless the return value is a Xml object,
-it will return a SimpleXMLElement or DOMDocument object (depending of your
-options parameter - default is SimpleXMLElement). Below you get some samples on
-how to import data from URL:
+You can import data with `Xml::build()`. Depending on the `return` option, it
+returns a SimpleXMLElement (the default) or a DOMDocument object. Below you get
+some samples on how to import data from a URL:
 
 ``` php
-// First Load the Utility Class
-App::uses('Xml', 'Utility');
-
-// Old method:
-$xml = new Xml('https://bakery.cakephp.org/articles.rss');
-
-// New method using SimpleXML
-$xml = Xml::build('https://bakery.cakephp.org/articles.rss');
+// Using SimpleXML
+$xml = Xml::build('https://example.com/articles.rss');
 // $xml now is a instance of SimpleXMLElement
 
 // or
-$xml = Xml::build('https://bakery.cakephp.org/articles.rss', ['return' => 'simplexml']);
+$xml = Xml::build('https://example.com/articles.rss', ['return' => 'simplexml']);
 // $xml now is a instance of SimpleXMLElement
 
-// New method using DOMDocument
-$xml = Xml::build('https://bakery.cakephp.org/articles.rss', ['return' => 'domdocument']);
+// Using DOMDocument
+$xml = Xml::build('https://example.com/articles.rss', ['return' => 'domdocument']);
 // $xml now is a instance of DOMDocument
 ```
 
@@ -58,8 +48,13 @@ files will be fetched with `HttpSocket`:
 $xml = Xml::build('/home/awesome/unicorns.xml');
 
 // remote file
-$xml = Xml::build('https://bakery.cakephp.org/articles.rss');
+$xml = Xml::build('https://example.com/articles.rss');
 ```
+
+> [!WARNING]
+> A string that does not contain `<` is treated as a file path or URL, and the
+> file or URL is read. Never pass user-supplied data to `Xml::build()` unless
+> you have checked that it is XML content.
 
 You can also build Xml objects using an array:
 
@@ -68,8 +63,8 @@ $data = [
     'post' => [
         'id' => 1,
         'title' => 'Best post',
-        'body' => ' ... '
-    ]
+        'body' => ' ... ',
+    ],
 ];
 $xml = Xml::build($data);
 ```
@@ -77,7 +72,7 @@ $xml = Xml::build($data);
 If your input is invalid the Xml class will throw a Exception:
 
 ``` php
-$xmlString = 'What is XML?'
+$xmlString = 'What is XML?';
 try {
     $xmlObject = Xml::build($xmlString); // Here will throw a Exception
 } catch (XmlException $e) {
@@ -92,16 +87,9 @@ try {
 
 ## Transforming a XML string in array
 
-Converting XML strings into arrays is simple with the Xml class as well. By
-default you'll get a SimpleXml object back:
+Converting XML strings into arrays is simple with the Xml class as well:
 
 ``` php
-//Old method:
-$xmlString = '<?xml version="1.0"?><root><child>value</child></root>';
-$xmlObject = new Xml($xmlString);
-$xmlArray = $xmlObject->toArray();
-
-// New method:
 $xmlString = '<?xml version="1.0"?><root><child>value</child></root>';
 $xmlArray = Xml::toArray(Xml::build($xmlString));
 ```
@@ -111,12 +99,6 @@ If your XML is invalid it will throw an Exception.
 ## Transforming an array into a string of XML
 
 ``` php
-// Old method:
-$xmlArray = ['root' => ['child' => 'value']];
-$xmlObject = new Xml($xmlArray, ['format' => 'tags']);
-$xmlString = $xmlObject->toString();
-
-// New method:
 $xmlArray = ['root' => ['child' => 'value']];
 $xmlObject = Xml::fromArray($xmlArray, ['format' => 'tags']); // You can use Xml::build() too
 $xmlString = $xmlObject->asXML();
@@ -139,14 +121,9 @@ Examples of invalid arrays:
 ];
 ```
 
-> [!WARNING]
-> The default format option was changed from <span class="title-ref">attributes</span> to <span class="title-ref">tags</span>. This was
-> done to make the Xml, that the Xml class generates, more compatible with XML
-> in the wild. Be careful if you depend of this. In the new version you can
-> create a mixed array with tags, attributes and value, just use format as
-> tags (or do not say anything, because it is the default value) and prefix
-> keys that are supposed to be attributes with <span class="title-ref">@</span>. For value text, use <span class="title-ref">@</span>
-> as the key.
+The default format is `tags`: each array key becomes a child element. You can
+create a mixed array with tags, attributes and value. Prefix keys that are
+supposed to be attributes with `@`, and use `@` as the key for the text value:
 
 ``` php
 $xmlArray = [
@@ -167,26 +144,12 @@ The content of `$xmlString` will be:
 <project id="1">Value of project<name>Name of project, as tag</name></project>
 ```
 
-> [!NOTE]
-> The structure of array was changed. Now the child must be in a sub-tree
-> and not in the same tree. Moreover, the strings will not be changed by
-> `Inflector`. See the sample below:
+Child elements must be nested in a sub-tree of their parent, and keys are used
+as element names as they are (they are not changed by `Inflector`). Repeated
+elements are written as a numerically indexed array. See the sample below:
 
 ``` php
-$oldArray = [
-    'Projects' => [
-        [
-            'Project' => ['id' => 1, 'title' => 'Project 1'],
-            'Industry' => ['id' => 1, 'name' => 'Industry 1']
-        ],
-        [
-            'Project' => ['id' => 2, 'title' => 'Project 2'],
-            'Industry' => ['id' => 2, 'name' => 'Industry 2']
-        ]
-    ]
-];
-
-$newArray = [
+$data = [
     'projects' => [
         'project' => [
             [
@@ -202,7 +165,7 @@ $newArray = [
 ];
 ```
 
-Both will result the XML below:
+This will result in the XML below:
 
 ``` php
 <?xml version="1.0"?>
@@ -241,7 +204,7 @@ $xmlArray = [
 ];
 $xml1 = Xml::fromArray($xmlArray);
 
-$xmlArray(
+$xmlArray = [
     'root' => [
         'tag' => [
             'xmlns:pref' => 'https://cakephp.org',
@@ -251,7 +214,7 @@ $xmlArray(
             ]
         ]
     ]
-);
+];
 $xml2 = Xml::fromArray($xmlArray);
 ```
 
@@ -259,7 +222,7 @@ The value of `$xml1` and `$xml2` will be, respectively:
 
 ``` php
 <?xml version="1.0"?>
-<root xmlns="https://cakephp.org"><child>value</child>
+<root xmlns="https://cakephp.org"><child>value</child></root>
 
 
 <?xml version="1.0"?>
@@ -268,22 +231,17 @@ The value of `$xml1` and `$xml2` will be, respectively:
 
 ### Creating a child
 
-The Xml class of CakePHP 2.0 doesn't provide the manipulation of content, this
-must be done using SimpleXMLElement or DOMDocument. But CakePHP has you covered.
-Below you see the steps for creating a child node with CakePHP:
+The Xml class doesn't provide the manipulation of content, this
+must be done using SimpleXMLElement or DOMDocument. Below you see the steps for
+creating a child node:
 
 ``` php
-// CakePHP 1.3
-$myXmlOriginal = '<?xml version="1.0"?><root><child>value</child></root>';
-$xml = new Xml($myXmlOriginal, ['format' => 'tags']);
-$xml->children[0]->createNode('young', 'new value');
-
-// CakePHP 2.0 - Using SimpleXML
+// Using SimpleXML
 $myXmlOriginal = '<?xml version="1.0"?><root><child>value</child></root>';
 $xml = Xml::build($myXmlOriginal);
-$xml->root->addChild('young', 'new value');
+$xml->addChild('young', 'new value');
 
-// CakePHP 2.0 - Using DOMDocument
+// Using DOMDocument
 $myXmlOriginal = '<?xml version="1.0"?><root><child>value</child></root>';
 $xml = Xml::build($myXmlOriginal, ['return' => 'domdocument']);
 $child = $xml->createElement('young', 'new value');
@@ -302,7 +260,17 @@ from a number of sources including strings, arrays and remote URLs.
 `static` Xml::**build**($input, $options = [])
 
 Initialize SimpleXMLElement or DOMDocument from a given XML string, file
-path, URL or array
+path, URL or array. The following options are available:
+
+- `return` Either `'simplexml'` (default) to return a SimpleXMLElement or
+  `'domdocument'` to return a DOMDocument.
+- `loadEntities` Whether to load `<!ENTITY` definitions. Defaults to `false`
+  for security reasons. Only enable it for XML from trusted sources.
+- `readFile` Whether a local file path is read. Defaults to `true`.
+- `parseHuge` Enables `LIBXML_PARSEHUGE`. Defaults to `true`.
+
+When the input is an array, the options of `Xml::fromArray()` (such as
+`format` and `pretty`) can also be passed.
 
 Building XML from a string:
 
@@ -325,7 +293,7 @@ $xml = Xml::build('/path/to/an/xml/file.xml');
 Building from a remote URL:
 
 ``` php
-$xml = Xml::build('http://example.com/example.xml');
+$xml = Xml::build('https://example.com/example.xml');
 ```
 
 Building from an array:

@@ -151,6 +151,8 @@ create() には多くのオプションがあります:
 
 `method` FormHelper::**end**($options = null, $secureAttributes = [])
 
+<a id="automagic-form-elements"></a>
+
 ## フォーム要素の生成
 
 FormHelper でフォームの input 要素を作る方法はいくつかあります。まずは
@@ -938,6 +940,8 @@ SecurityComponent を利用する際は、前述のようにフォームを閉�
 `method` FormHelper::**unlockField**($name)
 
 `method` FormHelper::**secure**(array $fields = [])
+
+<a id="form-improvements-1-3"></a>
 
 ## 2.0 アップデート内容
 

@@ -173,9 +173,9 @@ hasOne 用のテーブルは、以下の規約に従います。
 > 必ずしも CakePHP の規約に従っていなくても問題ありません。
 > それでも規約に従っていれば、コードの可読性、メンテナンス性が高くなります。
 
-User モデルは /app/Model/User.php にあります。
+User モデルは `src/Model/User.php` にあります。
 「User hasOne Profile」というアソシエーションを定義するには、User モデルの中で
-\$hasOne プロパティを追加します。ただし、Profile モデルが /app/Model/Profile.php に
+\$hasOne プロパティを追加します。ただし、Profile モデルが `src/Model/Profile.php` に
 ないと正常に動作しません。 :
 
 ``` php
@@ -274,7 +274,7 @@ belongsTo 用のテーブルは、以下の規約に従います。
 > あるテーブルが外部キーを含んでいれば、そのテーブルは外部キーの先の
 > テーブルに属しているということになります。
 
-Profile モデル (/app/Model/Profile.php) に文字列で belongsTo アソシエーションを
+Profile モデル (`src/Model/Profile.php`) に文字列で belongsTo アソシエーションを
 定義してみましょう。 :
 
 ``` php
@@ -415,7 +415,7 @@ class ImageComment extends AppModel
 }
 ```
 
-### 複数の counterCache
+### 複数の counterCache {#multiple-countercache}
 
 CakePHP は、 2.0 の時から単一のモデルのリレーション中に、複数の `counterCache` を持つことに
 対応しています。それはまた、それぞれの `counterCache` のための `counterScope` の定義を
@@ -460,7 +460,7 @@ hasMany 用のテーブルは、以下の規約に従います。
 | Cake hasMany Virtue    | Virtue.cake_id    |
 | Product hasMany Option | Option.product_id |
 
-User モデル (/app/Model/Profile.php) に文字列で hasMany アソシエーションを
+User モデル (`src/Model/User.php`) に文字列で hasMany アソシエーションを
 定義してみましょう。 :
 
 ``` php
@@ -728,7 +728,7 @@ Ingredient モデルに HABTM アソシエーションを定義することに�
 > [!TIP]
 > HABTM のデータ保存に関する詳細は [Saving Habtm](../models/saving-your-data#saving-habtm) を参照してください。
 
-## hasMany through (モデルの結合)
+## hasMany through (モデルの結合) {#hasmany-through}
 
 多 対 多のアソシエーションを使って追加データを保存する方が
 良い場合があります。以下のような状況を考えてみてください。
@@ -997,7 +997,7 @@ class Post extends AppModel
 テーブルに `parent_id` フィールドがある場合、 [Model Find Threaded](../models/retrieving-your-data#model-find-threaded) を使えば、
 アソシエーションを定義せずに、1度のクエリ実行で入れ子になったデータを取得できます。
 
-## テーブルの結合
+## テーブルの結合 {#joining-tables}
 
 JOIN 句を使って関連するテーブルを結合できます。
 これは複数テーブルを使った複雑なクエリを実行することができます。

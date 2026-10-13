@@ -8,7 +8,7 @@
 > 1.3のコードを2.0へ移行する手助けとなる、2.0で導入された [Upgrade Shell](../console-and-shells/upgrade-shell#upgrade-shell) を必ずチェックしてください。
 
 ::: pieceofcake2
-pieceofcake2 フォークでは、Upgrade Shell はコアから外されました。
+Piece of Cake 2 フォークでは、Upgrade Shell はコアから外されました。
 [pieceofcake2/upgrade](https://github.com/pieceofcake2/upgrade) プラグインをインストールし
 (`composer require --dev pieceofcake2/upgrade`)、`CakePlugin::load('Upgrade')` で読み込んでください。
 :::
@@ -891,9 +891,9 @@ SimpleTestをずっとサポートすることはもうないでしょう。
 テストを移行する方法についての更なる情報は、 PHPUnitへ移行するヒントを見てください。
 
 ::: pieceofcake2
-pieceofcake2 フォークは PHPUnit 3.7 ではなく PHPUnit 9.6 を使います。PHPUnit のクラスは名前空間付きの名前になります
+Piece of Cake 2 フォークは PHPUnit 3.7 ではなく PHPUnit 9.6 を使います。PHPUnit のクラスは名前空間付きの名前になります
 (例: `PHPUnit_Framework_TestSuite` ではなく `PHPUnit\Framework\TestSuite`)。
-[アップグレードガイド](/ja/pieceofcake2/upgrade) を参照してください。
+[アップグレードガイド](/ja/appendices/migrating-from-cakephp-2-10) を参照してください。
 :::
 
 ### グループテストの廃止

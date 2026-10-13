@@ -15,27 +15,33 @@ i18n シェルは、素早く容易に po テンプレートファイルを生�
 抽出するためにアプリケーション全体をスキャンします。アプリケーション中のユニークな文字列は
 それぞれ一つの POT ファイルの中に混合されます。 :
 
-    ./Console/cake i18n extract
+    bin/cake i18n extract
 
-上記は、抽出シェルを実行します。 `__()` メソッド中の文字列を抽出することのくわえて、
-モデルのバリデーションメッセージも抽出できます。このコマンドの結果は、
-`app/Locale/default.pot` ファイルになります。pot ファイルは、 po ファイルを
-作成するためのテンプレートとして使用します。もし、手動で pot ファイルから po ファイルを
-作成するなら、 `Plural-Forms` ヘッダー行を正しく設定してください。
+上記は、抽出シェルを実行します。シェルは、スキャンするディレクトリ (デフォルトは
+アプリケーションディレクトリの `src/`) と出力先 (デフォルトは `src/Locale`) を尋ねます。
+`__()` メソッド中の文字列を抽出することにくわえて、モデルのバリデーションメッセージも
+抽出できます。
 
-::: pieceofcake2
-pieceofcake2 フォークのモダンレイアウトでは、翻訳ファイルは `app/Locale/` ではなく
-`resources/locales/` に置きます。extract シェルが出力先として提案するのは `<アプリケーションディレクトリ>/Locale`
-（`src/Locale`）のままなので、`bin/cake i18n extract --output resources/locales`
-のように出力先を明示してください。
-:::
+ビューテンプレートは `templates/` に、翻訳ファイルは `resources/locales/` に置くので、
+通常はこの 2 つの場所を明示的に指定します。 :
+
+    bin/cake i18n extract --paths src,templates --output resources/locales
+
+このコマンドの結果は、 `resources/locales/default.pot` ファイルになります。
+pot ファイルは、 po ファイルを作成するためのテンプレートとして使用します。もし、手動で
+pot ファイルから po ファイルを作成するなら、 `Plural-Forms` ヘッダー行を正しく設定してください。
+
+> [!NOTE]
+> モデルのバリデーションメッセージが抽出されるのは、スキャン対象がアプリケーション
+> ディレクトリだけの場合 (対話モードのデフォルト) に限られます。上の
+> `--paths src,templates` を指定したコマンドでは抽出されません。
 
 ### プラグイン用 POT ファイルの生成
 
 特定のプラグインで使用される POT ファイルを生成することができます。 :
 
 ``` text
-./Console/cake i18n extract --plugin <Plugin>
+bin/cake i18n extract --plugin <Plugin>
 ```
 
 これは、プラグイン中で使用されたで必要な POT ファイルを生成します。
@@ -46,17 +52,17 @@ pieceofcake2 フォークのモダンレイアウトでは、翻訳ファイル�
 もし、モデルがすでに `$validationDomain` プロパティを持っているなら、
 与えられたバリデーションドメインは無視されます。 :
 
-    ./Console/cake i18n extract --validation-domain validation_errors
+    bin/cake i18n extract --validation-domain validation_errors
 
 また、バリデーションメッセージの抽出を止められます。 :
 
-    ./Console/cake i18n extract --ignore-model-validation
+    bin/cake i18n extract --ignore-model-validation
 
 ### フォルダーの除外
 
 除外したいフォルダをカンマ区切りで指定します。指定された値に含まれるパスは無視されます。 :
 
-    ./Console/cake i18n extract --exclude Test,Vendor
+    bin/cake i18n extract --exclude Test,Vendor
 
 ### 既存の POT ファイル上書きの警告をスキップする
 
@@ -66,7 +72,7 @@ pieceofcake2 フォークのモダンレイアウトでは、翻訳ファイル�
 `--overwrite` を追加することで、 POT ファイルが存在しても警告されず、
 デフォルトで上書きされます。 :
 
-    ./Console/cake i18n extract --overwrite
+    bin/cake i18n extract --overwrite
 
 ### CakePHP コアライブラリからのメッセージ抽出
 
@@ -77,17 +83,17 @@ pieceofcake2 フォークのモダンレイアウトでは、翻訳ファイル�
 抽出するかどうか訊ねます。 `--extract-core` に `yes` か `no` を設定することで、
 デフォルトの動作を指定できます。
 
-    ./Console/cake i18n extract --extract-core yes
+    bin/cake i18n extract --extract-core yes
 
     または
 
-    ./Console/cake i18n extract --extract-core no
+    bin/cake i18n extract --extract-core no
 
 ## TranslateBehavior で使用されるテーブルを作る
 
 i18n シェルは、 `TranslateBehavior` で使用されるデフォルトのテーブルを
 初期化することができます。 :
 
-    ./Console/cake i18n initdb
+    bin/cake i18n initdb
 
 これで翻訳ビヘイビアで使用される `i18n` デーブルが作成されます。

@@ -6,22 +6,18 @@ The [security library](https://api.cakephp.org/2.x/class-Security.html)
 handles basic security measures such as providing methods for
 hashing and encrypting data.
 
-> [!NOTE]
-> By default the encryption features offered by Security rely on the deprecated
-> `mcrypt` extension.
-> This behaviour can be changed by setting `Security.useOpenSsl`.
-> If you are using the default behaviour using PHP\>=7.1 you will need to
-> install `mcrypt` via PECL.
-
-::: pieceofcake2
-PHP 8 does not ship the `mcrypt` extension. On the pieceofcake2 fork, add
-`Configure::write('Security.useOpenSsl', true);` to your `core.php` so that
-`Security::encrypt()` and `Security::decrypt()` use OpenSSL.
-`Security::rijndael()` always requires `mcrypt`, and `Security::cipher()`
-(used by the default `'cipher'` type of `CookieComponent`) is insecure:
-use `encrypt()`/`decrypt()` or the `'aes'` cookie type instead.
-See [Security](/pieceofcake2/security).
-:::
+> [!IMPORTANT]
+> By default `Security::encrypt()` and `Security::decrypt()` use the `mcrypt`
+> extension, which has not been bundled with PHP since PHP 7.2. Enable OpenSSL
+> in `config/core.php` instead:
+>
+> ``` php
+> Configure::write('Security.useOpenSsl', true);
+> ```
+>
+> The OpenSSL implementation produces the same format as the `mcrypt` one, so
+> values encrypted earlier can still be decrypted. `Security::rijndael()` has no
+> OpenSSL implementation and always requires `mcrypt`.
 
 ## Security API
 
@@ -42,7 +38,9 @@ $nosecret = Security::cipher($secret, 'my_key');
 
 > [!WARNING]
 > `cipher()` uses a **weak** XOR cipher and should **not** be used.
-> It is only included for backwards compatibility.
+> It is only included for backwards compatibility. It is also used by the
+> default `'cipher'` encryption type of `CookieComponent`; use the `'aes'`
+> type instead (see [Security Fixes](/appendices/security-fixes)).
 
 `static` Security::**rijndael**($text, $key, $mode)
 
@@ -57,7 +55,9 @@ param string \$mode
 The mode to use, either 'encrypt' or 'decrypt'
 
 Encrypts/Decrypts text using the rijndael-256 cipher. This requires the
-[mcrypt extension](https://www.php.net/mcrypt) to be installed:
+[mcrypt extension](https://pecl.php.net/package/mcrypt) to be installed from
+PECL. For new code, prefer `Security::encrypt()` and `Security::decrypt()` with
+`Security.useOpenSsl` enabled. Usage looks like this:
 
 ``` php
 // Encrypt some data.
@@ -107,8 +107,8 @@ Encrypted values can be decrypted using `Security::decrypt()`.
 ::: info Added in version 2.5
 :::
 
-::: info Added in version 2.10.8
-Set `Security.useOpenSsl` to use OpenSSL instead of the deprecated `mcrypt` extension.
+::: info Changed in version 2.10.8
+Set `Security.useOpenSsl` to use OpenSSL instead of the `mcrypt` extension.
 :::
 
 `static` Security::**decrypt**($cipher, $key, $hmacSalt = null)
@@ -141,8 +141,8 @@ If the value cannot be decrypted due to changes in the key or HMAC salt
 ::: info Added in version 2.5
 :::
 
-::: info Added in version 2.10.8
-Set `Security.useOpenSsl` to use OpenSSL instead of the deprecated `mcrypt` extension.
+::: info Changed in version 2.10.8
+Set `Security.useOpenSsl` to use OpenSSL instead of the `mcrypt` extension.
 :::
 
 `static` Security::**hash**( $string, $type = NULL, $salt = false )

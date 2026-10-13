@@ -7,6 +7,10 @@
         {
           "text": "Piece of Cake 2",
           "link": "/ja/pieceofcake2"
+        },
+        {
+          "text": "本家ドキュメントからの変更点",
+          "link": "/ja/pieceofcake2/changes"
         }
       ]
     },
@@ -549,6 +553,10 @@
         {
           "text": "プラグインの使用方法",
           "link": "/ja/plugins/how-to-use-plugins"
+        },
+        {
+          "text": "メンテナンスされているプラグイン",
+          "link": "/ja/plugins/maintained-plugins"
         }
       ]
     },
@@ -593,6 +601,18 @@
         {
           "text": "付録",
           "link": "/ja/appendices"
+        },
+        {
+          "text": "CakePHP 2.10 からの移行",
+          "link": "/ja/appendices/migrating-from-cakephp-2-10"
+        },
+        {
+          "text": "モダン構成への移行",
+          "link": "/ja/appendices/migrating-to-the-modern-layout"
+        },
+        {
+          "text": "脆弱性への対応",
+          "link": "/ja/appendices/security-fixes"
         },
         {
           "text": "1.2 から 2.0 への移行",

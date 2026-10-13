@@ -141,7 +141,7 @@ class CategoriesController extends AppController
 and an even simpler model definition:
 
 ``` php
-// app/Model/Category.php
+// src/Model/Category.php
 class Category extends AppModel
 {
     public $actsAs = ['Tree'];

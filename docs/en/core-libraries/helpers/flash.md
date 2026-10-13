@@ -10,8 +10,9 @@ FlashHelper provides a way to render flash messages that were set in
 `$_SESSION` by [FlashComponent](../../core-libraries/components/flash).
 [FlashComponent](../../core-libraries/components/flash) and FlashHelper
 primarily use elements to render flash messages. Flash elements are found under
-the `app/View/Elements/Flash` directory. You'll notice that CakePHP's App
-template comes with two flash elements: `success.ctp` and `error.ctp`.
+the `templates/Elements/Flash` directory. CakePHP itself ships with
+`default.ctp`, `success.ctp` and `error.ctp` flash elements, which you can
+override by creating files with the same names in that directory.
 
 The FlashHelper replaces the `flash()` method on `SessionHelper`
 and should be used instead of that method.

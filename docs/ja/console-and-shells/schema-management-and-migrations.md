@@ -9,16 +9,10 @@
 また、既存のデータベースを使用してスキーマファイルを生成することもできます。 :
 
 ``` bash
-$ Console/cake schema generate
+$ bin/cake schema generate
 ```
 
-上のコマンドで schema.php ファイルが `app/Config/Schema` ディレクトリに生成されるはずです。
-
-::: pieceofcake2
-pieceofcake2 フォークのモダンレイアウトでは、スキーマファイルの読み書きは `app/Config/Schema/` ではなく
-`config/Schema/` で行われます（`SchemaShell` 自体はフレームワークパッケージの
-`src/Cake/Console/Command/` にあります）。
-:::
+上のコマンドで schema.php ファイルが `config/Schema` ディレクトリ (レガシーレイアウトでは `app/Config/Schema`) に生成されるはずです。
 
 > [!NOTE]
 > スキーマシェルはモデルが定義されたテーブルのみを対象として処理します。
@@ -27,7 +21,7 @@ pieceofcake2 フォークのモダンレイアウトでは、スキーマファ�
 前もって作成した schema.php からデータベースを再構築するためには、次のコマンドを実行してください。 :
 
 ``` bash
-$ Console/cake schema create
+$ bin/cake schema create
 ```
 
 schema.php の中身に沿ってテーブルが再構成されるはずです。
@@ -36,7 +30,7 @@ schema.php の中身に沿ってテーブルが再構成されるはずです。
 `CREATE TABLE` 文を含む SQL ファイルを生成するには次のコマンドを実行してください。 :
 
 ``` bash
-$ Console/cake schema dump --write filename.sql
+$ bin/cake schema dump --write filename.sql
 ```
 
 ここで filename.sql には SQL ファイルとして出力したいファイル名を指定します。
@@ -117,7 +111,7 @@ public function before($event = [])
 
 CakeSchema クラスは、全てのデータベーススキーマの基本クラスです。それぞれの
 スキーマクラスはテーブルのセットを生成することができます。
-`lib/Cake/Console/Command` ディレクトリの中のスキーマシェルコンソールクラス
+スキーマシェルコンソールクラス
 `SchemaShell` は、コマンドラインを解釈し、基本スキーマクラスは、データベースからの
 読み込みやデータベーステーブルの生成ができます。
 
@@ -322,7 +316,7 @@ var $comments => [
 もし既に作成済みのスキーマファイルがあるのであれば、次のコマンドを実行してください。 :
 
 ``` bash
-$ Console/cake schema generate
+$ bin/cake schema generate
 ```
 
 実行すると、次の選択肢が表示されるはずです。 :
@@ -341,7 +335,7 @@ Would you like to do? (o/s/q)
 いつでも以下のコマンドでスキーマファイルへの保存ができます。 :
 
 ``` bash
-$ cake schema update -s 2
+$ bin/cake schema update -s 2
 ```
 
 ここで 2 は更新元のスナップショット番号を示します。
@@ -368,7 +362,7 @@ $ cake schema update -s 2
 
     ``` bash
     $ # 一度データベースを更新した後で
-    $ Console/cake schema generate
+    $ bin/cake schema generate
     $ git commit -a
     ```
 
@@ -387,8 +381,8 @@ $ cake schema update -s 2
 
     ``` bash
     $ git pull
-    $ Console/cake schema create
-    $ Console/cake schema update
+    $ bin/cake schema create
+    $ bin/cake schema update
     ```
 
 いずれの操作でも `--dry` オプションで dry-run が使用できます。
@@ -403,7 +397,7 @@ $ cake schema update -s 2
 
 ``` bash
 $ git revert HEAD
-$ Console/cake schema update
+$ bin/cake schema update
 ```
 
 上のコマンドを実行すると、以下の選択肢が表示されるはずです。 :

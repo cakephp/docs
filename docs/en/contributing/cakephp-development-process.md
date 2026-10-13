@@ -1,57 +1,57 @@
 # CakePHP Development Process
 
-::: pieceofcake2
-This page describes the upstream CakePHP team's process. The pieceofcake2 fork
-is maintained by the community on GitHub: it has a single maintained branch
-(`2.x`), and discussion happens in the issues and pull requests of
-[pieceofcake2/cakephp](https://github.com/pieceofcake2/cakephp), not on IRC.
-:::
+Here we explain how the Piece of Cake 2 fork of CakePHP 2 is maintained. The
+fork is maintained by the community on GitHub. All discussion happens in the
+issues and pull requests of the
+[pieceofcake2](https://github.com/pieceofcake2) repositories.
 
-Here we attempt to explain the process we use when developing the
-CakePHP framework. We rely heavily on community interaction through
-tickets and IRC chat. IRC is the best place to find members of the
-[development team](https://github.com/cakephp?tab=members) and discuss
-ideas, the latest code, and make general comments. If something more
-formal needs to be proposed or there is a problem with a release, the
-ticket system is the best place to share your thoughts.
+## Goals
 
-We currently maintain 4 versions of CakePHP.
+The fork exists to keep existing CakePHP 2 applications running on current PHP
+versions. It aims to:
 
-- **stable** : Tagged releases intended for production where stability
-  is more important than features. Issues filed against these releases
-  will be fixed in the related branch, and be part of the next release.
-- **maintenance branch** : Development branches become maintenance
-  branches once a stable release point has been reached. Maintenance
-  branches are where all bugfixes are committed before making their way
-  into a stable release. Maintenance branches have the same name as the
-  major version they are for example *1.2*. If you are using a stable
-  release and need fixes that haven't made their way into a stable
-  release check here.
-- **development branches** : Development branches contain leading edge
-  fixes and features. They are named after the version number they are
-  for example *1.3*. Once development branches have reached a stable
-  release point they become maintenance branches, and no further new
-  features are introduced unless absolutely necessary.
-- **feature branches** : Feature branches contain unfinished or
-  possibly unstable features and are recommended only for power users
-  interested in the most advanced feature set and willing to contribute
-  back to the community. Feature branches are named with the following
-  convention *version-feature*. An example would be *1.3-router* Which
-  would contain new features for the Router for 1.3.
+- maintain compatibility with PHP 8.x,
+- fix bugs and security issues,
+- keep the tests passing on all supported PHP versions and databases,
+- support a gradual migration path to CakePHP 5, for example with the modern
+  directory layout that both CakePHP 2 and CakePHP 5 can use.
 
-Hopefully this will help you understand what version is right for you.
-Once you pick your version you may feel compelled to contribute a bug
-report or make general comments on the code.
+The fork does not add new features. For new projects, use CakePHP 5.
 
-- If you are using a stable version or maintenance branch, please submit
-  tickets or discuss with us on IRC.
-- If you are using the development branch or feature branch, the first
-  place to go is IRC. If you have a comment and cannot reach us in IRC
-  after a day or two, please submit a ticket.
+## Branches
 
-If you find an issue, the best answer is to write a test. The best
-advice we can offer in writing tests is to look at the ones included in
-the core.
+The framework has a single maintained branch, `2.x`. Bug fixes, security fixes
+and compatibility changes are all made on this branch, and pull requests target
+it. There are no separate maintenance, development or feature branches as in
+the original CakePHP project.
 
-As always, if you have any questions or comments, visit us at \#cakephp
-on irc.freenode.net.
+## Releases
+
+Releases are tags on the `2.x` branch, published as
+[GitHub releases](https://github.com/pieceofcake2/cakephp/releases) and on
+[Packagist](https://packagist.org/packages/pieceofcake2/cakephp) as
+`pieceofcake2/cakephp`. The fork started from CakePHP 2.10.24:
+
+- The first releases were numbered `2.10.24.1`, `2.10.24.2` and so on, on top
+  of the original 2.10.24.
+- Later releases continue with their own version numbers: `2.11.0` moved the
+  framework to the new directory layout, `2.12.0` switched to Composer classmap
+  autoloading, and `2.12.x` releases contain fixes on top of it.
+
+Minor releases such as 2.11.0 and 2.12.0 included changes that affect
+applications, so read the release notes before you update. Each release is described in the
+[CHANGELOG](https://github.com/pieceofcake2/cakephp/blob/2.x/CHANGELOG.md).
+Changes that require you to change your application, and how to migrate from
+the original CakePHP 2.10.24, are described in the
+[UPGRADE guide](https://github.com/pieceofcake2/cakephp/blob/2.x/UPGRADE.md)
+and in [Migrating from CakePHP 2.10](/appendices/migrating-from-cakephp-2-10).
+
+## Taking Part
+
+- If you find a bug, open an issue as described in [Tickets](tickets). The
+  best answer to a bug is a test that reproduces it. The tests in
+  `tests/TestCase` of the framework are good examples to start from.
+- If you want to fix something yourself, send a pull request as described in
+  [Code](code).
+- If you find a security issue, report it privately as described in
+  [Reporting Security Issues](tickets#reporting-security-issues).

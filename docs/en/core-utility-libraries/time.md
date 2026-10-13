@@ -13,8 +13,7 @@ class UsersController extends AppController
 
     public function afterLogin()
     {
-        App::uses('CakeTime', 'Utility');
-        if (CakeTime::isToday($this->Auth->user('date_of_birth']))) {
+        if (CakeTime::isToday($this->Auth->user('date_of_birth'))) {
             // greet user with a happy birthday message
             $this->Session->setFlash(__('Happy birthday you...'));
         }
@@ -30,13 +29,16 @@ class UsersController extends AppController
 
 ## Formatting
 
-::: pieceofcake2 strftime() replacement
-PHP's `strftime()` is deprecated in PHP 8.1. Methods that take `strftime()`
-style formats (such as `i18nFormat()`, `nice()` and `format()`) now use
-`IntlDateFormatter` through `php81_bc/strftime` (the `intl` extension, or the
-Symfony polyfill if it is not installed). Most formats produce the same output,
+Methods that accept `strftime()` style formats, such as `i18nFormat()` and
+`nice()`, format dates with `IntlDateFormatter` through the
+`php81_bc/strftime` library, because PHP's own `strftime()` is deprecated
+since PHP 8.1. Install the `intl` extension to get localized month and day
+names; without it the Symfony polyfill is used, which only supports English.
+
+::: pieceofcake2
+`strftime()` was replaced by an
+`IntlDateFormatter` based implementation. Most formats produce the same output,
 but edge cases may differ, so test your date formatting.
-See the [upgrade guide](/pieceofcake2/upgrade).
 :::
 
 `method` CakeTime::**convert**($serverTime, $timezone = NULL)

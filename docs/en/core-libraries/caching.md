@@ -18,15 +18,10 @@ to implement your own caching systems. The built-in caching engines are:
   atomic operations. However, since disk storage is often quite cheap,
   storing large objects, or elements that are infrequently written
   work well in files. This is the default Cache engine for 2.3+
-- `ApcCache` APC cache uses the [APC](https://www.php.net/manual/book.apcu) or [APCu](https://www.php.net/apcu) extension. These extensions use shared memory on the
+- `ApcCache` APC cache uses the [APCu](https://www.php.net/apcu) extension
+  (the `Apc` engine name is kept for compatibility). APCu uses shared memory on the
   webserver to store objects. This makes it very fast, and able to provide
-  atomic read/write features. By default CakePHP in 2.0-2.2 will use this cache
-  engine, if it's available.
-- `Wincache` Wincache uses the [Wincache](https://www.php.net/wincache)
-  extension. Wincache is similar to APC in features and performance, but
-  optimized for Windows and Microsoft IIS.
-- `XcacheEngine` [Xcache](https://en.wikipedia.org/wiki/List_of_PHP_accelerators#XCache)
-  is a PHP extension that provides similar features to APC.
+  atomic read/write features.
 - `MemcacheEngine` Uses the [Memcache](https://www.php.net/memcache)
   extension. Memcache provides a very fast cache system that can be
   distributed across many servers, and provides atomic operations.
@@ -36,11 +31,10 @@ to implement your own caching systems. The built-in caching engines are:
   extension (2.2.3 minimum). Redis provides a fast and persistent cache system
   similar to memcached, also provides atomic operations.
 
-::: pieceofcake2 Removed cache engines
-The `Wincache` and `Xcache` engines have been removed in the pieceofcake2 fork.
-The available engines are `File`, `Apc` (APCu), `Memcache`, `Memcached` and
-`Redis`. If you used Wincache or Xcache, switch to APCu, Memcached or Redis.
-See the [upgrade guide](/pieceofcake2/upgrade).
+::: pieceofcake2
+The Xcache and Wincache engines were removed.
+If you used them, switch to APCu (`Apc`), Memcached or Redis. See the
+[upgrade guide](/appendices/migrating-from-cakephp-2-10).
 :::
 
 ::: info Changed in version 2.3
@@ -60,10 +54,10 @@ can greatly improve performance as well.
 ## Configuring Cache class
 
 Configuring the Cache class can be done anywhere, but generally
-you will want to configure Cache in `app/Config/bootstrap.php`. You
+you will want to configure Cache in `config/bootstrap.php`. You
 can configure as many cache configurations as you need, and use any
 mixture of cache engines. CakePHP uses two cache configurations internally,
-which are configured in `app/Config/core.php`. If you are using APC or
+which are configured in `config/core.php`. If you are using APC or
 Memcache you should make sure to set unique keys for the core caches. This will
 prevent multiple applications from overwriting each other's cached data.
 
@@ -96,7 +90,7 @@ Cache::config('long', [
 ]);
 ```
 
-By placing the above code in your `app/Config/bootstrap.php` you will
+By placing the above code in your `config/bootstrap.php` you will
 have two additional Cache configurations. The name of these
 configurations 'short' or 'long' is used as the `$config`
 parameter for `Cache::write()` and `Cache::read()`, e.g. `Cache::read('my_data', 'short')`.
@@ -111,12 +105,12 @@ In debug mode missing directories will now be automatically created to avoid unn
 
 ## Creating a storage engine for Cache
 
-You can provide custom `Cache` adapters in `app/Lib` as well
+You can provide custom `Cache` adapters in `src/Lib` as well
 as in plugins using `$plugin/Lib`. App/plugin cache engines can
 also override the core engines. Cache adapters must be in a cache
 directory. If you had a cache engine named `MyCustomCacheEngine`
-it would be placed in either `app/Lib/Cache/Engine/MyCustomCacheEngine.php`
-as an app/libs or in `$plugin/Lib/Cache/Engine/MyCustomCacheEngine.php` as
+it would be placed in either `src/Lib/Cache/Engine/MyCustomCacheEngine.php`
+as an application library or in `$plugin/Lib/Cache/Engine/MyCustomCacheEngine.php` as
 part of a plugin. Cache configs from plugins need to use the plugin
 dot syntax. :
 
@@ -129,7 +123,7 @@ Cache::config('custom', [
 
 > [!NOTE]
 > App and Plugin cache engines should be configured in
-> `app/Config/bootstrap.php`. If you try to configure them in core.php
+> `config/bootstrap.php`. If you try to configure them in core.php
 > they will not work correctly.
 
 Custom Cache engines must extend `CacheEngine` which defines
@@ -186,8 +180,7 @@ a behavior, that read from the cache, or ran the associated model method.
 That is an exercise you can do though.
 
 As of 2.5 you can accomplish the above much more simple by using
-`Cache::remember()`. Assuming you are using PHP 5.3 or
-newer, using the `remember()` method would look like:
+`Cache::remember()`. Using the `remember()` method would look like:
 
 ``` php
 class Post extends AppModel
@@ -260,7 +253,7 @@ For instance, whenever a new post is added, we could tell the Cache engine to
 remove all entries associated to the `post` group:
 
 ``` php
-// Model/Post.php
+// src/Model/Post.php
 
 public function afterSave($created, $options = [])
 {
@@ -277,7 +270,7 @@ public function afterSave($created, $options = [])
 group and configurations, i.e.: having the same group:
 
 ``` php
-// Model/Post.php
+// src/Model/Post.php
 
 /**
  * A variation of previous example that clears all Cache configurations
@@ -405,8 +398,8 @@ add method was added in 2.8.0.
 
 `static` Cache::**clear**($check, $config = 'default')
 
-Destroy all cached values for a cache configuration. In engines like Apc,
-Memcache and Wincache, the cache configuration's prefix is used to remove
+Destroy all cached values for a cache configuration. In engines like Apc
+and Memcache, the cache configuration's prefix is used to remove
 cache entries. Make sure that different cache configurations have different
 prefixes.
 
@@ -432,8 +425,7 @@ it will be returned. If the key does not exist, the callable will be invoked
 and the results stored in the cache at the provided key.
 
 For example, you often want to cache query results. You could use
-`remember()` to make this simple. Assuming you are using PHP 5.3 or
-newer:
+`remember()` to make this simple:
 
 ``` php
 class Articles extends AppModel

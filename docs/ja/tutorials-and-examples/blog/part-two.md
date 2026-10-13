@@ -1,11 +1,5 @@
 # ブログチュートリアル - レイヤーの追加
 
-::: pieceofcake2
-`pieceofcake2/app` でプロジェクトを作成した場合（モダンレイアウト）は、`app/Model/`、`app/Controller/`、
-`app/View/` の代わりに、モデルを `src/Model/`、コントローラを `src/Controller/`、ビューを `templates/`
-（例: `templates/Posts/index.ctp`）に置いてください。[ブログチュートリアル](blog) 冒頭のボックスも参照してください。
-:::
-
 ## Post モデルの作成
 
 モデルクラスは、CakePHP アプリケーションの基本中の基本 (*bread and butter*) です。
@@ -13,11 +7,12 @@ CakePHP のモデルを作成することで、データベースとやりとり
 追加 (*add*)、編集 (*edit*)、削除 (*delete*) といった操作に必要な土台を
 手に入れることになります。
 
-CakePHP のモデルクラスのファイルは、 `/app/Model` の中にあり、今回は、
-`/app/Model/Post.php` というファイルを作って保存します。
+CakePHP のモデルクラスのファイルは、 `src/Model` の中にあり、今回は、
+`src/Model/Post.php` というファイルを作って保存します。
 ファイルの中身全体は次のようになります:
 
 ``` php
+// src/Model/Post.php
 class Post extends AppModel
 {
 }
@@ -28,23 +23,24 @@ CakePHP は自動的に、このモデルは PostsController で使用される�
 また、 `posts` という名前のデータベーステーブルと結びつけられます。
 
 > [!NOTE]
-> もし一致するファイルが /app/Model に見つけられなければ、CakePHP は動的に
+> もし一致するファイルが `src/Model` に見つけられなければ、CakePHP は動的に
 > モデルオブジェクトを生成します。これはまた、不意に間違ったファイル名 (例えば、
 > post.php や posts.php) をつけると、CakePHP はどんな設定も認識できず、
 > 代わりにデフォルトのものを使うことになるということも意味します。
 
 テーブルの接頭辞 (*prefix*) や、コールバック、バリデーションといったモデルの詳細については、
-マニュアルの [モデル](../../models) の章を参照してください。
+マニュアルの [モデル](/ja/models) の章を参照してください。
 
 ## Posts コントローラの作成
 
 次に、投稿記事 (*posts*) に対するコントローラを作成します。
 コントローラとは、投稿記事とやりとりするためのビジネスロジックが入るところです。
 簡単に言うと、それは幾つかのモデルとやりとりし、投稿記事に関連する作業を行う場所です。
-この新しいコントローラは、 `PostsController.php` という名前で、 `/app/Controller`
+この新しいコントローラは、 `PostsController.php` という名前で、 `src/Controller`
 ディレクトリの中に配置します。基本的なコントローラは次のようになります:
 
 ``` php
+// src/Controller/PostsController.php
 class PostsController extends AppController
 {
     public $helpers = ['Html', 'Form'];
@@ -87,7 +83,7 @@ www.example.com/posts/index というリクエストで、そのロジックに�
 Post モデルは自動的に `$this->Post` として呼び出せるようになります。
 これは、CakePHP の命名規約に従っているからです。
 
-CakePHP のコントローラに関する詳細は、 [コントローラ](../../controllers) の章をチェックしてください。
+CakePHP のコントローラに関する詳細は、 [コントローラ](/ja/controllers) の章をチェックしてください。
 
 ## Post ビューの作成
 
@@ -146,12 +142,12 @@ CakePHP のビュー (*view*) は、アプリケーションのレイアウト (
 ]
 ```
 
-CakePHP のビューファイルは、 `/app/View` の中の、コントローラ名に対応するフォルダの中に
+CakePHP のビューファイルは、 `templates/` の中の、コントローラ名に対応するフォルダの中に
 保存されています (この場合は、「Posts」というフォルダを作成します)。
 この投稿記事データをテーブル表示するには、ビューのコードは次のようなものにできます
 
 ``` php
-<!-- File: /app/View/Posts/index.ctp -->
+<!-- File: templates/Posts/index.ctp -->
 
 <h1>Blog posts</h1>
 <table>
@@ -181,7 +177,7 @@ CakePHP のビューファイルは、 `/app/View` の中の、コントロー�
 これは、CakePHP の `HtmlHelper` クラスのインスタンスです。
 CakePHP には一連のビューヘルパーがあり、リンクの作成、フォームの出力、
 JavaScript、AJAX などをすぐに使えます。使い方の詳細については、
-[ヘルパー](../../views/helpers) を参照してください。ここで重要なのは、
+[ヘルパー](/ja/views/helpers) を参照してください。ここで重要なのは、
 `link()` メソッドが、指定されたタイトル（最初のパラメータ）と
 URL (二つ目のパラメータ) で HTML リンクを生成する、ということです。
 
@@ -191,7 +187,7 @@ CakePHP のリバースルーティング機能を活用することができま
 /コントローラ/アクション/パラメータ1/パラメータ2
 という形のアプリケーションの基本パスに対する相対パスを単に書くこともできます。
 
-この時点で、ブラウザから <http://www.example.com/posts/index> を開いてみてください。
+この時点で、ブラウザから <http://localhost:8765/posts/index> を開いてみてください。
 タイトルと投稿内容のテーブル一覧がまとめられているビューが表示されるはずです。
 
 ビューの中のリンク (投稿記事のタイトルから /posts/view/some_id という URL へのリンク) を
@@ -201,7 +197,7 @@ CakePHP のリバースルーティング機能を活用することができま
 そうでないなら、これから PostsController の中に作ってみましょう:
 
 ``` php
-// File: /app/Controller/PostsController.php
+// File: src/Controller/PostsController.php
 class PostsController extends AppController
 {
     public $helpers = ['Html', 'Form'];
@@ -240,11 +236,11 @@ URL を通して渡されます。ユーザが、 `/posts/view/3` とリクエ�
 CakePHP の ErrorHandler に処理が引き継がれます。また、ユーザーが存在するレコードに
 アクセスしたことを確認するために同様のチェックを実行します。
 
-では、新しい「view」アクション用のビューを作って、 `/app/View/Posts/view.ctp`
+では、新しい「view」アクション用のビューを作って、 `templates/Posts/view.ctp`
 というファイルで保存しましょう。
 
 ``` php
-<!-- File: /app/View/Posts/view.ctp -->
+<!-- File: templates/Posts/view.ctp -->
 
 <h1><?php echo h($post['Post']['title']); ?></h1>
 
@@ -274,7 +270,7 @@ class PostsController extends AppController
         $this->set('posts', $this->Post->find('all'));
     }
 
-    public function view($id)
+    public function view($id = null)
     {
         if (!$id) {
             throw new NotFoundException(__('Invalid post'));
@@ -357,7 +353,7 @@ CakePHP を使うと、その作業を簡単、高速に片付けることがで
 add のビューは次のようなものになります:
 
 ``` php
-<!-- File: /app/View/Posts/add.ctp -->
+<!-- File: templates/Posts/add.ctp -->
 
 <h1>Add Post</h1>
 <?php
@@ -389,9 +385,9 @@ POST で送るフォームを構築している、と解釈されます。
 `$this->Form->end()` の呼び出しで、submit ボタンとフォームの終了部分が出力されます。
 `end()` の最初のパラメータとして文字列が指定してある場合、FormHelper は、
 それに合わせて submit ボタンに名前をつけ、終了フォームタグも出力します。
-ヘルパーの詳細に関しては、 [ヘルパー](../../views/helpers) を参照してください。
+ヘルパーの詳細に関しては、 [ヘルパー](/ja/views/helpers) を参照してください。
 
-さて少し戻って、 `/app/View/Posts/index.ctp` のビューで「Add Post」というリンクを
+さて少し戻って、 `templates/Posts/index.ctp` のビューで「Add Post」というリンクを
 新しく表示するように編集しましょう。 `<table>` の前に、以下の行を追加してください:
 
 ``` php
@@ -424,7 +420,7 @@ class Post extends AppModel
 空ではいけない、ということを設定しています。CakePHP のバリデーションエンジンは強力で、
 組み込みのルールがいろいろあります (クレジットカード番号、メールアドレスなど）。
 また柔軟に、独自ルールを作って設定することもできます。この設定に関する詳細は、
-[データバリデーション](../../models/data-validation) を参照してください。
+[データバリデーション](/ja/models/data-validation) を参照してください。
 
 バリデーションルールを書き込んだので、アプリケーションを動作させて、タイトルと本文を
 空にしたまま、記事を投稿してみてください。 `FormHelper::input()` メソッドを
@@ -477,7 +473,7 @@ POST データでレコードを更新したり、バリデーションエラー
 edit ビューは以下のようになるでしょう:
 
 ``` php
-<!-- File: /app/View/Posts/edit.ctp -->
+<!-- File: templates/Posts/edit.ctp -->
 
 <h1>Edit Post</h1>
 <?php
@@ -499,7 +495,7 @@ echo $this->Form->end('Save Post');
 これで、特定の記事をアップデートするためのリンクを index ビューに付けることができます:
 
 ``` php
-<!-- File: /app/View/Posts/index.ctp  (編集リンクを追加済み) -->
+<!-- File: templates/Posts/index.ctp  (編集リンクを追加済み) -->
 
 <h1>Blog posts</h1>
 <p><?php echo $this->Html->link("Add Post", ['action' => 'add']); ?></p>
@@ -547,7 +543,7 @@ echo $this->Form->end('Save Post');
 PostsController の `delete()` アクションを作るところから始めます:
 
 ``` php
-public function delete($id)
+public function delete($id = null)
 {
     if ($this->request->is('get')) {
         throw new MethodNotAllowedException();
@@ -571,14 +567,14 @@ public function delete($id)
 を使って、ユーザに確認メッセージを表示し、それから `/posts` にリダイレクトします。
 ユーザーが GET リクエストを用いて削除を試みようとすると、例外を投げます。
 捕捉されない例外は CakePHP の例外ハンドラーによって捕まえられ、気の利いたエラーページが
-表示されます。多くの組み込み [例外(Exception)](../../development/exceptions) があり、アプリケーションが
+表示されます。多くの組み込み [例外(Exception)](/ja/development/exceptions) があり、アプリケーションが
 生成することを必要とするであろう様々な HTTP エラーを指し示すのに使われます。
 
 ロジックを実行してリダイレクトするので、このアクションにはビューがありません。
 しかし、index ビューにリンクを付けて、投稿を削除するようにできるでしょう:
 
 ``` php
-<!-- File: /app/View/Posts/index.ctp -->
+<!-- File: templates/Posts/index.ctp -->
 
 <h1>Blog posts</h1>
 <p><?php echo $this->Html->link('Add Post', ['action' => 'add']); ?></p>
@@ -642,13 +638,13 @@ CakePHP のデフォルトのルーティングの動作で十分だという人
 URL がどのように特定の関数の呼び出しにマップされるのかを理解したいと思うはずです。
 このチュートリアルでは、routes を簡単に変える方法について扱います。
 
-ルーティングテクニックの応用に関する情報は、 [Routes Configuration](../../development/routing#routes-configuration) を見てください。
+ルーティングテクニックの応用に関する情報は、 [Routes Configuration](/ja/development/routing#routes-configuration) を見てください。
 
 今のところ、ユーザがサイト (たとえば、 <http://www.example.com>) を見に来ると、
 CakePHP は PagesController に接続し、「home」というビューを表示するようになっています。
 ではこれを、ルーティングルールを作成して PostsController に行くようにしてみましょう。
 
-CakePHP のルーティングは、 `/app/Config/routes.php` の中にあります。
+CakePHP のルーティングは、 `config/routes.php` の中にあります。
 デフォルトのトップページのルートをコメントアウトするか、削除します。
 この行です:
 
@@ -687,19 +683,19 @@ CakePHP には、もっともっと *多くの* 機能があります。シン�
 もっと機能豊かなアプリケーションを作成してください。
 
 基本的なアプリケーションの作成が終わったので、現実世界のアプリを作る準備が整いました。
-自分のプロジェクトを始めて、 [Cookbook](../../index) の残りと
+自分のプロジェクトを始めて、 [Cookbook](/ja/index) の残りと
 [API](https://api.cakephp.org) を使いましょう。
 
 もし困ったときは、いろんな方法で助けを得ることができます。
-[情報の探し方](../../cakephp-overview/where-to-get-help) を見てみてください。
+[情報の探し方](/ja/cakephp-overview/where-to-get-help) を見てみてください。
 CakePHP にようこそ！
 
 ### お勧めの参考文献
 
 CakePHP を学習する人が次に学びたいと思う共通のタスクがいくつかあります:
 
-1.  [View Layouts](../../views#view-layouts): ウェブサイトのレイアウトをカスタマイズする
-2.  [View Elements](../../views#view-elements) ビューのスニペットを読み込んで再利用する
-3.  [Scaffolding](../../controllers/scaffolding): コードを作成する前のプロトタイピング
-4.  [Bakeでコード生成](../../console-and-shells/code-generation-with-bake) 基本的な CRUD コードの生成
-5.  [シンプルな認証と承認のアプリケーション](../../tutorials-and-examples/blog-auth-example/auth): ユーザの認証と承認のチュートリアル
+1.  [View Layouts](/ja/views#view-layouts): ウェブサイトのレイアウトをカスタマイズする
+2.  [View Elements](/ja/views#view-elements) ビューのスニペットを読み込んで再利用する
+3.  [Scaffolding](/ja/controllers/scaffolding): コードを作成する前のプロトタイピング
+4.  [Bakeでコード生成](/ja/console-and-shells/code-generation-with-bake) 基本的な CRUD コードの生成
+5.  [シンプルな認証と承認のアプリケーション](/ja/tutorials-and-examples/blog-auth-example/auth): ユーザの認証と承認のチュートリアル

@@ -8,6 +8,8 @@
 識別・判定する柔軟な仕組みを作るための認可オブジェクトを組み合わせることができるように
 なります。
 
+<a id="authentication-objects"></a>
+
 ## 以降を読む前に
 
 認証の設定には、ユーザーテーブルの定義、モデルやコントローラーやビューの作成など、
@@ -227,12 +229,10 @@ Basic／ダイジェストオーセンティケータだけを使っているな
 
 認証オブジェクトはプラガブルなので、カスタム認証オブジェクトを自分のアプリケーション内にでも、
 プラグインとしてでも作成が可能です。もし例えば、OpenID 認証オブジェクトを作成したいのだとしたら、
-`app/Controller/Component/Auth/OpenidAuthenticate.php` の中で次のように記述することが
+`src/Controller/Component/Auth/OpenidAuthenticate.php` の中で次のように記述することが
 できます。 :
 
 ``` php
-App::uses('BaseAuthenticate', 'Controller/Component/Auth');
-
 class OpenidAuthenticate extends BaseAuthenticate
 {
     public function authenticate(CakeRequest $request, CakeResponse $response)
@@ -310,7 +310,7 @@ public function getUser($request)
 ### 認証についてのフラッシュメッセージの表示
 
 Auth が生成するセッションエラーメッセージを表示するためには、あなたのレイアウトに次のコードを
-加えなければなりません。 `app/View/Layouts/default.ctp` ファイルに次の２行を
+加えなければなりません。 `templates/Layouts/default.ctp` ファイルに次の２行を
 加えてください。content_for_layout 行の前にある body 部の中がよいでしょう。 :
 
 ``` php
@@ -353,7 +353,7 @@ if (!$this->Auth->loggedIn()) {
 }
 ```
 
-### パスワードのハッシュ化
+### パスワードのハッシュ化 {#hashing-passwords}
 
 AuthComponent がもはや自動ではパスワードをハッシュ化しなくなったことに、気づいたかもしれません。
 これは妥当性チェックのような多くの共通タスクを難しいものにしていたため、取り除かれました。
@@ -386,8 +386,6 @@ public $components = [
 パスワードハッシュ化クラスを使用してパスワードをハッシュ化できます。 :
 
 ``` php
-App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
-
 class User extends AppModel
 {
     public function beforeSave($options = [])
@@ -439,8 +437,6 @@ public $components = [
 ダイジェストパスワードを保管するのをお勧めします。 :
 
 ``` php
-App::uses('DigestAuthenticate', 'Controller/Component/Auth');
-
 class User extends AppModel
 {
     public function beforeSave($options = [])
@@ -469,11 +465,9 @@ class User extends AppModel
 
 カスタムパスワードハッシュ化クラスは `AbstractPasswordHasher` クラスを継承し、
 抽象メソッドの `hash()` と `check()` を実装する必要があります。
-`app/Controller/Component/Auth/CustomPasswordHasher.php` に次のように記述します。 :
+`src/Controller/Component/Auth/CustomPasswordHasher.php` に次のように記述します。 :
 
 ``` php
-App::uses('AbstractPasswordHasher', 'Controller/Component/Auth');
-
 class CustomPasswordHasher extends AbstractPasswordHasher
 {
     public function hash($password)
@@ -551,6 +545,8 @@ public function logout()
 一部のクライアントは 401 のステータスコードを送信して強制的にログアウトすることができます。
 認証 realm の変更は、一部のクライアントで機能させるためのもう１つの解決法です。
 
+<a id="authorization-objects"></a>
+
 ## 認可
 
 認可は識別され認証されたユーザーが、要求するリソースへのアクセスを許可されていることを
@@ -623,12 +619,10 @@ $this->Auth->authorize = [
 
 認可オブジェクトはプラガブルなので、カスタム認可オブジェクトを自分の
 アプリケーション内にでも、プラグインとしてでも作成が可能です。もし例えば、LDAP 認可
-オブジェクトを作成したいのだとしたら、 `app/Controller/Component/Auth/LdapAuthorize.php`
+オブジェクトを作成したいのだとしたら、 `src/Controller/Component/Auth/LdapAuthorize.php`
 の中で次のように記述することができます。 :
 
 ``` php
-App::uses('BaseAuthorize', 'Controller/Component/Auth');
-
 class LdapAuthorize extends BaseAuthorize
 {
     public function authorize($user, CakeRequest $request)

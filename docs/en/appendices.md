@@ -5,8 +5,8 @@ introduced in 2.x, and the migration path from 1.3 to 2.0.
 
 ::: pieceofcake2
 The migration guides below describe the original CakePHP releases. To move an
-application from CakePHP 2.10.24 to the pieceofcake2 fork, see the
-[Upgrade Guide](/pieceofcake2/upgrade). Upgrade to CakePHP 2.10.24 on PHP 7.4 first.
+application from CakePHP 2.10.24 to the Piece of Cake 2 fork, see the
+[Upgrade Guide](/appendices/migrating-from-cakephp-2-10). Upgrade to CakePHP 2.10.24 on PHP 7.4 first.
 :::
 
 ## 2.10 Migration Guide

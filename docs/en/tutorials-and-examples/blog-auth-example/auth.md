@@ -1,13 +1,5 @@
 # Simple Authentication and Authorization Application
 
-::: pieceofcake2
-With the modern layout of the pieceofcake2 fork, use `src/Model/User.php`,
-`src/Controller/UsersController.php` and `templates/Users/` instead of the `app/...` paths below
-(see the box at the top of the [Blog Tutorial](../blog/blog)). Baking code requires the
-[pieceofcake2/bake](../../console-and-shells/code-generation-with-bake) plugin.
-The `App::uses()` lines for framework classes such as `BlowfishPasswordHasher` are optional.
-:::
-
 Following our [Blog Tutorial](../../tutorials-and-examples/blog/blog) example, imagine we wanted to
 secure the access to certain URLs, based on the logged in
 user. We also have another requirement, to allow our blog to have multiple authors
@@ -38,9 +30,7 @@ Next step is to create our User model, responsible for finding, saving and
 validating any user data:
 
 ``` php
-// app/Model/User.php
-App::uses('AppModel', 'Model');
-
+// src/Model/User.php
 class User extends AppModel
 {
     public $validate = [
@@ -68,13 +58,11 @@ class User extends AppModel
 ```
 
 Let's also create our UsersController, the following contents correspond to a
-basic <span class="title-ref">baked</span> UsersController class using the code generation utilities bundled
-with CakePHP:
+basic "baked" UsersController class generated with the
+[Bake plugin](../../console-and-shells/code-generation-with-bake):
 
 ``` php
-// app/Controller/UsersController.php
-App::uses('AppController', 'Controller');
-
+// src/Controller/UsersController.php
 class UsersController extends AppController
 {
 
@@ -163,7 +151,7 @@ generation tool, we implement the views. For the purpose of this tutorial, we
 will show just the add.ctp:
 
 ``` php
-<!-- app/View/Users/add.ctp -->
+<!-- templates/Users/add.ctp -->
 <div class="users form">
 <?php echo $this->Form->create('User'); ?>
     <fieldset>
@@ -186,11 +174,11 @@ by the `AuthComponent`, a class responsible for requiring login for certain
 actions, handling user sign-in and sign-out, and also authorizing logged in
 users to the actions they are allowed to reach.
 
-To add this component to your application open your `app/Controller/AppController.php`
+To add this component to your application open your `src/Controller/AppController.php`
 file and add the following lines:
 
 ``` php
-// app/Controller/AppController.php
+// src/Controller/AppController.php
 class AppController extends Controller
 {
     //...
@@ -238,7 +226,7 @@ our database. Let's tell the AuthComponent to let un-authenticated users access
 the users add function and implement the login and logout action:
 
 ``` php
-// app/Controller/UsersController.php
+// src/Controller/UsersController.php
 
 public function beforeFilter()
 {
@@ -263,14 +251,11 @@ public function logout()
 }
 ```
 
-Password hashing is not done yet, open your `app/Model/User.php` model file
+Password hashing is not done yet, open your `src/Model/User.php` model file
 and add the following:
 
 ``` php
-// app/Model/User.php
-
-App::uses('AppModel', 'Model');
-App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
+// src/Model/User.php
 
 class User extends AppModel {
 
@@ -292,16 +277,15 @@ public function beforeSave($options = [])
 
 > [!NOTE]
 > The BlowfishPasswordHasher uses a stronger hashing algorithm (bcrypt) than
-> SimplePasswordHasher (sha1) and provides per user salts. The
-> SimplePasswordHasher will be removed as of CakePHP version 3.0
+> SimplePasswordHasher (sha1) and provides per user salts.
 
 So, now every time a user is saved, the password is hashed using the
 BlowfishPasswordHasher class. We're just missing a template view file for the
-login function. Open up your `app/View/Users/login.ctp` file and add the
+login function. Open up your `templates/Users/login.ctp` file and add the
 following lines:
 
 ``` php
-//app/View/Users/login.ctp
+// templates/Users/login.ctp
 
 <div class="users form">
 <?php echo $this->Flash->render('auth'); ?>
@@ -347,14 +331,14 @@ and in order to do this, we need to modify the posts table a bit to add the
 reference to the User model:
 
 ``` sql
-ALTER TABLE posts ADD COLUMN user_id INT(11);
+ALTER TABLE posts ADD COLUMN user_id INT UNSIGNED;
 ```
 
 Also, a small change in the PostsController is required to store the currently
 logged in user as a reference for the created post:
 
 ``` php
-// app/Controller/PostsController.php
+// src/Controller/PostsController.php
 public function add()
 {
     if ($this->request->is('post')) {
@@ -379,7 +363,7 @@ Open again the AppController class and add a few more options to the Auth
 config:
 
 ``` php
-// app/Controller/AppController.php
+// src/Controller/AppController.php
 
 public $components = [
     'Flash',
@@ -424,7 +408,7 @@ edition of posts if the author does not match. Open the file `PostsController.ph
 and add the following content:
 
 ``` php
-// app/Controller/PostsController.php
+// src/Controller/PostsController.php
 
 public function isAuthorized($user)
 {
@@ -454,7 +438,7 @@ function in the Post model. It is in general a good practice to move as much
 logic as possible into models. Let's then implement the function:
 
 ``` php
-// app/Model/Post.php
+// src/Model/Post.php
 
 public function isOwnedBy($post, $user)
 {

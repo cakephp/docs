@@ -6,32 +6,21 @@ CakePHP には、コントローラ、モデル、ビューのクラスがあり
 拡張性と再利用性を実現するクラスで、アプリケーションの MVC 基礎クラスにすばやく機能を追加できます。
 今は大枠をつかむだけにして、後で各ツールの詳細を調べましょう。
 
+<a id="application-extensions"></a>
+
 ## アプリケーションの拡張
 
 コントローラ、ヘルパー、モデルには親クラスがあり、アプリケーション全体に変更を加えることができます。
-AppController (`/app/Controller/AppController.php` に配置) 、
-AppHelper (`/app/View/Helper/AppHelper.php` に配置) と、
-AppModel (`/app/Model/AppModel.php` に配置) は、すべてのコントローラ、
+AppController (`src/Controller/AppController.php` に配置) 、
+AppHelper (`src/View/Helper/AppHelper.php` に配置) と、
+AppModel (`src/Model/AppModel.php` に配置) は、すべてのコントローラ、
 ヘルパー、モデルで共有するようなメソッドを置くのに良い場所です。
-
-::: pieceofcake2 ディレクトリ構成
-ファイルの場所はアプリケーションのディレクトリ構成によって異なります。
-
-| ファイル                    | 従来の構成 (legacy)                  | モダンな構成 (modern)            |
-|-----------------------------|--------------------------------------|----------------------------------|
-| AppController               | `app/Controller/AppController.php`   | `src/Controller/AppController.php` |
-| AppHelper                   | `app/View/Helper/AppHelper.php`      | `src/View/Helper/AppHelper.php`  |
-| AppModel                    | `app/Model/AppModel.php`             | `src/Model/AppModel.php`         |
-| ルート                      | `app/Config/routes.php`              | `config/routes.php`              |
-| レイアウト / エレメント     | `app/View/Layouts/`, `app/View/Elements/` | `templates/Layouts/`, `templates/Elements/` |
-
-[ディレクトリ構成](/ja/pieceofcake2/directory-structure) を参照してください。
-:::
+従来の `app/` 構成では、これらのファイルは `app/Controller/`、`app/View/Helper/`、`app/Model/` にあります。
 
 クラスやファイルではありませんがルートは、CakePHP にリクエストを送る役割を果たしています。
 ルートを定義することによって、URL とコントローラのアクションをどのように結びつける (*map*) が
 CakePHP に伝えられます。 URL `/controller/action/var1/var2` は、デフォルトの動作では、
-Controller::action(\$var1, \$var2) にマップされます。しかし、ルートを使うと URL をカスタマイズでき、
+Controller::action(\$var1, \$var2) にマップされます。しかし、`config/routes.php` で定義するルートを使うと URL をカスタマイズでき、
 アプリケーション内でどのように解釈するかを設定できます。
 
 アプリケーション内の機能の中には、そっくりそのままパッケージ化してしまうと便利なものもあります。
@@ -43,13 +32,13 @@ CakePHP のプラグインにできるでしょう。
 
 コンポーネントは、コントローラのロジック内で手伝いをするクラスのことです。
 もし、複数のコントローラ（またはアプリケーション）で共通に使いたいロジックがあれば、通常、
-コンポーネントにするのがいちばん良い方法です。例えば、コアに含まれる EmailComponent クラスは、
-Email を簡単に作成、送信することができます。一つのコントローラの中にこのロジックを
+コンポーネントにするのがいちばん良い方法です。例えば、コアに含まれる AuthComponent クラスを使うと、
+すべてのコントローラにログインとアクセス制御を簡単に追加できます。一つのコントローラの中にこのロジックを
 書いてしまうのではなく、ロジックをパッケージ化して、共通に使えるようにできるわけです。
 
 コントローラには、幾つかのコールバック (*callbacks*) もあります。
 CakePHP コアの動作中に自分のロジックを割り込ませたい場合、コールバックを使うことができます。
-使用できるコールバックには次のものがあります:
+使用できるコールバックには次のものがあります。
 
 - `~Controller::afterFilter()` 、 ビューの表示 (*render*) を含むすべての
   コントローラのロジックの後に実行されます。
@@ -66,13 +55,13 @@ CakePHP コアの動作中に自分のロジックを割り込ませたい場合
 
 モデルは、データソース (*DataSource*) と呼ばれるもう一つのクラスによっても支えられています。
 データソースは、異なるタイプの一連のデータについて、モデルがそれを操作できるように抽象化するものです。
-CakePHP アプリケーションの主なソースは、通常データベースですが、RSS フィード、CVS ファイル、
+CakePHP アプリケーションの主なソースは、通常データベースですが、RSS フィード、CSV ファイル、
 LDAP エントリ、iCal イベントなどをモデルが扱えるようなデータソースを追加することもできます。
 データソースは、異なるソースからのレコードを関連づけることも可能になっています。つまり、SQL の
 Join だけに制限されているわけではなく、LDAP モデルに多くの iCal イベントを関連付けるようなことも
 可能です。
 
-コントローラと同じように、モデルにもコールバックがあります:
+コントローラと同じように、モデルにもコールバックがあります。
 
 - beforeFind()
 - afterFind()
@@ -90,10 +79,10 @@ Join だけに制限されているわけではなく、LDAP モデルに多く�
 
 ヘルパーは、ビューのロジックを手伝うクラスのことです。コンポーネントがコントローラ内で使用されるのと
 同じように、ヘルパーによって、複数のビューから共通の表現用ロジックにアクセスできるようにします。
-コアに含まれるヘルパーのひとつ、JsHelper を使うと、ビュー内での Ajax リクエストを非常に簡単に扱えます。
-JsHelper は、jQuery (デフォルト)、Prototype、Mootools をサポートしています。
+コアに含まれるヘルパーのひとつ、FormHelper を使うと、モデルと連携するフォームを非常に簡単に作成できます。
 
 たいていのアプリケーションには、繰り返し利用されるビューのコードがあります。
 CakePHP はレイアウト (*layout*) とエレメント (*element*) によってビューコードの再利用を促進します。
 デフォルトでは、コントローラによって表示されるすべてのビューは、レイアウトの中に配置して表示されます。
 エレメントは、切れはし (*snippet*) を作って複数のビューの中で繰り返し利用したい時に使用できます。
+レイアウトは `templates/Layouts/` に、エレメントは `templates/Elements/` に置きます。

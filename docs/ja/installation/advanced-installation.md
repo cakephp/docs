@@ -1,209 +1,167 @@
 # 応用インストール
 
-## PEAR インストーラで CakePHP をインストール
+このページでは、Composer の設定の詳細と、アプリケーションのディレクトリを別の場所に配置する方法を説明します。
+通常のインストールについては [インストール](../installation) を参照してください。
 
-::: pieceofcake2
-pieceofcake2 フォークは PEAR パッケージとして公開されていません。Composer を使ってください。
-:::
+## Composer の設定
 
-CakePHP はあなたが PEAR インストーラを使用してインストールできるように
-PEAR パッケージを公開しています。PEAR インストーラでインストールすると、
-複数のアプリケーションで CakePHP ライブラリを共有するのが簡単になります。
-PEAR で CakePHP をインストールするには、次の手順を実行する必要があります。 :
+CakePHP とプラグインは Composer でインストールします。ディスパッチャファイル
+(`webroot/index.php`、`webroot/test.php`、`bin/cake`) は、CakePHP 本体より先に Composer のオートローダーを読み込みます。
+CakePHP アプリケーションの `composer.json` は、[pieceofcake2/app](https://github.com/pieceofcake2/app)
+スケルトンと同じように次のようになります。
 
-    pear channel-discover pear.cakephp.org
-    pear install cakephp/CakePHP
-
-> [!NOTE]
-> PEAR で CakePHP をインストールするとき、システムによっては `sudo` が必要になります。
-
-PEAR で CakePHP をインストールした後、PEAR が正しく設定されていれば、
-新しいアプリケーションを作成するために `cake` コマンドが使えるようになっています。
-CakePHP は PHP の `include_path` 上に配置されるので、とくに他の変更を行う必要はありません。
-
-## Composer で CakePHP をインストール
-
-::: pieceofcake2
-pieceofcake2 フォークでは、この節の内容は古くなっています。
-
-- PHP 8.0 以上が必要で、インストール方法は Composer のみをサポートしています。
-- `cakephp/cakephp` の代わりに `pieceofcake2/cakephp` を require してください。
-  Composer の標準どおり、プロジェクトルートの `vendor/` を使います。
-- `CAKE_CORE_INCLUDE_PATH` は使われなくなりました。ディスパッチャファイルが `vendor/autoload.php` を読み込み、
-  フレームワークのクラスは Composer の classmap でオートロードされます。
-- Bake はコアに含まれていません。`cake bake` を使うには `pieceofcake2/bake` をインストールするか、
-  [pieceofcake2/app](https://github.com/pieceofcake2/app) スケルトンから始めてください。
-
-[インストール](/ja/pieceofcake2/installation) を参照してください。
-:::
-
-始める前に、最新の PHP バージョンであることを確認してください。
-
-``` bash
-php -v
-```
-
-少なくとも PHP 5.3.0 (CLI) 以上がインストールされていなければなりません。
-ウェブサーバー版の PHP もまた 5.3.0 以上でなければりませんし、
-コマンドラインインターフェース (CLI) 版の PHP と同じバージョンがベストです。
-
-### Composer のインストール
-
-Composer は、PHP 5.3 以上向けの依存関係管理ツールです。これは、PEAR インストーラが抱える
-問題の多くを解決し、いろんなバージョンのライブラリをシンプルに管理できるようにします。
-[Packagist](https://packagist.org/) は、Composer でインストール可能なパッケージの
-メインリポジトリです。 CakePHP は、Packagist 上に公開された時、
-[Composer](https://getcomposer.org) を使用してインストールすることができます。
-
-- Linux や Mac OS X に Composer をインストール
-
-  1.  [公式の Composer ドキュメント](https://getcomposer.org/download/) に書かれた
-      インストーラスクリプトを実行し、Composer をインストールするために指示に従ってください。
-
-  2.  composer.phar を指定したパスのディレクトリに移すために以下のコマンドを実行してください。 :
-
-          mv composer.phar /usr/local/bin/composer
-
-- Windows に Composer をインストール
-
-  Windows 環境なら、 [こちら](https://github.com/composer/windows-setup/releases/) から
-  Windows インストーラをダウンロードできます。Composer の Windows インストーラについての詳細は、
-  [README](https://github.com/composer/windows-setup) をご覧ください。
-
-### CakePHP プロジェクトの作成
-
-CakePHP をインストールする前に `composer.json` ファイルをセットアップしましょう。
-CakePHP アプリケーションのための composer.json ファイルは次のようになります。 :
-
-``` json
+```json
 {
-    "name": "example-app",
+    "name": "example/my-app",
+    "type": "project",
     "require": {
-        "cakephp/cakephp": "2.10.*"
+        "php": ">=8.0",
+        "pieceofcake2/cakephp": "^2.12"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.6",
+        "pieceofcake2/bake": "^1.0",
+        "pieceofcake2/debug_kit": "^2.2"
+    },
+    "autoload": {
+        "classmap": ["src/"]
     },
     "config": {
-        "vendor-dir": "Vendor/"
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    },
+    "extra": {
+        "installer-paths": {
+            "plugins/{$name}/": ["type:cakephp-plugin"]
+        }
     }
 }
 ```
 
-この JSON を `composer.json` としてプロジェクトの APP ディレクトリに保存します。
-次に、composer.phar ファイルをプロジェクト内にダウンロードしてください。
-Composer をダウンロードしたら、 CakePHP をインストールしましょう。
-`composer.json` と同じディレクトリで次のコマンドを実行します。 :
+`composer.json` と `composer.lock` は、ソースコードの残りの部分と一緒に保存しておいてください。
 
-``` bash
-$ php composer.phar install
+### `replace` の仕組み
+
+`pieceofcake2/cakephp` には `"replace": {"cakephp/cakephp": "^2.0"}` が宣言されています。
+そのため Composer はこのパッケージを `cakephp/cakephp` として扱い、`cakephp/cakephp` 2.x に依存する
+プラグインも変更なしでインストールでき、動作します。両方のパッケージを同時に require しないでください。
+
+### プラグインの配置場所
+
+`cakephp-plugin` タイプのパッケージは `composer/installers` によってインストールされます。
+上記の `installer-paths` の設定により、プラグインはプロジェクトルートの `plugins/` にインストールされます。
+CakePHP はどちらの構成でもこのディレクトリからプラグインを探します (従来の `app/Plugin/` も探します)。
+プラグインは `config/bootstrap.php` で `CakePlugin::load()` を使って読み込む必要があります。
+[プラグインのインストール方法](../plugins/how-to-install-plugins) を参照してください。
+
+### クラスのオートロード
+
+CakePHP 自身のクラスは Composer の classmap でオートロードされるので、`App::uses()` は不要です。
+アプリケーションのクラスは引き続き `App::uses()` で読み込めますが、上記の `classmap` の設定を加えれば
+Composer に読み込ませることもできます。classmap を設定すると、コントローラ、モデル、ヘルパー、シェルから
+`App::uses()` を取り除けます。
+
+Composer の classmap は固定のファイル一覧なので、新しいクラスファイルを追加するたびに次のコマンドを実行してください。
+
+```bash
+composer dump-autoload
 ```
 
-Composer の実行が終わると、ディレクトリ構造は次のようになっていると思います。 :
+Composer のオートロードに対応していないプラグインでは、引き続き `App::uses()` が必要です。
+たとえば `App::uses('MyPluginHelper', 'MyPlugin.View/Helper');` のように書きます。
 
-    example-app/
-        composer.phar
-        composer.json
-        Vendor/
-            bin/
-            autoload.php
-            composer/
-            cakephp/
+`AppController` のように同じ名前のクラスがアプリケーションとパッケージの両方にあると、
+Composer がクラスの解決があいまいだという警告を出します。その場合は `composer.json` で
+パッケージ側のファイルを除外してください。
 
-さあ、アプリケーションのスケルトンの残りの部分を生成する準備ができました。 :
-
-``` bash
-$ Vendor/bin/cake bake project <path to project>
+```json
+{
+    "autoload": {
+        "classmap": ["src/"],
+        "exclude-from-classmap": [
+            "vendor/pieceofcake2/app/src/Controller/AppController.php",
+            "vendor/pieceofcake2/app/src/Model/AppModel.php"
+        ]
+    }
+}
 ```
-
-デフォルトでは、 `bake` は `CAKE_CORE_INCLUDE_PATH` をハードコードするようになっています。
-アプリケーションの移植性を高めるためには、 `webroot/index.php` を修正し、
-`CAKE_CORE_INCLUDE_PATH` を相対パスに変更しましょう。 :
-
-``` text
-define(
-    'CAKE_CORE_INCLUDE_PATH',
-    ROOT . DS . APP_DIR . DS . 'Vendor' . DS . 'cakephp' . DS . 'cakephp' . DS . 'lib'
-);
-```
-
-> [!NOTE]
-> もし、あなたのアプリケーションのためにユニットテストを作成する予定があるなら、
-> `webroot/test.php` も同様の変更が必要になります。
-
-Composer で他のライブラリをインストールしている場合は、
-オートローダーを設定して composer のオートローダーで起こる問題を回避してください。
-`Config/bootstrap.php` ファイルに次の行を追加します。 :
-
-``` text
-// Composer の autoload を読み込み
-require APP . 'Vendor/autoload.php';
-
-// CakePHP のオートローダーをいったん削除し、Composer より先に評価されるように先頭に追加する
-// http://goo.gl/kKVJO7 を参照
-spl_autoload_unregister(['App', 'load']);
-spl_autoload_register(['App', 'load'], true, true);
-```
-
-これで、Composer でインストールした CakePHP が機能する CakePHP アプリケーションができました。
-ソースコードの残りの部分と composer.json と composer.lock ファイルを保存しておいてください。
-
-## 複数のアプリケーションで CakePHP を共有する
 
 ::: pieceofcake2
-pieceofcake2 フォークでは CakePHP 本体はアプリケーションごとに Composer でインストールされ、
-`CAKE_CORE_INCLUDE_PATH` も使われないため、以下で説明する複数アプリケーションでのコア共有は当てはまりません。
-`ROOT`、`APP_DIR`、`WEBROOT_DIR` は引き続き変更できます。従来の構成 (legacy) ではディスパッチャファイルで、
-モダンな構成 (modern) では `config/define.php` で定義します。
-[ディレクトリ構成](/ja/pieceofcake2/directory-structure) を参照してください。
+CakePHP は Composer のオートローダーからのみ読み込まれます。
+`CAKE_CORE_INCLUDE_PATH` や `include_path` による設定、複数のアプリケーションで 1 つの CakePHP コアを共有する方法は
+サポートされなくなりました。CakePHP はアプリケーションごとに、それぞれの `vendor/` ディレクトリにインストールします。
 :::
 
-時には、CakePHP のディレクトリをファイルシステムの別な場所に配置したいと思う場合があるかもしれません。
-共有しているホストの制限であったり、複数のアプリが同じ CakePHP のライブラリを共有したい場合などです。
-このセクションでは、どうやって CakePHP のディレクトリをファイルシステム内に分散配置できるのかを説明します。
+## ディレクトリを別の場所に配置する
 
-まず、CakePHP アプリケーションには三つの主要な部分があることを意識しましょう:
+共有ホストの制限などにより、アプリケーションのディレクトリをファイルシステムの別の場所に配置したい場合があるかもしれません。
+CakePHP アプリケーションには三つの主要な部分があります。
 
-1.  CakePHP のコアライブラリは、 /lib/Cake の中です。
-2.  アプリケーションコードは、/app の中です。
-3.  アプリケーションのウェブルートは、通常 /app/webroot の中です。
+1. CakePHP 本体とその他の Composer パッケージ。`vendor/` の中にあります。
+2. アプリケーションのコードと設定。プロジェクトルート (`ROOT`) の `src/`、`config/`、`templates/` などにあります。
+3. アプリケーションのウェブルート。通常は `webroot/` です。
 
-webroot を除く各ディレクトリは、 ファイルシステム内のどこにでも配置できます。
-これらは Web サーバからアクセスできるようにする必要があります。
-また、 CakePHP に場所を知らせれば、 webroot フォルダを app フォルダの外に移すことができます。
+ウェブサーバからアクセスできる必要があるのはウェブルートだけです。
+CakePHP に場所を知らせれば、ウェブルートをプロジェクトのディレクトリの外に移すことができます。
 
-CakePHP インストールの環境設定をするには、以下のファイルを少し修正する必要があります。
+パスは `config/define.php` の定数で定義されます。このファイルは `webroot/index.php`、
+`webroot/test.php`、`bin/cake` が最初に読み込みます。
 
-- /app/webroot/index.php
-- /app/webroot/test.php ( [テスト](../development/testing) 機能を使う場合。)
+- `ROOT` はプロジェクトのディレクトリです。デフォルトでは `config/` の一つ上のディレクトリです。
+- `APP_DIR` は PHP のコードが入っているディレクトリの名前 (`src`) です。
+- `WEBROOT_DIR` はウェブルートのディレクトリの名前 (`webroot`) です。
+- `WWW_ROOT` はウェブルートのディレクトリのフルパスです。
+- `VENDORS` は Composer の vendor ディレクトリのフルパスです。
 
-編集しなくてはいけない三つの定数は、 `ROOT` 、 `APP_DIR` 、 `CAKE_CORE_INCLUDE_PATH` です。
+ここで定義しなかった定数は、CakePHP がディレクトリ構成を判別して設定します。
+`CONFIG` (`ROOT/config/`)、`TMP` (`ROOT/tmp/`)、`LOGS` (`ROOT/logs/`)、`TESTS` (`ROOT/tests/`) です。
+別の場所を使いたい場合は、これらも `config/define.php` で定義できます。
 
-- `ROOT` には、アプリのフォルダが含まれているディレクトリのパスを設定します。
-- `APP_DIR` には、（訳注：相対的な）アプリのフォルダ名を設定します。
-- `CAKE_CORE_INCLUDE_PATH` には、CakePHP ライブラリフォルダのパスを設定します。
+例を挙げて見てみましょう。CakePHP を次のような条件で動作させたいとします。
 
-例を挙げて、応用インストールを実践した場合の様子を見てみましょう。
-CakePHP を次のような条件で動作させたいとします:
+- `config/`、`src/`、`vendor/` を含むプロジェクトのディレクトリは `/home/me/myapp` にする。
+- ウェブルートのディレクトリは `/var/www/mysite/` にする。
 
-- CakePHP のコアライブラリは /usr/lib/cake に配置する。
-- アプリケーションの webroot ディレクトリは /var/www/mysite/ にする。
-- アプリケーションのアプリディレクトリは /home/me/myapp にする。
+まず `webroot/` の中身を `/var/www/mysite/` にコピーし、`config/define.php` でウェブルートの定数を設定します。
 
-このようなセットアップの場合には、 webroot/index.php ファイル（つまり、この例では /var/www/mysite/index.php）が次のようになるよう、編集します。 :
+```php
+// /home/me/myapp/config/define.php (一部分)
 
-``` text
-// /app/webroot/index.php (一部分。コメントは取り除いてあります。)
-
-if (!defined('ROOT')) {
-    define('ROOT', DS . 'home' . DS . 'me');
+if (!defined('WEBROOT_DIR')) {
+    define('WEBROOT_DIR', 'mysite');
 }
 
-if (!defined('APP_DIR')) {
-    define ('APP_DIR', 'myapp');
-}
-
-if (!defined('CAKE_CORE_INCLUDE_PATH')) {
-    define('CAKE_CORE_INCLUDE_PATH', DS . 'usr' . DS . 'lib');
+if (!defined('WWW_ROOT')) {
+    define('WWW_ROOT', DS . 'var' . DS . 'www' . DS . 'mysite' . DS);
 }
 ```
+
+次に `/var/www/mysite/index.php` (および [テスト](../development/testing) 機能を使う場合は `test.php`) を編集し、
+プロジェクトのディレクトリにあるこのファイルを読み込むようにします。
+`dirname(__DIR__) . DS . 'config' . DS . 'define.php'` が出てくる 2 か所を置き換えてください。
+
+```php
+// /var/www/mysite/index.php (一部分)
+
+$defineFile = DS . 'home' . DS . 'me' . DS . 'myapp' . DS . 'config' . DS . 'define.php';
+
+if (!is_file($defineFile)) {
+    trigger_error(
+        'Configuration file "config' . DS . 'define.php" could not be loaded. ' .
+        'Please ensure this file exists and is readable.',
+        E_USER_ERROR,
+    );
+}
+require_once $defineFile;
+```
+
+`ROOT` は `config/define.php` の場所から決まるので `/home/me/myapp` のままです。
+`bin/cake` も同じ設定を使います。
+
+従来の `app/` 構成では、同じ定数 (`ROOT`、`APP_DIR`、`WEBROOT_DIR`、`WWW_ROOT`) を
+`app/webroot/index.php` と `app/webroot/test.php` の先頭で定義します。
 
 ファイルパスの区切り文字には、スラッシュではなく `DS` 定数を使うのがオススメです。
 こうしておくと、間違った区切り文字による、ファイルが無いというエラーを防ぐことができ、コードをさまざまなプラットフォームで動くようにすることができます。

@@ -56,7 +56,7 @@ class BakeriesController extends AppController
 ```
 
 もしすべてのコントローラでヘルパーを有効にする必要がある場合ヘルパーの名前を
-`/app/Controller/AppController.php` (見つからない場合は作成して下さい) の
+`src/Controller/AppController.php` (見つからない場合は作成して下さい) の
 `$helpers` 配列に追加して下さい。デフォルトの Html ヘルパーと Form ヘルパーも
 忘れずに読み込んで下さい。 :
 
@@ -93,18 +93,17 @@ class AwesomeController extends AppController
 `$this->Html` や他の共通ヘルパーの参照を独自の実装に置き換えたい時に役立ちます。 :
 
 ``` php
-// app/Controller/PostsController.php
+// src/Controller/PostsController.php
 class PostsController extends AppController
 {
     public $helpers = [
         'Html' => [
-            'className' => 'MyHtml'
-        ]
+            'className' => 'MyHtml',
+        ],
     ];
 }
 
-// app/View/Helper/MyHtmlHelper.php
-App::uses('HtmlHelper', 'View/Helper');
+// src/View/Helper/MyHtmlHelper.php
 class MyHtmlHelper extends HtmlHelper
 {
     // コアHtmlHelperを上書きするためのコードを追加して下さい
@@ -163,27 +162,18 @@ CakePHP の他の箇所でも使われているコレクション API をサポ�
 
 ## ヘルパーを作る
 
-もし、コアヘルパー (または GitHub や Bakery にあるヘルパー) でやりたいことが
-できなかったとしても、ヘルパーを作るのは簡単なので大丈夫です。
+もし、コアヘルパー (または [リポジトリとプラグイン](/ja/plugins/maintained-plugins) に
+掲載されているようなプラグインのヘルパー) でやりたいことができなかったとしても、ヘルパーを作るのは簡単なので大丈夫です。
 
 ここで、アプリケーション内の様々な場所で必要とされる CSS スタイルのリンクを出力する
 ヘルパーを作りたかったとしましょう。CakePHP の既存のヘルパーの構造にロジックを
-あわせる為には、 `/app/View/Helper` に新しいクラスを作成する必要があります。
+あわせる為には、 `src/View/Helper` に新しいクラスを作成する必要があります
+(従来の `app/` レイアウトでは `app/View/Helper` です)。
 これから作るヘルパーを LinkHelper と呼ぶことにしましょう。実際の PHP クラスファイルは
-このようになるでしょう。 :
-
-::: pieceofcake2
-pieceofcake2 フォークのモダンレイアウトでは、ヘルパーは `src/View/Helper/` に置きます
-（例: `src/View/Helper/LinkHelper.php`）。`Helper` や `HtmlHelper` などのフレームワークのクラスは
-Composer でオートロードされるため、これらに対する `App::uses()` は省略できます。`AppHelper`
-など自分のアプリケーションのクラスに対する `App::uses()` を省略できるのは、アプリケーションのクラスを
-Composer でオートロードしている場合だけです（[ディレクトリ構成](/ja/pieceofcake2/directory-structure) を参照）。
-:::
+このようになるでしょう。
 
 ``` php
-/* /app/View/Helper/LinkHelper.php */
-App::uses('AppHelper', 'View/Helper');
-
+// src/View/Helper/LinkHelper.php
 class LinkHelper extends AppHelper
 {
     public function makeEdit($title, $url)
@@ -197,6 +187,12 @@ class LinkHelper extends AppHelper
 > ヘルパーは `AppHelper` または `Helper` を継承するか
 > [Helper Api](#helper-api) で定義されているすべてのコールバックを実装しなければなりません。
 
+ほかのアプリケーションのクラスと同じく、ヘルパーも Composer の classmap オートロードで
+読み込まれるため、 `App::uses()` は必要ありません。ファイルを追加したら
+`composer dump-autoload` を実行してください。classmap オートロードを使っていない
+アプリケーションでは、ファイルの先頭に `App::uses('AppHelper', 'View/Helper');` を書きます。
+詳しくは [クラスの読み込み](../controllers#autoloading-classes) を参照してください。
+
 ### 他のヘルパーを読み込む
 
 他のヘルパーに既に存在している機能を使いたいと思うかもしれません。その場合、 `$helpers`
@@ -204,9 +200,7 @@ class LinkHelper extends AppHelper
 指定する場合と同じようにして下さい。 :
 
 ``` php
-/* /app/View/Helper/LinkHelper.php (他のヘルパーを使っている) */
-App::uses('AppHelper', 'View/Helper');
-
+// src/View/Helper/LinkHelper.php (他のヘルパーを使っている)
 class LinkHelper extends AppHelper
 {
     public $helpers = ['Html'];
@@ -225,7 +219,7 @@ class LinkHelper extends AppHelper
 
 ### 自作のヘルパーを使う
 
-一旦ヘルパーを作って `/app/View/Helper/` に配置すると、コントローラで
+一旦ヘルパーを作って `src/View/Helper/` に配置すると、コントローラで
 `~Controller::$helpers` という特別な変数を使うことでそのヘルパーを
 読み込めるようになります。 :
 
@@ -249,11 +243,10 @@ class PostsController extends AppController
 
 すべてのヘルパーは特別なクラス AppHelper を (モデルが AppModel を継承し、コントローラが
 AppController を継承するのと同じように）継承します。すべてのヘルパーで利用できる機能を
-作成するためには、 `/app/View/Helper/AppHelper.php` を作成して下さい。 :
+作成するためには、 `src/View/Helper/AppHelper.php` を作成して下さい。
 
 ``` php
-App::uses('Helper', 'View');
-
+// src/View/Helper/AppHelper.php
 class AppHelper extends Helper
 {
     public function customMethod()
@@ -262,7 +255,7 @@ class AppHelper extends Helper
 }
 ```
 
-## ヘルパー API
+## ヘルパー API {#helper-api}
 
 `class` **Helper**
 

@@ -9,10 +9,10 @@ Most acl shell subcommands involve referencing aco/aro nodes. As there are two
 
 ``` text
 # A Model + foreign_key reference
-./Console/cake acl view aro Model.1
+bin/cake acl view aro Model.1
 
 # An alias path reference
-./Console/cake acl view aco root/controllers
+bin/cake acl view aco root/controllers
 ```
 
 Using a `.` indicates that you are going to use a bound record style reference
@@ -23,19 +23,19 @@ while using a `/` indicates an alias path.
 Before using the database ACL you'll need to setup the tables. You can do that
 using:
 
-    ./Console/cake acl initdb
+    bin/cake acl initdb
 
 ## Create and delete nodes
 
 You can use the create and delete subcommands to create and delete nodes:
 
-    ./Console/cake acl create aco controllers Posts
-    ./Console/cake acl create aco Posts index
+    bin/cake acl create aco controllers Posts
+    bin/cake acl create aco Posts index
 
 Would create an aco record using an alias path. You could do the following as
 well:
 
-    ./Console/cake acl create aro Group.1
+    bin/cake acl create aro Group.1
 
 To create an aro node for the Group id = 1.
 
@@ -45,12 +45,12 @@ Use the grant command to grant ACL permissions. Once executed, the ARO
 specified (and its children, if any) will have ALLOW access to the
 specified ACO action (and the ACO's children, if any):
 
-    ./Console/cake acl grant Group.1 controllers/Posts
+    bin/cake acl grant Group.1 controllers/Posts
 
 The above would grant all privileges. You could grant only the read privilege
 using the following:
 
-    ./Console/cake acl grant Group.1 controllers/Posts read
+    bin/cake acl grant Group.1 controllers/Posts read
 
 Denying permission works in the exact same way. The only difference is you
 switch 'deny' in for 'grant'.
@@ -59,7 +59,7 @@ switch 'deny' in for 'grant'.
 
 Use this command to check ACL permissions. :
 
-    ./Console/cake acl check Group.1 controllers/Posts read
+    bin/cake acl check Group.1 controllers/Posts read
 
 The output will either be `allowed` or `not allowed`.
 
@@ -68,4 +68,4 @@ The output will either be `allowed` or `not allowed`.
 The view command will return the ARO or ACO tree. The optional node parameter
 allows you to return only a portion of the requested tree:
 
-    ./Console/cake acl view
+    bin/cake acl view

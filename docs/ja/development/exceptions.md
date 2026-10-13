@@ -13,19 +13,22 @@ CakePHP はまた、HTTP エラーで使うことのできる数多くの例外�
 例外の設定として使えるキーがいくつかあります:
 
 ``` php
+// config/core.php
 Configure::write('Exception', [
     'handler' => 'ErrorHandler::handleException',
     'renderer' => 'ExceptionRenderer',
-    'log' => true
+    'log' => true,
 ]);
 ```
 
 - `handler` - callback - 例外をハンドルするコールバック。無名関数を含め、
   どんなコールバックタイプでも設定可能。
 - `renderer` - string - キャッチされなかった例外をレンダリングする役目を担うクラス。
-  独自のクラスを使う場合には、app/Lib/Error の下にそのクラスのファイルを置いてください。
-  このクラスは `render()` メソッドを実装している必要があります。
+  独自のクラスを使う場合には、`src/Lib/Error/`（レガシー構成では `app/Lib/Error/`）の下に
+  そのクラスのファイルを置いてください。このクラスは `render()` メソッドを実装している必要があります。
 - `log` - boolean - true を指定したなら、例外とそのスタックトレースが CakeLog に出力されます。
+- `skipLog` - array - ログに出力しない例外のクラス名のリスト。リスト内のクラスを継承した例外も
+  ログに出力されません。例: `'skipLog' => ['NotFoundException', 'UnauthorizedException']`
 - `consoleHandler` - callback - コンソールで実行された場合に、例外をハンドルするのに使われる
   コールバック。未定義なら、CakePHP のデフォルトハンドラが使われます。
 
@@ -47,24 +50,28 @@ CakePHP には多くの例外クラスが存在します。
 有益な情報を表示します。400番台のコードを特に使わない例外なら、
 Internal Server Error として扱われます。
 
-## CakePHP の組み込み例外
+例外ハンドラは PHP の `set_exception_handler()` で登録されるため、キャッチされなかった
+`TypeError` や `ArgumentCountError` などの `Error` オブジェクトも受け取ります。
+これらは、`CakeException` 以外の例外と同じようにログに出力され、`error500` テンプレートで
+レンダリングされます。
+
+## CakePHP の組み込み例外 {#built-in-exceptions}
 
 内部的なフレームワーク例外の他にも、CakePHP 内部の組み込み例外で、
-HTTP 方式の例外がいくつか存在します。
+HTTP 方式の例外がいくつか存在します。これらはフレームワークパッケージの
+`src/Cake/Error/exceptions.php` で定義されており、いつでも使うことができます。
 
-> 400 Bad Request エラーを発生させるために使います。
->
-> 401 Unauthorized エラーを発生させるために使います。
->
-> 403 Forbidden エラーを発生させるために使います。
->
-> 404 Not found エラーを発生させるために使います。
->
-> 405 Method Not Allowed エラーを発生させるために使います。
->
-> 500 Internal Server Error を発生させるために使います。
->
-> 501 Not Implemented Errors を発生させるために使います。
+| 例外 | 説明 |
+|----|----|
+| `BadRequestException` | 400 Bad Request エラーを発生させるために使います。 |
+| `UnauthorizedException` | 401 Unauthorized エラーを発生させるために使います。 |
+| `ForbiddenException` | 403 Forbidden エラーを発生させるために使います。 |
+| `NotFoundException` | 404 Not found エラーを発生させるために使います。 |
+| `MethodNotAllowedException` | 405 Method Not Allowed エラーを発生させるために使います。 |
+| `InternalErrorException` | 500 Internal Server Error を発生させるために使います。 |
+| `NotImplementedException` | 501 Not Implemented Errors を発生させるために使います。 |
+
+`NotImplementedException` 以外は、すべて `HttpException` を継承しています。
 
 あなたのコントローラが失敗のステータスや HTTP エラーを示すために、これらの例外を投げることができます。
 下記は、見つからなかったものがある場合の、 404 ページをレンダリングする HTTP 例外の使用例です:
@@ -86,8 +93,8 @@ HTTP エラー用の例外を使うことで、あなたのコードを奇麗に
 また、次に挙げるフレームワーク層の例外を使うこともできます。これらは CakePHP コアコンポーネントの
 多くから投げられているものです。
 
-> CakePHP での例外の基底クラスです。CakePHP によって投げられるフレームワーク層のすべての
-> 例外はこのクラスを継承しています。
+`CakeException` は CakePHP での例外の基底クラスです。CakePHP によって投げられるフレームワーク層の
+すべての例外はこのクラスを継承しています。
 
 これらの例外クラスはすべて `CakeException` を継承しています。
 CakeException を継承することで、独自の 'フレームワーク' エラーを作ることができます。
@@ -103,37 +110,32 @@ HTTP 例外と CakePHP 例外はすべて、CakeBaseException クラスを継承
 ヘッダーを加えるメソッドを持っています。405 MethodNotAllowedException を投げる場合について例を
 挙げると、RFC2616 ではこう言っています：
 「レスポンスは、要求されたリソースへの正しいメソッドのリストを含む Allow ヘッダーを含有していなければ【なりません】。」
+設定したヘッダーは、`ExceptionRenderer` によってエラーレスポンスに追加されます。
 
-> 選ばれた view ファイルが見つかりません。
->
-> 選ばれた layout が見つかりません。
->
-> ヘルパーが見つかりません。
->
-> 設定で指定された behavior が見つかりません。
->
-> 設定で指定されたコンポーネントが見つかりません。
->
-> 設定で指定されたタスクが見つかりません。
->
-> Shell クラスが見つかりません。
->
-> 選択された Shell クラスにこの名前のメソッドはありません。
->
-> 設定で指定されたデータベースが見つかりません。
->
-> モデルのコネクションが見つかりません。
->
-> CakePHP のキャッシュ、もしくはデータソースからモデルのテーブルが見つかりません。
-> データソースに新しいテーブルを追加した上で、モデルのキャッシュ
-> (デフォルトでは tmp/cache/models 以下にある) を削除しなければなりません。
->
-> 要求されたコントローラのアクションが見つかりません。
->
-> 要求されたコントローラが見つかりません。
->
-> private なアクションにアクセスしています。 private や protected、\_ で始まるアクションに
-> アクセスしているか、prefix されたルートに誤ってアクセスしようとしています。
+``` php
+$exception = new MethodNotAllowedException();
+$exception->responseHeader('Allow', 'GET, POST');
+throw $exception;
+```
+
+フレームワーク層の例外には次のものがあります。
+
+| 例外 | 説明 |
+|----|----|
+| `MissingViewException` | 選ばれた view ファイルが見つかりません。 |
+| `MissingLayoutException` | 選ばれた layout が見つかりません。 |
+| `MissingHelperException` | ヘルパーが見つかりません。 |
+| `MissingBehaviorException` | 設定で指定された behavior が見つかりません。 |
+| `MissingComponentException` | 設定で指定されたコンポーネントが見つかりません。 |
+| `MissingTaskException` | 設定で指定されたタスクが見つかりません。 |
+| `MissingShellException` | Shell クラスが見つかりません。 |
+| `MissingShellMethodException` | 選択された Shell クラスにこの名前のメソッドはありません。 |
+| `MissingDatabaseException` | 設定で指定されたデータベースが見つかりません。 |
+| `MissingConnectionException` | モデルのコネクションが見つかりません。 |
+| `MissingTableException` | CakePHP のキャッシュ、もしくはデータソースからモデルのテーブルが見つかりません。データソースに新しいテーブルを追加した上で、モデルのキャッシュ (デフォルトでは `tmp/cache/models` 以下にある) を削除しなければなりません。 |
+| `MissingActionException` | 要求されたコントローラのアクションが見つかりません。 |
+| `MissingControllerException` | 要求されたコントローラが見つかりません。 |
+| `PrivateActionException` | private なアクションにアクセスしています。 private や protected、\_ で始まるアクションにアクセスしているか、prefix されたルートに誤ってアクセスしようとしています。 |
 
 ## コントローラでの HTTP 例外の使用
 
@@ -142,7 +144,7 @@ HTTP 例外と CakePHP 例外はすべて、CakeBaseException クラスを継承
 ``` php
 public function view($id)
 {
-    $post = $this->Post->read(null, $id);
+    $post = $this->Post->findById($id);
     if (!$post) {
         throw new NotFoundException();
     }
@@ -161,22 +163,17 @@ public function view($id)
 ExceptionRenderer クラスは `CakeErrorController` を活用して、あなたのアプリケーションから
 投げられるすべての例外について、エラーページのレンダリングを処理します。
 
-エラーページの view は `app/View/Errors/` に置きます。4xx、5xx エラー用の view ファイルは
-それぞれ `error400.ctp` 、 `error500.ctp` が使われます。
-必要に応じてこれらをカスタマイスすることができます。デフォルトでは、`app/Layouts/default.ctp` が
-エラーページにも使われます。もし別のレイアウト、例えば `app/Layouts/my_error.ctp` を
-独自のエラーページとして使いたいという場合は、単純に、それらのエラー view を編集して、\`
+エラーページの view は `templates/Errors/`（レガシー構成では `app/View/Errors/`）に置きます。
+4xx、5xx エラー用の view ファイルはそれぞれ `error400.ctp` 、 `error500.ctp` が使われます。
+必要に応じてこれらをカスタマイズすることができます。デフォルトでは、`templates/Layouts/default.ctp` が
+エラーページにも使われます。もし別のレイアウト、例えば `templates/Layouts/my_error.ctp` を
+独自のエラーページとして使いたいという場合は、単純に、それらのエラー view を編集して、
 `error400.ctp` と `error500.ctp` に `$this->layout = 'my_error';` のステートメントを
-加えてください。
+加えてください。エラーページのレンダリング自体に失敗した場合は、`error` レイアウト
+（`templates/Layouts/error.ctp`）を使った最小限のレンダリングに切り替わります。
 
-::: pieceofcake2
-モダン構成では、エラー view は `app/View/Errors/` ではなく `templates/Errors/` に、
-レイアウトは `app/View/Layouts/` ではなく `templates/Layouts/` に置きます。
-フォーク自体のデフォルトのエラーテンプレートは、フレームワークパッケージの
-`templates/Errors/` にあります (以前の `lib/Cake/View/Errors/`)。
-:::
-
-フレームワーク層の例外はそれぞれ、自身の view ファイルをコアテンプレートの中に持っていますが、
+フレームワーク層の例外はそれぞれ、自身の view ファイルをコアテンプレート（フレームワークパッケージの
+`templates/Errors/` ディレクトリ）の中に持っていますが、
 それらは開発時にのみ使われるものですから、カスタマイズを思い悩む必要はまったくありません。
 デバッグモードが OFF の場合は、フレームワーク層の例外はすべて `InternalErrorException` に
 変換されます。
@@ -203,7 +200,7 @@ class MissingWidgetException extends CakeException
 };
 ```
 
-`app/View/Errors/missing_widget.ctp` を作成することにより、素晴らしい開発用エラーを
+`templates/Errors/missing_widget.ctp` を作成することにより、素晴らしい開発用エラーを
 提供させられます。本番モードでは、上記のエラーは 500 エラーとして扱われます。
 継承元の `CakeException` のコンストラクタにデータのハッシュマップを渡すことができます。
 それらのハッシュマップは messageTemplate の中にも、開発モードでエラーを表示するのに使われる
@@ -230,7 +227,7 @@ throw new MissingWidgetException(['widget' => 'Pointy']);
 
 例外を生成する際にコードを変えることで、独自の HTTP ステータスコードを作成することができます:
 
-``` text
+``` php
 throw new MissingWidgetHelperException('それはここではありません', 501);
 ```
 
@@ -255,22 +252,22 @@ throw new MissingWidgetHelperException('それはここではありません', 5
 ## <span class="title-ref">Exception.handler</span> を使って独自の例外ハンドラを作成する
 
 あなた独自の例外ハンドラを作成すれば、例外ハンドリング処理のすべてを完全に制御できるようになります。
-選択したクラスは、あなたの `app/Config/bootstrap.php` でロードすべきものですので、
+選択したクラスは、あなたの `config/bootstrap.php` でロードすべきものですので、
 どんな例外でもハンドリングすることができます。どのようなコールバックタイプでも定義することができます。
 `Exception.handler` をセットすることにより、CakePHP は他のすべての例外設定を無視します。
 独自の例外ハンドリングをセットアップする場合は次のようになります:
 
 ``` php
-// app/Config/core.php の中で
+// config/core.php
 Configure::write('Exception.handler', 'AppExceptionHandler::handle');
 
-// app/Config/bootstrap.php の中で
+// config/bootstrap.php
 App::uses('AppExceptionHandler', 'Lib');
 
-// app/Lib/AppExceptionHandler.php の中で
+// src/Lib/AppExceptionHandler.php
 class AppExceptionHandler
 {
-    public static function handle($error)
+    public static function handle(Throwable $error)
     {
         echo 'Oh noes! ' . $error->getMessage();
         // ...
@@ -279,12 +276,14 @@ class AppExceptionHandler
 }
 ```
 
-`handleException` の中ではどのようなコードでも走らせることができます。
-上記の例では単純に「Oh noes! 」＋例外のメッセージを表示しています。例外ハンドラは
-どのようなコールバックタイプでも（PHP 5.3 を使っているなら無名関数でも）定義することができます:
+`handle()` の中ではどのようなコードでも走らせることができます。
+上記の例では単純に「Oh noes! 」＋例外のメッセージを表示しています。ハンドラには PHP の
+`Error` オブジェクトを含め、キャッチされなかったすべての `Throwable` が渡されるので、
+引数の型は `Exception` ではなく `Throwable` にする（または型を指定しない）ようにしてください。
+例外ハンドラはどのようなコールバックタイプでも、無名関数でも定義することができます:
 
 ``` php
-Configure::write('Exception.handler', function ($error) {
+Configure::write('Exception.handler', function (Throwable $error) {
     echo 'Ruh roh ' . $error->getMessage();
 });
 ```
@@ -293,13 +292,13 @@ Configure::write('Exception.handler', function ($error) {
 提供することができます。例外ハンドラとして提供されるメソッド内で、下記のようにすることができます:
 
 ``` php
-// app/Lib/AppErrorHandler.php の中で
+// src/Lib/AppErrorHandler.php
 class AppErrorHandler
 {
-    public static function handleException($error)
+    public static function handleException(Throwable $error)
     {
         if ($error instanceof MissingWidgetException) {
-            return self::handleMissingWidget($error);
+            return static::handleMissingWidget($error);
         }
         // その他、各種処理
     }
@@ -321,6 +320,7 @@ appError
 このメソッドの中で独自のエラーハンドリングを実装します:
 
 ``` php
+// src/Controller/AppController.php
 class AppController extends Controller
 {
     public function appError($error)
@@ -335,16 +335,16 @@ class AppController extends Controller
 例外ハンドリングの制御はしたくないが、例外のレンダリングについては変更したいのならば、
 `Configure::write('Exception.renderer', 'AppExceptionRenderer');` を使うことで、
 例外ページをレンダリングするクラスを選択することができます。デフォルトでは、
-:php:class\`ExceptionRenderer\` が使われます。独自の例外レンダラクラスは
-`app/Lib/Error` の中に置いてください。もしくは、bootstrap にて指定された
-Lib のパスの中にある、 `Error` ディレクトリ内に置いてください。
+`ExceptionRenderer` が使われます。独自の例外レンダラクラスは
+`src/Lib/Error/`（レガシー構成では `app/Lib/Error/`）の中に置いてください。もしくは、
+bootstrap にて指定された Lib のパスの中にある、 `Error` ディレクトリ内に置いてください。
+`ErrorHandler` が `Error` パッケージから `App::uses()` で読み込むので、自分で読み込む必要は
+ありません。プラグインのレンダラを使う場合は `Plugin.ClassName` の形式で指定します。
 独自の例外レンダリングクラスの中であなたはアプリケーション固有のエラーに特化したハンドリングを
 提供することができます:
 
 ``` php
-// app/Lib/Error/AppExceptionRenderer.php の中で
-App::uses('ExceptionRenderer', 'Error');
-
+// src/Lib/Error/AppExceptionRenderer.php
 class AppExceptionRenderer extends ExceptionRenderer
 {
     public function missingWidget($error)
@@ -377,27 +377,37 @@ class AppExceptionRenderer extends ExceptionRenderer
 好きなコントローラを使うことができます:
 
 ``` php
+// src/Lib/Error/AppExceptionRenderer.php
 class AppExceptionRenderer extends ExceptionRenderer
 {
     protected function _getController($exception)
     {
         App::uses('SuperCustomErrorController', 'Controller');
+
         return new SuperCustomErrorController();
     }
 }
 ```
 
-別の方法として、コアの CakeErrorController を単に書き換えて `app/Controller` の
-下に置くということができます。エラーハンドリング用の独自コントローラを使う場合は、
+::: pieceofcake2
+`CakeErrorController` を含むフレームワークのクラスは
+Composer のクラスマップでオートロードされるため、アプリケーションの `Controller` ディレクトリに
+`CakeErrorController` を置いても、コアのクラスの代わりに使われるとは限りません。
+代わりに `_getController()` から独自のコントローラを返してください。
+:::
+
+エラーハンドリング用の独自コントローラを使う場合は、
 必要なセットアップをあなたのコンストラクタ内かレンダリングメソッド内ですべて行えているか
 よく確認してください。それらは組み込みの `ErrorHandler` クラスが直接呼び出す唯一の
 方法となるからです。
 
 ### 例外のログ出力
 
-あなたの core.php で `Exception.log` に true をセットすることで、組み込みの例外ハンドリングを
+`config/core.php` で `Exception.log` に true をセットすることで、組み込みの例外ハンドリングを
 使って ErrorHandler が扱うすべての例外をログに出力することができます。これを有効にすることで、
 すべての例外が `CakeLog` と設定で指定された logger に出力されることになります。
+デフォルトのログ設定では `logs/error.log` に書き込まれます。`NotFoundException` のように
+ログに残したくない例外は、`Exception.skipLog` で除外できます。
 
 > [!NOTE]
 > 独自の `Exception.handler` を使っているなら、その実装の中でそれを参照していない限り、

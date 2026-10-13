@@ -17,8 +17,8 @@
 メソッド群を新たに取得するのです。
 
 CakePHP には既に、ツリー構造、コンテンツ翻訳、アクセス制御リスト用のビヘイビアが付属しています。
-言うまでもありませんが、コミュニティの貢献によるビヘイビアが最早 CakePHP Bakery
-(<https://bakery.cakephp.org>) で入手できます。
+その他のビヘイビアはプラグインとして入手できます
+([メンテナンスされているプラグイン](/ja/plugins/maintained-plugins) を参照してください)。
 このセクションでは、モデルへのビヘイビア、CakePHP の組み込みのビヘイビアの使い方、独自のビヘイビアの
 作成方法といった基本的な使用方法のパターンを紹介します。
 
@@ -162,11 +162,11 @@ if (!$this->Category->Behaviors->loaded('Translate')) {
 `beforeSave`, `afterSave`, `beforeDelete`, `afterDelete` ,
 `onError` - 詳しくは [コールバックメソッド](../models/callback-methods) をご覧ください。
 
-作成したビヘイビアは `app/Model/Behavior` に置く必要があります。
+作成したビヘイビアは `src/Model/Behavior` に置く必要があります。
 名前はキャメルケース (*CamelCase*) で接尾語として `Behavior` がつきます。
 例えば、NameBehavior.php となります。
 独自のビヘイビアを作成する時には、コアのビヘイビアをテンプレートとして用いると便利なときがあります。
-コアのビヘイビアは `lib/Cake/Model/Behavior/` にあります。
+コアのビヘイビアは `vendor/pieceofcake2/cakephp/src/Cake/Model/Behavior/` にあります。
 
 全てのコールバックとビヘイビアのメソッドは、それが呼び出される元のモデルへの参照を第一引数として
 受け取ります。

@@ -72,12 +72,12 @@ CakePHP の URL とパラメータの取り扱いに関するより詳細な情�
 ルーティングやコントローラと同じ名前を持つファイルやディレクトリがある場合、
 コントローラではなく、そのディレクトリやファイルが参照されます。
 
-## ファイルとクラス名の規約
+## ファイルとクラス名の規約 {#file-and-classname-conventions}
 
 通常、ファイル名はクラス名にマッチしたものになり、キャメルケースとなります。
 従って、CakePHP で **MyNiftyClass** というクラスがあれば、ファイルは
 **MyNiftyClass.php** と命名されるでしょう。以下に CakePHP のアプリケーションで
-典型的に使うであろう種々のクラス毎のファイルにどう命名するかの例を挙げます:
+典型的に使うであろう種々のクラス毎のファイルにどう命名するかの例を挙げます。
 
 - **KissesAndHugsController** というコントローラのクラスは、
   **KissesAndHugsController.php** という名前にします。
@@ -92,15 +92,10 @@ CakePHP の URL とパラメータの取り扱いに関するより詳細な情�
 - **BestEverHelper** というヘルパーのクラスは、
   **BestEverHelper.php** というファイル名にします。
 
-各ファイルは、 app フォルダ内のそれぞれ適切なフォルダの中に配置します。
-
-::: pieceofcake2
-モダンな構成では、PHP のクラスファイルは `app/` ではなく `src/` 以下
-(`src/Controller/`、`src/Model/`、`src/View/Helper/` など) に配置します。
-`composer.json` で `"classmap": ["src/"]` によるオートロードを設定している場合は、
-新しいクラスファイルを追加するたびに `composer dump-autoload` を実行してください。
-[ディレクトリ構成](/ja/pieceofcake2/directory-structure) を参照してください。
-:::
+各ファイルは、 `src/` フォルダ内のそれぞれ適切なフォルダの中に配置します。
+たとえば `src/Controller/`、`src/Controller/Component/`、`src/Model/`、`src/Model/Behavior/`、
+`src/View/`、`src/View/Helper/` です。`composer.json` で `"classmap": ["src/"]` による
+オートロードを設定している場合は、新しいクラスファイルを追加するたびに `composer dump-autoload` を実行してください。
 
 ## モデルとデータベースの規約
 
@@ -149,33 +144,26 @@ CREATE TABLE posts_tags (
 
 また、主キーをオートインクリメントとしてではなく、char(36) として使用しても構いません。
 そうすると、Model::save メソッドを使って新規レコードを保存するとき、CakePHP はユニークな
-36文字の UUID (String::uuid) を用いようとします。
+36文字の UUID (`CakeText::uuid()`) を用いようとします。
 
 ## ビューの規約
 
 ビューのテンプレートファイルは、それを表示するコントローラの関数に合わせた、アンダースコア記法で
 名前が付きます。PeopleController クラスの getReady() 関数は、ビューテンプレートとして、
-/app/views/people/get_ready.ctp を探すことになります。
+`templates/People/get_ready.ctp` を探すことになります。
 
-基本パターンは、 /app/views/コントローラ名/アンダースコア記法_関数名.ctp です。
+基本パターンは、 `templates/コントローラ名/アンダースコア記法_関数名.ctp` です。
 
 各部分を CakePHP の規約に合わせて命名しておくことで、混乱を招く面倒な設定をしなくても
-機能的に動作するようになります。以下が最後の規約に合った命名の例です:
+機能的に動作するようになります。以下が最後の規約に合った命名の例です。
 
 - データベースのテーブル： "people"
-- モデルクラス： "Person"、 場所は /app/Model/Person.php
+- モデルクラス： "Person"、 場所は `src/Model/Person.php`
 - コントローラクラス： "PeopleController"、 場所は
-  /app/Controller/PeopleController.php
-- ビューのテンプレート、場所は /app/View/People/index.ctp
+  `src/Controller/PeopleController.php`
+- ビューのテンプレート、場所は `templates/People/index.ctp`
 
-::: pieceofcake2 モダンな構成
-モダンな構成では、同じファイルは次の場所に置きます。
-
-- モデルクラス: `src/Model/Person.php`
-- コントローラクラス: `src/Controller/PeopleController.php`
-- ビューのテンプレート: `templates/People/index.ctp`
-  (基本パターンは `templates/コントローラ名/アンダースコア記法_関数名.ctp`)
-:::
+従来の `app/` 構成では、これらのファイルは `app/Model/`、`app/Controller/`、`app/View/People/` にあります。
 
 これらの規約により、 CakePHP は <http://example.com/people/> へのリクエストを、
 PeopleController の index() 関数にマップします。そして、Person モデルが自動的に使える

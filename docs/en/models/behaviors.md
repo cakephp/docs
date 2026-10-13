@@ -21,8 +21,8 @@ of code, our CakePHP model takes on a whole new set of methods that allow it to
 interact with the underlying structure.
 
 CakePHP already includes behaviors for tree structures, translated content,
-access control list interaction, not to mention the community-contributed
-behaviors already available in the CakePHP Bakery (<https://bakery.cakephp.org>). In this section, we'll cover the basic usage
+access control list interaction, and more behaviors are available in plugins
+(see [Maintained Plugins](/plugins/maintained-plugins)). In this section, we'll cover the basic usage
 pattern for adding behaviors to models, how to use CakePHP's built-in behaviors,
 and how to create our own.
 
@@ -180,10 +180,10 @@ automatically. The callbacks are similar to those found in Models:
 `onError` - see
 [Callback Methods](../models/callback-methods).
 
-Your behaviors should be placed in `app/Model/Behavior`. They are named in CamelCase and
+Your behaviors should be placed in `src/Model/Behavior`. They are named in CamelCase and
 postfixed by `Behavior`, ex. NameBehavior.php.
 It's often helpful to use a core behavior as a template when creating
-your own. Find them in `lib/Cake/Model/Behavior/`.
+your own. Find them in `vendor/pieceofcake2/cakephp/src/Cake/Model/Behavior/`.
 
 Every callback and behavior method takes a reference to the model it is being called
 from as the first parameter.

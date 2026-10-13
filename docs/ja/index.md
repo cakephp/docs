@@ -1,44 +1,27 @@
 # Welcome
 
-> [!WARNING]
-> この文書のバージョンは CakePHP 2.x 用です。
-> [CakePHP 3.x の文書はここにあります](https://book.cakephp.org/3.0/) 。
-
-::: pieceofcake2
-このサイトは、CakePHP 2.x クックブックを **pieceofcake2/cakephp** 向けに調整したものです。
-pieceofcake2/cakephp は、PHP 8.0 以降で動作するようにコミュニティが保守している CakePHP 2.x のフォークです。
-このような枠は、オリジナルのクックブックとフォークとの違いを示します。
-概要は [pieceofcake2 フォークについて](/ja/pieceofcake2) を参照してください。
+::: warning サポート対象外のバージョン
+CakePHP 2 は本家ではサポートが終了 (EOL) しており、CakePHP プロジェクトによる保守は行われていません。
+このドキュメントは、CakePHP 2 のアプリケーションを PHP 8 で動かし続けるための
+Piece of Cake 2 フォーク、**pieceofcake2/cakephp** を対象としています。
+新しくプロジェクトを始める場合は [CakePHP 5](https://book.cakephp.org/5/ja/) を使ってください。
 :::
+
+これは Piece of Cake 2 フォーク向けに更新した CakePHP 2 のクックブックです。
+本家の CakePHP 2.x のドキュメントからの変更点は [本家ドキュメントからの変更点](/ja/pieceofcake2/changes) を参照してください。
 
 CakePHP クックブックは、オープンに開発されている、コミュニティで編集可能なドキュメントのプロジェクトです。
 ドキュメンテーションの品質、正当性、正確性の高さを維持することを期待しています。
-右上の "Improve this Doc" (この文書を改善する) ボタンに注目してください。
-このボタンは、あなたがドキュメンテーションの追加・削除・修正などの貢献が簡単にできるように、
+各ページの下にある "Edit this page on GitHub" リンクに注目してください。
+このリンクは、あなたがドキュメンテーションの追加・削除・修正などの貢献が簡単にできるように、
 該当ページの GitHub のオンラインエディタへ誘導します。
-
-<div>
-
-**クックブックがどこででも読めます**
-
-![Read the Book - CakePHP](/read-the-book.jpg)
-
-どこでも CakePHP クックブックをお楽しみ頂けます。 PDF と EPUB をご用意しましたので、
-多くのデバイス上でオフラインでドキュメントを読むことができます。
-
-- [PDF(英語)](../_downloads/en/CakePHPCookbook.pdf)
-- [EPUB](../_downloads/ja/CakePHPCookbook.epub)
-- [オリジナルソース](https://github.com/cakephp/docs)
-
-::: pieceofcake2
-このサイトでは PDF 版と EPUB 版を提供していません。
-上のリンクはオリジナルのクックブックから引き継いだもので、このサイトでは機能しません。
-このサイトのソースは [pieceofcake2/docs](https://github.com/pieceofcake2/docs) にあります。
-:::
-
-</div>
+このドキュメントのソースは [pieceofcake2/docs](https://github.com/pieceofcake2/docs) にあります。
 
 ## 入門
+
+### インストール
+
+Composer で [CakePHP をインストール](installation) し、ウェブサーバを設定します。
 
 ### ブログの作成
 

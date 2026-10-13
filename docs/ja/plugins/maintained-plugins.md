@@ -1,8 +1,4 @@
-# リポジトリとプラグイン
-
-::: pieceofcake2
-このページは **pieceofcake2 フォーク** 固有の内容で、本家 CakePHP 2.x のドキュメントには含まれません。
-:::
+# メンテナンスされているプラグイン
 
 [Piece of Cake 2](https://github.com/pieceofcake2) プロジェクトは、フレームワークのフォークに加えて、
 関連するリポジトリと、主要な CakePHP 2 プラグインのフォークをメンテナンスしています。
@@ -81,7 +77,7 @@
 
 プラグインは Composer でインストールし、通常どおり `CakePlugin::load()` で読み込みます。
 パッケージ名や設定方法は各リポジトリの README を参照してください。
-[モダン構成](/ja/pieceofcake2/directory-structure) では、`installer-paths` の設定により
+[モダン構成](/ja/appendices/migrating-to-the-modern-layout) では、`installer-paths` の設定により
 Composer がプラグインを `plugins/` にインストールします。
 
 Composer のオートロードに対応していないプラグインでは、そのクラスに対して引き続き `App::uses()`

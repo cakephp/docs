@@ -3,39 +3,80 @@
 データソースはモデルとモデルが表現するデータの元（ソース）とを
 仲立ちするものです。多くの場合、データは MySQL, PostgreSQL, Microsoft SQL Server
 といったリレーショナルデータベースから取り出されます。
-CakePHP は、以下の一覧にあるようないくつかのデータベース固有の
-データソース（ `lib/Cake/Model/Datasource/Database` を参照）
-とともに配布されています。:
+CakePHP にはデータベースごとのデータソースが同梱されています
+(`pieceofcake2/cakephp` パッケージの `src/Cake/Model/Datasource/Database` を参照)。
+いずれも PDO を使うため、対応する PDO エクステンションが必要です。
 
-- Mysql
-- Postgres
-- Sqlite
-- Sqlserver
+| データソース | 対応バージョン | PHP エクステンション |
+|----|----|----|
+| `Database/Mysql` | MySQL 5.6、5.7、8.0 以降 (MariaDB も判別します) | `pdo_mysql` |
+| `Database/Postgres` | PostgreSQL 9.4 以降 | `pdo_pgsql` |
+| `Database/Sqlite` | SQLite 3 | `pdo_sqlite` |
+| `Database/Sqlserver` | Microsoft SQL Server 2022 以降 | `pdo_sqlsrv` |
 
 > [!NOTE]
-> 上記以外にも、 [GitHub 上の CakePHP データソースリポジトリ](https://github.com/cakephp/datasources/tree/2.0)
-> にコミュニティが開発しているデータソースがあります。
+> 上記以外のデータソース (CSV/TSV ファイル、配列など) は
+> [Datasources プラグイン](https://github.com/pieceofcake2/datasources) にあります。
 
-`app/Config/database.php` でデータベースの接続設定を行うと、
+`config/database.php` (レガシーレイアウトでは `app/Config/database.php`)
+でデータベースの接続設定を行うと、
 モデルの操作全般において CakePHP は透過的に対応するデータソースを
 使用します。このため、それらのデータソースに関する知識がなくても
 利用できるようになっています。
 
-::: pieceofcake2 対応データベース
-pieceofcake2 フォークは MySQL 5.6、5.7、8.0 以降（`pdo_mysql`）、PostgreSQL 9.4 以降
-（`pdo_pgsql`）、SQLite 3（`pdo_sqlite`）、Microsoft SQL Server 2022 以降（`pdo_sqlsrv`）に
-対応しています。主な違いは次の通りです。
+## 接続設定
 
-- ドライバクラスは `src/Cake/Model/Datasource/Database` にあります。
-- 接続設定ファイルはレガシーレイアウトでは `app/Config/database.php`、
-  モダンレイアウトでは `config/database.php` です。
-- `encoding` の設定は、接続後の `SET NAMES` ではなく PDO の DSN で渡すようになりました。
-  PostgreSQL の `sslmode` は省略できます。設定の変更は不要です。
-- ドライバに `getVersion()`（MySQL、PostgreSQL）、`getServerType()`、
-  `utf8mb4Supported()`、`integerDisplayWidthDeprecated()`（MySQL）が追加されました。
-  これらのクラスを継承した独自ドライバでは実装が必要になる場合があります。
+アプリケーションスケルトンには `config/database.php.default` が含まれています。
+これを `config/database.php` にコピーして接続設定を編集してください。
+接続ごとに `DATABASE_CONFIG` クラスの public プロパティを定義します。
 
-詳しくは [アップグレードガイド](/ja/pieceofcake2/upgrade) を参照してください。
+``` php
+// config/database.php
+class DATABASE_CONFIG
+{
+    public $default = [
+        'datasource' => 'Database/Mysql',
+        'persistent' => false,
+        'host' => 'localhost',
+        'login' => 'user',
+        'password' => 'password',
+        'database' => 'database_name',
+        'prefix' => '',
+        'encoding' => 'utf8mb4',
+    ];
+}
+```
+
+`encoding` の設定は接続時にドライバへ渡されます。MySQL では DSN に `charset=...` として、
+PostgreSQL では `options='--client_encoding=...'` として追加されます。
+接続後にエンコーディングを変更したい場合は、これまでどおり `setEncoding()` を使えます。
+
+PostgreSQL の `sslmode` (`disable`、`allow`、`prefer`、`require` など) は、
+設定したときだけ DSN に追加されます。省略した場合は PostgreSQL クライアントライブラリの
+デフォルト値が使われます。
+
+`flags` には PDO のコンストラクタに渡す PDO 属性を配列で指定します。
+PHP 8.1 以降の `pdo_mysql` と `pdo_sqlite` は、整数や浮動小数点数のカラムを
+文字列ではなく PHP の `int` や `float` で返します。
+文字列との厳密な比較など、以前の動作に依存しているアプリケーションでは
+`PDO::ATTR_STRINGIFY_FETCHES` を指定してください。
+
+``` php
+public $default = [
+    'datasource' => 'Database/Mysql',
+    // ...
+    'flags' => [
+        PDO::ATTR_STRINGIFY_FETCHES => true,
+    ],
+];
+```
+
+::: pieceofcake2
+`encoding` の設定は接続後に `SET NAMES` を実行するのではなく
+DSN で渡すようになり、PostgreSQL の `sslmode` のデフォルト値 `allow` はなくなりました。
+MySQL と PostgreSQL のドライバには `getVersion()` などのメソッドが追加されているため、
+これらを継承した独自ドライバでは実装が必要になる場合があります。
+詳しくは [CakePHP 2.10 からの移行](/ja/appendices/migrating-from-cakephp-2-10) を参照してください。
 :::
 
 前述のソースはどれも `DboSource` から派生したもので、これにより
@@ -90,11 +131,10 @@ pieceofcake2 フォークは MySQL 5.6、5.7、8.0 以降（`pdo_mysql`）、Pos
 サードパーティの API にアクセスしたいという場合です。
 ここでは架空のリモート JSON ベースの API にアクセスする
 データソースを書いてみましょう。 `FarAwaySource` という名前で
-`app/Model/Datasource/FarAwaySource.php` に置くことにします:
+`src/Model/Datasource/FarAwaySource.php` に置くことにします:
 
 ``` php
-App::uses('HttpSocket', 'Network/Http');
-
+// src/Model/Datasource/FarAwaySource.php
 class FarAwaySource extends DataSource
 {
 
@@ -104,7 +144,7 @@ class FarAwaySource extends DataSource
     public $description = 'A far away datasource';
 
 /**
- * デフォルトの設定オプション。これらは ``app/Config/database.php`` 
+ * デフォルトの設定オプション。これらは ``config/database.php``
  * でカスタマイズされ、 ``__construct()`` の中でマージされます。
  */
     public $config = [
@@ -268,7 +308,7 @@ class FarAwaySource extends DataSource
 }
 ```
 
-データソースを構成するには `app/Config/database.php`
+データソースを構成するには `config/database.php`
 ファイルの中で以下のように追加します:
 
 ``` php
@@ -330,7 +370,7 @@ $this->MyModel->delete(42);
 データソースをパッケージにしてプラグインにすることもできます。
 
 単にあなたのデータソースファイルを
-`Plugin/[YourPlugin]/Model/Datasource/[YourSource].php`
+`plugins/[YourPlugin]/Model/Datasource/[YourSource].php`
 に置いて、それをプラグイン記法で参照するだけです:
 
 ``` php
@@ -342,49 +382,51 @@ public $faraway = [
 
 ## SQL Server に接続する
 
-SQL Server のデータソースは、pdo_sqlsrv と呼ばれるマイクロソフトの
-PHP エクステンションに依存しています。この PHP エクステンションは
-PHP の基本構成には含まれておらず、別途インストールする必要があります。
-
-また、そのエクステンションが動作するためには SQL Server の
-ネイティブクライアントがインストールされている必要があります。
-そのネイティブクライアントは Windows 用しかないので、
-これを Linux, Mac OS, FreeBSD 上で動かすことはできません。
+SQL Server のデータソースは、[pdo_sqlsrv と呼ばれるマイクロソフトの
+PHP エクステンション](https://github.com/Microsoft/msphpsql) に依存しています。
+この PHP エクステンションは PHP の基本構成には含まれておらず、
+Microsoft ODBC Driver for SQL Server とあわせて別途インストールする必要があります。
+どちらも Linux、macOS、Windows 用が提供されています。
 
 このため、SQL Server が以下のようなエラー:
 
     Error: Database connection "Sqlserver" is missing, or could not be created.
 
-を出す場合は、まず SQL Server の PHP エクステンション pdo_sqlsrv
-と SQL Server のネイティブクライアントが正しくインストール
+を出す場合は、まず `pdo_sqlsrv` エクステンションと ODBC ドライバが正しくインストール
 されているかどうかを確認して下さい。
 
-::: pieceofcake2
-pieceofcake2 フォークは SQL Server 2022 以降に対応しており、Linux 上で `pdo_sqlsrv` と
-Microsoft ODBC Driver for SQL Server を使ってテストされています。Windows は必須ではありません。
-設定には次のオプションが追加されています。
+SQL Server への接続設定は次のようになります。
 
 ``` php
 public $default = [
     'datasource' => 'Database/Sqlserver',
+    'persistent' => false,
     'host' => 'localhost',
-    'port' => 1433, // サーバー名の後ろに付加される
+    'port' => 1433,
     'login' => 'sa',
     'password' => 'secret',
     'database' => 'cakephp',
+    'schema' => 'dbo',
     'encoding' => 'utf8',
-    'schema' => [ // スキーマのマッピング（デフォルトは 'dbo'）
-        'default' => 'dbo',
-    ],
-    'options' => [ // SSL/TLS などの追加の DSN オプション
+    'options' => [
         'TrustServerCertificate' => 'yes',
         'Encrypt' => 'no',
     ],
 ];
 ```
 
-`Sqlserver` クラスを継承している場合、`describe()` の戻り値の型が `array` と宣言され、
-`insertMulti()` が `bool` を返すようになった点に注意してください。
-詳しくは [アップグレードガイド](/ja/pieceofcake2/upgrade) を参照してください。
-:::
+- `port` は DSN のサーバー名の後ろに付加されます (`server=localhost,1433`)。
+- `schema` はテーブルがあるスキーマです。デフォルトは `dbo` です。
+  同じデータベースの複数のスキーマにあるテーブルを使う場合は、データベースを分けるのではなく、
+  `schema` の値を変えた接続をスキーマごとに定義してください。
+- `options` には追加の DSN キーワードを指定します。SSL/TLS の設定である
+  `Encrypt` や `TrustServerCertificate` などです。
+- `encoding` に `utf8` を指定すると、ドライバは文字列を UTF-8 で扱います。
+- `pdo_sqlsrv` ドライバは持続的接続に対応していないため、`persistent` は `false` にしてください。
 
+::: pieceofcake2
+SQL Server データソースに `port` と `options` の設定が追加され、
+`schema` のデフォルト値が `dbo` になりました。`Sqlserver` クラスを継承している場合、
+`describe()` の戻り値の型が `array` と宣言され、`insertMulti()` は `bool` を返すようになりました。
+詳しくは [CakePHP 2.10 からの移行](/ja/appendices/migrating-from-cakephp-2-10) を参照してください。
+:::

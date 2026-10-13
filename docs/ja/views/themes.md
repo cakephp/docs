@@ -22,27 +22,22 @@ class ExampleController extends AppController
 $this->theme = 'AnotherExample';
 ```
 
-テーマのビューファイルは `/app/View/Themed/` フォルダに配置する必要があります。
+テーマのビューファイルは `templates/Themed/` フォルダに配置する必要があります。
 Themed フォルダの中にテーマ名のフォルダを作成して下さい。上記の例でいうと、テーマは
-`/app/View/Themed/AnotherExample` に配置するかたちになります。
-
-::: pieceofcake2
-pieceofcake2 フォークのモダンレイアウトでは、テーマは `app/View/Themed/` ではなく `templates/Themed/`
-に置きます（例: `templates/Themed/Example/Posts/edit.ctp`、
-`templates/Themed/Example/webroot/css/main.css`）。このページの以降の説明も、このパスに読み替えてください。
-:::
+`templates/Themed/AnotherExample` に配置するかたちになります。
+従来の `app/` レイアウトでは、テーマは `app/View/Themed/` に置きます。
 
 > [!NOTE]
 > これは大事なことなのですが、CakePHP は CamelCase のテーマ名を期待しているということを
 > 覚えておいてください。
 
-さらに、 `/app/View/Themed/Example/` 以下は `/app/View/` と全く同じ構造にして下さい。
+さらに、 `templates/Themed/Example/` 以下は `templates/` と全く同じ構造にして下さい。
 
 例えば、Posts コントローラの edit アクションのためのビューファイルは
-`/app/View/Themed/Example/Posts/edit.ctp` となります。また、レイアウトファイルは
-`/app/View/Themed/Example/Layouts/` に配置されます。
+`templates/Themed/Example/Posts/edit.ctp` となります。また、レイアウトファイルは
+`templates/Themed/Example/Layouts/` に配置されます。
 
-ビューファイルがテーマに見つからない時、CakePHP は `/app/View/` フォルダの中を探します。
+ビューファイルがテーマに見つからない時、CakePHP は `templates/` フォルダの中を探します。
 これによって、マスタービューファイルを作成して、テーマフォルダには上書きが必要なファイルだけを
 配置すればよくなります。
 
@@ -59,7 +54,7 @@ pieceofcake2 フォークのモダンレイアウトでは、テーマは `app/V
 新しいテーマの webroot を使うには:
 
 ``` text
-app/View/Themed/<themeName>/webroot<path_to_file>
+templates/Themed/<themeName>/webroot<path_to_file>
 ```
 
 のようなディレクトリをテーマの中に作成して下さい。ディスパッチャはビューパスから
@@ -70,14 +65,14 @@ CakePHP のすべての組み込みヘルパーはテーマに対応しており
 デフォルトととなります。 :
 
 ``` php
-//'purple_cupcake'という名前のテーマの時
+// 'purple_cupcake'という名前のテーマの時
 $this->Html->css('main.css');
 
-//パスの作成は以下の通り
+// パスの作成は以下の通り
 /theme/purple_cupcake/css/main.css
 
-//リンク
-app/View/Themed/PurpleCupcake/webroot/css/main.css
+// リンク
+templates/Themed/PurpleCupcake/webroot/css/main.css
 ```
 
 ## プラグインとテーマアセットのパフォーマンスを改善する
@@ -86,15 +81,10 @@ PHP を通してアセットを提供すると PHP を通さずにアセット�
 遅くなることはよく知られています。コアチームは出来るだけ速いプラグインとテーマのアセットを
 提供しようとコツコツと努力を重ねていますが、より高い性能が必要とされる状況はあるかもしれません。
 そのような状況では、シンボリックリンクを張るかプラグインとテーマのアセットを
-CakePHP によって使われている `app/webroot` のパスに一致するディレクトリに
+CakePHP によって使われている `webroot` のパスに一致するディレクトリに
 コピーすることが推奨されます。
 
-- `app/Plugin/DebugKit/webroot/js/my_file.js` は
-  `app/webroot/debug_kit/js/my_file.js` になります。
-- `app/View/Themed/Navy/webroot/css/navy.css` は
-  `app/webroot/theme/Navy/css/navy.css` になります。
-
-::: pieceofcake2
-モダンレイアウトではウェブルートは `webroot/`、Composer でインストールしたプラグインは `plugins/` にあるため、
-例えば `plugins/DebugKit/webroot/js/my_file.js` は `webroot/debug_kit/js/my_file.js` になります。
-:::
+- `plugins/DebugKit/webroot/js/my_file.js` は
+  `webroot/debug_kit/js/my_file.js` になります。
+- `templates/Themed/Navy/webroot/css/navy.css` は
+  `webroot/theme/Navy/css/navy.css` になります。

@@ -26,10 +26,10 @@ JavaScript ライブラリの種類に応じて、実際の JavaScript に変換
 ## 指定した JavaScript エンジンの利用
 
 はじめに、あなたが使用する JavaScript ライブラリを全てダウンロードして、
-`app/webroot/js` 以下に置いてください。
+`webroot/js` 以下に置いてください。
 
 その時、あなたのページにそのライブラリが含まれていなければなりません。
-それを全てのページに含めるためには、 `app/View/Layouts/default.ctp`
+それを全てのページに含めるためには、 `templates/Layouts/default.ctp`
 の \<head\> セクションに以下の行を追加してください。 :
 
 ``` php
@@ -127,7 +127,7 @@ JavaScript エンジンヘルパーは、いくつかの制約はありますが
 `JsHelper` は、いくつかのメソッドを用意し、エンジンヘルパーの表の面で
 動作します。ごく稀な場合を除いて、エンジンヘルパーに直接アクセスすべきでは
 ありません。 `JsHelper` の表の機能は、バッファリングやメソッドチェーン
-を便利にします。 (メソッドチェーンは PHP5 上でのみ動作します。)
+を便利にします。
 
 `JsHelper` は、デフォルトでは、生成されたすべてのスクリプトコードは、
 バッファに蓄積し、ビュー・エレメント・レイアウトを通してスクリプトを収集し、
@@ -146,8 +146,7 @@ JavaScript 内の多くのメソッドが DOM のエレメントのセレクタ�
 $this->Js->get('#foo')->event('click', $eventCode);
 ```
 
-上記がメソッドチェーンの例です。メソッドチェーンは、 PHP4 では不可能なので、
-下記のサンプルのように記述します。 :
+上記がメソッドチェーンの例です。これは、下記のサンプルと同じ意味になります。 :
 
 ``` php
 $this->Js->get('#foo');
@@ -290,7 +289,7 @@ CakePHP コアに含まれるすべてのエンジンに対応します。　あ
 
 `method` JsHelper::**value**($value)
 
-## AJAX ページ制御
+## AJAX ページ制御 {#ajax-pagination}
 
 1.2 の AJAX ページ制御のように、AJAX ページ制御のリンクの作成をプレーンな
 HTML リンクの代わりに制御するために JsHelper が利用できます。
@@ -376,7 +375,7 @@ echo $this->Js->writeBuffer();
 </html>
 ```
 
-indicator.gif ファイルを app/webroot/img フォルダ内におくことを忘れないでください。
+indicator.gif ファイルを webroot/img フォルダ内におくことを忘れないでください。
 indicator.gif がページロード中に直ちに表示される場面が考えられます。
 メインの CSS ファイル内に `#busy-indicator { display:none; }`
 を設定しておく必要があります。

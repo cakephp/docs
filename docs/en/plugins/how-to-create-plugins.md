@@ -4,27 +4,27 @@ As a working example from the [How To Use Plugins](../plugins/how-to-use-plugins
 begin to create a ContactManager plugin. To start out, we'll set up our plugin's
 basic directory structure. It should look like this:
 
-    /app
-        /Plugin
-            /ContactManager
-                /Controller
-                    /Component
-                /Model
-                    /Behavior
-                /View
-                    /Helper
-                    /Layouts
+    /plugins
+        /ContactManager
+            /Controller
+                /Component
+            /Model
+                /Behavior
+            /View
+                /Helper
+                /Layouts
 
-Note the name of the plugin folder, '\*\*ContactManager\*\*'. It is important
+Note the name of the plugin folder, **ContactManager**. It is important
 that this folder has the same name as the plugin.
 
-::: pieceofcake2
-In the pieceofcake2 fork's modern layout, plugins live in `plugins/ContactManager/` instead of
-`app/Plugin/ContactManager/`. The structure *inside* a plugin is unchanged (`Controller/`, `Model/`,
-`View/`, `Config/`, `webroot/` ...); only plugin tests may also use `tests/TestCase/` and
-`tests/Fixture/` instead of `Test/Case/` and `Test/Fixture/`. A starting point is available at
-[pieceofcake2/plugin](https://github.com/pieceofcake2/plugin).
-:::
+Plugins live in the `plugins/` directory at the root of your project (in an
+application with the legacy `app/` layout you can also use `app/Plugin/`).
+Unlike the application itself, a plugin keeps the CakePHP 2 structure
+*inside* its folder: PHP classes in `Controller/`, `Model/` and so on, and
+templates in `View/` next to `View/Helper/`. Plugin tests can use either
+`Test/Case/` and `Test/Fixture/` or `tests/TestCase/` and `tests/Fixture/`.
+The [pieceofcake2/plugin](https://github.com/pieceofcake2/plugin) skeleton is a
+good starting point for a new plugin.
 
 Inside the plugin folder, you'll notice it looks a lot like a CakePHP
 application, and that's basically what it is. You don't actually have to
@@ -43,7 +43,8 @@ application can, such as Config, Console, Lib, webroot, etc.
 > should look like for our ContactManager example:
 
 ``` php
-// In /app/Plugin/ContactManager/Controller/ContactManagerAppController.php
+// In plugins/ContactManager/Controller/ContactManagerAppController.php
+App::uses('AppController', 'Controller');
 
 class ContactManagerAppController extends AppController
 {
@@ -51,35 +52,46 @@ class ContactManagerAppController extends AppController
 ```
 
 ``` php
-// In /app/Plugin/ContactManager/Model/ContactManagerAppModel.php
+// In plugins/ContactManager/Model/ContactManagerAppModel.php
+App::uses('AppModel', 'Model');
 
 class ContactManagerAppModel extends AppModel
 {
 }
 ```
 
+Unlike the classes in your application's `src/` directory, plugin classes are
+not part of your application's Composer classmap. CakePHP loads them with its
+own class loader, so code inside a plugin keeps the `App::uses()` statements
+for the classes it depends on. This also keeps the plugin working in
+applications that don't use classmap autoloading.
+
 If you forgot to define these special classes, CakePHP will hand
 you "Missing Controller" errors until you've done so.
 
 Please note that the process of creating plugins can be greatly
-simplified by using the Cake shell.
+simplified by using the [Bake plugin](https://github.com/pieceofcake2/bake).
 
 In order to bake a plugin please use the following command:
 
-    user@host$ cake bake plugin ContactManager
+``` bash
+bin/cake bake plugin ContactManager
+```
 
 Now you can bake using the same conventions which apply to the rest
 of your app. For example - baking controllers:
 
-    user@host$ cake bake controller Contacts --plugin ContactManager
+``` bash
+bin/cake bake controller Contacts --plugin ContactManager
+```
 
 Please refer to the chapter
-[Code Generation with Bake](../console-and-shells/code-generation-with-bake) if you
-have any problems with using the command line.
+[Code Generation with Bake](../console-and-shells/code-generation-with-bake) for
+how to install and use Bake.
 
 > [!WARNING]
 > Plugins do not work as namespacing to separate code.
-> Due to PHP lacking namespaces in older versions
+> CakePHP 2 classes are not namespaced, so
 > you cannot have the same class,
 > or same filename, in your plugins.
 > Even if it is two different plugins.
@@ -89,15 +101,15 @@ have any problems with using the command line.
 ## Plugin Controllers
 
 Controllers for our ContactManager plugin will be stored in
-/app/Plugin/ContactManager/Controller/. Since the main thing we'll
+`plugins/ContactManager/Controller/`. Since the main thing we'll
 be doing is managing contacts, we'll need a ContactsController for
 this plugin.
 
 So, we place our new ContactsController in
-/app/Plugin/ContactManager/Controller and it looks like so:
+`plugins/ContactManager/Controller` and it looks like so:
 
 ``` php
-// In app/Plugin/ContactManager/Controller/ContactsController.php
+// In plugins/ContactManager/Controller/ContactsController.php
 
 class ContactsController extends ContactManagerAppController
 {
@@ -132,12 +144,12 @@ because we don't have a Contact model defined yet.
 
 ## Plugin Models
 
-Models for the plugin are stored in /app/Plugin/ContactManager/Model.
+Models for the plugin are stored in `plugins/ContactManager/Model`.
 We've already defined a ContactsController for this plugin, so let's
 create the model for that controller, called Contact:
 
 ``` php
-// In /app/Plugin/ContactManager/Model/Contact.php
+// In plugins/ContactManager/Model/Contact.php
 
 class Contact extends ContactManagerAppModel
 {
@@ -155,7 +167,7 @@ Let's create that next.
 For example:
 
 ``` php
-// In /app/Plugin/ContactManager/Model/Contact.php
+// In plugins/ContactManager/Model/Contact.php
 
 class Contact extends ContactManagerAppModel
 {
@@ -167,14 +179,14 @@ If you would prefer that the array keys for the association not
 have the plugin prefix on them, use the alternative syntax:
 
 ``` php
-// In /app/Plugin/ContactManager/Model/Contact.php
+// In plugins/ContactManager/Model/Contact.php
 
 class Contact extends ContactManagerAppModel
 {
     public $hasMany = [
         'AltName' => [
-            'className' => 'ContactManager.AltName'
-        ]
+            'className' => 'ContactManager.AltName',
+        ],
     ];
 }
 ```
@@ -182,13 +194,13 @@ class Contact extends ContactManagerAppModel
 ## Plugin Views
 
 Views behave exactly as they do in normal applications. Just place
-them in the right folder inside of the /app/Plugin/\[PluginName\]/View/
+them in the right folder inside of the `plugins/[PluginName]/View/`
 folder. For our ContactManager plugin, we'll need a view for our
 ContactsController::index() action, so let's include that as
 well:
 
-``` text
-<!-- /app/Plugin/ContactManager/View/Contacts/index.ctp: -->
+``` html
+<!-- plugins/ContactManager/View/Contacts/index.ctp: -->
 <h1>Contacts</h1>
 <p>Following is a sortable list of your contacts</p>
 <!-- A sortable list of contacts would go here....-->
@@ -204,17 +216,14 @@ You can override any plugin views from inside your app using
 special paths. If you have a plugin called 'ContactManager' you
 can override the view files of the plugin with more application
 specific view logic by creating files using the following template
-"app/View/Plugin/\[Plugin\]/\[Controller\]/\[view\].ctp". For the
+`templates/Plugin/[Plugin]/[Controller]/[view].ctp`
+(`app/View/Plugin/...` in the legacy `app/` layout). For the
 Contacts controller you could make the following file:
 
-    /app/View/Plugin/ContactManager/Contacts/index.ctp
+    templates/Plugin/ContactManager/Contacts/index.ctp
 
 Creating this file, would allow you to override
-"/app/Plugin/ContactManager/View/Contacts/index.ctp".
-
-::: pieceofcake2
-In the modern layout, use `templates/Plugin/ContactManager/Contacts/index.ctp`.
-:::
+`plugins/ContactManager/View/Contacts/index.ctp`.
 
 <a id="plugin-assets"></a>
 
@@ -223,12 +232,11 @@ In the modern layout, use `templates/Plugin/ContactManager/Contacts/index.ctp`.
 A plugin's web assets (but not PHP files) can be served through the
 plugin's 'webroot' directory, just like the main application's assets:
 
-    app/Plugin/ContactManager/webroot/
-                                        css/
-                                        js/
-                                        img/
-                                        flash/
-                                        pdf/
+    plugins/ContactManager/webroot/
+                                   css/
+                                   js/
+                                   img/
+                                   pdf/
 
 You may put any type of file in any directory, just like a regular
 webroot.
@@ -238,7 +246,9 @@ and CSS files of plugins, through the Dispatcher is incredibly inefficient.
 It is strongly recommended to symlink them for production.
 For example like this:
 
-    ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css
+``` bash
+ln -s ../../plugins/YourPlugin/webroot/css/yourplugin.css webroot/css/yourplugin.css
+```
 
 ### Linking to Assets in Plugins
 
@@ -248,7 +258,7 @@ in your application's webroot.
 
 For example, linking to '/contact_manager/js/some_file.js'
 would serve the asset
-'app/Plugin/ContactManager/webroot/js/some_file.js'.
+`plugins/ContactManager/webroot/js/some_file.js`.
 
 > [!NOTE]
 > It is important to note the **/your_plugin/** prefix before the
@@ -257,6 +267,10 @@ would serve the asset
 ::: info Changed in version 2.1
 Use `plugin syntax` to request assets. For example in your View:
 :::
+
+``` php
+echo $this->Html->css('ContactManager.style');
+```
 
 ## Components, Helpers and Behaviors
 
@@ -288,12 +302,12 @@ public $components = ['ContactManager.Example'];
 The same technique applies to Helpers and Behaviors.
 
 > [!NOTE]
-> When creating Helpers you may find AppHelper is not automatically
-> available. You should declare the resources you need with Uses:
+> As with the plugin's AppController and AppModel, declare the classes your
+> plugin's helpers depend on with `App::uses()`, so that the plugin also
+> works in applications without classmap autoloading:
 >
 > ``` php
 > // Declare use of AppHelper for your Plugin's Helper
->
 > App::uses('AppHelper', 'View/Helper');
 > ```
 
@@ -303,7 +317,7 @@ This example created a good start for a plugin, but there is a lot
 more that you can do. As a general rule, anything you can do with your
 application, you can do inside of a plugin instead.
 
-Go ahead, include some third-party libraries in 'Vendor', add some
+Go ahead, require some third-party libraries with Composer, add some
 new shells to the cake console, and don't forget to create test cases
 so your plugin users can automatically test your plugin's functionality!
 
@@ -316,7 +330,7 @@ that everyone can benefit from your awesome, reusable components!
 
 ## Plugin Tips
 
-Once a plugin has been installed in /app/Plugin/, you can access it
+Once a plugin has been installed in `plugins/`, you can access it
 at the URL /plugin_name/controller_name/action. In our ContactManager
 plugin example, we'd access our ContactsController at
 /contact_manager/contacts.
@@ -328,8 +342,8 @@ applications:
   \[Plugin\]AppModel, you'll get missing Controller errors when trying
   to access a plugin controller.
 - You can define your own layouts for plugins, inside
-  app/Plugin/\[Plugin\]/View/Layouts. Otherwise, plugins will use the
-  layouts from the /app/View/Layouts folder by default.
+  `plugins/[Plugin]/View/Layouts`. Otherwise, plugins will use the
+  layouts from the `templates/Layouts` folder by default.
 - You can do inter-plugin communication by using
   `$this->requestAction('/plugin_name/controller_name/action');` in your
   controllers.
@@ -341,13 +355,27 @@ applications:
 
 ## Publish Your Plugin
 
-You can add your plugin to [plugins.cakephp.org](https://plugins.cakephp.org)
-or propose it to the
-[awesome-cakephp list](https://github.com/FriendsOfCake/awesome-cakephp).
-
-Also, you might want to create a composer.json file and publish your plugin at
+To share your plugin, create a `composer.json` file and publish your plugin at
 [packagist.org](https://packagist.org/).
-This way it can easily be used through Composer.
+This way it can easily be used through Composer. Set the package `type` to
+`cakephp-plugin`, require `composer/installers` so the plugin is installed into
+the application's plugin directory, and set `installer-name` to the plugin's
+folder name:
+
+``` json
+{
+    "name": "foo-bar/cakephp-logging",
+    "type": "cakephp-plugin",
+    "require": {
+        "php": ">=8.0",
+        "composer/installers": "*",
+        "pieceofcake2/cakephp": "^2.12"
+    },
+    "extra": {
+        "installer-name": "Logging"
+    }
+}
+```
 
 Choose a semantically meaningful name for the package name. This should ideally
 be prefixed with the dependency, in this case "cakephp" as the framework.
@@ -359,4 +387,5 @@ The convention is to use lowercase letters and dashes as separator.
 So if you created a plugin "Logging" with your GitHub account "FooBar", a good
 name would be <span class="title-ref">foo-bar/cakephp-logging</span>.
 And the CakePHP owned "Localized" plugin can be found under <span class="title-ref">cakephp/localized</span>
-respectively.
+respectively. Its PHP 8 compatible fork is maintained at
+[pieceofcake2/localized](https://github.com/pieceofcake2/localized).
