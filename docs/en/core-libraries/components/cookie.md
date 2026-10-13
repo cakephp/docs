@@ -93,8 +93,8 @@ public function beforeFilter()
 }
 ```
 
-The `'aes'` type uses `Security::encrypt()`. PHP 8 does not provide
-the `mcrypt` extension, so enable the OpenSSL implementation in
+The `'aes'` type uses `Security::encrypt()`. The `mcrypt` extension
+is not bundled with PHP 7.2 and later, so enable the OpenSSL implementation in
 `config/core.php`:
 
 ``` php
@@ -127,5 +127,5 @@ Sets the encryption type used for cookie values. The available types are
 > The default type is `'cipher'` only for backwards compatibility. It is a
 > weak XOR cipher, so always call `type('aes')` in your `beforeFilter()` as
 > shown above, together with `Security.useOpenSsl`. `'rijndael'` requires the
-> `mcrypt` extension, which is not available on PHP 8. Changing the type
+> `mcrypt` extension, which must be installed from PECL on PHP 7.2 and later. Changing the type
 > invalidates cookies written with the previous type.

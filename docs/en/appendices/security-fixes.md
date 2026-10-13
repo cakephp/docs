@@ -79,7 +79,8 @@ file, and keep `composer/ca-bundle` up to date.
 
 ### Encryption on PHP 8
 
-PHP 8 does not ship the mcrypt extension. Without it, `Security::encrypt()`,
+The mcrypt extension is not bundled with PHP 7.2 and later; it is only
+available from [PECL](https://pecl.php.net/package/mcrypt). Without it, `Security::encrypt()`,
 `Security::decrypt()` and the `'aes'` type of `CookieComponent` only work when
 OpenSSL is enabled:
 

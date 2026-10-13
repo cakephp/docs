@@ -481,7 +481,7 @@ Security.cipherSeed
 
 Security.useOpenSsl  
 true にすると、`Security::encrypt()` と `Security::decrypt()` (つまり Cookie の暗号化タイプ
-`'aes'`) が mcrypt ではなく OpenSSL を使います。PHP 8 では mcrypt 拡張が使えないので、
+`'aes'`) が mcrypt ではなく OpenSSL を使います。mcrypt 拡張は PHP 7.2 以降同梱されていないので、
 `config/core.php` に次の行を追加してください。
 
 ``` php

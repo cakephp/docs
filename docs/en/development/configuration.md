@@ -477,7 +477,7 @@ for backwards compatibility. Use the `'aes'` type for cookies instead.
 Security.useOpenSsl  
 When true, `Security::encrypt()` and `Security::decrypt()` (and therefore
 the `'aes'` cookie encryption type) use OpenSSL instead of mcrypt. The mcrypt
-extension is not available on PHP 8, so add this line to `config/core.php`:
+extension is not bundled with PHP 7.2 and later, so add this line to `config/core.php`:
 
 ``` php
 Configure::write('Security.useOpenSsl', true);

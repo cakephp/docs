@@ -71,7 +71,7 @@ CSRF トークンはセッションに保存されたランダムな値でした
 
 ### PHP 8 での暗号化
 
-PHP 8 には mcrypt 拡張がありません。そのため、`Security::encrypt()`、`Security::decrypt()`、
+mcrypt 拡張は PHP 7.2 以降同梱されておらず、[PECL](https://pecl.php.net/package/mcrypt) から入れる必要があります。mcrypt が無い場合、`Security::encrypt()`、`Security::decrypt()`、
 `CookieComponent` の `'aes'` タイプは、OpenSSL を有効にした場合にのみ動作します。
 
 ```php

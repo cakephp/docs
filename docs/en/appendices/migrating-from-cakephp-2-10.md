@@ -526,7 +526,8 @@ moving to PHP 8.
 
 ### Enable OpenSSL for `Security::encrypt()` and AES cookies {#enable-openssl}
 
-The `mcrypt` extension is not available for PHP 8 in most environments.
+The `mcrypt` extension is not bundled with PHP 7.2 and later, and is usually
+not installed (it is available from [PECL](https://pecl.php.net/package/mcrypt)).
 `Security::encrypt()` and `Security::decrypt()` use OpenSSL only when
 `Security.useOpenSsl` is enabled; otherwise they call `mcrypt_*` functions and
 fail. The same applies to `CookieComponent` with the `'aes'` type, which uses

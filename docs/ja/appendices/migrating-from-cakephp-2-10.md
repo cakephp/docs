@@ -502,7 +502,7 @@ PHP 8 では `'aes'` を使う場合も `Security.useOpenSsl` の設定が必要
 
 ### `Security::encrypt()` と AES クッキーで OpenSSL を有効にする {#enable-openssl}
 
-PHP 8 では、ほとんどの環境で `mcrypt` 拡張を使えません。
+`mcrypt` 拡張は PHP 7.2 以降同梱されておらず、通常はインストールされていません（[PECL](https://pecl.php.net/package/mcrypt) から入れることはできます）。
 `Security::encrypt()` と `Security::decrypt()` は `Security.useOpenSsl` が有効な場合にだけ
 OpenSSL を使い、そうでなければ `mcrypt_*` 関数を呼び出して失敗します。これらのメソッドを使う
 `CookieComponent` の `'aes'` タイプも同様です。この設定はデフォルトでは有効になっていないため、

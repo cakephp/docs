@@ -88,7 +88,7 @@ public function beforeFilter()
 }
 ```
 
-`'aes'` 方式は `Security::encrypt()` を使います。PHP 8 には `mcrypt` 拡張がないため、
+`'aes'` 方式は `Security::encrypt()` を使います。`mcrypt` 拡張は PHP 7.2 以降同梱されていないため、
 `config/core.php` で OpenSSL による実装を有効にしてください。 :
 
 ``` php
@@ -118,5 +118,5 @@ Cookie の値の暗号化方式を設定します。指定できるのは `'ciph
 > [!WARNING]
 > デフォルトの `'cipher'` は後方互換性のためだけに残されている脆弱な XOR 暗号です。
 > 上の例のように `beforeFilter()` で `type('aes')` を呼び、`Security.useOpenSsl`
-> も有効にしてください。`'rijndael'` には PHP 8 で利用できない `mcrypt` 拡張が必要です。
+> も有効にしてください。`'rijndael'` には `mcrypt` 拡張が必要で、PHP 7.2 以降では PECL からインストールする必要があります。
 > 暗号化方式を変更すると、変更前の方式で書き込まれた Cookie は読めなくなります。
