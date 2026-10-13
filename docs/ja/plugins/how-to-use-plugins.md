@@ -12,11 +12,11 @@ bootstrap ファイルを定義しながら、全てのプラグインを自動�
 大丈夫です:
 
 ``` php
-CakePlugin::loadAll(array(
-    'Blog' => array('routes' => true),
-    'ContactManager' => array('bootstrap' => true),
-    'WebmasterTools' => array('bootstrap' => true, 'routes' => true),
-));
+CakePlugin::loadAll([
+    'Blog' => ['routes' => true],
+    'ContactManager' => ['bootstrap' => true],
+    'WebmasterTools' => ['bootstrap' => true, 'routes' => true],
+]);
 ```
 
 この設定方法に従うと、プラグインの設定や routes ファイルを手動で include() や
@@ -31,10 +31,10 @@ require() する必要はありません。適切なタイミングと場所で�
 ロード:
 
 ``` php
-CakePlugin::loadAll(array(
-    array('bootstrap' => true),
-    'Blog' => array('routes' => true)
-));
+CakePlugin::loadAll([
+    ['bootstrap' => true],
+    'Blog' => ['routes' => true]
+]);
 ```
 
 プラグインの設定の中で指定された全てのファイルは、実際に存在しなければならないこと、
@@ -47,9 +47,9 @@ CakePHP 2.3.0 は、プラグインをロードする時に、routes ファイ�
 
 ``` php
 // Loads all plugins including any possible routes and bootstrap files
-CakePlugin::loadAll(array(
-    array('routes' => true, 'bootstrap' => true, 'ignoreMissing' => true)
-));
+CakePlugin::loadAll([
+    ['routes' => true, 'bootstrap' => true, 'ignoreMissing' => true]
+]);
 ```
 
 さらに、いくつかのプラグインでは、あなたのデータベースに一つ以上のテーブルを
@@ -67,28 +67,29 @@ schema ファイルを用意しています。 :
 bootstrap 設定キーに複数ファイルの配列を設定します。 :
 
 ``` php
-CakePlugin::loadAll(array(
-    'Blog' => array(
-        'bootstrap' => array(
+CakePlugin::loadAll([
+    'Blog' => [
+        'bootstrap' => [
             'config1',
             'config2'
-        )
-    )
-));
+        ]
+    ]
+]);
 ```
 
 プラグインがロードされた際に実行する必要がある呼び出し可能な関数を設定できます。 :
 
 ``` php
-function aCallableFunction($pluginName, $config) {
+function aCallableFunction($pluginName, $config)
+{
 
 }
 
-CakePlugin::loadAll(array(
-    'Blog' => array(
+CakePlugin::loadAll([
+    'Blog' => [
         'bootstrap' => 'aCallableFunction'
-    )
-));
+    ]
+]);
 ```
 
 ## プラグインの使用
@@ -101,7 +102,7 @@ ContactManager プラグインの ContactInfoHelper を使用したいとしま�
 コントローラの中で、 \$helper 配列は、以下のように記述します。 :
 
 ``` php
-public $helpers = array('ContactManager.ContactInfo');
+public $helpers = ['ContactManager.ContactInfo'];
 ```
 
 すると、ビューの中で他のヘルパーと同様に ContactInfoHelper にアクセスすることができます。 :

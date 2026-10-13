@@ -18,11 +18,11 @@ The callback can be any PHP callable, including an anonymous function. The
 default error handling configuration looks like:
 
 ``` php
-Configure::write('Error', array(
+Configure::write('Error', [
     'handler' => 'ErrorHandler::handleError',
     'level' => E_ALL & ~E_DEPRECATED,
     'trace' => true
-));
+]);
 ```
 
 You have 5 built-in options when configuring error handlers:
@@ -70,9 +70,11 @@ Configure::write('Error.handler', 'AppError::handleError');
 App::uses('AppError', 'Lib');
 
 //in app/Lib/AppError.php
-class AppError {
+class AppError
+{
     public static function handleError($code, $description, $file = null,
-        $line = null, $context = null) {
+        $line = null, $context = null)
+    {
         echo 'There has been an error!';
     }
 }
@@ -106,9 +108,11 @@ Configure::write('Error.handler', 'AppError::handleError');
 App::uses('AppError', 'Lib');
 
 //in app/Lib/AppError.php
-class AppError {
+class AppError
+{
     public static function handleError($code, $description, $file = null,
-        $line = null, $context = null) {
+        $line = null, $context = null)
+    {
         list(, $level) = ErrorHandler::mapErrorCode($code);
         if ($level === LOG_ERR) {
             // Ignore fatal error. It will keep the PHP error message only

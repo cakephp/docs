@@ -39,14 +39,14 @@ this property will change the content that comes out of the view rendering.
 Example of how to set configuration file on controller:
 
 ``` php
-public $helpers = array(
-    'Html' => array(
+public $helpers = [
+    'Html' => [
         // Option one: an array with filename and reader name
-        'configFile' => array('config_file', 'php')
+        'configFile' => ['config_file', 'php']
         // Option two: a string with filename. The PhpReader will be used
         'configFile' => 'config_file'
-    )
-);
+    ]
+];
 ```
 
 ### FormHelper
@@ -90,9 +90,11 @@ this could be used to create routes to handle subdomains, or enabling https/http
 flags. An example of a route class that supports subdomains would be:
 
 ``` php
-class SubdomainRoute extends CakeRoute {
+class SubdomainRoute extends CakeRoute
+{
 
-    public function match($params) {
+    public function match($params)
+    {
         $subdomain = isset($params['subdomain']) ? $params['subdomain'] : null;
         unset($params['subdomain']);
         $path = parent::match($params);
@@ -110,7 +112,7 @@ subdomains.
 ``` php
 echo $this->Html->link(
     'Other domain',
-     array('subdomain' => 'test', 'controller' => 'posts', 'action' => 'add')
+     ['subdomain' => 'test', 'controller' => 'posts', 'action' => 'add']
 );
 ```
 
@@ -149,10 +151,10 @@ output like the following:
 
 ``` text
 ########## DEBUG ##########
-Array
-(
+
+[
     [0] => test
-)
+]
 ###########################
 ```
 
@@ -220,7 +222,7 @@ Pagination now provides a default maxLimit for pagination at 100.
 This limit can be overridden with the paginate variable on Controller:
 
 ``` php
-$this->paginate = array('maxLimit' => 1000);
+$this->paginate = ['maxLimit' => 1000];
 ```
 
 This default is provided to prevent user URL manipulation causing excessive
@@ -236,32 +238,32 @@ this, pass the 'className' key along with your class, like you would with
 models:
 
 ``` php
-public $helpers = array(
-    'Html' => array(
+public $helpers = [
+    'Html' => [
         'className' => 'MyHtml'
-    )
-);
+    ]
+];
 ```
 
 Similarly, you can alias components for use in your controllers:
 
 ``` php
-public $components = array(
-    'Email' => array(
+public $components = [
+    'Email' => [
         'className' => 'QueueEmailer'
-    )
-);
+    ]
+];
 ```
 
 Calls to the Email component would call the QueueEmailer component instead.
 Finally, you can alias behaviors as well:
 
 ``` php
-public $actsAs = array(
-    'Containable' => array(
+public $actsAs = [
+    'Containable' => [
         'className' => 'SuperContainable'
-    )
-);
+    ]
+];
 ```
 
 Because of the way 2.0 utilizes collections and shares them across the

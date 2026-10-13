@@ -1,6 +1,6 @@
 # NumberHelper
 
-`class` **NumberHelper**(View $view, array $settings = array())
+`class` **NumberHelper**(View $view, array $settings = [])
 
 The NumberHelper contains convenient methods that enable display
 numbers in common formats in your views. These methods include ways

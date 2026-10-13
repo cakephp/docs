@@ -1,6 +1,6 @@
 # NumberHelper
 
-`class` **NumberHelper**(View $view, array $settings = array())
+`class` **NumberHelper**(View $view, array $settings = [])
 
 NumberHelper は、ビューの中で一般的な書式で数値を表示するための
 便利なメソッドを持っています。これらのメソッドは、通貨、パーセンテージ、データサイズ、

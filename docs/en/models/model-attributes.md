@@ -20,7 +20,8 @@ connection.
 Example usage:
 
 ``` php
-class Example extends AppModel {
+class Example extends AppModel
+{
     public $useDbConfig = 'alternate';
 }
 ```
@@ -36,7 +37,8 @@ table.
 Example usage:
 
 ``` php
-class Example extends AppModel {
+class Example extends AppModel
+{
     public $useTable = false; // This model does not use a database table
 }
 ```
@@ -44,7 +46,8 @@ class Example extends AppModel {
 Alternatively:
 
 ``` php
-class Example extends AppModel {
+class Example extends AppModel
+{
     public $useTable = 'exmp'; // This model uses a database table 'exmp'
 }
 ```
@@ -60,7 +63,8 @@ the model.
 Example usage:
 
 ``` php
-class Example extends AppModel {
+class Example extends AppModel
+{
     public $tablePrefix = 'alternate_'; // will look for 'alternate_examples'
 }
 ```
@@ -76,7 +80,8 @@ setting CakePHP to use an existing database table.
 Example usage:
 
 ``` php
-class Example extends AppModel {
+class Example extends AppModel
+{
     // example_id is the field name in the database
     public $primaryKey = 'example_id';
 }
@@ -94,14 +99,15 @@ scaffolding and in `find('list')` calls. The model will use
 For example, to use the `username` field:
 
 ``` php
-class User extends AppModel {
+class User extends AppModel
+{
     public $displayField = 'username';
 }
 ```
 
 Multiple field names cannot be combined into a single display
 field. For example, you cannot specify,
-`array('first_name', 'last_name')` as the display field. Instead
+`['first_name', 'last_name']` as the display field. Instead
 create a virtual field with the Model attribute virtualFields
 
 ## recursive
@@ -156,7 +162,7 @@ $order = "Model.field";
 $order = "Model.field asc";
 $order = "Model.field ASC";
 $order = "Model.field DESC";
-$order = array("Model.field" => "asc", "Model.field2" => "DESC");
+$order = ["Model.field" => "asc", "Model.field2" => "DESC"];
 ```
 
 ## data
@@ -232,21 +238,21 @@ Maps to a TIME type in all databases.
 Example Usage:
 
 ``` php
-protected $_schema = array(
-    'first_name' => array(
+protected $_schema = [
+    'first_name' => [
         'type' => 'string',
         'length' => 30
-    ),
-    'last_name' => array(
+    ],
+    'last_name' => [
         'type' => 'string',
         'length' => 30
-    ),
-    'email' => array(
+    ],
+    'email' => [
         'type' => 'string',
         'length' => 30
-    ),
-    'message' => array('type' => 'text')
-);
+    ],
+    'message' => ['type' => 'text']
+];
 ```
 
 ::: info Changed in version 2.10.0
@@ -275,9 +281,9 @@ other fields in a model but will not be saveable.
 Example usage for MySQL:
 
 ``` php
-public $virtualFields = array(
+public $virtualFields = [
     'name' => "CONCAT(User.first_name, ' ', User.last_name)"
-);
+];
 ```
 
 In subsequent find operations, your User results would contain a
@@ -297,7 +303,8 @@ be set to the class name by constructor.
 Example usage:
 
 ``` php
-class Example extends AppModel {
+class Example extends AppModel
+{
     public $name = 'Example';
 }
 ```

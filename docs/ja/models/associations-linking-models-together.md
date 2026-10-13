@@ -42,15 +42,16 @@ belongsTo, そして hasAndBelongsToMany (HABTM) です。
 多次元の配列を使うこともできます。
 
 ``` php
-class User extends AppModel {
+class User extends AppModel
+{
     public $hasOne = 'Profile';
-    public $hasMany = array(
-        'Recipe' => array(
+    public $hasMany = [
+        'Recipe' => [
             'className' => 'Recipe',
-            'conditions' => array('Recipe.approved' => '1'),
+            'conditions' => ['Recipe.approved' => '1'],
             'order' => 'Recipe.created DESC'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -61,60 +62,64 @@ class User extends AppModel {
 たとえば次の例を見てください。これは正しい書き方です。 :
 
 ``` php
-class User extends AppModel {
-    public $hasMany = array(
-        'MyRecipe' => array(
+class User extends AppModel
+{
+    public $hasMany = [
+        'MyRecipe' => [
             'className' => 'Recipe',
-        )
-    );
-    public $hasAndBelongsToMany = array(
-        'MemberOf' => array(
+        ]
+    ];
+    public $hasAndBelongsToMany = [
+        'MemberOf' => [
             'className' => 'Group',
-        )
-    );
+        ]
+    ];
 }
 
-class Group extends AppModel {
-    public $hasMany = array(
-        'MyRecipe' => array(
+class Group extends AppModel
+{
+    public $hasMany = [
+        'MyRecipe' => [
             'className' => 'Recipe',
-        )
-    );
-    public $hasAndBelongsToMany = array(
-        'Member' => array(
+        ]
+    ];
+    public $hasAndBelongsToMany = [
+        'Member' => [
             'className' => 'User',
-        )
-    );
+        ]
+    ];
 }
 ```
 
 しかし、以下の例はうまく動きません。 :
 
 ``` php
-class User extends AppModel {
-    public $hasMany = array(
-        'MyRecipe' => array(
+class User extends AppModel
+{
+    public $hasMany = [
+        'MyRecipe' => [
             'className' => 'Recipe',
-        )
-    );
-    public $hasAndBelongsToMany = array(
-        'Member' => array(
+        ]
+    ];
+    public $hasAndBelongsToMany = [
+        'Member' => [
             'className' => 'Group',
-        )
-    );
+        ]
+    ];
 }
 
-class Group extends AppModel {
-    public $hasMany = array(
-        'MyRecipe' => array(
+class Group extends AppModel
+{
+    public $hasMany = [
+        'MyRecipe' => [
             'className' => 'Recipe',
-        )
-    );
-    public $hasAndBelongsToMany = array(
-        'Member' => array(
+        ]
+    ];
+    public $hasAndBelongsToMany = [
+        'Member' => [
             'className' => 'User',
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -174,7 +179,8 @@ User モデルは /app/Model/User.php にあります。
 ないと正常に動作しません。 :
 
 ``` php
-class User extends AppModel {
+class User extends AppModel
+{
     public $hasOne = 'Profile';
 }
 ```
@@ -188,14 +194,15 @@ class User extends AppModel {
 定義したい場合は次のようにします。
 
 ``` php
-class User extends AppModel {
-    public $hasOne = array(
-        'Profile' => array(
+class User extends AppModel
+{
+    public $hasOne = [
+        'Profile' => [
             'className' => 'Profile',
-            'conditions' => array('Profile.published' => '1'),
+            'conditions' => ['Profile.published' => '1'],
             'dependent' => true
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -209,11 +216,11 @@ hasOne アソシエーションの配列に指定できるキーは以下の通�
   `user_id` となります。他のモデルが主キーに 'id' 以外の名前を使用している場合、
   モデルクラスの `$primaryKey` プロパティを使って指定してください (上記の例では、
   'Profile' モデルクラスの中)。そうしなければ、カスケード削除は機能しません。
-- **conditions**: `array('Profile.approved' => true)` のような、find() に
+- **conditions**: `['Profile.approved' => true]` のような、find() に
   指定する conditions と互換性のある配列、もしくは SQL 文字列を指定します。
 - **fields**: アソシエーション先のモデルから取得するフィールドのリスト。
   デフォルトで全フィールドが含まれます。
-- **order**: `array('Profile.last_name' => 'ASC')` のような、find() に
+- **order**: `['Profile.last_name' => 'ASC']` のような、find() に
   指定する order と互換性のある配列、もしくは SQL 文字列を指定します。
 - **dependent**: このキーに ture がセットされていて、かつモデルの delete メソッドの
   cascade パラメータに true がセットされて呼び出された時、アソシエーション先のモデルの
@@ -226,22 +233,22 @@ hasOne アソシエーションの配列に指定できるキーは以下の通�
 ``` php
 //$this->User->find() を呼び出した時の戻り値
 
-Array
-(
-    [User] => Array
-        (
+
+[
+    [User] => 
+        [
             [id] => 121
             [name] => Gwoo the Kungwoo
             [created] => 2007-05-01 10:31:01
-        )
-    [Profile] => Array
-        (
+        ]
+    [Profile] => 
+        [
             [id] => 12
             [user_id] => 121
             [skill] => Baking Cakes
             [created] => 2007-05-01 10:31:01
-        )
-)
+        ]
+]
 ```
 
 ## belongsTo
@@ -271,7 +278,8 @@ Profile モデル (/app/Model/Profile.php) に文字列で belongsTo アソシ�
 定義してみましょう。 :
 
 ``` php
-class Profile extends AppModel {
+class Profile extends AppModel
+{
     public $belongsTo = 'User';
 }
 ```
@@ -279,13 +287,14 @@ class Profile extends AppModel {
 配列を使ってより詳しく設定することもできます。 :
 
 ``` php
-class Profile extends AppModel {
-    public $belongsTo = array(
-        'User' => array(
+class Profile extends AppModel
+{
+    public $belongsTo = [
+        'User' => [
             'className' => 'User',
             'foreignKey' => 'user_id'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -296,7 +305,7 @@ belongsTo アソシエーションの配列に指定できるキーは以下の�
 - **foreignKey**: アソシエーション先のモデルを検索するための外部キーの名前。
   これは複数の belongsTo を定義するためによく使われます。このキーのデフォルト値は
   アソシエーション先のモデルの単数形に `_id` がついたものです。
-- **conditions**: `array('User.active' => true)` のような、find() に
+- **conditions**: `['User.active' => true]` のような、find() に
   指定する conditions と互換性のある配列、もしくは SQL 文字列を指定します。
 - **type**: SQL クエリで使われるテーブル結合種別。外部キーにマッチするデータが
   必ずしも存在するとは限らないので、デフォルトでは 'LEFT' です。
@@ -306,7 +315,7 @@ belongsTo アソシエーションの配列に指定できるキーは以下の�
   どちらも取得しない、という時に使います。
 - **fields**: アソシエーション先のモデルから取得するフィールドのリスト。
   デフォルトで全フィールドが含まれます。
-- **order**: `array('User.username' => 'ASC')` のような、 find() に
+- **order**: `['User.username' => 'ASC']` のような、 find() に
   指定する order と互換性のある配列、もしくは SQL 文字列を指定します。
 - **counterCache**: trueをセットすれば、アソシエーション先のモデルで
   `save()` または `delete()` を実行した時に、外部テーブルの
@@ -324,22 +333,22 @@ belongsTo アソシエーションの配列に指定できるキーは以下の�
 ``` php
 //$this->Profile->find() を呼び出した時の戻り値
 
-Array
-(
-   [Profile] => Array
-        (
+
+[
+   [Profile] => 
+        [
             [id] => 12
             [user_id] => 121
             [skill] => Baking Cakes
             [created] => 2007-05-01 10:31:01
-        )
-    [User] => Array
-        (
+        ]
+    [User] => 
+        [
             [id] => 121
             [name] => Gwoo the Kungwoo
             [created] => 2007-05-01 10:31:01
-        )
-)
+        ]
+]
 ```
 
 ### counterCache - count() 結果をキャッシュする
@@ -370,12 +379,13 @@ Array
 `counterCache` キーに `true` をセットしましょう。 :
 
 ``` php
-class ImageComment extends AppModel {
-    public $belongsTo = array(
-        'Image' => array(
+class ImageComment extends AppModel
+{
+    public $belongsTo = [
+        'Image' => [
             'counterCache' => true,
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -391,16 +401,17 @@ class ImageComment extends AppModel {
 Image モデルのサンプルでは、次のようになるでしょう。 :
 
 ``` php
-class ImageComment extends AppModel {
-    public $belongsTo = array(
-        'Image' => array(
+class ImageComment extends AppModel
+{
+    public $belongsTo = [
+        'Image' => [
             'counterCache' => 'active_comment_count', //custom field name
             // only count if "ImageComment" is active = 1
-            'counterScope' => array(
+            'counterScope' => [
               'ImageComment.active' => 1
-            )
-        )
-    );
+            ]
+        ]
+    ];
 }
 ```
 
@@ -420,15 +431,16 @@ CakePHP は、 2.0 の時から単一のモデルのリレーション中に、�
 この構成での `belongsTo` は、以下のようになります:
 
 ``` php
-class Message extends AppModel {
-    public $belongsTo = array(
-        'User' => array(
-            'counterCache' => array(
-                'messages_read' => array('Message.is_read' => 1),
-                'messages_unread' => array('Message.is_read' => 0)
-            )
-        )
-    );
+class Message extends AppModel
+{
+    public $belongsTo = [
+        'User' => [
+            'counterCache' => [
+                'messages_read' => ['Message.is_read' => 1],
+                'messages_unread' => ['Message.is_read' => 0]
+            ]
+        ]
+    ];
 }
 ```
 
@@ -452,7 +464,8 @@ User モデル (/app/Model/Profile.php) に文字列で hasMany アソシエー�
 定義してみましょう。 :
 
 ``` php
-class User extends AppModel {
+class User extends AppModel
+{
     public $hasMany = 'Comment';
 }
 ```
@@ -460,17 +473,18 @@ class User extends AppModel {
 配列を使ってより詳しく設定することもできます。 :
 
 ``` php
-class User extends AppModel {
-    public $hasMany = array(
-        'Comment' => array(
+class User extends AppModel
+{
+    public $hasMany = [
+        'Comment' => [
             'className' => 'Comment',
             'foreignKey' => 'user_id',
-            'conditions' => array('Comment.status' => '1'),
+            'conditions' => ['Comment.status' => '1'],
             'order' => 'Comment.created DESC',
             'limit' => '5',
             'dependent' => true
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -480,9 +494,9 @@ hasMany アソシエーションの配列に指定できるキーは以下の通
   「User hasMany Comment」を定義したい場合、'Comment'となります。
 - **foreignKey**: アソシエーション先のモデルを検索するための外部キーの名前。
   これは複数のhasManyを定義するためによく使われます。このキーのデフォルト値はアソシエーション先のモデルの単数形に `_id` がついたものです。
-- **conditions**: `array('Comment.visible' => true)` のような、find() に
+- **conditions**: `['Comment.visible' => true]` のような、find() に
   指定する conditions と互換性のある配列、もしくはSQL文字列を指定します。
-- **order**: `array('Profile.last_name' => 'ASC')` のような、find() に
+- **order**: `['Profile.last_name' => 'ASC']` のような、find() に
   指定する order と互換性のある配列、もしくは SQL 文字列を指定します。
 - **limit**: アソシエーションモデルのデータの最大行数。
 - **offset**: アソシエーションモデルのデータをスキップする行数。
@@ -505,34 +519,34 @@ hasMany アソシエーションの配列に指定できるキーは以下の通
 ``` php
 //$this->User->find() を呼び出した時の戻り値
 
-Array
-(
-    [User] => Array
-        (
+
+[
+    [User] => 
+        [
             [id] => 121
             [name] => Gwoo the Kungwoo
             [created] => 2007-05-01 10:31:01
-        )
-    [Comment] => Array
-        (
-            [0] => Array
-                (
+        ]
+    [Comment] => 
+        [
+            [0] => 
+                [
                     [id] => 123
                     [user_id] => 121
                     [title] => On Gwoo the Kungwoo
                     [body] => The Kungwooness is not so Gwooish
                     [created] => 2006-05-01 10:31:01
-                )
-            [1] => Array
-                (
+                ]
+            [1] => 
+                [
                     [id] => 124
                     [user_id] => 121
                     [title] => More on Gwoo
                     [body] => But what of the ‘Nut?
                     [created] => 2006-05-01 10:41:01
-                )
-        )
-)
+                ]
+        ]
+]
 ```
 
 Comment モデルから User モデルのデータも取得するためには、
@@ -588,10 +602,11 @@ hasMany アソシエーション間のリンクは排他的です。
 新しいテーブルを作れば、モデルに HABTM アソシエーションを定義できます。 :
 
 ``` php
-class Recipe extends AppModel {
-    public $hasAndBelongsToMany = array(
+class Recipe extends AppModel
+{
+    public $hasAndBelongsToMany = [
         'Ingredient' =>
-            array(
+            [
                 'className' => 'Ingredient',
                 'joinTable' => 'ingredients_recipes',
                 'foreignKey' => 'recipe_id',
@@ -604,8 +619,8 @@ class Recipe extends AppModel {
                 'offset' => '',
                 'finderQuery' => '',
                 'with' => ''
-            )
-    );
+            ]
+    ];
 }
 ```
 
@@ -670,34 +685,34 @@ HABTM アソシエーションは次のキーを含ませることができま�
 ``` php
 //$this->Recipe->find() を呼び出した時の戻り値
 
-Array
-(
-    [Recipe] => Array
-        (
+
+[
+    [Recipe] => 
+        [
             [id] => 2745
             [name] => Chocolate Frosted Sugar Bombs
             [created] => 2007-05-01 10:31:01
             [user_id] => 2346
-        )
-    [Ingredient] => Array
-        (
-            [0] => Array
-                (
+        ]
+    [Ingredient] => 
+        [
+            [0] => 
+                [
                     [id] => 123
                     [name] => Chocolate
-                )
-           [1] => Array
-                (
+                ]
+           [1] => 
+                [
                     [id] => 124
                     [name] => Sugar
-                )
-           [2] => Array
-                (
+                ]
+           [2] => 
+                [
                     [id] => 125
                     [name] => Bombs
-                )
-        )
-)
+                ]
+        ]
+]
 ```
 
 Ingredient モデルを使って Recipe データを取得したい時は、
@@ -748,26 +763,29 @@ CourseMembership モデルを作ります。以下のモデルを見てくださ
 
 ``` php
 // Student.php
-class Student extends AppModel {
-    public $hasMany = array(
+class Student extends AppModel
+{
+    public $hasMany = [
         'CourseMembership'
-    );
+    ];
 }
 
 // Course.php
 
-class Course extends AppModel {
-    public $hasMany = array(
+class Course extends AppModel
+{
+    public $hasMany = [
         'CourseMembership'
-    );
+    ];
 }
 
 // CourseMembership.php
 
-class CourseMembership extends AppModel {
-    public $belongsTo = array(
+class CourseMembership extends AppModel
+{
+    public $belongsTo = [
         'Student', 'Course'
-    );
+    ];
 }
 ```
 
@@ -790,16 +808,18 @@ CourseMembership モデルは Student (生徒) の Course (授業) への参加�
 以下の2つのモデルを使って、bindModel() と unbindModel() の使い方を見てみましょう。 :
 
 ``` php
-class Leader extends AppModel {
-    public $hasMany = array(
-        'Follower' => array(
+class Leader extends AppModel
+{
+    public $hasMany = [
+        'Follower' => [
             'className' => 'Follower',
             'order' => 'Follower.rank'
-        )
-    );
+        ]
+    ];
 }
 
-class Follower extends AppModel {
+class Follower extends AppModel
+{
     public $name = 'Follower';
 }
 ```
@@ -811,13 +831,14 @@ Follower を取得できます。上記のコードでは、Leader モデルの�
 使ってみましょう。 :
 
 ``` php
-public function some_action() {
+public function some_action()
+{
     // Leader とそれに関連する Follower を取得します。
     $this->Leader->find('all');
 
     // ここで hasMany を削除してみます
     $this->Leader->unbindModel(
-        array('hasMany' => array('Follower'))
+        ['hasMany' => ['Follower']]
     );
 
     // これで find メソッドは Leader は返すけど、Follower は返さなくなります
@@ -842,7 +863,7 @@ public function some_action() {
 
 ``` php
 $this->Model->unbindModel(
-    array('associationType' => array('associatedModelClassName'))
+    ['associationType' => ['associatedModelClassName']]
 );
 ```
 
@@ -853,30 +874,31 @@ Principle モデルは \$name プロパティを除いては空っぽの状態�
 LeadersController で次のようにします。 :
 
 ``` php
-public function another_action() {
+public function another_action()
+{
     // leader.php モデルファイルでは、hasMany アソシエーションは定義されていません。
     // ここでの find は Leader のみ取得します。
     $this->Leader->find('all');
 
     // bindModel() を使って Leader モデルにアソシエーションを追加します。
     $this->Leader->bindModel(
-        array('hasMany' => array(
-                'Principle' => array(
+        ['hasMany' => [
+                'Principle' => [
                     'className' => 'Principle'
-                )
-            )
-        )
+                ]
+            ]
+        ]
     );
 
     // モデルのリセット後にも、このアソシエーションを継続したい場合、
     // 第２引数を以下のように設定します。
     $this->Leader->bindModel(
-        array('hasMany' => array(
-                'Principle' => array(
+        ['hasMany' => [
+                'Principle' => [
                     'className' => 'Principle'
-                )
-            )
-        ),
+                ]
+            ]
+        ],
         false
     );
 
@@ -891,12 +913,12 @@ bindModel() は基本的には、生成したいアソシエーションの名�
 
 ``` php
 $this->Model->bindModel(
-    array('associationName' => array(
-            'associatedModelClassName' => array(
+    ['associationName' => [
+            'associatedModelClassName' => [
                 // ここにモデルに指定するアソシエーション配列をセットします
-            )
-        )
-    )
+            ]
+        ]
+    ]
 );
 ```
 
@@ -914,17 +936,18 @@ $this->Model->bindModel(
 持っています。さて、ここでは Message モデルに次のように定義します。 :
 
 ``` php
-class Message extends AppModel {
-    public $belongsTo = array(
-        'Sender' => array(
+class Message extends AppModel
+{
+    public $belongsTo = [
+        'Sender' => [
             'className' => 'User',
             'foreignKey' => 'user_id'
-        ),
-        'Recipient' => array(
+        ],
+        'Recipient' => [
             'className' => 'User',
             'foreignKey' => 'recipient_id'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -932,38 +955,40 @@ Recipient は User モデルに対するエイリアスです。User モデル�
 このようになっています。 :
 
 ``` php
-class User extends AppModel {
-    public $hasMany = array(
-        'MessageSent' => array(
+class User extends AppModel
+{
+    public $hasMany = [
+        'MessageSent' => [
             'className' => 'Message',
             'foreignKey' => 'user_id'
-        ),
-        'MessageReceived' => array(
+        ],
+        'MessageReceived' => [
             'className' => 'Message',
             'foreignKey' => 'recipient_id'
-        )
-    );
+        ]
+    ];
 }
 ```
 
 自分自身に対するアソシエーションも以下のようにして定義できます。 :
 
 ``` php
-class Post extends AppModel {
+class Post extends AppModel
+{
 
-    public $belongsTo = array(
-        'Parent' => array(
+    public $belongsTo = [
+        'Parent' => [
             'className' => 'Post',
             'foreignKey' => 'parent_id'
-        )
-    );
+        ]
+    ];
 
-    public $hasMany = array(
-        'Children' => array(
+    public $hasMany = [
+        'Children' => [
             'className' => 'Post',
             'foreignKey' => 'parent_id'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -989,15 +1014,15 @@ CakePHP の belongsTo と hasOne では、関連データを取得するため�
 \$options 配列の 'joins' というキーを追加します。以下の例を見てください。 :
 
 ``` php
-$options['joins'] = array(
-    array('table' => 'channels',
+$options['joins'] = [
+    ['table' => 'channels',
         'alias' => 'Channel',
         'type' => 'LEFT',
-        'conditions' => array(
+        'conditions' => [
             'Channel.id = Item.channel_id',
-        )
-    )
-);
+        ]
+    ]
+];
 
 $Item->find('all', $options);
 ```
@@ -1020,19 +1045,19 @@ $Item->find('all', $options);
 joinsと共に、joinsで指定した関連モデルに関する条件をconditionsに指定できます。 :
 
 ``` php
-$options['joins'] = array(
-    array('table' => 'channels',
+$options['joins'] = [
+    ['table' => 'channels',
         'alias' => 'Channel',
         'type' => 'LEFT',
-        'conditions' => array(
+        'conditions' => [
             'Channel.id = Item.channel_id',
-        )
-    )
-);
+        ]
+    ]
+];
 
-$options['conditions'] = array(
+$options['conditions'] = [
     'Channel.private' => 1
-);
+];
 
 $privateItems = $Item->find('all', $options);
 ```
@@ -1044,26 +1069,26 @@ books テーブルと tags テーブルを繋げるために、中間テーブ�
 books_tags テーブルを使うように定義してみます。 :
 
 ``` php
-$options['joins'] = array(
-    array('table' => 'books_tags',
+$options['joins'] = [
+    ['table' => 'books_tags',
         'alias' => 'BooksTag',
         'type' => 'inner',
-        'conditions' => array(
+        'conditions' => [
             'Book.id = BooksTag.book_id'
-        )
-    ),
-    array('table' => 'tags',
+        ]
+    ],
+    ['table' => 'tags',
         'alias' => 'Tag',
         'type' => 'inner',
-        'conditions' => array(
+        'conditions' => [
             'BooksTag.tag_id = Tag.id'
-        )
-    )
-);
+        ]
+    ]
+];
 
-$options['conditions'] = array(
+$options['conditions'] = [
     'Tag.tag' => 'Novel'
-);
+];
 
 $books = $Book->find('all', $options);
 ```

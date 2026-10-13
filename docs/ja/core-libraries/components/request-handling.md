@@ -1,6 +1,6 @@
 # リクエストハンドリング
 
-`class` **RequestHandlerComponent**(ComponentCollection $collection, array $settings = array())
+`class` **RequestHandlerComponent**(ComponentCollection $collection, array $settings = [])
 
 RequestHandler コンポーネントは、 HTTP リクエストについての追加情報を取得するために
 使われます。クライアントが受付けるコンテンツタイプを得ることや、（設定している場合）
@@ -18,9 +18,10 @@ POST した場合、自動的に解析され `$this->request->data` 配列に割
 含めてください。 :
 
 ``` php
-class WidgetController extends AppController {
+class WidgetController extends AppController
+{
 
-    public $components = array('RequestHandler');
+    public $components = ['RequestHandler'];
 
     // 以下略
 }
@@ -102,10 +103,10 @@ CPU の処理を節約することができます。
 することができます。 :
 
 ``` php
-public $components = array(
-    'RequestHandler' => array(
+public $components = [
+    'RequestHandler' => [
         'checkHttpCache' => false
-));
+]];
 ```
 
 ## カスタム ViewClasses の利用
@@ -123,12 +124,12 @@ JsonView/XmlView を利用する場合、カスタムビュークラスでデフ
 `viewClassMap` を使って、自動的にセットすることも可能です。 :
 
 ``` php
-public $components = array(
-    'RequestHandler' => array(
-        'viewClassMap' => array(
+public $components = [
+    'RequestHandler' => [
+        'viewClassMap' => [
             'json' => 'ApiKit.MyJson',
             'xml' => 'ApiKit.MyXml',
             'csv' => 'ApiKit.Csv'
-        )
-));
+        ]
+]];
 ```

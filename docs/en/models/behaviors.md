@@ -41,8 +41,9 @@ Behaviors are attached to models through the `$actsAs` model class
 variable:
 
 ``` php
-class Category extends AppModel {
-    public $actsAs = array('Tree');
+class Category extends AppModel
+{
+    public $actsAs = ['Tree'];
 }
 ```
 
@@ -65,11 +66,12 @@ the names of the "left" and "right" fields in the underlying
 database table:
 
 ``` php
-class Category extends AppModel {
-    public $actsAs = array('Tree' => array(
+class Category extends AppModel
+{
+    public $actsAs = ['Tree' => [
         'left'  => 'left_node',
         'right' => 'right_node'
-    ));
+    ]];
 }
 ```
 
@@ -78,14 +80,15 @@ why, for example, our Category model should only behave as a tree,
 it may also need internationalization support:
 
 ``` php
-class Category extends AppModel {
-    public $actsAs = array(
-        'Tree' => array(
+class Category extends AppModel
+{
+    public $actsAs = [
+        'Tree' => [
           'left'  => 'left_node',
           'right' => 'right_node'
-        ),
+        ],
         'Translate'
-    );
+    ];
 }
 ```
 
@@ -144,7 +147,7 @@ We can also use the load method to override behavior settings:
 
 ``` php
 // We will change one setting from our already attached behavior
-$this->Category->Behaviors->load('Tree', array('left' => 'new_left_node'));
+$this->Category->Behaviors->load('Tree', ['left' => 'new_left_node']);
 ```
 
 And using aliasing, we can customize the alias it will be loaded as, also allowing it to be loaded
@@ -152,7 +155,7 @@ multiple times with different settings:
 
 ``` php
 // The behavior will be available as 'MyTree'
-$this->Category->Behaviors->load('MyTree', array('className' => 'Tree'));
+$this->Category->Behaviors->load('MyTree', ['className' => 'Tree']);
 ```
 
 There's also a method to obtain the list of behaviors a model has
@@ -193,12 +196,13 @@ A quick example that illustrates how behavior settings can be
 passed from the model to the behavior:
 
 ``` php
-class Post extends AppModel {
-    public $actsAs = array(
-        'YourBehavior' => array(
+class Post extends AppModel
+{
+    public $actsAs = [
+        'YourBehavior' => [
             'option1_key' => 'option1_value'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -207,13 +211,14 @@ good practice to store the settings per alias/model name that is using the
 behavior. When created behaviors will have their `setup()` method called:
 
 ``` php
-public function setup(Model $Model, $settings = array()) {
+public function setup(Model $Model, $settings = [])
+{
     if (!isset($this->settings[$Model->alias])) {
-        $this->settings[$Model->alias] = array(
+        $this->settings[$Model->alias] = [
             'option1_key' => 'option1_default_value',
             'option2_key' => 'option2_default_value',
             'option3_key' => 'option3_default_value',
-        );
+        ];
     }
     $this->settings[$Model->alias] = array_merge(
         $this->settings[$Model->alias], (array)$settings);
@@ -226,8 +231,9 @@ Behavior methods are automatically available on any model acting as
 the behavior. For example if you had:
 
 ``` php
-class Duck extends AppModel {
-    public $actsAs = array('Flying');
+class Duck extends AppModel
+{
+    public $actsAs = ['Flying'];
 }
 ```
 
@@ -245,7 +251,8 @@ Although this method takes two parameters, the method signature
 should look like:
 
 ``` php
-public function fly(Model $Model, $from, $to) {
+public function fly(Model $Model, $from, $to)
+{
     // Do some flying.
 }
 ```
@@ -264,10 +271,12 @@ to be declared in your behaviors `$mapMethods` array. The method signature for
 a mapped method is slightly different than a normal behavior mixin method:
 
 ``` php
-class MyBehavior extends ModelBehavior {
-    public $mapMethods = array('/do(\w+)/' => 'doSomething');
+class MyBehavior extends ModelBehavior
+{
+    public $mapMethods = ['/do(\w+)/' => 'doSomething'];
 
-    public function doSomething(Model $model, $method, $arg1, $arg2) {
+    public function doSomething(Model $model, $method, $arg1, $arg2)
+    {
         debug(func_get_args());
         //do something
     }
@@ -314,7 +323,7 @@ behavior class. Much like regular behavior methods, they receive a
 `$Model` parameter as the first argument. This parameter is the
 model that the behavior method was invoked on.
 
-`method` ModelBehavior::**setup**(Model $Model, array $settings = array())
+`method` ModelBehavior::**setup**(Model $Model, array $settings = [])
 
 `method` ModelBehavior::**cleanup**(Model $Model)
 
@@ -322,13 +331,13 @@ model that the behavior method was invoked on.
 
 `method` ModelBehavior::**afterFind**(Model $Model, mixed $results, boolean $primary = false)
 
-`method` ModelBehavior::**beforeValidate**(Model $Model, array $options = array())
+`method` ModelBehavior::**beforeValidate**(Model $Model, array $options = [])
 
 `method` ModelBehavior::**afterValidate**(Model $Model)
 
-`method` ModelBehavior::**beforeSave**(Model $Model, array $options = array())
+`method` ModelBehavior::**beforeSave**(Model $Model, array $options = [])
 
-`method` ModelBehavior::**afterSave**(Model $Model, boolean $created, array $options = array())
+`method` ModelBehavior::**afterSave**(Model $Model, boolean $created, array $options = [])
 
 `method` ModelBehavior::**beforeDelete**(Model $Model, boolean $cascade = true)
 

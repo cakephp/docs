@@ -1,6 +1,6 @@
 # Pagination
 
-`class` **PaginatorComponent**(ComponentCollection $collection, array $settings = array())
+`class` **PaginatorComponent**(ComponentCollection $collection, array $settings = [])
 
 One of the main obstacles of creating flexible and user-friendly
 web applications is designing an intuitive user interface. Many applications
@@ -27,16 +27,17 @@ the basis of your pagination queries. They are augmented by the `sort`, `directi
 here that the `order` key must be defined in an array structure like below:
 
 ``` php
-class PostsController extends AppController {
+class PostsController extends AppController
+{
 
-    public $components = array('Paginator');
+    public $components = ['Paginator'];
 
-    public $paginate = array(
+    public $paginate = [
         'limit' => 25,
-        'order' => array(
+        'order' => [
             'Post.title' => 'asc'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -44,17 +45,18 @@ You can also include other `~Model::find()` options, such as
 `fields`:
 
 ``` php
-class PostsController extends AppController {
+class PostsController extends AppController
+{
 
-    public $components = array('Paginator');
+    public $components = ['Paginator'];
 
-    public $paginate = array(
-        'fields' => array('Post.id', 'Post.created'),
+    public $paginate = [
+        'fields' => ['Post.id', 'Post.created'],
         'limit' => 25,
-        'order' => array(
+        'order' => [
             'Post.title' => 'asc'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -67,14 +69,15 @@ makes it very simple to use behaviors like `ContainableBehavior` with
 pagination:
 
 ``` php
-class RecipesController extends AppController {
+class RecipesController extends AppController
+{
 
-    public $components = array('Paginator');
+    public $components = ['Paginator'];
 
-    public $paginate = array(
+    public $paginate = [
         'limit' => 25,
-        'contain' => array('Article')
-    );
+        'contain' => ['Article']
+    ];
 }
 ```
 
@@ -83,12 +86,13 @@ set of pagination defaults in the controller, you just name the keys of the
 array after the model you wish to configure:
 
 ``` php
-class PostsController extends AppController {
+class PostsController extends AppController
+{
 
-    public $paginate = array(
-        'Post' => array (...),
-        'Author' => array (...)
-    );
+    public $paginate = [
+        'Post' =>  [...],
+        'Author' =>  [...]
+    ];
 }
 ```
 
@@ -106,7 +110,8 @@ used by `PaginatorHelper` for creating links.
 has not been added already:
 
 ``` php
-public function list_recipes() {
+public function list_recipes()
+{
     $this->Paginator->settings = $this->paginate;
 
     // similar to findAll(), but fetches paged results
@@ -121,7 +126,7 @@ parameter to the `paginate()` function:
 ``` php
 $data = $this->Paginator->paginate(
     'Recipe',
-    array('Recipe.title LIKE' => 'a%')
+    ['Recipe.title LIKE' => 'a%']
 );
 ```
 
@@ -129,11 +134,12 @@ Or you can also set `conditions` and other pagination settings array inside
 your action:
 
 ``` php
-public function list_recipes() {
-    $this->Paginator->settings = array(
-        'conditions' => array('Recipe.title LIKE' => 'a%'),
+public function list_recipes()
+{
+    $this->Paginator->settings = [
+        'conditions' => ['Recipe.title LIKE' => 'a%'],
         'limit' => 10
-    );
+    ];
     $data = $this->Paginator->paginate('Recipe');
     $this->set(compact('data'));
 }
@@ -152,12 +158,14 @@ normal additional first parameter of `$model`:
 ``` php
 // paginate and paginateCount implemented on a behavior.
 public function paginate(Model $model, $conditions, $fields, $order, $limit,
-    $page = 1, $recursive = null, $extra = array()) {
+    $page = 1, $recursive = null, $extra = [])
+{
     // method content
 }
 
 public function paginateCount(Model $model, $conditions = null, $recursive = 0,
-    $extra = array()) {
+    $extra = [])
+{
     // method body
 }
 ```
@@ -168,18 +176,18 @@ finder. To paginate with a custom find type, you should set the `0`'th
 element, or the `findType` key as of 2.3:
 
 ``` php
-public $paginate = array(
+public $paginate = [
     'popular'
-);
+];
 ```
 
 Since the 0th index is difficult to manage, in 2.3 the `findType` option was
 added:
 
 ``` php
-public $paginate = array(
+public $paginate = [
     'findType' => 'popular'
-);
+];
 ```
 
 The `paginate()` method should implement the following method signature. To
@@ -191,10 +199,11 @@ from:
  * Overridden paginate method - group by week, away_team_id and home_team_id
  */
 public function paginate($conditions, $fields, $order, $limit, $page = 1,
-    $recursive = null, $extra = array()) {
+    $recursive = null, $extra = [])
+{
 
     $recursive = -1;
-    $group = $fields = array('week', 'away_team_id', 'home_team_id');
+    $group = $fields = ['week', 'away_team_id', 'home_team_id'];
     return $this->find(
         'all',
         compact('conditions', 'fields', 'order', 'limit', 'page', 'recursive', 'group')
@@ -212,7 +221,8 @@ accordingly depending on what database you are using:
  * Overridden paginateCount method
  */
 public function paginateCount($conditions = null, $recursive = 0,
-                                $extra = array()) {
+                                $extra = [])
+{
     $sql = "SELECT
         DISTINCT ON(
             week, home_team_id, away_team_id
@@ -234,24 +244,25 @@ the keyword in controller's `$paginate` class variable:
 /**
  * Add GROUP BY clause
  */
-public $paginate = array(
-    'MyModel' => array(
+public $paginate = [
+    'MyModel' => [
         'limit' => 20,
-        'order' => array('week' => 'desc'),
-        'group' => array('week', 'home_team_id', 'away_team_id')
-    )
-);
+        'order' => ['week' => 'desc'],
+        'group' => ['week', 'home_team_id', 'away_team_id']
+    ]
+];
 /**
  * Or on-the-fly from within the action
  */
-public function index() {
-    $this->Paginator->settings = array(
-        'MyModel' => array(
+public function index()
+{
+    $this->Paginator->settings = [
+        'MyModel' => [
             'limit' => 20,
-            'order' => array('week' => 'desc'),
-            'group' => array('week', 'home_team_id', 'away_team_id')
-        )
-    );
+            'order' => ['week' => 'desc'],
+            'group' => ['week', 'home_team_id', 'away_team_id']
+        ]
+    ];
 }
 ```
 
@@ -268,7 +279,7 @@ fields that can be expensive to calculate. You can use the 3rd parameter of
 done on:
 
 ``` php
-$this->Paginator->paginate('Post', array(), array('title', 'slug'));
+$this->Paginator->paginate('Post', [], ['title', 'slug']);
 ```
 
 This would allow sorting on the title and slug columns only. A user that sets
@@ -285,10 +296,10 @@ for your application, you can adjust it as part of the pagination options, for
 example reducing it to `10`:
 
 ``` php
-public $paginate = array(
+public $paginate = [
     // other keys here.
     'maxLimit' => 10
-);
+];
 ```
 
 If the request's limit param is greater than this value, it will be reduced to
@@ -307,9 +318,9 @@ type, and the `PaginatorHelper` will generate links with the chosen type of
 parameter:
 
 ``` php
-public $paginate = array(
+public $paginate = [
     'paramType' => 'querystring'
-);
+];
 ```
 
 The above would enable querystring parameter parsing and generation. You can
@@ -333,21 +344,22 @@ arguments.
 > Assigning an initial value to the property solves the issue:
 >
 > ``` bash
-> $this->paginate = array();
+> $this->paginate = [];
 > $this->paginate['limit'] = 10;
 > //or
-> $this->paginate = array('limit' => 10);
+> $this->paginate = ['limit' => 10];
 > ```
 >
 > Or just declare the property in the controller class:
 >
 > ``` php
-> class PostsController {
->     public $paginate = array();
+> class PostsController
+> {
+>     public $paginate = [];
 > }
 > ```
 >
-> Or use `$this->Paginator->settings = array('limit' => 10);`
+> Or use `$this->Paginator->settings = ['limit' => 10];`
 >
 > Make sure you have added the Paginator component to your \$components array if
 > you want to modify the `$settings` property of the PaginatorComponent.
@@ -364,7 +376,8 @@ So you could either let the normal error page be rendered or use a try catch
 block and take appropriate action when a <span class="title-ref">NotFoundException</span> is caught:
 
 ``` php
-public function index() {
+public function index()
+{
     try {
         $this->Paginator->paginate();
     } catch (NotFoundException $e) {

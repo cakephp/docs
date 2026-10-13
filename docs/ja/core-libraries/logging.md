@@ -24,18 +24,18 @@ CakePHP でデータのロギングは簡単です。 log() 関数が Object ク
 
 ``` php
 // app/Lib 用
-CakeLog::config('otherFile', array(
+CakeLog::config('otherFile', [
     'engine' => 'Database',
     'model' => 'LogEntry',
     // ...
-));
+]);
 
 // LoggingPack というプラグイン用
-CakeLog::config('otherFile', array(
+CakeLog::config('otherFile', [
     'engine' => 'LoggingPack.Database',
     'model' => 'LogEntry',
     // ...
-));
+]);
 ```
 
 ログストリームを設定する時、 `engine` パラメータは、ログハンドラを配置、
@@ -45,13 +45,16 @@ CakeLog::config('otherFile', array(
 ``` php
 App::uses('BaseLog', 'Log/Engine');
 
-class DatabaseLog extends BaseLog {
-    public function __construct($options = array()) {
+class DatabaseLog extends BaseLog
+{
+    public function __construct($options = [])
+    {
         parent::__construct($options);
         // ...
     }
 
-    public function write($type, $message) {
+    public function write($type, $message)
+    {
         // データベースへの書き込み
     }
 }
@@ -165,10 +168,10 @@ CakeLog::write('activity', '活動記録としての特別なメッセージ');
 FileLog は、独自のパスを使用するために `path` を設定できます。 :
 
 ``` php
-CakeLog::config('custom_path', array(
+CakeLog::config('custom_path', [
     'engine' => 'File',
     'path' => '/path/to/custom/place/'
-));
+]);
 ```
 
 ## Syslog へのロギング
@@ -187,9 +190,9 @@ syslog を使うためには、デフォルトの FileLog エンジンを使う�
 設定します。 :
 
 ``` php
-CakeLog::config('default', array(
+CakeLog::config('default', [
     'engine' => 'Syslog'
-));
+]);
 ```
 
 Syslog ロギングエンジンのための設定配列は、以下のキーを認識します。
@@ -234,9 +237,9 @@ CakeLog は、自身では何も自動設定されません。結果として、
 に出力するためには、コアの `FileLog` クラスをセットするだけで可能です。 :
 
 ``` php
-CakeLog::config('default', array(
+CakeLog::config('default', [
     'engine' => 'File'
-));
+]);
 ```
 
 ## ロギングスコープ
@@ -256,20 +259,20 @@ CakePHP は、このコンセプトをロギングスコープで実現します
 ``` php
 // ２つの設定されたタイプ(ログレベル) を受け取るように、 tmp/logs/shop.log を設定。
 // スコープは `orders` と `payments`
-CakeLog::config('shop', array(
+CakeLog::config('shop', [
     'engine' => 'FileLog',
-    'types' => array('warning', 'error'),
-    'scopes' => array('orders', 'payments'),
+    'types' => ['warning', 'error'],
+    'scopes' => ['orders', 'payments'],
     'file' => 'shop.log',
-));
+]);
 
 // ２つの設定されたタイプ(ログレベル) を受け取るように、 tmp/logs/payments.log を設定。
 // スコープは `payments` のみ
-CakeLog::config('payments', array(
+CakeLog::config('payments', [
     'engine' => 'SyslogLog',
-    'types' => array('info', 'error', 'warning'),
-    'scopes' => array('payments')
-));
+    'types' => ['info', 'error', 'warning'],
+    'scopes' => ['payments']
+]);
 
 CakeLog::warning('これは、 shop のストリームにのみ書かれます', 'orders');
 CakeLog::warning('これは、 shop と payments の両ストリームに書かれます', 'payments');
@@ -310,7 +313,7 @@ returns
 param string \$name  
 今後メッセージを受信させたくないロガーの名前。
 
-`static` CakeLog::**write**($level, $message, $scope = array())
+`static` CakeLog::**write**($level, $message, $scope = [])
 
 全ての設定されたロガーにメッセージを書き込みます。
 \$level は、作成されたログメッセージのレベルを表します。
@@ -333,36 +336,36 @@ param string \$name
 ログレベルを使用します。 :
 
 ``` php
-CakeLog::levels(array('user0', 'user1'));
+CakeLog::levels(['user0', 'user1']);
 // または
-CakeLog::levels(array('user0', 'user1'), true);
+CakeLog::levels(['user0', 'user1'], true);
 ```
 
 `CakeLog::levels()` を呼ぶと結果は:
 
 ``` text
-array(
+[
     0 => 'emergency',
     1 => 'alert',
     // ...
     8 => 'user0',
     9 => 'user1',
-);
+];
 ```
 
 既存の設定を置き換えるために、第二引数に false をセットしてください。 :
 
 ``` php
-CakeLog::levels(array('user0', 'user1'), false);
+CakeLog::levels(['user0', 'user1'], false);
 ```
 
 `CakeLog::levels()` を呼ぶと結果は:
 
 ``` text
-array(
+[
     0 => 'user0',
     1 => 'user1',
-);
+];
 ```
 
 `static` CakeLog::**defaultLevels**()
@@ -373,7 +376,7 @@ returns
 独自の値にログレベルをリセットします。 :
 
 ``` text
-array(
+[
     'emergency' => LOG_EMERG,
     'alert'     => LOG_ALERT,
     'critical'  => LOG_CRIT,
@@ -382,7 +385,7 @@ array(
     'notice'    => LOG_NOTICE,
     'info'      => LOG_INFO,
     'debug'     => LOG_DEBUG,
-);
+];
 ```
 
 `static` CakeLog::**enabled**($streamName)
@@ -420,18 +423,18 @@ returns
 
 以下の便利メソッドは、 適切なログレベルで `$message` を記録するために追加されました。
 
-`static` CakeLog::**emergency**($message, $scope = array())
+`static` CakeLog::**emergency**($message, $scope = [])
 
-`static` CakeLog::**alert**($message, $scope = array())
+`static` CakeLog::**alert**($message, $scope = [])
 
-`static` CakeLog::**critical**($message, $scope = array())
+`static` CakeLog::**critical**($message, $scope = [])
 
-`static` CakeLog::**error**($message, $scope = array())
+`static` CakeLog::**error**($message, $scope = [])
 
-`static` CakeLog::**warning**($message, $scope = array())
+`static` CakeLog::**warning**($message, $scope = [])
 
-`static` CakeLog::**notice**($message, $scope = array())
+`static` CakeLog::**notice**($message, $scope = [])
 
-`static` CakeLog::**info**($message, $scope = array())
+`static` CakeLog::**info**($message, $scope = [])
 
-`static` CakeLog::**debug**($message, $scope = array())
+`static` CakeLog::**debug**($message, $scope = [])

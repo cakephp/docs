@@ -174,8 +174,10 @@ Windows Vista もしくは 7 をお使いの場合は、以下の手順に従っ
 `HelloShell.php` を作ってください。その中に以下のコードを書きます。 :
 
 ``` php
-class HelloShell extends AppShell {
-    public function main() {
+class HelloShell extends AppShell
+{
+    public function main()
+    {
         $this->out('Hello world.');
     }
 }
@@ -207,12 +209,15 @@ class HelloShell extends AppShell {
 ある程度わかったら、次は以下のように別のコマンドを追加してみましょう。 :
 
 ``` php
-class HelloShell extends AppShell {
-    public function main() {
+class HelloShell extends AppShell
+{
+    public function main()
+    {
         $this->out('Hello world.');
     }
 
-    public function hey_there() {
+    public function hey_there()
+    {
         $this->out('Hey there ' . $this->args[0]);
     }
 }
@@ -241,10 +246,12 @@ class HelloShell extends AppShell {
 定義されたモデルが、あなたのシェルに付属するプロパティとしてロードされます。 :
 
 ``` php
-class UserShell extends AppShell {
-    public $uses = array('User');
+class UserShell extends AppShell
+{
+    public $uses = ['User'];
 
-    public function show() {
+    public function show()
+    {
         $user = $this->User->findByUsername($this->args[0]);
         $this->out(print_r($user, true));
     }
@@ -263,8 +270,9 @@ class UserShell extends AppShell {
 プロパティを使ってシェルのタスクを定義できます。 :
 
 ``` php
-class UserShell extends AppShell {
-    public $tasks = array('Template');
+class UserShell extends AppShell
+{
+    public $tasks = ['Template'];
 }
 ```
 
@@ -278,9 +286,11 @@ class UserShell extends AppShell {
 次のようになります。 :
 
 ``` php
-class FileGeneratorTask extends Shell {
-    public $uses = array('User');
-    public function execute() {
+class FileGeneratorTask extends Shell
+{
+    public $uses = ['User'];
+    public function execute()
+    {
 
     }
 }
@@ -291,9 +301,11 @@ class FileGeneratorTask extends Shell {
 
 ``` php
 // Console/Command/SeaShell.php に作成
-class SeaShell extends AppShell {
-    public $tasks = array('Sound'); // Console/Command/Task/SoundTask.php に作成
-    public function main() {
+class SeaShell extends AppShell
+{
+    public $tasks = ['Sound']; // Console/Command/Task/SoundTask.php に作成
+    public function main()
+    {
         $this->Sound->execute();
     }
 }
@@ -396,7 +408,7 @@ $this->out('extra message', 1, Shell::VERBOSE);
 新しいスタイルを追加するには以下のようにします。 :
 
 ``` php
-$this->stdout->styles('flashy', array('text' => 'magenta', 'blink' => true));
+$this->stdout->styles('flashy', ['text' => 'magenta', 'blink' => true]);
 ```
 
 これで `<flashy>` というタグが有効になり、ansi カラーが有効な端末であれば、
@@ -468,7 +480,8 @@ OptionParsers は同時に２つのことを実現します。１つ目は、基
 簡単に設定できるようなメソッドを備えています。 :
 
 ``` php
-public function getOptionParser() {
+public function getOptionParser()
+{
     $parser = parent::getOptionParser();
     // パーサの設定
     return $parser;
@@ -481,16 +494,17 @@ public function getOptionParser() {
 これによりオプションパーサ全体を一連のメソッド呼び出しで定義できます。 :
 
 ``` php
-public function getOptionParser() {
+public function getOptionParser()
+{
     $parser = parent::getOptionParser();
-    $parser->addArgument('type', array(
+    $parser->addArgument('type', [
         'help' => 'フルパスもしくはクラスの型のいずれか。'
-    ))->addArgument('className', array(
+    ])->addArgument('className', [
         'help' => 'CakePHP コアのクラス名（Component, HtmlHelper 等)。'
-    ))->addOption('method', array(
+    ])->addOption('method', [
         'short' => 'm',
         'help' => __('The specific method you want help on.')
-    ))->description(__('Lookup doc block comments for classes in CakePHP.'));
+    ])->description(__('Lookup doc block comments for classes in CakePHP.'));
     return $parser;
 }
 ```
@@ -515,7 +529,7 @@ public function getOptionParser() {
 
 ``` php
 // 一度に複数行を設定
-$parser->description(array('１行目', '２行目'));
+$parser->description(['１行目', '２行目']);
 
 // 現在の値を取得する
 $parser->description();
@@ -529,7 +543,7 @@ $parser->description();
 
 ``` php
 // 一度に複数行を設定
-$parser->epilog(array('１行目', '２行目'));
+$parser->epilog(['１行目', '２行目']);
 
 // 現在の値を取得する
 $parser->epilog();
@@ -537,7 +551,7 @@ $parser->epilog();
 
 ### 引数の追加
 
-`method` ConsoleOptionParser::**addArgument**($name, $params = array())
+`method` ConsoleOptionParser::**addArgument**($name, $params = [])
 
 コマンドラインツールにおいて、指定順序が意味を持つ引数はよく使われます。
 `ConsoleOptionParser` では指定順序が意味を持つ引数を要求するだけでなく
@@ -546,7 +560,7 @@ $parser->epilog();
 指定するかを選べます。 :
 
 ``` php
-$parser->addArgument('model', array('help' => 'bake するモデル'));
+$parser->addArgument('model', ['help' => 'bake するモデル']);
 ```
 
 引数を作成する際は以下のオプションが指定できます:
@@ -568,10 +582,10 @@ $parser->addArgument('model', array('help' => 'bake するモデル'));
 一度に複数の引数を追加できます。 :
 
 ``` php
-$parser->addArguments(array(
-    'node', array('help' => '生成するノード', 'required' => true),
-    'parent' => array('help' => '親ノード', 'required' => true)
-));
+$parser->addArguments([
+    'node', ['help' => '生成するノード', 'required' => true],
+    'parent' => ['help' => '親ノード', 'required' => true]
+]);
 ```
 
 ConsoleOptionParser 上のすべてのビルダーメソッドと同様に、addArguments
@@ -585,11 +599,11 @@ ConsoleOptionParser 上のすべてのビルダーメソッドと同様に、add
 できます。 :
 
 ``` php
-$parser->addArgument('type', array(
+$parser->addArgument('type', [
     'help' => 'これとやり取りするノードの型',
     'required' => true,
-    'choices' => array('aro', 'aco')
-));
+    'choices' => ['aro', 'aco']
+]);
 ```
 
 この例では、必須でかつ入力時に値の正当性チェックが行われるような引数を
@@ -598,7 +612,7 @@ $parser->addArgument('type', array(
 
 ### オプションの追加
 
-`method` ConsoleOptionParser::**addOption**($name, $options = array())
+`method` ConsoleOptionParser::**addOption**($name, $options = [])
 
 コマンドラインツールでは、オプションやフラグもまたよく使われます。
 `ConsoleOptionParser` では長い名称と短い別名の両方を持つオプション、
@@ -607,11 +621,11 @@ $parser->addArgument('type', array(
 により追加します。 :
 
 ``` php
-$parser->addOption('connection', array(
+$parser->addOption('connection', [
     'short' => 'c'
     'help' => 'connection',
     'default' => 'default'
-));
+]);
 ```
 
 この例の場合、シェルを起動する際に `cake myshell --connection=other`,
@@ -621,7 +635,7 @@ $parser->addOption('connection', array(
 だけとなります。 :
 
 ``` php
-$parser->addOption('no-commit', array('boolean' => true));
+$parser->addOption('no-commit', ['boolean' => true]);
 ```
 
 このオプション指定の場合、 `cake myshell --no-commit something` のように
@@ -644,10 +658,10 @@ $parser->addOption('no-commit', array('boolean' => true));
 により一度に複数のオプションを追加できます。 :
 
 ``` php
-$parser->addOptions(array(
-    'node' => array('short' => 'n', 'help' => '生成するノード'),
-    'parent' => array('short' => 'p', 'help' => '親ノード')
-));
+$parser->addOptions([
+    'node' => ['short' => 'n', 'help' => '生成するノード'],
+    'parent' => ['short' => 'p', 'help' => '親ノード']
+]);
 ```
 
 ConsoleOptionParser 上のビルダーメソッドと同様に、addOptions も強力な
@@ -660,10 +674,10 @@ choices が指定されている場合、それらがそのオプションで取
 これ以外の値が指定されると `InvalidArgumentException` が発生します。 :
 
 ``` php
-$parser->addOption('accept', array(
+$parser->addOption('accept', [
     'help' => 'What version to accept.',
-    'choices' => array('working', 'theirs', 'mine')
-));
+    'choices' => ['working', 'theirs', 'mine']
+]);
 ```
 
 ### ブール型オプションの使用
@@ -674,10 +688,10 @@ $parser->addOption('accept', array(
 存在しない場合は false になります。 :
 
 ``` php
-$parser->addOption('verbose', array(
+$parser->addOption('verbose', [
     'help' => '冗長出力を有効にする.',
     'boolean' => true
-));
+]);
 ```
 
 以下の例のように `$this->params['verbose']` の結果が常に参照可能です。
@@ -700,7 +714,7 @@ if ($this->param('verbose')) {
 
 ### サブコマンドの追加
 
-`method` ConsoleOptionParser::**addSubcommand**($name, $options = array())
+`method` ConsoleOptionParser::**addSubcommand**($name, $options = [])
 
 コンソールアプリケーションはサブコマンドから構成されることも多いのですが、
 サブコマンド側で特別なオプション解析や独自ヘルプを持ちたいこともあります。
@@ -711,10 +725,10 @@ if ($this->param('verbose')) {
 解析すればよいのかを知ることができます。 :
 
 ``` php
-$parser->addSubcommand('model', array(
+$parser->addSubcommand('model', [
     'help' => 'Bake a model',
     'parser' => $this->Model->getOptionParser()
-));
+]);
 ```
 
 上の例では、シェルのタスクに対してヘルプやそれに特化したオプションパーサ
@@ -747,21 +761,21 @@ $parser->addSubcommand('model', array(
 扱えるので、サブコマンドパーサの構築が容易になります。 :
 
 ``` php
-$parser->addSubcommand('check', array(
+$parser->addSubcommand('check', [
     'help' => __('Check the permissions between an ACO and ARO.'),
-    'parser' => array(
-        'description' => array(
+    'parser' => [
+        'description' => [
             __("Use this command to grant ACL permissions. Once executed, the ARO "),
             __("specified (and its children, if any) will have ALLOW access to the"),
             __("specified ACO action (and the ACO's children, if any).")
-        ),
-        'arguments' => array(
-            'aro' => array('help' => __('ARO to check.'), 'required' => true),
-            'aco' => array('help' => __('ACO to check.'), 'required' => true),
-            'action' => array('help' => __('Action to check'))
-        )
-    )
-));
+        ],
+        'arguments' => [
+            'aro' => ['help' => __('ARO to check.'), 'required' => true],
+            'aco' => ['help' => __('ACO to check.'), 'required' => true],
+            'action' => ['help' => __('Action to check')]
+        ]
+    ]
+]);
 ```
 
 パーサの仕様の中では `definition`, `arguments`, `options`, `epilog`
@@ -772,19 +786,20 @@ $parser->addSubcommand('check', array(
 また、 buildFromArray を単独で使ってオプションパーサを構築することも可能です。 :
 
 ``` php
-public function getOptionParser() {
-    return ConsoleOptionParser::buildFromArray(array(
-        'description' => array(
+public function getOptionParser()
+{
+    return ConsoleOptionParser::buildFromArray([
+        'description' => [
             __("Use this command to grant ACL permissions. Once executed, the "),
             __("ARO specified (and its children, if any) will have ALLOW access "),
             __("to the specified ACO action (and the ACO's children, if any).")
-        ),
-        'arguments' => array(
-            'aro' => array('help' => __('ARO to check.'), 'required' => true),
-            'aco' => array('help' => __('ACO to check.'), 'required' => true),
-            'action' => array('help' => __('Action to check'))
-        )
-    ));
+        ],
+        'arguments' => [
+            'aro' => ['help' => __('ARO to check.'), 'required' => true],
+            'aco' => ['help' => __('ACO to check.'), 'required' => true],
+            'action' => ['help' => __('Action to check')]
+        ]
+    ]);
 }
 ```
 
@@ -936,7 +951,7 @@ $Email->domain('www.example.org');
 
 `method` Shell::**startup**()
 
-`method` Shell::**wrapText**($text, $options = array())
+`method` Shell::**wrapText**($text, $options = [])
 
 ## その他のトピック
 

@@ -65,7 +65,7 @@ Methods that must be implemented for all CRUD methods:
 - `calculate($model, $func, $params)`
 - At least one of:
   - `create(Model $model, $fields = null, $values = null)`
-  - `read(Model $model, $queryData = array(), $recursive = null)`
+  - `read(Model $model, $queryData = [], $recursive = null)`
   - `update(Model $model, $fields = null, $values = null, $conditions = null)`
   - `delete(Model $model, $id = null)`
 
@@ -93,7 +93,8 @@ based API. We'll call it `FarAwaySource` and we'll put it in
 ``` php
 App::uses('HttpSocket', 'Network/Http');
 
-class FarAwaySource extends DataSource {
+class FarAwaySource extends DataSource
+{
 
 /**
  * An optional description of your datasource
@@ -104,37 +105,38 @@ class FarAwaySource extends DataSource {
  * Our default config options. These options will be customized in our
  * ``app/Config/database.php`` and will be merged in the ``__construct()``.
  */
-    public $config = array(
+    public $config = [
         'apiKey' => '',
-    );
+    ];
 
 /**
  * If we want to create() or update() we need to specify the fields
  * available. We use the same array keys as we do with CakeSchema, eg.
  * fixtures and schema migrations.
  */
-    protected $_schema = array(
-        'id' => array(
+    protected $_schema = [
+        'id' => [
             'type' => 'integer',
             'null' => false,
             'key' => 'primary',
             'length' => 11,
-        ),
-        'name' => array(
+        ],
+        'name' => [
             'type' => 'string',
             'null' => true,
             'length' => 255,
-        ),
-        'message' => array(
+        ],
+        'message' => [
             'type' => 'text',
             'null' => true,
-        ),
-    );
+        ],
+    ];
 
 /**
  * Create our HttpSocket and handle any config tweaks.
  */
-    public function __construct($config) {
+    public function __construct($config)
+    {
         parent::__construct($config);
         $this->Http = new HttpSocket();
     }
@@ -148,7 +150,8 @@ class FarAwaySource extends DataSource {
  * listSources() is for caching. You'll likely want to implement caching in
  * your own way with a custom datasource. So just ``return null``.
  */
-    public function listSources($data = null) {
+    public function listSources($data = null)
+    {
         return null;
     }
 
@@ -159,7 +162,8 @@ class FarAwaySource extends DataSource {
  * datasource. If this is your case then set a ``schema`` property on your
  * models and simply return ``$model->schema`` here instead.
  */
-    public function describe($model) {
+    public function describe($model)
+    {
         return $this->_schema;
     }
 
@@ -172,15 +176,17 @@ class FarAwaySource extends DataSource {
  * return the string 'COUNT' and check for it in ``read()`` where
  * ``$data['fields'] === 'COUNT'``.
  */
-    public function calculate(Model $model, $func, $params = array()) {
+    public function calculate(Model $model, $func, $params = [])
+    {
         return 'COUNT';
     }
 
 /**
  * Implement the R in CRUD. Calls to ``Model::find()`` arrive here.
  */
-    public function read(Model $model, $queryData = array(),
-        $recursive = null) {
+    public function read(Model $model, $queryData = [],
+        $recursive = null)
+    {
         /**
          * Here we do the actual count as instructed by our calculate()
          * method above. We could either check the remote source or some
@@ -188,7 +194,7 @@ class FarAwaySource extends DataSource {
          * ``update()`` and ``delete()`` will assume the record exists.
          */
         if ($queryData['fields'] === 'COUNT') {
-            return array(array(array('count' => 1)));
+            return [[['count' => 1]]];
         }
         /**
          * Now we get, decode and return the remote data.
@@ -203,14 +209,15 @@ class FarAwaySource extends DataSource {
             $error = json_last_error();
             throw new CakeException($error);
         }
-        return array($model->alias => $res);
+        return [$model->alias => $res];
     }
 
 /**
  * Implement the C in CRUD. Calls to ``Model::save()`` without $model->id
  * set arrive here.
  */
-    public function create(Model $model, $fields = null, $values = null) {
+    public function create(Model $model, $fields = null, $values = null)
+    {
         $data = array_combine($fields, $values);
         $data['apiKey'] = $this->config['apiKey'];
         $json = $this->Http->post('http://example.com/api/set.json', $data);
@@ -228,18 +235,20 @@ class FarAwaySource extends DataSource {
  * ``$this->create()``.
  */
     public function update(Model $model, $fields = null, $values = null,
-        $conditions = null) {
+        $conditions = null)
+    {
         return $this->create($model, $fields, $values);
     }
 
 /**
  * Implement the D in CRUD. Calls to ``Model::delete()`` arrive here.
  */
-    public function delete(Model $model, $id = null) {
-        $json = $this->Http->get('http://example.com/api/remove.json', array(
+    public function delete(Model $model, $id = null)
+    {
+        $json = $this->Http->get('http://example.com/api/remove.json', [
             'id' => $id[$model->alias . '.id'],
             'apiKey' => $this->config['apiKey'],
-        ));
+        ]);
         $res = json_decode($json, true);
         if (is_null($res)) {
             $error = json_last_error();
@@ -247,7 +256,6 @@ class FarAwaySource extends DataSource {
         }
         return true;
     }
-
 }
 ```
 
@@ -255,16 +263,17 @@ We can then configure the datasource in our `app/Config/database.php` file
 by adding something like this:
 
 ``` php
-public $faraway = array(
+public $faraway = [
     'datasource' => 'FarAwaySource',
     'apiKey'     => '1234abcd',
-);
+];
 ```
 
 Then use the database config in our models like this:
 
 ``` php
-class MyModel extends AppModel {
+class MyModel extends AppModel
+{
     public $useDbConfig = 'faraway';
 }
 ```
@@ -273,9 +282,9 @@ We can retrieve data from our remote source using the familiar model methods:
 
 ``` php
 // Get all messages from 'Some Person'
-$messages = $this->MyModel->find('all', array(
-    'conditions' => array('name' => 'Some Person'),
-));
+$messages = $this->MyModel->find('all', [
+    'conditions' => ['name' => 'Some Person'],
+]);
 ```
 
 > [!TIP]
@@ -285,19 +294,19 @@ $messages = $this->MyModel->find('all', array(
 Similarly we can save a new message:
 
 ``` php
-$this->MyModel->save(array(
+$this->MyModel->save([
     'name' => 'Some Person',
     'message' => 'New Message',
-));
+]);
 ```
 
 Update the previous message:
 
 ``` php
 $this->MyModel->id = 42;
-$this->MyModel->save(array(
+$this->MyModel->save([
     'message' => 'Updated message',
-));
+]);
 ```
 
 And delete the message:
@@ -315,10 +324,10 @@ Simply place your datasource file into
 and refer to it using the plugin notation:
 
 ``` php
-public $faraway = array(
+public $faraway = [
     'datasource' => 'MyPlugin.FarAwaySource',
     'apiKey'     => 'abcd1234',
-);
+];
 ```
 
 ## Connecting to SQL Server

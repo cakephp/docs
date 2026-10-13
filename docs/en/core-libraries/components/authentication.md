@@ -1,6 +1,6 @@
 # Authentication
 
-`class` **AuthComponent**(ComponentCollection $collection, array $settings = array())
+`class` **AuthComponent**(ComponentCollection $collection, array $settings = [])
 
 Identifying, authenticating and authorizing users is a common part of almost
 every web application. In CakePHP AuthComponent provides a pluggable way to do
@@ -67,13 +67,13 @@ each authentication object, using an array:
 
 ``` php
 // Basic setup
-$this->Auth->authenticate = array('Form');
+$this->Auth->authenticate = ['Form'];
 
 // Pass settings in
-$this->Auth->authenticate = array(
-    'Basic' => array('userModel' => 'Member'),
-    'Form' => array('userModel' => 'Member')
-);
+$this->Auth->authenticate = [
+    'Basic' => ['userModel' => 'Member'],
+    'Form' => ['userModel' => 'Member']
+];
 ```
 
 In the second example you'll notice that we had to declare the `userModel` key
@@ -83,11 +83,11 @@ key is also exposed as `AuthComponent::ALL`:
 
 ``` php
 // Pass settings in using 'all'
-$this->Auth->authenticate = array(
-    AuthComponent::ALL => array('userModel' => 'Member'),
+$this->Auth->authenticate = [
+    AuthComponent::ALL => ['userModel' => 'Member'],
     'Basic',
     'Form'
-);
+];
 ```
 
 In the above example, both `Form` and `Basic` will get the settings defined
@@ -100,7 +100,7 @@ support the following configuration keys.
 - `userModel` The model name of the User, defaults to User.
 
 - `scope` Additional conditions to use when looking up and
-  authenticating users, i.e. `array('User.is_active' => 1)`.
+  authenticating users, i.e. `['User.is_active' => 1]`.
 
 - `recursive` The value of the recursive key passed to `find()`. Defaults to
   `0`.
@@ -128,15 +128,15 @@ To configure different fields for user in `$components` array:
 
 ``` php
 // Pass settings in $components array
-public $components = array(
-    'Auth' => array(
-        'authenticate' => array(
-            'Form' => array(
-                'fields' => array('username' => 'email')
-            )
-        )
-    )
-);
+public $components = [
+    'Auth' => [
+        'authenticate' => [
+            'Form' => [
+                'fields' => ['username' => 'email']
+            ]
+        ]
+    ]
+];
 ```
 
 Do not put other Auth configuration keys (like authError, loginAction etc)
@@ -146,24 +146,24 @@ like:
 
 ``` php
 // Pass settings in $components array
-public $components = array(
-    'Auth' => array(
-        'loginAction' => array(
+public $components = [
+    'Auth' => [
+        'loginAction' => [
             'controller' => 'users',
             'action' => 'login',
             'plugin' => 'users'
-        ),
+        ],
         'authError' => 'Did you really think you are allowed to see that?',
-        'authenticate' => array(
-            'Form' => array(
-                'fields' => array(
+        'authenticate' => [
+            'Form' => [
+                'fields' => [
                   'username' => 'my_user_model_username_field', //Default is 'username' in the userModel
                   'password' => 'my_user_model_password_field'  //Default is 'password' in the userModel
-                )
-            )
-        )
-    )
-);
+                ]
+            ]
+        ]
+    ]
+];
 ```
 
 In addition to the common configuration, Basic authentication supports the
@@ -192,7 +192,8 @@ objects are checked. A sample login function for working with a login form could
 look like:
 
 ``` php
-public function login() {
+public function login()
+{
     if ($this->request->is('post')) {
         // Important: Use login() without arguments! See warning below.
         if ($this->Auth->login()) {
@@ -248,8 +249,10 @@ following:
 ``` php
 App::uses('BaseAuthenticate', 'Controller/Component/Auth');
 
-class OpenidAuthenticate extends BaseAuthenticate {
-    public function authenticate(CakeRequest $request, CakeResponse $response) {
+class OpenidAuthenticate extends BaseAuthenticate
+{
+    public function authenticate(CakeRequest $request, CakeResponse $response)
+    {
         // Do things for OpenID here.
         // Return an array of user if they could authenticate the user,
         // return false if not
@@ -272,10 +275,10 @@ Once you've created your custom authentication object, you can use them by
 including them in AuthComponents authenticate array:
 
 ``` php
-$this->Auth->authenticate = array(
+$this->Auth->authenticate = [
     'Openid', // app authentication object.
     'AuthBag.Combo', // plugin authentication object.
-);
+];
 ```
 
 ### Creating stateless authentication systems
@@ -292,7 +295,8 @@ valid user. As with authentication object's `authenticate()` method the
 `false` on failure. :
 
 ``` php
-public function getUser($request) {
+public function getUser($request)
+{
     $username = env('PHP_AUTH_USER');
     $pass = env('PHP_AUTH_PW');
 
@@ -347,7 +351,7 @@ for setting flash messages. The available keys are
 
 - `element` - The element to use, defaults to 'default'.
 - `key` - The key to use, defaults to 'auth'
-- `params` - The array of additional params to use, defaults to array()
+- `params` - The array of additional params to use, defaults to []
 
 In addition to the flash message settings you can customize other error messages
 AuthComponent uses. In your controller's beforeFilter, or component settings you
@@ -389,18 +393,18 @@ hashing. By default the hash type set in Security class will be used. You can
 use specific hash type like this:
 
 ``` php
-public $components = array(
-    'Auth' => array(
-        'authenticate' => array(
-            'Form' => array(
-                'passwordHasher' => array(
+public $components = [
+    'Auth' => [
+        'authenticate' => [
+            'Form' => [
+                'passwordHasher' => [
                     'className' => 'Simple',
                     'hashType' => 'sha256'
-                )
-            )
-        )
-    )
-);
+                ]
+            ]
+        ]
+    ]
+];
 ```
 
 When creating new user records you can hash a password in the `beforeSave`
@@ -409,10 +413,12 @@ callback of your model using appropriate password hasher class:
 ``` php
 App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 
-class User extends AppModel {
-    public function beforeSave($options = array()) {
+class User extends AppModel
+{
+    public function beforeSave($options = [])
+    {
         if (!empty($this->data[$this->alias]['password'])) {
-            $passwordHasher = new SimplePasswordHasher(array('hashType' => 'sha256'));
+            $passwordHasher = new SimplePasswordHasher(['hashType' => 'sha256']);
             $this->data[$this->alias]['password'] = $passwordHasher->hash(
                 $this->data[$this->alias]['password']
             );
@@ -438,15 +444,15 @@ have to do with specify `passwordHasher` setting for the authenticating
 object:
 
 ``` php
-public $components = array(
-    'Auth' => array(
-        'authenticate' => array(
-            'Form' => array(
+public $components = [
+    'Auth' => [
+        'authenticate' => [
+            'Form' => [
                 'passwordHasher' => 'Blowfish'
-            )
-        )
-    )
-);
+            ]
+        ]
+    ]
+];
 ```
 
 #### Hashing passwords for digest authentication
@@ -461,8 +467,10 @@ the digest password in a separate column, from the normal password hash:
 ``` php
 App::uses('DigestAuthenticate', 'Controller/Component/Auth');
 
-class User extends AppModel {
-    public function beforeSave($options = array()) {
+class User extends AppModel
+{
+    public function beforeSave($options = [])
+    {
         // make a password for digest auth.
         $this->data[$this->alias]['digest_hash'] = DigestAuthenticate::password(
             $this->data[$this->alias]['username'],
@@ -494,12 +502,15 @@ following:
 ``` php
 App::uses('AbstractPasswordHasher', 'Controller/Component/Auth');
 
-class CustomPasswordHasher extends AbstractPasswordHasher {
-    public function hash($password) {
+class CustomPasswordHasher extends AbstractPasswordHasher
+{
+    public function hash($password)
+    {
         // stuff here
     }
 
-    public function check($password, $hashedPassword) {
+    public function check($password, $hashedPassword)
+    {
         // stuff here
     }
 }
@@ -512,12 +523,13 @@ after they registered for your application. You can do this by calling
 `$this->Auth->login()` with the user data you want to 'login':
 
 ``` php
-public function register() {
+public function register()
+{
     if ($this->User->save($this->request->data)) {
         $id = $this->User->id;
         $this->request->data['User'] = array_merge(
             $this->request->data['User'],
-            array('id' => $id)
+            ['id' => $id]
         );
         unset($this->request->data['User']['password']);
         $this->Auth->login($this->request->data['User']);
@@ -557,7 +569,8 @@ to where they need to go. This method is also useful if you want to provide a
 'Log me out' link inside a members' area of your application:
 
 ``` php
-public function logout() {
+public function logout()
+{
     return $this->redirect($this->Auth->logout());
 }
 ```
@@ -607,13 +620,13 @@ each authorization object, using an array:
 
 ``` php
 // Basic setup
-$this->Auth->authorize = array('Controller');
+$this->Auth->authorize = ['Controller'];
 
 // Pass settings in
-$this->Auth->authorize = array(
-    'Actions' => array('actionPath' => 'controllers/'),
+$this->Auth->authorize = [
+    'Actions' => ['actionPath' => 'controllers/'],
     'Controller'
-);
+];
 ```
 
 Much like `Auth->authenticate`, `Auth->authorize`, helps you keep your code
@@ -623,11 +636,11 @@ are passed to every attached object. The all key is also exposed as
 
 ``` php
 // Pass settings in using 'all'
-$this->Auth->authorize = array(
-    AuthComponent::ALL => array('actionPath' => 'controllers/'),
+$this->Auth->authorize = [
+    AuthComponent::ALL => ['actionPath' => 'controllers/'],
     'Actions',
     'Controller'
-);
+];
 ```
 
 In the above example, both the `Actions` and `Controller` will get the
@@ -653,8 +666,10 @@ following:
 ``` php
 App::uses('BaseAuthorize', 'Controller/Component/Auth');
 
-class LdapAuthorize extends BaseAuthorize {
-    public function authorize($user, CakeRequest $request) {
+class LdapAuthorize extends BaseAuthorize
+{
+    public function authorize($user, CakeRequest $request)
+    {
         // Do things for LDAP here.
     }
 }
@@ -673,10 +688,10 @@ Once you've created your custom authorize object, you can use them by
 including them in your AuthComponent's authorize array:
 
 ``` php
-$this->Auth->authorize = array(
+$this->Auth->authorize = [
     'Ldap', // app authorize object.
     'AuthBag.Combo', // plugin authorize object.
-);
+];
 ```
 
 ### Using no authorization
@@ -708,7 +723,7 @@ $this->Auth->allow();
 $this->Auth->allow('view', 'index');
 
 // Allow only the view and index actions.
-$this->Auth->allow(array('view', 'index'));
+$this->Auth->allow(['view', 'index']);
 ```
 
 > [!WARNING]
@@ -733,7 +748,7 @@ $this->Auth->deny();
 
 // remove a group of actions.
 $this->Auth->deny('add', 'edit');
-$this->Auth->deny(array('add', 'edit'));
+$this->Auth->deny(['add', 'edit']);
 ```
 
 You can provide as many action names as you need to `deny()`. You can
@@ -753,11 +768,13 @@ the request. The callback is passed the active user, so it can be
 checked:
 
 ``` php
-class AppController extends Controller {
-    public $components = array(
-        'Auth' => array('authorize' => 'Controller'),
-    );
-    public function isAuthorized($user = null) {
+class AppController extends Controller
+{
+    public $components = [
+        'Auth' => ['authorize' => 'Controller'],
+    ];
+    public function isAuthorized($user = null)
+    {
         // Any registered user can access public functions
         if (empty($this->request->params['admin'])) {
             return true;
@@ -809,10 +826,10 @@ AuthComponent will delegate to all the of the configured authorize
 objects, so you can be sure the settings were applied every where:
 
 ``` php
-$this->Auth->mapActions(array(
-    'create' => array('register'),
-    'view' => array('show', 'display')
-));
+$this->Auth->mapActions([
+    'create' => ['register'],
+    'view' => ['show', 'display']
+]);
 ```
 
 The keys for mapActions should be the CRUD permissions you want to set,
@@ -852,7 +869,7 @@ and authentication mechanics in CakePHP.
 >
 > - `element` - The element to use, defaults to 'default'.
 > - `key` - The key to use, defaults to 'auth'
-> - `params` - The array of additional params to use, defaults to array()
+> - `params` - The array of additional params to use, defaults to []
 >
 > A URL (defined as a string or array) to the controller action that handles
 > logins. Defaults to <span class="title-ref">/users/login</span>
@@ -897,7 +914,7 @@ and authentication mechanics in CakePHP.
 
 `method` AuthComponent::**logout**()
 
-`method` AuthComponent::**mapActions**($map = array())
+`method` AuthComponent::**mapActions**($map = [])
 
 `static` AuthComponent::**password**($pass)
 

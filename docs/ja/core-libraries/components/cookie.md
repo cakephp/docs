@@ -1,6 +1,6 @@
 # Cookie
 
-`class` **CookieComponent**(ComponentCollection $collection, array $settings = array())
+`class` **CookieComponent**(ComponentCollection $collection, array $settings = [])
 
 Cookie コンポーネントは PHP に組み込まれている `setcookie` メソッドに関連するラッパーです。
 コントローラーで Cookie を使ったコーディングをするのにとても便利な糖衣構文も多数含んでいます。
@@ -71,9 +71,10 @@ Cookie コンポーネントがどのように動くかは、コントローラ�
 Cookie の初期設定をするための例です。 :
 
 ``` php
-public $components = array('Cookie');
+public $components = ['Cookie'];
 
-public function beforeFilter() {
+public function beforeFilter()
+{
     parent::beforeFilter();
     $this->Cookie->name = 'baker_id';
     $this->Cookie->time = 3600;  // または '1 hour'

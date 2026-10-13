@@ -76,9 +76,9 @@ $path = Folder::addPathElement('/a/path/for', 'testing');
 
 `method` Folder::**cd**(string $path)
 
-`method` Folder::**chmod**(string $path, integer $mode = false, boolean $recursive = true, array $exceptions = array())
+`method` Folder::**chmod**(string $path, integer $mode = false, boolean $recursive = true, array $exceptions = [])
 
-`method` Folder::**copy**(array|string $options = array())
+`method` Folder::**copy**(array|string $options = [])
 
 `static` Folder::**correctSlashFor**(string $path)
 

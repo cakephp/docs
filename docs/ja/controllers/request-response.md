@@ -145,7 +145,7 @@ $data = $this->request->input('json_decode');
 
 ``` php
 // PUT/POST アクションで投稿されたデータを Xml エンコードで取得する
-$data = $this->request->input('Xml::build', array('return' => 'domdocument'));
+$data = $this->request->input('Xml::build', ['return' => 'domdocument']);
 ```
 
 ## パス情報にアクセス
@@ -184,27 +184,27 @@ $this->request->isPost(); // 非推奨
 // environment detector を追加する
 $this->request->addDetector(
     'post',
-    array('env' => 'REQUEST_METHOD', 'value' => 'POST')
+    ['env' => 'REQUEST_METHOD', 'value' => 'POST']
 );
 
 // pattern value detector を追加する
 $this->request->addDetector(
     'iphone',
-    array('env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i')
+    ['env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i']
 );
 
 // option detector を追加する
-$this->request->addDetector('internalIp', array(
+$this->request->addDetector('internalIp', [
     'env' => 'CLIENT_IP',
-    'options' => array('192.168.0.101', '192.168.0.100')
-));
+    'options' => ['192.168.0.101', '192.168.0.100']
+]);
 
 // callback detector を追加する。匿名関数か通常のコールバックが指定可能。
 $this->request->addDetector(
     'awesome',
-    array('callback' => function ($request) {
+    ['callback' => function ($request) {
         return isset($request->awesome);
-    })
+    }]
 );
 ```
 
@@ -341,7 +341,7 @@ CakePHP はデフォルトで `CakeResponse` を使います。
 
 ``` php
 // vCard タイプを追加
-$this->response->type(array('vcf' => 'text/v-card'));
+$this->response->type(['vcf' => 'text/v-card']);
 
 // レスポンスのコンテンツタイプを vcard に設定
 $this->response->type('vcf');
@@ -359,7 +359,8 @@ $this->response->type('vcf');
 ファイルを送信します。 :
 
 ``` php
-public function sendFile($id) {
+public function sendFile($id)
+{
     $file = $this->Attachment->getFile($id);
     this->response->file($file['path']);
     // レスポンスオブジェクトを返すとコントローラがビューの描画を中止します
@@ -378,7 +379,7 @@ CakePHP は、`CakeResponse::$_mimeTypes` に登録された、よく知られ�
 ``` php
 $this->response->file(
     $file['path'],
-    array('download' => true, 'name' => 'foo')
+    ['download' => true, 'name' => 'foo']
 );
 ```
 
@@ -387,7 +388,8 @@ $this->response->file(
 動的に生成された pdf や ics のようにディスクに存在しないファイルを返すことができます。 :
 
 ``` php
-public function sendIcs() {
+public function sendIcs()
+{
     $icsString = $this->Calendar->generateIcs();
     $this->response->body($icsString);
     $this->response->type('ics');
@@ -410,14 +412,14 @@ public function sendIcs() {
 $this->response->header('Location', 'http://example.com');
 
 // 複数ヘッダを設定する
-$this->response->header(array(
+$this->response->header([
     'Location' => 'http://example.com',
     'X-Extra' => 'My header'
-));
-$this->response->header(array(
+]);
+$this->response->header([
     'WWW-Authenticate: Negotiate',
     'Content-type: application/pdf'
-));
+]);
 ```
 
 同じ `~CakeResponse::header()` を複数回設定すると、
@@ -436,7 +438,8 @@ $this->response->header(array(
 `CakeResponse::disableCache()` はそういった目的で使われます。 :
 
 ``` php
-public function index() {
+public function index()
+{
     // 何か行う
     $this->response->disableCache();
 }
@@ -450,7 +453,8 @@ public function index() {
 キャッシュして欲しいことを伝えられます。 :
 
 ``` php
-public function index() {
+public function index()
+{
     //do something
     $this->response->cache('-1 minute', '+5 days');
 }
@@ -499,13 +503,15 @@ private としてレスポンスを設定することは、レスポンスのす
 このパラメータはレスポンスが古いと見なされる秒数を表しています。 :
 
 ``` php
-public function view() {
+public function view()
+{
     ...
     // Cache-Control を 3600 秒の間、public として設定
     $this->response->sharable(true, 3600);
 }
 
-public function my_data() {
+public function my_data()
+{
     ...
     // Cache-Control を 3600 秒の間、private として設定
     $this->response->sharable(false, 3600);
@@ -524,7 +530,8 @@ public function my_data() {
 このヘッダは `CakeResponse::expires()` メソッドを使って設定されます。 :
 
 ``` php
-public function view() {
+public function view()
+{
     $this->response->expires('+5 days');
 }
 ```
@@ -552,7 +559,8 @@ HTTP におけるキャッシュの検証はコンテンツが定期的に変化
 を読み込まなければなりません。 :
 
 ``` php
-public function index() {
+public function index()
+{
     $articles = $this->Article->find('all');
     $this->response->etag($this->Article->generateHash($articles));
     if ($this->response->checkNotModified($this->request)) {
@@ -575,7 +583,8 @@ HTTP キャッシュの検証モデルのもとでは、リソースが最後に
 メソッドを呼び出すかコントローラに `RequestHandlerComponent` を読み込まなければなりません。 :
 
 ``` php
-public function view() {
+public function view()
+{
     $article = $this->Article->find('first');
     $this->response->modified($article['Article']['modified']);
     if ($this->response->checkNotModified($this->request)) {
@@ -606,7 +615,8 @@ $this->response->vary('Accept-Language');
 このことで'単体'テストを作りやすくなり、コントローラのテスト実施が簡単になります。 :
 
 ``` php
-public function testSomething() {
+public function testSomething()
+{
     $this->controller->response = $this->getMock('CakeResponse');
     $this->controller->response->expects($this->once())->method('header');
     // ...
@@ -652,4 +662,4 @@ public function testSomething() {
 
 `method` CakeResponse::**send**()
 
-`method` CakeResponse::**file**($path, $options = array())
+`method` CakeResponse::**file**($path, $options = [])

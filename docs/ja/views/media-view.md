@@ -16,17 +16,19 @@
 渡して下さい。 :
 
 ``` php
-class ExampleController extends AppController {
-    public function download() {
+class ExampleController extends AppController
+{
+    public function download()
+    {
         $this->viewClass = 'Media';
         //  app/outside_webroot_dir/example.zip をダウンロードする
-        $params = array(
+        $params = [
             'id'        => 'example.zip',
             'name'      => 'example',
             'download'  => true,
             'extension' => 'zip',
             'path'      => APP . 'outside_webroot_dir' . DS
-        );
+        ];
         $this->set($params);
     }
 }
@@ -36,19 +38,20 @@ class ExampleController extends AppController {
 示します。また、デフォルトの `app/webroot` ディレクトリへの相対パスを使っています。 :
 
 ``` php
-public function download() {
+public function download()
+{
     $this->viewClass = 'Media';
     // Render app/webroot/files/example.docx
-    $params = array(
+    $params = [
         'id'        => 'example.docx',
         'name'      => 'example',
         'extension' => 'docx',
-        'mimeType'  => array(
+        'mimeType'  => [
             'docx' => 'application/vnd.openxmlformats-officedocument' .
                 '.wordprocessingml.document'
-        ),
+        ],
         'path'      => 'files' . DS
-    );
+    ];
     $this->set($params);
 }
 ```

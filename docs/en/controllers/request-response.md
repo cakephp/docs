@@ -150,7 +150,7 @@ in additional parameters as well:
 
 ``` php
 // Get Xml encoded data submitted to a PUT/POST action
-$data = $this->request->input('Xml::build', array('return' => 'domdocument'));
+$data = $this->request->input('Xml::build', ['return' => 'domdocument']);
 ```
 
 ## Accessing path information
@@ -199,28 +199,28 @@ Some examples would be:
 // Add an environment detector.
 $this->request->addDetector(
     'post',
-    array('env' => 'REQUEST_METHOD', 'value' => 'POST')
+    ['env' => 'REQUEST_METHOD', 'value' => 'POST']
 );
 
 // Add a pattern value detector.
 $this->request->addDetector(
     'iphone',
-    array('env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i')
+    ['env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i']
 );
 
 // Add an option detector.
-$this->request->addDetector('internalIp', array(
+$this->request->addDetector('internalIp', [
     'env' => 'CLIENT_IP',
-    'options' => array('192.168.0.101', '192.168.0.100')
-));
+    'options' => ['192.168.0.101', '192.168.0.100']
+]);
 
 // Add a callback detector. Can either be an anonymous function
 // or a regular callable.
 $this->request->addDetector(
     'awesome',
-    array('callback' => function ($request) {
+    ['callback' => function ($request) {
         return isset($request->awesome);
-    })
+    }]
 );
 ```
 
@@ -364,7 +364,7 @@ with `CakeResponse::type()` as well:
 
 ``` php
 // Add a vCard type
-$this->response->type(array('vcf' => 'text/v-card'));
+$this->response->type(['vcf' => 'text/v-card']);
 
 // Set the response Content-Type to vcard.
 $this->response->type('vcf');
@@ -384,7 +384,8 @@ As of 2.3, `MediaView` is deprecated and you can use `CakeResponse::file()`
 to send a file as response:
 
 ``` php
-public function sendFile($id) {
+public function sendFile($id)
+{
     $file = $this->Attachment->getFile($id);
     $this->response->file($file['path']);
     // Return response object to prevent controller from trying to render
@@ -404,7 +405,7 @@ the browser by specifying the options:
 ``` php
 $this->response->file(
     $file['path'],
-    array('download' => true, 'name' => 'foo')
+    ['download' => true, 'name' => 'foo']
 );
 ```
 
@@ -414,7 +415,8 @@ You can respond with a file that does not exist on the disk, such as
 a pdf or an ics generated on the fly from a string:
 
 ``` php
-public function sendIcs() {
+public function sendIcs()
+{
     $icsString = $this->Calendar->generateIcs();
     $this->response->body($icsString);
     $this->response->type('ics');
@@ -438,15 +440,15 @@ can be called with a few different parameter configurations:
 $this->response->header('Location', 'http://example.com');
 
 // Set multiple headers
-$this->response->header(array(
+$this->response->header([
     'Location' => 'http://example.com',
     'X-Extra' => 'My header'
-));
+]);
 
-$this->response->header(array(
+$this->response->header([
     'WWW-Authenticate: Negotiate',
     'Content-type: application/pdf'
-));
+]);
 ```
 
 Setting the same `~CakeResponse::header()` multiple times will result in overwriting the previous
@@ -466,7 +468,8 @@ You sometimes need to force browsers not to cache the results of a controller
 action. `CakeResponse::disableCache()` is intended for just that:
 
 ``` php
-public function index() {
+public function index()
+{
     // do something.
     $this->response->disableCache();
 }
@@ -480,7 +483,8 @@ You can also tell clients that you want them to cache responses. By using
 `CakeResponse::cache()`:
 
 ``` php
-public function index() {
+public function index()
+{
     //do something
     $this->response->cache('-1 minute', '+5 days');
 }
@@ -533,13 +537,15 @@ which is the number of seconds after which the response is no longer considered
 fresh:
 
 ``` php
-public function view() {
+public function view()
+{
     ...
     // set the Cache-Control as public for 3600 seconds
     $this->response->sharable(true, 3600);
 }
 
-public function my_data() {
+public function my_data()
+{
     ...
     // set the Cache-Control as private for 3600 seconds
     $this->response->sharable(false, 3600);
@@ -559,7 +565,8 @@ no longer considered fresh. This header can be set using the
 `CakeResponse::expires()` method:
 
 ``` php
-public function view() {
+public function view()
+{
     $this->response->expires('+5 days');
 }
 ```
@@ -588,7 +595,8 @@ To take advantage of this header, you must either call the
 `RequestHandlerComponent` in your controller:
 
 ``` php
-public function index() {
+public function index()
+{
     $articles = $this->Article->find('all');
     $this->response->etag($this->Article->generateHash($articles));
     if ($this->response->checkNotModified($this->request)) {
@@ -613,7 +621,8 @@ To take advantage of this header, you must either call the
 `RequestHandlerComponent` in your controller:
 
 ``` php
-public function view() {
+public function view()
+{
     $article = $this->Article->find('first');
     $this->response->modified($article['Article']['modified']);
     if ($this->response->checkNotModified($this->request)) {
@@ -646,7 +655,8 @@ components delegate to `CakeResponse`. This helps you to get closer to a unit
 test and makes testing controllers easier:
 
 ``` php
-public function testSomething() {
+public function testSomething()
+{
     $this->controller->response = $this->getMock('CakeResponse');
     $this->controller->response->expects($this->once())->method('header');
     // ...
@@ -693,4 +703,4 @@ headers in CLI.
 
 `method` CakeResponse::**send**()
 
-`method` CakeResponse::**file**($path, $options = array())
+`method` CakeResponse::**file**($path, $options = [])

@@ -74,8 +74,8 @@ http://example.com/controller/action/param1/param2/param3
 ``` php
 Router::connect(
     'URL',
-    array('default' => 'defaultValue'),
-    array('option' => 'matchingRegex')
+    ['default' => 'defaultValue'],
+    ['option' => 'matchingRegex']
 );
 ```
 
@@ -93,7 +93,7 @@ URLが特定されたら、一致したときに同様な動作をするかを `
 ``` php
 Router::connect(
     '/pages/*',
-    array('controller' => 'pages', 'action' => 'display')
+    ['controller' => 'pages', 'action' => 'display']
 );
 ```
 
@@ -109,7 +109,7 @@ CakePHP によってあらかじめ作られている routes.php ファイルで
 ``` php
 Router::connect(
     '/pages/**',
-    array('controller' => 'pages', 'action' => 'show')
+    ['controller' => 'pages', 'action' => 'show']
 );
 ```
 
@@ -126,7 +126,7 @@ Router::connect(
 ``` php
 Router::connect(
     '/government',
-    array('controller' => 'pages', 'action' => 'display', 5)
+    ['controller' => 'pages', 'action' => 'display', 5]
 );
 ```
 
@@ -146,7 +146,7 @@ Router::connect(
 
 ``` php
 Router::connect(
-    '/cooks/:action/*', array('controller' => 'users')
+    '/cooks/:action/*', ['controller' => 'users']
 );
 ```
 
@@ -158,7 +158,7 @@ Router::connect(
 これらの引数は [Passed Arguments](#passed-arguments) 配列で利用できるようになっています。
 
 URLを生成するときにもルーティングは使われます。
-もし最初に一致するものがあった場合、 `array('controller' => 'users', 'action' => 'some_action', 5)`
+もし最初に一致するものがあった場合、 `['controller' => 'users', 'action' => 'some_action', 5]`
 を使って /cooks/some_action/5 と出力します。
 
 デフォルトでは、すべての命名されて渡された引数は、テンプレートと照合して展開されます。
@@ -180,8 +180,8 @@ URLを生成するときにもルーティングは使われます。
 ``` php
 Router::connect(
     '/:controller/:id',
-    array('action' => 'view'),
-    array('id' => '[0-9]+')
+    ['action' => 'view'],
+    ['id' => '[0-9]+']
 );
 ```
 
@@ -205,7 +205,7 @@ Router::connect(
 `/home/demo` の代わりに `/demo` というURLを使う場合以下の通りに設定します :
 
 ``` php
-Router::connect('/:action', array('controller' => 'home'));
+Router::connect('/:action', ['controller' => 'home']);
 ```
 
 もし、大文字小文字を区別しないURLを提供したいと思ったら、正規表現の修飾子だけを使えます。:
@@ -213,8 +213,8 @@ Router::connect('/:action', array('controller' => 'home'));
 ``` php
 Router::connect(
     '/:userShortcut',
-    array('controller' => 'teachers', 'action' => 'profile', 1),
-    array('userShortcut' => '(?i:principal)')
+    ['controller' => 'teachers', 'action' => 'profile', 1],
+    ['userShortcut' => '(?i:principal)']
 );
 ```
 
@@ -223,12 +223,12 @@ Router::connect(
 ``` php
 Router::connect(
     '/:controller/:year/:month/:day',
-    array('action' => 'index'),
-    array(
+    ['action' => 'index'],
+    [
         'year' => '[12][0-9]{3}',
         'month' => '0[1-9]|1[012]',
         'day' => '0[1-9]|[12][0-9]|3[01]'
-    )
+    ]
 );
 ```
 
@@ -261,20 +261,21 @@ index() へのリクエストをそれが属するコントローラーに `$thi
 
 ``` php
 // SomeController.php
-public function view($articleId = null, $slug = null) {
+public function view($articleId = null, $slug = null)
+{
     // some code here...
 }
 
 // routes.php
 Router::connect(
     '/blog/:id-:slug', // E.g. /blog/3-CakePHP_Rocks
-    array('controller' => 'blog', 'action' => 'view'),
-    array(
+    ['controller' => 'blog', 'action' => 'view'],
+    [
         // order matters since this will simply map ":id" to
         // $articleId in your action
-        'pass' => array('id', 'slug'),
+        'pass' => ['id', 'slug'],
         'id' => '[0-9]+'
-    )
+    ]
 );
 ```
 
@@ -284,12 +285,12 @@ Cakeは知ることができます。 :
 ``` php
 // view.ctp
 // これは /blog/3-CakePHP_Rocks　へのリンクを返します。
-echo $this->Html->link('CakePHP Rocks', array(
+echo $this->Html->link('CakePHP Rocks', [
     'controller' => 'blog',
     'action' => 'view',
     'id' => 3,
     'slug' => 'CakePHP_Rocks'
-));
+]);
 ```
 
 ### ルーティングごとの名前付きパラメーター
@@ -300,15 +301,15 @@ echo $this->Html->link('CakePHP Rocks', array(
 ``` php
 Router::connect(
     '/:controller/:action/*',
-    array(),
-    array(
-        'named' => array(
+    [],
+    [
+        'named' => [
             'wibble',
-            'fish' => array('action' => 'index'),
-            'fizz' => array('controller' => array('comments', 'other')),
+            'fish' => ['action' => 'index'],
+            'fizz' => ['controller' => ['comments', 'other']],
             'buzz' => 'val-[\d]+'
-        )
-    )
+        ]
+    ]
 );
 ```
 
@@ -340,7 +341,7 @@ CakePHP ではプレフィックスルーティングをコア設定ファイル
 `app/Config/core.php` で設定されます。 :
 
 ``` php
-Configure::write('Routing.prefixes', array('admin'));
+Configure::write('Routing.prefixes', ['admin']);
 ```
 
 コントローラーでは、すべての `admin_` プレフィックス付きのアクションが呼ばれることがあるでしょう。
@@ -351,7 +352,7 @@ Configure::write('Routing.prefixes', array('admin'));
 ``` php
 Router::connect(
     '/admin',
-    array('controller' => 'pages', 'action' => 'index', 'admin' => true)
+    ['controller' => 'pages', 'action' => 'index', 'admin' => true]
 );
 ```
 
@@ -359,7 +360,7 @@ Router::connect(
 に変数を追加設定することでできます。もしこのように設定したら、:
 
 ``` php
-Configure::write('Routing.prefixes', array('admin', 'manager'));
+Configure::write('Routing.prefixes', ['admin', 'manager']);
 ```
 
 CakePHP は自動的に両方のプレフィックスを使用したルーティングをします。
@@ -368,19 +369,19 @@ CakePHP は自動的に両方のプレフィックスを使用したルーティ
 ``` php
 Router::connect(
     "/{$prefix}/:plugin/:controller",
-    array('action' => 'index', 'prefix' => $prefix, $prefix => true)
+    ['action' => 'index', 'prefix' => $prefix, $prefix => true]
 );
 Router::connect(
     "/{$prefix}/:plugin/:controller/:action/*",
-    array('prefix' => $prefix, $prefix => true)
+    ['prefix' => $prefix, $prefix => true]
 );
 Router::connect(
     "/{$prefix}/:controller",
-    array('action' => 'index', 'prefix' => $prefix, $prefix => true)
+    ['action' => 'index', 'prefix' => $prefix, $prefix => true]
 );
 Router::connect(
     "/{$prefix}/:controller/:action/*",
-    array('prefix' => $prefix, $prefix => true)
+    ['prefix' => $prefix, $prefix => true]
 );
 ```
 
@@ -396,13 +397,13 @@ admin ルーティングのように、すべてのプレフィックス付き�
 // プレフィックスルーティングする
 echo $this->Html->link(
     'Manage posts',
-    array('manager' => true, 'controller' => 'posts', 'action' => 'add')
+    ['manager' => true, 'controller' => 'posts', 'action' => 'add']
 );
 
 // プレフィックスルーティングをやめる
 echo $this->Html->link(
     'View Post',
-    array('manager' => false, 'controller' => 'posts', 'action' => 'view', 5)
+    ['manager' => false, 'controller' => 'posts', 'action' => 'view', 5]
 );
 ```
 
@@ -420,7 +421,7 @@ plugin routing
 ``` php
 echo $this->Html->link(
     'New todo',
-    array('plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create')
+    ['plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create']
 );
 ```
 
@@ -429,7 +430,7 @@ echo $this->Html->link(
 ``` php
 echo $this->Html->link(
     'New todo',
-    array('plugin' => null, 'controller' => 'users', 'action' => 'profile')
+    ['plugin' => null, 'controller' => 'users', 'action' => 'profile']
 );
 ```
 
@@ -456,10 +457,10 @@ Router::parseExtensions('html', 'rss');
 ``` php
 Router::connect(
     '/page/:title',
-    array('controller' => 'pages', 'action' => 'view'),
-    array(
-        'pass' => array('title')
-    )
+    ['controller' => 'pages', 'action' => 'view'],
+    [
+        'pass' => ['title']
+    ]
 );
 ```
 
@@ -468,12 +469,12 @@ Router::connect(
 ``` php
 $this->Html->link(
     'Link title',
-    array(
+    [
         'controller' => 'pages',
         'action' => 'view',
         'title' => 'super-article',
         'ext' => 'html'
-    )
+    ]
 );
 ```
 
@@ -499,8 +500,8 @@ RequestHandlerComponent に詳細があります。
 ``` php
 Router::connect(
     "/:controller/:id",
-    array("action" => "edit", "[method]" => "PUT"),
-    array("id" => "[0-9]+")
+    ["action" => "edit", "[method]" => "PUT"],
+    ["id" => "[0-9]+"]
 );
 ```
 
@@ -540,11 +541,11 @@ CalendarsController extends AppController {
 下の出力を得ます:
 
 ``` text
-Array
-(
+
+[
     [0] => recent
     [1] => mark
-)
+]
 ```
 
 コントローラーとビューとヘルパーで `$this->request->params['pass']` と `$this->passedArgs`
@@ -560,11 +561,11 @@ debug($this->passedArgs);
 上記の出力は以下になります。:
 
 ``` text
-Array
-(
+
+[
     [0] => recent
     [1] => mark
-)
+]
 ```
 
 > [!NOTE]
@@ -573,7 +574,7 @@ Array
 URLを `ルーティング配列` を使って生成するとき、文字列による添え字なしで配列に引数を加えます:
 
 ``` text
-array('controller' => 'posts', 'action' => 'view', 5)
+['controller' => 'posts', 'action' => 'view', 5]
 ```
 
 `5` は引数として渡されるときには数字キーを持ちます。
@@ -630,7 +631,7 @@ $this->params['named']['section'] = 'associations';
 名前付きパラメーターにルーティングで接続するときには、 `Router::connectNamed()` を使います。:
 
 ``` php
-Router::connectNamed(array('chapter', 'section'));
+Router::connectNamed(['chapter', 'section']);
 ```
 
 これは chapter（章） と section（項目） パラメーターを確実に正しくリバースルーティングするようにします。
@@ -638,7 +639,7 @@ Router::connectNamed(array('chapter', 'section'));
 URLを生成するときに、 `ルーティング配列` を名前付きパラメーターを文字列キーが名前に一致する値として追加するために使います。 :
 
 ``` text
-array('controller' => 'posts', 'action' => 'view', 'chapter' => 'association')
+['controller' => 'posts', 'action' => 'view', 'chapter' => 'association']
 ```
 
 'chapter' がすべての定義されたルーティング要素に一致しなければ、名前付きパラメーターとして扱われます。
@@ -651,14 +652,14 @@ array('controller' => 'posts', 'action' => 'view', 'chapter' => 'association')
 この文法は GET で使われる配列の文法ととても似た働きをします。URLを生成するときに以下の文法を使えます。 :
 
 ``` php
-$url = Router::url(array(
+$url = Router::url([
     'controller' => 'posts',
     'action' => 'index',
-    'filter' => array(
+    'filter' => [
         'published' => 1,
         'frontpage' => 1
-    )
-));
+    ]
+]);
 ```
 
 `/posts/index/filter[published]:1/filter[frontpage]:1` というURLが上記のコードで生成されます。
@@ -666,34 +667,34 @@ $url = Router::url(array(
 配列として保存されパースされます。just as you sent them to :
 
 ``` php
-$this->passedArgs['filter'] = array(
+$this->passedArgs['filter'] = [
     'published' => 1,
     'frontpage' => 1
-);
+];
 ```
 
 配列は渡された引数と同じぐらい柔軟に深くネストできます。 :
 
 ``` php
-$url = Router::url(array(
+$url = Router::url([
     'controller' => 'posts',
     'action' => 'search',
-    'models' => array(
-        'post' => array(
+    'models' => [
+        'post' => [
             'order' => 'asc',
-            'filter' => array(
+            'filter' => [
                 'published' => 1
-            )
-        ),
-        'comment' => array(
+            ]
+        ],
+        'comment' => [
             'order' => 'desc',
-            'filter' => array(
+            'filter' => [
                 'spam' => 0
-            )
-        ),
-    ),
-    'users' => array(1, 2, 3)
-));
+            ]
+        ],
+    ],
+    'users' => [1, 2, 3]
+]);
 ```
 
 とても長いURLも簡単に読めるようにラップして使えます。 :
@@ -706,20 +707,20 @@ $url = Router::url(array(
 コントローラーに渡された配列での結果出力以下のルーターに渡された配列と一致します。 :
 
 ``` php
-$this->passedArgs['models'] = array(
-    'post' => array(
+$this->passedArgs['models'] = [
+    'post' => [
         'order' => 'asc',
-        'filter' => array(
+        'filter' => [
             'published' => 1
-        )
-    ),
-    'comment' => array(
+        ]
+    ],
+    'comment' => [
         'order' => 'desc',
-        'filter' => array(
+        'filter' => [
             'spam' => 0
-        )
-    ),
-);
+        ]
+    ],
+];
 ```
 
 ### 名前付きパラメーターの制御
@@ -737,15 +738,15 @@ Router::connectNamed(false);
 Cakeのページネーションで使うデフォルトのパラメーターだけパースする。 :
 
 ``` php
-Router::connectNamed(false, array('default' => true));
+Router::connectNamed(false, ['default' => true]);
 ```
 
 数字の **page** パラメーターだけパースする。:
 
 ``` php
 Router::connectNamed(
-    array('page' => '[\d]+'),
-    array('default' => false, 'greedy' => false)
+    ['page' => '[\d]+'],
+    ['default' => false, 'greedy' => false]
 );
 ```
 
@@ -753,22 +754,22 @@ Router::connectNamed(
 
 ``` php
 Router::connectNamed(
-    array('page'),
-    array('default' => false, 'greedy' => false)
+    ['page'],
+    ['default' => false, 'greedy' => false]
 );
 
 'index' アクションが呼ばれた時、**page** パラメーターをパースする::
 
 Router::connectNamed(
-    array('page' => array('action' => 'index')),
-    array('default' => false, 'greedy' => false)
+    ['page' => ['action' => 'index']],
+    ['default' => false, 'greedy' => false]
 );
 
 コントローラーが 'pages' で 'index' アクションが呼ばれた時、**page** パラメーターをパースする::
 
 Router::connectNamed(
-    array('page' => array('action' => 'index', 'controller' => 'pages')),
-    array('default' => false, 'greedy' => false)
+    ['page' => ['action' => 'index', 'controller' => 'pages']],
+    ['default' => false, 'greedy' => false]
 );
 ```
 
@@ -799,7 +800,7 @@ $this->Html->link('View', '/posts/view/' . $id);
 ``` php
 $this->Html->link(
     'View',
-    array('controller' => 'posts', 'action' => 'view', $id)
+    ['controller' => 'posts', 'action' => 'view', $id]
 );
 ```
 
@@ -809,12 +810,12 @@ $this->Html->link(
 配列のURLを使うとき、文字列パラメーターによるクエリと、特定のキーによるドキュメントフラグメントを定義できます。:
 
 ``` php
-Router::url(array(
+Router::url([
     'controller' => 'posts',
     'action' => 'index',
-    '?' => array('page' => 1),
+    '?' => ['page' => 1],
     '#' => 'top'
-));
+]);
 
 // こんなURLが生成されます
 /posts/index?page=1#top
@@ -831,10 +832,10 @@ Router::url(array(
 ``` php
 Router::redirect(
     '/home/*',
-    array('controller' => 'posts', 'action' => 'view'),
+    ['controller' => 'posts', 'action' => 'view'],
     // もしくは$idを引数として受け取るviewアクションデフォルトルーティングのための
-    //array('persist'=>array('id'))
-    array('persist' => true)
+    //['persist'=>['id']]
+    ['persist' => true]
 );
 ```
 
@@ -843,7 +844,7 @@ Router::redirect(
 文字列のURLで外部にリダイレクトできます。:
 
 ``` php
-Router::redirect('/posts/*', 'https://google.com', array('status' => 302));
+Router::redirect('/posts/*', 'https://google.com', ['status' => 302]);
 ```
 
 これは、 `/posts/*` から `https://google.com` へwith a
@@ -872,8 +873,8 @@ App::uses('SlugRoute', 'Routing/Route');
 
 Router::connect(
      '/:slug',
-     array('controller' => 'posts', 'action' => 'view'),
-     array('routeClass' => 'SlugRoute')
+     ['controller' => 'posts', 'action' => 'view'],
+     ['routeClass' => 'SlugRoute']
 );
 ```
 
@@ -883,7 +884,7 @@ Router::connect(
 
 `class` **Router**
 
-`static` Router::**connect**($route, $defaults = array(), $options = array())
+`static` Router::**connect**($route, $defaults = [], $options = [])
 
 param string \$route  
 ルーティングテンプレートを表現する文字列
@@ -913,7 +914,7 @@ Router::connect('/:controller/:action/*');
 ``` php
 Router::connect(
     '/home-page',
-    array('controller' => 'pages', 'action' => 'display', 'home')
+    ['controller' => 'pages', 'action' => 'display', 'home']
 );
 ```
 
@@ -923,8 +924,8 @@ Router::connect(
 ``` php
 Router::connect(
     '/:lang/:controller/:action/:id',
-    array(),
-    array('id' => '[0-9]+', 'lang' => '[a-z]{3}')
+    [],
+    ['id' => '[0-9]+', 'lang' => '[a-z]{3}']
 );
 ```
 
@@ -935,18 +936,18 @@ Router::connect(
 
 - `pass` はどのパラメーターが配列に渡されるのかを定義するために使われます。
   渡すためにパラメーターを追加することで、それを正規のルーティング配列から削除できます。
-  例えば、 `'pass' => array('slug')` のように。
+  例えば、 `'pass' => ['slug']` のように。
 - `persist` はURLを新規に生成したときに、どのルーティングパラメーターが
   自動的にインクルードされるのかを定義するために使われます。
   URLで再定義することで一定のパラメーターをオーバーライドしたり、
-  `false` に設定することで除去できます。たとえば、 `'persist' => array('lang')` のように。
+  `false` に設定することで除去できます。たとえば、 `'persist' => ['lang']` のように。
 - `routeClass` は個別のルーティングがどのようにリクエストをパースするのかを
   拡張し変更するためと、リバースルーティングを `'routeClass' => 'SlugRoute'` のような
   カスタムルーティングクラスによって制御するために使われます。
 - `named` は名前付きパラメーターをルーティングレベルで設定するために使われます。
   このキーは `Router::connectNamed()` と同じオプションを使います。
 
-`static` Router::**redirect**($route, $url, $options = array())
+`static` Router::**redirect**($route, $url, $options = [])
 
 param string \$route  
 どのURLがリダイレクトされるのかを決めるルーティングテンプレート
@@ -960,7 +961,7 @@ param array \$options
 新しいリダイレクトにルーティング接続します。
 [Redirect Routing](#redirect-routing) に詳細があります。
 
-`static` Router::**connectNamed**($named, $options = array())
+`static` Router::**connectNamed**($named, $options = [])
 
 param array \$named  
 名前付きパラメーターのリスト。添字のペアが
@@ -1012,7 +1013,7 @@ Generate a URL for the specified action.特定のアクションのためのURL�
 - `full_base` - true にすると、 `Router::fullBaseUrl()` が
   生成されたURLの前に加えられます。
 
-`static` Router::**mapResources**($controller, $options = array())
+`static` Router::**mapResources**($controller, $options = [])
 
 与えられたコントローラーのために 渡されたREST をもとにどのようにルーティングするか決めます。
 詳細は [REST](../development/rest) ここです。

@@ -1,6 +1,6 @@
 # Request Handling
 
-`class` **RequestHandlerComponent**(ComponentCollection $collection, array $settings = array())
+`class` **RequestHandlerComponent**(ComponentCollection $collection, array $settings = [])
 
 The Request Handler component is used in CakePHP to obtain
 additional information about the HTTP requests that are made to
@@ -22,9 +22,10 @@ and can then be saved as model data. In order to make use of
 RequestHandler it must be included in your \$components array:
 
 ``` php
-class WidgetController extends AppController {
+class WidgetController extends AppController
+{
 
-    public $components = array('RequestHandler');
+    public $components = ['RequestHandler'];
 
     // Rest of controller
 }
@@ -111,10 +112,10 @@ You can opt-out this automatic checking by setting the `checkHttpCache`
 setting to false:
 
 ``` php
-public $components = array(
-    'RequestHandler' => array(
+public $components = [
+    'RequestHandler' => [
         'checkHttpCache' => false
-));
+]];
 ```
 
 ## Using custom ViewClasses
@@ -132,12 +133,12 @@ You can map existing and new types to your custom classes.
 You can also set this automatically by using the `viewClassMap` setting:
 
 ``` php
-public $components = array(
-    'RequestHandler' => array(
-        'viewClassMap' => array(
+public $components = [
+    'RequestHandler' => [
+        'viewClassMap' => [
             'json' => 'ApiKit.MyJson',
             'xml' => 'ApiKit.MyXml',
             'csv' => 'ApiKit.Csv'
-        )
-));
+        ]
+]];
 ```

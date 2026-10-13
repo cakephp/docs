@@ -7,28 +7,28 @@
 `Model::saveAll()` とその仲間は、複数のモデルにわたって <span class="title-ref">fieldList</span> をサポートします。例:
 
 ``` php
-$this->SomeModel->saveAll($data, array(
-    'fieldList' => array(
-        'SomeModel' => array('field_1'),
-        'AssociatedModel' => array('field_2', 'field_3')
-    )
-));
+$this->SomeModel->saveAll($data, [
+    'fieldList' => [
+        'SomeModel' => ['field_1'],
+        'AssociatedModel' => ['field_2', 'field_3']
+    ]
+]);
 ```
 
 `Model::saveAll()` とその仲間は、深さが無制限に保存できます。例:
 
 ``` php
-$data = array(
-    'Article' => array('title' => 'My first article'),
-    'Comment' => array(
-        array('body' => 'Comment 1', 'user_id' => 1),
-        array(
+$data = [
+    'Article' => ['title' => 'My first article'],
+    'Comment' => [
+        ['body' => 'Comment 1', 'user_id' => 1],
+        [
             'body' => 'Save a new user as well',
-            'User' => array('first' => 'mad', 'last' => 'coder')
-        )
-    ),
-);
-$this->SomeModel->saveAll($data, array('deep' => true));
+            'User' => ['first' => 'mad', 'last' => 'coder']
+        ]
+    ],
+];
+$this->SomeModel->saveAll($data, ['deep' => true]);
 ```
 
 ## ビュー
@@ -86,7 +86,8 @@ $this->SomeModel->saveAll($data, array('deep' => true));
 ``` php
 App::uses('Controller', 'Controller');
 
-class AppController extends Controller {
+class AppController extends Controller
+{
     public $theme = 'Example';
 }
 ```
@@ -104,7 +105,8 @@ JSON コンテンツを簡単に出力する新しいビュークラス。
 ``` php
 App::uses('Controller', 'Controller');
 
-class AppController extends Controller {
+class AppController extends Controller
+{
     public $viewClass = 'Json';
 }
 ```
@@ -113,7 +115,7 @@ class AppController extends Controller {
 
 ``` php
 $this->set(compact('users', 'posts', 'tags'));
-$this->set('_serialize', array('users', 'posts'));
+$this->set('_serialize', ['users', 'posts']);
 ```
 
 上記の例では、 以下のように `users` と `posts` 変数のみが JSON 出力としてシリアライズされます:
@@ -131,11 +133,13 @@ JSON データを表示するためのビューの `ctp` ファイルを作成�
 
 ``` php
 App::uses('JsonView', 'View');
-class ResultsJsonView extends JsonView {
-    public function render($view = null, $layout = null) {
+class ResultsJsonView extends JsonView
+{
+    public function render($view = null, $layout = null)
+    {
         $result = parent::render($view, $layout);
         if (isset($this->viewVars['_serialize'])) {
-            return json_encode(array('results' => json_decode($result)));
+            return json_encode(['results' => json_decode($result)]);
         }
         return $result;
     }
@@ -149,7 +153,7 @@ class ResultsJsonView extends JsonView {
 
 ``` php
 $this->set(compact('users', 'posts', 'tags'));
-$this->set('_serialize', array('users', 'posts'));
+$this->set('_serialize', ['users', 'posts']);
 ```
 
 上記の例では、以下のように `users` と `posts` 変数のみが XML 出力としてシリアライズされます:
@@ -174,10 +178,12 @@ XmlView は、 全てのシリアライズされた内容を囲むために　`r
 ビューの描画処理をスキップすることは、CPU サイクルやメモリを節約します。 :
 
 ``` php
-class ArticlesController extends AppController {
-    public $components = array('RequestHandler');
+class ArticlesController extends AppController
+{
+    public $components = ['RequestHandler'];
 
-    public function view($id) {
+    public function view($id)
+    {
         $article = $this->Article->read(null, $id);
         $this->response->modified($article['Article']['modified']);
         $this->set(compact('article'));
@@ -198,9 +204,11 @@ class ArticlesController extends AppController {
 新しいユーティリティクラスを使う場合:
 
 ``` php
-class AppController extends Controller {
+class AppController extends Controller
+{
 
-    public function log($msg) {
+    public function log($msg)
+    {
         $msg .= String::truncate($msg, 100);
         parent::log($msg);
     }
@@ -211,20 +219,23 @@ class AppController extends Controller {
 
 ``` php
 // Utility/MyAwesomeStringClass.php
-class MyAwesomeStringClass extends String {
+class MyAwesomeStringClass extends String
+{
     // my truncate is better than yours
-    public static function truncate($text, $length = 100, $options = array()) {
+    public static function truncate($text, $length = 100, $options = [])
+    {
         return null;
     }
 }
 
 // Controller/AppController.php
-class AppController extends Controller {
-    public $helpers = array(
-        'Text' => array(
+class AppController extends Controller
+{
+    public $helpers = [
+        'Text' => [
             'engine' => 'MyAwesomeStringClass',
-            ),
-        );
+            ],
+        ];
 }
 ```
 

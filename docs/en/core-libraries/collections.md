@@ -25,7 +25,7 @@ another instance will not be created. When loading components, you can also
 provide additional configuration for them:
 
 ``` php
-$this->Cookie = $this->Components->load('Cookie', array('name' => 'sweet'));
+$this->Cookie = $this->Components->load('Cookie', ['name' => 'sweet']);
 ```
 
 Any keys & values provided will be passed to the Component's constructor. The
@@ -37,7 +37,7 @@ components:
 ``` php
 $this->Auth = $this->Components->load(
     'Auth',
-    array('className' => 'MyCustomAuth')
+    ['className' => 'MyCustomAuth']
 );
 $this->Auth->user(); // Actually using MyCustomAuth::user();
 ```
@@ -57,7 +57,7 @@ triggered, that method will be called on all enabled objects in the collection.
 You can pass parameters to the callback loop as well:
 
 ``` php
-$this->Behaviors->trigger('afterFind', array($this, $results, $primary));
+$this->Behaviors->trigger('afterFind', [$this, $results, $primary]);
 ```
 
 In the above `$this` would be passed as the first argument to every
@@ -86,8 +86,8 @@ midway similar to stopping event propagation in JavaScript:
 ``` php
 $this->Behaviors->trigger(
     'beforeFind',
-    array($this, $query),
-    array('break' => true, 'breakOn' => false)
+    [$this, $query],
+    ['break' => true, 'breakOn' => false]
 );
 ```
 
@@ -130,28 +130,30 @@ explained [here](../core-libraries/events#event-priorities).
 Here's how you can specify priority at declaration time:
 
 ``` php
-class SomeController {
-    public $components = array(
+class SomeController
+{
+    public $components = [
         'Foo', //Foo gets default priority 10
         // Bar's callbacks are triggered before Foo's
-        'Bar' => array('priority' => 9)
-    );
+        'Bar' => ['priority' => 9]
+    ];
 
-    public $helpers = array(
+    public $helpers = [
         // Cache's callbacks will be triggered last
-        'Cache' => array('priority' => 12),
+        'Cache' => ['priority' => 12],
         'Asset',
         'Utility' //Utility has priority 10 same as Asset and its callbacks
                   //are triggered after Asset's
-    );
+    ];
 }
 
 
-class Post {
-    public $actsAs = array(
-        'DoFirst' => array('priority' => 1),
+class Post
+{
+    public $actsAs = [
+        'DoFirst' => ['priority' => 1],
         'Media'
-    );
+    ];
 }
 ```
 
@@ -160,7 +162,7 @@ When dynamically loading objects to a collection you can specify the priority li
 ``` php
 $this->MyComponent = $this->Components->load(
     'MyComponent',
-    array('priority' => 9)
+    ['priority' => 9]
 );
 ```
 
@@ -171,5 +173,5 @@ You can also change priorities at run time using the `ObjectCollection::setPrior
 $this->Components->setPriority('Foo', 2);
 
 //For multiple objects
-$this->Behaviors->setPriority(array('Object1' => 8, 'Object2' => 9));
+$this->Behaviors->setPriority(['Object1' => 8, 'Object2' => 9]);
 ```

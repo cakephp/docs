@@ -35,14 +35,14 @@ find operation, or to perform any other post-find logic. The
 results from the model's find operation, i.e. something like:
 
 ``` php
-$results = array(
-    0 => array(
-        'ModelName' => array(
+$results = [
+    0 => [
+        'ModelName' => [
             'field1' => 'value1',
             'field2' => 'value2',
-        ),
-    ),
-);
+        ],
+    ],
+];
 ```
 
 The return value for this callback should be the (possibly
@@ -57,10 +57,10 @@ result you would normally get from a find operation, you may get
 this:
 
 ``` php
-$results = array(
+$results = [
     'field_1' => 'value1',
     'field_2' => 'value2'
-);
+];
 ```
 
 > [!WARNING]
@@ -72,7 +72,8 @@ Below is an example of how afterfind can be used for date
 formatting:
 
 ``` php
-public function afterFind($results, $primary = false) {
+public function afterFind($results, $primary = false)
+{
     foreach ($results as $key => $val) {
         if (isset($val['Event']['begindate'])) {
             $results[$key]['Event']['begindate'] = $this->dateFormatAfterFind(
@@ -83,14 +84,15 @@ public function afterFind($results, $primary = false) {
     return $results;
 }
 
-public function dateFormatAfterFind($dateString) {
+public function dateFormatAfterFind($dateString)
+{
     return date('d-m-Y', strtotime($dateString));
 }
 ```
 
 ## beforeValidate
 
-`beforeValidate(array $options = array())`
+`beforeValidate(array $options = [])`
 
 Use this callback to modify model data before it is validated, or
 to modify validation rules if required. This function must also
@@ -105,7 +107,7 @@ any data cleanup or preparation if needed.
 
 ## beforeSave
 
-`beforeSave(array $options = array())`
+`beforeSave(array $options = [])`
 
 Place any pre-save logic in this function. This function executes
 immediately after model data has been successfully validated, but
@@ -124,7 +126,8 @@ displayed like DD-MM-YYYY in the application. Of course this can be
 changed very easily. Use the code below in the appropriate model.
 
 ``` php
-public function beforeSave($options = array()) {
+public function beforeSave($options = [])
+{
     if (!empty($this->data['Event']['begindate']) &&
         !empty($this->data['Event']['enddate'])
     ) {
@@ -139,7 +142,8 @@ public function beforeSave($options = array()) {
     return true;
 }
 
-public function dateFormatBeforeSave($dateString) {
+public function dateFormatBeforeSave($dateString)
+{
     return date('Y-m-d', strtotime($dateString));
 }
 ```
@@ -150,7 +154,7 @@ public function dateFormatBeforeSave($dateString) {
 
 ## afterSave
 
-`afterSave(boolean $created, array $options = array())`
+`afterSave(boolean $created, array $options = [])`
 
 If you have logic you need to be executed just after every save
 operation, place it in this callback method. The saved data will
@@ -184,10 +188,11 @@ on this record will also be deleted.
 // $this->id .
 // Assuming 'ProductCategory hasMany Product', we can access $this->Product
 // in the model.
-public function beforeDelete($cascade = true) {
-    $count = $this->Product->find("count", array(
-        "conditions" => array("product_category_id" => $this->id)
-    ));
+public function beforeDelete($cascade = true)
+{
+    $count = $this->Product->find("count", [
+        "conditions" => ["product_category_id" => $this->id]
+    ]);
     if ($count == 0) {
         return true;
     }
@@ -205,7 +210,8 @@ in this callback method.
 ``` php
 // perhaps after deleting a record from the database, you also want to delete
 // an associated file
-public function afterDelete() {
+public function afterDelete()
+{
     $file = new File($this->data['SomeModel']['file_path']);
     $file->delete();
 }

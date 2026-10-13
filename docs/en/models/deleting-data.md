@@ -58,7 +58,7 @@ Example:
 
 ``` php
 // Delete with array conditions similar to find()
-$this->Comment->deleteAll(array('Comment.spam' => true), false);
+$this->Comment->deleteAll(['Comment.spam' => true], false);
 ```
 
 If you delete with either callbacks and/or cascade, rows will be found and then

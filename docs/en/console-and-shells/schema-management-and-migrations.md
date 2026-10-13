@@ -55,21 +55,22 @@ not written to a file.
 After generating a schema you might want to insert data on some
 tables to get your app started. This can be achieved through
 CakeSchema callbacks. Every schema file is generated with a
-`before($event = array())` and a `after($event = array())` method.
+`before($event = [])` and a `after($event = [])` method.
 
 The `$event` param holds an array with two keys. One to tell if a
 table is being dropped or created and another for errors. Examples:
 
 ``` text
-array('drop' => 'posts', 'errors' => null)
-array('create' => 'posts', 'errors' => null)
+['drop' => 'posts', 'errors' => null]
+['create' => 'posts', 'errors' => null]
 ```
 
 Adding data to a posts table for example would like this:
 
 ``` php
 App::uses('Post', 'Model');
-public function after($event = array()) {
+public function after($event = [])
+{
     if (isset($event['create'])) {
         switch ($event['create']) {
             case 'posts':
@@ -77,9 +78,9 @@ public function after($event = array()) {
                 $post = ClassRegistry::init('Post');
                 $post->create();
                 $post->save(
-                    array('Post' =>
-                        array('title' => 'CakePHP Schema Files')
-                    )
+                    ['Post' =>
+                        ['title' => 'CakePHP Schema Files']
+                    ]
                 );
                 break;
         }
@@ -97,7 +98,8 @@ cache after each table is created. Cache can be disable by setting
 ``` php
 public $connection = 'default';
 
-public function before($event = array()) {
+public function before($event = [])
+{
     $db = ConnectionManager::getDataSource($this->connection);
     $db->cacheSources = false;
     return true;
@@ -108,10 +110,11 @@ If you use models in your callbacks make sure to initialize them with the
 correct datasource, lest they fallback to their default datasources:
 
 ``` php
-public function before($event = array()) {
-    $articles = ClassRegistry::init('Articles', array(
+public function before($event = [])
+{
+    $articles = ClassRegistry::init('Articles', [
         'ds' => $this->connection
-    ));
+    ]);
     // Do things with articles.
 }
 ```
@@ -139,42 +142,42 @@ Here is a full example from the acl class :
 /**
  * ACO - Access Control Object - Something that is wanted
  */
-    public $acos = array(
-        'id' => array(
+    public $acos = [
+        'id' => [
             'type' => 'integer',
             'null' => false,
             'default' => null,
             'length' => 10,
             'key' => 'primary'
-        ),
-        'parent_id' => array(
+        ],
+        'parent_id' => [
             'type' => 'integer',
             'null' => true,
             'default' => null,
             'length' => 10
-        ),
-        'model' => array('type' => 'string', 'null' => true),
-        'foreign_key' => array(
+        ],
+        'model' => ['type' => 'string', 'null' => true],
+        'foreign_key' => [
             'type' => 'integer',
             'null' => true,
             'default' => null,
             'length' => 10
-        ),
-        'alias' => array('type' => 'string', 'null' => true),
-        'lft' => array(
+        ],
+        'alias' => ['type' => 'string', 'null' => true],
+        'lft' => [
             'type' => 'integer',
             'null' => true,
             'default' => null,
             'length' => 10
-        ),
-        'rght' => array(
+        ],
+        'rght' => [
             'type' => 'integer',
             'null' => true,
             'default' => null,
             'length' => 10
-        ),
-        'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1))
-    );
+        ],
+        'indexes' => ['PRIMARY' => ['column' => 'id', 'unique' => 1]]
+    ];
 ```
 
 ### Columns
@@ -186,13 +189,13 @@ the following attributes.
 Example column:
 
 ``` text
-'id' => array(
+'id' => [
     'type' => 'integer',
     'null' => false,
     'default' => null,
     'length' => 10,
     'key' => 'primary'
- ),
+ ],
 ```
 
 key  
@@ -241,26 +244,26 @@ This is either a single column name or an array of columns.
 e.g. Single :
 
 ``` text
-'indexes' => array(
-    'PRIMARY' => array(
+'indexes' => [
+    'PRIMARY' => [
         'column' => 'id',
         'unique' => 1
-    )
-)
+    ]
+]
 ```
 
 e.g. Multiple :
 
 ``` text
-'indexes' => array(
-    'AB_KEY' => array(
-        'column' => array(
+'indexes' => [
+    'AB_KEY' => [
+        'column' => [
             'a_id',
             'b_id'
-        ),
+        ],
         'unique' => 1
-    )
-)
+    ]
+]
 ```
 
 unique  
@@ -292,25 +295,25 @@ You use `tableParameters` just as you would any other key in a
 schema file. Much like `indexes`:
 
 ``` php
-var $comments => array(
-    'id' => array(
+var $comments => [
+    'id' => [
         'type' => 'integer',
         'null' => false,
         'default' => 0,
         'key' => 'primary'
-    ),
-    'post_id' => array('type' => 'integer', 'null' => false, 'default' => 0),
-    'comment' => array('type' => 'text'),
-    'indexes' => array(
-        'PRIMARY' => array('column' => 'id', 'unique' => true),
-        'post_id' => array('column' => 'post_id'),
-    ),
-    'tableParameters' => array(
+    ],
+    'post_id' => ['type' => 'integer', 'null' => false, 'default' => 0],
+    'comment' => ['type' => 'text'],
+    'indexes' => [
+        'PRIMARY' => ['column' => 'id', 'unique' => true],
+        'post_id' => ['column' => 'post_id'],
+    ],
+    'tableParameters' => [
         'engine' => 'InnoDB',
         'charset' => 'latin1',
         'collate' => 'latin1_general_ci'
-    )
-);
+    ]
+];
 ```
 
 is an example of a table using `tableParameters` to set some

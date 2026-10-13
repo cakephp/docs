@@ -13,11 +13,11 @@ errors. See the section on [Built In Exceptions](#built-in-exceptions) for more 
 There are a few keys available for configuring exceptions:
 
 ``` php
-Configure::write('Exception', array(
+Configure::write('Exception', [
     'handler' => 'ErrorHandler::handleException',
     'renderer' => 'ExceptionRenderer',
     'log' => true
-));
+]);
 ```
 
 - `handler` - callback - The callback to handle exceptions. You can set this to
@@ -76,7 +76,8 @@ or HTTP errors. An example use of the HTTP exceptions could be rendering 404
 pages for items that have not been found:
 
 ``` php
-public function view($id) {
+public function view($id)
+{
     $post = $this->Post->findById($id);
     if (!$post) {
         throw new NotFoundException('Could not find that post');
@@ -147,7 +148,8 @@ You can throw any of the HTTP related exceptions from your controller actions
 to indicate failure states. For example:
 
 ``` php
-public function view($id) {
+public function view($id)
+{
     $post = $this->Post->findById($id);
     if (!$post) {
         throw new NotFoundException();
@@ -206,7 +208,9 @@ that matches the class name in order to provide useful information. If your
 application contained the following exception:
 
 ``` php
-class MissingWidgetException extends CakeException {};
+class MissingWidgetException extends CakeException
+{
+};
 ```
 
 You could provide nice development errors, by creating
@@ -219,11 +223,12 @@ exceptions, by providing more context for your errors. You can also provide a me
 template which allows the native `__toString()` methods to work as normal:
 
 ``` php
-class MissingWidgetException extends CakeException {
+class MissingWidgetException extends CakeException
+{
     protected $_messageTemplate = 'Seems that %s is missing.';
 }
 
-throw new MissingWidgetException(array('widget' => 'Pointy'));
+throw new MissingWidgetException(['widget' => 'Pointy']);
 ```
 
 When caught by the built-in exception handler, you would get a `$widget`
@@ -279,8 +284,10 @@ Configure::write('Exception.handler', 'AppExceptionHandler::handle');
 App::uses('AppExceptionHandler', 'Lib');
 
 // in app/Lib/AppExceptionHandler.php
-class AppExceptionHandler {
-    public static function handle($error) {
+class AppExceptionHandler
+{
+    public static function handle($error)
+    {
         echo 'Oh noes! ' . $error->getMessage();
         // ...
     }
@@ -305,8 +312,10 @@ could do the following:
 
 ``` php
 // in app/Lib/AppErrorHandler.php
-class AppErrorHandler {
-    public static function handleException($error) {
+class AppErrorHandler
+{
+    public static function handleException($error)
+    {
         if ($error instanceof MissingWidgetException) {
             return self::handleMissingWidget($error);
         }
@@ -330,8 +339,10 @@ the default exception rendering. It receives the thrown exception as its only
 argument. You should implement your error handling in that method:
 
 ``` php
-class AppController extends Controller {
-    public function appError($error) {
+class AppController extends Controller
+{
+    public function appError($error)
+    {
         // custom logic goes here.
     }
 }
@@ -350,8 +361,10 @@ you can provide specialized handling for application specific errors:
 // in app/Lib/Error/AppExceptionRenderer.php
 App::uses('ExceptionRenderer', 'Error');
 
-class AppExceptionRenderer extends ExceptionRenderer {
-    public function missingWidget($error) {
+class AppExceptionRenderer extends ExceptionRenderer
+{
+    public function missingWidget($error)
+    {
         echo 'Oops that widget is missing!';
     }
 }
@@ -381,8 +394,10 @@ custom error handling controller in your application. By implementing
 controller you want:
 
 ``` php
-class AppExceptionRenderer extends ExceptionRenderer {
-    protected function _getController($exception) {
+class AppExceptionRenderer extends ExceptionRenderer
+{
+    protected function _getController($exception)
+    {
         App::uses('SuperCustomErrorController', 'Controller');
         return new SuperCustomErrorController();
     }

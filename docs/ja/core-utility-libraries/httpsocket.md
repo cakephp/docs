@@ -1,6 +1,6 @@
 # HttpSocket
 
-`class` **HttpSocket**(mixed $config = array())
+`class` **HttpSocket**(mixed $config = [])
 
 CakePHP には、リクエストを簡単に行える HttpSocket クラスがあります。
 それは、外部のウェブサービスやリモート API との通信に役に立ちます。
@@ -104,7 +104,7 @@ $response->getHeader('date');
 App::uses('HttpSocket', 'Network/Http');
 
 $HttpSocket = new HttpSocket();
-$response = $HttpSocket->get('http://example.com/redirecting_url', array(), array('redirect' => true));
+$response = $HttpSocket->get('http://example.com/redirecting_url', [], ['redirect' => true]);
 ```
 
 *redirect* オプションは、以下の値を指定できます。
@@ -141,9 +141,9 @@ SSL のサービスへのリクエストを作成する場合、 HttpSocket は�
 これらのオプションは、コンストラクタの引数として指定します。 :
 
 ``` php
-$socket = new HttpSocket(array(
+$socket = new HttpSocket([
     'ssl_allow_self_signed' => true
-));
+]);
 ```
 
 上記の socket で作られたすべてのリクエストは自己署名証明書を許可します。
@@ -160,9 +160,11 @@ HttpSocket で使用する独自のレスポンスクラスを作成すること
 ``` php
 App::uses('HttpResponse', 'Network/Http');
 
-class YourResponse extends HttpResponse {
+class YourResponse extends HttpResponse
+{
 
-    public function parseResponse($message) {
+    public function parseResponse($message)
+    {
         parent::parseResponse($message);
         // Make what you want
     }
@@ -226,7 +228,8 @@ HttpSocket で利用するための独自の認証方法を作成することが
 ファイルを作成できました。 :
 
 ``` php
-class YourMethodAuthentication {
+class YourMethodAuthentication
+{
 
 /**
  * 認証
@@ -235,17 +238,17 @@ class YourMethodAuthentication {
  * @param array $authInfo
  * @return void
  */
-    public static function authentication(HttpSocket $http, &$authInfo) {
+    public static function authentication(HttpSocket $http, &$authInfo)
+    {
         // 何かをします。例えば、 $http->request['header']['Authentication'] の値をセット。
     }
-
 }
 ```
 
 独自認証を HttpSocket に設定するためには、新しい `configAuth()` メソッドを使用します。 :
 
 ``` php
-$http->configAuth('YourMethod', array('config1' => 'value1', 'config2' => 'value2'));
+$http->configAuth('YourMethod', ['config1' => 'value1', 'config2' => 'value2']);
 $http->get('http://secure.your-site.com');
 ```
 
@@ -257,7 +260,8 @@ $http->get('http://secure.your-site.com');
 独自のメソッドを作成します。 :
 
 ``` php
-class YourMethodAuthentication {
+class YourMethodAuthentication
+{
 
 /**
  * 認証
@@ -266,7 +270,8 @@ class YourMethodAuthentication {
  * @param array $authInfo
  * @return void
  */
-    public static function authentication(HttpSocket $http, &$authInfo) {
+    public static function authentication(HttpSocket $http, &$authInfo)
+    {
         // 何かします。例えば $http->request['header']['Authentication'] の値をセット。
     }
 
@@ -277,10 +282,10 @@ class YourMethodAuthentication {
  * @param array $proxyInfo
  * @return void
  */
-    public static function proxyAuthentication(HttpSocket $http, &$proxyInfo) {
+    public static function proxyAuthentication(HttpSocket $http, &$proxyInfo)
+    {
         // 何かします。例えば $http->request['header']['Proxy-Authentication'] の値をセット。
     }
-
 }
 ```
 

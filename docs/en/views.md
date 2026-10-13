@@ -111,10 +111,10 @@ $this->start('sidebar');
 ?>
 <li>
 <?php
-echo $this->Html->link('edit', array(
+echo $this->Html->link('edit', [
     'action' => 'edit',
     $post['Post']['id']
-)); ?>
+]); ?>
 </li>
 <?php $this->end(); ?>
 
@@ -283,8 +283,8 @@ when used with the `inline = false` option:
 ``` php
 <?php
 // In your view file
-$this->Html->script('carousel', array('inline' => false));
-$this->Html->css('carousel', array('inline' => false));
+$this->Html->script('carousel', ['inline' => false]);
+$this->Html->css('carousel', ['inline' => false]);
 ?>
 
 // In your layout file.
@@ -303,7 +303,7 @@ and CSS go to:
 
 ``` php
 // In your view
-$this->Html->script('carousel', array('block' => 'scriptBottom'));
+$this->Html->script('carousel', ['block' => 'scriptBottom']);
 
 // In your layout
 echo $this->fetch('scriptBottom');
@@ -392,7 +392,8 @@ controller actions using the controller or view's
 
 ``` php
 // From a controller
-public function admin_view() {
+public function admin_view()
+{
     // Stuff
     $this->layout = 'admin';
 }
@@ -407,13 +408,16 @@ space and specify it as the layout for all controllers' actions
 using something like:
 
 ``` php
-class UsersController extends AppController {
-    public function view_active() {
+class UsersController extends AppController
+{
+    public function view_active()
+    {
         $this->set('title_for_layout', 'View Active Users');
         $this->layout = 'default_small_ad';
     }
 
-    public function view_image() {
+    public function view_image()
+    {
         $this->layout = 'image';
         // Output user image
     }
@@ -440,8 +444,10 @@ If you want to use a layout that exists in a plugin, you can use
 Contacts plugin:
 
 ``` php
-class UsersController extends AppController {
-    public function view_active() {
+class UsersController extends AppController
+{
+    public function view_active()
+    {
         $this->layout = 'Contacts.contact';
     }
 }
@@ -477,9 +483,9 @@ You can pass data to an element through the element's second
 argument:
 
 ``` php
-echo $this->element('helpbox', array(
+echo $this->element('helpbox', [
     "helptext" => "Oh, this text is very helpful."
-));
+]);
 ```
 
 Inside the element file, all the passed variables are available as
@@ -497,16 +503,16 @@ The `View::element()` method also supports options for the element.
 The options supported are 'cache' and 'callbacks'. An example:
 
 ``` php
-echo $this->element('helpbox', array(
+echo $this->element('helpbox', [
         "helptext" => "This is passed to the element as $helptext",
         "foobar" => "This is passed to the element as $foobar",
-    ),
-    array(
+    ],
+    [
         // Uses the "long_view" cache configuration
         "cache" => "long_view",
         // Set to true to have before/afterRender called for the element
         "callbacks" => true
-    )
+    ]
 );
 ```
 
@@ -517,9 +523,9 @@ elements are stored. To cache different versions of the same element in an
 application, provide a unique cache key value using the following format:
 
 ``` php
-$this->element('helpbox', array(), array(
-        "cache" => array('config' => 'short', 'key' => 'unique value')
-    )
+$this->element('helpbox', [], [
+        "cache" => ['config' => 'short', 'key' => 'unique value']
+    ]
 );
 ```
 
@@ -536,9 +542,11 @@ To do this, in your controller add something like the following for
 the Post example:
 
 ``` php
-class PostsController extends AppController {
+class PostsController extends AppController
+{
     // ...
-    public function index() {
+    public function index()
+    {
         $posts = $this->paginate();
         if ($this->request->is('requested')) {
             return $posts;
@@ -576,7 +584,7 @@ configuring `Cache`. A simple example of caching an element would
 be:
 
 ``` php
-echo $this->element('helpbox', array(), array('cache' => true));
+echo $this->element('helpbox', [], ['cache' => true]);
 ```
 
 If you render the same element more than once in a view and have
@@ -587,15 +595,15 @@ overwriting the previous element() call's cached result. For example:
 ``` php
 echo $this->element(
     'helpbox',
-    array('var' => $var),
-    array('cache' => array('key' => 'first_use', 'config' => 'view_long')
-);
+    ['var' => $var],
+    ['cache' => ['key' => 'first_use', 'config' => 'view_long']
+];
 
 echo $this->element(
     'helpbox',
-    array('var' => $differenVar),
-    array('cache' => array('key' => 'second_use', 'config' => 'view_long')
-);
+    ['var' => $differenVar],
+    ['cache' => ['key' => 'second_use', 'config' => 'view_long']
+];
 ```
 
 The above will ensure that both element results are cached separately. If
@@ -612,7 +620,7 @@ To load an element from a plugin, use the <span class="title-ref">plugin</span> 
 <span class="title-ref">data</span> option in 1.x):
 
 ``` php
-echo $this->element('helpbox', array(), array('plugin' => 'Contacts'));
+echo $this->element('helpbox', [], ['plugin' => 'Contacts']);
 ```
 
 ### 2.1
@@ -661,8 +669,10 @@ You'll also want to extend `View` to ensure things work correctly:
 // In App/View/PdfView.php
 
 App::uses('View', 'View');
-class PdfView extends View {
-    public function render($view = null, $layout = null) {
+class PdfView extends View
+{
+    public function render($view = null, $layout = null)
+    {
         // Custom logic here.
     }
 }
@@ -686,7 +696,7 @@ To call any view method use `$this->method()`
 
 `method` View::**getVars**()
 
-`method` View::**element**(string $elementPath, array $data, array $options = array())
+`method` View::**element**(string $elementPath, array $data, array $options = [])
 
 `method` View::**uuid**(string $object, mixed $url)
 

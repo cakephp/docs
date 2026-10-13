@@ -1,6 +1,6 @@
 # アクセス制御リスト
 
-`class` **AclComponent**(ComponentCollection $collection, array $settings = array())
+`class` **AclComponent**(ComponentCollection $collection, array $settings = [])
 
 ## ACL はどうやって動いているのでしょうか？
 
@@ -430,7 +430,7 @@ ACL オブジェクトの `parent_id` を使ってツリー構造に書き込む
 する方法です:
 
 ``` php
-public $components = array('Acl');
+public $components = ['Acl'];
 ```
 
 ここまでできたら、これらのオブジェクトを生成する例をいくつか
@@ -451,24 +451,25 @@ public $components = array('Acl');
 いるように、以下のような感じでモデルを使ってデータを保存します:
 
 ``` php
-public function any_action() {
+public function any_action()
+{
     $aro = $this->Acl->Aro;
 
     // すべてのグループ情報を配列の中で列挙しています
-    $groups = array(
-        0 => array(
+    $groups = [
+        0 => [
             'alias' => '戦士たち'
-        ),
-        1 => array(
+        ],
+        1 => [
             'alias' => '魔法使い'
-        ),
-        2 => array(
+        ],
+        2 => [
             'alias' => 'ホビット族'
-        ),
-        3 => array(
+        ],
+        3 => [
             'alias' => '訪問者'
-        ),
-    );
+        ],
+    ];
 
     // 繰り返しながら ARO グループを作っています
     foreach ($groups as $data) {
@@ -514,69 +515,70 @@ Aro tree:
 > ACL ノードの ID を使うようにしてください。
 
 ``` php
-public function any_action() {
+public function any_action()
+{
     $aro = new Aro();
 
     // これが私達の user レコードで、新しい ARO レコードにリンク
     // されようとしています。このデータはモデル由来のもので今後変更
     // されるのですが、ここではデモのために静的な配列を使っています。
 
-    $users = array(
-        0 => array(
+    $users = [
+        0 => [
             'alias' => 'Aragorn',
             'parent_id' => 1,
             'model' => 'User',
             'foreign_key' => 2356,
-        ),
-        1 => array(
+        ],
+        1 => [
             'alias' => 'Legolas',
             'parent_id' => 1,
             'model' => 'User',
             'foreign_key' => 6342,
-        ),
-        2 => array(
+        ],
+        2 => [
             'alias' => 'Gimli',
             'parent_id' => 1,
             'model' => 'User',
             'foreign_key' => 1564,
-        ),
-        3 => array(
+        ],
+        3 => [
             'alias' => 'Gandalf',
             'parent_id' => 2,
             'model' => 'User',
             'foreign_key' => 7419,
-        ),
-        4 => array(
+        ],
+        4 => [
             'alias' => 'Frodo',
             'parent_id' => 3,
             'model' => 'User',
             'foreign_key' => 7451,
-        ),
-        5 => array(
+        ],
+        5 => [
             'alias' => 'Bilbo',
             'parent_id' => 3,
             'model' => 'User',
             'foreign_key' => 5126,
-        ),
-        6 => array(
+        ],
+        6 => [
             'alias' => 'Merry',
             'parent_id' => 3,
             'model' => 'User',
             'foreign_key' => 5144,
-        ),
-        7 => array(
+        ],
+        7 => [
             'alias' => 'Pippin',
             'parent_id' => 3,
             'model' => 'User',
             'foreign_key' => 1211,
-        ),
-        8 => array(
+        ],
+        8 => [
             'alias' => 'Gollum',
             'parent_id' => 4,
             'model' => 'User',
             'foreign_key' => 1337,
-        ),
-    );
+        ],
+    ];
 
     // 繰り返しながら ARO を（子ノードとして）作成します
     foreach ($users as $data) {
@@ -683,9 +685,10 @@ CakePHP のコア Acl コンポーネントによって行われます。
 class SomethingsController extends AppController {
     // これを AppController に置きたいと思うかもしれませんが、
     // これでもちゃんと動作します。
-    public $components = array('Acl');
+    public $components = ['Acl'];
 
-    public function index() {
+    public function index()
+    {
         // 戦士たちに武器への完全なアクセス権を与えます。
         // これらの例ではいずれもエイリアス書式を使っています。
         $this->Acl->allow('戦士たち', '武器');
@@ -724,12 +727,12 @@ ARO を特定しています。
 // 1564 = Gimli
 
 $this->Acl->deny(
-  array('model' => 'User', 'foreign_key' => 6342),
+  ['model' => 'User', 'foreign_key' => 6342],
   '武器',
   'delete'
 );
 $this->Acl->deny(
-  array('model' => 'User', 'foreign_key' => 1564),
+  ['model' => 'User', 'foreign_key' => 1564],
   '武器',
   'delete'
 );
@@ -739,7 +742,7 @@ $this->Acl->deny(
 > エイリアス書式を使ってノードを指定する場合、スラッシュ区切り
 > 文字列 ('/users/employees/developers') を使います。
 > 一方、モデル／外部キー書式を使ったノードの指定では、
-> `array('model' => 'User', 'foreign_key' => 8282)`
+> `['model' => 'User', 'foreign_key' => 8282]`
 > のように２つのパラメータを使います。
 
 次のセクションでは、今までに設定してきたパーミッションを
@@ -761,7 +764,8 @@ $this->Acl->check($aro, $aco, $action = '*');
 これをコントローラーのアクションの中で試してみましょう:
 
 ``` php
-public function index() {
+public function index()
+{
     // これらはどれも true を返します:
     $this->Acl->check('戦士たち/Aragorn', '武器');
     $this->Acl->check('戦士たち/Aragorn', '武器', 'create');
@@ -771,7 +775,7 @@ public function index() {
 
     // 私たちの ARO についてモデル/ID の書式を使えることも
     // 覚えておきましょう。
-    $this->Acl->check(array('User' => array('id' => 2356)), '武器');
+    $this->Acl->check(['User' => ['id' => 2356]], '武器');
 
     // これらも true を返します:
     $result = $this->Acl->check('戦士たち/Legolas', '武器', 'create');

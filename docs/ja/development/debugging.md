@@ -58,16 +58,16 @@ dump は変数の内容を出力します。渡された変数のすべてのプ
 （可能なら）メソッドを出力します:
 
 ``` php
-$foo = array(1,2,3);
+$foo = [1,2,3];
 
 Debugger::dump($foo);
 
 // 出力
-array(
+[
     1,
     2,
     3
-)
+]
 
 // シンプルなオブジェクト
 $car = new Car();
@@ -141,15 +141,15 @@ trace() の時点でどの関数が現在走っているのか特定できるの
 pr(Debugger::excerpt(ROOT . DS . LIBS . 'debugger.php', 321, 2));
 
 //下記のように出力されます
-Array
-(
+
+[
     [0] => <code><span style="color: #000000"> * @access public</span></code>
     [1] => <code><span style="color: #000000"> */</span></code>
     [2] => <code><span style="color: #000000">    function excerpt($file, $line, $context = 2) {</span></code>
 
-    [3] => <span class="code-highlight"><code><span style="color: #000000">        $data = $lines = array();</span></code></span>
+    [3] => <span class="code-highlight"><code><span style="color: #000000">        $data = $lines = [];</span></code></span>
     [4] => <code><span style="color: #000000">        $data = @explode("\n", file_get_contents($file));</span></code>
-)
+]
 ```
 
 このメソッドは内部的に使われているものですが、あなたが独自のエラーメッセージを生成する場合や

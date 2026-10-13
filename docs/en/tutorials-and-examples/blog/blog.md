@@ -161,7 +161,7 @@ setup. A sample completed configuration array might look something
 like the following:
 
 ``` php
-public $default = array(
+public $default = [
     'datasource' => 'Database/Mysql',
     'persistent' => false,
     'host' => 'localhost',
@@ -172,7 +172,7 @@ public $default = array(
     'schema' => '',
     'prefix' => '',
     'encoding' => 'utf8'
-);
+];
 ```
 
 Once you've saved your new `database.php` file, you should be

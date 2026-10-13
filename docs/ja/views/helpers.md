@@ -20,8 +20,9 @@ CakePHP でヘルパーを有効にするにはコントローラに認識させ
 コントローラの `$helpers` 配列に追加して下さい。 :
 
 ``` php
-class BakeriesController extends AppController {
-    public $helpers = array('Form', 'Html', 'Js', 'Time');
+class BakeriesController extends AppController
+{
+    public $helpers = ['Form', 'Html', 'Js', 'Time'];
 }
 ```
 
@@ -29,8 +30,9 @@ class BakeriesController extends AppController {
 `プラグイン記法` を使います。:
 
 ``` php
-class BakeriesController extends AppController {
-    public $helpers = array('Blog.Comment');
+class BakeriesController extends AppController
+{
+    public $helpers = ['Blog.Comment'];
 }
 ```
 
@@ -40,11 +42,14 @@ class BakeriesController extends AppController {
 さらに、ヘルパーを使わない他のアクションの処理コストを抑えることになります。 :
 
 ``` php
-class BakeriesController extends AppController {
-    public function bake() {
+class BakeriesController extends AppController
+{
+    public function bake()
+    {
         $this->helpers[] = 'Time';
     }
-    public function mix() {
+    public function mix()
+    {
         // ここに Time ヘルパーは読み込まれないので利用出来ません
     }
 }
@@ -56,8 +61,9 @@ class BakeriesController extends AppController {
 忘れずに読み込んで下さい。 :
 
 ``` php
-class AppController extends Controller {
-    public $helpers = array('Form', 'Html', 'Js', 'Time');
+class AppController extends Controller
+{
+    public $helpers = ['Form', 'Html', 'Js', 'Time'];
 }
 ```
 
@@ -65,15 +71,18 @@ class AppController extends Controller {
 ヘルパーの動作を変えるために使うことができます。 :
 
 ``` php
-class AwesomeHelper extends AppHelper {
-    public function __construct(View $view, $settings = array()) {
+class AwesomeHelper extends AppHelper
+{
+    public function __construct(View $view, $settings = [])
+    {
         parent::__construct($view, $settings);
         debug($settings);
     }
 }
 
-class AwesomeController extends AppController {
-    public $helpers = array('Awesome' => array('option1' => 'value1'));
+class AwesomeController extends AppController
+{
+    public $helpers = ['Awesome' => ['option1' => 'value1']];
 }
 ```
 
@@ -85,17 +94,19 @@ class AwesomeController extends AppController {
 
 ``` php
 // app/Controller/PostsController.php
-class PostsController extends AppController {
-    public $helpers = array(
-        'Html' => array(
+class PostsController extends AppController
+{
+    public $helpers = [
+        'Html' => [
             'className' => 'MyHtml'
-        )
-    );
+        ]
+    ];
 }
 
 // app/View/Helper/MyHtmlHelper.php
 App::uses('HtmlHelper', 'View/Helper');
-class MyHtmlHelper extends HtmlHelper {
+class MyHtmlHelper extends HtmlHelper
+{
     // コアHtmlHelperを上書きするためのコードを追加して下さい
 }
 ```
@@ -112,8 +123,10 @@ class MyHtmlHelper extends HtmlHelper {
 beforeRender コールバックの中でそれらを設定することが出来ます。:
 
 ``` php
-class PostsController extends AppController {
-    public function beforeRender() {
+class PostsController extends AppController
+{
+    public function beforeRender()
+    {
         parent::beforeRender();
         $this->helpers['CustomStuff'] = $this->_getCustomStuffSettings();
     }
@@ -171,8 +184,10 @@ Composer でオートロードしている場合だけです（[ディレクト�
 /* /app/View/Helper/LinkHelper.php */
 App::uses('AppHelper', 'View/Helper');
 
-class LinkHelper extends AppHelper {
-    public function makeEdit($title, $url) {
+class LinkHelper extends AppHelper
+{
+    public function makeEdit($title, $url)
+    {
         // 特別に整形されたリンクを作るためのロジックはここ...
     }
 }
@@ -192,14 +207,16 @@ class LinkHelper extends AppHelper {
 /* /app/View/Helper/LinkHelper.php (他のヘルパーを使っている) */
 App::uses('AppHelper', 'View/Helper');
 
-class LinkHelper extends AppHelper {
-    public $helpers = array('Html');
+class LinkHelper extends AppHelper
+{
+    public $helpers = ['Html'];
 
-    public function makeEdit($title, $url) {
+    public function makeEdit($title, $url)
+    {
         // 整形されたデータを出力するために
         // HTML ヘルパーを使う:
 
-        $link = $this->Html->link($title, $url, array('class' => 'edit'));
+        $link = $this->Html->link($title, $url, ['class' => 'edit']);
 
         return '<div class="editOuter">' . $link . '</div>';
     }
@@ -213,8 +230,9 @@ class LinkHelper extends AppHelper {
 読み込めるようになります。 :
 
 ``` php
-class PostsController extends AppController {
-    public $helpers = array('Link');
+class PostsController extends AppController
+{
+    public $helpers = ['Link'];
 }
 ```
 
@@ -236,8 +254,10 @@ AppController を継承するのと同じように）継承します。すべて
 ``` php
 App::uses('Helper', 'View');
 
-class AppHelper extends Helper {
-    public function customMethod() {
+class AppHelper extends Helper
+{
+    public function customMethod()
+    {
     }
 }
 ```
@@ -250,7 +270,7 @@ class AppHelper extends Helper {
 
 `method` Helper::**url**($url, $full = false)
 
-`method` Helper::**value**($options = array(), $field = null, $key = 'value')
+`method` Helper::**value**($options = [], $field = null, $key = 'value')
 
 `method` Helper::**domId**($options = null, $id = 'id')
 

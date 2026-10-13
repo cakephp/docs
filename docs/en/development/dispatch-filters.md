@@ -25,10 +25,10 @@ classes already enabled for all requests, let's take a look at how they are
 added:
 
 ``` php
-Configure::write('Dispatcher.filters', array(
+Configure::write('Dispatcher.filters', [
     'AssetDispatcher',
     'CacheDispatcher'
-));
+]);
 ```
 
 Each of those array values are class names that will be instantiated and added
@@ -50,12 +50,12 @@ executed in the order they were defined. There is also an alternative way for
 attaching filters that do not involve the special `DispatcherFilter` classes:
 
 ``` php
-Configure::write('Dispatcher.filters', array(
-    'my-filter' => array(
-        'callable' => array($classInstance, 'methodName'),
+Configure::write('Dispatcher.filters', [
+    'my-filter' => [
+        'callable' => [$classInstance, 'methodName'],
         'on' => 'after'
-    )
-));
+    ]
+]);
 ```
 
 As shown above, you can pass any valid PHP [callback](https://www.php.net/callback)
@@ -65,10 +65,10 @@ be treated as a class name, not as a possible function name. This of course
 gives the ability to PHP 5.3 users to attach anonymous functions as filters:
 
 ``` php
-Configure::write('Dispatcher.filters', array(
-   'my-filter' => array('callable' => function($event) {...}, 'on' => 'before'),
+Configure::write('Dispatcher.filters', [
+   'my-filter' => ['callable' => function($event) {...}, 'on' => 'before'],
    //more filters here
-));
+]);
 ```
 
 The `on` key only takes `before` and `after` as valid values, and evidently
@@ -81,19 +81,19 @@ As all filters will have default priority `10`, should you want to run a filter 
 any other in the list, select lower priority numbers as needed:
 
 ``` php
-Configure::write('Dispatcher.filters', array(
-   'my-filter' => array(
+Configure::write('Dispatcher.filters', [
+   'my-filter' => [
         'callable' => function($event) {...},
         'on' => 'before',
         'priority' => 5
-    ),
-    'other-filter' => array(
-        'callable' => array($class, 'method'),
+    ],
+    'other-filter' => [
+        'callable' => [$class, 'method'],
         'on' => 'after',
         'priority' => 1
-    ),
+    ],
    //more filters here
-));
+]);
 ```
 
 Obviously, when defining priorities the order in which filters are declared does
@@ -103,9 +103,9 @@ Finally, CakePHP's plugin notation can be used to define filters located in
 plugins:
 
 ``` php
-Configure::write('Dispatcher.filters', array(
+Configure::write('Dispatcher.filters', [
     'MyPlugin.MyFilter',
-));
+]);
 ```
 
 Feel free to remove the default attached filters if you choose to use a more
@@ -116,9 +116,9 @@ If you need to pass constructor parameters or settings to you dispatch filter
 classes you can do that by providing an array of settings:
 
 ``` php
-Configure::write('Dispatcher.filters', array(
-    'MyAssetFilter' => array('service' => 'google.com')
-));
+Configure::write('Dispatcher.filters', [
+    'MyAssetFilter' => ['service' => 'google.com']
+]);
 ```
 
 When the filter key is a valid classname, the value can be an array of
@@ -139,11 +139,13 @@ text:
 
 ``` php
 App::uses('DispatcherFilter', 'Routing');
-class HelloWorldFilter extends DispatcherFilter {
+class HelloWorldFilter extends DispatcherFilter
+{
 
     public $priority = 9;
 
-    public function beforeDispatch(CakeEvent $event) {
+    public function beforeDispatch(CakeEvent $event)
+    {
         $request = $event->data['request'];
         $response = $event->data['response'];
 
@@ -187,9 +189,11 @@ page, in our case it would be anything served from the `PagesController`:
 
 ``` php
 App::uses('DispatcherFilter', 'Routing');
-class HttpCacheFilter extends DispatcherFilter {
+class HttpCacheFilter extends DispatcherFilter
+{
 
-    public function afterDispatch(CakeEvent $event) {
+    public function afterDispatch(CakeEvent $event)
+    {
         $request = $event->data['request'];
         $response = $event->data['response'];
 
@@ -230,15 +234,15 @@ $postsList = function($event) {
     return $event->data['response'];
 };
 
-Configure::write('Dispatcher.filters', array(
+Configure::write('Dispatcher.filters', [
     'AssetDispatcher',
     'CacheDispatcher',
-    'recent-posts' => array(
+    'recent-posts' => [
         'callable' => $postsList,
         'priority' => 9,
         'on'=> 'before'
-    )
-));
+    ]
+]);
 ```
 
 In previous example we have selected a priority of `9` for our filter, so to skip

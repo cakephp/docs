@@ -22,8 +22,9 @@ To use the new behavior, you can add it to the \$actsAs property of
 your model:
 
 ``` php
-class Post extends AppModel {
-    public $actsAs = array('Containable');
+class Post extends AppModel
+{
+    public $actsAs = ['Containable'];
 }
 ```
 
@@ -46,19 +47,19 @@ extensive:
 ``` php
 debug($this->Post->find('all'));
 
-[0] => Array
-        (
-            [Post] => Array
-                (
+[0] => 
+        [
+            [Post] => 
+                [
                     [id] => 1
                     [title] => First article
                     [content] => aaa
                     [created] => 2008-05-18 00:00:00
-                )
-            [Comment] => Array
-                (
-                    [0] => Array
-                        (
+                ]
+            [Comment] => 
+                [
+                    [0] => 
+                        [
                             [id] => 1
                             [post_id] => 1
                             [author] => Daniel
@@ -66,9 +67,9 @@ debug($this->Post->find('all'));
                             [website] => http://example.com
                             [comment] => First comment
                             [created] => 2008-05-18 00:00:00
-                        )
-                    [1] => Array
-                        (
+                        ]
+                    [1] => 
+                        [
                             [id] => 2
                             [post_id] => 1
                             [author] => Sam
@@ -76,25 +77,25 @@ debug($this->Post->find('all'));
                             [website] => http://example.net
                             [comment] => Second comment
                             [created] => 2008-05-18 00:00:00
-                        )
-                )
-            [Tag] => Array
-                (
-                    [0] => Array
-                        (
+                        ]
+                ]
+            [Tag] => 
+                [
+                    [0] => 
+                        [
                             [id] => 1
                             [name] => Awesome
-                        )
-                    [1] => Array
-                        (
+                        ]
+                    [1] => 
+                        [
                             [id] => 2
                             [name] => Baking
-                        )
-                )
-        )
-[1] => Array
+                        ]
+                ]
+        ]
+[1] => array
         (
-            [Post] => Array
+            [Post] => array
                 (...
 ```
 
@@ -115,32 +116,32 @@ You can also invoke Containable's magic from inside the find()
 call:
 
 ``` php
-$this->Post->find('all', array('contain' => false));
+$this->Post->find('all', ['contain' => false]);
 ```
 
 Having done that, you end up with something a lot more concise:
 
 ``` text
-[0] => Array
-        (
-            [Post] => Array
-                (
+[0] => 
+        [
+            [Post] => 
+                [
                     [id] => 1
                     [title] => First article
                     [content] => aaa
                     [created] => 2008-05-18 00:00:00
-                )
-        )
-[1] => Array
-        (
-            [Post] => Array
-                (
+                ]
+        ]
+[1] => 
+        [
+            [Post] => 
+                [
                     [id] => 2
                     [title] => Second article
                     [content] => bbb
                     [created] => 2008-05-19 00:00:00
-                )
-        )
+                ]
+        ]
 ```
 
 This sort of help isn't new: in fact, you can do that without the
@@ -171,7 +172,7 @@ $this->Post->find('all');
 Again, we can use the contain key inside a find() call:
 
 ``` php
-$this->Post->find('all', array('contain' => 'Tag'));
+$this->Post->find('all', ['contain' => 'Tag']);
 ```
 
 Without Containable, you'd end up needing to use the
@@ -193,7 +194,7 @@ $this->Post->find('all');
 
 // or..
 
-$this->Post->find('all', array('contain' => 'Comment.author'));
+$this->Post->find('all', ['contain' => 'Comment.author']);
 ```
 
 Here, we've told Containable to give us our post information, and
@@ -201,29 +202,29 @@ just the author field of the associated Comment model. The output
 of the find call might look something like this:
 
 ``` text
-[0] => Array
-        (
-            [Post] => Array
-                (
+[0] => 
+        [
+            [Post] => 
+                [
                     [id] => 1
                     [title] => First article
                     [content] => aaa
                     [created] => 2008-05-18 00:00:00
-                )
-            [Comment] => Array
-                (
-                    [0] => Array
-                        (
+                ]
+            [Comment] => 
+                [
+                    [0] => 
+                        [
                             [author] => Daniel
                             [post_id] => 1
-                        )
-                    [1] => Array
-                        (
+                        ]
+                    [1] => 
+                        [
                             [author] => Sam
                             [post_id] => 1
-                        )
-                )
-        )
+                        ]
+                ]
+        ]
 [1] => Array
         (...
 ```
@@ -240,26 +241,26 @@ $this->Post->find('all');
 
 //or...
 
-$this->Post->find('all', array('contain' => 'Comment.author = "Daniel"'));
+$this->Post->find('all', ['contain' => 'Comment.author = "Daniel"']);
 ```
 
 This gives us a result that gives us posts with comments authored
 by Daniel:
 
 ``` text
-[0] => Array
-        (
-            [Post] => Array
-                (
+[0] => 
+        [
+            [Post] => 
+                [
                     [id] => 1
                     [title] => First article
                     [content] => aaa
                     [created] => 2008-05-18 00:00:00
-                )
-            [Comment] => Array
-                (
-                    [0] => Array
-                        (
+                ]
+            [Comment] => 
+                [
+                    [0] => 
+                        [
                             [id] => 1
                             [post_id] => 1
                             [author] => Daniel
@@ -267,30 +268,30 @@ by Daniel:
                             [website] => http://example.com
                             [comment] => First comment
                             [created] => 2008-05-18 00:00:00
-                        )
-                )
-        )
+                        ]
+                ]
+        ]
 ```
 
 There is an important caveat to using Containable when filtering on a deeper association. In the previous example,
 assume you had 3 posts in your database and Daniel had commented on 2 of those posts. The operation
-\$this-\>Post-\>find('all', array('contain' =\> 'Comment.author = "Daniel"')); would return ALL 3 posts, not
+\$this-\>Post-\>find('all', ['contain' =\> 'Comment.author = "Daniel"']); would return ALL 3 posts, not
 just the 2 posts that Daniel had commented on. It won't return all comments however, just comments by Daniel. :
 
 ``` text
-[0] => Array
-        (
-            [Post] => Array
-                (
+[0] => 
+        [
+            [Post] => 
+                [
                     [id] => 1
                     [title] => First article
                     [content] => aaa
                     [created] => 2008-05-18 00:00:00
-                )
-            [Comment] => Array
-                (
-                    [0] => Array
-                        (
+                ]
+            [Comment] => 
+                [
+                    [0] => 
+                        [
                             [id] => 1
                             [post_id] => 1
                             [author] => Daniel
@@ -298,35 +299,35 @@ just the 2 posts that Daniel had commented on. It won't return all comments howe
                             [website] => http://example.com
                             [comment] => First comment
                             [created] => 2008-05-18 00:00:00
-                        )
-                )
-        )
-[1] => Array
-        (
-            [Post] => Array
-                (
+                        ]
+                ]
+        ]
+[1] => 
+        [
+            [Post] => 
+                [
                     [id] => 2
                     [title] => Second article
                     [content] => bbb
                     [created] => 2008-05-18 00:00:00
-                )
-            [Comment] => Array
-                (
-                )
-        )
-[2] => Array
-        (
-            [Post] => Array
-                (
+                ]
+            [Comment] => 
+                [
+                ]
+        ]
+[2] => 
+        [
+            [Post] => 
+                [
                     [id] => 3
                     [title] => Third article
                     [content] => ccc
                     [created] => 2008-05-18 00:00:00
-                )
-            [Comment] => Array
-                (
-                    [0] => Array
-                        (
+                ]
+            [Comment] => 
+                [
+                    [0] => 
+                        [
                             [id] => 22
                             [post_id] => 3
                             [author] => Daniel
@@ -334,30 +335,30 @@ just the 2 posts that Daniel had commented on. It won't return all comments howe
                             [website] => http://example.com
                             [comment] => Another comment
                             [created] => 2008-05-18 00:00:00
-                        )
-                )
-        )
+                        ]
+                ]
+        ]
 ```
 
 If you want to filter the posts by the comments, so that posts without a comment by Daniel won't be
 returned, the easiest way is to find all the comments by Daniel and contain the Posts. :
 
 ``` php
-$this->Comment->find('all', array(
+$this->Comment->find('all', [
     'conditions' => 'Comment.author = "Daniel"',
     'contain' => 'Post'
-));
+]);
 ```
 
 Additional filtering can be performed by supplying the standard [Model Find](../../models/retrieving-your-data#model-find) options:
 
 ``` php
-$this->Post->find('all', array('contain' => array(
-    'Comment' => array(
-        'conditions' => array('Comment.author =' => "Daniel"),
+$this->Post->find('all', ['contain' => [
+    'Comment' => [
+        'conditions' => ['Comment.author =' => "Daniel"],
         'order' => 'Comment.created DESC'
-    )
-)));
+    ]
+]]);
 ```
 
 Here's an example of using the `ContainableBehavior` when you've
@@ -375,27 +376,27 @@ User->Post->Tag
 This is how we retrieve the above associations with Containable:
 
 ``` php
-$this->User->find('all', array(
-    'contain' => array(
+$this->User->find('all', [
+    'contain' => [
         'Profile',
-        'Account' => array(
+        'Account' => [
             'AccountSummary'
-        ),
-        'Post' => array(
-            'PostAttachment' => array(
-                'fields' => array('id', 'name'),
-                'PostAttachmentHistory' => array(
-                    'HistoryNotes' => array(
-                        'fields' => array('id', 'note')
-                    )
-                )
-            ),
-            'Tag' => array(
-                'conditions' => array('Tag.name LIKE' => '%happy%')
-            )
-        )
-    )
-));
+        ],
+        'Post' => [
+            'PostAttachment' => [
+                'fields' => ['id', 'name'],
+                'PostAttachmentHistory' => [
+                    'HistoryNotes' => [
+                        'fields' => ['id', 'note']
+                    ]
+                ]
+            ],
+            'Tag' => [
+                'conditions' => ['Tag.name LIKE' => '%happy%']
+            ]
+        ]
+    ]
+]);
 ```
 
 Keep in mind that `contain` key is only used once in the main
@@ -434,14 +435,14 @@ From the previous example, this is an example of how to force the posts
 to be ordered by the date when they were last updated:
 
 ``` php
-$this->User->find('all', array(
-    'contain' => array(
+$this->User->find('all', [
+    'contain' => [
         'Profile',
-        'Post' => array(
+        'Post' => [
             'order' => 'Post.updated DESC'
-        )
-    )
-));
+        ]
+    ]
+]);
 ```
 
 You can change ContainableBehavior settings at run time by
@@ -454,7 +455,7 @@ If you get invalid SQL errors due to mixing of aggregate and
 non-aggregate fields, try disabling the `autoFields` setting. :
 
 ``` php
-$this->Post->Behaviors->load('Containable', array('autoFields' => false));
+$this->Post->Behaviors->load('Containable', ['autoFields' => false]);
 ```
 
 ### Using Containable with pagination
@@ -468,10 +469,10 @@ See the section [Using Containable](#using-containable) for further details.
 Here's an example of how to contain associations when paginating:
 
 ``` php
-$this->paginate['User'] = array(
-    'contain' => array('Profile', 'Account'),
+$this->paginate['User'] = [
+    'contain' => ['Profile', 'Account'],
     'order' => 'User.username'
-);
+];
 
 $users = $this->paginate('User');
 ```
@@ -483,7 +484,7 @@ $users = $this->paginate('User');
 >
 > ``` bash
 > $this->User->recursive = -1;
-> $this->User->contain(array('Profile', 'Account'));
+> $this->User->contain(['Profile', 'Account']);
 >
 > $users = $this->paginate('User');
 > ```

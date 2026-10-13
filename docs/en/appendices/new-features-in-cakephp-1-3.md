@@ -13,7 +13,7 @@ The various requireXX methods like `requireGet` and
 as a collection of string names.
 
 ``` php
-$this->Security->requirePost(array('edit', 'update'));
+$this->Security->requirePost(['edit', 'update']);
 ```
 
 **Component settings**
@@ -23,15 +23,15 @@ Component settings for all core components can now be set from the
 settings for components when you declare the component.
 
 ``` php
-var $components = array(
-    'Cookie' => array(
+var $components = [
+    'Cookie' => [
         'name' => 'MyCookie'
-    ),
-    'Auth' => array(
+    ],
+    'Auth' => [
         'userModel' => 'MyUser',
-        'loginAction' => array('controller' => 'users', 'action' => 'login')
-    )
-);
+        'loginAction' => ['controller' => 'users', 'action' => 'login']
+    ]
+];
 ```
 
 This should reduce clutter in your Controller's `beforeFilter()`
@@ -96,7 +96,7 @@ A new method `addFormat()` has been added. This method allows you
 to set currency parameter sets, so you don't have to retype them:
 
 ``` php
-$this->Number->addFormat('NOK', array('before' => 'Kr. '));
+$this->Number->addFormat('NOK', ['before' => 'Kr. ']);
 $formatted = $this->Number->currency(1000, 'NOK');
 ```
 
@@ -126,10 +126,10 @@ part of a plugin. Cache configs from plugins need to use the plugin
 dot syntax:
 
 ``` php
-Cache::config('custom', array(
+Cache::config('custom', [
     'engine' => 'CachePack.MyCustomCache',
     ...
-));
+]);
 ```
 
 App and Plugin cache engines should be configured in
@@ -227,25 +227,25 @@ You use `tableParameters` just as you would any other key in a
 schema file. Much like `indexes`:
 
 ``` php
-var $comments => array(
-    'id' => array(
+var $comments => [
+    'id' => [
       'type' => 'integer',
       'null' => false,
       'default' => 0,
       'key' => 'primary'
-    ),
-    'post_id' => array('type' => 'integer', 'null' => false, 'default' => 0),
-    'comment' => array('type' => 'text'),
-    'indexes' => array(
-        'PRIMARY' => array('column' => 'id', 'unique' => true),
-        'post_id' => array('column' => 'post_id'),
-    ),
-    'tableParameters' => array(
+    ],
+    'post_id' => ['type' => 'integer', 'null' => false, 'default' => 0],
+    'comment' => ['type' => 'text'],
+    'indexes' => [
+        'PRIMARY' => ['column' => 'id', 'unique' => true],
+        'post_id' => ['column' => 'post_id'],
+    ],
+    'tableParameters' => [
         'engine' => 'InnoDB',
         'charset' => 'latin1',
         'collate' => 'latin1_general_ci'
-    )
-);
+    ]
+];
 ```
 
 is an example of a table using `tableParameters` to set some
@@ -304,18 +304,18 @@ to plugins. It expects and will create schema files in
 Generating URLs with new style prefixes works exactly the same as
 admin routing did in 1.2. They use the same syntax and
 persist/behave in the same way. Assuming you have
-`Configure::write('Routing.prefixes', array('admin', 'member'));`
+`Configure::write('Routing.prefixes', ['admin', 'member']);`
 in your core.php you will be able to do the following from a
 non-prefixed URL:
 
 ``` php
 $this->Html->link(
   'Go',
-  array('controller' => 'posts', 'action' => 'index', 'member' => true)
+  ['controller' => 'posts', 'action' => 'index', 'member' => true]
 );
 $this->Html->link(
   'Go',
-  array('controller' => 'posts', 'action' => 'index', 'admin' => true)
+  ['controller' => 'posts', 'action' => 'index', 'admin' => true]
 );
 ```
 
@@ -325,19 +325,19 @@ non-prefixed URL, do the following:
 ``` php
 $this->Html->link(
   'Go',
-  array(
+  [
     'controller' => 'posts',
     'action' => 'index',
     'member' => false
-  )
+  ]
 );
 $this->Html->link(
   'Go',
-  array(
+  [
     'controller' => 'posts',
     'action' => 'index',
     'admin' => false
-  )
+  ]
 );
 ```
 
@@ -365,7 +365,7 @@ handling.
 
 You can now globally customize the default transliteration map used
 in Inflector::slug using Inflector::rules. Example
-`Inflector::rules('transliteration', array('/å/' => 'aa', '/ø/' => 'oe'))`
+`Inflector::rules('transliteration', ['/å/' => 'aa', '/ø/' => 'oe'])`
 
 The Inflector now also internally caches all data passed to it for
 inflection (except slug method).
@@ -476,9 +476,10 @@ With the addition of `Routing.prefixes` scaffolding has been
 updated to allow the scaffolding of any one prefix:
 
 ``` php
-Configure::write('Routing.prefixes', array('admin', 'member'));
+Configure::write('Routing.prefixes', ['admin', 'member']);
 
-class PostsController extends AppController {
+class PostsController extends AppController
+{
     var $scaffold = 'member';
 }
 ```
@@ -498,11 +499,14 @@ the appropriate name. For example if you lived in the Netherlands
 you would create a class like:
 
 ``` php
-class NlValidation {
-    public function phone($check) {
+class NlValidation
+{
+    public function phone($check)
+    {
         ...
     }
-    public function postal($check) {
+    public function postal($check)
+    {
         ...
     }
 }
@@ -513,10 +517,10 @@ imported before attempting to use it. In your model validation you
 could use your NlValidation class by doing the following:
 
 ``` php
-public $validate = array(
-    'phone_no' => array('rule' => array('phone', null, 'nl')),
-    'postal_code' => array('rule' => array('postal', null, 'nl'))
-);
+public $validate = [
+    'phone_no' => ['rule' => ['phone', null, 'nl']],
+    'postal_code' => ['rule' => ['postal', null, 'nl']]
+];
 ```
 
 When your model data is validated, Validation will see that it

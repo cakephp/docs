@@ -1,6 +1,6 @@
 # SessionHelper
 
-`class` **SessionHelper**(View $view, array $settings = array())
+`class` **SessionHelper**(View $view, array $settings = [])
 
 As a natural counterpart to the Session Component, the Session
 Helper replicates most of the component's functionality and makes it
@@ -14,9 +14,9 @@ As with the Session Component, data is read by using
 `dot notation` array structures:
 
 ``` text
-array('User' => array(
+['User' => [
     'username' => 'super@example.com'
-));
+]];
 ```
 
 Given the previous array structure, the node would be accessed by
@@ -36,4 +36,4 @@ used.
 
 ## Displaying notifications or flash messages
 
-`method` SessionHelper::**flash**(string $key = 'flash', array $params = array())
+`method` SessionHelper::**flash**(string $key = 'flash', array $params = [])

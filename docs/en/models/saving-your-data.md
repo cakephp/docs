@@ -5,14 +5,14 @@ should be passed to the model's `save()` method using the
 following basic format:
 
 ``` text
-Array
-(
-    [ModelName] => Array
-    (
+
+[
+    [ModelName] => 
+    [
         [fieldname1] => 'value'
         [fieldname2] => 'value'
-    )
-)
+    ]
+]
 ```
 
 Most of the time you won't even need to worry about this format:
@@ -25,7 +25,8 @@ Here's a quick example of a controller action that uses a CakePHP
 model to save data to a database table:
 
 ``` php
-public function edit($id) {
+public function edit($id)
+{
     // Has any form data been POSTed?
     if ($this->request->is('post')) {
         // If the form data can be validated and saved...
@@ -76,10 +77,10 @@ single fields, in an ActiveRecord approach. You can also use
 
 ``` php
 $this->Post->read(null, 1);
-$this->Post->set(array(
+$this->Post->set([
     'title' => 'New title',
     'published' => false
-));
+]);
 $this->Post->save();
 ```
 
@@ -94,7 +95,7 @@ validation errors.
 ::: info Added in version 2.4
 :::
 
-## Model::save(array \$data = null, boolean \$validate = true, array \$fieldList = array())
+## Model::save(array \$data = null, boolean \$validate = true, array \$fieldList = [])
 
 Featured above, this method saves array-formatted data. The second
 parameter allows you to sidestep validation, and the third allows
@@ -112,7 +113,7 @@ the `fieldList` automatically.
 The save method also has an alternate syntax:
 
 ``` php
-save(array $data = null, array $params = array())
+save(array $data = null, array $params = [])
 ```
 
 `$params` array can have any of the following available options
@@ -163,12 +164,12 @@ If you want to update a value, rather than create a new one, make sure
 you are passing the primary key field into the data array:
 
 ``` php
-$data = array('id' => 10, 'title' => 'My new title');
+$data = ['id' => 10, 'title' => 'My new title'];
 // This will update Recipe with id 10
 $this->Recipe->save($data);
 ```
 
-## Model::create(array \$data = array())
+## Model::create(array \$data = [])
 
 This method resets the model state for saving new information.
 It does not actually create a record in the database but clears
@@ -206,7 +207,7 @@ $this->Post->saveField('title', 'A New Title for a New Day');
 The saveField method also has an alternate syntax:
 
 ``` php
-saveField(string $fieldName, string $fieldValue, array $params = array())
+saveField(string $fieldName, string $fieldValue, array $params = [])
 ```
 
 `$params` array can have any of the following available options
@@ -232,8 +233,8 @@ year, the update call might look something like:
 $thisYear = date('Y-m-d H:i:s', strtotime('-1 year'));
 
 $this->Baker->updateAll(
-    array('Baker.approved' => true),
-    array('Baker.created <=' => $thisYear)
+    ['Baker.approved' => true],
+    ['Baker.created <=' => $thisYear]
 );
 ```
 
@@ -245,8 +246,8 @@ model methods was calling `updateAll()` you would do the following:
 $db = $this->getDataSource();
 $value = $db->value($value, 'string');
 $this->updateAll(
-    array('Baker.status' => $value),
-    array('Baker.status' => 'old')
+    ['Baker.status' => $value],
+    ['Baker.status' => 'old']
 );
 ```
 
@@ -260,8 +261,8 @@ customer:
 
 ``` php
 $this->Ticket->updateAll(
-    array('Ticket.status' => "'closed'"),
-    array('Ticket.customer_id' => 453)
+    ['Ticket.status' => "'closed'"],
+    ['Ticket.customer_id' => 453]
 );
 ```
 
@@ -269,7 +270,7 @@ By default, updateAll() will automatically join any belongsTo
 association for databases that support joins. To prevent this,
 temporarily unbind the associations.
 
-## Model::saveMany(array \$data = null, array \$options = array())
+## Model::saveMany(array \$data = null, array \$options = [])
 
 Method used to save multiple rows of the same model at once. The following
 options may be used:
@@ -289,10 +290,10 @@ For saving multiple records of single model, \$data needs to be a
 numerically indexed array of records like this:
 
 ``` php
-$data = array(
-    array('title' => 'title 1'),
-    array('title' => 'title 2'),
-);
+$data = [
+    ['title' => 'title 1'],
+    ['title' => 'title 2'],
+];
 ```
 
 > [!NOTE]
@@ -304,46 +305,46 @@ $data = array(
 It is also acceptable to have the data in the following format:
 
 ``` php
-$data = array(
-    array('Article' => array('title' => 'title 1')),
-    array('Article' => array('title' => 'title 2')),
-);
+$data = [
+    ['Article' => ['title' => 'title 1']],
+    ['Article' => ['title' => 'title 2']],
+];
 ```
 
 To save also associated data with `$options['deep'] = true` (since 2.1), the two above examples would look like:
 
 ``` php
-$data = array(
-    array('title' => 'title 1', 'Assoc' => array('field' => 'value')),
-    array('title' => 'title 2'),
-);
-$data = array(
-    array(
-        'Article' => array('title' => 'title 1'),
-        'Assoc' => array('field' => 'value')
-    ),
-    array('Article' => array('title' => 'title 2')),
-);
-$Model->saveMany($data, array('deep' => true));
+$data = [
+    ['title' => 'title 1', 'Assoc' => ['field' => 'value']],
+    ['title' => 'title 2'],
+];
+$data = [
+    [
+        'Article' => ['title' => 'title 1'],
+        'Assoc' => ['field' => 'value']
+    ],
+    ['Article' => ['title' => 'title 2']],
+];
+$Model->saveMany($data, ['deep' => true]);
 ```
 
 Keep in mind that if you want to update a record instead of creating a new
 one you just need to add the primary key index to the data row:
 
 ``` php
-$data = array(
-    array(
+$data = [
+    [
         // This creates a new row
-        'Article' => array('title' => 'New article')),
-    array(
+        'Article' => ['title' => 'New article']],
+    [
         // This updates an existing row
-        'Article' => array('id' => 2, 'title' => 'title 2')),
-);
+        'Article' => ['id' => 2, 'title' => 'title 2']],
+];
 ```
 
 <a id="Model-saveAssociated"></a>
 
-## Model::saveAssociated(array \$data = null, array \$options = array())
+## Model::saveAssociated(array \$data = null, array \$options = [])
 
 Method used to save multiple model associations at once. The following
 options may be used:
@@ -364,51 +365,51 @@ For saving a record along with its related record having a hasOne
 or belongsTo association, the data array should be like this:
 
 ``` php
-$data = array(
-    'User' => array('username' => 'billy'),
-    'Profile' => array('sex' => 'Male', 'occupation' => 'Programmer'),
-);
+$data = [
+    'User' => ['username' => 'billy'],
+    'Profile' => ['sex' => 'Male', 'occupation' => 'Programmer'],
+];
 ```
 
 For saving a record along with its related records having hasMany
 association, the data array should be like this:
 
 ``` php
-$data = array(
-    'Article' => array('title' => 'My first article'),
-    'Comment' => array(
-        array('body' => 'Comment 1', 'user_id' => 1),
-        array('body' => 'Comment 2', 'user_id' => 12),
-        array('body' => 'Comment 3', 'user_id' => 40),
-    ),
-);
+$data = [
+    'Article' => ['title' => 'My first article'],
+    'Comment' => [
+        ['body' => 'Comment 1', 'user_id' => 1],
+        ['body' => 'Comment 2', 'user_id' => 12],
+        ['body' => 'Comment 3', 'user_id' => 40],
+    ],
+];
 ```
 
 And for saving a record along with its related records having hasMany with more
 than two levels deep associations, the data array should be as follow:
 
 ``` php
-$data = array(
-    'User' => array('email' => 'john-doe@cakephp.org'),
-    'Cart' => array(
-        array(
+$data = [
+    'User' => ['email' => 'john-doe@cakephp.org'],
+    'Cart' => [
+        [
             'payment_status_id' => 2,
             'total_cost' => 250,
-            'CartItem' => array(
-                array(
+            'CartItem' => [
+                [
                     'cart_product_id' => 3,
                     'quantity' => 1,
                     'cost' => 100,
-                ),
-                array(
+                ],
+                [
                     'cart_product_id' => 5,
                     'quantity' => 1,
                     'cost' => 150,
-                )
-            )
-        )
-    )
-);
+                ]
+            ]
+        ]
+    ]
+];
 ```
 
 > [!NOTE]
@@ -420,22 +421,22 @@ association and deeper associated Comment belongsTo User data as well,
 the data array should be like this:
 
 ``` php
-$data = array(
-    'Article' => array('title' => 'My first article'),
-    'Comment' => array(
-        array('body' => 'Comment 1', 'user_id' => 1),
-        array(
+$data = [
+    'Article' => ['title' => 'My first article'],
+    'Comment' => [
+        ['body' => 'Comment 1', 'user_id' => 1],
+        [
             'body' => 'Save a new user as well',
-            'User' => array('first' => 'mad', 'last' => 'coder')
-        ),
-    ),
-);
+            'User' => ['first' => 'mad', 'last' => 'coder']
+        ],
+    ],
+];
 ```
 
 And save this data with:
 
 ``` php
-$Article->saveAssociated($data, array('deep' => true));
+$Article->saveAssociated($data, ['deep' => true]);
 ```
 
 > [!WARNING]
@@ -445,12 +446,12 @@ $Article->saveAssociated($data, array('deep' => true));
 Example of using `fieldList` with multiple models:
 
 ``` php
-$this->SomeModel->saveAll($data, array(
-    'fieldList' => array(
-        'SomeModel' => array('field_1'),
-        'AssociatedModel' => array('field_2', 'field_3')
-    )
-));
+$this->SomeModel->saveAll($data, [
+    'fieldList' => [
+        'SomeModel' => ['field_1'],
+        'AssociatedModel' => ['field_2', 'field_3']
+    ]
+]);
 ```
 
 The fieldList will be an array of model aliases as keys and arrays with fields
@@ -460,7 +461,7 @@ as values. The model names are not nested like in the data to be saved.
 `Model::saveAll()` and friends now support passing the fieldList for multiple models.You can now save deeper associated data as well with setting `$options['deep'] = true;`
 :::
 
-## Model::saveAll(array \$data = null, array \$options = array())
+## Model::saveAll(array \$data = null, array \$options = [])
 
 The `saveAll` function is just a wrapper around the `saveMany` and `saveAssociated`
 methods. it will inspect the data and determine what type of save it should perform. If
@@ -491,7 +492,8 @@ that you've POSTed enough data (using the FormHelper) to create a
 single User and a single Profile:
 
 ``` php
-public function add() {
+public function add()
+{
     if (!empty($this->request->data)) {
         // We can save the User data:
         // it should be in $this->request->data['User']
@@ -541,12 +543,12 @@ First, you need to build your form for both Company and Account
 models (we'll assume that Company hasMany Account):
 
 ``` php
-echo $this->Form->create('Company', array('action' => 'add'));
-echo $this->Form->input('Company.name', array('label' => 'Company name'));
+echo $this->Form->create('Company', ['action' => 'add']);
+echo $this->Form->input('Company.name', ['label' => 'Company name']);
 echo $this->Form->input('Company.description');
 echo $this->Form->input('Company.location');
 
-echo $this->Form->input('Account.0.name', array('label' => 'Account name'));
+echo $this->Form->input('Account.0.name', ['label' => 'Account name']);
 echo $this->Form->input('Account.0.username');
 echo $this->Form->input('Account.0.email');
 
@@ -567,7 +569,8 @@ Now, in our CompaniesController we can create an `add()`
 action:
 
 ``` php
-public function add() {
+public function add()
+{
     if (!empty($this->request->data)) {
         // Use the following to avoid validation errors:
         unset($this->Company->Account->validate['company_id']);
@@ -590,20 +593,23 @@ a look at the following code. :
 
 ``` php
 // Controller/CourseMembershipController.php
-class CourseMembershipsController extends AppController {
-    public $uses = array('CourseMembership');
+class CourseMembershipsController extends AppController
+{
+    public $uses = ['CourseMembership'];
 
-    public function index() {
+    public function index()
+    {
         $this->set(
              'courseMembershipsList',
              $this->CourseMembership->find('all')
          );
     }
 
-    public function add() {
+    public function add()
+    {
         if ($this->request->is('post')) {
             if ($this->CourseMembership->saveAssociated($this->request->data)) {
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(['action' => 'index']);
             }
         }
     }
@@ -624,26 +630,26 @@ class CourseMembershipsController extends AppController {
 The data array will look like this when submitted. :
 
 ``` text
-Array
-(
-    [Student] => Array
-    (
+
+[
+    [Student] => 
+    [
         [first_name] => Joe
         [last_name] => Bloggs
-    )
+    ]
 
-    [Course] => Array
-    (
+    [Course] => 
+    [
         [name] => Cake
-    )
+    ]
 
-    [CourseMembership] => Array
-    (
+    [CourseMembership] => 
+    [
         [days_attended] => 5
         [grade] => A
-    )
+    ]
 
-)
+]
 ```
 
 CakePHP will happily be able to save the lot together and assign
@@ -653,33 +659,33 @@ action of our CourseMembershipsController the data structure
 received now from a find('all') is:
 
 ``` text
-Array
-(
-    [0] => Array
-    (
-        [CourseMembership] => Array
-        (
+
+[
+    [0] => 
+    [
+        [CourseMembership] => 
+        [
             [id] => 1
             [student_id] => 1
             [course_id] => 1
             [days_attended] => 5
             [grade] => A
-        )
+        ]
 
-        [Student] => Array
-        (
+        [Student] => 
+        [
             [id] => 1
             [first_name] => Joe
             [last_name] => Bloggs
-        )
+        ]
 
-        [Course] => Array
-        (
+        [Course] => 
+        [
             [id] => 1
             [name] => Cake
-        )
-    )
-)
+        ]
+    ]
+]
 ```
 
 There are of course many ways to work with a join model. The
@@ -697,21 +703,21 @@ then the two meta-fields for the CourseMembership, e.g. :
     <?php
         echo $this->Form->input(
             'Student.id',
-            array(
+            [
                 'type' => 'text',
                 'label' => 'Student ID',
                 'default' => 1
-            )
+            ]
         );
     ?>
     <?php
         echo $this->Form->input(
             'Course.id',
-            array(
+            [
                 'type' => 'text',
                 'label' => 'Course ID',
                 'default' => 1
-            )
+            ]
         );
     ?>
     <?php echo $this->Form->input('CourseMembership.days_attended'); ?>
@@ -723,24 +729,24 @@ then the two meta-fields for the CourseMembership, e.g. :
 And the resultant POST:
 
 ``` text
-Array
-(
-    [Student] => Array
-    (
-        [id] => 1
-    )
 
-    [Course] => Array
-    (
+[
+    [Student] => 
+    [
         [id] => 1
-    )
+    ]
 
-    [CourseMembership] => Array
-    (
+    [Course] => 
+    [
+        [id] => 1
+    ]
+
+    [CourseMembership] => 
+    [
         [days_attended] => 10
         [grade] => 5
-    )
-)
+    ]
+]
 ```
 
 Again CakePHP is good to us and pulls the Student id and Course id
@@ -758,17 +764,17 @@ correctly. An example of the required format for the data array
 passed to `save()` for the Tag model is shown below:
 
 ``` text
-Array
-(
-    [Recipe] => Array
-        (
+
+[
+    [Recipe] => 
+        [
             [id] => 42
-        )
-    [Tag] => Array
-        (
+        ]
+    [Tag] => 
+        [
             [name] => Italian
-        )
-)
+        ]
+]
 ```
 
 You can also use this format to save several records and their
@@ -776,53 +782,53 @@ HABTM associations with `saveAll()`, using an array like the
 following:
 
 ``` text
-Array
-(
-    [0] => Array
-        (
-            [Recipe] => Array
-                (
+
+[
+    [0] => 
+        [
+            [Recipe] => 
+                [
                     [id] => 42
-                )
-            [Tag] => Array
-                (
+                ]
+            [Tag] => 
+                [
                     [name] => Italian
-                )
-        )
-    [1] => Array
-        (
-            [Recipe] => Array
-                (
+                ]
+        ]
+    [1] => 
+        [
+            [Recipe] => 
+                [
                     [id] => 43
-                )
-            [Tag] => Array
-                (
+                ]
+            [Tag] => 
+                [
                     [name] => Pasta
-                )
-        )
-    [2] => Array
-        (
-            [Recipe] => Array
-                (
+                ]
+        ]
+    [2] => 
+        [
+            [Recipe] => 
+                [
                     [id] => 51
-                )
-            [Tag] => Array
-                (
+                ]
+            [Tag] => 
+                [
                     [name] => Mexican
-                )
-        )
-    [3] => Array
-        (
-            [Recipe] => Array
-                (
+                ]
+        ]
+    [3] => 
+        [
+            [Recipe] => 
+                [
                     [id] => 17
-                )
-            [Tag] => Array
-                (
+                ]
+            [Tag] => 
+                [
                     [name] => American (new)
-                )
-        )
-)
+                ]
+        ]
+]
 ```
 
 Passing the above array to `saveAll()` will create the contained tags,
@@ -834,56 +840,56 @@ you only need to pass in the id's of the associated HABTM model however it needs
 to be nested again:
 
 ``` text
-Array
-(
-    [0] => Array
-        (
-            [Post] => Array
-                (
+
+[
+    [0] => 
+        [
+            [Post] => 
+                [
                     [title] => 'Saving HABTM arrays'
-                )
-            [Tag] => Array
-                (
-                    [Tag] => Array(1, 2, 5, 9)
-                )
-        )
-    [1] => Array
-        (
-            [Post] => Array
-                (
+                ]
+            [Tag] => 
+                [
+                    [Tag] => [1, 2, 5, 9]
+                ]
+        ]
+    [1] => 
+        [
+            [Post] => 
+                [
                     [title] => 'Dr Who\'s Name is Revealed'
-                )
-            [Tag] => Array
-                (
-                    [Tag] => Array(7, 9, 15, 19)
-                )
-        )
-    [2] => Array
-        (
-            [Post] => Array
-                (
+                ]
+            [Tag] => 
+                [
+                    [Tag] => [7, 9, 15, 19]
+                ]
+        ]
+    [2] => 
+        [
+            [Post] => 
+                [
                     [title] => 'I Came, I Saw and I Conquered'
-                )
-            [Tag] => Array
-                (
-                    [Tag] => Array(11, 12, 15, 19)
-                )
-        )
-    [3] => Array
-        (
-            [Post] => Array
-                (
+                ]
+            [Tag] => 
+                [
+                    [Tag] => [11, 12, 15, 19]
+                ]
+        ]
+    [3] => 
+        [
+            [Post] => 
+                [
                     [title] => 'Simplicity is the Ultimate Sophistication'
-                )
-            [Tag] => Array
-                (
-                    [Tag] => Array(12, 22, 25, 29)
-                )
-        )
-)
+                ]
+            [Tag] => 
+                [
+                    [Tag] => [12, 22, 25, 29]
+                ]
+        ]
+]
 ```
 
-Passing the above array to `saveAll($data, array('deep' => true))`
+Passing the above array to `saveAll($data, ['deep' => true])`
 will populate the posts_tags join table with the Tag to Post associations.
 
 As an example, we'll build a form that creates a new tag and
@@ -897,7 +903,7 @@ The simplest form might look something like this (we'll assume that
 <?php echo $this->Form->create('Tag'); ?>
     <?php echo $this->Form->input(
         'Recipe.id',
-        array('type' => 'hidden', 'value' => $recipe_id)
+        ['type' => 'hidden', 'value' => $recipe_id]
     ); ?>
     <?php echo $this->Form->input('Tag.name'); ?>
 <?php echo $this->Form->end('Add Tag'); ?>
@@ -910,7 +916,8 @@ When the `save()` method is invoked within the controller, it'll
 automatically save the HABTM data to the database:
 
 ``` php
-public function add() {
+public function add()
+{
     // Save the association
     if ($this->Tag->save($this->request->data)) {
         // do something on success
@@ -965,14 +972,15 @@ By setting the `className` to the models name and use the alias as
 key we avoid those issues. :
 
 ``` php
-class Project extends AppModel {
-    public $hasAndBelongsToMany = array(
-        'RelatedProject' => array(
+class Project extends AppModel
+{
+    public $hasAndBelongsToMany = [
+        'RelatedProject' => [
             'className'              => 'Project',
             'foreignKey'             => 'projects_a_id',
             'associationForeignKey'  => 'projects_b_id',
-        ),
-    );
+        ],
+    ];
 }
 ```
 
@@ -1067,9 +1075,11 @@ from \$this-\>data and not automagically updated. If you don't want that you can
 the Model::save() to always do it for you:
 
 ``` php
-class AppModel extends Model {
+class AppModel extends Model
+{
 
-    public function save($data = null, $validate = true, $fieldList = array()) {
+    public function save($data = null, $validate = true, $fieldList = [])
+    {
         // Clear modified field value before each save
         $this->set($data);
         if (isset($this->data[$this->alias]['modified'])) {
@@ -1077,7 +1087,6 @@ class AppModel extends Model {
         }
         return parent::save($this->data, $validate, $fieldList);
     }
-
 }
 ```
 

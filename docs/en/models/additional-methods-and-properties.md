@@ -9,12 +9,14 @@ housed in your model classes. This concept is often referred to as
 the fat model.
 
 ``` php
-class Example extends AppModel {
-    public function getRecent() {
-        $conditions = array(
+class Example extends AppModel
+{
+    public function getRecent()
+    {
+        $conditions = [
             'created BETWEEN (curdate() - interval 7 day)' .
             ' and (curdate() - interval 0 day))'
-        );
+        ];
         return $this->find('all', compact('conditions'));
     }
 }
@@ -32,10 +34,10 @@ Get associations:
 
 ``` php
 $result = $this->Example->associations();
-// $result equals array('belongsTo', 'hasOne', 'hasMany', 'hasAndBelongsToMany')
+// $result equals ['belongsTo', 'hasOne', 'hasMany', 'hasAndBelongsToMany']
 ```
 
-## `Model::buildQuery(string $type = 'first', array $query = array())`
+## `Model::buildQuery(string $type = 'first', array $query = [])`
 
 Builds the query array that is used by the data source to generate the query to
 fetch the data.

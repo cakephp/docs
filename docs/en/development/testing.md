@@ -58,8 +58,8 @@ require APP . 'Vendor/autoload.php';
 // Remove and re-prepend CakePHP's autoloader as Composer thinks it is the
 // most important.
 // See: http://goo.gl/kKVJO7
-spl_autoload_unregister(array('App', 'load'));
-spl_autoload_register(array('App', 'load'), true, true);
+spl_autoload_unregister(['App', 'load']);
+spl_autoload_register(['App', 'load'], true, true);
 ```
 
 ### Install via .phar Package
@@ -99,14 +99,14 @@ debug is equal to 0. Before running any tests you should be sure to add a
 fixture tables and data:
 
 ``` php
-public $test = array(
+public $test = [
     'datasource' => 'Database/Mysql',
     'persistent' => false,
     'host'       => 'dbhost',
     'login'      => 'dblogin',
     'password'   => 'dbpassword',
     'database'   => 'test_database'
-);
+];
 ```
 
 > [!NOTE]
@@ -175,8 +175,10 @@ method. The helper we're going to test will be formatting progress bar HTML.
 Our helper looks like:
 
 ``` php
-class ProgressHelper extends AppHelper {
-    public function bar($value) {
+class ProgressHelper extends AppHelper
+{
+    public function bar($value)
+    {
         $width = round($value / 100, 2) * 100;
         return sprintf(
             '<div class="progress-container">
@@ -196,12 +198,15 @@ App::uses('Controller', 'Controller');
 App::uses('View', 'View');
 App::uses('ProgressHelper', 'View/Helper');
 
-class ProgressHelperTest extends CakeTestCase {
-    public function setUp() {
+class ProgressHelperTest extends CakeTestCase
+{
+    public function setUp()
+    {
 
     }
 
-    public function testBar() {
+    public function testBar()
+    {
 
     }
 }
@@ -214,7 +219,8 @@ test, and do any configuration needed. In our setup method we'll add the
 following:
 
 ``` php
-public function setUp() {
+public function setUp()
+{
     parent::setUp();
     $Controller = new Controller();
     $View = new View($Controller);
@@ -230,7 +236,8 @@ Next, we'll fill out the test method. We'll use some assertions to ensure that
 our code creates the output we expect:
 
 ``` php
-public function testBar() {
+public function testBar()
+{
     $result = $this->Progress->bar(90);
     $this->assertContains('width: 90%', $result);
     $this->assertContains('progress-bar', $result);
@@ -477,53 +484,54 @@ used to test our own Article model. Create a file named `ArticleFixture.php`
 in your `app/Test/Fixture` directory, with the following content:
 
 ``` php
-class ArticleFixture extends CakeTestFixture {
+class ArticleFixture extends CakeTestFixture
+{
 
       // Optional.
       // Set this property to load fixtures to a different test datasource
       public $useDbConfig = 'test';
-      public $fields = array(
-          'id' => array('type' => 'integer', 'key' => 'primary'),
-          'title' => array(
+      public $fields = [
+          'id' => ['type' => 'integer', 'key' => 'primary'],
+          'title' => [
             'type' => 'string',
             'length' => 255,
             'null' => false
-          ),
+          ],
           'body' => 'text',
-          'published' => array(
+          'published' => [
             'type' => 'integer',
             'default' => '0',
             'null' => false
-          ),
+          ],
           'created' => 'datetime',
           'updated' => 'datetime'
-      );
-      public $records = array(
-          array(
+      ];
+      public $records = [
+          [
             'id' => 1,
             'title' => 'First Article',
             'body' => 'First Article Body',
             'published' => '1',
             'created' => '2007-03-18 10:39:23',
             'updated' => '2007-03-18 10:41:31'
-          ),
-          array(
+          ],
+          [
             'id' => 2,
             'title' => 'Second Article',
             'body' => 'Second Article Body',
             'published' => '1',
             'created' => '2007-03-18 10:41:23',
             'updated' => '2007-03-18 10:43:31'
-          ),
-          array(
+          ],
+          [
             'id' => 3,
             'title' => 'Third Article',
             'body' => 'Third Article Body',
             'published' => '1',
             'created' => '2007-03-18 10:43:23',
             'updated' => '2007-03-18 10:45:31'
-          )
-      );
+          ]
+      ];
  }
 ```
 
@@ -588,28 +596,30 @@ if you wanted all the created and updated timestamps to reflect today's date you
 could do the following:
 
 ``` php
-class ArticleFixture extends CakeTestFixture {
+class ArticleFixture extends CakeTestFixture
+{
 
-    public $fields = array(
-        'id' => array('type' => 'integer', 'key' => 'primary'),
-        'title' => array('type' => 'string', 'length' => 255, 'null' => false),
+    public $fields = [
+        'id' => ['type' => 'integer', 'key' => 'primary'],
+        'title' => ['type' => 'string', 'length' => 255, 'null' => false],
         'body' => 'text',
-        'published' => array('type' => 'integer', 'default' => '0', 'null' => false),
+        'published' => ['type' => 'integer', 'default' => '0', 'null' => false],
         'created' => 'datetime',
         'updated' => 'datetime'
-    );
+    ];
 
-    public function init() {
-        $this->records = array(
-            array(
+    public function init()
+    {
+        $this->records = [
+            [
                 'id' => 1,
                 'title' => 'First Article',
                 'body' => 'First Article Body',
                 'published' => '1',
                 'created' => date('Y-m-d H:i:s'),
                 'updated' => date('Y-m-d H:i:s'),
-            ),
-        );
+            ],
+        ];
         parent::init();
     }
 }
@@ -635,7 +645,8 @@ fixture given in the previous section (`app/Test/Fixture/ArticleFixture.php`)
 to:
 
 ``` php
-class ArticleFixture extends CakeTestFixture {
+class ArticleFixture extends CakeTestFixture
+{
     public $import = 'Article';
 }
 ```
@@ -646,8 +657,9 @@ your application. The statement will only import the Article schema, and does
 not import records. To import records you can do the following:
 
 ``` php
-class ArticleFixture extends CakeTestFixture {
-    public $import = array('model' => 'Article', 'records' => true);
+class ArticleFixture extends CakeTestFixture
+{
+    public $import = ['model' => 'Article', 'records' => true];
 }
 ```
 
@@ -656,8 +668,9 @@ can specify that your import will take place by reading that table information
 instead. For example:
 
 ``` php
-class ArticleFixture extends CakeTestFixture {
-    public $import = array('table' => 'articles');
+class ArticleFixture extends CakeTestFixture
+{
+    public $import = ['table' => 'articles'];
 }
 ```
 
@@ -666,8 +679,9 @@ database connection named 'default'. If you want to use a different connection
 use:
 
 ``` php
-class ArticleFixture extends CakeTestFixture {
-    public $import = array('table' => 'articles', 'connection' => 'other');
+class ArticleFixture extends CakeTestFixture
+{
+    public $import = ['table' => 'articles', 'connection' => 'other'];
 }
 ```
 
@@ -677,8 +691,9 @@ snippets above do not import records from the table. To force the fixture to
 also import its records, change the import to:
 
 ``` php
-class ArticleFixture extends CakeTestFixture {
-    public $import = array('table' => 'articles', 'records' => true);
+class ArticleFixture extends CakeTestFixture
+{
+    public $import = ['table' => 'articles', 'records' => true];
 }
 ```
 
@@ -687,34 +702,35 @@ have your records defined directly on the fixture as it was shown on previous
 section. For example:
 
 ``` php
-class ArticleFixture extends CakeTestFixture {
+class ArticleFixture extends CakeTestFixture
+{
     public $import = 'Article';
-    public $records = array(
-        array(
+    public $records = [
+        [
           'id' => 1,
           'title' => 'First Article',
           'body' => 'First Article Body',
           'published' => '1',
           'created' => '2007-03-18 10:39:23',
           'updated' => '2007-03-18 10:41:31'
-        ),
-        array(
+        ],
+        [
           'id' => 2,
           'title' => 'Second Article',
           'body' => 'Second Article Body',
           'published' => '1',
           'created' => '2007-03-18 10:41:23',
           'updated' => '2007-03-18 10:43:31'
-        ),
-        array(
+        ],
+        [
           'id' => 3,
           'title' => 'Third Article',
           'body' => 'Third Article Body',
           'published' => '1',
           'created' => '2007-03-18 10:43:23',
           'updated' => '2007-03-18 10:45:31'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -726,8 +742,9 @@ fixture for every model that will have a query run against it. To load fixtures
 you define the `$fixtures` property in your model:
 
 ``` php
-class ArticleTest extends CakeTestCase {
-    public $fixtures = array('app.article', 'app.comment');
+class ArticleTest extends CakeTestCase
+{
+    public $fixtures = ['app.article', 'app.comment'];
 }
 ```
 
@@ -735,8 +752,9 @@ The above will load the Article and Comment fixtures from the application's
 Fixture directory. You can also load fixtures from CakePHP core, or plugins:
 
 ``` php
-class ArticleTest extends CakeTestCase {
-    public $fixtures = array('plugin.debug_kit.article', 'core.comment');
+class ArticleTest extends CakeTestCase
+{
+    public $fixtures = ['plugin.debug_kit.article', 'core.comment'];
 }
 ```
 
@@ -748,11 +766,13 @@ You can control when your fixtures are loaded by setting
 `CakeTestCase::loadFixtures()`:
 
 ``` php
-class ArticleTest extends CakeTestCase {
-    public $fixtures = array('app.article', 'app.comment');
+class ArticleTest extends CakeTestCase
+{
+    public $fixtures = ['app.article', 'app.comment'];
     public $autoFixtures = false;
 
-    public function testMyFunction() {
+    public function testMyFunction()
+    {
         $this->loadFixtures('Article', 'Comment');
     }
 }
@@ -764,8 +784,9 @@ To load fixtures in subdirectories, simply include the subdirectory name in the
 fixture name:
 
 ``` php
-class ArticleTest extends CakeTestCase {
-    public $fixtures = array('app.blog/article', 'app.blog/comment');
+class ArticleTest extends CakeTestCase
+{
+    public $fixtures = ['app.blog/article', 'app.blog/comment'];
 }
 ```
 
@@ -782,14 +803,16 @@ Let's say we already have our Article model defined on
 `app/Model/Article.php`, which looks like this:
 
 ``` php
-class Article extends AppModel {
-    public function published($fields = null) {
-        $params = array(
-            'conditions' => array(
+class Article extends AppModel
+{
+    public function published($fields = null)
+    {
+        $params = [
+            'conditions' => [
                 $this->name . '.published' => 1
-            ),
+            ],
             'fields' => $fields
-        );
+        ];
 
         return $this->find('all', $params);
     }
@@ -807,8 +830,9 @@ Let's now create a file named `ArticleTest.php` in your
 ``` php
 App::uses('Article', 'Model');
 
-class ArticleTest extends CakeTestCase {
-    public $fixtures = array('app.article');
+class ArticleTest extends CakeTestCase
+{
+    public $fixtures = ['app.article'];
 }
 ```
 
@@ -831,21 +855,24 @@ this:
 ``` php
 App::uses('Article', 'Model');
 
-class ArticleTest extends CakeTestCase {
-    public $fixtures = array('app.article');
+class ArticleTest extends CakeTestCase
+{
+    public $fixtures = ['app.article'];
 
-    public function setUp() {
+    public function setUp()
+    {
         parent::setUp();
         $this->Article = ClassRegistry::init('Article');
     }
 
-    public function testPublished() {
-        $result = $this->Article->published(array('id', 'title'));
-        $expected = array(
-            array('Article' => array('id' => 1, 'title' => 'First Article')),
-            array('Article' => array('id' => 2, 'title' => 'Second Article')),
-            array('Article' => array('id' => 3, 'title' => 'Third Article'))
-        );
+    public function testPublished()
+    {
+        $result = $this->Article->published(['id', 'title']);
+        $expected = [
+            ['Article' => ['id' => 1, 'title' => 'First Article']],
+            ['Article' => ['id' => 2, 'title' => 'Second Article']],
+            ['Article' => ['id' => 3, 'title' => 'Third Article']]
+        ];
 
         $this->assertEquals($expected, $result);
     }
@@ -872,8 +899,9 @@ use `getMockForModel` to create testing mocks of models. It avoids issues
 with reflected properties that normal mocks have:
 
 ``` php
-public function testSendingEmails() {
-    $model = $this->getMockForModel('EmailVerification', array('send'));
+public function testSendingEmails()
+{
+    $model = $this->getMockForModel('EmailVerification', ['send']);
     $model->expects($this->once())
         ->method('send')
         ->will($this->returnValue(true));
@@ -901,15 +929,17 @@ model. The controller code looks like:
 ``` php
 App::uses('AppController', 'Controller');
 
-class ArticlesController extends AppController {
-    public $helpers = array('Form', 'Html');
+class ArticlesController extends AppController
+{
+    public $helpers = ['Form', 'Html'];
 
-    public function index($short = null) {
+    public function index($short = null)
+    {
         if (!empty($this->request->data)) {
             $this->Article->save($this->request->data);
         }
         if (!empty($short)) {
-            $result = $this->Article->find('all', array('id', 'title'));
+            $result = $this->Article->find('all', ['id', 'title']);
         } else {
             $result = $this->Article->find('all');
         }
@@ -928,48 +958,54 @@ Create a file named `ArticlesControllerTest.php` in your
 `app/Test/Case/Controller` directory and put the following inside:
 
 ``` php
-class ArticlesControllerTest extends ControllerTestCase {
-    public $fixtures = array('app.article');
+class ArticlesControllerTest extends ControllerTestCase
+{
+    public $fixtures = ['app.article'];
 
-    public function testIndex() {
+    public function testIndex()
+    {
         $result = $this->testAction('/articles/index');
         debug($result);
     }
 
-    public function testIndexShort() {
+    public function testIndexShort()
+    {
         $result = $this->testAction('/articles/index/short');
         debug($result);
     }
 
-    public function testIndexShortGetRenderedHtml() {
+    public function testIndexShortGetRenderedHtml()
+    {
         $result = $this->testAction(
            '/articles/index/short',
-            array('return' => 'contents')
+            ['return' => 'contents']
         );
         debug($result);
     }
 
-    public function testIndexShortGetViewVars() {
+    public function testIndexShortGetViewVars()
+    {
         $result = $this->testAction(
             '/articles/index/short',
-            array('return' => 'vars')
+            ['return' => 'vars']
         );
         debug($result);
     }
 
-    public function testIndexPostData() {
-        $data = array(
-            'Article' => array(
+    public function testIndexPostData()
+    {
+        $data = [
+            'Article' => [
                 'user_id' => 1,
                 'published' => 1,
                 'slug' => 'new-article',
                 'title' => 'New Article',
                 'body' => 'New Body'
-            )
-        );
+            ]
+        ];
         $result = $this->testAction(
             '/articles/index',
-            array('data' => $data, 'method' => 'post')
+            ['data' => $data, 'method' => 'post']
         );
         debug($result);
     }
@@ -990,11 +1026,13 @@ the redirect. For example:
 ``` php
 App::uses('AppController', 'Controller');
 
-class ArticlesController extends AppController {
-    public function add() {
+class ArticlesController extends AppController
+{
+    public function add()
+    {
         if ($this->request->is('post')) {
             if ($this->Article->save($this->request->data)) {
-                $this->redirect(array('action' => 'index'));
+                $this->redirect(['action' => 'index']);
             }
         }
         // more code
@@ -1008,11 +1046,13 @@ redirect is reached. Instead, you should write the code like:
 ``` php
 App::uses('AppController', 'Controller');
 
-class ArticlesController extends AppController {
-    public function add() {
+class ArticlesController extends AppController
+{
+    public function add()
+    {
         if ($this->request->is('post')) {
             if ($this->Article->save($this->request->data)) {
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(['action' => 'index']);
             }
         }
         // more code
@@ -1032,14 +1072,15 @@ requests will be POST requests. You can simulate a GET request by setting the
 method key:
 
 ``` php
-public function testAdding() {
-    $data = array(
-        'Post' => array(
+public function testAdding()
+{
+    $data = [
+        'Post' => [
             'title' => 'New post',
             'body' => 'Secret sauce'
-        )
-    );
-    $this->testAction('/posts/add', array('data' => $data, 'method' => 'get'));
+        ]
+    ];
+    $this->testAction('/posts/add', ['data' => $data, 'method' => 'get']);
     // some assertions.
 }
 ```
@@ -1064,7 +1105,8 @@ you can also access the various other return types as properties in the test
 case:
 
 ``` php
-public function testIndex() {
+public function testIndex()
+{
     $this->testAction('/posts/index');
     $this->assertInternalType('array', $this->vars['posts']);
 }
@@ -1080,19 +1122,19 @@ controller to be used in testing, you can generate mocked versions of its models
 and components along with it:
 
 ``` php
-$Posts = $this->generate('Posts', array(
-    'methods' => array(
+$Posts = $this->generate('Posts', [
+    'methods' => [
         'isAuthorized'
-    ),
-    'models' => array(
-        'Post' => array('save')
-    ),
-    'components' => array(
-        'RequestHandler' => array('isPut'),
-        'Email' => array('send'),
+    ],
+    'models' => [
+        'Post' => ['save']
+    ],
+    'components' => [
+        'RequestHandler' => ['isPut'],
+        'Email' => ['send'],
         'Session'
-    )
-));
+    ]
+]);
 ```
 
 The above would create a mocked `PostsController`, stubbing out the `isAuthorized`
@@ -1118,13 +1160,14 @@ property which gives you access to the `headers` that would have been sent,
 allowing you to check for redirects:
 
 ``` php
-public function testAdd() {
-    $Posts = $this->generate('Posts', array(
-        'components' => array(
+public function testAdd()
+{
+    $Posts = $this->generate('Posts', [
+        'components' => [
             'Session',
-            'Email' => array('send')
-        )
-    ));
+            'Email' => ['send']
+        ]
+    ]);
     $Posts->Session
         ->expects($this->once())
         ->method('setFlash');
@@ -1133,19 +1176,20 @@ public function testAdd() {
         ->method('send')
         ->will($this->returnValue(true));
 
-    $this->testAction('/posts/add', array(
-        'data' => array(
-            'Post' => array('title' => 'New Post')
-        )
-    ));
+    $this->testAction('/posts/add', [
+        'data' => [
+            'Post' => ['title' => 'New Post']
+        ]
+    ]);
     $this->assertContains('/posts', $this->headers['Location']);
 }
 
-public function testAddGet() {
-    $this->testAction('/posts/add', array(
+public function testAddGet()
+{
+    $this->testAction('/posts/add', [
         'method' => 'GET',
         'return' => 'contents'
-    ));
+    ]);
     $this->assertRegExp('/<html/', $this->contents);
     $this->assertRegExp('/<form/', $this->view);
 }
@@ -1168,13 +1212,14 @@ wanted to mock out `AuthComponent::user()` you'd have to do the
 following:
 
 ``` php
-public function testAdd() {
-    $Posts = $this->generate('Posts', array(
-        'components' => array(
+public function testAdd()
+{
+    $Posts = $this->generate('Posts', [
+        'components' => [
             'Session',
-            'Auth' => array('user')
-        )
-    ));
+            'Auth' => ['user']
+        ]
+    ]);
     $Posts->Auth->staticExpects($this->any())
         ->method('user')
         ->with('id')
@@ -1197,9 +1242,11 @@ Testing the endpoints of your web service is very simple with CakePHP. Let us
 begin with a simple example controller that responds in JSON:
 
 ``` php
-class MarkersController extends AppController {
+class MarkersController extends AppController
+{
     public $autoRender = false;
-    public function index() {
+    public function index()
+    {
         $data = $this->Marker->find('first');
         $this->response->body(json_encode($data));
     }
@@ -1210,13 +1257,15 @@ Now we create the file `app/Test/Case/Controller/MarkersControllerTest.php`
 and make sure our web service is returning the proper response:
 
 ``` php
-class MarkersControllerTest extends ControllerTestCase {
-    public function testIndex() {
+class MarkersControllerTest extends ControllerTestCase
+{
+    public function testIndex()
+    {
         $result = $this->testAction('/markers/index.json');
         $result = json_decode($result, true);
-        $expected = array(
-            'Marker' => array('id' => 1, 'lng' => 66, 'lat' => 45),
-        );
+        $expected = [
+            'Marker' => ['id' => 1, 'lng' => 66, 'lat' => 45],
+        ];
         $this->assertEquals($expected, $result);
     }
 }
@@ -1240,19 +1289,22 @@ controllers that use it. Here is our example component located in
 `app/Controller/Component/PagematronComponent.php`:
 
 ``` php
-class PagematronComponent extends Component {
+class PagematronComponent extends Component
+{
     public $Controller = null;
 
-    public function startup(Controller $controller) {
+    public function startup(Controller $controller)
+    {
         parent::startup($controller);
         $this->Controller = $controller;
         // Make sure the controller is using pagination
         if (!isset($this->Controller->paginate)) {
-            $this->Controller->paginate = array();
+            $this->Controller->paginate = [];
         }
     }
 
-    public function adjust($length = 'short') {
+    public function adjust($length = 'short')
+    {
         switch ($length) {
             case 'long':
                 $this->Controller->paginate['limit'] = 100;
@@ -1280,15 +1332,18 @@ App::uses('ComponentCollection', 'Controller');
 App::uses('PagematronComponent', 'Controller/Component');
 
 // A fake controller to test against
-class PagematronControllerTest extends Controller {
+class PagematronControllerTest extends Controller
+{
     public $paginate = null;
 }
 
-class PagematronComponentTest extends CakeTestCase {
+class PagematronComponentTest extends CakeTestCase
+{
     public $PagematronComponent = null;
     public $Controller = null;
 
-    public function setUp() {
+    public function setUp()
+    {
         parent::setUp();
         // Setup our component and fake test controller
         $Collection = new ComponentCollection();
@@ -1299,7 +1354,8 @@ class PagematronComponentTest extends CakeTestCase {
         $this->PagematronComponent->startup($this->Controller);
     }
 
-    public function testAdjust() {
+    public function testAdjust()
+    {
         // Test our adjust method with different parameter settings
         $this->PagematronComponent->adjust();
         $this->assertEquals(20, $this->Controller->paginate['limit']);
@@ -1311,7 +1367,8 @@ class PagematronComponentTest extends CakeTestCase {
         $this->assertEquals(100, $this->Controller->paginate['limit']);
     }
 
-    public function tearDown() {
+    public function tearDown()
+    {
         parent::tearDown();
         // Clean up after we're done
         unset($this->PagematronComponent);
@@ -1331,8 +1388,10 @@ help us display currencies in our views and for simplicity only has one method
 
 ``` php
 // app/View/Helper/CurrencyRendererHelper.php
-class CurrencyRendererHelper extends AppHelper {
-    public function usd($amount) {
+class CurrencyRendererHelper extends AppHelper
+{
+    public function usd($amount)
+    {
         return 'USD ' . number_format($amount, 2, '.', ',');
     }
 }
@@ -1350,11 +1409,13 @@ App::uses('Controller', 'Controller');
 App::uses('View', 'View');
 App::uses('CurrencyRendererHelper', 'View/Helper');
 
-class CurrencyRendererHelperTest extends CakeTestCase {
+class CurrencyRendererHelperTest extends CakeTestCase
+{
     public $CurrencyRenderer = null;
 
     // Here we instantiate our helper
-    public function setUp() {
+    public function setUp()
+    {
         parent::setUp();
         $Controller = new Controller();
         $View = new View($Controller);
@@ -1362,7 +1423,8 @@ class CurrencyRendererHelperTest extends CakeTestCase {
     }
 
     // Testing the usd() function
-    public function testUsd() {
+    public function testUsd()
+    {
         $this->assertEquals('USD 5.30', $this->CurrencyRenderer->usd(5.30));
 
         // We should always have 2 decimal digits
@@ -1401,8 +1463,10 @@ the file system. If we wanted to create a test suite for all our model tests we
 would create `app/Test/Case/AllModelTest.php`. Put the following in it:
 
 ``` php
-class AllModelTest extends CakeTestSuite {
-    public static function suite() {
+class AllModelTest extends CakeTestSuite
+{
+    public static function suite()
+    {
         $suite = new CakeTestSuite('All model tests');
         $suite->addTestDirectory(TESTS . 'Case/Model');
         return $suite;
@@ -1424,8 +1488,10 @@ directory. You can use test suites to build a suite that runs all your
 application's tests:
 
 ``` php
-class AllTestsTest extends CakeTestSuite {
-    public static function suite() {
+class AllTestsTest extends CakeTestSuite
+{
+    public static function suite()
+    {
         $suite = new CakeTestSuite('All tests');
         $suite->addTestDirectoryRecursive(TESTS . 'Case');
         return $suite;
@@ -1468,13 +1534,15 @@ prefix your plugin fixtures with `plugin.blog.blog_post`:
 ``` php
 App::uses('BlogPost', 'Blog.Model');
 
-class BlogPostTest extends CakeTestCase {
+class BlogPostTest extends CakeTestCase
+{
 
     // Plugin fixtures located in /app/Plugin/Blog/Test/Fixture/
-    public $fixtures = array('plugin.blog.blog_post');
+    public $fixtures = ['plugin.blog.blog_post'];
     public $BlogPost;
 
-    public function testSomething() {
+    public function testSomething()
+    {
         // ClassRegistry makes the model use the test database connection
         $this->BlogPost = ClassRegistry::init('Blog.BlogPost');
 
@@ -1514,15 +1582,16 @@ a *shell script step* to the build that contains the following:
 ``` php
 cat > app/Config/database.php <<'DATABASE_PHP'
 <?php
-class DATABASE_CONFIG {
-    public $test = array(
+class DATABASE_CONFIG
+{
+    public $test = [
         'datasource' => 'Database/Mysql',
         'host'       => 'localhost',
         'database'   => 'jenkins_test',
         'login'      => 'jenkins',
         'password'   => 'cakephp_jenkins',
         'encoding'   => 'utf8'
-    );
+    ];
 }
 DATABASE_PHP
 ```

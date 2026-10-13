@@ -151,8 +151,8 @@ versions of CakePHP these values changed depending on your environment.
   instead.
 - `e()` was removed. Use `echo`.
 - `r()` was removed. Use `str_replace`.
-- `a()` was removed. `Use array()`
-- `aa()` was removed. Use `array()`
+- `a()` was removed. `Use []`
+- `aa()` was removed. Use `[]`
 - `up()` was removed. Use `strtoupper()`
 - `low()` was removed. Use `strtolower()`
 - `params()` was removed. It was not used anywhere in CakePHP.
@@ -219,9 +219,11 @@ Component is now the required base class for all components. You should update
 your components and their constructors, as both have changed:
 
 ``` php
-class PrgComponent extends Component {
+class PrgComponent extends Component
+{
     public function __construct(ComponentCollection $collection,
-      $settings = array()) {
+      $settings = [])
+    {
         parent::__construct($collection, $settings);
     }
 }
@@ -238,7 +240,9 @@ Since settings have been moved to the component constructor, the
 You should update your components to use the following method signature:
 
 ``` php
-public function initialize(Controller $controller) { }
+public function initialize(Controller $controller)
+{
+}
 ```
 
 Additionally, the initialize() method is only called on components that are
@@ -252,7 +256,7 @@ ComponentCollection. Instead you should use the <span class="title-ref">trigger(
 with callbacks. If you need to trigger a callback you could do so by calling:
 
 ``` php
-$this->Components->trigger('someCallback', array(&$this));
+$this->Components->trigger('someCallback', [&$this]);
 ```
 
 ### Changes in disabling components
@@ -373,8 +377,8 @@ same (ie. Prepending new paths to existing list).
 
 - Now supports plugins, App::objects('Users.Model') will return the models in
   plugin Users.
-- Returns array() instead of false for empty results or invalid types.
-- Does not return core objects anymore, App::objects('core') will return array().
+- Returns [] instead of false for empty results or invalid types.
+- Does not return core objects anymore, App::objects('core') will return [].
 - Returns the complete class name.
 
 App class lost the following properties, use method App::path() to access their value
@@ -487,13 +491,13 @@ fetch the class in the exact package in which you told it to find it.
 Examples:
 
 ``` php
-App::build(array('controllers' => array('/full/path/to/controllers')));
+App::build(['controllers' => ['/full/path/to/controllers']]);
 //becomes
-App::build(array('Controller' => array('/full/path/to/Controller')));
+App::build(['Controller' => ['/full/path/to/Controller']]);
 
-App::build(array('helpers' => array('/full/path/to/controllers')));
+App::build(['helpers' => ['/full/path/to/controllers']]);
 //becomes
-App::build(array('View/Helper' => array('/full/path/to/View/Helper')));
+App::build(['View/Helper' => ['/full/path/to/View/Helper']]);
 ```
 
 ### CakeLog
@@ -554,7 +558,7 @@ Cache::write('key', $value, 'something');
   ``` php
   Router::connect(
     '/users/:action',
-    array('controller' => 'users', 'plugin' => 'users')
+    ['controller' => 'users', 'plugin' => 'users']
   );
   ```
 
@@ -651,7 +655,7 @@ of Helper::\_\_construct() was changed. You should update any subclasses to use
 the following:
 
 ``` php
-public function __construct(View $View, $settings = array())
+public function __construct(View $View, $settings = [])
 ```
 
 When overriding the constructor you should always call <span class="title-ref">parent::\_\_construct</span> as
@@ -768,7 +772,7 @@ changes.
 The Helper class has more 3 protected attributes:
 
 - `Helper::_minimizedAttributes`: array with minimized attributes (ie:
-  `array('checked', 'selected', ...)`);
+  `['checked', 'selected', ...]`);
 - `Helper::_attributeFormat`: how attributes will be generated (ie:
   `%s="%s"`);
 - `Helper::_minimizedAttributeFormat`: how minimized attributes will be
@@ -781,14 +785,14 @@ this, just change `$_minimizedAttributeFormat` in your AppHelper to `%s`.
 To use with Html/Form helpers and others, you can write:
 
 ``` php
-$this->Form->checkbox('field', array('checked' => true, 'value' => 'some_value'));
+$this->Form->checkbox('field', ['checked' => true, 'value' => 'some_value']);
 ```
 
 Other facility is that minimized attributes can be passed as item and not as
 key. For example:
 
 ``` php
-$this->Form->checkbox('field', array('checked', 'value' => 'some_value'));
+$this->Form->checkbox('field', ['checked', 'value' => 'some_value']);
 ```
 
 Note that `checked` have a numeric key.
@@ -875,7 +879,7 @@ you update your application.
 
 ### Added methods
 
-- `View::loadHelper($name, $settings = array());` Load a single helper.
+- `View::loadHelper($name, $settings = []);` Load a single helper.
 - `View::loadHelpers()` Loads all the helpers indicated in `View::$helpers`.
 
 ### View-\>Helpers
@@ -906,19 +910,23 @@ it is the layout file being rendered. Your helpers function signatures should
 look like:
 
 ``` php
-public function beforeRender($viewFile) {
+public function beforeRender($viewFile)
+{
 
 }
 
-public function afterRender($viewFile) {
+public function afterRender($viewFile)
+{
 
 }
 
-public function beforeLayout($layoutFile) {
+public function beforeLayout($layoutFile)
+{
 
 }
 
-public function afterLayout($layoutFile) {
+public function afterLayout($layoutFile)
+{
 
 }
 ```
@@ -1003,22 +1011,23 @@ will throw the error "Notice: Indirect modification of overloaded property
 solves the issue:
 
 ``` text
-$Post->nonexistentProperty = array();
+$Post->nonexistentProperty = [];
 $Post->nonexistentProperty[] = 'value';
 ```
 
 Or just declare the property in the model class:
 
 ``` php
-class Post {
-    public $nonexistentProperty = array();
+class Post
+{
+    public $nonexistentProperty = [];
 }
 ```
 
 Either of these approaches will solve the notice errors.
 
 The notation of `find()` in CakePHP 1.2 is no longer supported. Finds should use
-notation `$model->find('type', array(PARAMS))` in CakePHP 1.3.
+notation `$model->find('type', [PARAMS])` in CakePHP 1.3.
 
 - `Model::$_findMethods` is now `Model::$findMethods`. This property is now
   public and can be modified by behaviors.
@@ -1052,13 +1061,13 @@ statements with query placeholders using the native driver if available.
   values as second parameter:
 
   ``` php
-  public function execute($sql, $params = array(), $options = array())
+  public function execute($sql, $params = [], $options = [])
   ```
 
   became:
 
   ``` php
-  public function execute($sql, $options = array(), $params = array())
+  public function execute($sql, $options = [], $params = [])
   ```
 
   third parameter is meant to receive options for logging, currently it only
@@ -1077,7 +1086,7 @@ statements with query placeholders using the native driver if available.
       username = ?
     AND
       password = ?',
-    array('jhon', '12345')
+    ['jhon', '12345']
   );
   $db->fetchAll(
     'SELECT
@@ -1086,7 +1095,7 @@ statements with query placeholders using the native driver if available.
         username = :username
     AND
       password = :password',
-    array('username' => 'jhon', 'password' => '12345')
+    ['username' => 'jhon', 'password' => '12345']
   );
   ```
 
@@ -1130,19 +1139,19 @@ The PDO driver will automatically escape those values for you.
 - No longer supports strings as configuration. Example:
 
   ``` php
-  public $actsAs = array(
+  public $actsAs = [
       'Acl' => 'Controlled',
       'Tree' => 'nested'
-  );
+  ];
   ```
 
   became:
 
   ``` php
-  public $actsAs = array(
-      'Acl' => array('type' => 'Controlled'),
-      'Tree' => array('type' => 'nested')
-  );
+  public $actsAs = [
+      'Acl' => ['type' => 'Controlled'],
+      'Tree' => ['type' => 'nested']
+  ];
   ```
 
 ## Plugins
@@ -1152,7 +1161,7 @@ and models used within them. You must be explicit with the components, models,
 and helpers you wish to use. In the past:
 
 ``` php
-public $components = array('Session', 'Comments');
+public $components = ['Session', 'Comments'];
 ```
 
 Would look in the controller's plugin before checking app/core components. It
@@ -1160,7 +1169,7 @@ will now only look in the app/core components. If you wish to use objects from a
 plugin you must put the plugin name:
 
 ``` php
-public $components = array('Session', 'Comment.Comments');
+public $components = ['Session', 'Comment.Comments'];
 ```
 
 This was done to reduce hard to debug issues caused by magic misfiring. It also
@@ -1252,12 +1261,12 @@ more consistent. Also, as the datasources have been moved to packages you will
 need to pass the package they are located in. Example:
 
 ``` php
-public $default = array(
+public $default = [
     'datasource' => 'Database/Mysql',
     'persistent' => false,
     'host' => 'localhost',
     'login' => 'root',
     'password' => 'root',
     'database' => 'cake',
-);
+];
 ```

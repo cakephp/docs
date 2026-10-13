@@ -23,7 +23,7 @@ CakeEmail の使い方は、 `EmailComponent` の使い方に似ていますが�
 
 ``` php
 $Email = new CakeEmail();
-$Email->from(array('me@example.com' => 'My Site'));
+$Email->from(['me@example.com' => 'My Site']);
 $Email->to('you@example.com');
 $Email->subject('About');
 $Email->send('My message');
@@ -34,7 +34,7 @@ $Email->send('My message');
 
 ``` php
 $Email = new CakeEmail();
-$Email->from(array('me@example.com' => 'My Site'))
+$Email->from(['me@example.com' => 'My Site'])
     ->to('you@example.com')
     ->subject('About')
     ->send('My message');
@@ -76,8 +76,10 @@ $Email->sender('app@example.com', 'MyApp emailer');
 もし、設定中に動的にデータをセットしたい場合、コンストラクターを使用することができます。 :
 
 ``` php
-class EmailConfig {
-    public function __construct() {
+class EmailConfig
+{
+    public function __construct()
+    {
         // Do conditional assignments here.
     }
 }
@@ -105,29 +107,30 @@ $Email = new CakeEmail();
 
 ``` php
 $Email = new CakeEmail();
-$Email->config(array('from' => 'me@example.org', 'transport' => 'MyCustom'));
+$Email->config(['from' => 'me@example.org', 'transport' => 'MyCustom']);
 
 //または、コンストラクタ内で::
-$Email = new CakeEmail(array('from' => 'me@example.org', 'transport' => 'MyCustom'));
+$Email = new CakeEmail(['from' => 'me@example.org', 'transport' => 'MyCustom']);
 ```
 
 > [!NOTE]
 > email のヘッダーや本文を記録するログレベルを設定するために `$Email->config()`
-> もしくはコンストラクタを使用してください。 `$Email->config(array('log' => true));`
+> もしくはコンストラクタを使用してください。 `$Email->config(['log' => true]);`
 > を使用する時、 LOG_DEBUG を使用します。 `CakeLog::write()` をご覧ください。
 
 Gmail のような SSL SMTP サーバの設定ができます。設定するためには、 `'ssl://'` のように
 ホストのプレフィックスを付けて、対応するポート番号を設定します。例:
 
 ``` php
-class EmailConfig {
-    public $gmail = array(
+class EmailConfig
+{
+    public $gmail = [
         'host' => 'ssl://smtp.gmail.com',
         'port' => 465,
         'username' => 'my@gmail.com',
         'password' => 'secret',
         'transport' => 'Smtp'
-    );
+    ];
 }
 ```
 
@@ -144,15 +147,16 @@ class EmailConfig {
 2.3.0 では、 `tls` オプションを使用して STARTTLS SMTP 拡張を有効にできます。 :
 
 ``` php
-class EmailConfig {
-    public $gmail = array(
+class EmailConfig
+{
+    public $gmail = [
         'host' => 'smtp.gmail.com',
         'port' => 465,
         'username' => 'my@gmail.com',
         'password' => 'secret',
         'transport' => 'Smtp',
         'tls' => true
-    );
+    ];
 }
 ```
 
@@ -207,7 +211,7 @@ class EmailConfig {
 > [!NOTE]
 > メールアドレスや配列で使用する上記のキーの値 (from, to, cc 他）は、関連するメソッドの第一引数として
 > 渡されます。例をあげると `CakeEmail::from('my@example.com', 'My Site')` は、設定の中では
-> `'from' => array('my@example.com' => 'My Site')` と定義されます。
+> `'from' => ['my@example.com' => 'My Site']` と定義されます。
 
 ### ヘッダーのセット
 
@@ -267,7 +271,7 @@ $Email->template('welcome', 'fancy')
 
 ``` php
 $Email = new CakeEmail('templated');
-$Email->viewVars(array('value' => 12345));
+$Email->viewVars(['value' => 12345]);
 ```
 
 以下のようにメールテンプレート内で使用します。 :
@@ -281,7 +285,7 @@ $Email->viewVars(array('value' => 12345));
 メソッドを使うことで追加でヘルパーをロードできます。 :
 
 ``` php
-$Email->helpers(array('Html', 'Custom', 'Text'));
+$Email->helpers(['Html', 'Custom', 'Text']);
 ```
 
 ヘルパーを設定する時は、'Html' を含めて下さい。そうしなければ、メールテンプレートに
@@ -322,24 +326,24 @@ $Email->theme('TestTheme');
 1.  文字列: `$Email->attachments('/full/file/path/file.png')` は、
     file.png というファイル名でこのファイルを添付します。
 
-2.  配列: `$Email->attachments(array('/full/file/path/file.png'))` は、
+2.  配列: `$Email->attachments(['/full/file/path/file.png'])` は、
     文字列の場合と同じ振る舞いをします。
 
 3.  キー付き配列:
-    `$Email->attachments(array('photo.png' => '/full/some_hash.png'))` は、
+    `$Email->attachments(['photo.png' => '/full/some_hash.png'])` は、
     photo.png というファイル名で some_hash.png ファイルを添付します。
     受信者からは、some_hash.png ではなく photo.png として見えます。
 
 4.  ネストした配列:
 
     ``` php
-    $Email->attachments(array(
-        'photo.png' => array(
+    $Email->attachments([
+        'photo.png' => [
             'file' => '/full/some_hash.png',
             'mimetype' => 'image/png',
             'contentId' => 'my-unique-id'
-        )
-    ));
+        ]
+    ]);
     ```
 
     上記は、異なる mimetype と独自のコンテンツID を添付します
@@ -389,12 +393,13 @@ SwiftMailer のような他のメールシステムを使うために独自の�
 ``` php
 App::uses('AbstractTransport', 'Network/Email');
 
-class ExampleTransport extends AbstractTransport {
+class ExampleTransport extends AbstractTransport
+{
 
-    public function send(CakeEmail $Email) {
+    public function send(CakeEmail $Email)
+    {
         // magic inside!
     }
-
 }
 ```
 

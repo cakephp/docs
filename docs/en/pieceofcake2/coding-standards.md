@@ -50,7 +50,7 @@ these points:
 | Original CakePHP 2.x | pieceofcake2 fork (CakePHP 5 sniffer) |
 |----------------------|----------------------------------------|
 | Indentation with one tab | Indentation with 4 spaces |
-| `array()` | Short array syntax `[]` |
+| `[]` | Short array syntax `[]` |
 | Opening brace of a method on the same line | Opening brace of classes and methods on its own line (PSR-12) |
 | 100 characters soft / 120 hard line limit | Line length is not checked (`Generic.Files.LineLength` excluded) |
 | No inline assignment in control structures | Assignment in conditions is allowed |

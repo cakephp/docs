@@ -7,13 +7,13 @@
 典型的には以下のようになります:
 
 ``` text
-array('controller' => 'posts', 'action' => 'view', 5)
+['controller' => 'posts', 'action' => 'view', 5]
 ```
 
 また、より複雑な例は:
 
 ``` text
-array(
+[
     'subdomain' => 'dev',
     'plugin' => 'account',
     'prefix' => 'admin',
@@ -21,11 +21,11 @@ array(
     'action' => 'edit',
     10257
     '#' => 'email',
-    '?' => array(
+    '?' => [
         'reset' => true,
-    ),
+    ],
     'full_base' => true,
-)
+]
 ```
 
 HTML属性  
@@ -33,7 +33,7 @@ HTMLの属性を構成するキー =\> 値の配列。例:
 
 ``` text
 // これを与えると
-array('class' => 'my-class', 'target' => '_blank')
+['class' => 'my-class', 'target' => '_blank']
 
 // これが生成される
 class="my-class" target="_blank"
@@ -43,7 +43,7 @@ class="my-class" target="_blank"
 
 ``` text
 // これを与えると
-array('checked' => true)
+['checked' => true]
 
 // これが生成される
 checked="checked"
@@ -62,13 +62,13 @@ checked="checked"
 は以下の値を指し示すことでしょう:
 
 ``` text
-array(
-    'Asset' => array(
-        'filter' => array(
+[
+    'Asset' => [
+        'filter' => [
             'css' => 'got me'
-        )
-    )
-)
+        ]
+    ]
+]
 ```
 
 CSRF  

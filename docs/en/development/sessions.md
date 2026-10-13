@@ -46,24 +46,24 @@ you need access to the session on both SSL and non-SSL domains you will want to
 disable this:
 
 ``` php
-Configure::write('Session', array(
+Configure::write('Session', [
     'defaults' => 'php',
-    'ini' => array(
+    'ini' => [
         'session.cookie_secure' => false
-    )
-));
+    ]
+]);
 ```
 
 Session cookie paths default to `/` in 2.0, to change this you can use the
 `session.cookie_path` ini flag to the directory path of your application:
 
 ``` php
-Configure::write('Session', array(
+Configure::write('Session', [
     'defaults' => 'php',
-    'ini' => array(
+    'ini' => [
         'session.cookie_path' => '/app/dir'
-    )
-));
+    ]
+]);
 ```
 
 If you are using php's default session settings, take note that
@@ -72,13 +72,13 @@ session.gc_maxlifetime can override your setting for timeout. The default is
 sessions:
 
 ``` php
-Configure::write('Session', array(
+Configure::write('Session', [
     'defaults' => 'php',
     'timeout' => 2160, // 36 hours
-    'ini' => array(
+    'ini' => [
         'session.gc_maxlifetime' => 129600 // 36 hours
-    )
-));
+    ]
+]);
 ```
 
 ## Built-in Session handlers & configuration
@@ -90,20 +90,20 @@ the default you want to use. You can then override any sub setting by declaring
 it in your Session config:
 
 ``` php
-Configure::write('Session', array(
+Configure::write('Session', [
     'defaults' => 'php'
-));
+]);
 ```
 
 The above will use the built-in 'php' session configuration. You could augment
 part or all of it by doing the following:
 
 ``` php
-Configure::write('Session', array(
+Configure::write('Session', [
     'defaults' => 'php',
     'cookie' => 'my_app',
     'timeout' => 4320 //3 days
-));
+]);
 ```
 
 The above overrides the timeout and cookie name for the 'php' session
@@ -125,23 +125,23 @@ object you want to use for session saving. There are two ways to use the
 are then applied to `session_set_save_handler`:
 
 ``` php
-Configure::write('Session', array(
+Configure::write('Session', [
     'userAgent' => false,
     'cookie' => 'my_cookie',
     'timeout' => 600,
-    'handler' => array(
-        array('Foo', 'open'),
-        array('Foo', 'close'),
-        array('Foo', 'read'),
-        array('Foo', 'write'),
-        array('Foo', 'destroy'),
-        array('Foo', 'gc'),
-    ),
-    'ini' => array(
+    'handler' => [
+        ['Foo', 'open'],
+        ['Foo', 'close'],
+        ['Foo', 'read'],
+        ['Foo', 'write'],
+        ['Foo', 'destroy'],
+        ['Foo', 'gc'],
+    ],
+    'ini' => [
         'cookie_secure' => 1,
         'use_trans_sid' => 0
-    )
-));
+    ]
+]);
 ```
 
 The second mode is to define an 'engine' key. This key should be a class name
@@ -188,12 +188,12 @@ Most of the time you will only need to set `Session.handler.model` in your
 configuration as well as choose the database defaults:
 
 ``` php
-Configure::write('Session', array(
+Configure::write('Session', [
     'defaults' => 'database',
-    'handler' => array(
+    'handler' => [
         'model' => 'CustomSession'
-    )
-));
+    ]
+]);
 ```
 
 The above will tell CakeSession to use the built-in 'database' defaults, and
@@ -204,9 +204,9 @@ If you do not need a fully custom session handler, but still require
 database-backed session storage, you can simplify the above code to:
 
 ``` php
-Configure::write('Session', array(
+Configure::write('Session', [
     'defaults' => 'database'
-));
+]);
 ```
 
 This configuration will require a database table to be added with
@@ -248,12 +248,12 @@ start to expire as records are evicted.
 To use Cache based sessions you can configure you Session config like:
 
 ``` php
-Configure::write('Session', array(
+Configure::write('Session', [
     'defaults' => 'cache',
-    'handler' => array(
+    'handler' => [
         'config' => 'session'
-    )
-));
+    ]
+]);
 ```
 
 This will configure CakeSession to use the `CacheSession` class as the
@@ -270,13 +270,13 @@ allows you to specify individual configuration values. For example you can use
 it to control settings like `session.gc_divisor`:
 
 ``` php
-Configure::write('Session', array(
+Configure::write('Session', [
     'defaults' => 'php',
-    'ini' => array(
+    'ini' => [
         'session.gc_divisor' => 1000,
         'session.cookie_httponly' => true
-    )
-));
+    ]
+]);
 ```
 
 ## Creating a custom session handler
@@ -293,16 +293,19 @@ something like:
 ``` php
 App::uses('DatabaseSession', 'Model/Datasource/Session');
 
-class ComboSession extends DatabaseSession implements CakeSessionHandlerInterface {
+class ComboSession extends DatabaseSession implements CakeSessionHandlerInterface
+{
     public $cacheKey;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->cacheKey = Configure::read('Session.handler.cache');
         parent::__construct();
     }
 
     // read data from the session.
-    public function read($id) {
+    public function read($id)
+    {
         $result = Cache::read($id, $this->cacheKey);
         if ($result) {
             return $result;
@@ -311,19 +314,22 @@ class ComboSession extends DatabaseSession implements CakeSessionHandlerInterfac
     }
 
     // write data into the session.
-    public function write($id, $data) {
+    public function write($id, $data)
+    {
         Cache::write($id, $data, $this->cacheKey);
         return parent::write($id, $data);
     }
 
     // destroy a session.
-    public function destroy($id) {
+    public function destroy($id)
+    {
         Cache::delete($id, $this->cacheKey);
         return parent::destroy($id);
     }
 
     // removes expired sessions.
-    public function gc($expires = null) {
+    public function gc($expires = null)
+    {
         Cache::gc($this->cacheKey);
         return parent::gc($expires);
     }
@@ -337,17 +343,17 @@ worry about what happens when we fill the cache. Using this session handler is
 also easy. In your `core.php` make the session block look like the following:
 
 ``` php
-Configure::write('Session', array(
+Configure::write('Session', [
     'defaults' => 'database',
-    'handler' => array(
+    'handler' => [
         'engine' => 'ComboSession',
         'model' => 'Session',
         'cache' => 'apc'
-    )
-));
+    ]
+]);
 
 // Make sure to add a apc cache config
-Cache::config('apc', array('engine' => 'Apc'));
+Cache::config('apc', ['engine' => 'Apc']);
 ```
 
 Now our application will start using our custom session handler for reading &

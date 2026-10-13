@@ -1,6 +1,6 @@
 # TimeHelper
 
-`class` **TimeHelper**(View $view, array $settings = array())
+`class` **TimeHelper**(View $view, array $settings = [])
 
 Time ヘルパーはメッキをかぶせることであなたの時間を節約します。
 Time ヘルパーには時間に関する情報を手早く処理するための2つの役割があります。

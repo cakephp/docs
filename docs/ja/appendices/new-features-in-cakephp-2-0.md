@@ -36,14 +36,14 @@
 コントローラで設定ファイルを指定する方法の例:
 
 ``` php
-public $helpers = array(
-    'Html' => array(
+public $helpers = [
+    'Html' => [
         // 一つ目の方法：ファイル名とリーダー名の配列
-        'configFile' => array('config_file', 'php')
+        'configFile' => ['config_file', 'php']
         // 二つ目の方法： ファイル名の文字列。PhpReaderが用いられます。
         'configFile' => 'config_file'
-    )
-);
+    ]
+];
 ```
 
 ### FormHelper
@@ -85,9 +85,11 @@ public $helpers = array(
 以下はサブドメインをサポートするルートクラスの一例です:
 
 ``` php
-class SubdomainRoute extends CakeRoute {
+class SubdomainRoute extends CakeRoute
+{
 
-    public function match($params) {
+    public function match($params)
+    {
         $subdomain = isset($params['subdomain']) ? $params['subdomain'] : null;
         unset($params['subdomain']);
         $path = parent::match($params);
@@ -104,7 +106,7 @@ class SubdomainRoute extends CakeRoute {
 ``` php
 echo $this->Html->link(
     'Other domain',
-     array('subdomain' => 'test', 'controller' => 'posts', 'action' => 'add')
+     ['subdomain' => 'test', 'controller' => 'posts', 'action' => 'add']
 );
 ```
 
@@ -140,10 +142,10 @@ CakePHP 2.0は [例外(Exception)](../development/exceptions) と [エラーハ�
 
 ``` text
 ########## DEBUG ##########
-Array
-(
+
+[
     [0] => test
-)
+]
 ###########################
 ```
 
@@ -205,7 +207,7 @@ CakePHP2.0のコンソールはほとんど完全に書き直されました。
 この制限はコントローラーでpaginate変数を用いて上書き可能です。
 
 ``` php
-$this->paginate = array('maxLimit' => 1000);
+$this->paginate = ['maxLimit' => 1000];
 ```
 
 このデフォルト値は、ユーザのURL操作で「limit」パラメータをとても大きな数値にしたリクエストのために、過大なデータベースの情報の引き出しを防ぐために提供されます。
@@ -217,32 +219,32 @@ $this->paginate = array('maxLimit' => 1000);
 これを為すには、モデルでしていたのと同じように、クラスを用いた「className」キーを渡してください。
 
 ``` php
-public $helpers = array(
-    'Html' => array(
+public $helpers = [
+    'Html' => [
         'className' => 'MyHtml'
-    )
-);
+    ]
+];
 ```
 
 同様に、コントローラで使うためにコンポーネントを別名として使うことができます。
 
 ``` php
-public $components = array(
-    'Email' => array(
+public $components = [
+    'Email' => [
         'className' => 'QueueEmailer'
-    )
-);
+    ]
+];
 ```
 
 Emailコンポーネントを呼び出すことは、代わりにQueueEmailerを呼び出すことになるでしょう。
 最後に、ビヘイビアでも別名呼び出しが可能です。
 
 ``` php
-public $actsAs = array(
-    'Containable' => array(
+public $actsAs = [
+    'Containable' => [
         'className' => 'SuperContainable'
-    )
-);
+    ]
+];
 ```
 
 2.0がコレクションを利用し、アプリケーションにまたがって共有することから、全てのエイリアス化されたクラスはアプリケーションの至る所で使用されるでしょう。

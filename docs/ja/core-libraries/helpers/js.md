@@ -1,6 +1,6 @@
 # JsHelper
 
-`class` **JsHelper**(View $view, array $settings = array())
+`class` **JsHelper**(View $view, array $settings = [])
 
 > [!WARNING]
 > 現在、JsHelper は非推奨です。 3.x で完全に削除されます。
@@ -54,7 +54,7 @@ echo $this->Js->writeBuffer(); // Write cached scripts
 JavaScript エンジンの選択は、あなたのコントローラのヘルパーを含める際に宣言します。 :
 
 ``` php
-public $helpers = array('Js' => array('Jquery'));
+public $helpers = ['Js' => ['Jquery']];
 ```
 
 上記は、あなたのビューの中の JsHelper のインスタンスで Jquery エンジンを使います。
@@ -78,7 +78,7 @@ jQuery 名前空間の中に上手に格納されます。あなたは、jQuery 
 $this->Js->JqueryEngine->jQueryObject = '$j';
 echo $this->Html->scriptBlock(
     'var $j = jQuery.noConflict();',
-    array('inline' => false)
+    ['inline' => false]
 );
 // noconflict モードで実行する事を jQuery に伝えます。
 ```
@@ -89,7 +89,7 @@ echo $this->Html->scriptBlock(
 JsHelper を宣言してください。 :
 
 ``` php
-public $helpers = array('Js');
+public $helpers = ['Js'];
 ```
 
 > [!NOTE]
@@ -100,10 +100,10 @@ public $helpers = array('Js');
 コントローラの中でヘルパーを設定してください。 :
 
 ``` php
-public $helpers = array(
-    'Js' => array('Prototype'),
+public $helpers = [
+    'Js' => ['Prototype'],
     'CustomHelper'
-);
+];
 ```
 
 > [!WARNING]
@@ -179,7 +179,7 @@ JavaScript ライブラリが変更可能な開発を簡素化する試みにお
 インクルードされたスクリプトファイルから独立して処理されることに
 注意してください。
 
-`method` JsHelper::**writeBuffer**($options = array())
+`method` JsHelper::**writeBuffer**($options = [])
 
 コードブロックにそれまで生成されたすべての JavaScript を出力します。
 もしくは、ファイルにキャッシュし、スクリプトのリンクを返します。
@@ -250,25 +250,25 @@ CakePHP コアに含まれるすべてのエンジンに対応します。　あ
 `オプション` と `イベントオプション` は別のリストに見えるかもしれませんが、
 両方のパラメータは、メソッドの `$options` 配列で指定します。
 
-`method` JsHelper::**object**($data, $options = array())
+`method` JsHelper::**object**($data, $options = [])
 
-`method` JsHelper::**sortable**($options = array())
+`method` JsHelper::**sortable**($options = [])
 
-`method` JsHelper::**request**($url, $options = array())
+`method` JsHelper::**request**($url, $options = [])
 
 `method` JsHelper::**get**($selector)
 
 `method` JsHelper::**set**(mixed $one, mixed $two = null)
 
-`method` JsHelper::**drag**($options = array())
+`method` JsHelper::**drag**($options = [])
 
-`method` JsHelper::**drop**($options = array())
+`method` JsHelper::**drop**($options = [])
 
-`method` JsHelper::**slider**($options = array())
+`method` JsHelper::**slider**($options = [])
 
-`method` JsHelper::**effect**($name, $options = array())
+`method` JsHelper::**effect**($name, $options = [])
 
-`method` JsHelper::**event**($type, $content, $options = array())
+`method` JsHelper::**event**($type, $content, $options = [])
 
 `method` JsHelper::**domReady**($callback)
 
@@ -280,11 +280,11 @@ CakePHP コアに含まれるすべてのエンジンに対応します。　あ
 
 `method` JsHelper::**prompt**($message, $default)
 
-`method` JsHelper::**submit**($caption = null, $options = array())
+`method` JsHelper::**submit**($caption = null, $options = [])
 
-`method` JsHelper::**link**($title, $url = null, $options = array())
+`method` JsHelper::**link**($title, $url = null, $options = [])
 
-`method` JsHelper::**serializeForm**($options = array())
+`method` JsHelper::**serializeForm**($options = [])
 
 `method` JsHelper::**redirect**($url)
 
@@ -305,8 +305,8 @@ jQuery を使用します。あなたのレイアウト内に jQuery
 あなたのコントローラに以下を追加してください。 :
 
 ``` php
-public $components = array('RequestHandler');
-public $helpers = array('Js');
+public $components = ['RequestHandler'];
+public $helpers = ['Js'];
 ```
 
 以下は、あなたが使用したい JavaScript ライブラリ内にリンクします。
@@ -321,10 +321,10 @@ echo $this->Html->script('jquery');
 そうするには、あなたのビューの先頭で `options()` を呼びます。 :
 
 ``` php
-$this->Paginator->options(array(
+$this->Paginator->options([
     'update' => '#content',
     'evalScripts' => true
-));
+]);
 ```
 
 これで `PaginatorHelper` は、 JavaScript でリンクを
@@ -369,7 +369,7 @@ echo $this->Js->writeBuffer();
     <?php
         echo $this->Html->image(
             'indicator.gif',
-            array('id' => 'busy-indicator')
+            ['id' => 'busy-indicator']
         );
     ?>
     </body>
@@ -386,18 +386,18 @@ indicator.gif がページロード中に直ちに表示される場面が考え
 そうするためには `options()` 関数を更新する必要があります。 :
 
 ``` php
-$this->Paginator->options(array(
+$this->Paginator->options([
     'update' => '#content',
     'evalScripts' => true,
     'before' => $this->Js->get('#busy-indicator')->effect(
         'fadeIn',
-        array('buffer' => false)
+        ['buffer' => false]
     ),
     'complete' => $this->Js->get('#busy-indicator')->effect(
         'fadeOut',
-        array('buffer' => false)
+        ['buffer' => false]
     ),
-));
+]);
 ```
 
 これは、 `#content` の div が更新される前後に busy-indicator

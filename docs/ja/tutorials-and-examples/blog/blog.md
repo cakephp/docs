@@ -149,7 +149,7 @@ CakePHP のデータベース設定ファイルの元は、 `/app/Config/databas
 変更するだけです。完全な設定の配列の例は次のようなものになるでしょう:
 
 ``` php
-public $default = array(
+public $default = [
     'datasource' => 'Database/Mysql',
     'persistent' => false,
     'host' => 'localhost',
@@ -160,7 +160,7 @@ public $default = array(
     'schema' => '',
     'prefix' => '',
     'encoding' => 'utf8'
-);
+];
 ```
 
 新しくできた `database.php` ファイルを保存したら、ブラウザを開いて、CakePHP の

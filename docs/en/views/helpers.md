@@ -25,8 +25,9 @@ helpers to be made available in the view. To enable a helper in your view, add
 the name of the helper to the controller's `$helpers` array:
 
 ``` php
-class BakeriesController extends AppController {
-    public $helpers = array('Form', 'Html', 'Js', 'Time');
+class BakeriesController extends AppController
+{
+    public $helpers = ['Form', 'Html', 'Js', 'Time'];
 }
 ```
 
@@ -34,8 +35,9 @@ Adding helpers from plugins uses the `plugin syntax` used elsewhere in
 CakePHP:
 
 ``` php
-class BakeriesController extends AppController {
-    public $helpers = array('Blog.Comment');
+class BakeriesController extends AppController
+{
+    public $helpers = ['Blog.Comment'];
 }
 ```
 
@@ -46,11 +48,14 @@ do not use the helper and helps keep the controller better
 organized:
 
 ``` php
-class BakeriesController extends AppController {
-    public function bake() {
+class BakeriesController extends AppController
+{
+    public function bake()
+    {
         $this->helpers[] = 'Time';
     }
-    public function mix() {
+    public function mix()
+    {
         // The Time helper is not loaded here and thus not available
     }
 }
@@ -62,8 +67,9 @@ create it if not present). Remember to include the default Html and
 Form helpers:
 
 ``` php
-class AppController extends Controller {
-    public $helpers = array('Form', 'Html', 'Js', 'Time');
+class AppController extends Controller
+{
+    public $helpers = ['Form', 'Html', 'Js', 'Time'];
 }
 ```
 
@@ -71,15 +77,18 @@ You can pass options to helpers. These options can be used to set
 attribute values or modify behavior of a helper:
 
 ``` php
-class AwesomeHelper extends AppHelper {
-    public function __construct(View $view, $settings = array()) {
+class AwesomeHelper extends AppHelper
+{
+    public function __construct(View $view, $settings = [])
+    {
         parent::__construct($view, $settings);
         debug($settings);
     }
 }
 
-class AwesomeController extends AppController {
-    public $helpers = array('Awesome' => array('option1' => 'value1'));
+class AwesomeController extends AppController
+{
+    public $helpers = ['Awesome' => ['option1' => 'value1']];
 }
 ```
 
@@ -93,17 +102,19 @@ implementation:
 
 ``` php
 // app/Controller/PostsController.php
-class PostsController extends AppController {
-    public $helpers = array(
-        'Html' => array(
+class PostsController extends AppController
+{
+    public $helpers = [
+        'Html' => [
             'className' => 'MyHtml'
-        )
-    );
+        ]
+    ];
 }
 
 // app/View/Helper/MyHtmlHelper.php
 App::uses('HtmlHelper', 'View/Helper');
-class MyHtmlHelper extends HtmlHelper {
+class MyHtmlHelper extends HtmlHelper
+{
     // Add your code to override the core HtmlHelper
 }
 ```
@@ -120,8 +131,10 @@ configuration options that cannot be included as part of a class declaration,
 you can set those in your controller's beforeRender callback:
 
 ``` php
-class PostsController extends AppController {
-    public function beforeRender() {
+class PostsController extends AppController
+{
+    public function beforeRender()
+    {
         parent::beforeRender();
         $this->helpers['CustomStuff'] = $this->_getCustomStuffSettings();
     }
@@ -182,8 +195,10 @@ by Composer (see [Directory structure](/pieceofcake2/directory-structure)).
 /* /app/View/Helper/LinkHelper.php */
 App::uses('AppHelper', 'View/Helper');
 
-class LinkHelper extends AppHelper {
-    public function makeEdit($title, $url) {
+class LinkHelper extends AppHelper
+{
+    public function makeEdit($title, $url)
+    {
         // Logic to create specially formatted link goes here...
     }
 }
@@ -203,14 +218,16 @@ helper. To do so, you can specify helpers you wish to use with a
 /* /app/View/Helper/LinkHelper.php (using other helpers) */
 App::uses('AppHelper', 'View/Helper');
 
-class LinkHelper extends AppHelper {
-    public $helpers = array('Html');
+class LinkHelper extends AppHelper
+{
+    public $helpers = ['Html'];
 
-    public function makeEdit($title, $url) {
+    public function makeEdit($title, $url)
+    {
         // Use the HTML helper to output
         // formatted data:
 
-        $link = $this->Html->link($title, $url, array('class' => 'edit'));
+        $link = $this->Html->link($title, $url, ['class' => 'edit']);
 
         return '<div class="editOuter">' . $link . '</div>';
     }
@@ -226,8 +243,9 @@ Once you've created your helper and placed it in
 controllers using the special variable `~Controller::$helpers`:
 
 ``` php
-class PostsController extends AppController {
-    public $helpers = array('Link');
+class PostsController extends AppController
+{
+    public $helpers = ['Link'];
 }
 ```
 
@@ -250,8 +268,10 @@ functionality that would be available to all helpers, create
 ``` php
 App::uses('Helper', 'View');
 
-class AppHelper extends Helper {
-    public function customMethod() {
+class AppHelper extends Helper
+{
+    public function customMethod()
+    {
     }
 }
 ```
@@ -266,7 +286,7 @@ class AppHelper extends Helper {
 
 `method` Helper::**url**($url, $full = false)
 
-`method` Helper::**value**($options = array(), $field = null, $key = 'value')
+`method` Helper::**value**($options = [], $field = null, $key = 'value')
 
 `method` Helper::**domId**($options = null, $id = 'id')
 

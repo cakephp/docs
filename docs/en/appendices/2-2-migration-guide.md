@@ -14,22 +14,22 @@ behavior with 2.1.x:
 ``` php
 // Enable the Dispatcher filters for plugin assets, and
 // CacheHelper.
-Configure::write('Dispatcher.filters', array(
+Configure::write('Dispatcher.filters', [
     'AssetDispatcher',
     'CacheDispatcher'
-));
+]);
 
 // Add logging configuration.
-CakeLog::config('debug', array(
+CakeLog::config('debug', [
     'engine' => 'FileLog',
-    'types' => array('notice', 'info', 'debug'),
+    'types' => ['notice', 'info', 'debug'],
     'file' => 'debug',
-));
-CakeLog::config('error', array(
+]);
+CakeLog::config('error', [
     'engine' => 'FileLog',
-    'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
+    'types' => ['warning', 'error', 'critical', 'alert', 'emergency'],
     'file' => 'error',
-));
+]);
 ```
 
 You will also need to modify `app/Config/core.php`. Change the value of
@@ -233,11 +233,11 @@ simpler to mass-delete cache entries associated to the same label. Groups are
 declared at configuration time when creating the cache engine:
 
 ``` php
-Cache::config(array(
+Cache::config([
     'engine' => 'Redis',
     ...
-    'groups' => array('post', 'comment', 'user')
-));
+    'groups' => ['post', 'comment', 'user']
+]);
 ```
 
 You can have as many groups as you like, but keep in mind they cannot be
@@ -255,14 +255,14 @@ and [Logging](../core-libraries/logging).
 - The `CakeLog` class now accepts the same log levels as defined in
   [RFC 5424](https://tools.ietf.org/html/rfc5424). Several convenience
   methods have also been added:
-  - `CakeLog::emergency($message, $scope = array())`
-  - `CakeLog::alert($message, $scope = array())`
-  - `CakeLog::critical($message, $scope = array())`
-  - `CakeLog::error($message, $scope = array())`
-  - `CakeLog::warning($message, $scope = array())`
-  - `CakeLog::notice($message, $scope = array())`
-  - `CakeLog::info($message, $scope = array())`
-  - `CakeLog::debug($message, $scope = array())`
+  - `CakeLog::emergency($message, $scope = [])`
+  - `CakeLog::alert($message, $scope = [])`
+  - `CakeLog::critical($message, $scope = [])`
+  - `CakeLog::error($message, $scope = [])`
+  - `CakeLog::warning($message, $scope = [])`
+  - `CakeLog::notice($message, $scope = [])`
+  - `CakeLog::info($message, $scope = [])`
+  - `CakeLog::debug($message, $scope = [])`
 - A third argument `$scope` has been added to `CakeLog::write`.
   See [Logging Scopes](../core-libraries/logging#logging-scopes).
 - A new log engine: `ConsoleLog` has been added.

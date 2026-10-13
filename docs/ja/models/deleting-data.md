@@ -57,7 +57,7 @@ $this->Comment->delete($this->request->data('Comment.id'));
 
 ``` php
 // find() と同様に、配列で与えられた条件で削除する
-$this->Comment->deleteAll(array('Comment.spam' => true), false);
+$this->Comment->deleteAll(['Comment.spam' => true], false);
 ```
 
 コールバックまたはカスケード、あるいはその両方で削除を行った場合、対象となる行が検索されてから

@@ -6,11 +6,13 @@
 `CakeTime` クラスを使用してください。 :
 
 ``` php
-class UsersController extends AppController {
+class UsersController extends AppController
+{
 
-    public $components = array('Auth');
+    public $components = ['Auth'];
 
-    public function afterLogin() {
+    public function afterLogin()
+    {
         App::uses('CakeTime', 'Utility');
         if (CakeTime::isToday($this->Auth->user('date_of_birth']))) {
             // 誕生日のお祝いメッセージでユーザーに挨拶
@@ -59,7 +61,7 @@ PHP の `strftime()` は PHP 8.1 で非推奨になりました。`strftime()` �
 
 `method` CakeTime::**serverOffset**()
 
-`method` CakeTime::**timeAgoInWords**($dateString, $options = array())
+`method` CakeTime::**timeAgoInWords**($dateString, $options = [])
 
 `method` CakeTime::**toAtom**($dateString, $timezone = NULL)
 
@@ -73,7 +75,7 @@ PHP の `strftime()` は PHP 8.1 で非推奨になりました。`strftime()` �
 
 `method` CakeTime::**timezone**($timezone = NULL)
 
-`method` CakeTime::**listTimezones**($filter = null, $country = null, $options = array())
+`method` CakeTime::**listTimezones**($filter = null, $country = null, $options = [])
 
 ## 時間のテスト
 

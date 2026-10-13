@@ -39,8 +39,9 @@ CakePHP では、データベースの詳細設定は `app/Config/database.php`
 記載されています。設定後の内容は、たとえば以下のようになります:
 
 ``` php
-class DATABASE_CONFIG {
-    public $default = array(
+class DATABASE_CONFIG
+{
+    public $default = [
         'datasource'  => 'Database/Mysql',
         'persistent'  => false,
         'host'        => 'localhost',
@@ -48,7 +49,7 @@ class DATABASE_CONFIG {
         'password'    => 'c4k3roxx!',
         'database'    => 'my_cakephp_project',
         'prefix'      => ''
-    );
+    ];
 }
 ```
 
@@ -180,80 +181,80 @@ bootstrap.php の中で `App::build()` を使うと、CakePHP
 がクラスを検索する際の追加パスを定義できます:
 
 ``` php
-App::build(array(
-    'Model' => array(
+App::build([
+    'Model' => [
         '/path/to/models',
         '/next/path/to/models'
-    ),
-    'Model/Behavior' => array(
+    ],
+    'Model/Behavior' => [
         '/path/to/behaviors',
         '/next/path/to/behaviors'
-    ),
-    'Model/Datasource' => array(
+    ],
+    'Model/Datasource' => [
         '/path/to/datasources',
         '/next/path/to/datasources'
-    ),
-    'Model/Datasource/Database' => array(
+    ],
+    'Model/Datasource/Database' => [
         '/path/to/databases',
         '/next/path/to/database'
-    ),
-    'Model/Datasource/Session' => array(
+    ],
+    'Model/Datasource/Session' => [
         '/path/to/sessions',
         '/next/path/to/sessions'
-    ),
-    'Controller' => array(
+    ],
+    'Controller' => [
         '/path/to/controllers',
         '/next/path/to/controllers'
-    ),
-    'Controller/Component' => array(
+    ],
+    'Controller/Component' => [
         '/path/to/components',
         '/next/path/to/components'
-    ),
-    'Controller/Component/Auth' => array(
+    ],
+    'Controller/Component/Auth' => [
         '/path/to/auths',
         '/next/path/to/auths'
-    ),
-    'Controller/Component/Acl' => array(
+    ],
+    'Controller/Component/Acl' => [
         '/path/to/acls',
         '/next/path/to/acls'
-    ),
-    'View' => array(
+    ],
+    'View' => [
         '/path/to/views',
         '/next/path/to/views'
-    ),
-    'View/Helper' => array(
+    ],
+    'View/Helper' => [
         '/path/to/helpers',
         '/next/path/to/helpers'
-    ),
-    'Console' => array(
+    ],
+    'Console' => [
         '/path/to/consoles',
         '/next/path/to/consoles'
-    ),
-    'Console/Command' => array(
+    ],
+    'Console/Command' => [
         '/path/to/commands',
         '/next/path/to/commands'
-    ),
-    'Console/Command/Task' => array(
+    ],
+    'Console/Command/Task' => [
         '/path/to/tasks',
         '/next/path/to/tasks'
-    ),
-    'Lib' => array(
+    ],
+    'Lib' => [
         '/path/to/libs',
         '/next/path/to/libs'
-    ),
-    'Locale' => array(
+    ],
+    'Locale' => [
         '/path/to/locales',
         '/next/path/to/locales'
-    ),
-    'Vendor' => array(
+    ],
+    'Vendor' => [
         '/path/to/vendors',
         '/next/path/to/vendors'
-    ),
-    'Plugin' => array(
+    ],
+    'Plugin' => [
         '/path/to/plugins',
         '/next/path/to/plugins'
-    ),
-));
+    ],
+]);
 ```
 
 > [!NOTE]
@@ -545,10 +546,10 @@ Configure::write('Company.slogan','Pizza for your body and soul');
 ``` php
 Configure::write(
     'Company',
-    array(
+    [
         'name' => 'Pizza, Inc.',
         'slogan' => 'Pizza for your body and soul'
-    )
+    ]
 );
 ```
 
@@ -575,7 +576,7 @@ Configure::read('Company.slogan');  // 'Pizza for your body and soul'
 Configure::read('Company');
 
 // 返される値:
-array('name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul');
+['name' => 'Pizza, Inc.', 'slogan' => 'Pizza for your body and soul'];
 ```
 
 \$key を指定しない場合、 Configure にあるすべての値を返します。指定された \$key に関連する
@@ -700,7 +701,7 @@ Configure::load('my_file', 'default');
 
 ### 設定ファイルを生成／変更する
 
-`static` Configure::**dump**($key, $config = 'default', $keys = array())
+`static` Configure::**dump**($key, $config = 'default', $keys = [])
 
 param string \$key  
 ファイル名、または生成されるストレージ設定
@@ -729,7 +730,7 @@ Configure::dump('my_config.php', 'default');
 エラーハンドラー設定だけを保存します。:
 
 ``` php
-Configure::dump('error.php', 'default', array('Error', 'Exception'));
+Configure::dump('error.php', 'default', ['Error', 'Exception']);
 ```
 
 `Configure::dump()` は `Configure::load()` で読める形式の
@@ -803,21 +804,25 @@ XML 設定リーダを作ることもできます。:
 ``` php
 // app/Lib/Configure/XmlReader.php の中
 App::uses('Xml', 'Utility');
-class XmlReader implements ConfigReaderInterface {
-    public function __construct($path = null) {
+class XmlReader implements ConfigReaderInterface
+{
+    public function __construct($path = null)
+    {
         if (!$path) {
             $path = APP . 'Config' . DS;
         }
         $this->_path = $path;
     }
 
-    public function read($key) {
+    public function read($key)
+    {
         $xml = Xml::build($this->_path . $key . '.xml');
         return Xml::toArray($xml);
     }
 
     // 2.3 時点では dump() メソッドもまだ必須です
-    public function dump($key, $data) {
+    public function dump($key, $data)
+    {
         // code to dump data to file
     }
 }
@@ -876,20 +881,20 @@ CakePHP はそれぞれの部品を関連付けるにあたり、それぞれの
 ファイルの中に `Inflector::rules()` を書きます。:
 
 ``` php
-Inflector::rules('singular', array(
-    'rules' => array(
+Inflector::rules('singular', [
+    'rules' => [
         '/^(bil)er$/i' => '\1',
         '/^(inflec|contribu)tors$/i' => '\1ta'
-    ),
-    'uninflected' => array('singulars'),
-    'irregular' => array('spins' => 'spinor')
-));
+    ],
+    'uninflected' => ['singulars'],
+    'irregular' => ['spins' => 'spinor']
+]);
 ```
 
 または:
 
 ``` php
-Inflector::rules('plural', array('irregular' => array('phylum' => 'phyla')));
+Inflector::rules('plural', ['irregular' => ['phylum' => 'phyla']]);
 ```
 
 これらのコードは、指定されたルールを lib/Cake/Utility/Inflector.php

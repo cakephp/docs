@@ -198,7 +198,7 @@ context は、同じドメイン内で一意にする翻訳文字列の一意の
 `$showFrom` が false にセットされない場合、それがコールされた行の情報を伴ってデバグ情報の出力が始まります。
 [デバッグ](../development/debugging) も参照して下さい
 
-`function` **stackTrace(array $options = array())**
+`function` **stackTrace(array $options = [])**
 
 もしアプリケーションのデバッグレベルが 0 以外の場合、スタックトレースが出力されます。
 

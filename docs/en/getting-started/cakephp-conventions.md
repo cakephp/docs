@@ -36,13 +36,16 @@ will not be accessible directly from the web but is available for
 internal use. For example:
 
 ``` php
-class NewsController extends AppController {
+class NewsController extends AppController
+{
 
-    public function latest() {
+    public function latest()
+    {
         $this->_findNewArticles();
     }
 
-    protected function _findNewArticles() {
+    protected function _findNewArticles()
+    {
         // Logic to find latest news articles
     }
 }

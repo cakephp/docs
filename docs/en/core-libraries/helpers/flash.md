@@ -1,6 +1,6 @@
 # FlashHelper
 
-`class` **FlashHelper**(View $view, array $config = array())
+`class` **FlashHelper**(View $view, array $config = [])
 
 ::: info Added in version 2.7.0
 in replacement of `SessionHelper::flash()`
@@ -38,14 +38,14 @@ You can also override any of the options that were set in FlashComponent:
 
 ``` php
 // In your Controller
-$this->Flash->set('The user has been saved.', array(
+$this->Flash->set('The user has been saved.', [
     'element' => 'success'
-));
+]);
 
 // In your View: Will use great_success.ctp instead of success.ctp
-<?php echo $this->Flash->render('flash', array(
+<?php echo $this->Flash->render('flash', [
     'element' => 'great_success'
-));
+]);
 ```
 
 > [!NOTE]

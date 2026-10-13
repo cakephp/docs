@@ -12,8 +12,9 @@ the related Acl entry an ARO or an ACO. The default is to create
 ACOs:
 
 ``` php
-class User extends AppModel {
-    public $actsAs = array('Acl' => array('type' => 'requester'));
+class User extends AppModel
+{
+    public $actsAs = ['Acl' => ['type' => 'requester']];
 }
 ```
 
@@ -21,8 +22,9 @@ This would attach the Acl behavior in ARO mode. To join the ACL
 behavior in ACO mode use:
 
 ``` php
-class Post extends AppModel {
-    public $actsAs = array('Acl' => array('type' => 'controlled'));
+class Post extends AppModel
+{
+    public $actsAs = ['Acl' => ['type' => 'controlled']];
 }
 ```
 
@@ -30,15 +32,16 @@ For User and Group models it is common to have both ACO and ARO nodes,
 to achieve this use:
 
 ``` php
-class User extends AppModel {
-    public $actsAs = array('Acl' => array('type' => 'both'));
+class User extends AppModel
+{
+    public $actsAs = ['Acl' => ['type' => 'both']];
 }
 ```
 
 You can also attach the behavior on the fly like so:
 
 ``` php
-$this->Post->Behaviors->load('Acl', array('type' => 'controlled'));
+$this->Post->Behaviors->load('Acl', ['type' => 'controlled']);
 ```
 
 ::: info Changed in version 2.1
@@ -54,7 +57,8 @@ determine parent-\>child relationships. A model's parentNode()
 method must return null or return a parent Model reference:
 
 ``` php
-public function parentNode() {
+public function parentNode()
+{
     return null;
 }
 ```
@@ -63,7 +67,8 @@ If you want to set an ACO or ARO node as the parent for your Model,
 parentNode() must return the alias of the ACO or ARO node:
 
 ``` php
-public function parentNode() {
+public function parentNode()
+{
     return 'root_node';
 }
 ```
@@ -72,7 +77,8 @@ A more complete example. Using an example User Model, where User
 belongsTo Group:
 
 ``` php
-public function parentNode() {
+public function parentNode()
+{
     if (!$this->id && empty($this->data)) {
         return null;
     }
@@ -83,7 +89,7 @@ public function parentNode() {
     if (!$data['User']['group_id']) {
         return null;
     }
-    return array('Group' => array('id' => $data['User']['group_id']));
+    return ['Group' => ['id' => $data['User']['group_id']]];
 }
 ```
 
@@ -105,9 +111,9 @@ data array:
 $this->User->id = 1;
 $node = $this->User->node();
 
-$user = array('User' => array(
+$user = ['User' => [
     'id' => 1
-));
+]];
 $node = $this->User->node($user);
 ```
 
@@ -120,8 +126,8 @@ specify which node type you want:
 $this->User->id = 1;
 $node = $this->User->node(null, 'Aro');
 
-$user = array('User' => array(
+$user = ['User' => [
     'id' => 1
-));
+]];
 $node = $this->User->node($user, 'Aro');
 ```

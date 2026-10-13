@@ -251,7 +251,7 @@ pieceofcake2 フォークでは Bake はコアに含まれていません。`cak
 ### ErrorHandler
 
 - 新しい設定オプションに特定の Exception のスキップを許可する `skipLog` が追加されました。
-  `Configure::write('Exception.skipLog', array('NotFoundException', 'ForbiddenException'));` は、
+  `Configure::write('Exception.skipLog', ['NotFoundException', 'ForbiddenException']);` は、
   `'Exception.log'` が `true` の場合にこれらの例外を除外してロギングします。
 
 ## ルーティング

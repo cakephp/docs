@@ -18,11 +18,11 @@ Configure を使って、好きなメソッドをデフォルトのエラーハ�
 エラーをハンドルするデフォルトの設定は以下のようになっています。 :
 
 ``` php
-Configure::write('Error', array(
+Configure::write('Error', [
     'handler' => 'ErrorHandler::handleError',
     'level' => E_ALL & ~E_DEPRECATED,
     'trace' => true
-));
+]);
 ```
 
 エラーのハンドラを設定する際に使えるオプションが５つあります:
@@ -68,9 +68,11 @@ Configure::write('Error.handler', 'AppError::handleError');
 App::uses('AppError', 'Lib');
 
 //app/Lib/AppError.php の中で
-class AppError {
+class AppError
+{
     public static function handleError($code, $description, $file = null,
-        $line = null, $context = null) {
+        $line = null, $context = null)
+    {
         echo 'エラー発生！';
     }
 }
@@ -103,9 +105,11 @@ Configure::write('Error.handler', 'AppError::handleError');
 App::uses('AppError', 'Lib');
 
 //app/Lib/AppError.php の中で
-class AppError {
+class AppError
+{
     public static function handleError($code, $description, $file = null,
-        $line = null, $context = null) {
+        $line = null, $context = null)
+    {
         list(, $level) = ErrorHandler::mapErrorCode($code);
         if ($level === LOG_ERR) {
             // 致命的エラーを無視する。PHP エラーのメッセージのみとする。

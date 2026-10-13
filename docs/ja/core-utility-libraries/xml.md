@@ -31,11 +31,11 @@ $xml = Xml::build('https://bakery.cakephp.org/articles.rss');
 // このとき、 $xml は SimpleXMLElement のインスタンスです。
 
 // もしくは
-$xml = Xml::build('https://bakery.cakephp.org/articles.rss', array('return' => 'simplexml'));
+$xml = Xml::build('https://bakery.cakephp.org/articles.rss', ['return' => 'simplexml']);
 // このときも、 $xml は SimpleXMLElement のインスタンスです。
 
 // DOMDocument を使った新しい方法:
-$xml = Xml::build('https://bakery.cakephp.org/articles.rss', array('return' => 'domdocument'));
+$xml = Xml::build('https://bakery.cakephp.org/articles.rss', ['return' => 'domdocument']);
 // このとき、 $xml は DOMDocument のインスタンスです。
 ```
 
@@ -66,13 +66,13 @@ $xml = Xml::build('https://bakery.cakephp.org/articles.rss');
 配列を使っても Xml オブジェクトを作成できます。 :
 
 ``` php
-$data = array(
-    'post' => array(
+$data = [
+    'post' => [
         'id' => 1,
         'title' => 'Best post',
         'body' => ' ... '
-    )
-);
+    ]
+];
 $xml = Xml::build($data);
 ```
 
@@ -114,13 +114,13 @@ XML が正しくなければ例外がスローされます。
 
 ``` php
 // 今までの方法:
-$xmlArray = array('root' => array('child' => 'value'));
-$xmlObject = new Xml($xmlArray, array('format' => 'tags'));
+$xmlArray = ['root' => ['child' => 'value']];
+$xmlObject = new Xml($xmlArray, ['format' => 'tags']);
 $xmlString = $xmlObject->toString();
 
 // 新しい方法:
-$xmlArray = array('root' => array('child' => 'value'));
-$xmlObject = Xml::fromArray($xmlArray, array('format' => 'tags')); // Xml::build() を使うこともできます
+$xmlArray = ['root' => ['child' => 'value']];
+$xmlObject = Xml::fromArray($xmlArray, ['format' => 'tags']); // Xml::build() を使うこともできます
 $xmlString = $xmlObject->asXML();
 ```
 
@@ -130,15 +130,15 @@ Xml クラスは例外をスローします。以下は正しくない例です�
 
 ``` text
 // 数値のキーを用いたトップレベル要素
-array(
-    array('key' => 'value')
-);
+[
+    ['key' => 'value']
+];
 
 // トップレベルに複数の要素がある
-array(
+[
     'key1' => 'first value',
     'key2' => 'other value'
-);
+];
 ```
 
 > [!WARNING]
@@ -151,13 +151,13 @@ array(
 > <span class="title-ref">@</span> をキーとして用います。
 
 ``` php
-$xmlArray = array(
-    'project' => array(
+$xmlArray = [
+    'project' => [
         '@id' => 1,
         'name' => 'Name of project, as tag',
         '@' => 'Value of project'
-    )
-);
+    ]
+];
 $xmlObject = Xml::fromArray($xmlArray);
 $xmlString = $xmlObject->asXML();
 ```
@@ -177,33 +177,33 @@ $xmlString = $xmlObject->asXML();
 > 以下の例を見てください。
 
 ``` php
-$oldArray = array(
-    'Projects' => array(
-        array(
-            'Project' => array('id' => 1, 'title' => 'Project 1'),
-            'Industry' => array('id' => 1, 'name' => 'Industry 1')
-        ),
-        array(
-            'Project' => array('id' => 2, 'title' => 'Project 2'),
-            'Industry' => array('id' => 2, 'name' => 'Industry 2')
-        )
-    )
-);
+$oldArray = [
+    'Projects' => [
+        [
+            'Project' => ['id' => 1, 'title' => 'Project 1'],
+            'Industry' => ['id' => 1, 'name' => 'Industry 1']
+        ],
+        [
+            'Project' => ['id' => 2, 'title' => 'Project 2'],
+            'Industry' => ['id' => 2, 'name' => 'Industry 2']
+        ]
+    ]
+];
 
-$newArray = array(
-    'projects' => array(
-        'project' => array(
-            array(
+$newArray = [
+    'projects' => [
+        'project' => [
+            [
                 'id' => 1, 'title' => 'Project 1',
-                'industry' => array('id' => 1, 'name' => 'Industry 1')
-            ),
-            array(
+                'industry' => ['id' => 1, 'name' => 'Industry 1']
+            ],
+            [
                 'id' => 2, 'title' => 'Project 2',
-                'industry' => array('id' => 2, 'name' => 'Industry 2')
-            )
-        )
-    )
-);
+                'industry' => ['id' => 2, 'name' => 'Industry 2']
+            ]
+        ]
+    ]
+];
 ```
 
 どちらの例も、以下のような XML になります。 :
@@ -238,24 +238,24 @@ $newArray = array(
 以下の例を見てください。 :
 
 ``` php
-$xmlArray = array(
-    'root' => array(
+$xmlArray = [
+    'root' => [
         'xmlns:' => 'https://cakephp.org',
         'child' => 'value'
-    )
-);
+    ]
+];
 $xml1 = Xml::fromArray($xmlArray);
 
 $xmlArray(
-    'root' => array(
-        'tag' => array(
+    'root' => [
+        'tag' => [
             'xmlns:pref' => 'https://cakephp.org',
-            'pref:item' => array(
+            'pref:item' => [
                 'item 1',
                 'item 2'
-            )
-        )
-    )
+            ]
+        ]
+    ]
 );
 $xml2 = Xml::fromArray($xmlArray);
 ```
@@ -281,7 +281,7 @@ CakePHP はそれをカバーしてくれます。以下のように、CakePHP �
 ``` php
 // CakePHP 1.3
 $myXmlOriginal = '<?xml version="1.0"?><root><child>value</child></root>';
-$xml = new Xml($myXmlOriginal, array('format' => 'tags'));
+$xml = new Xml($myXmlOriginal, ['format' => 'tags']);
 $xml->children[0]->createNode('young', 'new value');
 
 // CakePHP 2.0 - SimpleXML を使用
@@ -291,7 +291,7 @@ $xml->root->addChild('young', 'new value');
 
 // CakePHP 2.0 - DOMDocument を使用
 $myXmlOriginal = '<?xml version="1.0"?><root><child>value</child></root>';
-$xml = Xml::build($myXmlOriginal, array('return' => 'domdocument'));
+$xml = Xml::build($myXmlOriginal, ['return' => 'domdocument']);
 $child = $xml->createElement('young', 'new value');
 $xml->firstChild->appendChild($child);
 ```
@@ -306,7 +306,7 @@ $xml->firstChild->appendChild($child);
 SimpleXml または DOMDocument クラスのオブジェクトを生成する、
 factory クラスまたは変換クラスです。
 
-`static` Xml::**build**($input, $options = array())
+`static` Xml::**build**($input, $options = [])
 
 XML の文字列やファイルパス、 URL 、配列を与えて
 SimpleXMLElement または DOMDocument を初期化します。
@@ -320,7 +320,7 @@ $xml = Xml::build('<example>text</example>');
 文字列から XML を作成し、 DOMDocument クラスのオブジェクトとして出力する:
 
 ``` php
-$xml = Xml::build('<example>text</example>', array('return' => 'domdocument'));
+$xml = Xml::build('<example>text</example>', ['return' => 'domdocument']);
 ```
 
 ローカルのファイルパスから XML を作成する:
@@ -338,20 +338,20 @@ $xml = Xml::build('http://example.com/example.xml');
 配列から作成する:
 
 ``` php
-$value = array(
-    'tags' => array(
-        'tag' => array(
-            array(
+$value = [
+    'tags' => [
+        'tag' => [
+            [
                 'id' => '1',
                 'name' => 'defect'
-            ),
-            array(
+            ],
+            [
                 'id' => '2',
                 'name' => 'enhancement'
-        )
-        )
-    )
-);
+        ]
+        ]
+    ]
+];
 $xml = Xml::build($value);
 ```
 

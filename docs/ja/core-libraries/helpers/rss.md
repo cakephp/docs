@@ -1,6 +1,6 @@
 # RssHelper
 
-`class` **RssHelper**(View $view, array $settings = array())
+`class` **RssHelper**(View $view, array $settings = [])
 
 RssHelper は、RSS フィードのための XML を簡単に生成するために使用します。
 
@@ -33,14 +33,14 @@ PostsController の \$components 配列に RequestHandler を加えるのは
 良いアイディアです。これで、多くのことが自動的に行われます。 :
 
 ``` php
-public $components = array('RequestHandler');
+public $components = ['RequestHandler'];
 ```
 
 ビューで `TextHelper` を、フォーマットに使うために
 コントローラに追加します。 :
 
 ``` php
-public $helpers = array('Text');
+public $helpers = ['Text'];
 ```
 
 posts/index の RSS バージョンが作れるようになる前に、いくつかのことを順番に
@@ -55,21 +55,22 @@ posts/index の RSS バージョンが作れるようになる前に、いくつ
 // Posts コントローラで RSS フィードの配信を行うアクション、
 // この例では index アクションを修正してください。
 
-public function index() {
+public function index()
+{
     if ($this->RequestHandler->isRss() ) {
         $posts = $this->Post->find(
             'all',
-            array('limit' => 20, 'order' => 'Post.created DESC')
+            ['limit' => 20, 'order' => 'Post.created DESC']
         );
         return $this->set(compact('posts'));
     }
 
     // これは、RSS リクエストではありません。
     // ウェブサイトインターフェースで使用されるデータを配信します。
-    $this->paginate['Post'] = array(
+    $this->paginate['Post'] = [
         'order' => 'Post.created DESC',
         'limit' => 10
-    );
+    ];
 
     $posts = $this->paginate();
     $this->set(compact('posts'));
@@ -85,15 +86,15 @@ RSS レイアウトはとてもシンプルです。 `app/View/Layouts/rss/defau
 
 ``` php
 if (!isset($documentData)) {
-    $documentData = array();
+    $documentData = [];
 }
 if (!isset($channelData)) {
-    $channelData = array();
+    $channelData = [];
 }
 if (!isset($channelData['title'])) {
     $channelData['title'] = $this->fetch('title');
 }
-$channel = $this->Rss->channel(array(), $channelData, $this->fetch('content'));
+$channel = $this->Rss->channel([], $channelData, $this->fetch('content'));
 echo $this->Rss->document($documentData, $channel);
 ```
 
@@ -117,12 +118,12 @@ CakePHP では、あなたのビューからレイアウトに変数を渡すこ
 メソッドを使って行われます。ここでチャンネルのメタデータを渡すとレイアウトに戻ります。 :
 
 ``` php
-$this->set('channelData', array(
+$this->set('channelData', [
     'title' => __("Most Recent Posts"),
     'link' => $this->Html->url('/', true),
     'description' => __("Most recent posts."),
     'language' => 'en-us'
-));
+]);
 ```
 
 ビューの後半部分は、実際のフィードのレコードのための要素を生成します。
@@ -143,30 +144,30 @@ $this->set('channelData', array(
 foreach ($posts as $post) {
     $postTime = strtotime($post['Post']['created']);
 
-    $postLink = array(
+    $postLink = [
         'controller' => 'posts',
         'action' => 'view',
         'year' => date('Y', $postTime),
         'month' => date('m', $postTime),
         'day' => date('d', $postTime),
         $post['Post']['slug']
-    );
+    ];
 
     // フィードの本文が正しくなるよう HTML の削除とエスケープ
     $bodyText = h(strip_tags($post['Post']['body']));
-    $bodyText = $this->Text->truncate($bodyText, 400, array(
+    $bodyText = $this->Text->truncate($bodyText, 400, [
         'ending' => '...',
         'exact'  => true,
         'html'   => true,
-    ));
+    ]);
 
-    echo  $this->Rss->item(array(), array(
+    echo  $this->Rss->item([], [
         'title' => $post['Post']['title'],
         'link' => $postLink,
-        'guid' => array('url' => $postLink, 'isPermaLink' => 'true'),
+        'guid' => ['url' => $postLink, 'isPermaLink' => 'true'],
         'description' => $bodyText,
         'pubDate' => $post['Post']['created']
-    ));
+    ]);
 }
 ```
 
@@ -207,13 +208,13 @@ XML を検証するサイトで確認することができます。
 >
 > デフォルトの生成された RSS の仕様バージョン
 
-`method` RssHelper::**channel**(array $attrib = array (), array $elements = array (), mixed $content = null)
+`method` RssHelper::**channel**(array $attrib = [], array $elements = [], mixed $content = null)
 
-`method` RssHelper::**document**(array $attrib = array (), string $content = null)
+`method` RssHelper::**document**(array $attrib = [], string $content = null)
 
-`method` RssHelper::**elem**(string $name, array $attrib = array (), mixed $content = null, boolean $endTag = true)
+`method` RssHelper::**elem**(string $name, array $attrib = [], mixed $content = null, boolean $endTag = true)
 
-`method` RssHelper::**item**(array $att = array (), array $elements = array ())
+`method` RssHelper::**item**(array $att = [], array $elements = [])
 
 `method` RssHelper::**items**(array $items, mixed $callback = null)
 

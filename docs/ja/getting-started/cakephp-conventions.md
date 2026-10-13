@@ -27,13 +27,16 @@ CakePHP の規約は長年のウェブ開発経験とベストプラクティス
 設定され、内部での利用のみ可能になります。例えば:
 
 ``` php
-class NewsController extends AppController {
+class NewsController extends AppController
+{
 
-    public function latest() {
+    public function latest()
+    {
         $this->_findNewArticles();
     }
 
-    protected function _findNewArticles() {
+    protected function _findNewArticles()
+    {
         // 最新のニュース記事を取得するロジック
     }
 }

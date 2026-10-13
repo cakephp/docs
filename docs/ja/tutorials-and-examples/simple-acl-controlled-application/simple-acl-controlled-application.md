@@ -123,7 +123,8 @@ Auth と Acl コンポーネントを追加する前に、多少の部品を加�
 まずは `UsersController` にログインとログアウトのアクションを加えましょう:
 
 ``` php
-public function login() {
+public function login()
+{
     if ($this->request->is('post')) {
         if ($this->Auth->login()) {
             return $this->redirect($this->Auth->redirect());
@@ -132,7 +133,8 @@ public function login() {
     }
 }
 
-public function logout() {
+public function logout()
+{
     //ここは、今は空にしておいてください
 }
 ```
@@ -142,12 +144,12 @@ public function logout() {
 
 ``` php
 <?php
-echo $this->Form->create('User', array('action' => 'login'));
-echo $this->Form->inputs(array(
+echo $this->Form->create('User', ['action' => 'login']);
+echo $this->Form->inputs([
     'legend' => __('Login'),
     'username',
     'password'
-));
+]);
 echo $this->Form->end('Login');
 ?>
 ```
@@ -159,10 +161,12 @@ echo $this->Form->end('Login');
 
 ``` php
 App::uses('AuthComponent', 'Controller/Component');
-class User extends AppModel {
+class User extends AppModel
+{
     // 他のコード。
 
-    public function beforeSave($options = array()) {
+    public function beforeSave($options = [])
+    {
         $this->data['User']['password'] = AuthComponent::password(
           $this->data['User']['password']
         );
@@ -177,32 +181,34 @@ class User extends AppModel {
 行います。次のコードを加えてください:
 
 ``` php
-class AppController extends Controller {
-    public $components = array(
+class AppController extends Controller
+{
+    public $components = [
         'Acl',
-        'Auth' => array(
-            'authorize' => array(
-                'Actions' => array('actionPath' => 'controllers')
-            )
-        ),
+        'Auth' => [
+            'authorize' => [
+                'Actions' => ['actionPath' => 'controllers']
+            ]
+        ],
         'Session'
-    );
-    public $helpers = array('Html', 'Form', 'Session');
+    ];
+    public $helpers = ['Html', 'Form', 'Session'];
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         // AuthComponent の設定
-        $this->Auth->loginAction = array(
+        $this->Auth->loginAction = [
           'controller' => 'users',
           'action' => 'login'
-        );
-        $this->Auth->logoutRedirect = array(
+        ];
+        $this->Auth->logoutRedirect = [
           'controller' => 'users',
           'action' => 'login'
-        );
-        $this->Auth->loginRedirect = array(
+        ];
+        $this->Auth->loginRedirect = [
           'controller' => 'posts',
           'action' => 'add'
-        );
+        ];
     }
 }
 ```
@@ -214,7 +220,8 @@ ACL をセットアップし終わってしまう前に、ユーザとグルー�
 `GroupsController` と `UsersController` の **両方** に、次のコードを追加してください:
 
 ``` php
-public function beforeFilter() {
+public function beforeFilter()
+{
     parent::beforeFilter();
 
     // CakePHP 2.0
@@ -257,11 +264,13 @@ Auth と ACL をきちんと動作させるには、ユーザとグループを 
 `User` モデルに次のコードを追加してください:
 
 ``` php
-class User extends AppModel {
-    public $belongsTo = array('Group');
-    public $actsAs = array('Acl' => array('type' => 'requester'));
+class User extends AppModel
+{
+    public $belongsTo = ['Group'];
+    public $actsAs = ['Acl' => ['type' => 'requester']];
 
-    public function parentNode() {
+    public function parentNode()
+    {
         if (!$this->id && empty($this->data)) {
             return null;
         }
@@ -273,7 +282,7 @@ class User extends AppModel {
         if (!$groupId) {
             return null;
         } else {
-            return array('Group' => array('id' => $groupId));
+            return ['Group' => ['id' => $groupId]];
         }
     }
 }
@@ -282,10 +291,12 @@ class User extends AppModel {
 `Group` モデルには、次のコードを追加します:
 
 ``` php
-class Group extends AppModel {
-    public $actsAs = array('Acl' => array('type' => 'requester'));
+class Group extends AppModel
+{
+    public $actsAs = ['Acl' => ['type' => 'requester']];
 
-    public function parentNode() {
+    public function parentNode()
+    {
         return null;
     }
 }
@@ -336,15 +347,16 @@ ACL の管理機能を、アプリケーションの一部として作成でき�
 を実装する必要があります:
 
 ``` php
-public function bindNode($user) {
-    return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
+public function bindNode($user)
+{
+    return ['model' => 'Group', 'foreign_key' => $user['User']['group_id']];
 }
 ```
 
 `User` モデルの `actsAs` を更新して、 requester ディレクティブを無効化します:
 
 ``` php
-public $actsAs = array('Acl' => array('type' => 'requester', 'enabled' => false));
+public $actsAs = ['Acl' => ['type' => 'requester', 'enabled' => false]];
 ```
 
 これら２つの変更は、ACL に `User` の ARO のチェックを省き、 `Group` の ARO のみを
@@ -386,7 +398,7 @@ ACO オブジェクトを作成するには、ACL シェルを用いるか、 `A
 AclComponent を使う方法は次のようになります:
 
 ``` php
-$this->Acl->Aco->create(array('parent_id' => null, 'alias' => 'controllers'));
+$this->Acl->Aco->create(['parent_id' => null, 'alias' => 'controllers']);
 $this->Acl->Aco->save();
 ```
 
@@ -401,15 +413,15 @@ ACL を使用しないということです。グローバルなルート ACO �
 
 ``` php
 class AppController extends Controller {
-    public $components = array(
+    public $components = [
         'Acl',
-        'Auth' => array(
-            'authorize' => array(
-                'Actions' => array('actionPath' => 'controllers')
-            )
-        ),
+        'Auth' => [
+            'authorize' => [
+                'Actions' => ['actionPath' => 'controllers']
+            ]
+        ],
         'Session'
-    );
+    ];
 ```
 
 チュートリアルを続行するには、続けて [Part Two](../../part-two) を見てください。

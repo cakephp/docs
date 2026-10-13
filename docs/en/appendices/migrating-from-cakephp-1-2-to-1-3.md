@@ -40,56 +40,56 @@ There is a new way to add those paths. As of 1.3 RC1 the
 `App::build()` to modify paths.
 
 ``` php
-App::build(array(
-    'plugins' => array(
+App::build([
+    'plugins' => [
       '/full/path/to/plugins/',
       '/next/full/path/to/plugins/'
-    ),
-    'models' =>  array(
+    ],
+    'models' =>  [
       '/full/path/to/models/',
       '/next/full/path/to/models/'
-    ),
-    'views' => array(
+    ],
+    'views' => [
       '/full/path/to/views/',
       '/next/full/path/to/views/'
-    ),
-    'controllers' => array(
+    ],
+    'controllers' => [
       '/full/path/to/controllers/',
       '/next/full/path/to/controllers/'
-    ),
-    'datasources' => array(
+    ],
+    'datasources' => [
       '/full/path/to/datasources/',
       '/next/full/path/to/datasources/'
-    ),
-    'behaviors' => array(
+    ],
+    'behaviors' => [
       '/full/path/to/behaviors/',
       '/next/full/path/to/behaviors/'
-    ),
-    'components' => array(
+    ],
+    'components' => [
       '/full/path/to/components/',
       '/next/full/path/to/components/'
-    ),
-    'helpers' => array(
+    ],
+    'helpers' => [
       '/full/path/to/helpers/',
       '/next/full/path/to/helpers/'
-    ),
-    'vendors' => array(
+    ],
+    'vendors' => [
       '/full/path/to/vendors/',
       '/next/full/path/to/vendors/'
-    ),
-    'shells' => array(
+    ],
+    'shells' => [
       '/full/path/to/shells/',
       '/next/full/path/to/shells/'
-    ),
-    'locales' => array(
+    ],
+    'locales' => [
       '/full/path/to/locale/',
       '/next/full/path/to/locale/'
-    ),
-    'libs' => array(
+    ],
+    'libs' => [
       '/full/path/to/libs/',
       '/next/full/path/to/libs/'
-    )
-));
+    ]
+]);
 ```
 
 Also changed is the order in which bootstrapping occurs. In the
@@ -107,14 +107,14 @@ increase their flexibility. You now use `Inflector::rules()` to
 load custom inflections:
 
 ``` php
-Inflector::rules('singular', array(
-    'rules' => array(
+Inflector::rules('singular', [
+    'rules' => [
       '/^(bil)er$/i' => '\1',
       '/^(inflec|contribu)tors$/i' => '\1ta'
-    ),
-    'uninflected' => array('singulars'),
-    'irregular' => array('spins' => 'spinor')
-));
+    ],
+    'uninflected' => ['singulars'],
+    'irregular' => ['spins' => 'spinor']
+]);
 ```
 
 Will merge the supplied rules into the infection sets, with the
@@ -231,8 +231,8 @@ declared like any other helper/component. You should update
 include these classes to retain existing behavior:
 
 ``` php
-var $components = array('Session', 'Auth', ...);
-var $helpers = array('Session', 'Html', 'Form' ...);
+var $components = ['Session', 'Auth', ...];
+var $helpers = ['Session', 'Html', 'Form' ...];
 ```
 
 These change were done to make CakePHP more explicit and
@@ -286,7 +286,7 @@ update simply change your core.php:
 Configure::write('Routing.admin', 'admin');
 
 //to:
-Configure::write('Routing.prefixes', array('admin'));
+Configure::write('Routing.prefixes', ['admin']);
 ```
 
 See the New features guide for more information on using prefix
@@ -295,8 +295,8 @@ params should now only consist of alphanumeric chars, - and \_ or
 `/[A-Z0-9-_+]+/`:
 
 ``` php
-Router::connect('/:$%@#param/:action/*', array(...)); // BAD
-Router::connect('/:can/:anybody/:see/:m-3/*', array(...)); //Acceptable
+Router::connect('/:$%@#param/:action/*', [...]); // BAD
+Router::connect('/:can/:anybody/:see/:m-3/*', [...]); //Acceptable
 ```
 
 For 1.3 the internals of the Router were heavily refactored to
@@ -309,7 +309,7 @@ longer create routes like:
 ``` php
 Router::connect(
   '/([0-9]+)-p-(.*)/',
-  array('controller' => 'products', 'action' => 'show')
+  ['controller' => 'products', 'action' => 'show']
 );
 ```
 
@@ -322,8 +322,8 @@ use a greedy star in the middle of a route:
 ``` php
 Router::connect(
     '/pages/*/:event',
-    array('controller' => 'pages', 'action' => 'display'),
-    array('event' => '[a-z0-9_-]+')
+    ['controller' => 'pages', 'action' => 'display'],
+    ['event' => '[a-z0-9_-]+']
 );
 ```
 
@@ -340,7 +340,7 @@ actions, you will need to rewrite all your \$html-\>link() and
 
 ``` php
 // old format:
-$url = array('controller' => 'posts', 'action' => 'view', 'id' => $id);
+$url = ['controller' => 'posts', 'action' => 'view', 'id' => $id];
 // use cases:
 Router::url($url);
 $html->link($url);
@@ -350,7 +350,7 @@ $this->redirect($url);
 // 1.3 result:
 /posts/view/id:123
 // correct format:
-$url = array('controller' => 'posts', 'action' => 'view', $id);
+$url = ['controller' => 'posts', 'action' => 'view', $id];
 ```
 
 **Dispatcher**
@@ -389,7 +389,7 @@ This feature was also undocumented, and untested.
 - Configure::buildPaths() replaced by App::build()
 - Configure no longer manages paths.
 - Configure::write('modelPaths', array...) replaced by
-  App::build(array('models' =\> array...))
+  App::build(['models' =\> array...])
 - Configure::read('modelPaths') replaced by App::path('models')
 - There is no longer a debug = 3. The controller dumps generated
   by this setting often caused memory consumption issues making it an

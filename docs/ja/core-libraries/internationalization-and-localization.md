@@ -92,7 +92,8 @@ po ファイルは、短いメッセージの翻訳には便利ですが、長�
 
 ``` php
 // App Controller Code.
-public function beforeFilter() {
+public function beforeFilter()
+{
     $locale = Configure::read('Config.language');
     if ($locale && file_exists(APP . 'View' . DS . $locale . DS . $this->viewPath . DS . $this->view . $this->ext)) {
         // e.g. use /app/View/fra/Pages/tos.ctp instead of /app/View/Pages/tos.ctp
@@ -195,8 +196,10 @@ $this->Session->write('Config.language', 'fra');
 設定してください。 :
 
 ``` php
-class AppController extends Controller {
-    public function beforeFilter() {
+class AppController extends Controller
+{
+    public function beforeFilter()
+    {
         if ($this->Session->check('Config.language')) {
             Configure::write('Config.language', $this->Session->read('Config.language'));
         }
@@ -237,7 +240,8 @@ CakePHP は、自動的に `$validate` 配列中のすべてのモデルのバ�
 上書きすることができます。 :
 
 ``` php
-class User extends AppModel {
+class User extends AppModel
+{
 
     public $validationDomain = 'validation_errors';
 }
@@ -247,23 +251,24 @@ class User extends AppModel {
 これは、動的にバリデーションメッセージを作成することができます。 :
 
 ``` php
-class User extends AppModel {
+class User extends AppModel
+{
 
     public $validationDomain = 'validation';
 
-    public $validate = array(
-        'username' => array(
-                'length' => array(
-                'rule' => array('between', 2, 10),
+    public $validate = [
+        'username' => [
+                'length' => [
+                'rule' => ['between', 2, 10],
                 'message' => 'Username should be between %d and %d characters'
-            )
-        )
-    )
+            ]
+        ]
+    ]
 }
 ```
 
 以下のように内部的に呼びだされます。 :
 
 ``` text
-__d('validation', 'Username should be between %d and %d characters', array(2, 10));
+__d('validation', 'Username should be between %d and %d characters', [2, 10]);
 ```

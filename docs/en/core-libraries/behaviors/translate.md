@@ -31,10 +31,11 @@ Add it to your model by using the `$actsAs` property like in the
 following example. :
 
 ``` php
-class Post extends AppModel {
-    public $actsAs = array(
+class Post extends AppModel
+{
+    public $actsAs = [
         'Translate'
-    );
+    ];
 }
 ```
 
@@ -49,12 +50,13 @@ You can set the fields by simply extending the `'Translate'`
 value with another array, like so:
 
 ``` php
-class Post extends AppModel {
-    public $actsAs = array(
-        'Translate' => array(
+class Post extends AppModel
+{
+    public $actsAs = [
+        'Translate' => [
             'fieldOne', 'fieldTwo', 'and_so_on'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -63,12 +65,13 @@ fields) you already finished the basic setup. Great! According to
 our current example the model should now look something like this:
 
 ``` php
-class Post extends AppModel {
-    public $actsAs = array(
-        'Translate' => array(
+class Post extends AppModel
+{
+    public $actsAs = [
+        'Translate' => [
             'title'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -89,14 +92,15 @@ When defining the fields that are translated you can also load translations via
 to load partially translated records:
 
 ``` php
-class Post extends AppModel {
-    public $actsAs = array(
-        'Translate' => array(
+class Post extends AppModel
+{
+    public $actsAs = [
+        'Translate' => [
             'title',
             'body',
             'joinType' => 'left'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -125,9 +129,9 @@ By setting `$Model->locale` you can read translations for a specific locale:
 ``` php
 // Read the spanish locale data.
 $this->Post->locale = 'es';
-$results = $this->Post->find('first', array(
-    'conditions' => array('Post.id' => $id)
-));
+$results = $this->Post->find('first', [
+    'conditions' => ['Post.id' => $id]
+]);
 // $results will contain the spanish translation.
 ```
 
@@ -138,12 +142,13 @@ model record you simply extend the **field array** in your behavior
 setup as shown below. The naming is completely up to you. :
 
 ``` php
-class Post extends AppModel {
-    public $actsAs = array(
-        'Translate' => array(
+class Post extends AppModel
+{
+    public $actsAs = [
+        'Translate' => [
             'title' => 'titleTranslation'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -151,40 +156,40 @@ With this setup the result of `$this->Post->find()` should look
 something like this:
 
 ``` text
-Array
-(
-     [Post] => Array
-         (
+
+[
+     [Post] => 
+         [
              [id] => 1
              [title] => Beispiel Eintrag
              [body] => lorem ipsum...
              [locale] => de_de
-         )
+         ]
 
-     [titleTranslation] => Array
-         (
-             [0] => Array
-                 (
+     [titleTranslation] => 
+         [
+             [0] => 
+                 [
                      [id] => 1
                      [locale] => en_us
                      [model] => Post
                      [foreign_key] => 1
                      [field] => title
                      [content] => Example entry
-                 )
+                 ]
 
-             [1] => Array
-                 (
+             [1] => 
+                 [
                      [id] => 2
                      [locale] => de_de
                      [model] => Post
                      [foreign_key] => 1
                      [field] => title
                      [content] => Beispiel Eintrag
-                 )
+                 ]
 
-         )
-)
+         ]
+]
 ```
 
 > [!NOTE]
@@ -208,49 +213,49 @@ where the key is the translatable field and the value is the fake
 association name. :
 
 ``` php
-$this->Post->bindTranslation(array('title' => 'titleTranslation'));
+$this->Post->bindTranslation(['title' => 'titleTranslation']);
 // need at least recursive 1 for this to work.
-$this->Post->find('all', array('recursive' => 1));
+$this->Post->find('all', ['recursive' => 1]);
 ```
 
 With this setup the result of your find() should look something
 like this:
 
 ``` text
-Array
-(
-     [Post] => Array
-         (
+
+[
+     [Post] => 
+         [
              [id] => 1
              [title] => Beispiel Eintrag
              [body] => lorem ipsum...
              [locale] => de_de
-         )
+         ]
 
-     [titleTranslation] => Array
-         (
-             [0] => Array
-                 (
+     [titleTranslation] => 
+         [
+             [0] => 
+                 [
                      [id] => 1
                      [locale] => en_us
                      [model] => Post
                      [foreign_key] => 1
                      [field] => title
                      [content] => Example entry
-                 )
+                 ]
 
-             [1] => Array
-                 (
+             [1] => 
+                 [
                      [id] => 2
                      [locale] => de_de
                      [model] => Post
                      [foreign_key] => 1
                      [field] => title
                      [content] => Beispiel Eintrag
-                 )
+                 ]
 
-         )
-)
+         ]
+]
 ```
 
 ## Saving in another language
@@ -266,15 +271,17 @@ your controller or you can define it directly in the model.
 **Example A:** In your controller:
 
 ``` php
-class PostsController extends AppController {
+class PostsController extends AppController
+{
 
-    public function add() {
+    public function add()
+    {
         if (!empty($this->request->data)) {
             // we are going to save the German version
             $this->Post->locale = 'de_de';
             $this->Post->create();
             if ($this->Post->save($this->request->data)) {
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(['action' => 'index']);
             }
         }
     }
@@ -284,18 +291,20 @@ class PostsController extends AppController {
 **Example B:** In your model:
 
 ``` php
-class Post extends AppModel {
-    public $actsAs = array(
-        'Translate' => array(
+class Post extends AppModel
+{
+    public $actsAs = [
+        'Translate' => [
             'title'
-        )
-    );
+        ]
+    ];
 
     // Option 1) just define the property directly
     public $locale = 'en_us';
 
     // Option 2) create a simple method
-    public function setLanguage($locale) {
+    public function setLanguage($locale)
+    {
         $this->locale = $locale;
     }
 }
@@ -315,12 +324,13 @@ table "post_i18ns" instead of the default "i18n" table. To do so
 you need to setup your model like this:
 
 ``` php
-class Post extends AppModel {
-    public $actsAs = array(
-        'Translate' => array(
+class Post extends AppModel
+{
+    public $actsAs = [
+        'Translate' => [
             'title'
-        )
-    );
+        ]
+    ];
 
     // Use a different model (and table)
     public $translateModel = 'PostI18n';
@@ -344,7 +354,8 @@ displayField directly in the model using this behavior yet.
 Make sure that you change the `$displayField` to `'field'`. :
 
 ``` php
-class PostI18n extends AppModel {
+class PostI18n extends AppModel
+{
     public $displayField = 'field'; // important
 }
 // filename: PostI18n.php
@@ -361,12 +372,13 @@ If you want to change the name of the table you simply define
 \$translateTable in your model, like so:
 
 ``` php
-class Post extends AppModel {
-    public $actsAs = array(
-        'Translate' => array(
+class Post extends AppModel
+{
+    public $actsAs = [
+        'Translate' => [
             'title'
-        )
-    );
+        ]
+    ];
 
     // Use a different model
     public $translateModel = 'PostI18n';

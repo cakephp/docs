@@ -14,17 +14,17 @@ expressions. An example of a virtual field definition using MySQL
 would be:
 
 ``` php
-public $virtualFields = array(
+public $virtualFields = [
     'name' => 'CONCAT(User.first_name, " ", User.last_name)'
-);
+];
 ```
 
 And with PostgreSQL:
 
 ``` php
-public $virtualFields = array(
+public $virtualFields = [
     'name' => "User.first_name || \' \' || User.last_name"
-);
+];
 ```
 
 In subsequent find operations, your User results would contain a
@@ -89,14 +89,14 @@ be placed under the model's key in the resultset:
 $results = $this->User->find('first');
 
 // results contains the following
-array(
-    'User' => array(
+[
+    'User' => [
         'first_name' => 'Mark',
         'last_name' => 'Story',
         'name' => 'Mark Story',
         //more fields.
-    )
-);
+    ]
+];
 ```
 
 ### Pagination and virtual fields
@@ -113,7 +113,8 @@ using virtualFields in models that have more than one alias it is
 best to define the virtualFields in your model's constructor:
 
 ``` php
-public function __construct($id = false, $table = null, $ds = null) {
+public function __construct($id = false, $table = null, $ds = null)
+{
     parent::__construct($id, $table, $ds);
     $this->virtualFields['name'] = sprintf(
         'CONCAT(%s.first_name, " ", %s.last_name)', $this->alias, $this->alias
@@ -144,23 +145,23 @@ $this->Products->recursive = -1;
 $this->Products->ProductsItems->virtualFields['Total'] = 'count(ProductsItems.products_id)';
 
 // Where ORM
-$where = array(
-    'fields' => array(
+$where = [
+    'fields' => [
         'Products.*',
         'count(ProductsItems.products_id) AS ProductsItems__Total',
-    ),
-    'joins' => array(
-        array(
+    ],
+    'joins' => [
+        [
             'table' => 'products_items',
             'alias' => 'ProductsItems',
             'type' => 'LEFT',
-            'conditions' => array(
+            'conditions' => [
                 'ProductsItems.products_id = Products.id',
-            )
-        )
-    ),
+            ]
+        ]
+    ],
     'group' => 'ProductsItems.products_id'
-);
+];
 
 // Set conditions Paginator
 $this->paginate = $where;
@@ -172,33 +173,33 @@ $data = $this->Paginator->paginate();
 would return something like this:
 
 ``` text
-Array
-(
-    [0] => Array
-        (
-            [Products] => Array
-                (
+
+[
+    [0] => 
+        [
+            [Products] => 
+                [
                     [id] => 1234,
                     [description] => 'Text bla bla...',
-                )
-             [ProductsItems] => Array
-                 (
+                ]
+             [ProductsItems] => 
+                 [
                      [Total] => 25
-                 )
-        )
-     [1] => Array
-        (
-            [Products] => Array
-                (
+                 ]
+        ]
+     [1] => 
+        [
+            [Products] => 
+                [
                     [id] => 4321,
                     [description] => 'Text 2 bla bla...',
-                )
-             [ProductsItems] => Array
-                 (
+                ]
+             [ProductsItems] => 
+                 [
                      [Total] => 50
-                 )
-        )
- )
+                 ]
+        ]
+ ]
 ```
 
 ## Virtual fields in SQL queries
@@ -222,20 +223,20 @@ $this->Timelog->query(
 would return something like this:
 
 ``` text
-Array
-(
-    [0] => Array
-        (
-            [Timelog] => Array
-                (
+
+[
+    [0] => 
+        [
+            [Timelog] => 
+                [
                     [project_id] => 1234
-                )
-             [0] => Array
-                 (
+                ]
+             [0] => 
+                 [
                      [TotalHours] => 25.5
-                 )
-        )
- )
+                 ]
+        ]
+ ]
 ```
 
 If we want to group TotalHours into our Timelog array we should specify a
@@ -268,17 +269,17 @@ Running the query again after specifying the virtual field should result in a
 cleaner grouping of values:
 
 ``` text
-Array
-(
-    [0] => Array
-        (
-            [Timelog] => Array
-                (
+
+[
+    [0] => 
+        [
+            [Timelog] => 
+                [
                     [project_id] => 1234
                     [TotalHours] => 25.5
-                )
-        )
-)
+                ]
+        ]
+]
 ```
 
 ## Limitations of virtualFields

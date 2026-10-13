@@ -174,8 +174,10 @@ we'll create a simple Hello world shell. In your applications
 code inside it:
 
 ``` php
-class HelloShell extends AppShell {
-    public function main() {
+class HelloShell extends AppShell
+{
+    public function main()
+    {
         $this->out('Hello world.');
     }
 }
@@ -207,12 +209,15 @@ built-in one. Since our main method wasn't very interesting let's add another co
 that does something:
 
 ``` php
-class HelloShell extends AppShell {
-    public function main() {
+class HelloShell extends AppShell
+{
+    public function main()
+    {
         $this->out('Hello world.');
     }
 
-    public function hey_there() {
+    public function hey_there()
+    {
         $this->out('Hey there ' . $this->args[0]);
     }
 }
@@ -239,10 +244,12 @@ are loaded in as properties attached to your shell, just like a controller gets
 models attached to it:
 
 ``` php
-class UserShell extends AppShell {
-    public $uses = array('User');
+class UserShell extends AppShell
+{
+    public $uses = ['User'];
 
-    public function show() {
+    public function show()
+    {
         $user = $this->User->findByUsername($this->args[0]);
         $this->out(print_r($user, true));
     }
@@ -260,8 +267,9 @@ Tasks allow you to extract commands into classes. For example the `bake` is made
 almost entirely of tasks. You define a shell's tasks by using the `$tasks` property:
 
 ``` php
-class UserShell extends AppShell {
-    public $tasks = array('Template');
+class UserShell extends AppShell
+{
+    public $tasks = ['Template'];
 }
 ```
 
@@ -274,9 +282,11 @@ Each task must at least implement an `execute()` method. The ShellDispatcher,
 will call this method when the task is invoked. A task class looks like:
 
 ``` php
-class FileGeneratorTask extends Shell {
-    public $uses = array('User');
-    public function execute() {
+class FileGeneratorTask extends Shell
+{
+    public $uses = ['User'];
+    public function execute()
+    {
 
     }
 }
@@ -287,9 +297,11 @@ making re-usable chunks of functionality similar to [Components](controllers/com
 
 ``` php
 // found in Console/Command/SeaShell.php
-class SeaShell extends AppShell {
-    public $tasks = array('Sound'); // found in Console/Command/Task/SoundTask.php
-    public function main() {
+class SeaShell extends AppShell
+{
+    public $tasks = ['Sound']; // found in Console/Command/Task/SoundTask.php
+    public function main()
+    {
         $this->Sound->execute();
     }
 }
@@ -395,7 +407,7 @@ You can create additional styles using <span class="title-ref">\$this-\>stdout-\
 new output style you could do:
 
 ``` php
-$this->stdout->styles('flashy', array('text' => 'magenta', 'blink' => true));
+$this->stdout->styles('flashy', ['text' => 'magenta', 'blink' => true]);
 ```
 
 This would then allow you to use a `<flashy>` tag in your shell output, and if ansi
@@ -468,7 +480,8 @@ The ConsoleOptionParser implements a fluent interface and includes
 methods for easily setting multiple options/arguments at once. :
 
 ``` php
-public function getOptionParser() {
+public function getOptionParser()
+{
     $parser = parent::getOptionParser();
     //configure parser
     return $parser;
@@ -481,16 +494,17 @@ All of the methods that configure an option parser can be chained,
 allowing you to define an entire option parser in one series of method calls:
 
 ``` php
-public function getOptionParser() {
+public function getOptionParser()
+{
     $parser = parent::getOptionParser();
-    $parser->addArgument('type', array(
+    $parser->addArgument('type', [
         'help' => 'Either a full path or type of class.'
-    ))->addArgument('className', array(
+    ])->addArgument('className', [
         'help' => 'A CakePHP core class name (e.g: Component, HtmlHelper).'
-    ))->addOption('method', array(
+    ])->addOption('method', [
         'short' => 'm',
         'help' => __('The specific method you want help on.')
-    ))->description(__('Lookup doc block comments for classes in CakePHP.'));
+    ])->description(__('Lookup doc block comments for classes in CakePHP.'));
     return $parser;
 }
 ```
@@ -516,7 +530,7 @@ Calling with no arguments will return the current value:
 
 ``` php
 // Set multiple lines at once
-$parser->description(array('line one', 'line two'));
+$parser->description(['line one', 'line two']);
 
 // read the current value
 $parser->description();
@@ -531,7 +545,7 @@ Calling with no arguments will return the current value:
 
 ``` php
 // Set multiple lines at once
-$parser->epilog(array('line one', 'line two'));
+$parser->epilog(['line one', 'line two']);
 
 // read the current value
 $parser->epilog();
@@ -539,7 +553,7 @@ $parser->epilog();
 
 ### Adding arguments
 
-`method` ConsoleOptionParser::**addArgument**($name, $params = array())
+`method` ConsoleOptionParser::**addArgument**($name, $params = [])
 
 Positional arguments are frequently used in command line tools,
 and `ConsoleOptionParser` allows you to define positional
@@ -548,7 +562,7 @@ one at a time with `$parser->addArgument();` or multiple at once
 with `$parser->addArguments();`:
 
 ``` php
-$parser->addArgument('model', array('help' => 'The model to bake'));
+$parser->addArgument('model', ['help' => 'The model to bake']);
 ```
 
 You can use the following options when creating an argument:
@@ -575,10 +589,10 @@ If you have an array with multiple arguments you can use `$parser->addArguments(
 to add multiple arguments at once. :
 
 ``` php
-$parser->addArguments(array(
-    'node' => array('help' => 'The node to create', 'required' => true),
-    'parent' => array('help' => 'The parent node', 'required' => true)
-));
+$parser->addArguments([
+    'node' => ['help' => 'The node to create', 'required' => true],
+    'parent' => ['help' => 'The parent node', 'required' => true]
+]);
 ```
 
 As with all the builder methods on ConsoleOptionParser, addArguments
@@ -592,11 +606,11 @@ Additionally you can use `choices` to force an argument to
 be from a list of valid choices:
 
 ``` php
-$parser->addArgument('type', array(
+$parser->addArgument('type', [
     'help' => 'The type of node to interact with.',
     'required' => true,
-    'choices' => array('aro', 'aco')
-));
+    'choices' => ['aro', 'aco']
+]);
 ```
 
 The above will create an argument that is required and has validation
@@ -605,7 +619,7 @@ value an exception will be raised and the shell will be stopped.
 
 ### Adding Options
 
-`method` ConsoleOptionParser::**addOption**($name, $options = array())
+`method` ConsoleOptionParser::**addOption**($name, $options = [])
 
 Options or flags are also frequently used in command line tools.
 `ConsoleOptionParser` supports creating options
@@ -614,11 +628,11 @@ and creating boolean switches. Options are created with either
 `$parser->addOption()` or `$parser->addOptions()`. :
 
 ``` php
-$parser->addOption('connection', array(
+$parser->addOption('connection', [
     'short' => 'c',
     'help' => 'connection',
     'default' => 'default',
-));
+]);
 ```
 
 The above would allow you to use either `cake myshell --connection=other`,
@@ -628,7 +642,7 @@ consume values, and their presence just enables them in the
 parsed parameters. :
 
 ``` php
-$parser->addOption('no-commit', array('boolean' => true));
+$parser->addOption('no-commit', ['boolean' => true]);
 ```
 
 With this option, when calling a shell like `cake myshell --no-commit something`
@@ -654,10 +668,10 @@ If you have an array with multiple options you can use `$parser->addOptions()`
 to add multiple options at once. :
 
 ``` php
-$parser->addOptions(array(
-    'node' => array('short' => 'n', 'help' => 'The node to create'),
-    'parent' => array('short' => 'p', 'help' => 'The parent node')
-));
+$parser->addOptions([
+    'node' => ['short' => 'n', 'help' => 'The node to create'],
+    'parent' => ['short' => 'p', 'help' => 'The parent node']
+]);
 ```
 
 As with all the builder methods on ConsoleOptionParser, addOptions is can be used
@@ -670,10 +684,10 @@ can be. When an option has defined choices, those are the only valid choices
 for an option. All other values will raise an `InvalidArgumentException`:
 
 ``` php
-$parser->addOption('accept', array(
+$parser->addOption('accept', [
     'help' => 'What version to accept.',
-    'choices' => array('working', 'theirs', 'mine')
-));
+    'choices' => ['working', 'theirs', 'mine']
+]);
 ```
 
 ### Using boolean options
@@ -684,10 +698,10 @@ themselves into the parsed parameters. When the flags are present they are set
 to true, when they are absent false:
 
 ``` php
-$parser->addOption('verbose', array(
+$parser->addOption('verbose', [
     'help' => 'Enable verbose output.',
     'boolean' => true
-));
+]);
 ```
 
 The following option would result in `$this->params['verbose']` always
@@ -710,7 +724,7 @@ Since the boolean options are always defined as `true` or
 
 ### Adding subcommands
 
-`method` ConsoleOptionParser::**addSubcommand**($name, $options = array())
+`method` ConsoleOptionParser::**addSubcommand**($name, $options = [])
 
 Console applications are often made of subcommands, and these subcommands
 may require special option parsing and have their own help. A perfect
@@ -720,10 +734,10 @@ define subcommands and provide command specific option parsers so the
 shell knows how to parse commands for its tasks:
 
 ``` php
-$parser->addSubcommand('model', array(
+$parser->addSubcommand('model', [
     'help' => 'Bake a model',
     'parser' => $this->Model->getOptionParser()
-));
+]);
 ```
 
 The above is an example of how you could provide help and a specialized
@@ -757,21 +771,21 @@ you can define the parser spec as an array for that method. This can help
 make building subcommand parsers easier, as everything is an array:
 
 ``` php
-$parser->addSubcommand('check', array(
+$parser->addSubcommand('check', [
     'help' => __('Check the permissions between an ACO and ARO.'),
-    'parser' => array(
-        'description' => array(
+    'parser' => [
+        'description' => [
             __("Use this command to grant ACL permissions. Once executed, the "),
             __("ARO specified (and its children, if any) will have ALLOW access "),
             __("to the specified ACO action (and the ACO's children, if any).")
-        ),
-        'arguments' => array(
-            'aro' => array('help' => __('ARO to check.'), 'required' => true),
-            'aco' => array('help' => __('ACO to check.'), 'required' => true),
-            'action' => array('help' => __('Action to check'))
-        )
-    )
-));
+        ],
+        'arguments' => [
+            'aro' => ['help' => __('ARO to check.'), 'required' => true],
+            'aco' => ['help' => __('ACO to check.'), 'required' => true],
+            'action' => ['help' => __('Action to check')]
+        ]
+    ]
+]);
 ```
 
 Inside the parser spec, you can define keys for `arguments`, `options`,
@@ -782,19 +796,20 @@ format that `ConsoleOptionParser::addArguments()` and
 buildFromArray on its own, to build an option parser:
 
 ``` php
-public function getOptionParser() {
-    return ConsoleOptionParser::buildFromArray(array(
-        'description' => array(
+public function getOptionParser()
+{
+    return ConsoleOptionParser::buildFromArray([
+        'description' => [
             __("Use this command to grant ACL permissions. Once executed, the "),
             __("ARO specified (and its children, if any) will have ALLOW access "),
             __("to the specified ACO action (and the ACO's children, if any).")
-        ),
-        'arguments' => array(
-            'aro' => array('help' => __('ARO to check.'), 'required' => true),
-            'aco' => array('help' => __('ACO to check.'), 'required' => true),
-            'action' => array('help' => __('Action to check'))
-        )
-    ));
+        ],
+        'arguments' => [
+            'aro' => ['help' => __('ARO to check.'), 'required' => true],
+            'aco' => ['help' => __('ACO to check.'), 'required' => true],
+            'action' => ['help' => __('Action to check')]
+        ]
+    ]);
 }
 ```
 
@@ -942,7 +957,7 @@ This asserts that the generated message IDs are valid and fit to the domain the 
 
 `method` Shell::**startup**()
 
-`method` Shell::**wrapText**($text, $options = array())
+`method` Shell::**wrapText**($text, $options = [])
 
 ## More topics
 

@@ -132,7 +132,8 @@ Acl components. First add a login and logout action to your
 `UsersController`:
 
 ``` php
-public function login() {
+public function login()
+{
     if ($this->request->is('post')) {
         if ($this->Auth->login()) {
             return $this->redirect($this->Auth->redirectUrl());
@@ -141,7 +142,8 @@ public function login() {
     }
 }
 
-public function logout() {
+public function logout()
+{
     //Leave empty for now.
 }
 ```
@@ -151,12 +153,12 @@ Then create the following view file for login at
 
 ``` php
 <?php
-echo $this->Form->create('User', array('action' => 'login'));
-echo $this->Form->inputs(array(
+echo $this->Form->create('User', ['action' => 'login']);
+echo $this->Form->inputs([
     'legend' => __('Login'),
     'username',
     'password'
-));
+]);
 echo $this->Form->end('Login');
 ?>
 ```
@@ -168,10 +170,12 @@ AuthComponent will expect that your passwords are hashed. In
 
 ``` php
 App::uses('AuthComponent', 'Controller/Component');
-class User extends AppModel {
+class User extends AppModel
+{
     // other code.
 
-    public function beforeSave($options = array()) {
+    public function beforeSave($options = [])
+    {
         $this->data['User']['password'] = AuthComponent::password(
           $this->data['User']['password']
         );
@@ -186,32 +190,34 @@ site controlled with Auth and Acl, we will set them up in
 `AppController`:
 
 ``` php
-class AppController extends Controller {
-    public $components = array(
+class AppController extends Controller
+{
+    public $components = [
         'Acl',
-        'Auth' => array(
-            'authorize' => array(
-                'Actions' => array('actionPath' => 'controllers')
-            )
-        ),
+        'Auth' => [
+            'authorize' => [
+                'Actions' => ['actionPath' => 'controllers']
+            ]
+        ],
         'Session'
-    );
-    public $helpers = array('Html', 'Form', 'Session');
+    ];
+    public $helpers = ['Html', 'Form', 'Session'];
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         //Configure AuthComponent
-        $this->Auth->loginAction = array(
+        $this->Auth->loginAction = [
           'controller' => 'users',
           'action' => 'login'
-        );
-        $this->Auth->logoutRedirect = array(
+        ];
+        $this->Auth->logoutRedirect = [
           'controller' => 'users',
           'action' => 'login'
-        );
-        $this->Auth->loginRedirect = array(
+        ];
+        $this->Auth->loginRedirect = [
           'controller' => 'posts',
           'action' => 'add'
-        );
+        ];
     }
 }
 ```
@@ -224,7 +230,8 @@ and users. In **both** your `GroupsController` and your
 `UsersController` Add the following:
 
 ``` php
-public function beforeFilter() {
+public function beforeFilter()
+{
     parent::beforeFilter();
 
     // For CakePHP 2.0
@@ -273,11 +280,13 @@ requires an implementation of `parentNode()` on your model. In
 our `User` model we will add the following:
 
 ``` php
-class User extends AppModel {
-    public $belongsTo = array('Group');
-    public $actsAs = array('Acl' => array('type' => 'requester'));
+class User extends AppModel
+{
+    public $belongsTo = ['Group'];
+    public $actsAs = ['Acl' => ['type' => 'requester']];
 
-    public function parentNode() {
+    public function parentNode()
+    {
         if (!$this->id && empty($this->data)) {
             return null;
         }
@@ -289,7 +298,7 @@ class User extends AppModel {
         if (!$groupId) {
             return null;
         }
-        return array('Group' => array('id' => $groupId));
+        return ['Group' => ['id' => $groupId]];
     }
 }
 ```
@@ -297,10 +306,12 @@ class User extends AppModel {
 Then in our `Group` Model Add the following:
 
 ``` php
-class Group extends AppModel {
-    public $actsAs = array('Acl' => array('type' => 'requester'));
+class Group extends AppModel
+{
+    public $actsAs = ['Acl' => ['type' => 'requester']];
 
-    public function parentNode() {
+    public function parentNode()
+    {
         return null;
     }
 }
@@ -353,15 +364,16 @@ In case we want simplified per-group only permissions, we need to
 implement `bindNode()` in `User` model:
 
 ``` php
-public function bindNode($user) {
-    return array('model' => 'Group', 'foreign_key' => $user['User']['group_id']);
+public function bindNode($user)
+{
+    return ['model' => 'Group', 'foreign_key' => $user['User']['group_id']];
 }
 ```
 
 Then modify the `actsAs` for the model `User` and disable the requester directive:
 
 ``` php
-public $actsAs = array('Acl' => array('type' => 'requester', 'enabled' => false));
+public $actsAs = ['Acl' => ['type' => 'requester', 'enabled' => false]];
 ```
 
 These two changes will tell ACL to skip checking `User` Aro's and to check only `Group`
@@ -404,7 +416,7 @@ Creating Acos from the shell looks like:
 While using the AclComponent would look like:
 
 ``` php
-$this->Acl->Aco->create(array('parent_id' => null, 'alias' => 'controllers'));
+$this->Acl->Aco->create(['parent_id' => null, 'alias' => 'controllers']);
 $this->Acl->Aco->save();
 ```
 
@@ -422,15 +434,15 @@ that your `$components` array contains the `actionPath` defined earlier:
 
 ``` php
 class AppController extends Controller {
-    public $components = array(
+    public $components = [
         'Acl',
-        'Auth' => array(
-            'authorize' => array(
-                'Actions' => array('actionPath' => 'controllers')
-            )
-        ),
+        'Auth' => [
+            'authorize' => [
+                'Actions' => ['actionPath' => 'controllers']
+            ]
+        ],
         'Session'
-    );
+    ];
 ```
 
 Continue to [Part Two](../../part-two) to continue the tutorial.

@@ -9,22 +9,22 @@ CakePHP2.2 にアップグレードする際には、 `app/Config/bootstrap.php`
 ``` php
 // アセットプラグイン、キャッシュヘルパープラグインの
 // ディスパッチャーフィルターを有効化
-Configure::write('Dispatcher.filters', array(
+Configure::write('Dispatcher.filters', [
     'AssetDispatcher',
     'CacheDispatcher'
-));
+]);
 
 // ログ設定の追加
-CakeLog::config('debug', array(
+CakeLog::config('debug', [
     'engine' => 'FileLog',
-    'types' => array('notice', 'info', 'debug'),
+    'types' => ['notice', 'info', 'debug'],
     'file' => 'debug',
-));
-CakeLog::config('error', array(
+]);
+CakeLog::config('error', [
     'engine' => 'FileLog',
-    'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
+    'types' => ['warning', 'error', 'critical', 'alert', 'emergency'],
     'file' => 'error',
-));
+]);
 ```
 
 また、 `app/Config/core.php` ファイルも修正が必要です。
@@ -205,11 +205,11 @@ define('LOG_ERROR', LOG_ERR);
 グループはキャッシュエンジン生成時の設定のものが定義されます :
 
 ``` php
-Cache::config(array(
+Cache::config([
     'engine' => 'Redis',
     ...
-    'groups' => array('post', 'comment', 'user')
-));
+    'groups' => ['post', 'comment', 'user']
+]);
 ```
 
 グループはいくつでも持てますが、注意して頂きたいのが、グループは動的に変更できないことです。
@@ -224,14 +224,14 @@ Cache::config(array(
 
 - `CakeLog` クラスは [RFC 5424](https://tools.ietf.org/html/rfc5424) の定義と同じレベルでログを出力します。
   いくつかの便利なメソッドが追加されました。
-  - `CakeLog::emergency($message, $scope = array())`
-  - `CakeLog::alert($message, $scope = array())`
-  - `CakeLog::critical($message, $scope = array())`
-  - `CakeLog::error($message, $scope = array())`
-  - `CakeLog::warning($message, $scope = array())`
-  - `CakeLog::notice($message, $scope = array())`
-  - `CakeLog::info($message, $scope = array())`
-  - `CakeLog::debug($message, $scope = array())`
+  - `CakeLog::emergency($message, $scope = [])`
+  - `CakeLog::alert($message, $scope = [])`
+  - `CakeLog::critical($message, $scope = [])`
+  - `CakeLog::error($message, $scope = [])`
+  - `CakeLog::warning($message, $scope = [])`
+  - `CakeLog::notice($message, $scope = [])`
+  - `CakeLog::info($message, $scope = [])`
+  - `CakeLog::debug($message, $scope = [])`
 - `CakeLog::write` メソッドに第3引数 `$scope` が追加されました。
   [Logging Scopes](../core-libraries/logging#logging-scopes) を参照ください
 - 新しいログエンジン `ConsoleLog` が追加されました。

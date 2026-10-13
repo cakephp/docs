@@ -1,6 +1,6 @@
 # JsHelper
 
-`class` **JsHelper**(View $view, array $settings = array())
+`class` **JsHelper**(View $view, array $settings = [])
 
 > [!WARNING]
 > The JsHelper is currently deprecated and completely removed in 3.x.
@@ -57,7 +57,7 @@ JavaScript engine selection is declared when you include the helper
 in your controller:
 
 ``` php
-public $helpers = array('Js' => array('Jquery'));
+public $helpers = ['Js' => ['Jquery']];
 ```
 
 The above would use the Jquery Engine in the instances of JsHelper
@@ -83,7 +83,7 @@ To override the "\$" shortcut, use the jQueryObject variable:
 $this->Js->JqueryEngine->jQueryObject = '$j';
 echo $this->Html->scriptBlock(
     'var $j = jQuery.noConflict();',
-    array('inline' => false)
+    ['inline' => false]
 );
 // Tell jQuery to go into noconflict mode
 ```
@@ -94,7 +94,7 @@ Declare the JsHelper in the `$helpers` array in your
 customHelper:
 
 ``` php
-public $helpers = array('Js');
+public $helpers = ['Js'];
 ```
 
 > [!NOTE]
@@ -105,10 +105,10 @@ If you are willing to use an other JavaScript engine than the
 default, do the helper setup in your controller as follows:
 
 ``` php
-public $helpers = array(
-    'Js' => array('Prototype'),
+public $helpers = [
+    'Js' => ['Prototype'],
     'CustomHelper'
-);
+];
 ```
 
 > [!WARNING]
@@ -188,7 +188,7 @@ allow all scripts generated in layout elements to be output in one
 place. It should be noted that buffered scripts are handled
 separately from included script files.
 
-`method` JsHelper::**writeBuffer**($options = array())
+`method` JsHelper::**writeBuffer**($options = [])
 
 Writes all JavaScript generated so far to a code block or caches
 them to a file and returns a linked script.
@@ -262,25 +262,25 @@ CakePHP core. Whenever you see separate lists for `Options` and
 `Event Options` both sets of parameters are supplied in the
 `$options` array for the method.
 
-`method` JsHelper::**object**($data, $options = array())
+`method` JsHelper::**object**($data, $options = [])
 
-`method` JsHelper::**sortable**($options = array())
+`method` JsHelper::**sortable**($options = [])
 
-`method` JsHelper::**request**($url, $options = array())
+`method` JsHelper::**request**($url, $options = [])
 
 `method` JsHelper::**get**($selector)
 
 `method` JsHelper::**set**(mixed $one, mixed $two = null)
 
-`method` JsHelper::**drag**($options = array())
+`method` JsHelper::**drag**($options = [])
 
-`method` JsHelper::**drop**($options = array())
+`method` JsHelper::**drop**($options = [])
 
-`method` JsHelper::**slider**($options = array())
+`method` JsHelper::**slider**($options = [])
 
-`method` JsHelper::**effect**($name, $options = array())
+`method` JsHelper::**effect**($name, $options = [])
 
-`method` JsHelper::**event**($type, $content, $options = array())
+`method` JsHelper::**event**($type, $content, $options = [])
 
 `method` JsHelper::**domReady**($callback)
 
@@ -292,11 +292,11 @@ CakePHP core. Whenever you see separate lists for `Options` and
 
 `method` JsHelper::**prompt**($message, $default)
 
-`method` JsHelper::**submit**($caption = null, $options = array())
+`method` JsHelper::**submit**($caption = null, $options = [])
 
-`method` JsHelper::**link**($title, $url = null, $options = array())
+`method` JsHelper::**link**($title, $url = null, $options = [])
 
-`method` JsHelper::**serializeForm**($options = array())
+`method` JsHelper::**serializeForm**($options = [])
 
 `method` JsHelper::**redirect**($url)
 
@@ -320,8 +320,8 @@ include `RequestHandlerComponent` in your components. Add the
 following to your controller:
 
 ``` php
-public $components = array('RequestHandler');
-public $helpers = array('Js');
+public $components = ['RequestHandler'];
+public $helpers = ['Js'];
 ```
 
 Next link in the JavaScript library you want to use. For this
@@ -336,10 +336,10 @@ want to make JavaScript enhanced links instead of plain HTML ones.
 To do so, call the `options()` at the top of your view:
 
 ``` php
-$this->Paginator->options(array(
+$this->Paginator->options([
     'update' => '#content',
     'evalScripts' => true
-));
+]);
 ```
 
 The `PaginatorHelper` now knows to make JavaScript enhanced
@@ -385,7 +385,7 @@ indicator effects yourself:
     <?php
         echo $this->Html->image(
             'indicator.gif',
-            array('id' => 'busy-indicator')
+            ['id' => 'busy-indicator']
         );
     ?>
     </body>
@@ -403,18 +403,18 @@ with the `JsHelper`. To do that we need to update our
 `options()` function:
 
 ``` php
-$this->Paginator->options(array(
+$this->Paginator->options([
     'update' => '#content',
     'evalScripts' => true,
     'before' => $this->Js->get('#busy-indicator')->effect(
         'fadeIn',
-        array('buffer' => false)
+        ['buffer' => false]
     ),
     'complete' => $this->Js->get('#busy-indicator')->effect(
         'fadeOut',
-        array('buffer' => false)
+        ['buffer' => false]
     ),
-));
+]);
 ```
 
 This will show/hide the busy-indicator element before and after the

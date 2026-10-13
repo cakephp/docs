@@ -80,20 +80,20 @@ Example:
 
 ``` php
 // Cache configuration for data that can be cached for a short time only.
-Cache::config('short', array(
+Cache::config('short', [
     'engine' => 'File',
     'duration' => '+1 hours',
     'path' => CACHE,
     'prefix' => 'cake_short_'
-));
+]);
 
 // Cache configuration for data that can be cached for a long time.
-Cache::config('long', array(
+Cache::config('long', [
     'engine' => 'File',
     'duration' => '+1 week',
     'probability' => 100,
     'path' => CACHE . 'long' . DS,
-));
+]);
 ```
 
 By placing the above code in your `app/Config/bootstrap.php` you will
@@ -121,10 +121,10 @@ part of a plugin. Cache configs from plugins need to use the plugin
 dot syntax. :
 
 ``` php
-Cache::config('custom', array(
+Cache::config('custom', [
     'engine' => 'CachePack.MyCustomCache',
     // ...
-));
+]);
 ```
 
 > [!NOTE]
@@ -166,12 +166,14 @@ cache. A perfect example of this are the results from `Model::find()`.
 A method that uses Cache to store results could look like:
 
 ``` php
-class Post extends AppModel {
+class Post extends AppModel
+{
 
-    public function newest() {
+    public function newest()
+    {
         $result = Cache::read('newest_posts', 'long');
         if (!$result) {
-            $result = $this->find('all', array('order' => 'Post.updated DESC', 'limit' => 10));
+            $result = $this->find('all', ['order' => 'Post.updated DESC', 'limit' => 10]);
             Cache::write('newest_posts', $result, 'long');
         }
         return $result;
@@ -188,15 +190,17 @@ As of 2.5 you can accomplish the above much more simple by using
 newer, using the `remember()` method would look like:
 
 ``` php
-class Post extends AppModel {
+class Post extends AppModel
+{
 
-    public function newest() {
+    public function newest()
+    {
         $model = $this;
         return Cache::remember('newest_posts', function () use ($model){
-            return $model->find('all', array(
+            return $model->find('all', [
                 'order' => 'Post.updated DESC',
                 'limit' => 10
-            ));
+            ]);
         }, 'long');
     }
 }
@@ -239,11 +243,11 @@ whenever some information changes that is shared among all entries in the same
 group. This is possible by declaring the groups in cache configuration:
 
 ``` php
-Cache::config('site_home', array(
+Cache::config('site_home', [
     'engine' => 'Redis',
     'duration' => '+999 days',
-    'groups' => array('comment', 'post')
-));
+    'groups' => ['comment', 'post']
+]);
 ```
 
 Let's say you want to store the HTML generated for your homepage in cache, but
@@ -258,7 +262,8 @@ remove all entries associated to the `post` group:
 ``` php
 // Model/Post.php
 
-public function afterSave($created, $options = array()) {
+public function afterSave($created, $options = [])
+{
     if ($created) {
         Cache::clearGroup('post', 'site_home');
     }
@@ -278,7 +283,8 @@ group and configurations, i.e.: having the same group:
  * A variation of previous example that clears all Cache configurations
  * having the same group
  */
-public function afterSave($created, $options = array()) {
+public function afterSave($created, $options = [])
+{
     if ($created) {
         $configs = Cache::groupConfigs('post');
         foreach ($configs['post'] as $config) {
@@ -296,7 +302,7 @@ choose a common prefix for all your configs.
 
 `class` **Cache**
 
-`static` Cache::**config**($name = null, $settings = array())
+`static` Cache::**config**($name = null, $settings = [])
 
 `Cache::config()` is used to create additional Cache
 configurations. These additional configurations can have different
@@ -354,7 +360,7 @@ of trips made to the database to fetch posts.
 `Cache::delete()` will allow you to completely remove a cached
 object from the Cache store.
 
-`static` Cache::**set**($settings = array(), $value = null, $config = 'default')
+`static` Cache::**set**($settings = [], $value = null, $config = 'default')
 
 `Cache::set()` allows you to temporarily override a cache config's
 settings for one operation (usually a read or write). If you use
@@ -364,12 +370,12 @@ fail to do so, the default settings will be used when the cache key
 is read. :
 
 ``` php
-Cache::set(array('duration' => '+30 days'));
+Cache::set(['duration' => '+30 days']);
 Cache::write('results', $data);
 
 // Later on
 
-Cache::set(array('duration' => '+30 days'));
+Cache::set(['duration' => '+30 days']);
 $results = Cache::read('results');
 ```
 
@@ -430,8 +436,10 @@ For example, you often want to cache query results. You could use
 newer:
 
 ``` php
-class Articles extends AppModel {
-    function all() {
+class Articles extends AppModel
+{
+    function all()
+    {
         $model = $this;
         return Cache::remember('all_articles', function () use ($model){
             return $model->find('all');

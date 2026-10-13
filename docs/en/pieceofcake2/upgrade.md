@@ -463,7 +463,7 @@ See [Coding Standards](/pieceofcake2/coding-standards).
 
 **Changes:**
 
-- `array()` → `[]`
+- `[]` → `[]`
 - `get_class()` → `::class`
 - `list()` → `[]` for array destructuring
 - `dirname(__FILE__)` → `__DIR__`

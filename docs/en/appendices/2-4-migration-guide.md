@@ -236,7 +236,7 @@ In the pieceofcake2 fork, Bake is not part of the core. Install the
 ### ErrorHandler
 
 - New configuration option `skipLog` has been added, to allow skipping certain
-  Exception types to be logged. `Configure::write('Exception.skipLog', array('NotFoundException', 'ForbiddenException'));`
+  Exception types to be logged. `Configure::write('Exception.skipLog', ['NotFoundException', 'ForbiddenException']);`
   will avoid these exceptions and the ones extending them to be be logged when
   `'Exception.log'` config is `true`
 

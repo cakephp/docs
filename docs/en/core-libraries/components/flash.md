@@ -1,6 +1,6 @@
 # Flash
 
-`class` **FlashComponent**(ComponentCollection $collection, array $config = array())
+`class` **FlashComponent**(ComponentCollection $collection, array $config = [])
 
 FlashComponent provides a way to set one-time notification messages to be
 displayed after processing a form or acknowledging data. CakePHP refers to these
@@ -56,13 +56,13 @@ An example of using these options:
 
 ``` php
 // In your Controller
-$this->Flash->success('The user has been saved', array(
+$this->Flash->success('The user has been saved', [
     'key' => 'positive',
-    'params' => array(
+    'params' => [
         'name' => $user['User']['name'],
         'email' => $user['User']['email']
-    )
-));
+    ]
+]);
 
 // In your View
 <?php echo $this->Flash->render('positive') ?>
@@ -79,7 +79,7 @@ should set the `plugin` parameter. For example:
 
 ``` php
 // In your Controller
-$this->Flash->warning('My message', array('plugin' => 'PluginName'));
+$this->Flash->warning('My message', ['plugin' => 'PluginName']);
 ```
 
 The code above will use the warning.ctp element under `plugins/PluginName/View/Elements/Flash`

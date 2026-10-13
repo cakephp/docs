@@ -45,14 +45,16 @@ application can, such as Config, Console, Lib, webroot, etc.
 ``` php
 // In /app/Plugin/ContactManager/Controller/ContactManagerAppController.php
 
-class ContactManagerAppController extends AppController {
+class ContactManagerAppController extends AppController
+{
 }
 ```
 
 ``` php
 // In /app/Plugin/ContactManager/Model/ContactManagerAppModel.php
 
-class ContactManagerAppModel extends AppModel {
+class ContactManagerAppModel extends AppModel
+{
 }
 ```
 
@@ -97,10 +99,12 @@ So, we place our new ContactsController in
 ``` php
 // In app/Plugin/ContactManager/Controller/ContactsController.php
 
-class ContactsController extends ContactManagerAppController {
-    public $uses = array('ContactManager.Contact');
+class ContactsController extends ContactManagerAppController
+{
+    public $uses = ['ContactManager.Contact'];
 
-    public function index() {
+    public function index()
+    {
         // ...
     }
 }
@@ -135,7 +139,8 @@ create the model for that controller, called Contact:
 ``` php
 // In /app/Plugin/ContactManager/Model/Contact.php
 
-class Contact extends ContactManagerAppModel {
+class Contact extends ContactManagerAppModel
+{
 }
 ```
 
@@ -152,8 +157,9 @@ For example:
 ``` php
 // In /app/Plugin/ContactManager/Model/Contact.php
 
-class Contact extends ContactManagerAppModel {
-    public $hasMany = array('ContactManager.AltName');
+class Contact extends ContactManagerAppModel
+{
+    public $hasMany = ['ContactManager.AltName'];
 }
 ```
 
@@ -163,12 +169,13 @@ have the plugin prefix on them, use the alternative syntax:
 ``` php
 // In /app/Plugin/ContactManager/Model/Contact.php
 
-class Contact extends ContactManagerAppModel {
-    public $hasMany = array(
-        'AltName' => array(
+class Contact extends ContactManagerAppModel
+{
+    public $hasMany = [
+        'AltName' => [
             'className' => 'ContactManager.AltName'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -269,12 +276,13 @@ component. For example:
 ``` php
 // Component defined in 'ContactManager' plugin
 
-class ExampleComponent extends Component {
+class ExampleComponent extends Component
+{
 }
 
 // Within your controllers:
 
-public $components = array('ContactManager.Example');
+public $components = ['ContactManager.Example'];
 ```
 
 The same technique applies to Helpers and Behaviors.

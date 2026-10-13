@@ -1,6 +1,6 @@
 # RssHelper
 
-`class` **RssHelper**(View $view, array $settings = array())
+`class` **RssHelper**(View $view, array $settings = [])
 
 The RSS helper makes generating XML for RSS feeds easy.
 
@@ -34,14 +34,14 @@ It is a good idea to add RequestHandler to your PostsController's
 \$components array. This will allow a lot of automagic to occur:
 
 ``` php
-public $components = array('RequestHandler');
+public $components = ['RequestHandler'];
 ```
 
 Our view will also use the `TextHelper` for formatting, so that
 should be added to the controller as well:
 
 ``` php
-public $helpers = array('Text');
+public $helpers = ['Text'];
 ```
 
 Before we can make an RSS version of our posts/index we need to get
@@ -59,21 +59,22 @@ the same:
 // the action which deliver the rss feed, which is the
 // index action in our example
 
-public function index() {
+public function index()
+{
     if ($this->RequestHandler->isRss() ) {
         $posts = $this->Post->find(
             'all',
-            array('limit' => 20, 'order' => 'Post.created DESC')
+            ['limit' => 20, 'order' => 'Post.created DESC']
         );
         return $this->set(compact('posts'));
     }
 
     // this is not an Rss request, so deliver
     // data used by website's interface
-    $this->paginate['Post'] = array(
+    $this->paginate['Post'] = [
         'order' => 'Post.created DESC',
         'limit' => 10
-    );
+    ];
 
     $posts = $this->paginate();
     $this->set(compact('posts'));
@@ -89,15 +90,15 @@ An Rss layout is very simple, put the following contents in
 
 ``` php
 if (!isset($documentData)) {
-    $documentData = array();
+    $documentData = [];
 }
 if (!isset($channelData)) {
-    $channelData = array();
+    $channelData = [];
 }
 if (!isset($channelData['title'])) {
     $channelData['title'] = $this->fetch('title');
 }
-$channel = $this->Rss->channel(array(), $channelData, $this->fetch('content'));
+$channel = $this->Rss->channel([], $channelData, $this->fetch('content'));
 echo $this->Rss->document($documentData, $channel);
 ```
 
@@ -123,12 +124,12 @@ done by using the `View::set()` method which is analogous to the
 metadata back to the layout:
 
 ``` php
-$this->set('channelData', array(
+$this->set('channelData', [
     'title' => __("Most Recent Posts"),
     'link' => $this->Html->url('/', true),
     'description' => __("Most recent posts."),
     'language' => 'en-us'
-));
+]);
 ```
 
 The second part of the view generates the elements for the actual
@@ -153,30 +154,30 @@ associative array into an element for each key value pair.
 foreach ($posts as $post) {
     $postTime = strtotime($post['Post']['created']);
 
-    $postLink = array(
+    $postLink = [
         'controller' => 'posts',
         'action' => 'view',
         'year' => date('Y', $postTime),
         'month' => date('m', $postTime),
         'day' => date('d', $postTime),
         $post['Post']['slug']
-    );
+    ];
 
     // Remove & escape any HTML to make sure the feed content will validate.
     $bodyText = h(strip_tags($post['Post']['body']));
-    $bodyText = $this->Text->truncate($bodyText, 400, array(
+    $bodyText = $this->Text->truncate($bodyText, 400, [
         'ending' => '...',
         'exact'  => true,
         'html'   => true,
-    ));
+    ]);
 
-    echo  $this->Rss->item(array(), array(
+    echo  $this->Rss->item([], [
         'title' => $post['Post']['title'],
         'link' => $postLink,
-        'guid' => array('url' => $postLink, 'isPermaLink' => 'true'),
+        'guid' => ['url' => $postLink, 'isPermaLink' => 'true'],
         'description' => $bodyText,
         'pubDate' => $post['Post']['created']
-    ));
+    ]);
 }
 ```
 
@@ -219,13 +220,13 @@ site at <https://validator.w3.org/feed/>.
 >
 > Default spec version of generated RSS.
 
-`method` RssHelper::**channel**(array $attrib = array (), array $elements = array (), mixed $content = null)
+`method` RssHelper::**channel**(array $attrib = [], array $elements = [], mixed $content = null)
 
-`method` RssHelper::**document**(array $attrib = array (), string $content = null)
+`method` RssHelper::**document**(array $attrib = [], string $content = null)
 
-`method` RssHelper::**elem**(string $name, array $attrib = array (), mixed $content = null, boolean $endTag = true)
+`method` RssHelper::**elem**(string $name, array $attrib = [], mixed $content = null, boolean $endTag = true)
 
-`method` RssHelper::**item**(array $att = array (), array $elements = array ())
+`method` RssHelper::**item**(array $att = [], array $elements = [])
 
 `method` RssHelper::**items**(array $items, mixed $callback = null)
 

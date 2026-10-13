@@ -1,6 +1,6 @@
 # Security
 
-`class` **SecurityComponent**(ComponentCollection $collection, array $settings = array())
+`class` **SecurityComponent**(ComponentCollection $collection, array $settings = [])
 
 The Security Component creates an easy way to integrate tighter
 security in your application. It provides methods for various tasks like:
@@ -123,11 +123,13 @@ Using the security component is generally done in the controllers
 want and the Security Component will enforce them on its startup:
 
 ``` php
-class WidgetController extends AppController {
+class WidgetController extends AppController
+{
 
-    public $components = array('Security');
+    public $components = ['Security'];
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         $this->Security->requirePost('delete');
     }
 }
@@ -137,11 +139,13 @@ In this example the delete action can only be successfully
 triggered if it receives a POST request:
 
 ``` php
-class WidgetController extends AppController {
+class WidgetController extends AppController
+{
 
-    public $components = array('Security');
+    public $components = ['Security'];
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         if (isset($this->request->params['admin'])) {
             $this->Security->requireSecure();
         }
@@ -153,18 +157,21 @@ This example would force all actions that had admin routing to
 require secure SSL requests:
 
 ``` php
-class WidgetController extends AppController {
+class WidgetController extends AppController
+{
 
-    public $components = array('Security');
+    public $components = ['Security'];
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         if (isset($this->params['admin'])) {
             $this->Security->blackHoleCallback = 'forceSSL';
             $this->Security->requireSecure();
         }
     }
 
-    public function forceSSL() {
+    public function forceSSL()
+    {
         return $this->redirect('https://' . env('SERVER_NAME') . $this->here);
     }
 }
@@ -209,17 +216,18 @@ valid for 30 minutes and expire on use. You can control how long tokens last by 
 csrfExpires on the component. :
 
 ``` php
-public $components = array(
-    'Security' => array(
+public $components = [
+    'Security' => [
         'csrfExpires' => '+1 hour'
-    )
-);
+    ]
+];
 ```
 
 You can also set this property in your controller's `beforeFilter`:
 
 ``` php
-public function beforeFilter() {
+public function beforeFilter()
+{
     $this->Security->csrfExpires = '+1 hour';
     // ...
 }
@@ -246,11 +254,11 @@ applications. You can toggle on longer, multi-use tokens by setting
 the `beforeFilter` of your controller:
 
 ``` php
-public $components = array(
-    'Security' => array(
+public $components = [
+    'Security' => [
         'csrfUseOnce' => false
-    )
-);
+    ]
+];
 ```
 
 This will tell the component that you want to re-use a CSRF token until it

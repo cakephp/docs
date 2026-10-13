@@ -104,7 +104,8 @@ should consider implementing a different solution. e.g. :
 
 ``` php
 // App Controller Code.
-public function beforeFilter() {
+public function beforeFilter()
+{
     $locale = Configure::read('Config.language');
     if ($locale && file_exists(APP . 'View' . DS . $locale . DS . $this->viewPath . DS . $this->view . $this->ext)) {
         // e.g. use /app/View/fra/Pages/tos.ctp instead of /app/View/Pages/tos.ctp
@@ -211,8 +212,10 @@ At the beginning of each request in your controller's `beforeFilter` you
 should configure `Configure` as well:
 
 ``` php
-class AppController extends Controller {
-    public function beforeFilter() {
+class AppController extends Controller
+{
+    public function beforeFilter()
+    {
         if ($this->Session->check('Config.language')) {
             Configure::write('Config.language', $this->Session->read('Config.language'));
         }
@@ -260,7 +263,8 @@ CakePHP will automatically extract the validation error when you are using the
 This can be overwritten by setting the `$validationDomain` property in your model:
 
 ``` php
-class User extends AppModel {
+class User extends AppModel
+{
 
     public $validationDomain = 'validation_errors';
 }
@@ -270,23 +274,24 @@ Additional parameters defined in the validation rule are passed to the translati
 function. This allows you to create dynamic validation messages:
 
 ``` php
-class User extends AppModel {
+class User extends AppModel
+{
 
     public $validationDomain = 'validation';
 
-    public $validate = array(
-        'username' => array(
-                'length' => array(
-                'rule' => array('between', 2, 10),
+    public $validate = [
+        'username' => [
+                'length' => [
+                'rule' => ['between', 2, 10],
                 'message' => 'Username should be between %d and %d characters'
-            )
-        )
-    )
+            ]
+        ]
+    ]
 }
 ```
 
 Which will do the following internal call:
 
 ``` text
-__d('validation', 'Username should be between %d and %d characters', array(2, 10));
+__d('validation', 'Username should be between %d and %d characters', [2, 10]);
 ```

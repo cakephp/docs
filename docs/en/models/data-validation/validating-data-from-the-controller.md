@@ -35,7 +35,7 @@ you would validate just email and password rules. To do this you
 can pass an options array specifying the fields to validate:
 
 ``` php
-if ($this->User->validates(array('fieldList' => array('email', 'password')))) {
+if ($this->User->validates(['fieldList' => ['email', 'password']])) {
     // valid
 } else {
     // invalid
@@ -67,7 +67,7 @@ used:
 
 ``` php
 if ($this->ModelName->saveAll(
-    $this->request->data, array('validate' => 'only')
+    $this->request->data, ['validate' => 'only']
 )) {
   // validates
 } else {
@@ -80,7 +80,7 @@ to avoid second check:
 
 ``` php
 if ($this->ModelName->saveAll(
-    $this->request->data, array('validate' => false)
+    $this->request->data, ['validate' => false]
 )) {
     // saving without validation
 }

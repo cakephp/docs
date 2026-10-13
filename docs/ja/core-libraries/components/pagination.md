@@ -1,6 +1,6 @@
 # ページ制御
 
-`class` **PaginatorComponent**(ComponentCollection $collection, array $settings = array())
+`class` **PaginatorComponent**(ComponentCollection $collection, array $settings = [])
 
 柔軟で、かつユーザーにやさしいウェブアプリを作ろうとすると、
 まず障害となるのが直感的なユーザーインターフェースのデザインです。
@@ -30,16 +30,17 @@ URL から受け取った `page` パラメータなどを追加していきま�
 以下の要領で配列として定義しておく必要があるので注意してください。 :
 
 ``` php
-class PostsController extends AppController {
+class PostsController extends AppController
+{
 
-    public $components = array('Paginator');
+    public $components = ['Paginator'];
 
-    public $paginate = array(
+    public $paginate = [
         'limit' => 25,
-        'order' => array(
+        'order' => [
             'Post.title' => 'asc'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -47,17 +48,18 @@ class PostsController extends AppController {
 入れることもできます。 :
 
 ``` php
-class PostsController extends AppController {
+class PostsController extends AppController
+{
 
-    public $components = array('Paginator');
+    public $components = ['Paginator'];
 
-    public $paginate = array(
-        'fields' => array('Post.id', 'Post.created'),
+    public $paginate = [
+        'fields' => ['Post.id', 'Post.created'],
         'limit' => 25,
-        'order' => array(
+        'order' => [
             'Post.title' => 'asc'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -69,14 +71,15 @@ find() メソッドに渡されます。これにより、ページ制御に対�
 `ContainableBehavior` のようなビヘイビアを使えます。 :
 
 ``` php
-class RecipesController extends AppController {
+class RecipesController extends AppController
+{
 
-    public $components = array('Paginator');
+    public $components = ['Paginator'];
 
-    public $paginate = array(
+    public $paginate = [
         'limit' => 25,
-        'contain' => array('Article')
-    );
+        'contain' => ['Article']
+    ];
 }
 ```
 
@@ -85,12 +88,13 @@ class RecipesController extends AppController {
 単に設定したいモデルの後で、配列のキーに名前をつけるだけです。 :
 
 ``` php
-class PostsController extends AppController {
+class PostsController extends AppController
+{
 
-    public $paginate = array(
-        'Post' => array (...),
-        'Author' => array (...)
-    );
+    public $paginate = [
+        'Post' =>  [...],
+        'Author' =>  [...]
+    ];
 }
 ```
 
@@ -109,7 +113,8 @@ class PostsController extends AppController {
 がまだ入っていなければ追加します。 :
 
 ``` php
-public function list_recipes() {
+public function list_recipes()
+{
     $this->Paginator->settings = $this->paginate;
 
     // findAll() に似ていますが、ページ制御された結果を返します。
@@ -124,7 +129,7 @@ public function list_recipes() {
 ``` php
 $data = $this->Paginator->paginate(
     'Recipe',
-    array('Recipe.title LIKE' => 'a%')
+    ['Recipe.title LIKE' => 'a%']
 );
 ```
 
@@ -132,11 +137,12 @@ $data = $this->Paginator->paginate(
 を始めとするページ制御用設定の配列をセットすることもできます。 :
 
 ``` php
-public function list_recipes() {
-    $this->Paginator->settings = array(
-        'conditions' => array('Recipe.title LIKE' => 'a%'),
+public function list_recipes()
+{
+    $this->Paginator->settings = [
+        'conditions' => ['Recipe.title LIKE' => 'a%'],
         'limit' => 10
-    );
+    ];
     $data = $this->Paginator->paginate('Recipe');
     $this->set(compact('data'));
 }
@@ -157,12 +163,14 @@ public function list_recipes() {
 ``` php
 // ビヘイビア上に実装された paginate と paginateCount
 public function paginate(Model $model, $conditions, $fields, $order, $limit,
-    $page = 1, $recursive = null, $extra = array()) {
+    $page = 1, $recursive = null, $extra = [])
+{
     // メソッドの中身
 }
 
 public function paginateCount(Model $model, $conditions = null, $recursive = 0,
-    $extra = array()) {
+    $extra = [])
+{
     // メソッドの中身
 }
 ```
@@ -175,18 +183,18 @@ paginate() と paginateCount() を自前で実装しなければならないよ�
 もしくは CakePHP 2.3 であれば `findType` キーを設定してください。 :
 
 ``` php
-public $paginate = array(
+public $paginate = [
     'popular'
-);
+];
 ```
 
 0 番目のインデックスを管理するのは難しいため、2.3 では `findType`
 オプションが追加されました。 :
 
 ``` php
-public $paginate = array(
+public $paginate = [
     'findType' => 'popular'
-);
+];
 ```
 
 `paginate()` メソッドでは、
@@ -200,10 +208,11 @@ public $paginate = array(
  *  - week, away_team_id, home_team_id でグルーピングしている
  */
 public function paginate($conditions, $fields, $order, $limit, $page = 1,
-    $recursive = null, $extra = array()) {
+    $recursive = null, $extra = [])
+{
 
     $recursive = -1;
-    $group = $fields = array('week', 'away_team_id', 'home_team_id');
+    $group = $fields = ['week', 'away_team_id', 'home_team_id'];
     return $this->find(
         'all',
         compact('conditions', 'fields', 'order', 'limit', 'page', 'recursive', 'group')
@@ -221,7 +230,8 @@ public function paginate($conditions, $fields, $order, $limit, $page = 1,
  * オーバーライドされた paginateCount メソッド
  */
 public function paginateCount($conditions = null, $recursive = 0,
-                                $extra = array()) {
+                                $extra = [])
+{
     $sql = "SELECT
         DISTINCT ON(
             week, home_team_id, away_team_id
@@ -244,24 +254,25 @@ public function paginateCount($conditions = null, $recursive = 0,
 /**
  * GROUP BY 句を追加します
  */
-public $paginate = array(
-    'MyModel' => array(
+public $paginate = [
+    'MyModel' => [
         'limit' => 20,
-        'order' => array('week' => 'desc'),
-        'group' => array('week', 'home_team_id', 'away_team_id')
-    )
-);
+        'order' => ['week' => 'desc'],
+        'group' => ['week', 'home_team_id', 'away_team_id']
+    ]
+];
 /**
  * もしくは、アクションの中でその場で実行できます
  */
-public function index() {
-    $this->Paginator->settings = array(
-        'MyModel' => array(
+public function index()
+{
+    $this->Paginator->settings = [
+        'MyModel' => [
             'limit' => 20,
-            'order' => array('week' => 'desc'),
-            'group' => array('week', 'home_team_id', 'away_team_id')
-        )
-    );
+            'order' => ['week' => 'desc'],
+            'group' => ['week', 'home_team_id', 'away_team_id']
+        ]
+    ];
 }
 ```
 
@@ -279,7 +290,7 @@ CakePHP 2.0 では、グループ句を使う場合でも、もはや `paginateC
 ソート可能な列を制限することができます。 :
 
 ``` php
-$this->Paginator->paginate('Post', array(), array('title', 'slug'));
+$this->Paginator->paginate('Post', [], ['title', 'slug']);
 ```
 
 これは、title と slug 列に対してのみソートを許可します。
@@ -297,10 +308,10 @@ CakePHP のデフォルトでは、一度に取り出せる行数を 100 に制�
 例えば、 `10` に制限する場合:
 
 ``` php
-public $paginate = array(
+public $paginate = [
     // ここに他のキーもあります。
     'maxLimit' => 10
-);
+];
 ```
 
 リスクストの limit パラメータがこの値より大きい場合、
@@ -319,9 +330,9 @@ CakePHP の過去のバージョンでは、ページ制御用リンクの生成
 が選択されたパラメータタイプでリンクを生成します。 :
 
 ``` php
-public $paginate = array(
+public $paginate = [
     'paramType' => 'querystring'
-);
+];
 ```
 
 上記の例ではクエリ文字列によるパースとリンク生成を有効にします。
@@ -345,21 +356,22 @@ $this->Paginator->settings['paramType'] = 'querystring';
 > という例外が発生します。プロパティに対して初期値を代入しておくことで、この問題を防げます。 :
 >
 > ``` bash
-> $this->paginate = array();
+> $this->paginate = [];
 > $this->paginate['limit'] = 10;
 > //  または
-> $this->paginate = array('limit' => 10);
+> $this->paginate = ['limit' => 10];
 > ```
 >
 > もしくは、単にコントローラクラスでプロパティを宣言するのでもOKです。 :
 >
 > ``` php
-> class PostsController {
->     public $paginate = array();
+> class PostsController
+> {
+>     public $paginate = [];
 > }
 > ```
 >
-> または、 `$this->Paginator->settings = array('limit' => 10);`
+> または、 `$this->Paginator->settings = ['limit' => 10];`
 > を使います。
 >
 > PaginatorComponent の `$settings` プロパティを変更したい場合は、
@@ -378,7 +390,8 @@ try ～ catch ブロックで <span class="title-ref">NotFoundException</span> �
 適切なアクションを起こさせることも可能です。 :
 
 ``` php
-public function index() {
+public function index()
+{
     try {
         $this->Paginator->paginate();
     } catch (NotFoundException $e) {

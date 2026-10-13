@@ -62,12 +62,14 @@ $this->Acl->allow($aroAlias, $acoAlias);
 パーミッションがセットできたことを確認したら、作成した関数を削除してください:
 
 ``` php
-public function beforeFilter() {
+public function beforeFilter()
+{
     parent::beforeFilter();
     $this->Auth->allow('initDB'); //この行は終わったあと削除できます
 }
 
-public function initDB() {
+public function initDB()
+{
     $group = $this->User->Group;
     //管理者グループには全てを許可する
     $group->id = 1;
@@ -112,7 +114,8 @@ index と view は、public になります。権限を持たないユーザで�
 取り外したいですね。その場合は、posts と widgets コントローラに次の行を追加しましょう:
 
 ``` php
-public function beforeFilter() {
+public function beforeFilter()
+{
     parent::beforeFilter();
     $this->Auth->allow('index', 'view');
 }
@@ -140,12 +143,12 @@ $this->Auth->allow('display');
 ``` php
 <h2>Login</h2>
 <?php
-echo $this->Form->create('User', array(
-    'url' => array(
+echo $this->Form->create('User', [
+    'url' => [
         'controller' => 'users', 
         'action' => 'login'
-    )
-));
+    ]
+]);
 echo $this->Form->input('User.username');
 echo $this->Form->input('User.password');
 echo $this->Form->end('Login');
@@ -155,7 +158,8 @@ echo $this->Form->end('Login');
 しましょう:
 
 ``` php
-public function login() {
+public function login()
+{
     if ($this->Session->read('Auth.User')) {
         $this->Session->setFlash('You are logged in!');
         $this->redirect('/', null, false);

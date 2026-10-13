@@ -1,6 +1,6 @@
 # HttpSocket
 
-`class` **HttpSocket**(mixed $config = array())
+`class` **HttpSocket**(mixed $config = [])
 
 CakePHP includes an HttpSocket class which can be used easily for
 making requests. It is a great way to communicate with external webservices, or
@@ -105,7 +105,7 @@ an extra request can be automatically done according to the received *Location* 
 App::uses('HttpSocket', 'Network/Http');
 
 $HttpSocket = new HttpSocket();
-$response = $HttpSocket->get('http://example.com/redirecting_url', array(), array('redirect' => true));
+$response = $HttpSocket->get('http://example.com/redirecting_url', [], ['redirect' => true]);
 ```
 
 The *redirect* option can take the following values
@@ -147,9 +147,9 @@ date through Composer. See [Security](/pieceofcake2/security).
 These options are provided as constructor arguments:
 
 ``` php
-$socket = new HttpSocket(array(
+$socket = new HttpSocket([
     'ssl_allow_self_signed' => true
-));
+]);
 ```
 
 Would allow self-signed certificates for all requests made with the created
@@ -167,9 +167,11 @@ the file `app/Lib/Network/Http/YourResponse.php` with the content:
 ``` php
 App::uses('HttpResponse', 'Network/Http');
 
-class YourResponse extends HttpResponse {
+class YourResponse extends HttpResponse
+{
 
-    public function parseResponse($message) {
+    public function parseResponse($message)
+    {
         parent::parseResponse($message);
         // Make what you want
     }
@@ -234,7 +236,8 @@ could create the file `app/Lib/Network/Http/YourMethodAuthentication.php` with t
 content:
 
 ``` php
-class YourMethodAuthentication {
+class YourMethodAuthentication
+{
 
 /**
  * Authentication
@@ -243,10 +246,10 @@ class YourMethodAuthentication {
  * @param array $authInfo
  * @return void
  */
-    public static function authentication(HttpSocket $http, &$authInfo) {
+    public static function authentication(HttpSocket $http, &$authInfo)
+    {
         // Do something, for example set $http->request['header']['Authentication'] value
     }
-
 }
 ```
 
@@ -254,7 +257,7 @@ To configure HttpSocket to use your auth configuration, you can use the new
 method `configAuth()`:
 
 ``` php
-$http->configAuth('YourMethod', array('config1' => 'value1', 'config2' => 'value2'));
+$http->configAuth('YourMethod', ['config1' => 'value1', 'config2' => 'value2']);
 $http->get('http://secure.your-site.com');
 ```
 
@@ -267,7 +270,8 @@ create your customized method to proxy authentication in the same class of
 authentication. For example:
 
 ``` php
-class YourMethodAuthentication {
+class YourMethodAuthentication
+{
 
 /**
  * Authentication
@@ -276,7 +280,8 @@ class YourMethodAuthentication {
  * @param array $authInfo
  * @return void
  */
-    public static function authentication(HttpSocket $http, &$authInfo) {
+    public static function authentication(HttpSocket $http, &$authInfo)
+    {
         // Do something, for example set $http->request['header']['Authentication'] value
     }
 
@@ -287,10 +292,10 @@ class YourMethodAuthentication {
  * @param array $proxyInfo
  * @return void
  */
-    public static function proxyAuthentication(HttpSocket $http, &$proxyInfo) {
+    public static function proxyAuthentication(HttpSocket $http, &$proxyInfo)
+    {
         // Do something, for example set $http->request['header']['Proxy-Authentication'] value
     }
-
 }
 ```
 

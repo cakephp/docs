@@ -1,6 +1,6 @@
 # CacheHelper
 
-`class` **CacheHelper**(View $view, array $settings = array())
+`class` **CacheHelper**(View $view, array $settings = [])
 
 The Cache helper assists in caching entire layouts and views, saving time
 repetitively retrieving data. View Caching in CakePHP temporarily stores parsed
@@ -28,17 +28,18 @@ Once you've uncommented the `Cache.check` line you will need to add the helper
 to your controller's `$helpers` array:
 
 ``` php
-class PostsController extends AppController {
-    public $helpers = array('Cache');
+class PostsController extends AppController
+{
+    public $helpers = ['Cache'];
 }
 ```
 
 You will also need to add the CacheDispatcher to your dispatcher filters in your bootstrap:
 
 ``` php
-Configure::write('Dispatcher.filters', array(
+Configure::write('Dispatcher.filters', [
     'CacheDispatcher'
-));
+]);
 ```
 
 ::: info Added in version 2.3
@@ -58,10 +59,10 @@ Using the example of an ArticlesController, that receives a lot of
 traffic that needs to be cached:
 
 ``` php
-public $cacheAction = array(
+public $cacheAction = [
     'view' => 36000,
     'index' => 48000
-);
+];
 ```
 
 This will cache the view action 10 hours, and the index action 13 hours. By
@@ -77,11 +78,11 @@ created with `CacheHelper`. To do so you must use the array
 format for `$cacheAction` and create an array like the following:
 
 ``` php
-public $cacheAction = array(
-    'view' => array('callbacks' => true, 'duration' => 21600),
-    'add' => array('callbacks' => true, 'duration' => 36000),
-    'index' => array('callbacks' => true, 'duration' => 48000)
-);
+public $cacheAction = [
+    'view' => ['callbacks' => true, 'duration' => 21600],
+    'add' => ['callbacks' => true, 'duration' => 36000],
+    'index' => ['callbacks' => true, 'duration' => 48000]
+];
 ```
 
 By setting `callbacks => true` you tell CacheHelper that you want

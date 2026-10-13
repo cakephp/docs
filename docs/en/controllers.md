@@ -47,7 +47,8 @@ CakePHP core library. `AppController` is defined in
 `/app/Controller/AppController.php` as follows:
 
 ``` php
-class AppController extends Controller {
+class AppController extends Controller
+{
 }
 ```
 
@@ -79,7 +80,8 @@ Also remember to call `AppController`'s callbacks within child
 controller callbacks for best results:
 
 ``` php
-public function beforeFilter() {
+public function beforeFilter()
+{
     parent::beforeFilter();
 }
 ```
@@ -108,16 +110,20 @@ in `/app/Controller/RecipesController.php` and contain:
 ``` php
 # /app/Controller/RecipesController.php
 
-class RecipesController extends AppController {
-    public function view($id) {
+class RecipesController extends AppController
+{
+    public function view($id)
+    {
         //action logic goes here..
     }
 
-    public function share($customerId, $recipeId) {
+    public function share($customerId, $recipeId)
+    {
         //action logic goes here..
     }
 
-    public function search($query) {
+    public function search($query)
+    {
         //action logic goes here..
     }
 }
@@ -154,8 +160,10 @@ methods that are used for normal web requests + requestAction, you should check
 the request type before returning:
 
 ``` php
-class RecipesController extends AppController {
-    public function popular() {
+class RecipesController extends AppController
+{
+    public function popular()
+    {
         $popular = $this->Recipe->popular();
         if (!empty($this->request->params['requested'])) {
             return $popular;
@@ -218,8 +226,10 @@ the conventional one. You can do this by calling
 will not try to re-render the view:
 
 ``` php
-class PostsController extends AppController {
-    public function my_action() {
+class PostsController extends AppController
+{
+    public function my_action()
+    {
         $this->render('custom_file');
     }
 }
@@ -233,8 +243,10 @@ You can also render views inside plugins using the following syntax:
 For example:
 
 ``` php
-class PostsController extends AppController {
-    public function my_action() {
+class PostsController extends AppController
+{
+    public function my_action()
+    {
         $this->render('Users.UserDetails/custom_file');
     }
 }
@@ -290,7 +302,8 @@ visit the [CakePHP API](https://api.cakephp.org/2.x/class-Controller.html).
 >
 > ``` php
 > // $name controller attribute usage example
-> class RecipesController extends AppController {
+> class RecipesController extends AppController
+> {
 >    public $name = 'Recipes';
 > }
 > ```
@@ -319,7 +332,7 @@ given by `~Controller::$helpers` to the view as an object reference variable
 > also be included. This is illustrated in the example below.
 >
 > If you do not wish to use a Model in your controller, set
-> `public $uses = array()`. This will allow you to use a controller
+> `public $uses = []`. This will allow you to use a controller
 > without a need for a corresponding Model file. However, the models
 > defined in the `AppController` will still be loaded. You can also use
 > `false` to not load any models at all. Even those defined in the
@@ -340,10 +353,11 @@ given by `~Controller::$helpers` to the view as an object reference variable
 > additional MVC classes:
 >
 > ``` php
-> class RecipesController extends AppController {
->     public $uses = array('Recipe', 'User');
->     public $helpers = array('Js');
->     public $components = array('RequestHandler');
+> class RecipesController extends AppController
+> {
+>     public $uses = ['Recipe', 'User'];
+>     public $helpers = ['Js'];
+>     public $components = ['RequestHandler'];
 > }
 > ```
 >
@@ -373,14 +387,15 @@ own sections in the manual.
 > that you update your code to use normal component settings:
 >
 > ``` php
-> class ArticlesController extends AppController {
->     public $components = array(
->         'Paginator' => array(
->             'Article' => array(
->                 'conditions' => array('published' => 1)
->             )
->         )
->     );
+> class ArticlesController extends AppController
+> {
+>     public $components = [
+>         'Paginator' => [
+>             'Article' => [
+>                 'conditions' => ['published' => 1]
+>             ]
+>         ]
+>     ];
 > }
 > ```
 

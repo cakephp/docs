@@ -1,6 +1,6 @@
 # FlashHelper
 
-`class` **FlashHelper**(View $view, array $config = array())
+`class` **FlashHelper**(View $view, array $config = [])
 
 ::: info Added in version 2.7.0
 `SessionHelper::flash()` を置き換えました。
@@ -38,14 +38,14 @@ FlashComponent 内で設定したオプションを上書きすることがで�
 
 ``` php
 // コントローラの中で
-$this->Flash->set('The user has been saved.', array(
+$this->Flash->set('The user has been saved.', [
     'element' => 'success'
-));
+]);
 
 // ビューの中で、 success.ctp の代わりに great_success.ctp を使用
-<?php echo $this->Flash->render('flash', array(
+<?php echo $this->Flash->render('flash', [
     'element' => 'great_success'
-));
+]);
 ```
 
 > [!NOTE]

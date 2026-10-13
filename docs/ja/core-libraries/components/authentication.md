@@ -1,6 +1,6 @@
 # 認証
 
-`class` **AuthComponent**(ComponentCollection $collection, array $settings = array())
+`class` **AuthComponent**(ComponentCollection $collection, array $settings = [])
 
 ユーザーを識別し、認証し、権限を付与することは、ほとんどすべてのウェブアプリケーションに
 共通の機能です。CakePHP の AuthComponent ではそういったタスクを実行するための
@@ -61,13 +61,13 @@ SSL 暗号化しないアプリケーションにもふさわしいものです�
 
 ``` php
 // 基本的な設定法
-$this->Auth->authenticate = array('Form');
+$this->Auth->authenticate = ['Form'];
 
 // 設定を中に記述
-$this->Auth->authenticate = array(
-    'Basic' => array('userModel' => 'Member'),
-    'Form' => array('userModel' => 'Member')
-);
+$this->Auth->authenticate = [
+    'Basic' => ['userModel' => 'Member'],
+    'Form' => ['userModel' => 'Member']
+];
 ```
 
 上記の２つ目のブロックでは、 `userModel` キーを２回宣言しなければならないということに
@@ -77,11 +77,11 @@ all キーは `AuthComponent::ALL` と記述することもできます。 :
 
 ``` php
 // 'all' を使って設定を記述
-$this->Auth->authenticate = array(
-    AuthComponent::ALL => array('userModel' => 'Member'),
+$this->Auth->authenticate = [
+    AuthComponent::ALL => ['userModel' => 'Member'],
     'Basic',
     'Form'
-);
+];
 ```
 
 上記の例では、 `Form` と `Basic` の両方ともが 'all' キーで宣言された設定を
@@ -93,7 +93,7 @@ $this->Auth->authenticate = array(
 - `userModel` User のモデル名。デフォルトは User。
 
 - `scope` 認証するユーザーを検索する際に使う、追加の条件。
-  例： `array('User.is_active' => 1)`
+  例： `['User.is_active' => 1]`
 
 - `recursive` `find()` に渡された recursive キーの値。 デフォルトは `0` 。
 
@@ -119,15 +119,15 @@ $this->Auth->authenticate = array(
 
 ``` php
 // $components 配列の中で設定を記述
-public $components = array(
-    'Auth' => array(
-        'authenticate' => array(
-            'Form' => array(
-                'fields' => array('username' => 'email')
-            )
-        )
-    )
-);
+public $components = [
+    'Auth' => [
+        'authenticate' => [
+            'Form' => [
+                'fields' => ['username' => 'email']
+            ]
+        ]
+    ]
+];
 ```
 
 Auth の他の設定キー (authError や loginAction など) を authenticate や Form の
@@ -136,24 +136,24 @@ Auth の他の設定キー (authError や loginAction など) を authenticate �
 
 ``` php
 // $components 配列の中で設定を記述
-public $components = array(
-    'Auth' => array(
-        'loginAction' => array(
+public $components = [
+    'Auth' => [
+        'loginAction' => [
             'controller' => 'users',
             'action' => 'login',
             'plugin' => 'users'
-        ),
+        ],
         'authError' => 'Did you really think you are allowed to see that?',
-        'authenticate' => array(
-            'Form' => array(
-                'fields' => array(
+        'authenticate' => [
+            'Form' => [
+                'fields' => [
                   'username' => 'my_user_model_username_field', // デフォルトは userModel の 'username'
                   'password' => 'my_user_model_password_field'  // デフォルトは userModel の 'password'
-                )
-            )
-        )
-    )
-);
+                ]
+            ]
+        ]
+    ]
+];
 ```
 
 共通の設定に加えて、Basic 認証では次のキーも利用できます:
@@ -179,7 +179,8 @@ public $components = array(
 ログインフォームと連携する単純な login 関数なら次のようになります。 :
 
 ``` php
-public function login() {
+public function login()
+{
     if ($this->request->is('post')) {
         // Important: Use login() without arguments! See warning below.
         if ($this->Auth->login()) {
@@ -232,8 +233,10 @@ Basic／ダイジェストオーセンティケータだけを使っているな
 ``` php
 App::uses('BaseAuthenticate', 'Controller/Component/Auth');
 
-class OpenidAuthenticate extends BaseAuthenticate {
-    public function authenticate(CakeRequest $request, CakeResponse $response) {
+class OpenidAuthenticate extends BaseAuthenticate
+{
+    public function authenticate(CakeRequest $request, CakeResponse $response)
+    {
         // OpenID 用の処理をここに記述します。
         // ユーザー認証が通った場合は、user の配列を返します。
         // 通らなかった場合は false を返します。
@@ -255,10 +258,10 @@ class OpenidAuthenticate extends BaseAuthenticate {
 含めることで利用することができます。 :
 
 ``` php
-$this->Auth->authenticate = array(
+$this->Auth->authenticate = [
     'Openid', // app 内の認証オブジェクト
     'AuthBag.Combo', // プラグインの認証オブジェクト
-);
+];
 ```
 
 ### ステートレス認証システムの作成
@@ -273,7 +276,8 @@ $this->Auth->authenticate = array(
 を返すようにしてください。 :
 
 ``` php
-public function getUser($request) {
+public function getUser($request)
+{
     $username = env('PHP_AUTH_USER');
     $pass = env('PHP_AUTH_PW');
 
@@ -325,7 +329,7 @@ AuthComponent の flash 設定を使うことでエラーメッセージをカ�
 
 - `element` - 使用されるエレメント。デフォルトは 'default'
 - `key` - 使用されるキー。デフォルトは 'auth'
-- `params` - 使用される追加の params 配列。デフォルトは array()
+- `params` - 使用される追加の params 配列。デフォルトは []
 
 フラッシュメッセージの設定だけでなく、AuthComponent が使用する他のエラーメッセージを
 カスタマイズすることもできます。コントローラの beforeFilter の中や component の設定で、
@@ -364,18 +368,18 @@ AuthComponent がもはや自動ではパスワードをハッシュ化しなく
 md5 ハッシュに使用することができます。次のようにしてハッシュ化クラスを指定します。 :
 
 ``` php
-public $components = array(
-    'Auth' => array(
-        'authenticate' => array(
-            'Form' => array(
-                'passwordHasher' => array(
+public $components = [
+    'Auth' => [
+        'authenticate' => [
+            'Form' => [
+                'passwordHasher' => [
                     'className' => 'Simple',
                     'hashType' => 'sha256'
-                )
-            )
-        )
-    )
-);
+                ]
+            ]
+        ]
+    ]
+];
 ```
 
 新しいユーザーレコードを作成するとき、モデルの `beforeSave` コールバック内で適切な
@@ -384,10 +388,12 @@ public $components = array(
 ``` php
 App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 
-class User extends AppModel {
-    public function beforeSave($options = array()) {
+class User extends AppModel
+{
+    public function beforeSave($options = [])
+    {
         if (!empty($this->data[$this->alias]['password'])) {
-            $passwordHasher = new SimplePasswordHasher(array('hashType' => 'sha256'));
+            $passwordHasher = new SimplePasswordHasher(['hashType' => 'sha256']);
             $this->data[$this->alias]['password'] = $passwordHasher->hash(
                 $this->data[$this->alias]['password']
             );
@@ -413,15 +419,15 @@ Blowfish password hasher は、任意の認証クラスで使用することが�
 指定しないといけません。 :
 
 ``` php
-public $components = array(
-    'Auth' => array(
-        'authenticate' => array(
-            'Form' => array(
+public $components = [
+    'Auth' => [
+        'authenticate' => [
+            'Form' => [
                 'passwordHasher' => 'Blowfish'
-            )
-        )
-    )
-);
+            ]
+        ]
+    ]
+];
 ```
 
 #### ダイジェスト認証のパスワードのハッシュ化
@@ -435,8 +441,10 @@ public $components = array(
 ``` php
 App::uses('DigestAuthenticate', 'Controller/Component/Auth');
 
-class User extends AppModel {
-    public function beforeSave($options = array()) {
+class User extends AppModel
+{
+    public function beforeSave($options = [])
+    {
         // ダイジェスト認証のパスワードを作成
         $this->data[$this->alias]['digest_hash'] = DigestAuthenticate::password(
             $this->data[$this->alias]['username'],
@@ -466,12 +474,15 @@ class User extends AppModel {
 ``` php
 App::uses('AbstractPasswordHasher', 'Controller/Component/Auth');
 
-class CustomPasswordHasher extends AbstractPasswordHasher {
-    public function hash($password) {
+class CustomPasswordHasher extends AbstractPasswordHasher
+{
+    public function hash($password)
+    {
         // ここにコードを書く
     }
 
-    public function check($password, $hashedPassword) {
+    public function check($password, $hashedPassword)
+    {
         // ここにコードを書く
     }
 }
@@ -484,12 +495,13 @@ class CustomPasswordHasher extends AbstractPasswordHasher {
 を呼び出すことで、これを実現することができます。 :
 
 ``` php
-public function register() {
+public function register()
+{
     if ($this->User->save($this->request->data)) {
         $id = $this->User->id;
         $this->request->data['User'] = array_merge(
             $this->request->data['User'],
-            array('id' => $id)
+            ['id' => $id]
         );
         unset($this->request->data['User']['password']);
         $this->Auth->login($this->request->data['User']);
@@ -528,7 +540,8 @@ $this->Auth->user('id');
 便利です。 :
 
 ``` php
-public function logout() {
+public function logout()
+{
     $this->redirect($this->Auth->logout());
 }
 ```
@@ -573,13 +586,13 @@ public function logout() {
 
 ``` php
 // 基本的な設定
-$this->Auth->authorize = array('Controller');
+$this->Auth->authorize = ['Controller'];
 
 // 設定を記述
-$this->Auth->authorize = array(
-    'Actions' => array('actionPath' => 'controllers/'),
+$this->Auth->authorize = [
+    'Actions' => ['actionPath' => 'controllers/'],
     'Controller'
-);
+];
 ```
 
 `Auth->authorize` も `Auth->authenticate` とほぼ同様で、 `all` キーを使うことで
@@ -588,11 +601,11 @@ $this->Auth->authorize = array(
 
 ``` php
 // 'all' を使って設定を記述
-$this->Auth->authorize = array(
-    AuthComponent::ALL => array('actionPath' => 'controllers/'),
+$this->Auth->authorize = [
+    AuthComponent::ALL => ['actionPath' => 'controllers/'],
     'Actions',
     'Controller'
-);
+];
 ```
 
 上記の例では、 `Actions` と `Controller` の両方ともが 'all' キーで宣言された設定を
@@ -616,8 +629,10 @@ $this->Auth->authorize = array(
 ``` php
 App::uses('BaseAuthorize', 'Controller/Component/Auth');
 
-class LdapAuthorize extends BaseAuthorize {
-    public function authorize($user, CakeRequest $request) {
+class LdapAuthorize extends BaseAuthorize
+{
+    public function authorize($user, CakeRequest $request)
+    {
         // LDAP 用の処理をここに記述します。
     }
 }
@@ -635,10 +650,10 @@ class LdapAuthorize extends BaseAuthorize {
 含めることで使うことができます。 :
 
 ``` php
-$this->Auth->authorize = array(
+$this->Auth->authorize = [
     'Ldap', // app 内の認可オブジェクト
     'AuthBag.Combo', // プラグインの認可オブジェクト
-);
+];
 ```
 
 ### 認可を使用しない
@@ -668,7 +683,7 @@ $this->Auth->allow();
 $this->Auth->allow('view', 'index');
 
 // view と index アクションのみ許可。
-$this->Auth->allow(array('view', 'index'));
+$this->Auth->allow(['view', 'index']);
 ```
 
 > [!WARNING]
@@ -693,7 +708,7 @@ $this->Auth->deny();
 
 // アクションのグループを取り除く
 $this->Auth->deny('add', 'edit');
-$this->Auth->deny(array('add', 'edit'));
+$this->Auth->deny(['add', 'edit']);
 ```
 
 `deny()` には必要な数だけいくつでもアクション名を記述することができます。
@@ -710,11 +725,13 @@ ControllerAuthorize では、コントローラのコールバックで認可チ
 コールバックにはアクティブなユーザーが渡されますので、チェックが可能です。 :
 
 ``` php
-class AppController extends Controller {
-    public $components = array(
-        'Auth' => array('authorize' => 'Controller'),
-    );
-    public function isAuthorized($user = null) {
+class AppController extends Controller
+{
+    public $components = [
+        'Auth' => ['authorize' => 'Controller'],
+    ];
+    public function isAuthorized($user = null)
+    {
         // 登録済みユーザーなら誰でも公開機能にアクセス可能です。
         if (empty($this->request->params['admin'])) {
             return true;
@@ -762,10 +779,10 @@ CrudAuthorize やアクションマッピングを使う他の認可オブジェ
 このメソッドを呼び出すことで、設定済みのすべての認可オブジェクトに設定が渡されます。 :
 
 ``` php
-$this->Auth->mapActions(array(
-    'create' => array('register'),
-    'view' => array('show', 'display')
-));
+$this->Auth->mapActions([
+    'create' => ['register'],
+    'view' => ['show', 'display']
+]);
 ```
 
 mapActions のキーには設定したい CRUD パーミッションを指定してください。
@@ -801,7 +818,7 @@ AuthComponent は CakePHP に組み込み済みの認可・認証メカニズム
 >
 > - `element` - 使用するエレメント。デフォルトで 'default'。
 > - `key` - 使用するキー。デフォルトで 'auth'。
-> - `params` - 追加で使用するパラメータの配列。デフォルトで array()。
+> - `params` - 追加で使用するパラメータの配列。デフォルトで []。
 >
 > ログインを扱うコントローラとアクションを表す (文字列や配列で定義した) URL。
 > デフォルトは <span class="title-ref">/users/login</span> 。
@@ -846,7 +863,7 @@ AuthComponent は CakePHP に組み込み済みの認可・認証メカニズム
 
 `method` AuthComponent::**logout**()
 
-`method` AuthComponent::**mapActions**($map = array())
+`method` AuthComponent::**mapActions**($map = [])
 
 `static` AuthComponent::**password**($pass)
 

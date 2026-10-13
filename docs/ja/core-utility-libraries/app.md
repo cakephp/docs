@@ -155,7 +155,7 @@ string
 
 ## App がパッケージを探索できるようにパスを追加する
 
-`static` App::**build**(array $paths = array(), mixed $mode = App::PREPEND)
+`static` App::**build**(array $paths = [], mixed $mode = App::PREPEND)
 
 rtype  
 void
@@ -171,15 +171,15 @@ void
 
 ``` php
 //Model パッケージのための新しい探索パスがセットアップされます
-App::build(array('Model' => array('/a/full/path/to/models/')));
+App::build(['Model' => ['/a/full/path/to/models/']]);
 
 //このパスはモデルを探索するための唯一正しいパスとしてセットアップされます
-App::build(array('Model' => array('/path/to/models/')), App::RESET);
+App::build(['Model' => ['/path/to/models/']], App::RESET);
 
 //ヘルパーの複数の探索パスがセットアップされます
-App::build(array(
-    'View/Helper' => array('/path/to/helpers/', '/another/path/')
-));
+App::build([
+    'View/Helper' => ['/path/to/helpers/', '/another/path/']
+]);
 ```
 
 reset が true に設定されている場合、ロードされたすべてのプラグインは忘れ去られ、
@@ -188,13 +188,13 @@ reset が true に設定されている場合、ロードされたすべての�
 例:
 
 ``` php
-App::build(array('controllers' => array('/full/path/to/controllers/')));
+App::build(['controllers' => ['/full/path/to/controllers/']]);
 //このようになりました
-App::build(array('Controller' => array('/full/path/to/Controller/')));
+App::build(['Controller' => ['/full/path/to/Controller/']]);
 
-App::build(array('helpers' => array('/full/path/to/views/helpers/')));
+App::build(['helpers' => ['/full/path/to/views/helpers/']]);
 //このようになりました
-App::build(array('View/Helper' => array('/full/path/to/View/Helper/')));
+App::build(['View/Helper' => ['/full/path/to/View/Helper/']]);
 ```
 
 ::: info Changed in version 2.0
@@ -207,9 +207,9 @@ App::build(array('View/Helper' => array('/full/path/to/View/Helper/')));
 アプリケーションに新しいトップレベルのパッケージや、サブパッケージを追加したい場合に便利です:
 
 ``` php
-App::build(array(
-    'Service' => array('%s' . 'Service' . DS)
-), App::REGISTER);
+App::build([
+    'Service' => ['%s' . 'Service' . DS]
+], App::REGISTER);
 ```
 
 新しく登録されたパッケージの `%s` は、 `APP` パスに置き換えられます。
@@ -233,25 +233,25 @@ App が把握しているアプリケーションのコントローラ、を見�
 使用例:
 
 ``` php
-//returns array('DebugKit', 'Blog', 'User');
+//returns ['DebugKit', 'Blog', 'User'];
 App::objects('plugin');
 
-//returns array('PagesController', 'BlogController');
+//returns ['PagesController', 'BlogController'];
 App::objects('Controller');
 ```
 
 プラグインドット記法を用いることで、そのプラグイン内においてのオブジェクトを探すこともできます:
 
 ``` php
-// returns array('MyPluginPost', 'MyPluginComment');
+// returns ['MyPluginPost', 'MyPluginComment'];
 App::objects('MyPlugin.Model');
 ```
 
 ::: info Changed in version 2.0
 :::
 
-1.  結果が空の場合や型が不正な場合に false の代わりに `array()` を返します
-2.  `App::objects('core')` は、もはやコアオブジェクトを返さずに `array()` を返します
+1.  結果が空の場合や型が不正な場合に false の代わりに `[]` を返します
+2.  `App::objects('core')` は、もはやコアオブジェクトを返さずに `[]` を返します
 3.  完全なクラス名を返します
 
 ## プラグインの配置
@@ -279,7 +279,7 @@ string
 
 ## App::import() でファイルをインクルードする
 
-`static` App::**import**(mixed $type = null, string $name = null, mixed $parent = true, array $search = array(), string $file = null, boolean $return = false)
+`static` App::**import**(mixed $type = null, string $name = null, mixed $parent = true, array $search = [], string $file = null, boolean $return = false)
 
 rtype  
 boolean
@@ -359,7 +359,7 @@ App::uses('Geshi', 'Vendor');
 ``` php
 // app/Vendor/SomePackage/ClassInSomePackage.php 内の
 // ClassInSomePackage クラスをロードする
-App::build(array('Vendor' => array(APP . 'Vendor' . DS . 'SomePackage' . DS)));
+App::build(['Vendor' => [APP . 'Vendor' . DS . 'SomePackage' . DS]]);
 App::uses('ClassInSomePackage', 'Vendor');
 ```
 
@@ -380,13 +380,13 @@ App::import('Vendor', 'geshi');
 **app/Vendor/flickr/flickr.php** をロードする:
 
 ``` php
-App::import('Vendor', 'flickr', array('file' => 'flickr/flickr.php'));
+App::import('Vendor', 'flickr', ['file' => 'flickr/flickr.php']);
 ```
 
 **app/Vendor/some.name.php** をロードする:
 
 ``` php
-App::import('Vendor', 'SomeName', array('file' => 'some.name.php'));
+App::import('Vendor', 'SomeName', ['file' => 'some.name.php']);
 ```
 
 **app/Vendor/services/well.named.php** をロードする:
@@ -395,7 +395,7 @@ App::import('Vendor', 'SomeName', array('file' => 'some.name.php'));
 App::import(
     'Vendor',
     'WellNamed',
-    array('file' => 'services' . DS . 'well.named.php')
+    ['file' => 'services' . DS . 'well.named.php']
 );
 ```
 
@@ -405,7 +405,7 @@ App::import(
 App::import(
     'Vendor',
     'Awesome.WellNamed',
-    array('file' => 'services' . DS . 'well.named.php')
+    ['file' => 'services' . DS . 'well.named.php']
 );
 ```
 
@@ -415,7 +415,7 @@ App::import(
 App::import(
     'Vendor',
     'Awesome.Foo',
-    array('file' => 'Folder' . DS . 'Foo.php'));
+    ['file' => 'Folder' . DS . 'Foo.php']);
 ```
 
 ベンダーファイルが /vendors ディレクトリ内にあるかどうかに違いはありません。
@@ -427,7 +427,7 @@ CakePHP は自動的にそれを見出します。
 App::import(
     'Vendor',
     'aUniqueIdentifier',
-    array('file' => 'vendorName' . DS . 'libFile.php')
+    ['file' => 'vendorName' . DS . 'libFile.php']
 );
 ```
 

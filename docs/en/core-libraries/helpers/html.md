@@ -1,6 +1,6 @@
 # HtmlHelper
 
-`class` **HtmlHelper**(View $view, array $settings = array())
+`class` **HtmlHelper**(View $view, array $settings = [])
 
 The role of the HtmlHelper in CakePHP is to make HTML-related
 options easier, faster, and more resilient to change. Using this
@@ -36,17 +36,17 @@ methods of the HtmlHelper and how to use them.
 
 `method` HtmlHelper::**charset**($charset=null)
 
-`method` HtmlHelper::**css**(mixed $path, array $options = array())
+`method` HtmlHelper::**css**(mixed $path, array $options = [])
 
-`method` HtmlHelper::**meta**(string $type, string $url = null, array $options = array())
+`method` HtmlHelper::**meta**(string $type, string $url = null, array $options = [])
 
 `method` HtmlHelper::**docType**(string $type = 'xhtml-strict')
 
 `method` HtmlHelper::**style**(array $data, boolean $oneline = true)
 
-`method` HtmlHelper::**image**(string $path, array $options = array())
+`method` HtmlHelper::**image**(string $path, array $options = [])
 
-`method` HtmlHelper::**link**(string $title, mixed $url = null, array $options = array())
+`method` HtmlHelper::**link**(string $title, mixed $url = null, array $options = [])
 
 `method` HtmlHelper::**media**(string|array $path, array $options)
 
@@ -58,13 +58,13 @@ methods of the HtmlHelper and how to use them.
 
 `method` HtmlHelper::**script**(mixed $url, mixed $options)
 
-`method` HtmlHelper::** scriptBlock($code, $options = array())**()
+`method` HtmlHelper::** scriptBlock($code, $options = [])**()
 
-`method` HtmlHelper::**scriptStart**($options = array())
+`method` HtmlHelper::**scriptStart**($options = [])
 
 `method` HtmlHelper::**scriptEnd**()
 
-`method` HtmlHelper::**nestedList**(array $list, array $options = array(), array $itemOptions = array(), string $tag = 'ul')
+`method` HtmlHelper::**nestedList**(array $list, array $options = [], array $itemOptions = [], string $tag = 'ul')
 
 `method` HtmlHelper::**tableHeaders**(array $names, array $trOptions = null, array $thOptions = null)
 
@@ -84,4 +84,4 @@ methods of the HtmlHelper and how to use them.
 
 `method` HtmlHelper::**addCrumb**(string $name, string $link = null, mixed $options = null)
 
-`method` HtmlHelper::**getCrumbList**(array $options = array(), mixed $startText)
+`method` HtmlHelper::**getCrumbList**(array $options = [], mixed $startText)

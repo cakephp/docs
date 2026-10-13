@@ -7,28 +7,28 @@
 `Model::saveAll()` and friends now support passing the <span class="title-ref">fieldList</span> for multiple models. Example:
 
 ``` php
-$this->SomeModel->saveAll($data, array(
-    'fieldList' => array(
-        'SomeModel' => array('field_1'),
-        'AssociatedModel' => array('field_2', 'field_3')
-    )
-));
+$this->SomeModel->saveAll($data, [
+    'fieldList' => [
+        'SomeModel' => ['field_1'],
+        'AssociatedModel' => ['field_2', 'field_3']
+    ]
+]);
 ```
 
 `Model::saveAll()` and friends now can save unlimited levels deep. Example:
 
 ``` php
-$data = array(
-    'Article' => array('title' => 'My first article'),
-    'Comment' => array(
-        array('body' => 'Comment 1', 'user_id' => 1),
-        array(
+$data = [
+    'Article' => ['title' => 'My first article'],
+    'Comment' => [
+        ['body' => 'Comment 1', 'user_id' => 1],
+        [
             'body' => 'Save a new user as well',
-            'User' => array('first' => 'mad', 'last' => 'coder')
-        )
-    ),
-);
-$this->SomeModel->saveAll($data, array('deep' => true));
+            'User' => ['first' => 'mad', 'last' => 'coder']
+        ]
+    ],
+];
+$this->SomeModel->saveAll($data, ['deep' => true]);
 ```
 
 ## View
@@ -82,7 +82,8 @@ All custom pathing code has been moved into the `View` class, meaning that it is
 ``` php
 App::uses('Controller', 'Controller');
 
-class AppController extends Controller {
+class AppController extends Controller
+{
     public $theme = 'Example';
 }
 ```
@@ -100,7 +101,8 @@ The `JsonView` is used like any other view class, by defining it on the controll
 ``` php
 App::uses('Controller', 'Controller');
 
-class AppController extends Controller {
+class AppController extends Controller
+{
     public $viewClass = 'Json';
 }
 ```
@@ -109,7 +111,7 @@ Once you have setup the controller, you need to identify what content should be 
 
 ``` php
 $this->set(compact('users', 'posts', 'tags'));
-$this->set('_serialize', array('users', 'posts'));
+$this->set('_serialize', ['users', 'posts']);
 ```
 
 The above example would result in only the `users` and `posts` variables being serialized for the JSON output, like so:
@@ -126,11 +128,13 @@ The following example wraps the result with `{results: ... }`:
 
 ``` php
 App::uses('JsonView', 'View');
-class ResultsJsonView extends JsonView {
-    public function render($view = null, $layout = null) {
+class ResultsJsonView extends JsonView
+{
+    public function render($view = null, $layout = null)
+    {
         $result = parent::render($view, $layout);
         if (isset($this->viewVars['_serialize'])) {
-            return json_encode(array('results' => json_decode($result)));
+            return json_encode(['results' => json_decode($result)]);
         }
         return $result;
     }
@@ -145,7 +149,7 @@ should be serialized into XML for output:
 
 ``` php
 $this->set(compact('users', 'posts', 'tags'));
-$this->set('_serialize', array('users', 'posts'));
+$this->set('_serialize', ['users', 'posts']);
 ```
 
 The above example would result in only the `users` and `posts` variables
@@ -173,10 +177,12 @@ status code before rendering the view. Skipping the view rendering process saves
 CPU cycles and memory. :
 
 ``` php
-class ArticlesController extends AppController {
-    public $components = array('RequestHandler');
+class ArticlesController extends AppController
+{
+    public $components = ['RequestHandler'];
 
-    public function view($id) {
+    public function view($id)
+    {
         $article = $this->Article->findById($id);
         $this->response->modified($article['Article']['modified']);
         $this->set(compact('article'));
@@ -197,9 +203,11 @@ and `CakeNumber` classes respectively.
 To use the new utility classes:
 
 ``` php
-class AppController extends Controller {
+class AppController extends Controller
+{
 
-    public function log($msg) {
+    public function log($msg)
+    {
         $msg .= String::truncate($msg, 100);
         parent::log($msg);
     }
@@ -212,20 +220,23 @@ it in `engine` key:
 
 ``` php
 // Utility/MyAwesomeStringClass.php
-class MyAwesomeStringClass extends String {
+class MyAwesomeStringClass extends String
+{
     // my truncate is better than yours
-    public static function truncate($text, $length = 100, $options = array()) {
+    public static function truncate($text, $length = 100, $options = [])
+    {
         return null;
     }
 }
 
 // Controller/AppController.php
-class AppController extends Controller {
-    public $helpers = array(
-        'Text' => array(
+class AppController extends Controller
+{
+    public $helpers = [
+        'Text' => [
             'engine' => 'MyAwesomeStringClass',
-            ),
-        );
+            ],
+        ];
 }
 ```
 

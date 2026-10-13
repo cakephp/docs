@@ -31,56 +31,56 @@ app/config/bootstrap.php に、 `$pluginPaths` や `$controllerPaths` のよう�
 パスを更新するには `App::build()` を使う必要があります。
 
 ``` php
-App::build(array(
-    'plugins' => array(
+App::build([
+    'plugins' => [
       '/full/path/to/plugins/',
       '/next/full/path/to/plugins/'
-    ),
-    'models' =>  array(
+    ],
+    'models' =>  [
       '/full/path/to/models/',
       '/next/full/path/to/models/'
-    ),
-    'views' => array(
+    ],
+    'views' => [
       '/full/path/to/views/',
       '/next/full/path/to/views/'
-    ),
-    'controllers' => array(
+    ],
+    'controllers' => [
       '/full/path/to/controllers/',
       '/next/full/path/to/controllers/'
-    ),
-    'datasources' => array(
+    ],
+    'datasources' => [
       '/full/path/to/datasources/',
       '/next/full/path/to/datasources/'
-    ),
-    'behaviors' => array(
+    ],
+    'behaviors' => [
       '/full/path/to/behaviors/',
       '/next/full/path/to/behaviors/'
-    ),
-    'components' => array(
+    ],
+    'components' => [
       '/full/path/to/components/',
       '/next/full/path/to/components/'
-    ),
-    'helpers' => array(
+    ],
+    'helpers' => [
       '/full/path/to/helpers/',
       '/next/full/path/to/helpers/'
-    ),
-    'vendors' => array(
+    ],
+    'vendors' => [
       '/full/path/to/vendors/',
       '/next/full/path/to/vendors/'
-    ),
-    'shells' => array(
+    ],
+    'shells' => [
       '/full/path/to/shells/',
       '/next/full/path/to/shells/'
-    ),
-    'locales' => array(
+    ],
+    'locales' => [
       '/full/path/to/locale/',
       '/next/full/path/to/locale/'
-    ),
-    'libs' => array(
+    ],
+    'libs' => [
       '/full/path/to/libs/',
       '/next/full/path/to/libs/'
-    )
-));
+    ]
+]);
 ```
 
 またブートストラップするときの順序が変更されました。
@@ -94,14 +94,14 @@ App::build(array(
 今やカスタム *inflections* を読み込むためには、 `Inflector::rules()` を使います。 :
 
 ``` php
-Inflector::rules('singular', array(
-    'rules' => array(
+Inflector::rules('singular', [
+    'rules' => [
       '/^(bil)er$/i' => '\1',
       '/^(inflec|contribu)tors$/i' => '\1ta'
-    ),
-    'uninflected' => array('singulars'),
-    'irregular' => array('spins' => 'spinor')
-));
+    ],
+    'uninflected' => ['singulars'],
+    'irregular' => ['spins' => 'spinor']
+]);
 ```
 
 こうして設定されるルールは、コアのルールより優先的に inflection のセットにマージされます。
@@ -196,8 +196,8 @@ SessionHelper と SessionComponent は他のコンポーネントと同じよう
 既存の振る舞いを保持するなら、 `AppController::$components` と `AppController::$helpers` にこれらのクラスを読み込むように書き換えてください。 :
 
 ``` php
-var $components = array('Session', 'Auth', ...);
-var $helpers = array('Session', 'Html', 'Form' ...);
+var $components = ['Session', 'Auth', ...];
+var $helpers = ['Session', 'Html', 'Form' ...];
 ```
 
 これらの変更はCakePHPが、これらクラスを明白的に、また宣言的にアプリケーション開発者が使いたいように成されました。
@@ -246,7 +246,7 @@ var $helpers = array('Session', 'Html', 'Form' ...);
 Configure::write('Routing.admin', 'admin');
 
 // このような書き方へ:
-Configure::write('Routing.prefixes', array('admin'));
+Configure::write('Routing.prefixes', ['admin']);
 ```
 
 prefixルートの更なる情報に関しては、新機能ガイドを見てください。
@@ -254,8 +254,8 @@ prefixルートの更なる情報に関しては、新機能ガイドを見て�
 ルーティングパラメータは今や英数字と「-」、「\_」または `/[A-Z0-9-_+]+/` から成る必要があります。 :
 
 ``` php
-Router::connect('/:$%@#param/:action/*', array(...)); // ダメ
-Router::connect('/:can/:anybody/:see/:m-3/*', array(...)); // 許容可能
+Router::connect('/:$%@#param/:action/*', [...]); // ダメ
+Router::connect('/:can/:anybody/:see/:m-3/*', [...]); // 許容可能
 ```
 
 1.3 のために、 Router の内部はパフォーマンス向上とコードの乱雑さを減らすために大規模に
@@ -266,7 +266,7 @@ Router::connect('/:can/:anybody/:see/:m-3/*', array(...)); // 許容可能
 ``` php
 Router::connect(
   '/([0-9]+)-p-(.*)/',
-  array('controller' => 'products', 'action' => 'show')
+  ['controller' => 'products', 'action' => 'show']
 );
 ```
 
@@ -278,8 +278,8 @@ Router::connect(
 ``` php
 Router::connect(
     '/pages/*/:event',
-    array('controller' => 'pages', 'action' => 'display'),
-    array('event' => '[a-z0-9_-]+')
+    ['controller' => 'pages', 'action' => 'display'],
+    ['event' => '[a-z0-9_-]+']
 );
 ```
 
@@ -291,7 +291,7 @@ Router::connect(
 
 ``` php
 // 古いフォーマット:
-$url = array('controller' => 'posts', 'action' => 'view', 'id' => $id);
+$url = ['controller' => 'posts', 'action' => 'view', 'id' => $id];
 // ユースケース:
 Router::url($url);
 $html->link($url);
@@ -301,7 +301,7 @@ $this->redirect($url);
 // 1.3 の結果:
 /posts/view/id:123
 // 正しいフォーマット:
-$url = array('controller' => 'posts', 'action' => 'view', $id);
+$url = ['controller' => 'posts', 'action' => 'view', $id];
 ```
 
 **Dispatcher**
@@ -336,7 +336,7 @@ Controller によって操作されるべきです。
 - Configure::buildPaths() は App::build() に置き換えられました。
 - Configureはパスを管理しないようになりました。
 - Configure::write('modelPaths', array...) は
-  App::build(array('models' =\> array...)) に置き換えられました。
+  App::build(['models' =\> array...]) に置き換えられました。
 - Configure::read('modelPaths')は App::path('models') に置き換えられました。
 - debug = 3はもうありません。
   この設定によって生成されるコントローラのダンプは、度々メモリの消費問題を引き起こし、非実用的で使用不可能な設定でした。

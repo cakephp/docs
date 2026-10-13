@@ -18,16 +18,18 @@ pieceofcake2 フォークには `String` クラスがありません (PHP 7 以�
 `CakeText` クラスを使ってください。 :
 
 ``` php
-class UsersController extends AppController {
+class UsersController extends AppController
+{
 
-    public $components = array('Auth');
+    public $components = ['Auth'];
 
-    public function afterLogin() {
+    public function afterLogin()
+    {
         App::uses('CakeText', 'Utility');
         $message = $this->User->find('new_message');
         if (!empty($message)) {
             // 新しいメッセージをユーザへ通知
-            $this->Session->setFlash(__('You have a new message: %s', CakeText::truncate($message['Message']['body'], 255, array('html' => true))));
+            $this->Session->setFlash(__('You have a new message: %s', CakeText::truncate($message['Message']['body'], 255, ['html' => true])));
         }
     }
 }
@@ -58,19 +60,19 @@ CakeText::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
 $data = "cakephp 'great framework' php";
 $result = CakeText::tokenize($data, ' ', "'", "'");
 // 結果
-array('cakephp', "'great framework'", 'php');
+['cakephp', "'great framework'", 'php'];
 ```
 
-`static` CakeText::**insert**($string, $data, $options = array())
+`static` CakeText::**insert**($string, $data, $options = [])
 
 insert メソッドは、テンプレートとキー・バリューの組み合わせから文字列を作成できます。 :
 
 ``` php
-CakeText::insert('My name is :name and I am :age years old.', array('name' => 'Bob', 'age' => '65'));
+CakeText::insert('My name is :name and I am :age years old.', ['name' => 'Bob', 'age' => '65']);
 // 生成される文字列: "My name is Bob and I am 65 years old."
 ```
 
-`static` CakeText::**cleanInsert**($string, $options = array())
+`static` CakeText::**cleanInsert**($string, $options = [])
 
 与えられた \$options に 'clean' キーが存在した場合、その指定に従って
 `CakeText::insert` をクリーンアップします。
@@ -81,16 +83,16 @@ CakeText::insert('My name is :name and I am :age years old.', array('name' => 'B
 オプションは次のように指定します。 :
 
 ``` php
-$options = array(
-    'clean' => array(
+$options = [
+    'clean' => [
         'method' => 'text', // or html
-    ),
+    ],
     'before' => '',
     'after' => ''
-);
+];
 ```
 
-`static` CakeText::**wrap**($text, $options = array())
+`static` CakeText::**wrap**($text, $options = [])
 
 テキストのブロックを決められた幅や折り返し、インデントにも対応します。
 単語の途中で改行されたりしないように、賢く折り返しの処理を行います。 :
@@ -114,7 +116,7 @@ that never ends.
 
 <!-- start-string -->
 
-`method` CakeText::**highlight**(string $haystack, string $needle, array $options = array() )
+`method` CakeText::**highlight**(string $haystack, string $needle, array $options = [] )
 
 `method` CakeText::**stripLinks**($text)
 

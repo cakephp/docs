@@ -42,7 +42,8 @@ pieceofcake2 フォークは 2 種類のアプリケーションレイアウト�
 `AppController` は `/app/Controller/AppController.php` に次のように定義されます。 :
 
 ``` php
-class AppController extends Controller {
+class AppController extends Controller
+{
 }
 ```
 
@@ -70,7 +71,8 @@ Html ヘルパーと Form ヘルパーが追加されます。
 このようにするのがベストです。 :
 
 ``` php
-public function beforeFilter() {
+public function beforeFilter()
+{
     parent::beforeFilter();
 }
 ```
@@ -98,16 +100,20 @@ CakePHP は規約に従って、アクション名のビューを描画します
 ``` php
 # /app/Controller/RecipesController.php
 
-class RecipesController extends AppController {
-    public function view($id) {
+class RecipesController extends AppController
+{
+    public function view($id)
+    {
         //action logic goes here..
     }
 
-    public function share($customerId, $recipeId) {
+    public function share($customerId, $recipeId)
+    {
         //action logic goes here..
     }
 
-    public function search($query) {
+    public function search($query)
+    {
         //action logic goes here..
     }
 }
@@ -141,8 +147,10 @@ requestAction からも呼ばれるコントローラのメソッドがあれば
 チェックしましょう。 :
 
 ``` php
-class RecipesController extends AppController {
-    public function popular() {
+class RecipesController extends AppController
+{
+    public function popular()
+    {
         $popular = $this->Recipe->popular();
         if (!empty($this->request->params['requested'])) {
             return $popular;
@@ -200,8 +208,10 @@ CakePHP のコントローラは、リクエストのライフサイクル周り
 CakePHP は再度ビューを描画することはありません。 :
 
 ``` php
-class PostsController extends AppController {
-    public function my_action() {
+class PostsController extends AppController
+{
+    public function my_action()
+    {
         $this->render('custom_file');
     }
 }
@@ -216,8 +226,10 @@ class PostsController extends AppController {
 例:
 
 ``` php
-class PostsController extends AppController {
-    public function my_action() {
+class PostsController extends AppController
+{
+    public function my_action()
+    {
         $this->render('Users.UserDetails/custom_file');
     }
 }
@@ -271,7 +283,8 @@ class PostsController extends AppController {
 >
 > ``` php
 > // $name 変数の使い方のサンプル
-> class RecipesController extends AppController {
+> class RecipesController extends AppController
+> {
 >    public $name = 'Recipes';
 > }
 > ```
@@ -296,7 +309,7 @@ class PostsController extends AppController {
 > それらが使えるようになっている時は、 `~Controller::$uses` に現在のコントローラの
 > モデルの名前も含めなければなりません。これについては、下の方のサンプルで説明します。
 >
-> コントローラでモデルを使いたくない場合は、 `public $uses = array()` とセットしてください。
+> コントローラでモデルを使いたくない場合は、 `public $uses = []` とセットしてください。
 > これでコントローラを使うのに対応するモデルファイルが必要なくなります。それでも、
 > `AppController` で定義されたモデルはロードされます。`false` を使うことで、
 > `AppController` で定義されていたとしてもモデルがロードされなくなります。
@@ -316,10 +329,11 @@ class PostsController extends AppController {
 > 追加で利用する MVC クラス達をどうやって CakePHP のコントローラに伝えるのかを見てみましょう。 :
 >
 > ``` php
-> class RecipesController extends AppController {
->     public $uses = array('Recipe', 'User');
->     public $helpers = array('Js');
->     public $components = array('RequestHandler');
+> class RecipesController extends AppController
+> {
+>     public $uses = ['Recipe', 'User'];
+>     public $helpers = ['Js'];
+>     public $components = ['RequestHandler'];
 > }
 > ```
 >
@@ -347,14 +361,15 @@ class PostsController extends AppController {
 > 次のように、コンポーネントの設定を使うように修正することが推奨されます。 :
 >
 > ``` php
-> class ArticlesController extends AppController {
->     public $components = array(
->         'Paginator' => array(
->             'Article' => array(
->                 'conditions' => array('published' => 1)
->             )
->         )
->     );
+> class ArticlesController extends AppController
+> {
+>     public $components = [
+>         'Paginator' => [
+>             'Article' => [
+>                 'conditions' => ['published' => 1]
+>             ]
+>         ]
+>     ];
 > }
 > ```
 

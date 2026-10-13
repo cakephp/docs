@@ -41,7 +41,8 @@ To add scaffolding to your application, in the controller, add the
 `$scaffold` variable:
 
 ``` php
-class CategoriesController extends AppController {
+class CategoriesController extends AppController
+{
     public $scaffold;
 }
 ```
@@ -82,7 +83,8 @@ by ID in scaffolding. This feature makes scaffolding more readable
 in many instances:
 
 ``` php
-class User extends AppModel {
+class User extends AppModel
+{
     public $displayField = 'first_name';
 }
 ```
@@ -90,7 +92,7 @@ class User extends AppModel {
 ## Creating a simple admin interface with scaffolding
 
 If you have enabled admin routing in your `app/Config/core.php` with
-`Configure::write('Routing.prefixes', array('admin'));`, you can
+`Configure::write('Routing.prefixes', ['admin']);`, you can
 use scaffolding to generate an admin interface.
 
 Once you have enabled admin routing, assign your admin prefix to the
@@ -114,7 +116,8 @@ scaffolded at the same time. As with normal scaffolding, you can
 override individual methods and replace them with your own:
 
 ``` php
-public function admin_view($id = null) {
+public function admin_view($id = null)
+{
   // custom code here
 }
 ```

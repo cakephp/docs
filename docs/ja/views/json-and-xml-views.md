@@ -41,12 +41,14 @@ CakePHP 2.1 には新しい二つのビュークラスがあります。 `XmlVie
 そのとき、 `_serialize` の値は文字列かシリアライズされるビュー変数の配列になります。:
 
 ``` php
-class PostsController extends AppController {
-    public $components = array('RequestHandler');
+class PostsController extends AppController
+{
+    public $components = ['RequestHandler'];
 
-    public function index() {
+    public function index()
+    {
         $this->set('posts', $this->Paginator->paginate());
-        $this->set('_serialize', array('posts'));
+        $this->set('_serialize', ['posts']);
     }
 }
 ```
@@ -54,13 +56,15 @@ class PostsController extends AppController {
 連結されたビュー変数の配列として `_serialize` を定義することも出来ます。 :
 
 ``` php
-class PostsController extends AppController {
-    public $components = array('RequestHandler');
+class PostsController extends AppController
+{
+    public $components = ['RequestHandler'];
 
-    public function index() {
+    public function index()
+    {
         // some code that created $posts and $comments
         $this->set(compact('posts', 'comments'));
-        $this->set('_serialize', array('posts', 'comments'));
+        $this->set('_serialize', ['posts', 'comments']);
     }
 }
 ```
@@ -80,8 +84,10 @@ class PostsController extends AppController {
 
 ``` php
 // コントローラ コード
-class PostsController extends AppController {
-    public function index() {
+class PostsController extends AppController
+{
+    public function index()
+    {
         $this->set(compact('posts', 'comments'));
     }
 }

@@ -6,11 +6,13 @@ If you need `TimeHelper` functionalities outside of a `View`,
 use the `CakeTime` class:
 
 ``` php
-class UsersController extends AppController {
+class UsersController extends AppController
+{
 
-    public $components = array('Auth');
+    public $components = ['Auth'];
 
-    public function afterLogin() {
+    public function afterLogin()
+    {
         App::uses('CakeTime', 'Utility');
         if (CakeTime::isToday($this->Auth->user('date_of_birth']))) {
             // greet user with a happy birthday message
@@ -59,7 +61,7 @@ See the [upgrade guide](/pieceofcake2/upgrade).
 
 `method` CakeTime::**serverOffset**()
 
-`method` CakeTime::**timeAgoInWords**($dateString, $options = array())
+`method` CakeTime::**timeAgoInWords**($dateString, $options = [])
 
 `method` CakeTime::**toAtom**($dateString, $timezone = NULL)
 
@@ -73,7 +75,7 @@ See the [upgrade guide](/pieceofcake2/upgrade).
 
 `method` CakeTime::**timezone**($timezone = NULL)
 
-`method` CakeTime::**listTimezones**($filter = null, $country = null, $options = array())
+`method` CakeTime::**listTimezones**($filter = null, $country = null, $options = [])
 
 ## Testing Time
 

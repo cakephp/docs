@@ -41,28 +41,29 @@ validating any user data:
 // app/Model/User.php
 App::uses('AppModel', 'Model');
 
-class User extends AppModel {
-    public $validate = array(
-        'username' => array(
-            'required' => array(
+class User extends AppModel
+{
+    public $validate = [
+        'username' => [
+            'required' => [
                 'rule' => 'notBlank',
                 'message' => 'A username is required'
-            )
-        ),
-        'password' => array(
-            'required' => array(
+            ]
+        ],
+        'password' => [
+            'required' => [
                 'rule' => 'notBlank',
                 'message' => 'A password is required'
-            )
-        ),
-        'role' => array(
-            'valid' => array(
-                'rule' => array('inList', array('admin', 'author')),
+            ]
+        ],
+        'role' => [
+            'valid' => [
+                'rule' => ['inList', ['admin', 'author']],
                 'message' => 'Please enter a valid role',
                 'allowEmpty' => false
-            )
-        )
-    );
+            ]
+        ]
+    ];
 }
 ```
 
@@ -74,19 +75,23 @@ with CakePHP:
 // app/Controller/UsersController.php
 App::uses('AppController', 'Controller');
 
-class UsersController extends AppController {
+class UsersController extends AppController
+{
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         parent::beforeFilter();
         $this->Auth->allow('add');
     }
 
-    public function index() {
+    public function index()
+    {
         $this->User->recursive = 0;
         $this->set('users', $this->paginate());
     }
 
-    public function view($id = null) {
+    public function view($id = null)
+    {
         $this->User->id = $id;
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
@@ -94,12 +99,13 @@ class UsersController extends AppController {
         $this->set('user', $this->User->findById($id));
     }
 
-    public function add() {
+    public function add()
+    {
         if ($this->request->is('post')) {
             $this->User->create();
             if ($this->User->save($this->request->data)) {
                 $this->Flash->success(__('The user has been saved'));
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(
                 __('The user could not be saved. Please, try again.')
@@ -107,7 +113,8 @@ class UsersController extends AppController {
         }
     }
 
-    public function edit($id = null) {
+    public function edit($id = null)
+    {
         $this->User->id = $id;
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
@@ -115,7 +122,7 @@ class UsersController extends AppController {
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->User->save($this->request->data)) {
                 $this->Flash->success(__('The user has been saved'));
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(
                 __('The user could not be saved. Please, try again.')
@@ -126,7 +133,8 @@ class UsersController extends AppController {
         }
     }
 
-    public function delete($id = null) {
+    public function delete($id = null)
+    {
         // Prior to 2.5 use
         // $this->request->onlyAllow('post');
 
@@ -138,12 +146,11 @@ class UsersController extends AppController {
         }
         if ($this->User->delete()) {
             $this->Flash->success(__('User deleted'));
-            return $this->redirect(array('action' => 'index'));
+            return $this->redirect(['action' => 'index']);
         }
         $this->Flash->error(__('User was not deleted'));
-        return $this->redirect(array('action' => 'index'));
+        return $this->redirect(['action' => 'index']);
     }
-
 }
 ```
 
@@ -163,9 +170,9 @@ will show just the add.ctp:
         <legend><?php echo __('Add User'); ?></legend>
         <?php echo $this->Form->input('username');
         echo $this->Form->input('password');
-        echo $this->Form->input('role', array(
-            'options' => array('admin' => 'Admin', 'author' => 'Author')
-        ));
+        echo $this->Form->input('role', [
+            'options' => ['admin' => 'Admin', 'author' => 'Author']
+        ]);
     ?>
     </fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
@@ -184,30 +191,32 @@ file and add the following lines:
 
 ``` php
 // app/Controller/AppController.php
-class AppController extends Controller {
+class AppController extends Controller
+{
     //...
 
-    public $components = array(
+    public $components = [
         'Flash',
-        'Auth' => array(
-            'loginRedirect' => array(
+        'Auth' => [
+            'loginRedirect' => [
                 'controller' => 'posts',
                 'action' => 'index'
-            ),
-            'logoutRedirect' => array(
+            ],
+            'logoutRedirect' => [
                 'controller' => 'pages',
                 'action' => 'display',
                 'home'
-            ),
-            'authenticate' => array(
-                'Form' => array(
+            ],
+            'authenticate' => [
+                'Form' => [
                     'passwordHasher' => 'Blowfish'
-                )
-            )
-        )
-    );
+                ]
+            ]
+        ]
+    ];
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         $this->Auth->allow('index', 'view');
     }
     //...
@@ -231,13 +240,15 @@ the users add function and implement the login and logout action:
 ``` php
 // app/Controller/UsersController.php
 
-public function beforeFilter() {
+public function beforeFilter()
+{
     parent::beforeFilter();
     // Allow users to register and logout.
     $this->Auth->allow('add', 'logout');
 }
 
-public function login() {
+public function login()
+{
     if ($this->request->is('post')) {
         if ($this->Auth->login()) {
             return $this->redirect($this->Auth->redirectUrl());
@@ -246,7 +257,8 @@ public function login() {
     }
 }
 
-public function logout() {
+public function logout()
+{
     return $this->redirect($this->Auth->logout());
 }
 ```
@@ -264,7 +276,8 @@ class User extends AppModel {
 
 // ...
 
-public function beforeSave($options = array()) {
+public function beforeSave($options = [])
+{
     if (isset($this->data[$this->alias]['password'])) {
         $passwordHasher = new BlowfishPasswordHasher();
         $this->data[$this->alias]['password'] = $passwordHasher->hash(
@@ -342,13 +355,14 @@ logged in user as a reference for the created post:
 
 ``` php
 // app/Controller/PostsController.php
-public function add() {
+public function add()
+{
     if ($this->request->is('post')) {
         //Added this line
         $this->request->data['Post']['user_id'] = $this->Auth->user('id');
         if ($this->Post->save($this->request->data)) {
             $this->Flash->success(__('Your post has been saved.'));
-            return $this->redirect(array('action' => 'index'));
+            return $this->redirect(['action' => 'index']);
         }
     }
 }
@@ -367,25 +381,26 @@ config:
 ``` php
 // app/Controller/AppController.php
 
-public $components = array(
+public $components = [
     'Flash',
-    'Auth' => array(
-        'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
-        'logoutRedirect' => array(
+    'Auth' => [
+        'loginRedirect' => ['controller' => 'posts', 'action' => 'index'],
+        'logoutRedirect' => [
             'controller' => 'pages',
             'action' => 'display',
             'home'
-        ),
-        'authenticate' => array(
-            'Form' => array(
+        ],
+        'authenticate' => [
+            'Form' => [
                 'passwordHasher' => 'Blowfish'
-            )
-        ),
-        'authorize' => array('Controller') // Added this line
-    )
-);
+            ]
+        ],
+        'authorize' => ['Controller'] // Added this line
+    ]
+];
 
-public function isAuthorized($user) {
+public function isAuthorized($user)
+{
     // Admin can access every action
     if (isset($user['role']) && $user['role'] === 'admin') {
         return true;
@@ -411,14 +426,15 @@ and add the following content:
 ``` php
 // app/Controller/PostsController.php
 
-public function isAuthorized($user) {
+public function isAuthorized($user)
+{
     // All registered users can add posts
     if ($this->action === 'add') {
         return true;
     }
 
     // The owner of a post can edit and delete it
-    if (in_array($this->action, array('edit', 'delete'))) {
+    if (in_array($this->action, ['edit', 'delete'])) {
         $postId = (int) $this->request->params['pass'][0];
         if ($this->Post->isOwnedBy($postId, $user['id'])) {
             return true;
@@ -440,8 +456,9 @@ logic as possible into models. Let's then implement the function:
 ``` php
 // app/Model/Post.php
 
-public function isOwnedBy($post, $user) {
-    return $this->field('id', array('id' => $post, 'user_id' => $user)) !== false;
+public function isOwnedBy($post, $user)
+{
+    return $this->field('id', ['id' => $post, 'user_id' => $user]) !== false;
 }
 ```
 

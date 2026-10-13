@@ -1,6 +1,6 @@
 # Access Control Lists
 
-`class` **AclComponent**(ComponentCollection $collection, array $settings = array())
+`class` **AclComponent**(ComponentCollection $collection, array $settings = [])
 
 ## Understanding How ACL Works
 
@@ -417,7 +417,7 @@ respective classes. The easiest way to do this is to include CakePHP's
 ACL Component in your controller's \$components array:
 
 ``` php
-public $components = array('Acl');
+public $components = ['Acl'];
 ```
 
 Once we've got that done, let's see some examples of creating
@@ -437,24 +437,25 @@ Our approach shouldn't be drastically new - we're just using
 models to save data like we always do:
 
 ``` php
-public function any_action() {
+public function any_action()
+{
     $aro = $this->Acl->Aro;
 
     // Here's all of our group info in an array we can iterate through
-    $groups = array(
-        0 => array(
+    $groups = [
+        0 => [
             'alias' => 'warriors'
-        ),
-        1 => array(
+        ],
+        1 => [
             'alias' => 'wizards'
-        ),
-        2 => array(
+        ],
+        2 => [
             'alias' => 'hobbits'
-        ),
-        3 => array(
+        ],
+        3 => [
             'alias' => 'visitors'
-        ),
-    );
+        ],
+    ];
 
     // Iterate and create ARO groups
     foreach ($groups as $data) {
@@ -500,69 +501,70 @@ specific model records in our database.
 > ID, rather than a foreign_key value.
 
 ``` php
-public function any_action() {
+public function any_action()
+{
     $aro = new Aro();
 
     // Here are our user records, ready to be linked to new ARO records.
     // This data could come from a model and be modified, but we're using static
     // arrays here for demonstration purposes.
 
-    $users = array(
-        0 => array(
+    $users = [
+        0 => [
             'alias' => 'Aragorn',
             'parent_id' => 1,
             'model' => 'User',
             'foreign_key' => 2356,
-        ),
-        1 => array(
+        ],
+        1 => [
             'alias' => 'Legolas',
             'parent_id' => 1,
             'model' => 'User',
             'foreign_key' => 6342,
-        ),
-        2 => array(
+        ],
+        2 => [
             'alias' => 'Gimli',
             'parent_id' => 1,
             'model' => 'User',
             'foreign_key' => 1564,
-        ),
-        3 => array(
+        ],
+        3 => [
             'alias' => 'Gandalf',
             'parent_id' => 2,
             'model' => 'User',
             'foreign_key' => 7419,
-        ),
-        4 => array(
+        ],
+        4 => [
             'alias' => 'Frodo',
             'parent_id' => 3,
             'model' => 'User',
             'foreign_key' => 7451,
-        ),
-        5 => array(
+        ],
+        5 => [
             'alias' => 'Bilbo',
             'parent_id' => 3,
             'model' => 'User',
             'foreign_key' => 5126,
-        ),
-        6 => array(
+        ],
+        6 => [
             'alias' => 'Merry',
             'parent_id' => 3,
             'model' => 'User',
             'foreign_key' => 5144,
-        ),
-        7 => array(
+        ],
+        7 => [
             'alias' => 'Pippin',
             'parent_id' => 3,
             'model' => 'User',
             'foreign_key' => 1211,
-        ),
-        8 => array(
+        ],
+        8 => [
             'alias' => 'Gollum',
             'parent_id' => 4,
             'model' => 'User',
             'foreign_key' => 1337,
-        ),
-    );
+        ],
+    ];
 
     // Iterate and create AROs (as children)
     foreach ($users as $data) {
@@ -664,9 +666,10 @@ an action inside our controller:
 class SomethingsController extends AppController {
     // You might want to place this in the AppController
     // instead, but here works great too.
-    public $components = array('Acl');
+    public $components = ['Acl'];
 
-    public function index() {
+    public function index()
+    {
         // Allow warriors complete access to weapons
         // Both these examples use the alias syntax
         $this->Acl->allow('warriors', 'Weapons');
@@ -705,12 +708,12 @@ yourself. What we have above is equivalent to this:
 // 1564 = Gimli
 
 $this->Acl->deny(
-  array('model' => 'User', 'foreign_key' => 6342),
+  ['model' => 'User', 'foreign_key' => 6342],
   'Weapons',
   'delete'
 );
 $this->Acl->deny(
-  array('model' => 'User', 'foreign_key' => 1564),
+  ['model' => 'User', 'foreign_key' => 1564],
   'Weapons',
   'delete'
 );
@@ -720,7 +723,7 @@ $this->Acl->deny(
 > Addressing a node using the alias syntax uses a slash-delimited
 > string ('/users/employees/developers'). Addressing a node using
 > model/foreign key syntax uses an array with two parameters:
-> `array('model' => 'User', 'foreign_key' => 8282)`.
+> `['model' => 'User', 'foreign_key' => 8282]`.
 
 The next section will help us validate our setup by using the
 AclComponent to check the permissions we've just set up.
@@ -741,7 +744,8 @@ $this->Acl->check($aro, $aco, $action = '*');
 Let's give it a try inside a controller action:
 
 ``` php
-public function index() {
+public function index()
+{
     // These all return true:
     $this->Acl->check('warriors/Aragorn', 'Weapons');
     $this->Acl->check('warriors/Aragorn', 'Weapons', 'create');
@@ -751,7 +755,7 @@ public function index() {
 
     // Remember, we can use the model/id syntax
     // for our user AROs
-    $this->Acl->check(array('User' => array('id' => 2356)), 'Weapons');
+    $this->Acl->check(['User' => ['id' => 2356]], 'Weapons');
 
     // These also return true:
     $result = $this->Acl->check('warriors/Legolas', 'Weapons', 'create');

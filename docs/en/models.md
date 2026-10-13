@@ -31,7 +31,8 @@ Here is a simple example of a model definition in CakePHP:
 
 ``` php
 App::uses('AppModel', 'Model');
-class Ingredient extends AppModel {
+class Ingredient extends AppModel
+{
     public $name = 'Ingredient';
 }
 ```
@@ -89,8 +90,10 @@ a controller named IngredientsController will automatically initialize the
 Ingredient model and attach it to the controller at `$this->Ingredient`:
 
 ``` php
-class IngredientsController extends AppController {
-    public function index() {
+class IngredientsController extends AppController
+{
+    public function index()
+    {
         //grab all ingredients and pass it to the view:
         $ingredients = $this->Ingredient->find('all');
         $this->set('ingredients', $ingredients);
@@ -102,9 +105,11 @@ Associated models are available through the main model. In the following
 example, Recipe has an association with the Ingredient model:
 
 ``` php
-class Recipe extends AppModel {
+class Recipe extends AppModel
+{
 
-    public function steakRecipes() {
+    public function steakRecipes()
+    {
         $ingredient = $this->Ingredient->findByName('Steak');
         return $this->findAllByMainIngredient($ingredient['Ingredient']['id']);
     }

@@ -138,8 +138,8 @@ require APP . 'Vendor/autoload.php';
 
 // CakePHP のオートローダーをいったん削除し、Composer より先に評価されるように先頭に追加する
 // http://goo.gl/kKVJO7 を参照
-spl_autoload_unregister(array('App', 'load'));
-spl_autoload_register(array('App', 'load'), true, true);
+spl_autoload_unregister(['App', 'load']);
+spl_autoload_register(['App', 'load'], true, true);
 ```
 
 これで、Composer でインストールした CakePHP が機能する CakePHP アプリケーションができました。

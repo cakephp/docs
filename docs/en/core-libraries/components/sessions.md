@@ -1,6 +1,6 @@
 # Sessions
 
-`class` **SessionComponent**(ComponentCollection $collection, array $settings = array())
+`class` **SessionComponent**(ComponentCollection $collection, array $settings = [])
 
 The CakePHP SessionComponent provides a way to persist client data
 between page requests. It acts as a wrapper for `$_SESSION` as
@@ -22,9 +22,9 @@ Session by using `dot notation`. So `User.username` would
 reference the following:
 
 ``` text
-array('User' => array(
+['User' => [
     'username' => 'clark-kent@dailyplanet.com'
-));
+]];
 ```
 
 Dots are used to indicate nested arrays. This notation is used for
@@ -46,4 +46,4 @@ all Session component methods wherever a name/key is used.
 
 ## Creating notification messages
 
-`method` SessionComponent::**setFlash**(string $message, string $element = 'default', array $params = array(), string $key = 'flash')
+`method` SessionComponent::**setFlash**(string $message, string $element = 'default', array $params = [], string $key = 'flash')

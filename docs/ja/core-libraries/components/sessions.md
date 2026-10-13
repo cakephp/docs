@@ -1,6 +1,6 @@
 # セッション
 
-`class` **SessionComponent**(ComponentCollection $collection, array $settings = array())
+`class` **SessionComponent**(ComponentCollection $collection, array $settings = [])
 
 CakePHP の SessionComponent は、複数のページにわたってクライアントのデータを継続して
 保持する方法を提供します。このコンポーネントは `$_SESSION` 変数に関連した
@@ -18,9 +18,9 @@ SessionComponent はセッション情報を伝えあうために使われます
 そのため `User.username` は、次のような値が参照されます。 :
 
 ``` text
-array('User' => array(
+['User' => [
     'username' => 'clark-kent@dailyplanet.com'
-));
+]];
 ```
 
 ドット (.) は、多次元配列のために使われます。
@@ -40,4 +40,4 @@ array('User' => array(
 
 ## 通知メッセージの作成
 
-`method` SessionComponent::**setFlash**(string $message, string $element = 'default', array $params = array(), string $key = 'flash')
+`method` SessionComponent::**setFlash**(string $message, string $element = 'default', array $params = [], string $key = 'flash')

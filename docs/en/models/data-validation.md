@@ -19,8 +19,9 @@ in the Model. To do that, use the Model::validate array in the
 Model definition, for example:
 
 ``` php
-class User extends AppModel {
-    public $validate = array();
+class User extends AppModel
+{
+    public $validate = [];
 }
 ```
 
@@ -30,12 +31,13 @@ the users table has login, email and born fields, the example below
 shows some simple validation rules that apply to those fields:
 
 ``` php
-class User extends AppModel {
-    public $validate = array(
+class User extends AppModel
+{
+    public $validate = [
         'login' => 'alphaNumeric',
         'email' => 'email',
         'born' => 'date'
-    );
+    ];
 }
 ```
 
@@ -55,30 +57,31 @@ Here is a more complex validation example that takes advantage of
 some of these built-in validation rules:
 
 ``` php
-class User extends AppModel {
-    public $validate = array(
-        'login' => array(
-            'alphaNumeric' => array(
+class User extends AppModel
+{
+    public $validate = [
+        'login' => [
+            'alphaNumeric' => [
                 'rule' => 'alphaNumeric',
                 'required' => true,
                 'message' => 'Letters and numbers only'
-            ),
-            'between' => array(
-                'rule' => array('lengthBetween', 5, 15),
+            ],
+            'between' => [
+                'rule' => ['lengthBetween', 5, 15],
                 'message' => 'Between 5 to 15 characters'
-            )
-        ),
-        'password' => array(
-            'rule' => array('minLength', '8'),
+            ]
+        ],
+        'password' => [
+            'rule' => ['minLength', '8'],
             'message' => 'Minimum 8 characters long'
-        ),
+        ],
         'email' => 'email',
-        'born' => array(
+        'born' => [
             'rule' => 'date',
             'message' => 'Enter a valid date',
             'allowEmpty' => true
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -106,7 +109,7 @@ validation rule. The general syntax for defining rules this way
 is:
 
 ``` php
-public $validate = array('fieldName' => 'ruleName');
+public $validate = ['fieldName' => 'ruleName'];
 ```
 
 Where, 'fieldName' is the name of the field the rule is defined
@@ -117,7 +120,7 @@ For example, to ensure that the user is giving a well formatted
 email address, you could use this rule:
 
 ``` php
-public $validate = array('user_email' => 'email');
+public $validate = ['user_email' => 'email'];
 ```
 
 ## One Rule Per Field
@@ -127,17 +130,17 @@ validation rules work. But before we discuss that, let's see the
 general usage pattern adding a rule for a single field:
 
 ``` php
-public $validate = array(
-    'fieldName1' => array(
-        // or: array('ruleName', 'param1', 'param2' ...)
+public $validate = [
+    'fieldName1' => [
+        // or: ['ruleName', 'param1', 'param2' ...]
         'rule' => 'ruleName',
         'required' => true,
         'allowEmpty' => false,
         // or: 'update'
         'on' => 'create',
         'message' => 'Your Error Message'
-    )
-);
+    ]
+];
 ```
 
 The 'rule' key is required. If you only set 'required' =\> true, the
@@ -162,22 +165,22 @@ If the rule does not require any parameters, 'rule' can be a single
 value e.g. :
 
 ``` php
-public $validate = array(
-    'login' => array(
+public $validate = [
+    'login' => [
         'rule' => 'alphaNumeric'
-    )
-);
+    ]
+];
 ```
 
 If the rule requires some parameters (like the max, min or range),
 'rule' should be an array:
 
 ``` php
-public $validate = array(
-    'password' => array(
-        'rule' => array('minLength', 8)
-    )
-);
+public $validate = [
+    'password' => [
+        'rule' => ['minLength', 8]
+    ]
+];
 ```
 
 Remember, the 'rule' key is required for array-based rule
@@ -192,12 +195,12 @@ operations. If 'required' is evaluated to true, the field must be present in the
 data array. For example, if the validation rule has been defined as follows:
 
 ``` php
-public $validate = array(
-    'login' => array(
+public $validate = [
+    'login' => [
         'rule' => 'alphaNumeric',
         'required' => true
-    )
-);
+    ]
+];
 ```
 
 The data sent to the model's save() method must contain data for
@@ -248,12 +251,12 @@ The message key allows you to define a custom validation error
 message for the rule:
 
 ``` php
-public $validate = array(
-    'password' => array(
-        'rule' => array('minLength', 8),
+public $validate = [
+    'password' => [
+        'rule' => ['minLength', 8],
         'message' => 'Password must be at least 8 characters long'
-    )
-);
+    ]
+];
 ```
 
 > [!NOTE]
@@ -271,18 +274,18 @@ If you would like to assign multiple validation rules to a single
 field, this is basically how it should look:
 
 ``` php
-public $validate = array(
-    'fieldName' => array(
-        'ruleName' => array(
+public $validate = [
+    'fieldName' => [
+        'ruleName' => [
             'rule' => 'ruleName',
             // extra keys like on, required, etc. go here...
-        ),
-        'ruleName2' => array(
+        ],
+        'ruleName2' => [
             'rule' => 'ruleName2',
             // extra keys like on, required, etc. go here...
-        )
-    )
-);
+        ]
+    ]
+];
 ```
 
 As you can see, this is quite similar to what we did in the
@@ -294,18 +297,18 @@ of validation parameters.
 This is better explained with a practical example:
 
 ``` php
-public $validate = array(
-    'login' => array(
-        'loginRule-1' => array(
+public $validate = [
+    'login' => [
+        'loginRule-1' => [
             'rule' => 'alphaNumeric',
             'message' => 'Only alphabets and numbers allowed',
-         ),
-        'loginRule-2' => array(
-            'rule' => array('minLength', 8),
+         ],
+        'loginRule-2' => [
+            'rule' => ['minLength', 8],
             'message' => 'Minimum length of 8 characters'
-        )
-    )
-);
+        ]
+    ]
+];
 ```
 
 The above example defines two rules for the login field:
@@ -327,32 +330,32 @@ and error messages for both failing rules will be returned if "rule2" also
 fails:
 
 ``` php
-public $validate = array(
-    'login' => array(
-        'rule1' => array(
+public $validate = [
+    'login' => [
+        'rule1' => [
             'rule' => 'alphaNumeric',
             'message' => 'Only alphabets and numbers allowed',
             'last' => false
-         ),
-        'rule2' => array(
-            'rule' => array('minLength', 8),
+         ],
+        'rule2' => [
+            'rule' => ['minLength', 8],
             'message' => 'Minimum length of 8 characters'
-        )
-    )
-);
+        ]
+    ]
+];
 ```
 
 When specifying validation rules in this array form it's possible to avoid
 providing the `message` key. Consider this example:
 
 ``` php
-public $validate = array(
-    'login' => array(
-        'Only alphabets and numbers allowed' => array(
+public $validate = [
+    'login' => [
+        'Only alphabets and numbers allowed' => [
             'rule' => 'alphaNumeric',
-         ),
-    )
-);
+         ],
+    ]
+];
 ```
 
 If the `alphaNumeric` rules fails the array key for this rule
@@ -373,12 +376,12 @@ using regular expression matching, you can define a custom
 expression as a field validation rule:
 
 ``` php
-public $validate = array(
-    'login' => array(
+public $validate = [
+    'login' => [
         'rule' => '/^[a-z0-9]{3,}$/i',
         'message' => 'Only letters and integers, min 3 characters'
-    )
-);
+    ]
+];
 ```
 
 The example above checks if the login contains only letters and
@@ -396,22 +399,24 @@ can only be used 25 times, you need to add your own validation
 function, as shown below:
 
 ``` php
-class User extends AppModel {
+class User extends AppModel
+{
 
-    public $validate = array(
-        'promotion_code' => array(
-            'rule' => array('limitDuplicates', 25),
+    public $validate = [
+        'promotion_code' => [
+            'rule' => ['limitDuplicates', 25],
             'message' => 'This code has been used too many times.'
-        )
-    );
+        ]
+    ];
 
-    public function limitDuplicates($check, $limit) {
-        // $check will have value: array('promotion_code' => 'some-value')
+    public function limitDuplicates($check, $limit)
+    {
+        // $check will have value: ['promotion_code' => 'some-value']
         // $limit will have value: 25
-        $existingPromoCount = $this->find('count', array(
+        $existingPromoCount = $this->find('count', [
             'conditions' => $check,
             'recursive' => -1
-        ));
+        ]);
         return $existingPromoCount < $limit;
     }
 }
@@ -442,17 +447,19 @@ the field value as its value. The full record being validated is
 stored in \$this-\>data member variable:
 
 ``` php
-class Post extends AppModel {
+class Post extends AppModel
+{
 
-    public $validate = array(
-        'slug' => array(
+    public $validate = [
+        'slug' => [
             'rule' => 'alphaNumericDashUnderscore',
             'message' => 'Slug can only be letters,' .
                 ' numbers, dash and underscore'
-        )
-    );
+        ]
+    ];
 
-    public function alphaNumericDashUnderscore($check) {
+    public function alphaNumericDashUnderscore($check)
+    {
         // $data array is passed using the form field name as the key
         // have to extract the value to make the function generic
         $value = array_values($check);
@@ -495,10 +502,10 @@ set. The first one is using the `add` method:
 
 ``` php
 // Inside a model class
-$this->validator()->add('password', 'required', array(
+$this->validator()->add('password', 'required', [
     'rule' => 'notBlank',
     'required' => 'create'
-));
+]);
 ```
 
 This will add a single rule to the `password` field in the model. You can
@@ -507,29 +514,29 @@ chain multiple calls to add to create as many rules as you like:
 ``` php
 // Inside a model class
 $this->validator()
-    ->add('password', 'required', array(
+    ->add('password', 'required', [
         'rule' => 'notBlank',
         'required' => 'create'
-    ))
-    ->add('password', 'size', array(
-        'rule' => array('lengthBetween', 8, 20),
+    ])
+    ->add('password', 'size', [
+        'rule' => ['lengthBetween', 8, 20],
         'message' => 'Password should be at least 8 chars long'
-    ));
+    ]);
 ```
 
 It is also possible to add multiple rules at once for a single field:
 
 ``` php
-$this->validator()->add('password', array(
-    'required' => array(
+$this->validator()->add('password', [
+    'required' => [
         'rule' => 'notBlank',
         'required' => 'create'
-    ),
-    'size' => array(
-        'rule' => array('lengthBetween', 8, 20),
+    ],
+    'size' => [
+        'rule' => ['lengthBetween', 8, 20],
         'message' => 'Password should be at least 8 chars long'
-    )
-));
+    ]
+]);
 ```
 
 Alternatively, you can use the validator object to set rules directly to fields
@@ -537,15 +544,15 @@ using the array interface:
 
 ``` php
 $validator = $this->validator();
-$validator['username'] = array(
-    'unique' => array(
+$validator['username'] = [
+    'unique' => [
         'rule' => 'isUnique',
         'required' => 'create'
-    ),
-    'alphanumeric' => array(
+    ],
+    'alphanumeric' => [
         'rule' => 'alphanumeric'
-    )
-);
+    ]
+];
 ```
 
 ### Modifying current validation rules
@@ -559,10 +566,10 @@ field or completely remove a rule from a field rule set:
 
 ``` php
 // In a model class
-$this->validator()->getField('password')->setRule('required', array(
+$this->validator()->getField('password')->setRule('required', [
     'rule' => 'required',
     'required' => true
-));
+]);
 ```
 
 You can also completely replace all the rules for a field using a similar
@@ -570,10 +577,10 @@ method:
 
 ``` php
 // In a model class
-$this->validator()->getField('password')->setRules(array(
-    'required' => array(...),
-    'otherRule' => array(...)
-));
+$this->validator()->getField('password')->setRules([
+    'required' => [...],
+    'otherRule' => [...]
+]);
 ```
 
 If you wish to just modify a single property in a rule you can set properties
@@ -594,10 +601,10 @@ using the array interface:
 
 ``` php
 $validator = $this->validator();
-$validator['username']['unique'] = array(
+$validator['username']['unique'] = [
     'rule' => 'isUnique',
     'required' => 'create'
-);
+];
 
 $validator['username']['unique']->last = true;
 $validator['username']['unique']->message = 'Name already taken';
@@ -647,12 +654,12 @@ with usage examples.
 The data for the field must only contain letters and numbers. :
 
 ``` php
-public $validate = array(
-    'login' => array(
+public $validate = [
+    'login' => [
         'rule' => 'alphaNumeric',
         'message' => 'Usernames must only contain letters and numbers.'
-    )
-);
+    ]
+];
 ```
 
 `static` Validation::**lengthBetween**(string $check, integer $min, integer $max)
@@ -662,12 +669,12 @@ numeric range. Both minimum and maximum values must be supplied.
 Uses = not. :
 
 ``` php
-public $validate = array(
-    'password' => array(
-        'rule' => array('lengthBetween', 5, 15),
+public $validate = [
+    'password' => [
+        'rule' => ['lengthBetween', 5, 15],
         'message' => 'Passwords must be between 5 and 15 characters long.'
-    )
-);
+    ]
+];
 ```
 
 The data is checked by number of characters, not number of bytes.
@@ -681,12 +688,12 @@ white space characters are present in its value. White space
 characters include space, tab, carriage return, and newline. :
 
 ``` php
-public $validate = array(
-    'id' => array(
+public $validate = [
+    'id' => [
         'rule' => 'blank',
         'on' => 'create'
-    )
-);
+    ]
+];
 ```
 
 `static` Validation::**boolean**(string $check)
@@ -695,12 +702,12 @@ The data for the field must be a boolean value. Valid values are
 true or false, integers 0 or 1 or strings '0' or '1'. :
 
 ``` php
-public $validate = array(
-    'myCheckbox' => array(
-        'rule' => array('boolean'),
+public $validate = [
+    'myCheckbox' => [
+        'rule' => ['boolean'],
         'message' => 'Incorrect value for myCheckbox'
-    )
-);
+    ]
+];
 ```
 
 `static` Validation::**cc**(mixed $check, mixed $type = 'fast', boolean $deep = false, string $regex = null)
@@ -740,12 +747,12 @@ The 'regex' key allows you to supply your own regular expression
 that will be used to validate the credit card number:
 
 ``` php
-public $validate = array(
-    'ccnumber' => array(
-        'rule' => array('cc', array('visa', 'maestro'), false, null),
+public $validate = [
+    'ccnumber' => [
+        'rule' => ['cc', ['visa', 'maestro'], false, null],
         'message' => 'The credit card number you supplied was invalid.'
-    )
-);
+    ]
+];
 ```
 
 `static` Validation::**comparison**(mixed $check1, string $operator = null, integer $check2 = null)
@@ -755,19 +762,19 @@ greater", "is less", "greater or equal", "less or equal", "equal
 to", and "not equal". Some examples are shown below:
 
 ``` php
-public $validate = array(
-    'age' => array(
-        'rule' => array('comparison', '>=', 18),
+public $validate = [
+    'age' => [
+        'rule' => ['comparison', '>=', 18],
         'message' => 'Must be at least 18 years old to qualify.'
-    )
-);
+    ]
+];
 
-public $validate = array(
-    'age' => array(
-        'rule' => array('comparison', 'greater or equal', 18),
+public $validate = [
+    'age' => [
+        'rule' => ['comparison', 'greater or equal', 18],
         'message' => 'Must be at least 18 years old to qualify.'
-    )
-);
+    ]
+];
 ```
 
 `static` Validation::**custom**(mixed $check, string $regex = null)
@@ -775,12 +782,12 @@ public $validate = array(
 Used when a custom regular expression is needed:
 
 ``` php
-public $validate = array(
-    'infinite' => array(
-        'rule' => array('custom', '\u221E'),
+public $validate = [
+    'infinite' => [
+        'rule' => ['custom', '\u221E'],
         'message' => 'Please enter an infinite number.'
-    )
-);
+    ]
+];
 ```
 
 `static` Validation::**date**(string $check, mixed $format = 'ymd', string $regex = null)
@@ -810,13 +817,13 @@ If no keys are supplied, the default key that will be used is
 'ymd':
 
 ``` php
-public $validate = array(
-    'born' => array(
-        'rule' => array('date', 'ymd'),
+public $validate = [
+    'born' => [
+        'rule' => ['date', 'ymd'],
         'message' => 'Enter a valid date in YY-MM-DD format.',
         'allowEmpty' => true
-    )
-);
+    ]
+];
 ```
 
 While many data stores require a certain date format, you might
@@ -852,12 +859,12 @@ If no keys are supplied, the default key that will be used is
 'ymd':
 
 ``` php
-public $validate = array(
-    'birthday' => array(
-        'rule' => array('datetime', 'dmy'),
+public $validate = [
+    'birthday' => [
+        'rule' => ['datetime', 'dmy'],
         'message' => 'Please enter a valid date and time.'
-    )
-);
+    ]
+];
 ```
 
 Also a second parameter can be passed to specify a custom regular
@@ -875,11 +882,11 @@ be validated as a scientific float, which will cause validation to
 fail if no digits are found after the decimal point:
 
 ``` php
-public $validate = array(
-    'price' => array(
-        'rule' => array('decimal', 2)
-    )
-);
+public $validate = [
+    'price' => [
+        'rule' => ['decimal', 2]
+    ]
+];
 ```
 
 `static` Validation::**email**(string $check, boolean $deep = false, string $regex = null)
@@ -889,14 +896,14 @@ boolean true as the second parameter for this rule will also
 attempt to verify that the host for the address is valid:
 
 ``` php
-public $validate = array('email' => array('rule' => 'email'));
+public $validate = ['email' => ['rule' => 'email']];
 
-public $validate = array(
-    'email' => array(
-        'rule' => array('email', true),
+public $validate = [
+    'email' => [
+        'rule' => ['email', true],
         'message' => 'Please supply a valid email address.'
-    )
-);
+    ]
+];
 ```
 
 `static` Validation::**equalTo**(mixed $check, mixed $compareTo)
@@ -905,29 +912,29 @@ This rule will ensure that the value is equal to, and of the same
 type as the given value.
 
 ``` php
-public $validate = array(
-    'food' => array(
-        'rule' => array('equalTo', 'cake'),
+public $validate = [
+    'food' => [
+        'rule' => ['equalTo', 'cake'],
         'message' => 'This value must be the string cake'
-    )
-);
+    ]
+];
 ```
 
-`static` Validation::**extension**(mixed $check, array $extensions = array('gif', 'jpeg', 'png', 'jpg'))
+`static` Validation::**extension**(mixed $check, array $extensions = ['gif', 'jpeg', 'png', 'jpg'])
 
 This rule checks for valid file extensions like .jpg or .png. Allow
 multiple extensions by passing them in array form.
 
 ``` php
-public $validate = array(
-    'image' => array(
-        'rule' => array(
+public $validate = [
+    'image' => [
+        'rule' => [
             'extension',
-            array('gif', 'jpeg', 'png', 'jpg')
-        ),
+            ['gif', 'jpeg', 'png', 'jpg']
+        ],
         'message' => 'Please supply a valid image.'
-    )
-);
+    ]
+];
 ```
 
 `static` Validation::**fileSize**($check, $operator = null, $size = null)
@@ -939,12 +946,12 @@ method will automatically handle array values from `$_FILES` by reading
 from the `tmp_name` key if `$check` is an array and contains that key:
 
 ``` php
-public $validate = array(
-    'image' => array(
-        'rule' => array('fileSize', '<=', '1MB'),
+public $validate = [
+    'image' => [
+        'rule' => ['fileSize', '<=', '1MB'],
         'message' => 'Image must be less than 1MB'
-    )
-);
+    ]
+];
 ```
 
 ::: info Added in version 2.3
@@ -960,14 +967,14 @@ one of the values in the given array.
 Example:
 
 ``` php
-public $validate = array(
-    'function' => array(
-         'allowedChoice' => array(
-             'rule' => array('inList', array('Foo', 'Bar')),
+public $validate = [
+    'function' => [
+         'allowedChoice' => [
+             'rule' => ['inList', ['Foo', 'Bar']],
              'message' => 'Enter either Foo or Bar.'
-         )
-     )
- );
+         ]
+     ]
+ ];
 ```
 
 Comparison is case sensitive by default. You can set `$caseInsensitive` to true
@@ -979,12 +986,12 @@ This rule will ensure that a valid IPv4 or IPv6 address has been
 submitted. Accepts as option 'both' (default), 'IPv4' or 'IPv6'.
 
 ``` php
-public $validate = array(
-    'clientip' => array(
-        'rule' => array('ip', 'IPv4'), // or 'IPv6' or 'both' (default)
+public $validate = [
+    'clientip' => [
+        'rule' => ['ip', 'IPv4'], // or 'IPv6' or 'both' (default)
         'message' => 'Please supply a valid IP address.'
-    )
-);
+    ]
+];
 ```
 
 `method` Validation::**Model::isUnique()**()
@@ -1001,12 +1008,12 @@ This rule ensures that the data stays within a maximum length
 requirement:
 
 ``` php
-public $validate = array(
-    'login' => array(
-        'rule' => array('maxLength', 15),
+public $validate = [
+    'login' => [
+        'rule' => ['maxLength', 15],
         'message' => 'Usernames must be no larger than 15 characters long.'
-    )
-);
+    ]
+];
 ```
 
 This will ensure that the 'login' field is less than or equal to 15
@@ -1018,12 +1025,12 @@ This rule ensures that the data stays within a maximum length
 requirement:
 
 ``` php
-public $validate = array(
-    'data' => array(
-        'rule' => array('maxLengthBytes', 2 ** 24 - 1),
+public $validate = [
+    'data' => [
+        'rule' => ['maxLengthBytes', 2 ** 24 - 1],
         'message' => 'Data can not be bigger than 16 MB.'
-    )
-);
+    ]
+];
 ```
 
 This will ensure that the 'data' field is less than or equal to 16777215 bytes.
@@ -1041,16 +1048,16 @@ This rule checks for valid mime types. Comparison is case sensitive.
 Since 2.5 `$mimeTypes` can be a regex string.
 
 ``` php
-public $validate = array(
-    'image' => array(
-        'rule' => array('mimeType', array('image/gif')),
+public $validate = [
+    'image' => [
+        'rule' => ['mimeType', ['image/gif']],
         'message' => 'Invalid mime type.'
-    ),
-    'logo' => array(
-        'rule' => array('mimeType', '#image/.+#'),
+    ],
+    'logo' => [
+        'rule' => ['mimeType', '#image/.+#'],
         'message' => 'Invalid mime type.'
-    ),
-);
+    ],
+];
 ```
 
 `static` Validation::**minLength**(string $check, integer $min)
@@ -1059,12 +1066,12 @@ This rule ensures that the data meets a minimum length
 requirement:
 
 ``` php
-public $validate = array(
-    'login' => array(
-        'rule' => array('minLength', 8),
+public $validate = [
+    'login' => [
+        'rule' => ['minLength', 8],
         'message' => 'Usernames must be at least 8 characters long.'
-    )
-);
+    ]
+];
 ```
 
 The length here is number of characters, not the number of bytes.
@@ -1077,12 +1084,12 @@ This rule ensures that the data meets a minimum length
 requirement:
 
 ``` php
-public $validate = array(
-    'login' => array(
-        'rule' => array('minLengthBytes', 2 ** 16 - 1),
+public $validate = [
+    'login' => [
+        'rule' => ['minLengthBytes', 2 ** 16 - 1],
         'message' => 'Data can not be smaller than 64KB.'
-    )
-);
+    ]
+];
 ```
 
 The length here is number of bytes.
@@ -1095,30 +1102,30 @@ amount.
 Second parameter defines where symbol is located (left/right).
 
 ``` php
-public $validate = array(
-    'salary' => array(
-        'rule' => array('money', 'left'),
+public $validate = [
+    'salary' => [
+        'rule' => ['money', 'left'],
         'message' => 'Please supply a valid monetary amount.'
-    )
-);
+    ]
+];
 ```
 
-`static` Validation::**multiple**(mixed $check, mixed $options = array(), boolean $caseInsensitive = false)
+`static` Validation::**multiple**(mixed $check, mixed $options = [], boolean $caseInsensitive = false)
 
 Use this for validating a multiple select input. It supports
 parameters "in", "max" and "min".
 
 ``` php
-public $validate = array(
-    'multiple' => array(
-        'rule' => array('multiple', array(
-            'in'  => array('do', 're', 'mi', 'fa', 'sol', 'la', 'ti'),
+public $validate = [
+    'multiple' => [
+        'rule' => ['multiple', [
+            'in'  => ['do', 're', 'mi', 'fa', 'sol', 'la', 'ti'],
             'min' => 1,
             'max' => 3
-        )),
+        ]],
         'message' => 'Please select one, two or three options'
-    )
-);
+    ]
+];
 ```
 
 Comparison is case sensitive by default. You can set `$caseInsensitive` to true
@@ -1139,12 +1146,12 @@ Use `notBlank` instead.
 The basic rule to ensure that a field is not empty. :
 
 ``` php
-public $validate = array(
-    'title' => array(
+public $validate = [
+    'title' => [
         'rule' => 'notBlank',
         'message' => 'This field cannot be left blank'
-    )
-);
+    ]
+];
 ```
 
 Do not use this for a multiple select input as it will cause an
@@ -1155,12 +1162,12 @@ error. Instead, use "multiple".
 Checks if the data passed is a valid number. :
 
 ``` php
-public $validate = array(
-    'cars' => array(
+public $validate = [
+    'cars' => [
         'rule' => 'numeric',
         'message' => 'Please supply the number of cars.'
-    )
-);
+    ]
+];
 ```
 
 `static` Validation::**naturalNumber**(mixed $check, boolean $allowZero = false)
@@ -1172,16 +1179,16 @@ This rule checks if the data passed is a valid natural number.
 If `$allowZero` is set to true, zero is also accepted as a value.
 
 ``` php
-public $validate = array(
-    'wheels' => array(
+public $validate = [
+    'wheels' => [
         'rule' => 'naturalNumber',
         'message' => 'Please supply the number of wheels.'
-    ),
-    'airbags' => array(
-        'rule' => array('naturalNumber', true),
+    ],
+    'airbags' => [
+        'rule' => ['naturalNumber', true],
         'message' => 'Please supply the number of airbags.'
-    ),
-);
+    ],
+];
 ```
 
 `static` Validation::**phone**(mixed $check, string $regex = null, string $country = 'all')
@@ -1191,11 +1198,11 @@ phone numbers, you can provide a regular expression as the second
 parameter to cover additional number formats.
 
 ``` php
-public $validate = array(
-    'phone' => array(
-        'rule' => array('phone', null, 'us')
-    )
-);
+public $validate = [
+    'phone' => [
+        'rule' => ['phone', null, 'us']
+    ]
+];
 ```
 
 `static` Validation::**postal**(mixed $check, string $regex = null, string $country = 'us')
@@ -1206,11 +1213,11 @@ other ZIP code formats, you may provide a regular expression as the
 second parameter.
 
 ``` php
-public $validate = array(
-    'zipcode' => array(
-        'rule' => array('postal', null, 'us')
-    )
-);
+public $validate = [
+    'zipcode' => [
+        'rule' => ['postal', null, 'us']
+    ]
+];
 ```
 
 `static` Validation::**range**(string $check, integer $lower = null, integer $upper = null)
@@ -1220,12 +1227,12 @@ is supplied, the rule will check to ensure the value is a legal
 finite on the current platform.
 
 ``` php
-public $validate = array(
-    'number' => array(
-        'rule' => array('range', -1, 11),
+public $validate = [
+    'number' => [
+        'rule' => ['range', -1, 11],
         'message' => 'Please enter a number between -1 and 11'
-    )
-);
+    ]
+];
 ```
 
 The above example will accept any value which is larger than -1
@@ -1241,11 +1248,11 @@ Ssn validates social security numbers from the U.S. (us), Denmark
 formats, you may provide a regular expression.
 
 ``` php
-public $validate = array(
-    'ssn' => array(
-        'rule' => array('ssn', null, 'us')
-    )
-);
+public $validate = [
+    'ssn' => [
+        'rule' => ['ssn', null, 'us']
+    ]
+];
 ```
 
 `static` Validation::**time**(string $check)
@@ -1261,12 +1268,12 @@ time as 24hr (HH:MM) or am/pm (\[H\]H:MM\[a\|p\]m) Does not allow/validate secon
 This rule checks if a file upload has an error.
 
 ``` php
-public $validate = array(
-    'image' => array(
+public $validate = [
+    'image' => [
         'rule' => 'uploadError',
         'message' => 'Something went wrong with the upload.'
-    ),
-);
+    ],
+];
 ```
 
 `static` Validation::**url**(string $check, boolean $strict = false)
@@ -1275,22 +1282,22 @@ This rule checks for valid URL formats. Supports http(s), ftp(s),
 file, news, and gopher protocols:
 
 ``` php
-public $validate = array(
-    'website' => array(
+public $validate = [
+    'website' => [
         'rule' => 'url'
-    )
-);
+    ]
+];
 ```
 
 To ensure that a protocol is in the url, strict mode can be enabled
 like so:
 
 ``` php
-public $validate = array(
-    'website' => array(
-        'rule' => array('url', true)
-    )
-);
+public $validate = [
+    'website' => [
+        'rule' => ['url', true]
+    ]
+];
 ```
 
 This validation method uses a complex regular expression that can sometimes
@@ -1311,11 +1318,14 @@ they do not know how to handle to another class with the appropriate name. For
 example if you lived in the Netherlands you would create a class like:
 
 ``` php
-class NlValidation {
-    public static function phone($check) {
+class NlValidation
+{
+    public static function phone($check)
+    {
         // ...
     }
-    public static function postal($check) {
+    public static function postal($check)
+    {
         // ...
     }
 }
@@ -1327,10 +1337,10 @@ attempting to use it. In your model validation you could use your NlValidation
 class by doing the following:
 
 ``` php
-public $validate = array(
-    'phone_no' => array('rule' => array('phone', null, 'nl')),
-    'postal_code' => array('rule' => array('postal', null, 'nl')),
-);
+public $validate = [
+    'phone_no' => ['rule' => ['phone', null, 'nl']],
+    'postal_code' => ['rule' => ['postal', null, 'nl']],
+];
 ```
 
 When your model data is validated, Validation will see that it cannot handle

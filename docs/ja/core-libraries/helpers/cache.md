@@ -1,6 +1,6 @@
 # CacheHelper
 
-`class` **CacheHelper**(View $view, array $settings = array())
+`class` **CacheHelper**(View $view, array $settings = [])
 
 Cache ヘルパーはレイアウトやビューをキャッシュするのを助けてくれ、繰り返しデータを取得する際に
 時間を節約できます。CakePHP のビューキャッシングは一時的に解析したレイアウトやビューをシンプルな
@@ -27,17 +27,18 @@ Cache ヘルパーを使用する前に2つのステップをこなさなけれ�
 追加しなければなりません。 :
 
 ``` php
-class PostsController extends AppController {
-    public $helpers = array('Cache');
+class PostsController extends AppController
+{
+    public $helpers = ['Cache'];
 }
 ```
 
 また、 bootstrap に CacheDispatcher をディスパッチャフィルタへ追加する必要があります。 :
 
 ``` php
-Configure::write('Dispatcher.filters', array(
+Configure::write('Dispatcher.filters', [
     'CacheDispatcher'
-));
+]);
 ```
 
 ::: info Added in version 2.3
@@ -55,10 +56,10 @@ Cache ヘルパーはいくつかの環境設定オプションを持ってい�
 ArticlesController の例を使用して、キャッシュする必要のある多くのトラフィックを受け取ります。 :
 
 ``` php
-public $cacheAction = array(
+public $cacheAction = [
     'view' => 36000,
     'index' => 48000
-);
+];
 ```
 
 上のコードはビューアクションを10時間、そインデックスアクションは13時間キャッシュすることができるものです。
@@ -74,11 +75,11 @@ public $cacheAction = "1 hour";
 ただし、追加するときは `$cacheAction` で配列を使って、以下のように記述してください。 :
 
 ``` php
-public $cacheAction = array(
-    'view' => array('callbacks' => true, 'duration' => 21600),
-    'add' => array('callbacks' => true, 'duration' => 36000),
-    'index' => array('callbacks' => true, 'duration' => 48000)
-);
+public $cacheAction = [
+    'view' => ['callbacks' => true, 'duration' => 21600],
+    'add' => ['callbacks' => true, 'duration' => 36000],
+    'index' => ['callbacks' => true, 'duration' => 48000]
+];
 ```
 
 `callbacks => true` をセットすることによって Cache ヘルパーにコントローラー用の

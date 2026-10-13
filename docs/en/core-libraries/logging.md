@@ -30,18 +30,18 @@ calling `CakeLog::config()`. Configuring our DatabaseLog would look like:
 
 ``` php
 // for app/Lib
-CakeLog::config('otherFile', array(
+CakeLog::config('otherFile', [
     'engine' => 'Database',
     'model' => 'LogEntry',
     // ...
-));
+]);
 
 // for plugin called LoggingPack
-CakeLog::config('otherFile', array(
+CakeLog::config('otherFile', [
     'engine' => 'LoggingPack.Database',
     'model' => 'LogEntry',
     // ...
-));
+]);
 ```
 
 When configuring a log stream the `engine` parameter is used to
@@ -51,13 +51,16 @@ properties are passed to the log stream's constructor as an array. :
 ``` php
 App::uses('BaseLog', 'Log/Engine');
 
-class DatabaseLog extends BaseLog {
-    public function __construct($options = array()) {
+class DatabaseLog extends BaseLog
+{
+    public function __construct($options = [])
+    {
         parent::__construct($options);
         // ...
     }
 
-    public function write($type, $message) {
+    public function write($type, $message)
+    {
         // write to the database.
     }
 }
@@ -180,10 +183,10 @@ You can configure additional/alternate FileLog locations using
 custom paths to be used:
 
 ``` php
-CakeLog::config('custom_path', array(
+CakeLog::config('custom_path', [
     'engine' => 'File',
     'path' => '/path/to/custom/place/'
-));
+]);
 ```
 
 <a id="syslog-log"></a>
@@ -205,9 +208,9 @@ configuration snippet will replace the default logger with syslog. This should
 be done in the <span class="title-ref">bootstrap.php</span> file:
 
 ``` php
-CakeLog::config('default', array(
+CakeLog::config('default', [
     'engine' => 'Syslog'
-));
+]);
 ```
 
 The configuration array accepted for the Syslog logging engine understands the
@@ -259,9 +262,9 @@ listen to all types and levels. Usually, you can just set the core `FileLog` cla
 to output into `app/tmp/logs/`:
 
 ``` php
-CakeLog::config('default', array(
+CakeLog::config('default', [
     'engine' => 'File'
-));
+]);
 ```
 
 <a id="logging-scopes"></a>
@@ -285,20 +288,20 @@ message. For example:
 ``` php
 // Configure tmp/logs/shop.log to receive the two configured types (log levels), but only
 // those with `orders` and `payments` as scope
-CakeLog::config('shop', array(
+CakeLog::config('shop', [
     'engine' => 'FileLog',
-    'types' => array('warning', 'error'),
-    'scopes' => array('orders', 'payments'),
+    'types' => ['warning', 'error'],
+    'scopes' => ['orders', 'payments'],
     'file' => 'shop.log',
-));
+]);
 
 // Configure tmp/logs/payments.log to receive the two configured types, but only
 // those with `payments` as scope
-CakeLog::config('payments', array(
+CakeLog::config('payments', [
     'engine' => 'SyslogLog',
-    'types' => array('info', 'error', 'warning'),
-    'scopes' => array('payments')
-));
+    'types' => ['info', 'error', 'warning'],
+    'scopes' => ['payments']
+]);
 
 CakeLog::warning('This gets written only to shops stream', 'orders');
 CakeLog::warning('This gets written to both shops and payments streams', 'payments');
@@ -341,7 +344,7 @@ param string \$name
 Name of the logger you wish to no longer receive
 messages.
 
-`static` CakeLog::**write**($level, $message, $scope = array())
+`static` CakeLog::**write**($level, $message, $scope = [])
 
 Write a message into all the configured loggers.
 \$level indicates the level of log message being created.
@@ -364,37 +367,37 @@ To append the additional levels 'user0' and 'user1' to the default
 log levels use:
 
 ``` php
-CakeLog::levels(array('user0', 'user1'));
+CakeLog::levels(['user0', 'user1']);
 // or
-CakeLog::levels(array('user0', 'user1'), true);
+CakeLog::levels(['user0', 'user1'], true);
 ```
 
 Calling `CakeLog::levels()` will result in:
 
 ``` text
-array(
+[
     0 => 'emergency',
     1 => 'alert',
     // ...
     8 => 'user0',
     9 => 'user1',
-);
+];
 ```
 
 To set/replace an existing configuration, pass an array with the second
 argument set to false:
 
 ``` php
-CakeLog::levels(array('user0', 'user1'), false);
+CakeLog::levels(['user0', 'user1'], false);
 ```
 
 Calling `CakeLog::levels()` will result in:
 
 ``` text
-array(
+[
     0 => 'user0',
     1 => 'user1',
-);
+];
 ```
 
 `static` CakeLog::**defaultLevels**()
@@ -405,7 +408,7 @@ An array of the default log levels values.
 Resets log levels to their original values:
 
 ``` text
-array(
+[
     'emergency' => LOG_EMERG,
     'alert'     => LOG_ALERT,
     'critical'  => LOG_CRIT,
@@ -414,7 +417,7 @@ array(
     'notice'    => LOG_NOTICE,
     'info'      => LOG_INFO,
     'debug'     => LOG_DEBUG,
-);
+];
 ```
 
 `static` CakeLog::**enabled**($streamName)
@@ -453,18 +456,18 @@ Gets `$streamName` from the active streams.
 The following convenience methods were added to log `$message` with the
 appropriate log level.
 
-`static` CakeLog::**emergency**($message, $scope = array())
+`static` CakeLog::**emergency**($message, $scope = [])
 
-`static` CakeLog::**alert**($message, $scope = array())
+`static` CakeLog::**alert**($message, $scope = [])
 
-`static` CakeLog::**critical**($message, $scope = array())
+`static` CakeLog::**critical**($message, $scope = [])
 
-`static` CakeLog::**error**($message, $scope = array())
+`static` CakeLog::**error**($message, $scope = [])
 
-`static` CakeLog::**warning**($message, $scope = array())
+`static` CakeLog::**warning**($message, $scope = [])
 
-`static` CakeLog::**notice**($message, $scope = array())
+`static` CakeLog::**notice**($message, $scope = [])
 
-`static` CakeLog::**info**($message, $scope = array())
+`static` CakeLog::**info**($message, $scope = [])
 
-`static` CakeLog::**debug**($message, $scope = array())
+`static` CakeLog::**debug**($message, $scope = [])

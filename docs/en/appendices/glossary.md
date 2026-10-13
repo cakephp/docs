@@ -7,13 +7,13 @@ An array of attributes that are passed to `Router::url()`.
 They typically look like:
 
 ``` text
-array('controller' => 'posts', 'action' => 'view', 5)
+['controller' => 'posts', 'action' => 'view', 5]
 ```
 
 Or a more complex example:
 
 ``` text
-array(
+[
     'subdomain' => 'dev',
     'plugin' => 'account',
     'prefix' => 'admin',
@@ -21,11 +21,11 @@ array(
     'action' => 'edit',
     10257
     '#' => 'email',
-    '?' => array(
+    '?' => [
         'reset' => true,
-    ),
+    ],
     'full_base' => true,
-)
+]
 ```
 
 HTML attributes  
@@ -33,7 +33,7 @@ An array of key =\> values that are composed into HTML attributes. For example:
 
 ``` text
 // Given
-array('class' => 'my-class', 'target' => '_blank')
+['class' => 'my-class', 'target' => '_blank']
 
 // Would generate
 class="my-class" target="_blank"
@@ -44,7 +44,7 @@ can be used:
 
 ``` text
 // Given
-array('checked' => true)
+['checked' => true]
 
 // Would generate
 checked="checked"
@@ -64,13 +64,13 @@ For example:
 Would point to the following value:
 
 ``` text
-array(
-    'Asset' => array(
-        'filter' => array(
+[
+    'Asset' => [
+        'filter' => [
             'css' => 'got me'
-        )
-    )
-)
+        ]
+    ]
+]
 ```
 
 CSRF  

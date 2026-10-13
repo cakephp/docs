@@ -118,9 +118,11 @@ VALUES
 簡単なコントローラを使います。 :
 
 ``` php
-class CategoriesController extends AppController {
+class CategoriesController extends AppController
+{
 
-    public function index() {
+    public function index()
+    {
         $data = $this->Category->generateTreeList(
           null,
           null,
@@ -136,8 +138,9 @@ class CategoriesController extends AppController {
 
 ``` php
 // app/Model/Category.php
-class Category extends AppModel {
-    public $actsAs = array('Tree');
+class Category extends AppModel
+{
+    public $actsAs = ['Tree'];
 }
 ```
 
@@ -181,7 +184,7 @@ Tree ビヘイビアを用いる場合、親 ID (*parent_id*) をセットする
 
 ``` php
 // pseudo controller code
-$data = array();
+$data = [];
 $data['Category']['name'] = '別の人たちのカテゴリ';
 $this->Category->save($data);
 ```
@@ -215,7 +218,7 @@ $this->Category->save($data);
 ``` php
 // コントローラのコードの一部
 $this->Category->id = 5; // 「エクストリーム編み物」の ID
-$this->Category->save(array('name' => 'Extreme fishing'));
+$this->Category->save(['name' => 'Extreme fishing']);
 ```
 
 上記のコードは parent_id フィールドに何も影響をあたえません。
@@ -249,9 +252,9 @@ $this->Category->save(array('name' => 'Extreme fishing'));
 $this->Category->id = 5; // 「エクストリームフィッシング」の ID
 $newParentId = $this->Category->field(
   'id',
-  array('name' => '別の人たちのカテゴリ')
+  ['name' => '別の人たちのカテゴリ']
 );
-$this->Category->save(array('parent_id' => $newParentId));
+$this->Category->save(['parent_id' => $newParentId]);
 ```
 
 次のような構造に変更されることが正しい動作です。
@@ -335,7 +338,8 @@ Tree ビヘイビアはバックグラウンドだけで働くわけではあり
 コントローラアクションの例です。 :
 
 ``` php
-public function movedown($id = null, $delta = null) {
+public function movedown($id = null, $delta = null)
+{
     $this->Category->id = $id;
     if (!$this->Category->exists()) {
        throw new NotFoundException(__('Invalid category'));
@@ -349,7 +353,7 @@ public function movedown($id = null, $delta = null) {
         );
     }
 
-    return $this->redirect(array('action' => 'index'));
+    return $this->redirect(['action' => 'index']);
 }
 ```
 
@@ -366,7 +370,8 @@ public function movedown($id = null, $delta = null) {
 例です。 :
 
 ``` php
-public function moveup($id = null, $delta = null) {
+public function moveup($id = null, $delta = null)
+{
     $this->Category->id = $id;
     if (!$this->Category->exists()) {
        throw new NotFoundException(__('Invalid category'));
@@ -380,7 +385,7 @@ public function moveup($id = null, $delta = null) {
         );
     }
 
-    return $this->redirect(array('action' => 'index'));
+    return $this->redirect(['action' => 'index']);
 }
 ```
 
@@ -439,13 +444,13 @@ $this->Node->removeFromTree($id, true);
 これは、子ノードが親ノードに紐づけられ、スポーツが削除されるという
 `removeFromTree` の別の使い方を実演しています。
 
-`method` TreeBehavior::**reorder**(array('id' => null, 'field' => $Model->displayField, 'order' => 'ASC', 'verify' => true))
+`method` TreeBehavior::**reorder**(['id' => null, 'field' => $Model->displayField, 'order' => 'ASC', 'verify' => true])
 
 ツリー構造のデータ中のノード (と子ノード) を、パラメータで定義されたフィールドと
 指示によって、もう一度並び替えます。このメソッドは、全てのノードの親を変更しません。 :
 
 ``` php
-$model->reorder(array(
+$model->reorder([
     // 並び替え時に頂点として使用するレコードの ID。デフォルト: $Model->id
     'id' => ,
     // 並び替えで使用するフィールド。デフォルト: $Model->displayFirld
@@ -454,7 +459,7 @@ $model->reorder(array(
     'order' => ,
     // 並び替えの前にツリーの検証を行うかどうか。デフォルト: true
     'verify' =>
-));
+]);
 ```
 
 > [!NOTE]
@@ -505,7 +510,7 @@ $this->Category->recover('parent');
 $this->Category->recover('tree');
 ```
 
-`method` TreeBehavior::**reorder**($options = array())
+`method` TreeBehavior::**reorder**($options = [])
 
 ツリー構造のデータ中のノード (と子ノード) を、パラメータで定義されたフィールドと
 指示によって、もう一度並び替えます。このメソッドは、全てのノードの親を変更しません。
@@ -523,12 +528,12 @@ $this->Category->recover('tree');
 以下の利用可能なキーを持ち、それらは全てオプションです。 :
 
 ``` text
-array(
+[
     'id' => null,
     'field' => $model->displayField,
     'order' => 'ASC',
     'verify' => true
-)
+]
 ```
 
 `method` TreeBehavior::**verify**()
@@ -553,12 +558,12 @@ $this->Category->verify();
 ``` text
 Array
 (
-    [0] => Array
-        (
+    [0] => 
+        [
             [0] => node
             [1] => 3
             [2] => left and right values identical
-        )
+        ]
     [1] => Array
         (
             [0] => node
@@ -590,9 +595,9 @@ Array
 レベルを保存するフィールドを指定することができます。 :
 
 ``` php
-public $actsAs = array('Tree' => array(
+public $actsAs = ['Tree' => [
     'level' => 'level', // デフォルトは null で、レベルは保存しません
-));
+]];
 ```
 
 `method` TreeBehavior::**getLevel**($id)

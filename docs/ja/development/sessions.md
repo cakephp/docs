@@ -41,12 +41,12 @@ SSL と SSL 以外のドメイン両方でセッションにアクセスする�
 これを無効にします:
 
 ``` php
-Configure::write('Session', array(
+Configure::write('Session', [
     'defaults' => 'php',
-    'ini' => array(
+    'ini' => [
         'session.cookie_secure' => false
-    )
-));
+    ]
+]);
 ```
 
 2.0 において、セッションクッキーパスのデフォルトは `/` です。これを変更する場合は
@@ -54,12 +54,12 @@ Configure::write('Session', array(
 を指定することが出来ます:
 
 ``` php
-Configure::write('Session', array(
+Configure::write('Session', [
     'defaults' => 'php',
-    'ini' => array(
+    'ini' => [
         'session.cookie_path' => '/app/dir'
-    )
-));
+    ]
+]);
 ```
 
 もし、php のデフォルトのセッション設定を使用している場合、session.gc_maxlifetime で
@@ -67,13 +67,13 @@ Configure::write('Session', array(
 より長いセッションに合わせるために ini 設定を変更してください:
 
 ``` php
-Configure::write('Session', array(
+Configure::write('Session', [
     'defaults' => 'php',
     'timeout' => 2160, // 36 hours
-    'ini' => array(
+    'ini' => [
         'session.gc_maxlifetime' => 129600 // 36 hours
-    )
-));
+    ]
+]);
 ```
 
 ## ビルトインセッションハンドラーと設定
@@ -85,20 +85,20 @@ CakePHP にはいくつかビルトインなセッションの設定がありま
 config で宣言をすればサブセッティングだけを上書きすることも出来ます:
 
 ``` php
-Configure::write('Session', array(
+Configure::write('Session', [
     'defaults' => 'php'
-));
+]);
 ```
 
 上記はビルトインの 'php' 設定を使用します。下記のように全てまたは部分的に
 設定を上書きすることも出来ます:
 
 ``` php
-Configure::write('Session', array(
+Configure::write('Session', [
     'defaults' => 'php',
     'cookie' => 'my_app',
     'timeout' => 4320 //3 days
-));
+]);
 ```
 
 上記は 'php' 設定のタイムアウトとクッキー名を上書きします。ビルトイン設定は:
@@ -117,23 +117,23 @@ Configure::write('Session', array(
 一つ用意する方法です。これは都度 `session_set_save_handler` に適用されます:
 
 ``` php
-Configure::write('Session', array(
+Configure::write('Session', [
     'userAgent' => false,
     'cookie' => 'my_cookie',
     'timeout' => 600,
-    'handler' => array(
-        array('Foo', 'open'),
-        array('Foo', 'close'),
-        array('Foo', 'read'),
-        array('Foo', 'write'),
-        array('Foo', 'destroy'),
-        array('Foo', 'gc'),
-    ),
-    'ini' => array(
+    'handler' => [
+        ['Foo', 'open'],
+        ['Foo', 'close'],
+        ['Foo', 'read'],
+        ['Foo', 'write'],
+        ['Foo', 'destroy'],
+        ['Foo', 'gc'],
+    ],
+    'ini' => [
         'cookie_secure' => 1,
         'use_trans_sid' => 0
-    )
-));
+    ]
+]);
 ```
 
 二つ目の方法は 'engine' キーを定義することです。このキーは
@@ -179,12 +179,12 @@ Configure::write('Session', array(
 設定の中の `Session.handler.model` をセットするだけです:
 
 ``` php
-Configure::write('Session', array(
+Configure::write('Session', [
     'defaults' => 'database',
-    'handler' => array(
+    'handler' => [
         'model' => 'CustomSession'
-    )
-));
+    ]
+]);
 ```
 
 上記は CakeSession にビルトインの 'database' 設定を使用するように伝え、
@@ -194,9 +194,9 @@ Configure::write('Session', array(
 必要な場合、以下のコードのように単純化できます。 :
 
 ``` php
-Configure::write('Session', array(
+Configure::write('Session', [
     'defaults' => 'database'
-));
+]);
 ```
 
 この設定では、少なくとも以下の項目を追加したデータベーステーブルが必要です。 :
@@ -236,12 +236,12 @@ Memcached、Memcache、Redis を使ってください。
 セッションを元としたキャッシュを使うためセッション config を以下のように設定します:
 
 ``` php
-Configure::write('Session', array(
+Configure::write('Session', [
     'defaults' => 'cache',
-    'handler' => array(
+    'handler' => [
         'config' => 'session'
-    )
-));
+    ]
+]);
 ```
 
 これは CakeSession に `CacheSession` クラスをセッション保存先として
@@ -258,13 +258,13 @@ Configure::write('Session', array(
 コントロールするのに使えます:
 
 ``` php
-Configure::write('Session', array(
+Configure::write('Session', [
     'defaults' => 'php',
-    'ini' => array(
+    'ini' => [
         'session.gc_divisor' => 1000,
         'session.cookie_httponly' => true
-    )
-));
+    ]
+]);
 ```
 
 ## カスタムセッションハンドラーの作成
@@ -281,16 +281,19 @@ Configure::write('Session', array(
 ``` php
 App::uses('DatabaseSession', 'Model/Datasource/Session');
 
-class ComboSession extends DatabaseSession implements CakeSessionHandlerInterface {
+class ComboSession extends DatabaseSession implements CakeSessionHandlerInterface
+{
     public $cacheKey;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->cacheKey = Configure::read('Session.handler.cache');
         parent::__construct();
     }
 
     // セッションからデータ読み込み
-    public function read($id) {
+    public function read($id)
+    {
         $result = Cache::read($id, $this->cacheKey);
         if ($result) {
             return $result;
@@ -299,19 +302,22 @@ class ComboSession extends DatabaseSession implements CakeSessionHandlerInterfac
     }
 
     // セッションへデータ書き込み
-    public function write($id, $data) {
+    public function write($id, $data)
+    {
         Cache::write($id, $data, $this->cacheKey);
         return parent::write($id, $data);
     }
 
     // セッションの破棄
-    public function destroy($id) {
+    public function destroy($id)
+    {
         Cache::delete($id, $this->cacheKey);
         return parent::destroy($id);
     }
 
     // 期限切れセッションの削除
-    public function gc($expires = null) {
+    public function gc($expires = null)
+    {
         Cache::gc($this->cacheKey);
         return parent::gc($expires);
     }
@@ -325,17 +331,17 @@ class ComboSession extends DatabaseSession implements CakeSessionHandlerInterfac
 `core.php` のセッションブロックを以下のように設定します:
 
 ``` php
-Configure::write('Session', array(
+Configure::write('Session', [
     'defaults' => 'database',
-    'handler' => array(
+    'handler' => [
         'engine' => 'ComboSession',
         'model' => 'Session',
         'cache' => 'apc'
-    )
-));
+    ]
+]);
 
 // apc キャッシュ config を追加すること
-Cache::config('apc', array('engine' => 'Apc'));
+Cache::config('apc', ['engine' => 'Apc']);
 ```
 
 これでアプリケーションはカスタムセッションハンドラーを使ったセッションデータの読み書きを行います。

@@ -68,12 +68,14 @@ visit the address in your browser to run them (e.g.
 function:
 
 ``` php
-public function beforeFilter() {
+public function beforeFilter()
+{
     parent::beforeFilter();
     $this->Auth->allow('initDB'); // We can remove this line after we're finished
 }
 
-public function initDB() {
+public function initDB()
+{
     $group = $this->User->Group;
 
     // Allow admins to everything
@@ -127,7 +129,8 @@ in your users and groups controllers. Then add the following to
 your posts and widgets controllers:
 
 ``` php
-public function beforeFilter() {
+public function beforeFilter()
+{
     parent::beforeFilter();
     $this->Auth->allow('index', 'view');
 }
@@ -158,12 +161,12 @@ so already:
 ``` php
 <h2>Login</h2>
 <?php
-echo $this->Form->create('User', array(
-    'url' => array(
+echo $this->Form->create('User', [
+    'url' => [
         'controller' => 'users', 
         'action' => 'login'
-    )
-));
+    ]
+]);
 echo $this->Form->input('User.username');
 echo $this->Form->input('User.password');
 echo $this->Form->end('Login');
@@ -173,7 +176,8 @@ If a user is already logged in, redirect him by adding this to your
 UsersController:
 
 ``` php
-public function login() {
+public function login()
+{
     if ($this->Session->read('Auth.User')) {
         $this->Session->setFlash('You are logged in!');
         return $this->redirect('/');

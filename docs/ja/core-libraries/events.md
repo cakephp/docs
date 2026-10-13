@@ -51,14 +51,16 @@ CakePHP は、jQuery などの一般的な JavaScript フレームワークに�
 ``` php
 // Cart/Model/Order.php
 App::uses('CakeEvent', 'Event');
-class Order extends AppModel {
+class Order extends AppModel
+{
 
-    public function place($order) {
+    public function place($order)
+    {
         if ($this->save($order)) {
             $this->Cart->remove($order);
-            $event = new CakeEvent('Model.Order.afterPlace', $this, array(
+            $event = new CakeEvent('Model.Order.afterPlace', $this, [
                 'order' => $order
-            ));
+            ]);
             $this->getEventManager()->dispatch($event);
             return true;
         }
@@ -119,9 +121,9 @@ CakeEventManager::instance()->attach(
 
 ``` php
 // Create a new event and dispatch it.
-$event = new CakeEvent('Model.Order.afterPlace', $this, array(
+$event = new CakeEvent('Model.Order.afterPlace', $this, [
     'order' => $order
-));
+]);
 $this->getEventManager()->dispatch($event);
 ```
 
@@ -164,15 +166,18 @@ UserStatistic クラスがあると仮定しましょう。これは、リスナ
 // In app/Lib/Event/UserStatistic.php
 App::uses('CakeEventListener', 'Event');
 
-class UserStatistic implements CakeEventListener {
+class UserStatistic implements CakeEventListener
+{
 
-    public function implementedEvents() {
-        return array(
+    public function implementedEvents()
+    {
+        return [
             'Model.Order.afterPlace' => 'updateBuyStatistic',
-        );
+        ];
     }
 
-    public function updateBuyStatistic($event) {
+    public function updateBuyStatistic($event)
+    {
         // Code to update statistics
     }
 }
@@ -234,10 +239,10 @@ $this->Order->getEventManager()->attach(function($event) {
 無名関数に加えてその他の PHP がサポートする呼び出し可能な形式を使用することもできます。 :
 
 ``` php
-$events = array(
+$events = [
     'email-sending' => 'EmailSender::sendBuyEmail',
-    'inventory' => array($this->InventoryManager, 'decrement'),
-);
+    'inventory' => [$this->InventoryManager, 'decrement'],
+];
 foreach ($events as $callable) {
     $eventManager->attach($callable, 'Model.Order.afterPlace');
 }
@@ -263,22 +268,24 @@ foreach ($events as $callable) {
 
 ``` php
 // Setting priority for a callback
-$callback = array($this, 'doSomething');
+$callback = [$this, 'doSomething'];
 $this->getEventManager()->attach(
     $callback,
     'Model.Order.afterPlace',
-    array('priority' => 2)
+    ['priority' => 2]
 );
 
 // Setting priority for a listener
-class UserStatistic implements CakeEventListener {
-    public function implementedEvents() {
-        return array(
-            'Model.Order.afterPlace' => array(
+class UserStatistic implements CakeEventListener
+{
+    public function implementedEvents()
+    {
+        return [
+            'Model.Order.afterPlace' => [
                 'callable' => 'updateBuyStatistic',
                 'priority' => 100
-            ),
-        );
+            ],
+        ];
     }
 }
 ```
@@ -301,25 +308,28 @@ class UserStatistic implements CakeEventListener {
 
 ``` php
 // Enabling passed parameters mode for an anonymous listener
-$callback = array($this, 'doSomething');
+$callback = [$this, 'doSomething'];
 $this->getEventManager()->attach(
     $callback,
     'Model.Order.afterPlace',
-    array('passParams' => true)
+    ['passParams' => true]
 );
 
 // Enabling passed parameters mode for a listener
-class UserStatistic implements CakeEventListener {
-    public function implementedEvents() {
-        return array(
-            'Model.Order.afterPlace' => array(
+class UserStatistic implements CakeEventListener
+{
+    public function implementedEvents()
+    {
+        return [
+            'Model.Order.afterPlace' => [
                 'callable' => 'updateBuyStatistic',
                 'passParams' => true
-            ),
-        );
+            ],
+        ];
     }
 
-    public function updateBuyStatistic($orderData) {
+    public function updateBuyStatistic($orderData)
+    {
         // ...
     }
 }
@@ -330,9 +340,9 @@ class UserStatistic implements CakeEventListener {
 いくつかのデータを伴って `Model.Order.afterPlace` イベントをトリガするからです:
 
 ``` php
-$event = new CakeEvent('Model.Order.afterPlace', $this, array(
+$event = new CakeEvent('Model.Order.afterPlace', $this, [
     'order' => $order
-));
+]);
 $this->getEventManager()->dispatch($event);
 ```
 
@@ -351,12 +361,14 @@ DOM イベントのように、追加のリスナーへ通知されることを�
 `stopPropagation` メソッドを呼び出すかのいずれかを行うことができます:
 
 ``` php
-public function doSomething($event) {
+public function doSomething($event)
+{
     // ...
     return false; // stops the event
 }
 
-public function updateBuyStatistic($event) {
+public function updateBuyStatistic($event)
+{
     // ...
     $event->stopPropagation();
 }
@@ -371,10 +383,11 @@ public function updateBuyStatistic($event) {
 メソッドを呼び出します:
 
 ``` php
-public function place($order) {
+public function place($order)
+{
     $event = new CakeEvent(
         'Model.Order.beforePlace',
-        $this, array('order' => $order)
+        $this, ['order' => $order]
     );
     $this->getEventManager()->dispatch($event);
     if ($event->isStopped()) {
@@ -400,23 +413,26 @@ public function place($order) {
 
 ``` php
 // A listener callback
-public function doSomething($event) {
+public function doSomething($event)
+{
     // ...
     $alteredData = $event->data['order'] + $moreData;
     return $alteredData;
 }
 
 // Another listener callback
-public function doSomethingElse($event) {
+public function doSomethingElse($event)
+{
     // ...
     $event->result['order'] = $alteredData;
 }
 
 // Using the event result
-public function place($order) {
+public function place($order)
+{
     $event = new CakeEvent(
         'Model.Order.beforePlace',
-        $this, array('order' => $order)
+        $this, ['order' => $order]
     );
     $this->getEventManager()->dispatch($event);
     if (!empty($event->result['order'])) {
@@ -443,10 +459,10 @@ public function place($order) {
 
 ``` php
 // Attaching a function
-$this->getEventManager()->attach(array($this, 'doSomething'), 'My.event');
+$this->getEventManager()->attach([$this, 'doSomething'], 'My.event');
 
 // Detaching the function
-$this->getEventManager()->detach(array($this, 'doSomething'), 'My.event');
+$this->getEventManager()->detach([$this, 'doSomething'], 'My.event');
 
 // Attaching an anonymous function (PHP 5.3+ only);
 $myFunction = function($event) { ... };

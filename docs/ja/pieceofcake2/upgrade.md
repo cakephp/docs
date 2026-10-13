@@ -438,7 +438,7 @@ CakePlugin::load('Upgrade');
 
 **変更点:**
 
-- `array()` → `[]`
+- `[]` → `[]`
 - `get_class()` → `::class`
 - 配列の分割代入で `list()` → `[]`
 - `dirname(__FILE__)` → `__DIR__`

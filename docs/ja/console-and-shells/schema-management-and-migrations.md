@@ -47,22 +47,23 @@ filename.sql を省略すると、SQL のダンプはコンソールへ出力さ
 
 スキーマの生成後、アプリケーションを動作させるためテーブルにデータを挿入したいと
 考えるかもしれません。データも CakeSchema のコールバックで保存させることができます。
-全てのスキーマファイルは `before($event = array())` メソッドと
-`after($event = array())` メソッドが生成されます。
+全てのスキーマファイルは `before($event = [])` メソッドと
+`after($event = [])` メソッドが生成されます。
 
 `$event` パラメータは2つのキーを持つ配列です。１つはテーブルを削除するのか
 作成するのかを示すパラメータで、もう１つはエラーに関するパラメータです。例を示します。 :
 
 ``` text
-array('drop' => 'posts', 'errors' => null)
-array('create' => 'posts', 'errors' => null)
+['drop' => 'posts', 'errors' => null]
+['create' => 'posts', 'errors' => null]
 ```
 
 データを posts テーブルへ加える例は以下のようになります。 :
 
 ``` php
 App::uses('Post', 'Model');
-public function after($event = array()) {
+public function after($event = [])
+{
     if (isset($event['create'])) {
         switch ($event['create']) {
             case 'posts':
@@ -70,9 +71,9 @@ public function after($event = array()) {
                 $post = ClassRegistry::init('Post');
                 $post->create();
                 $post->save(
-                    array('Post' =>
-                        array('title' => 'CakePHP Schema Files')
-                    )
+                    ['Post' =>
+                        ['title' => 'CakePHP Schema Files']
+                    ]
                 );
                 break;
         }
@@ -91,7 +92,8 @@ before アクション内で `$db->cacheSources = false` を設定すること�
 ``` php
 public $connection = 'default';
 
-public function before($event = array()) {
+public function before($event = [])
+{
     $db = ConnectionManager::getDataSource($this->connection);
     $db->cacheSources = false;
     return true;
@@ -102,10 +104,11 @@ public function before($event = array()) {
 デフォルトのデータソースを使わないようにします。 :
 
 ``` php
-public function before($event = array()) {
-    $articles = ClassRegistry::init('Articles', array(
+public function before($event = [])
+{
+    $articles = ClassRegistry::init('Articles', [
         'ds' => $this->connection
-    ));
+    ]);
     // Do things with articles.
 }
 ```
@@ -133,42 +136,42 @@ CakeSchema はまた、 `tableParameters` をサポートします。
 /**
  * ACO - Access Control Object - Something that is wanted
  */
-    public $acos = array(
-        'id' => array(
+    public $acos = [
+        'id' => [
             'type' => 'integer',
             'null' => false,
             'default' => null,
             'length' => 10,
             'key' => 'primary'
-        ),
-        'parent_id' => array(
+        ],
+        'parent_id' => [
             'type' => 'integer',
             'null' => true,
             'default' => null,
             'length' => 10
-        ),
-        'model' => array('type' => 'string', 'null' => true),
-        'foreign_key' => array(
+        ],
+        'model' => ['type' => 'string', 'null' => true],
+        'foreign_key' => [
             'type' => 'integer',
             'null' => true,
             'default' => null,
             'length' => 10
-        ),
-        'alias' => array('type' => 'string', 'null' => true),
-        'lft' => array(
+        ],
+        'alias' => ['type' => 'string', 'null' => true],
+        'lft' => [
             'type' => 'integer',
             'null' => true,
             'default' => null,
             'length' => 10
-        ),
-        'rght' => array(
+        ],
+        'rght' => [
             'type' => 'integer',
             'null' => true,
             'default' => null,
             'length' => 10
-        ),
-        'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1))
-    );
+        ],
+        'indexes' => ['PRIMARY' => ['column' => 'id', 'unique' => 1]]
+    ];
 ```
 
 ### カラム
@@ -179,13 +182,13 @@ CakeSchema はまた、 `tableParameters` をサポートします。
 カラムの例 :
 
 ``` text
-'id' => array(
+'id' => [
     'type' => 'integer',
     'null' => false,
     'default' => null,
     'length' => 10,
     'key' => 'primary'
- ),
+ ],
 ```
 
 key  
@@ -234,26 +237,26 @@ column
 単一の場合 :
 
 ``` text
-'indexes' => array(
-    'PRIMARY' => array(
+'indexes' => [
+    'PRIMARY' => [
         'column' => 'id',
         'unique' => 1
-    )
-)
+    ]
+]
 ```
 
 複数の場合 :
 
 ``` text
-'indexes' => array(
-    'AB_KEY' => array(
-        'column' => array(
+'indexes' => [
+    'AB_KEY' => [
+        'column' => [
             'a_id',
             'b_id'
-        ),
+        ],
         'unique' => 1
-    )
-)
+    ]
+]
 ```
 
 unique  
@@ -284,25 +287,25 @@ MySQL の dbo は、 tableParameters に加えて `fieldParameters` を実装し
 例えば `indexes` のように :
 
 ``` php
-var $comments => array(
-    'id' => array(
+var $comments => [
+    'id' => [
         'type' => 'integer',
         'null' => false,
         'default' => 0,
         'key' => 'primary'
-    ),
-    'post_id' => array('type' => 'integer', 'null' => false, 'default' => 0),
-    'comment' => array('type' => 'text'),
-    'indexes' => array(
-        'PRIMARY' => array('column' => 'id', 'unique' => true),
-        'post_id' => array('column' => 'post_id'),
-    ),
-    'tableParameters' => array(
+    ],
+    'post_id' => ['type' => 'integer', 'null' => false, 'default' => 0],
+    'comment' => ['type' => 'text'],
+    'indexes' => [
+        'PRIMARY' => ['column' => 'id', 'unique' => true],
+        'post_id' => ['column' => 'post_id'],
+    ],
+    'tableParameters' => [
         'engine' => 'InnoDB',
         'charset' => 'latin1',
         'collate' => 'latin1_general_ci'
-    )
-);
+    ]
+];
 ```
 
 いくつかのデータベース特有の設定をセットするために `tableParameters` を

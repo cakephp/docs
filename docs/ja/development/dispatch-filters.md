@@ -27,10 +27,10 @@ CakePHP にはデフォルトで２つのフィルタークラスが備わって
 されているのかを見てみましょう。:
 
 ``` php
-Configure::write('Dispatcher.filters', array(
+Configure::write('Dispatcher.filters', [
     'AssetDispatcher',
     'CacheDispatcher'
-));
+]);
 ```
 
 これらの配列の値は、それぞれディスパッチャーのレベルで生成されたイベント
@@ -54,12 +54,12 @@ Configure::write('Dispatcher.filters', array(
 フィルターを接続するための別の方法もあります。:
 
 ``` php
-Configure::write('Dispatcher.filters', array(
-    'my-filter' => array(
-        'callable' => array($classInstance, 'methodName'),
+Configure::write('Dispatcher.filters', [
+    'my-filter' => [
+        'callable' => [$classInstance, 'methodName'],
         'on' => 'after'
-    )
-));
+    ]
+]);
 ```
 
 これに示されるように、PHP で有効な [callback](https://www.php.net/callback)
@@ -70,10 +70,10 @@ Configure::write('Dispatcher.filters', array(
 場合は、無名関数であればもちろんフィルターとして指定可能です。:
 
 ``` php
-Configure::write('Dispatcher.filters', array(
-   'my-filter' => array('callable' => function($event) {...}, 'on' => 'before'),
+Configure::write('Dispatcher.filters', [
+   'my-filter' => ['callable' => function($event) {...}, 'on' => 'before'],
    // さらにフィルターを記載可能
-));
+]);
 ```
 
 `on` キーに有効な値は `before` と `after` のみです。これは文字通り、
@@ -87,19 +87,19 @@ Configure::write('Dispatcher.filters', array(
 数値を指定してください。:
 
 ``` php
-Configure::write('Dispatcher.filters', array(
-   'my-filter' => array(
+Configure::write('Dispatcher.filters', [
+   'my-filter' => [
         'callable' => function($event) {...},
         'on' => 'before',
         'priority' => 5
-    ),
-    'other-filter' => array(
-        'callable' => array($class, 'method'),
+    ],
+    'other-filter' => [
+        'callable' => [$class, 'method'],
         'on' => 'after',
         'priority' => 1
-    ),
+    ],
    // さらなるフィルター定義
-));
+]);
 ```
 
 宣言するフィルターの優先順位を定義する場合、同一の優先度を持つものの
@@ -109,9 +109,9 @@ Configure::write('Dispatcher.filters', array(
 の中にあるフィルターの定義ができるようになりました。:
 
 ``` php
-Configure::write('Dispatcher.filters', array(
+Configure::write('Dispatcher.filters', [
     'MyPlugin.MyFilter',
-));
+]);
 ```
 
 テーマやプラグインの静的ファイルを提供するための、より先進的で速い
@@ -123,9 +123,9 @@ Configure::write('Dispatcher.filters', array(
 パラメーターや設定を渡す必要がある場合、設定を配列として渡します。:
 
 ``` php
-Configure::write('Dispatcher.filters', array(
-    'MyAssetFilter' => array('service' => 'google.com')
-));
+Configure::write('Dispatcher.filters', [
+    'MyAssetFilter' => ['service' => 'google.com']
+]);
 ```
 
 フィルターのキーが有効なクラス名の場合、その値としてディスパッチフィルター
@@ -146,11 +146,13 @@ Configure::write('Dispatcher.filters', array(
 
 ``` php
 App::uses('DispatcherFilter', 'Routing');
-class HelloWorldFilter extends DispatcherFilter {
+class HelloWorldFilter extends DispatcherFilter
+{
 
     public $priority = 9;
 
-    public function beforeDispatch(CakeEvent $event) {
+    public function beforeDispatch(CakeEvent $event)
+    {
         $request = $event->data['request'];
         $response = $event->data['response'];
 
@@ -198,9 +200,11 @@ class HelloWorldFilter extends DispatcherFilter {
 
 ``` php
 App::uses('DispatcherFilter', 'Routing');
-class HttpCacheFilter extends DispatcherFilter {
+class HttpCacheFilter extends DispatcherFilter
+{
 
-    public function afterDispatch(CakeEvent $event) {
+    public function afterDispatch(CakeEvent $event)
+    {
         $request = $event->data['request'];
         $response = $event->data['response'];
 
@@ -242,15 +246,15 @@ $postsList = function($event) {
     return $event->data['response'];
 };
 
-Configure::write('Dispatcher.filters', array(
+Configure::write('Dispatcher.filters', [
     'AssetDispatcher',
     'CacheDispatcher',
-    'recent-posts' => array(
+    'recent-posts' => [
         'callable' => $postsList,
         'priority' => 9,
         'on'=> 'before'
-    )
-));
+    ]
+]);
 ```
 
 直前の例では、私たちは自身のフィルターについて `9` の優先度を選びました。

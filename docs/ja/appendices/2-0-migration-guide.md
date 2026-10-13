@@ -137,9 +137,9 @@ CakePHPの前バージョンでは、これらの値が環境によって変わ�
 - `r()` は削除されました。
   `str_replace` を使用してください。
 - `a()` は削除されました。
-  `array()` を使用してください。
+  `[]` を使用してください。
 - `aa()` は削除されました。
-  `array()` を使用してください。
+  `[]` を使用してください。
 - `up()` は削除されました。
   `strtoupper()` を使用してください。
 - `low()` は削除されました。
@@ -208,9 +208,11 @@ Componentは、全てのコンポーネントが必須とする基底クラス�
 コンポーネントとそのコンストラクタが変更になったことから、これを書き換える必要があります:
 
 ``` php
-class PrgComponent extends Component {
+class PrgComponent extends Component
+{
     public function __construct(ComponentCollection $collection,
-      $settings = array()) {
+      $settings = [])
+    {
         parent::__construct($collection, $settings);
     }
 }
@@ -224,7 +226,9 @@ class PrgComponent extends Component {
 以下のメソッド特性を使うようにコンポーネントを書き換える必要があります:
 
 ``` php
-public function initialize(Controller $controller) { }
+public function initialize(Controller $controller)
+{
+}
 ```
 
 加えて、initialize()メソッドはコンポーネントが有効な時のみ呼び出されます。
@@ -237,7 +241,7 @@ Componentで非推奨となったすべてのコールバックはComponentColle
 コールバックを引き起こす必要があるなら、以下のように呼び出すことができます:
 
 ``` php
-$this->Components->trigger('someCallback', array(&$this));
+$this->Components->trigger('someCallback', [&$this]);
 ```
 
 ### コンポーネント無効化の変更点
@@ -458,13 +462,13 @@ App::uses('HttpSocket', 'Network/Http');
 例:
 
 ``` php
-App::build(array('controllers' => array('/full/path/to/controllers')));
+App::build(['controllers' => ['/full/path/to/controllers']]);
 // は次のようになる
-App::build(array('Controller' => array('/full/path/to/Controller')));
+App::build(['Controller' => ['/full/path/to/Controller']]);
 
-App::build(array('helpers' => array('/full/path/to/controllers')));
+App::build(['helpers' => ['/full/path/to/controllers']]);
 // は次のようになる
-App::build(array('View/Helper' => array('/full/path/to/View/Helper')));
+App::build(['View/Helper' => ['/full/path/to/View/Helper']]);
 ```
 
 ### CakeLog
@@ -518,7 +522,7 @@ Cache::write('key', $value, 'something');
   ``` php
   Router::connect(
     '/users/:action',
-    array('controller' => 'users', 'plugin' => 'users')
+    ['controller' => 'users', 'plugin' => 'users']
   );
   ```
 
@@ -609,7 +613,7 @@ ClassRegistryからViewが削除されたことに対応して、Helper::\_\_con
 以下のものを使うようにサブクラスを更新する必要があります:
 
 ``` php
-public function __construct(View $View, $settings = array())
+public function __construct(View $View, $settings = [])
 ```
 
 コンストラクタをオーバーライドするとき、常に <span class="title-ref">parent::\_\_construct</span> を呼ぶ必要もあります。
@@ -712,7 +716,7 @@ CacheHelperはViewから完全に分離され、ヘルパーのコールバッ�
 
 Helperクラスは更に3つのprotectedな属性を持つようになりました:
 
-- `Helper::_minimizedAttributes`: 最小化される属性の配列(例: `array('checked', 'selected', ...)`);
+- `Helper::_minimizedAttributes`: 最小化される属性の配列(例: `['checked', 'selected', ...]`);
 - `Helper::_attributeFormat`: 属性の生成方法(例: `%s="%s"`);
 - `Helper::_minimizedAttributeFormat`: 最小化される属性の生成方法:(例 `%s="%s"`)
 
@@ -723,14 +727,14 @@ Helperクラスは更に3つのprotectedな属性を持つようになりまし�
 Html・Formヘルパー、またその他でこれを使うには、次のように書けます:
 
 ``` php
-$this->Form->checkbox('field', array('checked' => true, 'value' => 'some_value'));
+$this->Form->checkbox('field', ['checked' => true, 'value' => 'some_value']);
 ```
 
 他の便宜的方法は最小化される属性をキーではなくアイテムとして渡すことです。
 例を挙げます:
 
 ``` php
-$this->Form->checkbox('field', array('checked', 'value' => 'some_value'));
+$this->Form->checkbox('field', ['checked', 'value' => 'some_value']);
 ```
 
 `checked` が数値添字であることに注意してください。
@@ -805,7 +809,7 @@ $this->Form->checkbox('field', array('checked', 'value' => 'some_value'));
 
 ### 追加されたメソッド
 
-- `View::loadHelper($name, $settings = array());` が追加され、これは単一のヘルパーを読み込みます。
+- `View::loadHelper($name, $settings = []);` が追加され、これは単一のヘルパーを読み込みます。
 - `View::loadHelpers()` が追加され、これは `View::$helpers` で示されたヘルパー全てを読み込みます。
 
 ### View-\>Helpers
@@ -831,19 +835,23 @@ beforeRenderもまた同様で、ビューでの変数全てが操作される�
 ヘルパーの関数特性は以下のようにする必要があります:
 
 ``` php
-public function beforeRender($viewFile) {
+public function beforeRender($viewFile)
+{
 
 }
 
-public function afterRender($viewFile) {
+public function afterRender($viewFile)
+{
 
 }
 
-public function beforeLayout($layoutFile) {
+public function beforeLayout($layoutFile)
+{
 
 }
 
-public function afterLayout($layoutFile) {
+public function afterLayout($layoutFile)
+{
 
 }
 ```
@@ -920,22 +928,23 @@ $Post->inexistentProperty[] = 'value';
 以下のように、プロパティに初期値を与えることによってこの問題を解決できます:
 
 ``` text
-$Post->nonexistentProperty = array();
+$Post->nonexistentProperty = [];
 $Post->nonexistentProperty[] = 'value';
 ```
 
 また、以下のようにモデルのクラスにプロパティを定義するだけでも解決できます:
 
 ``` php
-class Post {
-    public $nonexistentProperty = array();
+class Post
+{
+    public $nonexistentProperty = [];
 }
 ```
 
 これらのどちらかのアプローチでnoticeエラーを回避できることでしょう。
 
 Cake 1.2での `find()` の文法はサポートされなくなりました。
-findはCake 1.3の `$model->find('type', array(PARAMS))` のような文法を使うべできす。
+findはCake 1.3の `$model->find('type', [PARAMS])` のような文法を使うべできす。
 
 - `Model::$_findMethods` は `Model::$findMethods` になりました。
   このプロパティはpublicとなり、ビヘイビアによって更新することができるようになりました。
@@ -965,13 +974,13 @@ PDOを採用した後に追加された素晴らしい機能のうちの一つ�
   二番目の引数としてクエリの値の配列をとるようになりました:
 
   ``` php
-  public function execute($sql, $params = array(), $options = array())
+  public function execute($sql, $params = [], $options = [])
   ```
 
   上記が以下のようになりました:
 
   ``` php
-  public function execute($sql, $options = array(), $params = array())
+  public function execute($sql, $options = [], $params = [])
   ```
 
   第三引数はログのオプションを受け取ることを意味し、現在は「log」オプションのみ理解します。
@@ -989,7 +998,7 @@ PDOを採用した後に追加された素晴らしい機能のうちの一つ�
       username = ?
     AND
       password = ?',
-    array('jhon', '12345')
+    ['jhon', '12345']
   );
   $db->fetchAll(
     'SELECT
@@ -998,7 +1007,7 @@ PDOを採用した後に追加された素晴らしい機能のうちの一つ�
         username = :username
     AND
       password = :password',
-    array('username' => 'jhon', 'password' => '12345')
+    ['username' => 'jhon', 'password' => '12345']
   );
   ```
 
@@ -1037,19 +1046,19 @@ PDOドライバは自動的にこれらの値をエスケープします。
 - 設定として文字列をサポートしなくなりました。例:
 
   ``` php
-  public $actsAs = array(
+  public $actsAs = [
       'Acl' => 'Controlled',
       'Tree' => 'nested'
-  );
+  ];
   ```
 
   こうなりました:
 
   ``` php
-  public $actsAs = array(
-      'Acl' => array('type' => 'Controlled'),
-      'Tree' => array('type' => 'nested')
-  );
+  public $actsAs = [
+      'Acl' => ['type' => 'Controlled'],
+      'Tree' => ['type' => 'nested']
+  ];
   ```
 
 ## プラグイン
@@ -1058,7 +1067,7 @@ PDOドライバは自動的にこれらの値をエスケープします。
 明示的に使いたいものを指定しなければなりません。以前は:
 
 ``` php
-public $components = array('Session', 'Comments');
+public $components = ['Session', 'Comments'];
 ```
 
 とすると、アプリケーション・コアのコンポーネントをチェックする前にコントローラのプラグインを調べていたでしょう。
@@ -1066,7 +1075,7 @@ public $components = array('Session', 'Comments');
 プラグインからオブジェクトを使いたい場合は、プラグインの名前を指定しなければなりません:
 
 ``` php
-public $components = array('Session', 'Comment.Comments');
+public $components = ['Session', 'Comment.Comments'];
 ```
 
 これは、マジックの失敗によって起こされていた問題をデバッグすることの煩雑さを減らすために為されました。
@@ -1148,12 +1157,12 @@ public $components = array('Session', 'Comment.Comments');
 例を挙げます:
 
 ``` php
-public $default = array(
+public $default = [
     'datasource' => 'Database/Mysql',
     'persistent' => false,
     'host' => 'localhost',
     'login' => 'root',
     'password' => 'root',
     'database' => 'cake',
-);
+];
 ```

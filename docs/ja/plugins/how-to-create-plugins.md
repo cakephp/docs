@@ -43,14 +43,16 @@ pieceofcake2 フォークのモダンレイアウトでは、プラグインは 
 ``` php
 // /app/Plugin/ContactManager/Controller/ContactManagerAppController.php の中で
 
-class ContactManagerAppController extends AppController {
+class ContactManagerAppController extends AppController
+{
 }
 ```
 
 ``` php
 // /app/Plugin/ContactManager/Model/ContactManagerAppModel.php の中で
 
-class ContactManagerAppModel extends AppModel {
+class ContactManagerAppModel extends AppModel
+{
 }
 ```
 
@@ -90,10 +92,12 @@ contacts の管理ですので、このプラグインには ContactsController 
 ``` php
 // app/Plugin/ContactManager/Controller/ContactsController.php の中で
 
-class ContactsController extends ContactManagerAppController {
-    public $uses = array('ContactManager.Contact');
+class ContactsController extends ContactManagerAppController
+{
+    public $uses = ['ContactManager.Contact'];
 
-    public function index() {
+    public function index()
+    {
         // ...
     }
 }
@@ -123,7 +127,8 @@ class ContactsController extends ContactManagerAppController {
 ``` php
 // /app/Plugin/ContactManager/Model/Contact.php の中で
 
-class Contact extends ContactManagerAppModel {
+class Contact extends ContactManagerAppModel
+{
 }
 ```
 
@@ -139,8 +144,9 @@ class Contact extends ContactManagerAppModel {
 ``` php
 // /app/Plugin/ContactManager/Model/Contact.php の中で
 
-class Contact extends ContactManagerAppModel {
-    public $hasMany = array('ContactManager.AltName');
+class Contact extends ContactManagerAppModel
+{
+    public $hasMany = ['ContactManager.AltName'];
 }
 ```
 
@@ -149,12 +155,13 @@ class Contact extends ContactManagerAppModel {
 ``` php
 // /app/Plugin/ContactManager/Model/Contact.php の中で
 
-class Contact extends ContactManagerAppModel {
-    public $hasMany = array(
-        'AltName' => array(
+class Contact extends ContactManagerAppModel
+{
+    public $hasMany = [
+        'AltName' => [
             'className' => 'ContactManager.AltName'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -246,12 +253,13 @@ ContactManager プラグインでは、ContactsController::index()
 ``` php
 // 'ContactManager' プラグインのコンポーネントとして定義
 
-class ExampleComponent extends Component {
+class ExampleComponent extends Component
+{
 }
 
 // あなたのコントローラで下記のように呼び出す
 
-public $components = array('ContactManager.Example');
+public $components = ['ContactManager.Example'];
 ```
 
 同じテクニックはヘルパーとビヘイビアにも使えます。

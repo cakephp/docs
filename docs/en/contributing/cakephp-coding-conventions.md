@@ -16,7 +16,7 @@ page. Its code is checked with
 CakePHP 2 specific exclusions in the fork's `phpcs.xml` (no namespaces,
 no required type declarations, no line length check, etc.).
 The main differences from the rules below are 4-space indentation instead of
-tabs, short array syntax `[]` instead of `array()`, and opening braces of
+tabs, short array syntax `[]` instead of `[]`, and opening braces of
 classes and methods on their own line. The
 [pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton ships the same
 sniffer, so you can run `vendor/bin/phpcs` in your application.
@@ -155,12 +155,12 @@ if (expr) {
 }
 
 // wrong = inline assignment
-if ($variable = Class::function()) {
+if ($variable = class::function()) {
     statement;
 }
 
 // good
-$variable = Class::function();
+$variable = class::function();
 if ($variable) {
     statement;
 }
@@ -275,7 +275,8 @@ class Foo
 Example of a method definition:
 
 ``` php
-public function someFunction($arg1, $arg2 = '') {
+public function someFunction($arg1, $arg2 = '')
+{
     if (expr) {
         statement;
     }
@@ -289,7 +290,8 @@ or `false`, so it can be determined whether the function call was
 successful:
 
 ``` php
-public function connection($dns, $persistent = false) {
+public function connection($dns, $persistent = false)
+{
     if (is_array($dns)) {
         $dnsInfo = $dns;
     } else {
@@ -324,7 +326,8 @@ Arguments that expect objects or arrays can be typehinted:
  * @param array $array Some array value.
  * @param bool $boolean Some boolean value.
  */
-public function foo(Model $Model, array $array, $boolean) {
+public function foo(Model $Model, array $array, $boolean)
+{
 }
 ```
 
@@ -339,7 +342,8 @@ you should not typehint as `array` accepts only the primitive type:
  *
  * @param array|ArrayObject $array Some array value.
  */
-public function foo($array) {
+public function foo($array)
+{
 }
 ```
 
@@ -408,7 +412,8 @@ Class DocBlocks should look like this:
  * @see Bar
  * @link https://book.cakephp.org/2.0/en/foo.html
  */
-class Foo {
+class Foo
+{
 
 }
 ```
@@ -469,7 +474,8 @@ Method and functions DocBlocks should look like this:
  * @deprecated 3.0.0 Deprecated as of 2.5.0. Will be removed in 3.0.0. Use Bar::baz instead.
  * @see Bar::baz
  */
- public function bar($param1, $param2 = null) {
+ public function bar($param1, $param2 = null)
+ {
  }
 ```
 
@@ -539,7 +545,8 @@ When returning the object itself, e.g. for chaining, one should use `$this` inst
  *
  * @return $this
  */
-public function foo() {
+public function foo()
+{
     return $this;
 }
 ```
@@ -581,7 +588,8 @@ function longFunctionName() {
 Class names should be written in CamelCase, for example:
 
 ``` php
-class ExampleClass {
+class ExampleClass
+{
 }
 ```
 
@@ -589,7 +597,7 @@ class ExampleClass {
 
 ::: pieceofcake2
 The fork requires short array syntax: write `['John', 'Hans', 'Arne']`
-instead of `array('John', 'Hans', 'Arne')`
+instead of `['John', 'Hans', 'Arne']`
 (`Generic.Arrays.DisallowLongArraySyntax`).
 :::
 
@@ -601,7 +609,7 @@ variable is an object of. Example:
 
 ``` php
 $user = 'John';
-$users = array('John', 'Hans', 'Arne');
+$users = ['John', 'Hans', 'Arne'];
 
 $dispatcher = new Dispatcher();
 ```
@@ -612,10 +620,12 @@ Use PHP5's private and protected keywords for methods and variables. Additionall
 protected method or variable names start with a single underscore (`_`). Example:
 
 ``` php
-class A {
+class A
+{
     protected $_iAmAProtectedVariable;
 
-    protected function _iAmAProtectedMethod() {
+    protected function _iAmAProtectedMethod()
+    {
        /* ... */
     }
 }
@@ -624,10 +634,12 @@ class A {
 Private methods or variable names start with double underscore (`__`). Example:
 
 ``` php
-class A {
+class A
+{
     private $__iAmAPrivateVariable;
 
-    private function __iAmAPrivateMethod() {
+    private function __iAmAPrivateMethod()
+    {
         /* ... */
     }
 }

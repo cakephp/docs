@@ -9,7 +9,7 @@
 
 ## find
 
-`find(string $type = 'first', array $params = array())`
+`find(string $type = 'first', array $params = [])`
 
 find はデータ取得のための、非常に多機能でとても良く働いてくれる関数です。
 `$type` は `'all'`, `'first'`, `'count'`, `'list'`, `'neighbors'`,
@@ -22,21 +22,21 @@ find はデータ取得のための、非常に多機能でとても良く働い
 任意です。 :
 
 ``` text
-array(
-    'conditions' => array('Model.field' => $thisValue), // 検索条件の配列
+[
+    'conditions' => ['Model.field' => $thisValue], // 検索条件の配列
     'recursive' => 1, // int
     // フィールド名の配列
-    'fields' => array('Model.field1', 'DISTINCT Model.field2'),
+    'fields' => ['Model.field1', 'DISTINCT Model.field2'],
     // 並び順を文字列または配列で指定
-    'order' => array('Model.created', 'Model.field3 DESC'),
-    'group' => array('Model.field'), // GROUP BYのフィールド
+    'order' => ['Model.created', 'Model.field3 DESC'],
+    'group' => ['Model.field'], // GROUP BYのフィールド
     'limit' => n, // int
     'page' => n, // int
     'offset' => n, // int
     'callbacks' => true, // falseの他に'before'、'after'を指定できます
-    'having' => array('COUNT(Model.field) >' => 1), // HAVING 条件の配列
+    'having' => ['COUNT(Model.field) >' => 1], // HAVING 条件の配列
     'lock' => true, // FOR UPDATE ロックを有効にします
-)
+]
 ```
 
 これ以外のパラメータを追加したり使用することが可能です。いくつかの `find()` のタイプとビヘイビアは、
@@ -56,15 +56,16 @@ array(
 以下の例を見てください。 :
 
 ``` php
-public function some_function() {
+public function some_function()
+{
     // ...
     $semiRandomArticle = $this->Article->find('first');
-    $lastCreated = $this->Article->find('first', array(
-        'order' => array('Article.created' => 'desc')
-    ));
-    $specificallyThisOne = $this->Article->find('first', array(
-        'conditions' => array('Article.id' => 1)
-    ));
+    $lastCreated = $this->Article->find('first', [
+        'order' => ['Article.created' => 'desc']
+    ]);
+    $specificallyThisOne = $this->Article->find('first', [
+        'conditions' => ['Article.id' => 1]
+    ]);
     // ...
 }
 ```
@@ -73,24 +74,24 @@ public function some_function() {
 されないということです。 `find('first')` の戻り値はこのような形式になっています。 :
 
 ``` text
-Array
-(
-    [ModelName] => Array
-        (
+
+[
+    [ModelName] => 
+        [
             [id] => 83
             [field1] => value1
             [field2] => value2
             [field3] => value3
-        )
+        ]
 
-    [AssociatedModelName] => Array
-        (
+    [AssociatedModelName] => 
+        [
             [id] => 1
             [field1] => value1
             [field2] => value2
             [field3] => value3
-        )
-)
+        ]
+]
 ```
 
 <a id="model-find-count"></a>
@@ -100,17 +101,18 @@ Array
 `find('count', $params)` は整数を返します。以下のサンプルを見てください。 :
 
 ``` php
-public function some_function() {
+public function some_function()
+{
     // ...
     $total = $this->Article->find('count');
-    $pending = $this->Article->find('count', array(
-        'conditions' => array('Article.status' => 'pending')
-    ));
+    $pending = $this->Article->find('count', [
+        'conditions' => ['Article.status' => 'pending']
+    ]);
     $authors = $this->Article->User->find('count');
-    $publishedAuthors = $this->Article->find('count', array(
+    $publishedAuthors = $this->Article->find('count', [
        'fields' => 'DISTINCT Article.user_id',
-       'conditions' => array('Article.status !=' => 'pending')
-    ));
+       'conditions' => ['Article.status !=' => 'pending']
+    ]);
     // ...
 }
 ```
@@ -128,16 +130,17 @@ public function some_function() {
 `find()` や、 `paginate` でも使われています。以下のサンプルを見てください。 :
 
 ``` php
-public function some_function() {
+public function some_function()
+{
     // ...
     $allArticles = $this->Article->find('all');
-    $pending = $this->Article->find('all', array(
-        'conditions' => array('Article.status' => 'pending')
-    ));
+    $pending = $this->Article->find('all', [
+        'conditions' => ['Article.status' => 'pending']
+    ]);
     $allAuthors = $this->Article->User->find('all');
-    $allPublishedAuthors = $this->Article->User->find('all', array(
-        'conditions' => array('Article.status !=' => 'pending')
-    ));
+    $allPublishedAuthors = $this->Article->User->find('all', [
+        'conditions' => ['Article.status !=' => 'pending']
+    ]);
     // ...
 }
 ```
@@ -149,28 +152,28 @@ public function some_function() {
 `find('all')` を呼び出すと、その戻り値は以下のような形式となります。 :
 
 ``` text
-Array
-(
-    [0] => Array
-        (
-            [ModelName] => Array
-                (
+
+[
+    [0] => 
+        [
+            [ModelName] => 
+                [
                     [id] => 83
                     [field1] => value1
                     [field2] => value2
                     [field3] => value3
-                )
+                ]
 
-            [AssociatedModelName] => Array
-                (
+            [AssociatedModelName] => 
+                [
                     [id] => 1
                     [field1] => value1
                     [field2] => value2
                     [field3] => value3
-                )
+                ]
 
-        )
-)
+        ]
+]
 ```
 
 <a id="model-find-list"></a>
@@ -182,18 +185,19 @@ Array
 以下のサンプルを見てください。 :
 
 ``` php
-public function some_function() {
+public function some_function()
+{
     // ...
     $allArticles = $this->Article->find('list');
-    $pending = $this->Article->find('list', array(
-        'conditions' => array('Article.status' => 'pending')
-    ));
+    $pending = $this->Article->find('list', [
+        'conditions' => ['Article.status' => 'pending']
+    ]);
     $allAuthors = $this->Article->User->find('list');
-    $allPublishedAuthors = $this->Article->find('list', array(
-        'fields' => array('User.id', 'User.name'),
-        'conditions' => array('Article.status !=' => 'pending'),
+    $allPublishedAuthors = $this->Article->find('list', [
+        'fields' => ['User.id', 'User.name'],
+        'conditions' => ['Article.status !=' => 'pending'],
         'recursive' => 0
-    ));
+    ]);
     // ...
 }
 ```
@@ -205,8 +209,8 @@ public function some_function() {
 `find('list')` を呼び出すと、その戻り値は以下のような形式となります。 :
 
 ``` text
-Array
-(
+
+[
     //[id] => 'displayValue',
     [1] => 'displayValue1',
     [2] => 'displayValue2',
@@ -214,7 +218,7 @@ Array
     [5] => 'displayValue5',
     [6] => 'displayValue6',
     [3] => 'displayValue3',
-)
+]
 ```
 
 `fields` キーを渡して `find('list')` 呼び出せば、どのフィールドを検索結果の
@@ -224,17 +228,18 @@ Array
 [Model Displayfield](../models/model-attributes#model-displayField) で設定できます) 以下に例を示します。 :
 
 ``` php
-public function some_function() {
+public function some_function()
+{
     // ...
-    $justusernames = $this->Article->User->find('list', array(
-        'fields' => array('User.username')
-    ));
-    $usernameMap = $this->Article->User->find('list', array(
-        'fields' => array('User.username', 'User.first_name')
-    ));
-    $usernameGroups = $this->Article->User->find('list', array(
-        'fields' => array('User.username', 'User.first_name', 'User.group')
-    ));
+    $justusernames = $this->Article->User->find('list', [
+        'fields' => ['User.username']
+    ]);
+    $usernameMap = $this->Article->User->find('list', [
+        'fields' => ['User.username', 'User.first_name']
+    ]);
+    $usernameGroups = $this->Article->User->find('list', [
+        'fields' => ['User.username', 'User.first_name', 'User.group']
+    ]);
     // ...
 }
 ```
@@ -242,42 +247,42 @@ public function some_function() {
 上記サンプルを実行した結果、それぞれの変数の中身は次のようになっています。 :
 
 ``` php
-$justusernames = Array
-(
+$justusernames = 
+[
     //[id] => 'username',
     [213] => 'AD7six',
     [25] => '_psychic_',
     [1] => 'PHPNut',
     [2] => 'gwoo',
     [400] => 'jperras',
-)
+]
 
-$usernameMap = Array
-(
+$usernameMap = 
+[
     //[username] => 'firstname',
     ['AD7six'] => 'Andy',
     ['_psychic_'] => 'John',
     ['PHPNut'] => 'Larry',
     ['gwoo'] => 'Gwoo',
     ['jperras'] => 'Joël',
-)
+]
 
-$usernameGroups = Array
-(
-    ['User'] => Array
-    (
+$usernameGroups = 
+[
+    ['User'] => 
+    [
         ['PHPNut'] => 'Larry',
         ['gwoo'] => 'Gwoo',
-    )
+    ]
 
-    ['Admin'] => Array
-    (
+    ['Admin'] => 
+    [
         ['_psychic_'] => 'John',
         ['AD7six'] => 'Andy',
         ['jperras'] => 'Joël',
-    )
+    ]
 
-)
+]
 ```
 
 <a id="model-find-threaded"></a>
@@ -288,12 +293,13 @@ $usernameGroups = Array
 `parent_id` フィールドがある場合に使います。以下のサンプルを見てください。 :
 
 ``` php
-public function some_function() {
+public function some_function()
+{
     // ...
     $allCategories = $this->Category->find('threaded');
-    $someCategories = $this->Comment->find('threaded', array(
-        'conditions' => array('article_id' => 50)
-    ));
+    $someCategories = $this->Comment->find('threaded', [
+        'conditions' => ['article_id' => 50]
+    ]);
     // ...
 }
 ```
@@ -306,56 +312,56 @@ public function some_function() {
 格納されています。 `find('threaded')` を呼び出すと、戻り値は次のような形式となります。 :
 
 ``` text
-Array
-(
-    [0] => Array
-    (
-        [ModelName] => Array
-        (
+
+[
+    [0] => 
+    [
+        [ModelName] => 
+        [
             [id] => 83
             [parent_id] => null
             [field1] => value1
             [field2] => value2
             [field3] => value3
-        )
+        ]
 
-        [AssociatedModelName] => Array
-        (
+        [AssociatedModelName] => 
+        [
             [id] => 1
             [field1] => value1
             [field2] => value2
             [field3] => value3
-        )
+        ]
 
-        [children] => Array
-        (
-            [0] => Array
-            (
-                [ModelName] => Array
-                (
+        [children] => 
+        [
+            [0] => 
+            [
+                [ModelName] => 
+                [
                     [id] => 42
                     [parent_id] => 83
                     [field1] => value1
                     [field2] => value2
                     [field3] => value3
-                )
+                ]
 
-                [AssociatedModelName] => Array
-                (
+                [AssociatedModelName] => 
+                [
                     [id] => 2
                     [field1] => value1
                     [field2] => value2
                     [field3] => value3
-                )
+                ]
 
-                [children] => Array
-                (
-                )
-            )
+                [children] => 
+                [
+                ]
+            ]
             ...
-        )
-    )
-)
+        ]
+    ]
+]
 ```
 
 結果の表示順は、並べ替えることができます。
@@ -367,10 +373,11 @@ Array
 > 含まれる必要があります:
 >
 > ``` php
-> public function some_function() {
->     $categories = $this->Category->find('threaded', array(
->         'fields' => array('id', 'name', 'parent_id')
->     ));
+> public function some_function()
+> {
+>     $categories = $this->Category->find('threaded', [
+>         'fields' => ['id', 'name', 'parent_id']
+>     ]);
 > }
 > ```
 >
@@ -386,10 +393,11 @@ Array
 :
 
 ``` php
-public function some_function() {
+public function some_function()
+{
     $neighbors = $this->Article->find(
         'neighbors',
-        array('field' => 'id', 'value' => 3)
+        ['field' => 'id', 'value' => 3]
     );
 }
 ```
@@ -400,43 +408,43 @@ Containable ビヘイビアを利用していれば、 `$params` に 'contain' �
 `find('neighbors')` を呼び出すと、戻り値は以下の様な形式となります。
 
 ``` text
-Array
-(
-    [prev] => Array
-    (
-        [ModelName] => Array
-        (
+
+[
+    [prev] => 
+    [
+        [ModelName] => 
+        [
             [id] => 2
             [field1] => value1
             [field2] => value2
             ...
-        )
-        [AssociatedModelName] => Array
-        (
+        ]
+        [AssociatedModelName] => 
+        [
             [id] => 151
             [field1] => value1
             [field2] => value2
             ...
-        )
-    )
-    [next] => Array
-    (
-        [ModelName] => Array
-        (
+        ]
+    ]
+    [next] => 
+    [
+        [ModelName] => 
+        [
             [id] => 4
             [field1] => value1
             [field2] => value2
             ...
-        )
-        [AssociatedModelName] => Array
-        (
+        ]
+        [AssociatedModelName] => 
+        [
             [id] => 122
             [field1] => value1
             [field2] => value2
             ...
-        )
-    )
-)
+        ]
+    ]
+]
 ```
 
 > [!NOTE]
@@ -453,7 +461,7 @@ Array
 
 ``` php
 $this->User->find('first');
-$this->User->find('all', array('limit' => 1));
+$this->User->find('all', ['limit' => 1]);
 ```
 
 コアに含まれる find 種別は以下のものがあります。
@@ -470,8 +478,9 @@ $this->User->find('all', array('limit' => 1));
 追加することです。
 
 ``` php
-class Article extends AppModel {
-    public $findMethods = array('available' =>  true);
+class Article extends AppModel
+{
+    public $findMethods = ['available' =>  true];
 }
 ```
 
@@ -480,10 +489,12 @@ class Article extends AppModel {
 finder を実装したければ、その関数の名前は `_findMyFancySearch` となります。
 
 ``` php
-class Article extends AppModel {
-    public $findMethods = array('available' =>  true);
+class Article extends AppModel
+{
+    public $findMethods = ['available' =>  true];
 
-    protected function _findAvailable($state, $query, $results = array()) {
+    protected function _findAvailable($state, $query, $results = [])
+    {
         if ($state == 'before') {
             $query['conditions']['Article.published'] = true;
             return $query;
@@ -496,15 +507,16 @@ class Article extends AppModel {
 次のようにして使えます。
 
 ``` php
-class ArticlesController extends AppController {
+class ArticlesController extends AppController
+{
 
     // 公開されているすべての記事を検索して、createdカラムの順番に並び替える
-    public function index() {
-        $articles = $this->Article->find('available', array(
-            'order' => array('created' => 'desc')
-        ));
+    public function index()
+    {
+        $articles = $this->Article->find('available', [
+            'order' => ['created' => 'desc']
+        ]);
     }
-
 }
 ```
 
@@ -532,15 +544,16 @@ class ArticlesController extends AppController {
 :
 
 ``` php
-class ArticlesController extends AppController {
+class ArticlesController extends AppController
+{
 
     // Will paginate all published articles
-    public function index() {
-        $this->paginate = array('findType' => 'available');
+    public function index()
+    {
+        $this->paginate = ['findType' => 'available'];
         $articles = $this->paginate();
         $this->set(compact('articles'));
     }
-
 }
 ```
 
@@ -551,7 +564,8 @@ class ArticlesController extends AppController {
 正しいページ数が取得できるでしょう。
 
 ``` php
-class AppModel extends Model {
+class AppModel extends Model
+{
 
 /**
  * Removes 'fields' key from count query on custom finds when it is an array,
@@ -564,7 +578,8 @@ class AppModel extends Model {
  * @access protected
  * @see Model::find()
  */
-    protected function _findCount($state, $query, $results = array()) {
+    protected function _findCount($state, $query, $results = [])
+    {
         if ($state === 'before') {
             if (isset($query['type']) &&
                 isset($this->findMethods[$query['type']])) {
@@ -580,7 +595,6 @@ class AppModel extends Model {
         }
         return parent::_findCount($state, $query, $results);
     }
-
 }
 ?>
 ```
@@ -595,15 +609,16 @@ class AppModel extends Model {
 区別できます。 :
 
 ``` php
-protected function _findAvailable($state, $query, $results = array()) {
+protected function _findAvailable($state, $query, $results = [])
+{
     if ($state == 'before') {
         $query['conditions']['Article.published'] = true;
         if (!empty($query['operation']) && $query['operation'] == 'count') {
             return $query;
         }
-        $query['joins'] = array(
+        $query['joins'] = [
             //array of required joins
-        );
+        ];
         return $query;
     }
     return $results;
@@ -632,7 +647,7 @@ protected function _findAvailable($state, $query, $results = array()) {
 | `$this->Cake->findAllById(7);` | `Cake.id = 7` |
 | `$this->User->findAllByEmailOrUsername('jhon');` | `User.email = 'jhon' OR User.username = 'jhon';` |
 | `$this->User->findAllByUsernameAndPassword('jhon', '123');` | `User.username = 'jhon' AND User.password = '123';` |
-| `$this->User->findAllByLastName('psychic', array(), array('User.user_name => 'asc'));` | `User.last_name = 'psychic' ORDER BY User.user_name ASC` |
+| `$this->User->findAllByLastName('psychic', [], array('User.user_name => 'asc'));` | `User.last_name = 'psychic' ORDER BY User.user_name ASC` |
 
 この関数の戻り値は `find('all')` の戻り値と同じ形式です。
 
@@ -646,9 +661,9 @@ protected function _findAvailable($state, $query, $results = array()) {
 $results = $this->Article->findPublishedByAuthorId(5);
 
 // 以下と同等です
-$this->Article->find('published', array(
-    'conditions' => array('Article.author_id' => 5)
-));
+$this->Article->find('published', [
+    'conditions' => ['Article.author_id' => 5]
+]);
 ```
 
 ::: info Added in version 2.8.0
@@ -698,26 +713,26 @@ $this->Picture->query("SELECT * FROM pictures LIMIT 2;");
 これは、以下の様な配列を返します。 :
 
 ``` text
-Array
-(
-    [0] => Array
-    (
-        [pictures] => Array
-        (
+
+[
+    [0] => 
+    [
+        [pictures] => 
+        [
             [id] => 1304
             [user_id] => 759
-        )
-    )
+        ]
+    ]
 
-    [1] => Array
-    (
-        [pictures] => Array
-        (
+    [1] => 
+    [
+        [pictures] => 
+        [
             [id] => 1305
             [user_id] => 759
-        )
-    )
-)
+        ]
+    ]
+]
 ```
 
 find メソッドと同じように、戻り値の配列のキーにモデル名を使うためには、
@@ -730,26 +745,26 @@ $this->Picture->query("SELECT * FROM pictures AS Picture LIMIT 2;");
 すると以下の様な配列となります。 :
 
 ``` text
-Array
-(
-    [0] => Array
-    (
-        [Picture] => Array
-        (
+
+[
+    [0] => 
+    [
+        [Picture] => 
+        [
             [id] => 1304
             [user_id] => 759
-        )
-    )
+        ]
+    ]
 
-    [1] => Array
-    (
-        [Picture] => Array
-        (
+    [1] => 
+    [
+        [Picture] => 
+        [
             [id] => 1305
             [user_id] => 759
-        )
-    )
-)
+        ]
+    ]
+]
 ```
 
 > [!NOTE]
@@ -773,7 +788,7 @@ echo $this->Post->field('name'); // ID が 22 の行の name フィールドを�
 // 最新日付のデータの name フィールドを表示します
 echo $this->Post->field(
     'name',
-    array('created <' => date('Y-m-d H:i:s')),
+    ['created <' => date('Y-m-d H:i:s')],
     'created DESC'
 );
 ```
@@ -818,9 +833,9 @@ echo $this->Post->field(
 最も良く使われるのは、次のような配列ベースのクエリです。 :
 
 ``` php
-$conditions = array("Post.title" => "This is a post", "Post.author_id" => 1);
+$conditions = ["Post.title" => "This is a post", "Post.author_id" => 1];
 // モデルの使い方のサンプル
-$this->Post->find('first', array('conditions' => $conditions));
+$this->Post->find('first', ['conditions' => $conditions]);
 ```
 
 この書き方は非常にわかりやすいと思います。
@@ -834,7 +849,7 @@ $this->Post->find('first', array('conditions' => $conditions));
 "This is a post" 以外の投稿データを取得したい場合は以下のようにします。 :
 
 ``` text
-array("Post.title !=" => "This is a post")
+["Post.title !=" => "This is a post"]
 ```
 
 フィールド名の前に `'!='` があるのがわかると思います。
@@ -844,34 +859,34 @@ array("Post.title !=" => "This is a post")
 `IN` を使って、リストから投稿タイトルを検索したい場合は以下のようにします。 :
 
 ``` text
-array(
-    "Post.title" => array("First post", "Second post", "Third post")
-)
+[
+    "Post.title" => ["First post", "Second post", "Third post"]
+]
 ```
 
 `NOT IN` (...) でリストに含まれない投稿タイトルを検索した場合は以下のようにします。 :
 
 ``` text
-array(
-    "NOT" => array(
-        "Post.title" => array("First post", "Second post", "Third post")
-    )
-)
+[
+    "NOT" => [
+        "Post.title" => ["First post", "Second post", "Third post"]
+    ]
+]
 ```
 
 検索条件に新しい条件を追加したければ、キーと値のペアを配列に追加するだけです。 :
 
 ``` text
-array (
-    "Post.title" => array("First post", "Second post", "Third post"),
+ [
+    "Post.title" => ["First post", "Second post", "Third post"],
     "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
-)
+]
 ```
 
 データベースの2つのフィールドを比較する条件を指定することもできます。 :
 
 ``` text
-array("Post.created = Post.modified")
+["Post.created = Post.modified"]
 ```
 
 上記サンプルは、作成日と変更日が同じ投稿データ
@@ -881,10 +896,10 @@ array("Post.created = Post.modified")
 指定できます。 :
 
 ``` text
-array(
+[
     'Model.field & 8 = 1',
     // キーと値のペアでは指定できないような条件
-)
+]
 ```
 
 デフォルトでは、CakePHP は `AND` で複数の条件をつなげます。
@@ -893,10 +908,10 @@ array(
 ただ、どちらかの条件にマッチする投稿を取得したいこともあるでしょう。 :
 
 ``` text
-array("OR" => array(
-    "Post.title" => array("First post", "Second post", "Third post"),
+["OR" => [
+    "Post.title" => ["First post", "Second post", "Third post"],
     "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
-))
+]]
 ```
 
 CakePHP は `AND` 、 `OR` 、 `NOT` 、 `XOR` (大文字、小文字は区別しません)などの、
@@ -907,23 +922,23 @@ CakePHP は `AND` 、 `OR` 、 `NOT` 、 `XOR` (大文字、小文字は区別�
 Bob が書いた投稿、に制限して取得したい場合、次のようにします。 :
 
 ``` text
-array(
+[
     "Author.name" => "Bob",
-    "OR" => array(
+    "OR" => [
         "Post.title LIKE" => "%magic%",
         "Post.created >" => date('Y-m-d', strtotime("-2 weeks"))
-    )
-)
+    ]
+]
 ```
 
 同じフィールドに対して複数の `LIKE` 条件を指定したい場合は、
 同じように以下のように条件を指定します。 :
 
 ``` text
-array('OR' => array(
-    array('Post.title LIKE' => '%one%'),
-    array('Post.title LIKE' => '%two%')
-))
+['OR' => [
+    ['Post.title LIKE' => '%one%'],
+    ['Post.title LIKE' => '%two%']
+]]
 ```
 
 ワイルドカード演算子 `ILIKE` と `RLIKE` (`RLIKE` は 2.6 以降) も利用可能です。
@@ -932,16 +947,16 @@ CakePHP は null も受け入れることができます。次のクエリは、
 投稿のタイトルが NOT NULL である投稿を返します。 :
 
 ``` text
-array("NOT" => array(
+["NOT" => [
         "Post.title" => null
-    )
-)
+    ]
+]
 ```
 
 `BETWEEN` は、以下のように出来ます。 :
 
 ``` text
-array('Post.read_count BETWEEN ? AND ?' => array(1,10))
+['Post.read_count BETWEEN ? AND ?' => [1,10]]
 ```
 
 > [!NOTE]
@@ -950,13 +965,13 @@ array('Post.read_count BETWEEN ? AND ?' => array(1,10))
 `GROUP BY` は？ :
 
 ``` text
-array(
-    'fields' => array(
+[
+    'fields' => [
         'Product.type',
         'MIN(Product.price) as price'
-    ),
+    ],
     'group' => 'Product.type'
-)
+]
 ```
 
 この時の戻り値の配列は、次のような形式です。 :
@@ -964,17 +979,17 @@ array(
 ``` text
 Array
 (
-    [0] => Array
-    (
-        [Product] => Array
-        (
+    [0] => 
+    [
+        [Product] => 
+        [
             [type] => Clothing
-        )
-        [0] => Array
-        (
+        ]
+        [0] => 
+        [
             [price] => 32
-        )
-    )
+        ]
+    ]
     [1] => Array
     ...
 ```
@@ -982,31 +997,31 @@ Array
 以下は `DISTINCT` のサンプルです。他にも `MIN()` や `MAX()` なども同じように使えます。 :
 
 ``` text
-array(
-    'fields' => array('DISTINCT (User.name) AS my_column_name'),
-    'order' = >array('User.id DESC')
-)
+[
+    'fields' => ['DISTINCT (User.name) AS my_column_name'],
+    'order' = >['User.id DESC']
+]
 ```
 
 とても複雑な検索条件も、複数の配列をネストすることで実現可能です。 :
 
 ``` text
-array(
-    'OR' => array(
-        array('Company.name' => 'Future Holdings'),
-        array('Company.city' => 'CA')
-    ),
-    'AND' => array(
-        array(
-            'OR' => array(
-                array('Company.status' => 'active'),
-                'NOT' => array(
-                    array('Company.status' => array('inactive', 'suspended'))
-                )
-            )
-        )
-    )
-)
+[
+    'OR' => [
+        ['Company.name' => 'Future Holdings'],
+        ['Company.city' => 'CA']
+    ],
+    'AND' => [
+        [
+            'OR' => [
+                ['Company.status' => 'active'],
+                'NOT' => [
+                    ['Company.status' => ['inactive', 'suspended']]
+                ]
+            ]
+        ]
+    ]
+]
 ```
 
 上記サンプルは次のような SQL を生成します。 :
@@ -1042,17 +1057,17 @@ $conditionsSubQuery['User2.status'] = 'B';
 
 $db = $this->User->getDataSource();
 $subQuery = $db->buildStatement(
-    array(
-        'fields'     => array('User2.id'),
+    [
+        'fields'     => ['User2.id'],
         'table'      => $db->fullTableName($this->User),
         'alias'      => 'User2',
         'limit'      => null,
         'offset'     => null,
-        'joins'      => array(),
+        'joins'      => [],
         'conditions' => $conditionsSubQuery,
         'order'      => null,
         'group'      => null
-    ),
+    ],
     $this->User
 );
 $subQuery = 'User.id NOT IN (' . $subQuery . ') ';
@@ -1096,10 +1111,10 @@ WHERE
 $db = $this->getDataSource();
 $db->fetchAll(
     'SELECT * from users where username = ? AND password = ?',
-    array('jhon', '12345')
+    ['jhon', '12345']
 );
 $db->fetchAll(
     'SELECT * from users where username = :username AND password = :password',
-    array('username' => 'jhon','password' => '12345')
+    ['username' => 'jhon','password' => '12345']
 );
 ```

@@ -45,7 +45,7 @@ class HeadingHelper extends BaseShellHelper
 {
     public function output($args)
     {
-        $args += array('', '#', 3);
+        $args += ['', '#', 3];
         $marker = str_repeat($args[1], $args[2]);
         $this->_consoleOutput->out($marker . ' ' . $args[0] . ' ' . $marker);
     }
@@ -69,11 +69,11 @@ $this->helper('heading')->output('It works!', '~', 4);
 TableHelper は、アスキーアートの表の作成を支援します。使い方は、とてもシンプルです。 :
 
 ``` php
-$data = array(
-    array('Header 1', 'Header', 'Long Header'),
-    array('short', 'Longish thing', 'short'),
-    array('Longer thing', 'short', 'Longest Value'),
-);
+$data = [
+    ['Header 1', 'Header', 'Long Header'],
+    ['short', 'Longish thing', 'short'],
+    ['Longer thing', 'short', 'Longest Value'],
+];
 $this->helper('table')->output($data);
 
 // 出力結果
@@ -106,23 +106,23 @@ $this->helper('progress')->output(function ($progress) {
 全てのオプションを使用した例です。 :
 
 ``` php
-$this->helper('progress')->output(array(
+$this->helper('progress')->output([
     'total' => 10,
     'width' => 20,
     'callback' => function ($progress) {
         $progress->increment(2);
     }
-));
+]);
 ```
 
 Progress ヘルパーは、必要であればプログレスバーの増加や再描画を手動で行うことができます。 :
 
 ``` php
 $progress = $this->helper('Progress');
-$progress->init(array(
+$progress->init([
     'total' => 10,
     'width' => 20,
-));
+]);
 
 $progress->increment(4);
 $progress->draw();

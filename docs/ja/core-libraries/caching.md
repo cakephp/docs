@@ -77,20 +77,20 @@ Cache クラスの設定は、どこでもできます。しかし、一般的�
 例:
 
 ``` php
-Cache::config('short', array(
+Cache::config('short', [
     'engine' => 'File',
     'duration' => '+1 hours',
     'path' => CACHE,
     'prefix' => 'cake_short_'
-));
+]);
 
 // long
-Cache::config('long', array(
+Cache::config('long', [
     'engine' => 'File',
     'duration' => '+1 week',
     'probability' => 100,
     'path' => CACHE . 'long' . DS,
-));
+]);
 ```
 
 `app/Config/bootstrap.php` に上記のコードを記述することで、Cache 設定が
@@ -117,10 +117,10 @@ Cache::config('long', array(
 プラグインの Cache 設定は、ドット記法を使用する必要があります。 :
 
 ``` php
-Cache::config('custom', array(
+Cache::config('custom', [
     'engine' => 'CachePack.MyCustomCache',
     // ...
-));
+]);
 ```
 
 > [!NOTE]
@@ -159,12 +159,14 @@ CacheEngine に必要な API は、以下の通りです。
 検索結果を格納する Cache を使用するメソッドは以下のようになります。 :
 
 ``` php
-class Post extends AppModel {
+class Post extends AppModel
+{
 
-    public function newest() {
+    public function newest()
+    {
         $result = Cache::read('newest_posts', 'long');
         if (!$result) {
-            $result = $this->find('all', array('order' => 'Post.updated DESC', 'limit' => 10));
+            $result = $this->find('all', ['order' => 'Post.updated DESC', 'limit' => 10]);
             Cache::write('newest_posts', $result, 'long');
         }
         return $result;
@@ -181,15 +183,17 @@ class Post extends AppModel {
 メソッドは、以下のように使用します。 :
 
 ``` php
-class Post extends AppModel {
+class Post extends AppModel
+{
 
-    public function newest() {
+    public function newest()
+    {
         $model = $this;
         return Cache::remember('newest_posts', function() use ($model){
-            return $model->find('all', array(
+            return $model->find('all', [
                 'order' => 'Post.updated DESC',
                 'limit' => 10
-            ));
+            ]);
         }, 'long');
     }
 }
@@ -231,11 +235,11 @@ Cache::increment('initial_count');
 可能になります。 :
 
 ``` php
-Cache::config('site_home', array(
+Cache::config('site_home', [
     'engine' => 'Redis',
     'duration' => '+999 days',
-    'groups' => array('comment', 'post')
-));
+    'groups' => ['comment', 'post']
+]);
 ```
 
 ホームページのために生成された HTML をキャッシュに格納したいとします。そして、
@@ -249,7 +253,8 @@ Cache::config('site_home', array(
 ``` php
 // Model/Post.php
 
-public function afterSave($created, $options = array()) {
+public function afterSave($created, $options = [])
+{
     if ($created) {
         Cache::clearGroup('post', 'site_home');
     }
@@ -268,7 +273,8 @@ public function afterSave($created, $options = array()) {
 /**
  * 前例の別のバリエーション。同じグループに属する全てのキャッシュを消去します。
  */
-public function afterSave($created, $options = array()) {
+public function afterSave($created, $options = [])
+{
     if ($created) {
         $configs = Cache::groupConfigs('post');
         foreach ($configs['post'] as $config) {
@@ -286,7 +292,7 @@ public function afterSave($created, $options = array()) {
 
 `class` **Cache**
 
-`static` Cache::**config**($name = null, $settings = array())
+`static` Cache::**config**($name = null, $settings = [])
 
 `Cache::config()` は、追加のキャッシュ設定の作成に使用されます。
 これら追加の設定は、デフォルトのキャッシュ設定とは異なる有効期限 (*duration*)・
@@ -340,7 +346,7 @@ posts を取得する回数を容易に削減することができます。
 
 `Cache::delete()` は、キャッシュに格納されているオブジェクトを完全に削除します。
 
-`static` Cache::**set**($settings = array(), $value = null, $config = 'default')
+`static` Cache::**set**($settings = [], $value = null, $config = 'default')
 
 `Cache::set()` は、１つの操作 (大抵は read や write) のために、
 一時的にキャッシュの設定を上書きできます。もし、write のために設定を変更するなら、
@@ -348,12 +354,12 @@ posts を取得する回数を容易に削減することができます。
 キャッシュキーで読み込む時にデフォルトの設定が使用されます。 :
 
 ``` php
-Cache::set(array('duration' => '+30 days'));
+Cache::set(['duration' => '+30 days']);
 Cache::write('results', $data);
 
 // Later on
 
-Cache::set(array('duration' => '+30 days'));
+Cache::set(['duration' => '+30 days']);
 $results = Cache::read('results');
 ```
 
@@ -412,8 +418,10 @@ return
 シンプルに実現できます。PHP 5.3 以上を使用している場合、 :
 
 ``` php
-class Articles extends AppModel {
-    function all() {
+class Articles extends AppModel
+{
+    function all()
+    {
         $model = $this;
         return Cache::remember('all_articles', function() use ($model){
             return $model->find('all');

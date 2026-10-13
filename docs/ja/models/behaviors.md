@@ -35,8 +35,9 @@ CakePHP に含まれるいくつかのビヘイビアがあります。それぞ
 ビヘイビアはモデルのクラス変数 `$actsAs` を通してモデルに割り当てられます。 :
 
 ``` php
-class Category extends AppModel {
-    public $actsAs = array('Tree');
+class Category extends AppModel
+{
+    public $actsAs = ['Tree'];
 }
 ```
 
@@ -57,11 +58,12 @@ $kids = $this->Category->children();
 フィールド名を TreeBehavior に伝えましょう。 :
 
 ``` php
-class Category extends AppModel {
-    public $actsAs = array('Tree' => array(
+class Category extends AppModel
+{
+    public $actsAs = ['Tree' => [
         'left'  => 'left_node',
         'right' => 'right_node'
-    ));
+    ]];
 }
 ```
 
@@ -69,14 +71,15 @@ class Category extends AppModel {
 ツリーとしてだけ振る舞うべき理由はなく、国際化のサポートも必要とするかもしれません:
 
 ``` php
-class Category extends AppModel {
-    public $actsAs = array(
-        'Tree' => array(
+class Category extends AppModel
+{
+    public $actsAs = [
+        'Tree' => [
           'left'  => 'left_node',
           'right' => 'right_node'
-        ),
+        ],
         'Translate'
-    );
+    ];
 }
 ```
 
@@ -128,7 +131,7 @@ load メソッドを使用して、ビヘイビアの設定を上書きできま
 
 ``` php
 // すでに割り当てられたビヘイビアのある設定を変更
-$this->Category->Behaviors->load('Tree', array('left' => 'new_left_node'));
+$this->Category->Behaviors->load('Tree', ['left' => 'new_left_node']);
 ```
 
 そして、エイリアスを使用することで、ロードするビヘイビアの別名をカスタマイズでき、
@@ -136,7 +139,7 @@ $this->Category->Behaviors->load('Tree', array('left' => 'new_left_node'));
 
 ``` php
 // Tree ビヘイビアが 'MyTree' として利用可能
-$this->Category->Behaviors->load('MyTree', array('className' => 'Tree'));
+$this->Category->Behaviors->load('MyTree', ['className' => 'Tree']);
 ```
 
 モデルが割り当てているビヘイビアのリストを取得するメソッドもあります。
@@ -175,12 +178,13 @@ if (!$this->Category->Behaviors->loaded('Translate')) {
 以下はモデルからビヘイビアへ設定を渡す方法を示す簡単な例です:
 
 ``` php
-class Post extends AppModel {
-    public $actsAs = array(
-        'YourBehavior' => array(
+class Post extends AppModel
+{
+    public $actsAs = [
+        'YourBehavior' => [
             'option1_key' => 'option1_value'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -189,13 +193,14 @@ class Post extends AppModel {
 ビヘイビアが生成されたときに、ビヘイビアの `setup()` メソッドが呼ばれます。 :
 
 ``` php
-public function setup(Model $Model, $settings = array()) {
+public function setup(Model $Model, $settings = [])
+{
     if (!isset($this->settings[$Model->alias])) {
-        $this->settings[$Model->alias] = array(
+        $this->settings[$Model->alias] = [
             'option1_key' => 'option1_default_value',
             'option2_key' => 'option2_default_value',
             'option3_key' => 'option3_default_value',
-        );
+        ];
     }
     $this->settings[$Model->alias] = array_merge(
         $this->settings[$Model->alias], (array)$settings);
@@ -208,8 +213,9 @@ public function setup(Model $Model, $settings = array()) {
 例として、以下のようにしたとします:
 
 ``` php
-class Duck extends AppModel {
-    public $actsAs = array('Flying');
+class Duck extends AppModel
+{
+    public $actsAs = ['Flying'];
 }
 ```
 
@@ -225,7 +231,8 @@ $this->Duck->fly('toronto', 'montreal');
 このメソッドは２つの引数をとりますが、メソッドの定義は次のようになります:
 
 ``` php
-public function fly(Model $Model, $from, $to) {
+public function fly(Model $Model, $from, $to)
+{
     // 飛ぶことをする。
 }
 ```
@@ -243,10 +250,12 @@ public function fly(Model $Model, $from, $to) {
 マッピングされたメソッドの定義は普通の mixin なビヘイビアのメソッドとはわずかに違います。 :
 
 ``` php
-class MyBehavior extends ModelBehavior {
-    public $mapMethods = array('/do(\w+)/' => 'doSomething');
+class MyBehavior extends ModelBehavior
+{
+    public $mapMethods = ['/do(\w+)/' => 'doSomething'];
 
-    public function doSomething(Model $model, $method, $arg1, $arg2) {
+    public function doSomething(Model $model, $method, $arg1, $arg2)
+    {
         debug(func_get_args());
         //何かする
     }
@@ -290,7 +299,7 @@ $model->doReleaseTheHounds('karl', 'lenny');
 標準のビヘイビアのメソッドと同じく、 `$Model` パラメータを第一引数として受け取ります。
 この引数はビヘイビアのメソッドが呼び出されたモデルにあたります。
 
-`method` ModelBehavior::**setup**(Model $Model, array $settings = array())
+`method` ModelBehavior::**setup**(Model $Model, array $settings = [])
 
 `method` ModelBehavior::**cleanup**(Model $Model)
 
@@ -298,13 +307,13 @@ $model->doReleaseTheHounds('karl', 'lenny');
 
 `method` ModelBehavior::**afterFind**(Model $Model, mixed $results, boolean $primary = false)
 
-`method` ModelBehavior::**beforeValidate**(Model $Model, array $options = array())
+`method` ModelBehavior::**beforeValidate**(Model $Model, array $options = [])
 
 `method` ModelBehavior::**afterValidate**(Model $Model)
 
-`method` ModelBehavior::**beforeSave**(Model $Model, array $options = array())
+`method` ModelBehavior::**beforeSave**(Model $Model, array $options = [])
 
-`method` ModelBehavior::**afterSave**(Model $Model, boolean $created, array $options = array())
+`method` ModelBehavior::**afterSave**(Model $Model, boolean $created, array $options = [])
 
 `method` ModelBehavior::**beforeDelete**(Model $Model, boolean $cascade = true)
 

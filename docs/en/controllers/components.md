@@ -24,16 +24,16 @@ method:
 
 ``` php
 class PostsController extends AppController {
-    public $components = array(
-        'Auth' => array(
-            'authorize' => array('controller'),
-            'loginAction' => array(
+    public $components = [
+        'Auth' => [
+            'authorize' => ['controller'],
+            'loginAction' => [
                 'controller' => 'users',
                 'action' => 'login'
-            )
-        ),
-        'Cookie' => array('name' => 'CookieMonster')
-    );
+            ]
+        ],
+        'Cookie' => ['name' => 'CookieMonster']
+    ];
 ```
 
 The previous fragment of code would be an example of
@@ -46,12 +46,13 @@ function to a component property. The above could also be expressed
 as:
 
 ``` php
-public function beforeFilter() {
-    $this->Auth->authorize = array('controller');
-    $this->Auth->loginAction = array(
+public function beforeFilter()
+{
+    $this->Auth->authorize = ['controller'];
+    $this->Auth->loginAction = [
         'controller' => 'users',
         'action' => 'login'
-    );
+    ];
 
     $this->Cookie->name = 'CookieMonster';
 }
@@ -63,9 +64,9 @@ configuration options to be set before the controller's
 configuration options be set in the `$components` array:
 
 ``` php
-public $components = array(
-    'DebugKit.Toolbar' => array('panels' => array('history', 'session'))
-);
+public $components = [
+    'DebugKit.Toolbar' => ['panels' => ['history', 'session']]
+];
 ```
 
 Consult the relevant documentation to determine what configuration
@@ -78,18 +79,20 @@ implementation:
 
 ``` php
 // app/Controller/PostsController.php
-class PostsController extends AppController {
-    public $components = array(
-        'Auth' => array(
+class PostsController extends AppController
+{
+    public $components = [
+        'Auth' => [
             'className' => 'MyAuth'
-        )
-    );
+        ]
+    ];
 }
 
 // app/Controller/Component/MyAuthComponent.php
 App::uses('AuthComponent', 'Controller/Component');
 
-class MyAuthComponent extends AuthComponent {
+class MyAuthComponent extends AuthComponent
+{
     // Add your code to override the core AuthComponent
 }
 ```
@@ -111,12 +114,13 @@ them like so:
 
 ``` php
 class PostsController extends AppController {
-    public $components = array('Session', 'Cookie');
+    public $components = ['Session', 'Cookie'];
 
-    public function delete() {
+    public function delete()
+    {
         if ($this->Post->delete($this->request->data('Post.id'))) {
             $this->Session->setFlash('Post deleted.');
-            return $this->redirect(array('action' => 'index'));
+            return $this->redirect(['action' => 'index']);
         }
     }
 ```
@@ -165,8 +169,10 @@ structure for the component would look something like this:
 ``` php
 App::uses('Component', 'Controller');
 
-class MathComponent extends Component {
-    public function doComplexOperation($amount1, $amount2) {
+class MathComponent extends Component
+{
+    public function doComplexOperation($amount1, $amount2)
+    {
         return $amount1 + $amount2;
     }
 }
@@ -193,7 +199,7 @@ through which we can access an instance of it:
 ``` php
 /* Make the new component available at $this->Math,
 as well as the standard $this->Session */
-public $components = array('Math', 'Session');
+public $components = ['Math', 'Session'];
 ```
 
 Components declared in `AppController` will be merged with those
@@ -206,13 +212,13 @@ constructor. These parameters can then be handled by
 the Component:
 
 ``` php
-public $components = array(
-    'Math' => array(
+public $components = [
+    'Math' => [
         'precision' => 2,
         'randomGenerator' => 'srand'
-    ),
+    ],
     'Session', 'Auth'
-);
+];
 ```
 
 The above would pass the array containing precision and
@@ -230,15 +236,18 @@ way you include them in controllers - using the `$components` var:
 // app/Controller/Component/CustomComponent.php
 App::uses('Component', 'Controller');
 
-class CustomComponent extends Component {
+class CustomComponent extends Component
+{
     // the other component your component uses
-    public $components = array('Existing');
+    public $components = ['Existing'];
 
-    public function initialize(Controller $controller) {
+    public function initialize(Controller $controller)
+    {
         $this->Existing->foo();
     }
 
-    public function bar() {
+    public function bar()
+    {
         // ...
    }
 }
@@ -246,9 +255,11 @@ class CustomComponent extends Component {
 // app/Controller/Component/ExistingComponent.php
 App::uses('Component', 'Controller');
 
-class ExistingComponent extends Component {
+class ExistingComponent extends Component
+{
 
-    public function foo() {
+    public function foo()
+    {
         // ...
     }
 }
@@ -264,7 +275,7 @@ class ExistingComponent extends Component {
 
 `class` **Component**
 
-`method` Component::**__construct**(ComponentCollection $collection, $settings = array())
+`method` Component::**__construct**(ComponentCollection $collection, $settings = [])
 
 ### Callbacks
 

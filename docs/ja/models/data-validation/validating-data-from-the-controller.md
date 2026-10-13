@@ -34,7 +34,7 @@ if ($this->ModelName->validates()) {
 あげます:
 
 ``` php
-if ($this->User->validates(array('fieldList' => array('email', 'password')))) {
+if ($this->User->validates(['fieldList' => ['email', 'password']])) {
     // バリデーションOK
 } else {
     // バリデーションNG
@@ -67,7 +67,7 @@ $errors = $this->ModelName->invalidFields(); // validationErrors 配列を返す
 
 ``` php
 if ($this->ModelName->saveAll(
-    $this->request->data, array('validate' => 'only')
+    $this->request->data, ['validate' => 'only']
 )) {
   // データは有効
 } else {
@@ -80,7 +80,7 @@ if ($this->ModelName->saveAll(
 
 ``` php
 if ($this->ModelName->saveAll(
-    $this->request->data, array('validate' => false)
+    $this->request->data, ['validate' => false]
 )) {
     // チェックを省略して保存する
 }

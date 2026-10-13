@@ -122,9 +122,11 @@ can create a test method and output the contents of our category
 tree to see what it looks like. With a simple controller:
 
 ``` php
-class CategoriesController extends AppController {
+class CategoriesController extends AppController
+{
 
-    public function index() {
+    public function index()
+    {
         $data = $this->Category->generateTreeList(
           null,
           null,
@@ -140,8 +142,9 @@ and an even simpler model definition:
 
 ``` php
 // app/Model/Category.php
-class Category extends AppModel {
-    public $actsAs = array('Tree');
+class Category extends AppModel
+{
+    public $actsAs = ['Tree'];
 }
 ```
 
@@ -185,7 +188,7 @@ to the tree making your new addition a new top level entry:
 
 ``` php
 // pseudo controller code
-$data = array();
+$data = [];
 $data['Category']['name'] = 'Other People\'s Categories';
 $this->Category->save($data);
 ```
@@ -220,7 +223,7 @@ of your data will remain unchanged. For example:
 ``` php
 // pseudo controller code
 $this->Category->id = 5; // id of Extreme knitting
-$this->Category->save(array('name' => 'Extreme fishing'));
+$this->Category->save(['name' => 'Extreme fishing']);
 ```
 
 The above code did not affect the parent_id field - even if the
@@ -256,9 +259,9 @@ following code:
 $this->Category->id = 5; // id of Extreme fishing
 $newParentId = $this->Category->field(
   'id',
-  array('name' => 'Other People\'s Categories')
+  ['name' => 'Other People\'s Categories']
 );
-$this->Category->save(array('parent_id' => $newParentId));
+$this->Category->save(['parent_id' => $newParentId]);
 ```
 
 As would be expected the structure would be modified to:
@@ -344,7 +347,8 @@ Here is an example of a controller action (in a controller named
 Categories) that moves a specified node down the tree:
 
 ``` php
-public function movedown($id = null, $delta = null) {
+public function movedown($id = null, $delta = null)
+{
     $this->Category->id = $id;
     if (!$this->Category->exists()) {
        throw new NotFoundException(__('Invalid category'));
@@ -359,7 +363,7 @@ public function movedown($id = null, $delta = null) {
         );
     }
 
-    return $this->redirect(array('action' => 'index'));
+    return $this->redirect(['action' => 'index']);
 }
 ```
 
@@ -377,7 +381,8 @@ Here's an example of a controller action (in a controller named
 Categories) that moves a node up the tree:
 
 ``` php
-public function moveup($id = null, $delta = null) {
+public function moveup($id = null, $delta = null)
+{
     $this->Category->id = $id;
     if (!$this->Category->exists()) {
        throw new NotFoundException(__('Invalid category'));
@@ -392,7 +397,7 @@ public function moveup($id = null, $delta = null) {
         );
     }
 
-    return $this->redirect(array('action' => 'index'));
+    return $this->redirect(['action' => 'index']);
 }
 ```
 
@@ -453,14 +458,14 @@ The tree would become
 This demonstrates the alternate use for `removeFromTree`, the
 children have been reparented and 'Sport' has been deleted.
 
-`method` TreeBehavior::**reorder**(array('id' => null, 'field' => $Model->displayField, 'order' => 'ASC', 'verify' => true))
+`method` TreeBehavior::**reorder**(['id' => null, 'field' => $Model->displayField, 'order' => 'ASC', 'verify' => true])
 
 Reorders the nodes (and child nodes) of the tree according to the
 field and direction specified in the parameters. This method does
 not change the parent of any node. :
 
 ``` php
-$model->reorder(array(
+$model->reorder([
     //id of record to use as top node for reordering, default: $Model->id
     'id' => ,
     //which field to use in reordering, default: $Model->displayField
@@ -469,7 +474,7 @@ $model->reorder(array(
     'order' => ,
     //whether or not to verify the tree before reorder, default: true
     'verify' =>
-));
+]);
 ```
 
 > [!NOTE]
@@ -524,7 +529,7 @@ $this->Category->recover('parent');
 $this->Category->recover('tree');
 ```
 
-`method` TreeBehavior::**reorder**($options = array())
+`method` TreeBehavior::**reorder**($options = [])
 
 Reorders the nodes (and child nodes) of the tree according to the
 field and direction specified in the parameters. This method does
@@ -545,12 +550,12 @@ following options can affect the process:
 following possible keys by default, all of which are optional:
 
 ``` text
-array(
+[
     'id' => null,
     'field' => $model->displayField,
     'order' => 'ASC',
     'verify' => true
-)
+]
 ```
 
 `method` TreeBehavior::**verify**()
@@ -576,12 +581,12 @@ Example output:
 ``` text
 Array
 (
-    [0] => Array
-        (
+    [0] => 
+        [
             [0] => node
             [1] => 3
             [2] => left and right values identical
-        )
+        ]
     [1] => Array
         (
             [0] => node
@@ -613,9 +618,9 @@ only upto a certain level for e.g. when generating menus. You can use the
 `level` option to specify the field that will save level of each node:
 
 ``` php
-public $actsAs = array('Tree' => array(
+public $actsAs = ['Tree' => [
     'level' => 'level', // Defaults to null, i.e. no level saving
-));
+]];
 ```
 
 `method` TreeBehavior::**getLevel**($id)

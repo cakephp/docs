@@ -1,6 +1,6 @@
 # フラッシュ
 
-`class` **FlashComponent**(ComponentCollection $collection, array $config = array())
+`class` **FlashComponent**(ComponentCollection $collection, array $config = [])
 
 FlashComponent は、フォームの処理後やデータの確認のために表示する一回限りのメッセージ通知に
 使用します。 このような通知を CakePHP では「フラッシュメッセージ」と呼んでいます。
@@ -53,13 +53,13 @@ FlashComponent の `__call` や `set()` メソッドは、第２引数にオプ�
 
 ``` php
 // コントローラの中で
-$this->Flash->success('The user has been saved', array(
+$this->Flash->success('The user has been saved', [
     'key' => 'positive',
-    'params' => array(
+    'params' => [
         'name' => $user['User']['name'],
         'email' => $user['User']['email']
-    )
-));
+    ]
+]);
 
 // ビューの中で
 <?php echo $this->Flash->render('positive') ?>
@@ -77,7 +77,7 @@ $this->Flash->success('The user has been saved', array(
 
 ``` php
 // コントローラの中で
-$this->Flash->warning('My message', array('plugin' => 'PluginName'));
+$this->Flash->warning('My message', ['plugin' => 'PluginName']);
 ```
 
 上記のコードは、 `plugins/PluginName/View/Elements/Flash` 配下の warning.ctp

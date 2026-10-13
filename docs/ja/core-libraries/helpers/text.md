@@ -1,6 +1,6 @@
 # TextHelper
 
-`class` **TextHelper**(View $view, array $settings = array())
+`class` **TextHelper**(View $view, array $settings = [])
 
 TextHelper は、ビューの中でテキストを作成する際に便利で使いやすいメソッドが
 含まれています。リンクの有効化、URL のフォーマット、選ばれた言葉やフレーズの
@@ -11,11 +11,11 @@ TextHelper は、ビューの中でテキストを作成する際に便利で使
 `TextHelper` のいくつかのメソッドは、 `View` レイヤーの外でも使用できるように `String` クラスに移動しました。ビューの中でこれらのメソッドは TextHelper クラスを経由してアクセス可能です。普通のヘルパーメソッドを呼ぶのと同様に `$this->Text->method($args);` のように利用できます。
 :::
 
-`method` TextHelper::**autoLinkEmails**(string $text, array $options=array())
+`method` TextHelper::**autoLinkEmails**(string $text, array $options=[])
 
-`method` TextHelper::**autoLinkUrls**(string $text, array $options=array())
+`method` TextHelper::**autoLinkUrls**(string $text, array $options=[])
 
-`method` TextHelper::**autoLink**(string $text, array $options=array())
+`method` TextHelper::**autoLink**(string $text, array $options=[])
 
 `method` TextHelper::**autoParagraph**(string $text)
 

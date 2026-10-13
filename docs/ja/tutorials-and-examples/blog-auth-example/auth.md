@@ -37,28 +37,29 @@ CREATE TABLE users (
 
 ``` php
 // app/Model/User.php
-class User extends AppModel {
-    public $validate = array(
-        'username' => array(
-            'required' => array(
+class User extends AppModel
+{
+    public $validate = [
+        'username' => [
+            'required' => [
                 'rule' => 'notBlank',
                 'message' => 'A username is required'
-            )
-        ),
-        'password' => array(
-            'required' => array(
+            ]
+        ],
+        'password' => [
+            'required' => [
                 'rule' => 'notBlank',
                 'message' => 'A password is required'
-            )
-        ),
-        'role' => array(
-            'valid' => array(
-                'rule' => array('inList', array('admin', 'author')),
+            ]
+        ],
+        'role' => [
+            'valid' => [
+                'rule' => ['inList', ['admin', 'author']],
                 'message' => 'Please enter a valid role',
                 'allowEmpty' => false
-            )
-        )
-    );
+            ]
+        ]
+    ];
 }
 ```
 
@@ -69,19 +70,23 @@ UsersController もまた作成しましょう。以下のコードは基本的�
 // app/Controller/UsersController.php
 App::uses('AppController', 'Controller');
 
-class UsersController extends AppController {
+class UsersController extends AppController
+{
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         parent::beforeFilter();
         $this->Auth->allow('add');
     }
 
-    public function index() {
+    public function index()
+    {
         $this->User->recursive = 0;
         $this->set('users', $this->paginate());
     }
 
-    public function view($id = null) {
+    public function view($id = null)
+    {
         $this->User->id = $id;
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
@@ -89,12 +94,13 @@ class UsersController extends AppController {
         $this->set('user', $this->User->findById($id));
     }
 
-    public function add() {
+    public function add()
+    {
         if ($this->request->is('post')) {
             $this->User->create();
             if ($this->User->save($this->request->data)) {
                 $this->Flash->success(__('The user has been saved'));
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(
                 __('The user could not be saved. Please, try again.')
@@ -102,7 +108,8 @@ class UsersController extends AppController {
         }
     }
 
-    public function edit($id = null) {
+    public function edit($id = null)
+    {
         $this->User->id = $id;
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
@@ -110,7 +117,7 @@ class UsersController extends AppController {
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->User->save($this->request->data)) {
                 $this->Flash->success(__('The user has been saved'));
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(
                 __('The user could not be saved. Please, try again.')
@@ -121,7 +128,8 @@ class UsersController extends AppController {
         }
     }
 
-    public function delete($id = null) {
+    public function delete($id = null)
+    {
         // Prior to 2.5 use
         // $this->request->onlyAllow('post');
 
@@ -133,12 +141,11 @@ class UsersController extends AppController {
         }
         if ($this->User->delete()) {
             $this->Flash->success(__('User deleted'));
-            return $this->redirect(array('action' => 'index'));
+            return $this->redirect(['action' => 'index']);
         }
         $this->Flash->error(__('User was not deleted'));
-        return $this->redirect(array('action' => 'index'));
+        return $this->redirect(['action' => 'index']);
     }
-
 }
 ```
 
@@ -157,9 +164,9 @@ class UsersController extends AppController {
         <legend><?php echo __('Add User'); ?></legend>
         <?php echo $this->Form->input('username');
         echo $this->Form->input('password');
-        echo $this->Form->input('role', array(
-            'options' => array('admin' => 'Admin', 'author' => 'Author')
-        ));
+        echo $this->Form->input('role', [
+            'options' => ['admin' => 'Admin', 'author' => 'Author']
+        ]);
     ?>
     </fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
@@ -178,30 +185,32 @@ class UsersController extends AppController {
 
 ``` php
 // app/Controller/AppController.php
-class AppController extends Controller {
+class AppController extends Controller
+{
     //...
 
-    public $components = array(
+    public $components = [
         'Flash',
-        'Auth' => array(
-            'loginRedirect' => array(
+        'Auth' => [
+            'loginRedirect' => [
                 'controller' => 'posts',
                 'action' => 'index'
-            ),
-            'logoutRedirect' => array(
+            ],
+            'logoutRedirect' => [
                 'controller' => 'pages',
                 'action' => 'display',
                 'home'
-            ),
-            'authenticate' => array(
-                'Form' => array(
+            ],
+            'authenticate' => [
+                'Form' => [
                     'passwordHasher' => 'Blowfish'
-                )
-            )
-        )
-    );
+                ]
+            ]
+        ]
+    ];
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         $this->Auth->allow('index', 'view');
     }
     //...
@@ -224,13 +233,15 @@ users の add 関数にアクセスすること、実装にログインとログ
 ``` php
 // app/Controller/UsersController.php
 
-public function beforeFilter() {
+public function beforeFilter()
+{
     parent::beforeFilter();
     // ユーザー自身による登録とログアウトを許可する
     $this->Auth->allow('add', 'logout');
 }
 
-public function login() {
+public function login()
+{
     if ($this->request->is('post')) {
         if ($this->Auth->login()) {
             $this->redirect($this->Auth->redirect());
@@ -240,7 +251,8 @@ public function login() {
     }
 }
 
-public function logout() {
+public function logout()
+{
     $this->redirect($this->Auth->logout());
 }
 ```
@@ -258,7 +270,8 @@ class User extends AppModel {
 
 // ...
 
-public function beforeSave($options = array()) {
+public function beforeSave($options = [])
+{
     if (isset($this->data[$this->alias]['password'])) {
         $passwordHasher = new BlowfishPasswordHasher();
         $this->data[$this->alias]['password'] = $passwordHasher->hash(
@@ -333,13 +346,14 @@ PostsController での小さな変更が必要です:
 
 ``` php
 // app/Controller/PostsController.php
-public function add() {
+public function add()
+{
     if ($this->request->is('post')) {
         //Added this line
         $this->request->data['Post']['user_id'] = $this->Auth->user('id');
         if ($this->Post->save($this->request->data)) {
             $this->Flash->success(__('Your post has been saved.'));
-            return $this->redirect(array('action' => 'index'));
+            return $this->redirect(['action' => 'index']);
         }
     }
 }
@@ -356,25 +370,26 @@ Auth コンポーネントの `user()` 関数は現在ログインしている�
 ``` php
 // app/Controller/AppController.php
 
-public $components = array(
+public $components = [
     'Flash',
-    'Auth' => array(
-        'loginRedirect' => array('controller' => 'posts', 'action' => 'index'),
-        'logoutRedirect' => array(
+    'Auth' => [
+        'loginRedirect' => ['controller' => 'posts', 'action' => 'index'],
+        'logoutRedirect' => [
             'controller' => 'pages',
             'action' => 'display',
             'home'
-        ),
-        'authenticate' => array(
-            'Form' => array(
+        ],
+        'authenticate' => [
+            'Form' => [
                 'passwordHasher' => 'Blowfish'
-            )
-        ),
-        'authorize' => array('Controller') // この行を追加しました
-    )
-);
+            ]
+        ],
+        'authorize' => ['Controller'] // この行を追加しました
+    ]
+];
 
-public function isAuthorized($user) {
+public function isAuthorized($user)
+{
     // Admin can access every action
     if (isset($user['role']) && $user['role'] === 'admin') {
         return true;
@@ -399,14 +414,15 @@ public function isAuthorized($user) {
 ``` php
 // app/Controller/PostsController.php
 
-public function isAuthorized($user) {
+public function isAuthorized($user)
+{
     // 登録済ユーザーは投稿できる
     if ($this->action === 'add') {
         return true;
     }
 
     // 投稿のオーナーは編集や削除ができる
-    if (in_array($this->action, array('edit', 'delete'))) {
+    if (in_array($this->action, ['edit', 'delete'])) {
         $postId = (int) $this->request->params['pass'][0];
         if ($this->Post->isOwnedBy($postId, $user['id'])) {
             return true;
@@ -428,8 +444,9 @@ add アクションへのアクセス、条件的に edit と delete を許可�
 ``` php
 // app/Model/Post.php
 
-public function isOwnedBy($post, $user) {
-    return $this->field('id', array('id' => $post, 'user_id' => $user)) !== false;
+public function isOwnedBy($post, $user)
+{
+    return $this->field('id', ['id' => $post, 'user_id' => $user]) !== false;
 }
 ```
 

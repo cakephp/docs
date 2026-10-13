@@ -26,14 +26,14 @@ findから返された結果を変更するため、あるいは他のfindの後
 モデルのfindから返された結果が含まれます。たとえば次のようなものです。:
 
 ``` php
-$results = array(
-    0 => array(
-        'ModelName' => array(
+$results = [
+    0 => [
+        'ModelName' => [
             'field1' => 'value1',
             'field2' => 'value2',
-        ),
-    ),
-);
+        ],
+    ],
+];
 ```
 
 このコールバックの返り値は、このコールバックを呼び出したfindの結果(を加工したもの)にする必要があります。
@@ -45,10 +45,10 @@ $results = array(
 通常の find の結果の代わりに次のようになります:
 
 ``` php
-$results = array(
+$results = [
     'field_1' => 'value1',
     'field_2' => 'value2'
-);
+];
 ```
 
 > [!WARNING]
@@ -59,7 +59,8 @@ $results = array(
 afterFind によってデータをフォーマットする例を次に示します。:
 
 ``` php
-public function afterFind($results, $primary = false) {
+public function afterFind($results, $primary = false)
+{
     foreach ($results as $key => $val) {
         if (isset($val['Event']['begindate'])) {
             $results[$key]['Event']['begindate'] = $this->dateFormatAfterFind(
@@ -70,14 +71,15 @@ public function afterFind($results, $primary = false) {
     return $results;
 }
 
-public function dateFormatAfterFind($dateString) {
+public function dateFormatAfterFind($dateString)
+{
     return date('d-m-Y', strtotime($dateString));
 }
 ```
 
 ## beforeValidate
 
-`beforeValidate(array $options = array())`
+`beforeValidate(array $options = [])`
 
 バリデーションが行われる前にモデルのデータを変更するか、
 必要に応じてバリデーションルールを変更するために、このコールバックを使用します。
@@ -93,7 +95,7 @@ public function dateFormatAfterFind($dateString) {
 
 ## beforeSave
 
-`beforeSave(array $options = array())`
+`beforeSave(array $options = [])`
 
 この関数に保存の前処理のロジックを置きます。
 この関数はモデルのデータがバリデーションに成功した後、
@@ -111,7 +113,8 @@ beforeSaveによってどのように日付を加工するかの例を次に示�
 このコードを適切なモデルにおいて使用します。
 
 ``` php
-public function beforeSave($options = array()) {
+public function beforeSave($options = [])
+{
     if (!empty($this->data['Event']['begindate']) &&
         !empty($this->data['Event']['enddate'])
 ) {
@@ -126,7 +129,8 @@ public function beforeSave($options = array()) {
     return true;
 }
 
-public function dateFormatBeforeSave($dateString) {
+public function dateFormatBeforeSave($dateString)
+{
     return date('Y-m-d', strtotime($dateString));
 }
 ```
@@ -167,10 +171,11 @@ public function dateFormatBeforeSave($dateString) {
 // $this->idがセットされます。
 // 「ProductCategory hasMany Product」と仮定すると、
 // このモデルで$this->Productにアクセスできます。
-public function beforeDelete($cascade = true) {
-    $count = $this->Product->find("count", array(
-        "conditions" => array("product_category_id" => $this->id)
-    ));
+public function beforeDelete($cascade = true)
+{
+    $count = $this->Product->find("count", [
+        "conditions" => ["product_category_id" => $this->id]
+    ]);
     if ($count == 0) {
         return true;
     } else {

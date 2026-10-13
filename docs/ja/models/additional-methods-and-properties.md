@@ -8,12 +8,14 @@ CakePHP のモデルの標準機能があれば、やりたいことはなんで
 こういう考え方は、ファットモデル (*fat model*) といわれます。
 
 ``` php
-class Example extends AppModel {
-    public function getRecent() {
-        $conditions = array(
+class Example extends AppModel
+{
+    public function getRecent()
+    {
+        $conditions = [
             'created BETWEEN (curdate() - interval 7 day)' .
             ' and (curdate() - interval 0 day))'
-        );
+        ];
         return $this->find('all', compact('conditions'));
     }
 }
@@ -31,10 +33,10 @@ $recent = $this->Example->getRecent();
 
 ``` php
 $result = $this->Example->associations();
-// $result の値は array('belongsTo', 'hasOne', 'hasMany', 'hasAndBelongsToMany')
+// $result の値は ['belongsTo', 'hasOne', 'hasMany', 'hasAndBelongsToMany']
 ```
 
-## `Model::buildQuery(string $type = 'first', array $query = array())`
+## `Model::buildQuery(string $type = 'first', array $query = [])`
 
 データソースがデータ取得のクエリを生成するために使用するクエリ配列を作成します。
 

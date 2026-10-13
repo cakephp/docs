@@ -19,8 +19,9 @@
 たとえば以下のようになります。 :
 
 ``` php
-class User extends AppModel {
-    public $validate = array();
+class User extends AppModel
+{
+    public $validate = [];
 }
 ```
 
@@ -31,12 +32,13 @@ class User extends AppModel {
 いくつかのシンプルなバリデーションルールを以下の例で示します。 :
 
 ``` php
-class User extends AppModel {
-    public $validate = array(
+class User extends AppModel
+{
+    public $validate = [
         'login' => 'alphaNumeric',
         'email' => 'email',
         'born'  => 'date'
-    );
+    ];
 }
 ```
 
@@ -56,30 +58,31 @@ CakePHP には多くのバリデーションルールが用意されており、
 より複雑な例を以下に示します。 :
 
 ``` php
-class User extends AppModel {
-    public $validate = array(
-        'login' => array(
-            'alphaNumeric' => array(
+class User extends AppModel
+{
+    public $validate = [
+        'login' => [
+            'alphaNumeric' => [
                 'rule' => 'alphaNumeric',
                 'required' => true,
                 'message' => '文字と数字のみです'
-            ),
-            'between' => array(
-                'rule' => array('lengthBetween', 5, 15),
+            ],
+            'between' => [
+                'rule' => ['lengthBetween', 5, 15],
                 'message' => '5～15文字です'
-            )
-        ),
-        'password' => array(
-            'rule' => array('minLength', '8'),
+            ]
+        ],
+        'password' => [
+            'rule' => ['minLength', '8'],
             'message' => '最低8文字です'
-        ),
+        ],
         'email' => 'email',
-        'born' => array(
+        'born' => [
             'rule' => 'date',
             'message' => '正しい値を入れてください',
             'allowEmpty' => true
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -107,7 +110,7 @@ CakePHP が使うエラーメッセージを自由に定義できます。
 この方法で定義する場合の、一般的な書式は以下の通りです。 :
 
 ``` php
-public $validate = array('fieldName' => 'ruleName');
+public $validate = ['fieldName' => 'ruleName'];
 ```
 
 ここで 'fieldName' はルールを定義する対象の項目名です。
@@ -118,7 +121,7 @@ public $validate = array('fieldName' => 'ruleName');
 どうかをチェックするために、以下のようにルールを使えます。 :
 
 ``` php
-public $validate = array('user_email' => 'email');
+public $validate = ['user_email' => 'email'];
 ```
 
 ## 項目単位の単一ルール
@@ -128,17 +131,17 @@ public $validate = array('user_email' => 'email');
 する際の一般的に利用パターンを見てみましょう。 :
 
 ``` php
-public $validate = array(
-    'fieldName1' => array(
-        // or: array('ruleName', 'param1', 'param2' ...)
+public $validate = [
+    'fieldName1' => [
+        // or: ['ruleName', 'param1', 'param2' ...]
         'rule'       => 'ruleName',
         'required'   => true,
         'allowEmpty' => false,
         // or: 'update'
         'on'         => 'create',
         'message'    => 'エラーメッセージ'
-    )
-);
+    ]
+];
 ```
 
 'rule' キーは必須です。　'required' =\> true だけをセットしても、
@@ -162,22 +165,22 @@ rule がパラメータを必要としない場合、'rule' に次のような�
 値を指定できます。 :
 
 ``` php
-public $validate = array(
-    'login' => array(
+public $validate = [
+    'login' => [
         'rule' => 'alphaNumeric'
-    )
-);
+    ]
+];
 ```
 
 （max, min, range のように）rule がパラメータを取る場合、
 'rule' を配列で指定します。 :
 
 ``` php
-public $validate = array(
-    'password' => array(
-        'rule' => array('minLength', 8)
-    )
-);
+public $validate = [
+    'password' => [
+        'rule' => ['minLength', 8]
+    ]
+];
 ```
 
 配列ベースのルール定義には 'rule' キーが必要ですので覚えておいてください。
@@ -192,12 +195,12 @@ public $validate = array(
 たとえばバリデーションルールが以下のように定義されたとすると、 :
 
 ``` php
-public $validate = array(
-    'login' => array(
+public $validate = [
+    'login' => [
         'rule'     => 'alphaNumeric',
         'required' => true
-    )
-);
+    ]
+];
 ```
 
 モデルの save() メソッドに送られるデータにはログイン項目が含まれて
@@ -248,12 +251,12 @@ message キーを使うと、そのルールについてのカスタムバリデ
 エラーメッセージを定義できます。 :
 
 ``` php
-public $validate = array(
-    'password' => array(
-        'rule' => array('minLength', 8),
+public $validate = [
+    'password' => [
+        'rule' => ['minLength', 8],
         'message' => 'パスワードは８文字以上必要です。'
-    )
-);
+    ]
+];
 ```
 
 > [!NOTE]
@@ -271,18 +274,18 @@ public $validate = array(
 その基本的な書き方は以下のようになります。 :
 
 ``` php
-public $validate = array(
-    'fieldName' => array(
-        'ruleName' => array(
+public $validate = [
+    'fieldName' => [
+        'ruleName' => [
             'rule' => 'ruleName',
             // ここに on や required などその他のキーを書く
-        ),
-        'ruleName2' => array(
+        ],
+        'ruleName2' => [
             'rule' => 'ruleName2',
             // ここに on や required などその他のキーを書く
-        )
-    )
-);
+        ]
+    ]
+];
 ```
 
 これでわかるように、この書き方はこれまでのセクションで出てきた
@@ -295,18 +298,18 @@ public $validate = array(
 もう少し実践的な例を見てみましょう。 :
 
 ``` php
-public $validate = array(
-    'login' => array(
-        'loginRule-1' => array(
+public $validate = [
+    'login' => [
+        'loginRule-1' => [
             'rule' => 'alphaNumeric',
             'message' => 'アルファベットまたは数字のみです',
-         ),
-        'loginRule-2' => array(
-            'rule' => array('minLength', 8),
+         ],
+        'loginRule-2' => [
+            'rule' => ['minLength', 8],
             'message' => '最低８文字です'
-        )
-    )
-);
+        ]
+    ]
+];
 ```
 
 この例では login 項目に対して loginRule-1 と loginRule-2
@@ -329,32 +332,32 @@ public $validate = array(
 エラーメッセージが返されます。 :
 
 ``` php
-public $validate = array(
-    'login' => array(
-        'rule1' => array(
+public $validate = [
+    'login' => [
+        'rule1' => [
             'rule' => 'alphaNumeric',
             'message' => 'アルファベットと数字だけを使えます',
             'last'    => false
-         ),
-        'rule2' => array(
-            'rule' => array('minLength', 8),
+         ],
+        'rule2' => [
+            'rule' => ['minLength', 8],
             'message' => '８文字以上です'
-        )
-    )
-);
+        ]
+    ]
+];
 ```
 
 この配列形式でバリデーションルールを指定する場合、
 `message` キーは省略できます。以下の例を見てください。 :
 
 ``` php
-public $validate = array(
-    'login' => array(
-        'アルファベットと数字だけです' => array(
+public $validate = [
+    'login' => [
+        'アルファベットと数字だけです' => [
             'rule' => 'alphaNumeric',
-         ),
-    )
-);
+         ],
+    ]
+];
 ```
 
 `alphaNumeric` ルールに引っかかった場合、 `message` キーが
@@ -375,12 +378,12 @@ public $validate = array(
 カスタム正規表現を定義できます。 :
 
 ``` php
-public $validate = array(
-    'login' => array(
+public $validate = [
+    'login' => [
         'rule' => '/^[a-z0-9]{3,}$/i',
         'message' => '文字と数字のみ、３文字以上'
-    )
-);
+    ]
+];
 ```
 
 上記の例では login が文字と数字のみで構成され、最低３文字あるか
@@ -398,22 +401,24 @@ public $validate = array(
 バリデーション関数を追加する必要があります。 :
 
 ``` php
-class User extends AppModel {
+class User extends AppModel
+{
 
-    public $validate = array(
-        'promotion_code' => array(
-            'rule' => array('limitDuplicates', 25),
+    public $validate = [
+        'promotion_code' => [
+            'rule' => ['limitDuplicates', 25],
             'message' => '利用回数の制限を超えました。'
-        )
-    );
+        ]
+    ];
 
-    public function limitDuplicates($check, $limit) {
-        // $check には array('promotion_code' => '入力値') が入る
+    public function limitDuplicates($check, $limit)
+    {
+        // $check には ['promotion_code' => '入力値'] が入る
         // $limit には 25 が入っている
-        $existingPromoCount = $this->find('count', array(
+        $existingPromoCount = $this->find('count', [
             'conditions' => $check,
             'recursive' => -1
-        ));
+        ]);
         return $existingPromoCount < $limit;
     }
 }
@@ -443,17 +448,19 @@ class User extends AppModel {
 レコードの全体は \$this-\>data メンバ変数に入っています。 :
 
 ``` php
-class Post extends AppModel {
+class Post extends AppModel
+{
 
-    public $validate = array(
-        'slug' => array(
+    public $validate = [
+        'slug' => [
             'rule' => 'alphaNumericDashUnderscore',
             'message' => 'これには文字、数字、ハイフン、' .
                 'アンダースコアが使えます'
-        )
-    );
+        ]
+    ];
 
-    public function alphaNumericDashUnderscore($check) {
+    public function alphaNumericDashUnderscore($check)
+    {
         // $data 配列はフォームの項目名をキーとして渡される。
         // この関数が汎用的に使えるように、値を展開する必要がある。
         $value = array_values($check);
@@ -499,10 +506,10 @@ class Post extends AppModel {
 
 ``` php
 // Inside a model class
-$this->validator()->add('password', 'required', array(
+$this->validator()->add('password', 'required', [
     'rule' => 'notBlank',
     'required' => 'create'
-));
+]);
 ```
 
 これはモデルの `password` 項目に対して単一のルールを追加します。
@@ -511,29 +518,29 @@ add に対してさらに他の add への呼び出しを、好きなだけ繋�
 ``` php
 // Inside a model class
 $this->validator()
-    ->add('password', 'required', array(
+    ->add('password', 'required', [
         'rule' => 'notBlank',
         'required' => 'create'
-    ))
-    ->add('password', 'size', array(
-        'rule' => array('lengthBetween', 8, 20),
+    ])
+    ->add('password', 'size', [
+        'rule' => ['lengthBetween', 8, 20],
         'message' => 'パスワードは最低8文字です。'
-    ));
+    ]);
 ```
 
 一つの項目に対して一度に複数のルールを追加することもできます。 :
 
 ``` php
-$this->validator()->add('password', array(
-    'required' => array(
+$this->validator()->add('password', [
+    'required' => [
         'rule' => 'notBlank',
         'required' => 'create'
-    ),
-    'size' => array(
-        'rule' => array('lengthBetween', 8, 20),
+    ],
+    'size' => [
+        'rule' => ['lengthBetween', 8, 20],
         'message' => 'パスワードは最低8文字です。'
-    )
-));
+    ]
+]);
 ```
 
 また、validator オブジェクトに対して配列形式のインターフェース
@@ -541,15 +548,15 @@ $this->validator()->add('password', array(
 
 ``` php
 $validator = $this->validator();
-$validator['username'] = array(
-    'unique' => array(
+$validator['username'] = [
+    'unique' => [
         'rule' => 'isUnique',
         'required' => 'create'
-    ),
-    'alphanumeric' => array(
+    ],
+    'alphanumeric' => [
         'rule' => 'alphanumeric'
-    )
-);
+    ]
+];
 ```
 
 ### 現在のバリデーションルールを変更する
@@ -564,10 +571,10 @@ validator オブジェクトを使って現在のバリデーションルール�
 
 ``` php
 // モデルクラスの中で
-$this->validator()->getField('password')->setRule('required', array(
+$this->validator()->getField('password')->setRule('required', [
     'rule' => 'required',
     'required' => true
-));
+]);
 ```
 
 これと似たようなやり方で、その項目におけるルールをすべて完全に
@@ -575,10 +582,10 @@ $this->validator()->getField('password')->setRule('required', array(
 
 ``` php
 // モデルクラスの中で
-$this->validator()->getField('password')->setRules(array(
-    'required' => array(...),
-    'otherRule' => array(...)
-));
+$this->validator()->getField('password')->setRules([
+    'required' => [...],
+    'otherRule' => [...]
+]);
 ```
 
 ルールの中の一つのプロパティだけを変更したい場合は、
@@ -600,10 +607,10 @@ $this->validator()->getField('password')
 
 ``` php
 $validator = $this->validator();
-$validator['username']['unique'] = array(
+$validator['username']['unique'] = [
     'rule' => 'isUnique',
     'required' => 'create'
-);
+];
 
 $validator['username']['unique']->last = true;
 $validator['username']['unique']->message = 'その名前はすでに使われています';
@@ -651,12 +658,12 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 この項目は文字と数字だけで構成されなければなりません。 :
 
 ``` php
-public $validate = array(
-    'login' => array(
+public $validate = [
+    'login' => [
         'rule' => 'alphaNumeric',
         'message' => 'ユーザ名には文字と数字だけしか使えません。'
-    )
-);
+    ]
+];
 ```
 
 `static` Validation::**lengthBetween**(string $check, integer $min, integer $max)
@@ -665,12 +672,12 @@ public $validate = array(
 なりません。最小値と最大値の両方を指定する必要があります。 :
 
 ``` php
-public $validate = array(
-    'password' => array(
-        'rule' => array('lengthBetween', 5, 15),
+public $validate = [
+    'password' => [
+        'rule' => ['lengthBetween', 5, 15],
         'message' => 'パスワードは5～15文字でなければなりません。'
-    )
-);
+    ]
+];
 ```
 
 データは文字数でチェックされます。バイト数ではありません。
@@ -685,12 +692,12 @@ public $validate = array(
 改行（ニューライン）です。 :
 
 ``` php
-public $validate = array(
-    'id' => array(
+public $validate = [
+    'id' => [
         'rule' => 'blank',
         'on'   => 'create'
-    )
-);
+    ]
+];
 ```
 
 `static` Validation::**boolean**(string $check)
@@ -699,12 +706,12 @@ public $validate = array(
 true, false, 数字の 0 または 1、文字列の '0' または '1' です。 :
 
 ``` php
-public $validate = array(
-    'myCheckbox' => array(
-        'rule' => array('boolean'),
+public $validate = [
+    'myCheckbox' => [
+        'rule' => ['boolean'],
         'message' => 'myCheckbox の値が誤っています'
-    )
-);
+    ]
+];
 ```
 
 `static` Validation::**cc**(mixed $check, mixed $type = 'fast', boolean $deep = false, string $regex = null)
@@ -743,12 +750,12 @@ public $validate = array(
 独自の正規表現を指定できます。 :
 
 ``` php
-public $validate = array(
-    'ccnumber' => array(
-        'rule' => array('cc', array('visa', 'maestro'), false, null),
+public $validate = [
+    'ccnumber' => [
+        'rule' => ['cc', ['visa', 'maestro'], false, null],
         'message' => 'クレジットカード番号が正しくありません。'
-    )
-);
+    ]
+];
 ```
 
 `static` Validation::**comparison**(mixed $check1, string $operator = null, integer $check2 = null)
@@ -758,19 +765,19 @@ comparison は数値を比較します。サポートしている機能は『よ
 以下にいくつか例を示します。 :
 
 ``` php
-public $validate = array(
-    'age' => array(
-        'rule' => array('comparison', '>=', 18),
+public $validate = [
+    'age' => [
+        'rule' => ['comparison', '>=', 18],
         'message' => '条件は１８歳以上です。'
-    )
-);
+    ]
+];
 
-public $validate = array(
-    'age' => array(
-        'rule' => array('comparison', 'greater or equal', 18),
+public $validate = [
+    'age' => [
+        'rule' => ['comparison', 'greater or equal', 18],
         'message' => '条件は１８歳以上です。'
-    )
-);
+    ]
+];
 ```
 
 `static` Validation::**custom**(mixed $check, string $regex = null)
@@ -778,12 +785,12 @@ public $validate = array(
 カスタム正規表現が必要な場合に使われます。 :
 
 ``` php
-public $validate = array(
-    'infinite' => array(
-        'rule' => array('custom', '\u221E'),
+public $validate = [
+    'infinite' => [
+        'rule' => ['custom', '\u221E'],
         'message' => '∞ を入力してください'
-    )
-);
+    ]
+];
 ```
 
 `static` Validation::**date**(string $check, mixed $format = 'ymd', string $regex = null)
@@ -813,13 +820,13 @@ public $validate = array(
 キーが指定されない場合、'ymd' がデフォルトのキーとして使われます。 :
 
 ``` php
-public $validate = array(
-    'born' => array(
-        'rule'       => array('date', 'ymd'),
+public $validate = [
+    'born' => [
+        'rule'       => ['date', 'ymd'],
         'message'    => '有効な日付を YY-MM-DD フォーマットで入力してください。',
         'allowEmpty' => true
-    )
-);
+    ]
+];
 ```
 
 大量のデータが特定の日付フォーマットを要求している場合は、様々な
@@ -852,12 +859,12 @@ public $validate = array(
 キーが指定されない場合、'ymd' がデフォルトのキーとして使われます。 :
 
 ``` php
-public $validate = array(
-    'birthday' => array(
-        'rule' => array('datetime', 'dmy'),
+public $validate = [
+    'birthday' => [
+        'rule' => ['datetime', 'dmy'],
         'message'    => '有効な日時を入力してください。',
-    )
-);
+    ]
+];
 ```
 
 ２番めのパラメータには正規表現を指定します。このパラメータが指定
@@ -873,11 +880,11 @@ date() と異なり、datetime() は日時を検証します。
 場合は正当な数値としてはみなされません。 :
 
 ``` php
-public $validate = array(
-    'price' => array(
-        'rule' => array('decimal', 2)
-    )
-);
+public $validate = [
+    'price' => [
+        'rule' => ['decimal', 2]
+    ]
+];
 ```
 
 `static` Validation::**email**(string $check, boolean $deep = false, string $regex = null)
@@ -887,14 +894,14 @@ public $validate = array(
 どうかも合わせてチェックします。 :
 
 ``` php
-public $validate = array('email' => array('rule' => 'email'));
+public $validate = ['email' => ['rule' => 'email']];
 
-public $validate = array(
-    'email' => array(
-        'rule' => array('email', true),
+public $validate = [
+    'email' => [
+        'rule' => ['email', true],
         'message' => '有効なメールアドレスを入力してください。'
-    )
-);
+    ]
+];
 ```
 
 `static` Validation::**equalTo**(mixed $check, mixed $compareTo)
@@ -904,29 +911,29 @@ public $validate = array(
 :
 
 ``` php
-public $validate = array(
-    'food' => array(
-        'rule' => array('equalTo', 'cake'),
+public $validate = [
+    'food' => [
+        'rule' => ['equalTo', 'cake'],
         'message' => 'この値は文字列 cake でなければなりません。'
-    )
-);
+    ]
+];
 ```
 
-`static` Validation::**extension**(mixed $check, array $extensions = array('gif', 'jpeg', 'png', 'jpg'))
+`static` Validation::**extension**(mixed $check, array $extensions = ['gif', 'jpeg', 'png', 'jpg'])
 
 .jpg や .png といった有効なファイル拡張子かどうかをチェックします。
 複数の拡張子を配列として渡すこともできます。
 
 ``` php
-public $validate = array(
-    'image' => array(
-        'rule' => array(
+public $validate = [
+    'image' => [
+        'rule' => [
             'extension',
-            array('gif', 'jpeg', 'png', 'jpg')
-        ),
+            ['gif', 'jpeg', 'png', 'jpg']
+        ],
         'message' => '有効な画像ファイルを指定してください。'
-    )
-);
+    ]
+];
 ```
 
 `static` Validation::**fileSize**($check, $operator = null, $size = null)
@@ -939,12 +946,12 @@ public $validate = array(
 自動的に解析し、`tmp_name` キーがあれば取り出します。 :
 
 ``` php
-public $validate = array(
-    'image' => array(
-        'rule' => array('fileSize', '<=', '1MB'),
+public $validate = [
+    'image' => [
+        'rule' => ['fileSize', '<=', '1MB'],
         'message' => '画像は 1MB 未満でなければなりません。'
-    )
-);
+    ]
+];
 ```
 
 ::: info Added in version 2.3
@@ -960,14 +967,14 @@ public $validate = array(
 使用例:
 
 ``` php
-public $validate = array(
-    'function' => array(
-         'allowedChoice' => array(
-             'rule' => array('inList', array('Foo', 'Bar')),
+public $validate = [
+    'function' => [
+         'allowedChoice' => [
+             'rule' => ['inList', ['Foo', 'Bar']],
              'message' => 'Foo または Bar を入力してください。'
-         )
-     )
- );
+         ]
+     ]
+ ];
 ```
 
 デフォルトでは比較の際に大文字と小文字を区別します。 `$caseInsensitive`
@@ -980,12 +987,12 @@ public $validate = array(
 を指定可能です。
 
 ``` php
-public $validate = array(
-    'clientip' => array(
-        'rule' => array('ip', 'IPv4'), // or 'IPv6' or 'both' (default)
+public $validate = [
+    'clientip' => [
+        'rule' => ['ip', 'IPv4'], // or 'IPv6' or 'both' (default)
         'message' => '有効なIPアドレスを入力してください。'
-    )
-);
+    ]
+];
 ```
 
 `method` Validation::**Model::isUnique()**()
@@ -1000,12 +1007,12 @@ luhn アルゴリズム：さまざまな一意の番号を検証するための
 このルールはデータが最大長に収まっているかどうかを検証します。 :
 
 ``` php
-public $validate = array(
-    'login' => array(
-        'rule' => array('maxLength', 15),
+public $validate = [
+    'login' => [
+        'rule' => ['maxLength', 15],
         'message' => 'ユーザ名は15文字までです。'
-    )
-);
+    ]
+];
 ```
 
 これは 'login' フィールドが15文字以内になることを保証します。
@@ -1016,12 +1023,12 @@ public $validate = array(
 このルールはデータが最大長に収まっているかどうかを検証します。 :
 
 ``` php
-public $validate = array(
-    'data' => array(
-        'rule' => array('maxLengthBytes', 2 ** 24 - 1),
+public $validate = [
+    'data' => [
+        'rule' => ['maxLengthBytes', 2 ** 24 - 1],
         'message' => 'データは 16 MB より大きくできません。'
-    )
-);
+    ]
+];
 ```
 
 これは 'data' フィールドが 16777215 バイト以内になることを保証します。
@@ -1040,16 +1047,16 @@ public $validate = array(
 2.5 から `$mimeTypes` に正規表現が書けるようになりました。
 
 ``` php
-public $validate = array(
-    'image' => array(
-        'rule' => array('mimeType', array('image/gif')),
+public $validate = [
+    'image' => [
+        'rule' => ['mimeType', ['image/gif']],
         'message' => 'mime 型が不正です。'
-    ),
-    'logo' => array(
-        'rule' => array('mimeType', '#image/.+#'),
+    ],
+    'logo' => [
+        'rule' => ['mimeType', '#image/.+#'],
         'message' => 'mime 型が不正です。'
-    ),
-);
+    ],
+];
 ```
 
 `static` Validation::**minLength**(string $check, integer $min)
@@ -1057,12 +1064,12 @@ public $validate = array(
 このルールはデータが最小長を満たしているかどうかを検証します。 :
 
 ``` php
-public $validate = array(
-    'login' => array(
-        'rule' => array('minLength', 8),
+public $validate = [
+    'login' => [
+        'rule' => ['minLength', 8],
         'message' => 'ユーザー名は最低8文字以上にしてください。'
-    )
-);
+    ]
+];
 ```
 
 ここでいうところの長さとは文字数のことです。バイト数ではありません。
@@ -1074,12 +1081,12 @@ public $validate = array(
 このルールはデータが最小長を満たしているかどうかを検証します。 :
 
 ``` php
-public $validate = array(
-    'login' => array(
-        'rule' => array('minLengthBytes', 2 ** 16 - 1),
+public $validate = [
+    'login' => [
+        'rule' => ['minLengthBytes', 2 ** 16 - 1],
         'message' => 'Data can not be smaller than 64KB.'
-    )
-);
+    ]
+];
 ```
 
 ここでの長さはバイト数です。
@@ -1091,31 +1098,31 @@ public $validate = array(
 第二パラメータは通貨シンボルが左右(left/right)どちらに付くかを指定します。
 
 ``` php
-public $validate = array(
-    'salary' => array(
-        'rule' => array('money', 'left'),
+public $validate = [
+    'salary' => [
+        'rule' => ['money', 'left'],
         'message' => '適切な金額を入力してください。'
-    )
-);
+    ]
+];
 ```
 
-`static` Validation::**multiple**(mixed $check, mixed $options = array(), boolean $caseInsensitive = false)
+`static` Validation::**multiple**(mixed $check, mixed $options = [], boolean $caseInsensitive = false)
 
 複数の select 入力を検査するのに使います。"in", "max", "min"
 パラメータをサポートしています。
 :
 
 ``` php
-public $validate = array(
-    'multiple' => array(
-        'rule' => array('multiple', array(
-            'in'  => array('do', 're', 'mi', 'fa', 'sol', 'la', 'ti'),
+public $validate = [
+    'multiple' => [
+        'rule' => ['multiple', [
+            'in'  => ['do', 're', 'mi', 'fa', 'sol', 'la', 'ti'],
             'min' => 1,
             'max' => 3
-        )),
+        ]],
         'message' => '１個から３個までのオプションを選んでください'
-    )
-);
+    ]
+];
 ```
 
 比較の際はデフォルトで大文字小文字を区別します。区別したくない場合は
@@ -1136,12 +1143,12 @@ public $validate = array(
 その項目が空でないことをチェックする、基本的なルールです。 :
 
 ``` php
-public $validate = array(
-    'title' => array(
+public $validate = [
+    'title' => [
         'rule' => 'notBlank',
         'message' => 'この項目は必須入力です。'
-    )
-);
+    ]
+];
 ```
 
 これを複数 select 入力で使うとエラーになります。その場合は
@@ -1152,12 +1159,12 @@ public $validate = array(
 データが有効な数値かどうかをチェックします。 :
 
 ``` php
-public $validate = array(
-    'cars' => array(
+public $validate = [
+    'cars' => [
         'rule' => 'numeric',
         'message' => '車の台数を入力してください。'
-    )
-);
+    ]
+];
 ```
 
 `static` Validation::**naturalNumber**(mixed $check, boolean $allowZero = false)
@@ -1169,16 +1176,16 @@ public $validate = array(
 `$allowZero` を true にすると 0 も入力可能となります。
 
 ``` php
-public $validate = array(
-    'wheels' => array(
+public $validate = [
+    'wheels' => [
         'rule' => 'naturalNumber',
         'message' => '車輪の数を入力してください。'
-    ),
-    'airbags' => array(
-        'rule' => array('naturalNumber', true),
+    ],
+    'airbags' => [
+        'rule' => ['naturalNumber', true],
         'message' => 'エアバッグ数を入力してください。'
-    ),
-);
+    ],
+];
 ```
 
 `static` Validation::**phone**(mixed $check, string $regex = null, string $country = 'all')
@@ -1188,11 +1195,11 @@ US の電話番号かどうかをチェックします。第二引数として�
 しています。
 
 ``` php
-public $validate = array(
-    'phone' => array(
-        'rule' => array('phone', null, 'us')
-    )
-);
+public $validate = [
+    'phone' => [
+        'rule' => ['phone', null, 'us']
+    ]
+];
 ```
 
 `static` Validation::**postal**(mixed $check, string $regex = null, string $country = 'us')
@@ -1202,11 +1209,11 @@ public $validate = array(
 これら以外の郵便番号もサポートしています。
 
 ``` php
-public $validate = array(
-    'zipcode' => array(
-        'rule' => array('postal', null, 'us')
-    )
-);
+public $validate = [
+    'zipcode' => [
+        'rule' => ['postal', null, 'us']
+    ]
+];
 ```
 
 `static` Validation::**range**(string $check, integer $lower = null, integer $upper = null)
@@ -1217,12 +1224,12 @@ public $validate = array(
 :
 
 ``` php
-public $validate = array(
-    'number' => array(
-        'rule' => array('range', -1, 11),
+public $validate = [
+    'number' => [
+        'rule' => ['range', -1, 11],
         'message' => '0 から 10 までの数字を入力してください。'
-    )
-);
+    ]
+];
 ```
 
 上記の例では 0 より大きく（たとえば 0.01）10 より小さい
@@ -1238,11 +1245,11 @@ public $validate = array(
 フォーマットにも対応できます。
 
 ``` php
-public $validate = array(
-    'ssn' => array(
-        'rule' => array('ssn', null, 'us')
-    )
-);
+public $validate = [
+    'ssn' => [
+        'rule' => ['ssn', null, 'us']
+    ]
+];
 ```
 
 `static` Validation::**time**(string $check)
@@ -1259,12 +1266,12 @@ public $validate = array(
 チェックします。
 
 ``` php
-public $validate = array(
-    'image' => array(
+public $validate = [
+    'image' => [
         'rule' => 'uploadError',
         'message' => 'ファイルアップロードで障害が起こりました。'
-    ),
-);
+    ],
+];
 ```
 
 `static` Validation::**url**(string $check, boolean $strict = false)
@@ -1273,22 +1280,22 @@ public $validate = array(
 http(s), ftp(s), file, news, gopher をサポートしています。 :
 
 ``` php
-public $validate = array(
-    'website' => array(
+public $validate = [
+    'website' => [
         'rule' => 'url'
-    )
-);
+    ]
+];
 ```
 
 プロトコルが URL に含まれるかどうかをチェックします。
 以下のように strict（厳密）モードを有効にすることもできます。 :
 
 ``` php
-public $validate = array(
-    'website' => array(
-        'rule' => array('url', true)
-    )
-);
+public $validate = [
+    'website' => [
+        'rule' => ['url', true]
+    ]
+];
 ```
 
 このバリデーションメソッドは複雑な正規表現を使っているため、
@@ -1310,11 +1317,14 @@ Windows + Apache2 + mod_php の組み合わせだと問題が起こる
 あなたがオランダに住んでいて、以下の様なクラスを作ったとします。 :
 
 ``` php
-class NlValidation {
-    public static function phone($check) {
+class NlValidation
+{
+    public static function phone($check)
+    {
         // ...
     }
-    public static function postal($check) {
+    public static function postal($check)
+    {
         // ...
     }
 }
@@ -1326,10 +1336,10 @@ class NlValidation {
 バリデーションで、以下のように NlValidation を利用できます。 :
 
 ``` php
-public $validate = array(
-    'phone_no' => array('rule' => array('phone', null, 'nl')),
-    'postal_code' => array('rule' => array('postal', null, 'nl')),
-);
+public $validate = [
+    'phone_no' => ['rule' => ['phone', null, 'nl']],
+    'postal_code' => ['rule' => ['postal', null, 'nl']],
+];
 ```
 
 モデルのデータが検査される際、Validation は `nl` ロケールを

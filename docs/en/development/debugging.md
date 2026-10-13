@@ -67,16 +67,16 @@ Dump prints out the contents of a variable. It will print out all
 properties and methods (if any) of the supplied variable:
 
 ``` php
-$foo = array(1,2,3);
+$foo = [1,2,3];
 
 Debugger::dump($foo);
 
 // outputs
-array(
+[
     1,
     2,
     3
-)
+]
 
 // simple object
 $car = new Car();
@@ -156,15 +156,15 @@ lines around it. :
 pr(Debugger::excerpt(ROOT . DS . LIBS . 'debugger.php', 321, 2));
 
 //will output the following.
-Array
-(
+
+[
     [0] => <code><span style="color: #000000"> * @access public</span></code>
     [1] => <code><span style="color: #000000"> */</span></code>
     [2] => <code><span style="color: #000000">    function excerpt($file, $line, $context = 2) {</span></code>
 
-    [3] => <span class="code-highlight"><code><span style="color: #000000">        $data = $lines = array();</span></code></span>
+    [3] => <span class="code-highlight"><code><span style="color: #000000">        $data = $lines = [];</span></code></span>
     [4] => <code><span style="color: #000000">        $data = @explode("\n", file_get_contents($file));</span></code>
-)
+]
 ```
 
 Although this method is used internally, it can be handy if you're

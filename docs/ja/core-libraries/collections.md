@@ -22,7 +22,7 @@ $this->Prg->process();
 別のインスタンスは新たに生成されません。ロードする際に、コンポーネントに設定を追加することもできます。 :
 
 ``` php
-$this->Cookie = $this->Components->load('Cookie', array('name' => 'sweet'));
+$this->Cookie = $this->Components->load('Cookie', ['name' => 'sweet']);
 ```
 
 与えられたキーと値がコンポーネントのコンストラクタに渡されます。このルールの一つの例外は
@@ -33,7 +33,7 @@ $this->Cookie = $this->Components->load('Cookie', array('name' => 'sweet'));
 ``` php
 $this->Auth = $this->Components->load(
     'Auth',
-    array('className' => 'MyCustomAuth')
+    ['className' => 'MyCustomAuth']
 );
 $this->Auth->user(); // 実際には MyCustomAuth::user() が使用されます
 ```
@@ -54,7 +54,7 @@ $this->Cookie->read(); // Fatal error.
 コールされます。さらに、パラメータをコールバックのループに渡せます。 :
 
 ``` php
-$this->Behaviors->trigger('afterFind', array($this, $results, $primary));
+$this->Behaviors->trigger('afterFind', [$this, $results, $primary]);
 ```
 
 上記の `$this` は全てのビヘイビアの afterFind メソッドに第一引数として渡されます。
@@ -82,8 +82,8 @@ JavaScript におけるイベント伝播を停止させるような感じで途
 ``` php
 $this->Behaviors->trigger(
     'beforeFind',
-    array($this, $query),
-    array('break' => true, 'breakOn' => false)
+    [$this, $query],
+    ['break' => true, 'breakOn' => false]
 );
 ```
 
@@ -124,28 +124,30 @@ $enabled = $this->Helpers->enabled();
 宣言時にプライオリティを設定できる方法は次に示します。 :
 
 ``` php
-class SomeController {
-    public $components = array(
+class SomeController
+{
+    public $components = [
         'Foo', //Foo はデフォルトのプライオリティ 10 を持ちます
         // Bar のコールバックは Foo の前にトリガーされます
-        'Bar' => array('priority' => 9)
-    );
+        'Bar' => ['priority' => 9]
+    ];
 
-    public $helpers = array(
+    public $helpers = [
         // Cache のコールバックは最後にトリガーされます
-        'Cache' => array('priority' => 12), 
+        'Cache' => ['priority' => 12], 
         'Asset',
         'Utility' //Utility は Asset と同じプライオリティ 10 を持ち、そのコールバックは
                   //Asset のものよりあとにトリガーされます
-    );
+    ];
 }
 
 
-class Post {
-    public $actsAs = array(
-        'DoFirst' => array('priority' => 1),
+class Post
+{
+    public $actsAs = [
+        'DoFirst' => ['priority' => 1],
         'Media'
-    );
+    ];
 }
 ```
 
@@ -154,7 +156,7 @@ class Post {
 ``` php
 $this->MyComponent = $this->Components->load(
     'MyComponent',
-    array('priority' => 9)
+    ['priority' => 9]
 );
 ```
 
@@ -165,5 +167,5 @@ $this->MyComponent = $this->Components->load(
 $this->Components->setPriority('Foo', 2);
 
 //オブジェクトが複数の場合
-$this->Behaviors->setPriority(array('Object1' => 8, 'Object2' => 9));
+$this->Behaviors->setPriority(['Object1' => 8, 'Object2' => 9]);
 ```

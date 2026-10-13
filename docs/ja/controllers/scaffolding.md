@@ -32,7 +32,8 @@ CakePHP のスキャフォールディングはとても素晴らしいです。
 スキャフォールディングを追加するために、コントローラの中で、 `$scaffold` 変数を追加して下さい。 :
 
 ``` php
-class CategoriesController extends AppController {
+class CategoriesController extends AppController
+{
     public $scaffold;
 }
 ```
@@ -68,7 +69,8 @@ public $belongsTo = 'Group';
 関連したユーザが示されるように User クラスに `$displayField` を設定してみましょう。 :
 
 ``` php
-class User extends AppModel {
+class User extends AppModel
+{
     public $displayField = 'first_name';
 }
 ```
@@ -76,7 +78,7 @@ class User extends AppModel {
 ## Scaffolding を使って単純な管理インターフェイスを作成する
 
 もし `app/Config/core.php` にて管理ルーティングを有効にする場合、
-`Configure::write('Routing.prefixes', array('admin'));`
+`Configure::write('Routing.prefixes', ['admin']);`
 とすることで管理者インターフェイスを生成するためにスキャフォールディングを使えるようになります。
 
 一旦管理ルーティングを有効にしたら、スキャフォールディング変数に admin プレフィクスを設定して下さい。 :
@@ -98,7 +100,8 @@ public $scaffold = 'admin';
 普通のスキャフォールディングでは個別のメソッドを上書きしたり、独自実装に置き換えることができます。 :
 
 ``` php
-public function admin_view($id = null) {
+public function admin_view($id = null)
+{
   // custom code here
 }
 ```

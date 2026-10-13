@@ -129,14 +129,16 @@ PHPUnitが個々のテストケースとテストスイートをテストラン�
 テストスイートの例は以下のようになります:
 
 ``` php
-class AllJavascriptHelpersTest extends PHPUnit_Framework_TestSuite {
+class AllJavascriptHelpersTest extends PHPUnit_Framework_TestSuite
+{
 
 /**
  * このスイートのためのテストの定義を組み立て
  *
  * @return void
  */
-    public static function suite() {
+    public static function suite()
+    {
         $suite = new PHPUnit_Framework_TestSuite('Js Helper and all Engine Helpers');
 
         $helperTestPath = CORE_TEST_CASES . DS . 'View' . DS . 'Helper' . DS;

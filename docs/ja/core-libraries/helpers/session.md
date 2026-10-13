@@ -1,6 +1,6 @@
 # SessionHelper
 
-`class` **SessionHelper**(View $view, array $settings = array())
+`class` **SessionHelper**(View $view, array $settings = [])
 
 Session コンポーネントの自然な対応として、 Session ヘルパーは
 コンポーネントの大半の機能を、ビューの中で使用可能にします。
@@ -12,9 +12,9 @@ Session コンポーネントと同じく、データは
 `ドット記法` の配列構造で読み込みます:
 
 ``` text
-array('User' => array(
+['User' => [
     'username' => 'super@example.com'
-));
+]];
 ```
 
 ご覧の配列構造には、ノードに `User.username` といった形で、ドット
@@ -32,4 +32,4 @@ array('User' => array(
 
 ## 通知やフラッシュメッセージの表示
 
-`method` SessionHelper::**flash**(string $key = 'flash', array $params = array())
+`method` SessionHelper::**flash**(string $key = 'flash', array $params = [])

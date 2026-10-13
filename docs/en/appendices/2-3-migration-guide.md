@@ -80,7 +80,7 @@ as they are conditionally defined by CakePHP now.
   prevent file include errors when you try to load routes or bootstrap but they don't exist for a plugin.
   So essentially you can now use the following statement which will load all plugins and their routes and
   bootstrap for whatever plugin it can find::
-  `CakePlugin::loadAll(array(array('routes' => true, 'bootstrap' => true, 'ignoreMissing' => true)))`
+  `CakePlugin::loadAll([['routes' => true, 'bootstrap' => true, 'ignoreMissing' => true]])`
 
 ### Configure
 

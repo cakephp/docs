@@ -13,7 +13,7 @@ CakePHP 1.3 は数多くの機能を取り入れました。
 渡すこともできるようになりました。
 
 ``` php
-$this->Security->requirePost(array('edit', 'update'));
+$this->Security->requirePost(['edit', 'update']);
 ```
 
 **コンポーネントの設定**
@@ -22,15 +22,15 @@ $this->Security->requirePost(array('edit', 'update'));
 ビヘイビアのように、コンポーネントを宣言する際、コンポーネントの設定を宣言することができます。
 
 ``` php
-var $components = array(
-    'Cookie' => array(
+var $components = [
+    'Cookie' => [
         'name' => 'MyCookie'
-    ),
-    'Auth' => array(
+    ],
+    'Auth' => [
         'userModel' => 'MyUser',
-        'loginAction' => array('controller' => 'users', 'action' => 'login')
-    )
-);
+        'loginAction' => ['controller' => 'users', 'action' => 'login']
+    ]
+];
 ```
 
 はコントローラの `beforeFilter()` メソッドの乱雑さを減らすはずです。
@@ -88,7 +88,7 @@ highlight() はハイライトするための単語の配列を受け入れる�
 組み合わせを設定することを可能にし、同じものを何度も入力する必要がなくなりました。
 
 ``` php
-$this->Number->addFormat('NOK', array('before' => 'Kr. '));
+$this->Number->addFormat('NOK', ['before' => 'Kr. ']);
 $formatted = $this->Number->currency(1000, 'NOK');
 ```
 
@@ -114,10 +114,10 @@ Cache アダプタは cache ディレクトリに置く必要があります。 
 プラグインのキャッシュ設定は、ドットを使った文法を使う必要があります。
 
 ``` php
-Cache::config('custom', array(
+Cache::config('custom', [
     'engine' => 'CachePack.MyCustomCache',
     ...
-));
+]);
 ```
 
 アプリケーションまたはプラグインのキャッシュエンジンは `app/bootstrap.php` で設定する
@@ -211,25 +211,25 @@ MySQL は一番多くのテーブルパラメータをサポートしていま�
 `indexes` とよく似ています:
 
 ``` php
-var $comments => array(
-    'id' => array(
+var $comments => [
+    'id' => [
       'type' => 'integer',
       'null' => false,
       'default' => 0,
       'key' => 'primary'
-    ),
-    'post_id' => array('type' => 'integer', 'null' => false, 'default' => 0),
-    'comment' => array('type' => 'text'),
-    'indexes' => array(
-        'PRIMARY' => array('column' => 'id', 'unique' => true),
-        'post_id' => array('column' => 'post_id'),
-    ),
-    'tableParameters' => array(
+    ],
+    'post_id' => ['type' => 'integer', 'null' => false, 'default' => 0],
+    'comment' => ['type' => 'text'],
+    'indexes' => [
+        'PRIMARY' => ['column' => 'id', 'unique' => true],
+        'post_id' => ['column' => 'post_id'],
+    ],
+    'tableParameters' => [
         'engine' => 'InnoDB',
         'charset' => 'latin1',
         'collate' => 'latin1_general_ci'
-    )
-);
+    ]
+];
 ```
 
 これはいくつかのデータベース特有の設定をするための `tableParameters` を使ったテーブルの
@@ -281,17 +281,17 @@ Schema シェルはプラグインのスキーマファイルと SQL ダンプ�
 
 新しいスタイルの prefix を用いたURL生成は、まさしく 1.2 での admin ルーティングと同じく振舞います。
 同じ文法を使い、同じ方法で持続的になり、同じ方法で振る舞います。core.php に
-`Configure::write('Routing.prefixes', array('admin', 'member'));` となっていると
+`Configure::write('Routing.prefixes', ['admin', 'member']);` となっていると
 仮定すると、prefix 無しの URL から次のようにすることができます:
 
 ``` php
 $this->Html->link(
   'Go',
-  array('controller' => 'posts', 'action' => 'index', 'member' => true)
+  ['controller' => 'posts', 'action' => 'index', 'member' => true]
 );
 $this->Html->link(
   'Go',
-  array('controller' => 'posts', 'action' => 'index', 'admin' => true)
+  ['controller' => 'posts', 'action' => 'index', 'admin' => true]
 );
 ```
 
@@ -300,19 +300,19 @@ $this->Html->link(
 ``` php
 $this->Html->link(
   'Go',
-  array(
+  [
     'controller' => 'posts',
     'action' => 'index',
     'member' => false
-  )
+  ]
 );
 $this->Html->link(
   'Go',
-  array(
+  [
     'controller' => 'posts',
     'action' => 'index',
     'admin' => false
-  )
+  ]
 );
 ```
 
@@ -338,7 +338,7 @@ $this->Html->link(
 
 Inflector::rules を使い、Inflector::slug で使われる音訳マップのデフォルトをグローバルに
 カスタマイズすることができるようになりました。
-例： `Inflector::rules('transliteration', array('/å/' => 'aa', '/ø/' => 'oe'))`
+例： `Inflector::rules('transliteration', ['/å/' => 'aa', '/ø/' => 'oe'])`
 
 また、Inflector は今や inflection のために渡された全てのデータを内部でキャッシュします。
 （slugメソッド以外）。
@@ -440,9 +440,10 @@ error404 に独自のエラーメソッドを変換したいなら、手動で�
 
 ``` php
 <?php
-Configure::write('Routing.prefixes', array('admin', 'member'));
+Configure::write('Routing.prefixes', ['admin', 'member']);
 
-class PostsController extends AppController {
+class PostsController extends AppController
+{
     var $scaffold = 'member';
 }
 ```
@@ -459,11 +460,14 @@ class PostsController extends AppController {
 例として、あなたがオランダに住んでいたとすると、以下のようなクラスを作ることになります。
 
 ``` php
-class NlValidation {
-    public function phone($check) {
+class NlValidation
+{
+    public function phone($check)
+    {
         ...
     }
-    public function postal($check) {
+    public function postal($check)
+    {
         ...
     }
 }
@@ -474,10 +478,10 @@ class NlValidation {
 NlValidation クラスを使用します。
 
 ``` php
-public $validate = array(
-    'phone_no' => array('rule' => array('phone', null, 'nl')),
-    'postal_code' => array('rule' => array('postal', null, 'nl'))
-);
+public $validate = [
+    'phone_no' => ['rule' => ['phone', null, 'nl']],
+    'postal_code' => ['rule' => ['postal', null, 'nl']]
+];
 ```
 
 デルのデータがバリデートされる際、バリデーションは「nl」ロケールを扱えないことを確認し、

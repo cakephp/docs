@@ -1,6 +1,6 @@
 # PaginatorHelper
 
-`class` **PaginatorHelper**(View $view, array $settings = array())
+`class` **PaginatorHelper**(View $view, array $settings = [])
 
 ページ制御ヘルパーは、ページ番号や次ページへ／前ページへのリンクといった、
 ページ制御関連の出力を行なうもので、`PaginatorComponent`
@@ -11,7 +11,7 @@
 
 ## ソートリンクの作成
 
-`method` PaginatorHelper::**sort**($key, $title = null, $options = array())
+`method` PaginatorHelper::**sort**($key, $title = null, $options = [])
 
 ソート用のリンクを作成します。ソートと方向のための、名前付きまたはクエリー
 文字列パラメーターをセットします。リンクはデフォルトでは昇順にソートされます。
@@ -66,7 +66,7 @@ echo $this->Paginator->sort('user_id', 'User account');
 echo $this->Paginator->sort(
   'user_id',
   '<em>User account</em>',
-  array('escape' => false)
+  ['escape' => false]
 );
 ```
 
@@ -82,7 +82,7 @@ direction オプションでリンクのデフォルトのソート順を設定�
 一度リンクがアクティブになると、自動的にソート順は通常に戻ります。 :
 
 ``` php
-echo $this->Paginator->sort('user_id', null, array('direction' => 'desc'));
+echo $this->Paginator->sort('user_id', null, ['direction' => 'desc']);
 ```
 
 出力結果:
@@ -94,16 +94,16 @@ echo $this->Paginator->sort('user_id', null, array('direction' => 'desc'));
 lock オプションでソート順を指定された順に固定できます。 :
 
 ``` php
-echo $this->Paginator->sort('user_id', null, array('direction' => 'asc', 'lock' => true));
+echo $this->Paginator->sort('user_id', null, ['direction' => 'asc', 'lock' => true]);
 ```
 
-`method` PaginatorHelper::**sortDir**(string $model = null, mixed $options = array())
+`method` PaginatorHelper::**sortDir**(string $model = null, mixed $options = [])
 
-`method` PaginatorHelper::**sortKey**(string $model = null, mixed $options = array())
+`method` PaginatorHelper::**sortKey**(string $model = null, mixed $options = [])
 
 ## ページ番号のリンクを作成する
 
-`method` PaginatorHelper::**numbers**($options = array())
+`method` PaginatorHelper::**numbers**($options = [])
 
 ページ番号の並びを返します。モジュールを使って、現在のページの前後
 何ページまでを表示するのかを決めます。デフォルトでは、
@@ -132,7 +132,7 @@ echo $this->Paginator->sort('user_id', null, array('direction' => 'asc', 'lock' 
   その文字列をタイトルの値として先頭ページへのリンクを生成します。 :
 
   ``` php
-  echo $this->Paginator->numbers(array('first' => 'First page'));
+  echo $this->Paginator->numbers(['first' => 'First page']);
   ```
 
 - `last` 最終ページヘのリンクを生成したい場合、最後から何ページ分を
@@ -164,7 +164,7 @@ first と last オプションを使って先頭ページと最終ページへ�
 ２ページのリンクを含むページリンクの並びを生成します。 :
 
 ``` php
-echo $this->Paginator->numbers(array('first' => 2, 'last' => 2));
+echo $this->Paginator->numbers(['first' => 2, 'last' => 2]);
 ```
 
 ::: info Added in version 2.1
@@ -180,17 +180,17 @@ echo $this->Paginator->numbers(array('first' => 2, 'last' => 2));
 特定のページ番号に直接行けるリンクを作れるだけでなく、現在の直前や直後、
 および先頭や末尾へのリンクを作りたくなる場合もあるでしょう。
 
-`method` PaginatorHelper::**prev**($title = '<< Previous', $options = array(), $disabledTitle = null, $disabledOptions = array())
+`method` PaginatorHelper::**prev**($title = '<< Previous', $options = [], $disabledTitle = null, $disabledOptions = [])
 
 ::: info Changed in version 2.3
 `PaginatorHelper::prev()` と `PaginatorHelper::next()` メソッドについて、 `tag` オプションを `false` にすることで ラッパーを無効にすることができますが、2.3 から新しい `disabledTag` が 追加されました。`$disabledOptions` が無指定の場合 `$options` パラメーターが使われます。 これで、どちらも同じ値を指定する場合のタイピング量が減らせます。
 :::
 
-`method` PaginatorHelper::**next**($title = 'Next >>', $options = array(), $disabledTitle = null, $disabledOptions = array())
+`method` PaginatorHelper::**next**($title = 'Next >>', $options = [], $disabledTitle = null, $disabledOptions = [])
 
-`method` PaginatorHelper::**first**($first = '<< first', $options = array())
+`method` PaginatorHelper::**first**($first = '<< first', $options = [])
 
-`method` PaginatorHelper::**last**($last = 'last >>', $options = array())
+`method` PaginatorHelper::**last**($last = 'last >>', $options = [])
 
 `method` PaginatorHelper::**current**(string $model = null)
 
@@ -202,7 +202,7 @@ echo $this->Paginator->numbers(array('first' => 2, 'last' => 2));
 
 ## ページカウンターの生成
 
-`method` PaginatorHelper::**counter**($options = array())
+`method` PaginatorHelper::**counter**($options = [])
 
 ページ制御された結果セットのためのカウンター文字列を返します。
 与えられた書式文字列と多くのオプションを使って、ページ制御された
@@ -240,9 +240,9 @@ echo $this->Paginator->numbers(array('first' => 2, 'last' => 2));
   range に対して 'format' を設定すると '1 - 3 of 13' のように出力します。 :
 
   ``` php
-  echo $this->Paginator->counter(array(
+  echo $this->Paginator->counter([
       'format' => 'range'
-  ));
+  ]);
   ```
 
 - `separator` 実際のページとページ数の間の区切り文字。デフォルトは
@@ -250,9 +250,9 @@ echo $this->Paginator->numbers(array('first' => 2, 'last' => 2));
   これは 'format' のデフォルト値です。 :
 
   ``` php
-  echo $this->Paginator->counter(array(
+  echo $this->Paginator->counter([
       'separator' => ' of a total of '
-  ));
+  ]);
   ```
 
 - `model` ページ制御する対象のモデル。デフォルトは
@@ -261,7 +261,7 @@ echo $this->Paginator->numbers(array('first' => 2, 'last' => 2));
 
 ## PaginatorHelper が使うオプションを変更する
 
-`method` PaginatorHelper::**options**($options = array())
+`method` PaginatorHelper::**options**($options = [])
 
 Paginatorヘルパーのすべてのオプションを設定します。
 サポートされているオプションは以下の通りです。
@@ -278,12 +278,12 @@ Paginatorヘルパーのすべてのオプションを設定します。
   コンテンツを追加できます。 :
 
   ``` php
-  $this->Paginator->options(array(
-      'url' => array(
+  $this->Paginator->options([
+      'url' => [
           'sort' => 'email', 'direction' => 'desc', 'page' => 6,
           'lang' => 'en'
-      )
-  ));
+      ]
+  ]);
   ```
 
   この例では、ヘルパーが生成するリンク全てに経路パラメーター 'en'
@@ -299,7 +299,7 @@ Paginatorヘルパーのすべてのオプションを設定します。
   CSS セレクター。指定されない場合は通常のリンクが作成されます。 :
 
   ``` php
-  $this->Paginator->options(array('update' => '#content'));
+  $this->Paginator->options(['update' => '#content']);
   ```
 
   これは [Ajax Pagination](../../core-libraries/helpers/js#ajax-pagination) する場合に便利です。update の値は CSS
@@ -318,9 +318,9 @@ GET パラメーターを使いたいケースもあります。この機能に�
 パラメーターを指定できます。 :
 
 ``` php
-$this->Paginator->options(array(
-  'convertKeys' => array('your', 'keys', 'here')
-));
+$this->Paginator->options([
+  'convertKeys' => ['your', 'keys', 'here']
+]);
 ```
 
 ### PaginatorHelper を設定して JavaScript ヘルパーを使う
@@ -333,7 +333,7 @@ $this->Paginator->options(array(
 ``` php
 // コントローラーの中で
 $this->set('posts', $this->paginate());
-$this->helpers['Paginator'] = array('ajax' => 'CustomJs');
+$this->helpers['Paginator'] = ['ajax' => 'CustomJs'];
 ```
 
 これにより AJAX 操作を行なう `PaginatorHelper` が `CustomJs` を使うように
@@ -402,13 +402,13 @@ echo $this->Paginator->prev(
   '< Previous',
   null,
   null,
-  array('class' => 'disabled')
+  ['class' => 'disabled']
 );
 echo $this->Paginator->next(
   'Next >',
   null,
   null,
-  array('class' => 'disabled')
+  ['class' => 'disabled']
 );
 
 // 現在のページ番号 / 全ページ数 を表示する
@@ -419,17 +419,17 @@ counter() メソッドによる説明文の表示についても、
 特殊なマーカーによりカスタマイズできます。 :
 
 ``` php
-echo $this->Paginator->counter(array(
+echo $this->Paginator->counter([
     'format' => 'ページ {:page} / {:pages}, 全 {:count} レコード中の
     {:current} レコードを表示中, 先頭レコード {:start}, 末尾 {:end}'
-));
+]);
 ```
 
 ## その他のメソッド
 
-`method` PaginatorHelper::**link**($title, $url = array(), $options = array())
+`method` PaginatorHelper::**link**($title, $url = [], $options = [])
 
-`method` PaginatorHelper::**url**($options = array(), $asArray = false, $model = null)
+`method` PaginatorHelper::**url**($options = [], $asArray = false, $model = null)
 
 `method` PaginatorHelper::**defaultModel**()
 
@@ -441,7 +441,7 @@ echo $this->Paginator->counter(array(
 `param()` メソッドは 2.4 で追加されました。
 :::
 
-`method` PaginatorHelper::**meta**(array $options = array())
+`method` PaginatorHelper::**meta**(array $options = [])
 
 ::: info Added in version 2.6
 `meta()` メソッドは 2.6 で追加されました。

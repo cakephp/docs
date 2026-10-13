@@ -18,7 +18,8 @@ CakePHP のモデルクラスのファイルは、 `/app/Model` の中にあり�
 ファイルの中身全体は次のようになります:
 
 ``` php
-class Post extends AppModel {
+class Post extends AppModel
+{
 }
 ```
 
@@ -44,8 +45,9 @@ CakePHP は自動的に、このモデルは PostsController で使用される�
 ディレクトリの中に配置します。基本的なコントローラは次のようになります:
 
 ``` php
-class PostsController extends AppController {
-    public $helpers = array('Html', 'Form');
+class PostsController extends AppController
+{
+    public $helpers = ['Html', 'Form'];
 }
 ```
 
@@ -56,10 +58,12 @@ class PostsController extends AppController {
 このアクションのコードは次のようになります:
 
 ``` php
-class PostsController extends AppController {
-    public $helpers = array('Html', 'Form');
+class PostsController extends AppController
+{
+    public $helpers = ['Html', 'Form'];
 
-    public function index() {
+    public function index()
+    {
         $this->set('posts', $this->Post->find('all'));
     }
 }
@@ -104,42 +108,42 @@ CakePHP のビュー (*view*) は、アプリケーションのレイアウト (
 ``` text
 // print_r($posts) の出力:
 
-Array
-(
-    [0] => Array
-        (
-            [Post] => Array
-                (
+
+[
+    [0] => 
+        [
+            [Post] => 
+                [
                     [id] => 1
                     [title] => タイトル
                     [body] => これは、記事の本文です。
                     [created] => 2008-02-13 18:34:55
                     [modified] =>
-                )
-        )
-    [1] => Array
-        (
-            [Post] => Array
-                (
+                ]
+        ]
+    [1] => 
+        [
+            [Post] => 
+                [
                     [id] => 2
                     [title] => またタイトル
                     [body] => そこに本文が続きます。
                     [created] => 2008-02-13 18:34:56
                     [modified] =>
-                )
-        )
-    [2] => Array
-        (
-            [Post] => Array
-                (
+                ]
+        ]
+    [2] => 
+        [
+            [Post] => 
+                [
                     [id] => 3
                     [title] => タイトルの逆襲
                     [body] => こりゃ本当にわくわくする！うそ。
                     [created] => 2008-02-13 18:34:57
                     [modified] =>
-                )
-        )
-)
+                ]
+        ]
+]
 ```
 
 CakePHP のビューファイルは、 `/app/View` の中の、コントローラ名に対応するフォルダの中に
@@ -164,7 +168,7 @@ CakePHP のビューファイルは、 `/app/View` の中の、コントロー�
         <td><?php echo $post['Post']['id']; ?></td>
         <td>
             <?php echo $this->Html->link($post['Post']['title'],
-array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
+['controller' => 'posts', 'action' => 'view', $post['Post']['id']]); ?>
         </td>
         <td><?php echo $post['Post']['created']; ?></td>
     </tr>
@@ -198,14 +202,17 @@ CakePHP のリバースルーティング機能を活用することができま
 
 ``` php
 // File: /app/Controller/PostsController.php
-class PostsController extends AppController {
-    public $helpers = array('Html', 'Form');
+class PostsController extends AppController
+{
+    public $helpers = ['Html', 'Form'];
 
-    public function index() {
+    public function index()
+    {
          $this->set('posts', $this->Post->find('all'));
     }
 
-    public function view($id = null) {
+    public function view($id = null)
+    {
         if (!$id) {
             throw new NotFoundException(__('Invalid post'));
         }
@@ -257,15 +264,18 @@ CakePHP の ErrorHandler に処理が引き継がれます。また、ユーザ�
 まず、PostsController の中に、 `add()` アクションを作ります:
 
 ``` php
-class PostsController extends AppController {
-    public $helpers = array('Html', 'Form', 'Flash');
-    public $components = array('Flash');
+class PostsController extends AppController
+{
+    public $helpers = ['Html', 'Form', 'Flash'];
+    public $components = ['Flash'];
 
-    public function index() {
+    public function index()
+    {
         $this->set('posts', $this->Post->find('all'));
     }
 
-    public function view($id) {
+    public function view($id)
+    {
         if (!$id) {
             throw new NotFoundException(__('Invalid post'));
         }
@@ -277,12 +287,13 @@ class PostsController extends AppController {
         $this->set('post', $post);
     }
 
-    public function add() {
+    public function add()
+    {
         if ($this->request->is('post')) {
             $this->Post->create();
             if ($this->Post->save($this->request->data)) {
                 $this->Flash->success(__('Your post has been saved.'));
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Unable to add your post.'));
         }
@@ -320,7 +331,7 @@ FlashComponent の `FlashComponent::success()` メソッドを使って
 セッション変数にメッセージをセットすることによって、リダイレクト後のページでこれを表示します。
 レイアウトでは `FlashHelper::render()` を用いて、メッセージを表示し、
 対応するセッション変数を削除します。コントローラの `Controller::redirect`
-関数は別の URL にリダイレクトを行います。 `array('action' => 'index')` パラメータは
+関数は別の URL にリダイレクトを行います。 `['action' => 'index']` パラメータは
 /posts、つまり posts コントローラの index アクションを表す URL に解釈されます。
 多くの CakePHP の関数で指定できるURLのフォーマットについては、
 [API](https://api.cakephp.org) の `Router::url()`
@@ -352,7 +363,7 @@ add のビューは次のようなものになります:
 <?php
 echo $this->Form->create('Post');
 echo $this->Form->input('title');
-echo $this->Form->input('body', array('rows' => '3'));
+echo $this->Form->input('body', ['rows' => '3']);
 echo $this->Form->end('Save Post');
 ?>
 ```
@@ -386,7 +397,7 @@ POST で送るフォームを構築している、と解釈されます。
 ``` php
 <?php echo $this->Html->link(
     'Add Post',
-    array('controller' => 'posts', 'action' => 'add')
+    ['controller' => 'posts', 'action' => 'add']
 ); ?>
 ```
 
@@ -395,15 +406,16 @@ POST で送るフォームを構築している、と解釈されます。
 Post モデルを見直して、幾つか修正してみましょう:
 
 ``` php
-class Post extends AppModel {
-    public $validate = array(
-        'title' => array(
+class Post extends AppModel
+{
+    public $validate = [
+        'title' => [
             'rule' => 'notBlank'
-        ),
-        'body' => array(
+        ],
+        'body' => [
             'rule' => 'notBlank'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -426,7 +438,8 @@ class Post extends AppModel {
 PostsController の `edit()` アクションはこんな形になります:
 
 ``` php
-public function edit($id = null) {
+public function edit($id = null)
+{
     if (!$id) {
         throw new NotFoundException(__('Invalid post'));
     }
@@ -436,11 +449,11 @@ public function edit($id = null) {
         throw new NotFoundException(__('Invalid post'));
     }
 
-    if ($this->request->is(array('post', 'put'))) {
+    if ($this->request->is(['post', 'put'])) {
         $this->Post->id = $id;
         if ($this->Post->save($this->request->data)) {
             $this->Flash->success(__('Your post has been updated.'));
-            return $this->redirect(array('action' => 'index'));
+            return $this->redirect(['action' => 'index']);
         }
         $this->Flash->error(__('Unable to update your post.'));
     }
@@ -470,8 +483,8 @@ edit ビューは以下のようになるでしょう:
 <?php
 echo $this->Form->create('Post');
 echo $this->Form->input('title');
-echo $this->Form->input('body', array('rows' => '3'));
-echo $this->Form->input('id', array('type' => 'hidden'));
+echo $this->Form->input('body', ['rows' => '3']);
+echo $this->Form->input('id', ['type' => 'hidden']);
 echo $this->Form->end('Save Post');
 ?>
 ```
@@ -489,7 +502,7 @@ echo $this->Form->end('Save Post');
 <!-- File: /app/View/Posts/index.ctp  (編集リンクを追加済み) -->
 
 <h1>Blog posts</h1>
-<p><?php echo $this->Html->link("Add Post", array('action' => 'add')); ?></p>
+<p><?php echo $this->Html->link("Add Post", ['action' => 'add']); ?></p>
 <table>
     <tr>
         <th>Id</th>
@@ -507,7 +520,7 @@ echo $this->Form->end('Save Post');
             <?php
                 echo $this->Html->link(
                     $post['Post']['title'],
-                    array('action' => 'view', $post['Post']['id'])
+                    ['action' => 'view', $post['Post']['id']]
                 );
             ?>
         </td>
@@ -515,7 +528,7 @@ echo $this->Form->end('Save Post');
             <?php
                 echo $this->Html->link(
                     'Edit',
-                    array('action' => 'edit', $post['Post']['id'])
+                    ['action' => 'edit', $post['Post']['id']]
                 );
             ?>
         </td>
@@ -534,7 +547,8 @@ echo $this->Form->end('Save Post');
 PostsController の `delete()` アクションを作るところから始めます:
 
 ``` php
-public function delete($id) {
+public function delete($id)
+{
     if ($this->request->is('get')) {
         throw new MethodNotAllowedException();
     }
@@ -549,7 +563,7 @@ public function delete($id) {
         );
     }
 
-    return $this->redirect(array('action' => 'index'));
+    return $this->redirect(['action' => 'index']);
 }
 ```
 
@@ -567,7 +581,7 @@ public function delete($id) {
 <!-- File: /app/View/Posts/index.ctp -->
 
 <h1>Blog posts</h1>
-<p><?php echo $this->Html->link('Add Post', array('action' => 'add')); ?></p>
+<p><?php echo $this->Html->link('Add Post', ['action' => 'add']); ?></p>
 <table>
     <tr>
         <th>Id</th>
@@ -585,7 +599,7 @@ public function delete($id) {
             <?php
                 echo $this->Html->link(
                     $post['Post']['title'],
-                    array('action' => 'view', $post['Post']['id'])
+                    ['action' => 'view', $post['Post']['id']]
                 );
             ?>
         </td>
@@ -593,13 +607,13 @@ public function delete($id) {
             <?php
                 echo $this->Form->postLink(
                     'Delete',
-                    array('action' => 'delete', $post['Post']['id']),
-                    array('confirm' => 'Are you sure?')
+                    ['action' => 'delete', $post['Post']['id']],
+                    ['confirm' => 'Are you sure?']
                 );
             ?>
             <?php
                 echo $this->Html->link(
-                    'Edit', array('action' => 'edit', $post['Post']['id'])
+                    'Edit', ['action' => 'edit', $post['Post']['id']]
                 );
             ?>
         </td>
@@ -641,7 +655,7 @@ CakePHP のルーティングは、 `/app/Config/routes.php` の中にありま�
 ``` php
 Router::connect(
     '/',
-    array('controller' => 'pages', 'action' => 'display', 'home')
+    ['controller' => 'pages', 'action' => 'display', 'home']
 );
 ```
 
@@ -649,7 +663,7 @@ Router::connect(
 これを、自分のコントローラに接続させるために、次のような行を追加してください:
 
 ``` php
-Router::connect('/', array('controller' => 'posts', 'action' => 'index'));
+Router::connect('/', ['controller' => 'posts', 'action' => 'index']);
 ```
 
 これで、「/」でリクエストしてきたユーザを、PostController の index() アクションに
@@ -658,7 +672,7 @@ Router::connect('/', array('controller' => 'posts', 'action' => 'index'));
 > [!NOTE]
 > CakePHP は「リバースルーティング」も利用します。
 > 上記のルートが定義されている状態で、配列を期待する関数に
-> `array('controller' => 'posts', 'action' => 'index')`
+> `['controller' => 'posts', 'action' => 'index']`
 > を渡すと、結果のURLは「/」になります。
 > つまり、URL の指定に常に配列を使うということが良策となります。
 > これによりルートが URL の行き先を定義する意味を持ち、

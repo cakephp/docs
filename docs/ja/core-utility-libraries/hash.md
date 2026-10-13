@@ -76,7 +76,7 @@ array
 $users = $this->user->find("all");
 $results = Hash::extract($users, '{n}.User.id');
 // $results は以下のとおり:
-// array(1,2,3,4,5,...);
+// [1,2,3,4,5,...];
 ```
 
 `static` Hash::**insert**(array $data, $path, $values = null)
@@ -87,22 +87,22 @@ array
 \$data を `$path` の定義に従って配列の中に挿入します。　:
 
 ``` php
-$a = array(
-    'pages' => array('name' => 'page')
-);
-$result = Hash::insert($a, 'files', array('name' => 'files'));
+$a = [
+    'pages' => ['name' => 'page']
+];
+$result = Hash::insert($a, 'files', ['name' => 'files']);
 // $result は以下のようになります:
-Array
-(
-    [pages] => Array
-        (
+
+[
+    [pages] => 
+        [
             [name] => page
-        )
-    [files] => Array
-        (
+        ]
+    [files] => 
+        [
             [name] => files
-        )
-)
+        ]
+]
 ```
 
 `{n}` や `{s}` を使ったパスを使うことで、複数のポイントにデータを挿入することが
@@ -125,20 +125,18 @@ array
 \$path に合致するすべての要素を配列から削除します。 :
 
 ``` php
-$a = array(
-    'pages' => array('name' => 'page'),
-    'files' => array('name' => 'files')
-);
+$a = [
+    'pages' => ['name' => 'page'],
+    'files' => ['name' => 'files']
+];
 $result = Hash::remove($a, 'files');
 /* $result は以下のようになります:
-    Array
-    (
-        [pages] => Array
-            (
+    [
+        [pages] => [
                 [name] => page
-            )
+            ]
 
-    )
+    ]
 */
 ```
 
@@ -158,100 +156,87 @@ array
 \$groupPath が指定された場合は、そのパスにしたがって生成したものをグルーピングします:
 
 ``` php
-$a = array(
-    array(
-        'User' => array(
+$a = [
+    [
+        'User' => [
             'id' => 2,
             'group_id' => 1,
-            'Data' => array(
+            'Data' => [
                 'user' => 'mariano.iglesias',
                 'name' => 'Mariano Iglesias'
-            )
-        )
-    ),
-    array(
-        'User' => array(
+            ]
+        ]
+    ],
+    [
+        'User' => [
             'id' => 14,
             'group_id' => 2,
-            'Data' => array(
+            'Data' => [
                 'user' => 'phpnut',
                 'name' => 'Larry E. Masters'
-            )
-        )
-    ),
-);
+            ]
+        ]
+    ],
+];
 
 $result = Hash::combine($a, '{n}.User.id');
 /* $result は以下のようになります:
-    Array
-    (
+    [
         [2] =>
         [14] =>
-    )
+    ]
 */
 
 $result = Hash::combine($a, '{n}.User.id', '{n}.User.Data');
 /* $result は以下のようになります:
-    Array
-    (
-        [2] => Array
-            (
+    [
+        [2] => [
                 [user] => mariano.iglesias
                 [name] => Mariano Iglesias
-            )
-        [14] => Array
-            (
+            ]
+        [14] => [
                 [user] => phpnut
                 [name] => Larry E. Masters
-            )
-    )
+            ]
+    ]
 */
 
 $result = Hash::combine($a, '{n}.User.id', '{n}.User.Data.name');
 /* $result は以下のようになります:
-    Array
-    (
+    [
         [2] => Mariano Iglesias
         [14] => Larry E. Masters
-    )
+    ]
 */
 
 $result = Hash::combine($a, '{n}.User.id', '{n}.User.Data', '{n}.User.group_id');
 /* $result は以下のようになります:
-    Array
-    (
-        [1] => Array
-            (
-                [2] => Array
-                    (
+    [
+        [1] => [
+                [2] => [
                         [user] => mariano.iglesias
                         [name] => Mariano Iglesias
-                    )
-            )
-        [2] => Array
-            (
-                [14] => Array
-                    (
+                    ]
+            ]
+        [2] => [
+                [14] => [
                         [user] => phpnut
                         [name] => Larry E. Masters
-                    )
-            )
-    )
+                    ]
+            ]
+    ]
 */
 
 $result = Hash::combine($a, '{n}.User.id', '{n}.User.Data.name', '{n}.User.group_id');
 /* $result は以下のようになります:
-    Array
-    (
-        [1] => Array
-            (
+    [
+        [1] => [
                 [2] => Mariano Iglesias
-            )
-        [2] => Array
-            (
+            ]
+        [2] => [
                 [14] => Larry E. Masters
-            )
-    )
+            ]
+    ]
 */
 ```
 
@@ -263,34 +248,30 @@ $result = Hash::combine($a, '{n}.User.id', '{n}.User.Data.name', '{n}.User.group
 $result = Hash::combine(
     $a,
     '{n}.User.id',
-    array('%s: %s', '{n}.User.Data.user', '{n}.User.Data.name'),
+    ['%s: %s', '{n}.User.Data.user', '{n}.User.Data.name'],
     '{n}.User.group_id'
 );
 /* $result は以下のようになります:
-    Array
-    (
-        [1] => Array
-            (
+    [
+        [1] => [
                 [2] => mariano.iglesias: Mariano Iglesias
-            )
-        [2] => Array
-            (
+            ]
+        [2] => [
                 [14] => phpnut: Larry E. Masters
-            )
-    )
+            ]
+    ]
 */
 
 $result = Hash::combine(
     $a,
-    array('%s: %s', '{n}.User.Data.user', '{n}.User.Data.name'),
+    ['%s: %s', '{n}.User.Data.user', '{n}.User.Data.name'],
     '{n}.User.id'
 );
 /* $result は以下のようになります:
-    Array
-    (
+    [
         [mariano.iglesias: Mariano Iglesias] => 2
         [phpnut: Larry E. Masters] => 14
-    )
+    ]
 */
 ```
 
@@ -302,54 +283,52 @@ array
 配列から取り出し、フォーマット文字列でフォーマットされた文字列の配列を返します:
 
 ``` php
-$data = array(
-    array(
-        'Person' => array(
+$data = [
+    [
+        'Person' => [
             'first_name' => 'Nate',
             'last_name' => 'Abele',
             'city' => 'Boston',
             'state' => 'MA',
             'something' => '42'
-        )
-    ),
-    array(
-        'Person' => array(
+        ]
+    ],
+    [
+        'Person' => [
             'first_name' => 'Larry',
             'last_name' => 'Masters',
             'city' => 'Boondock',
             'state' => 'TN',
             'something' => '{0}'
-        )
-    ),
-    array(
-        'Person' => array(
+        ]
+    ],
+    [
+        'Person' => [
             'first_name' => 'Garrett',
             'last_name' => 'Woodworth',
             'city' => 'Venice Beach',
             'state' => 'CA',
             'something' => '{1}'
-        )
-    )
-);
+        ]
+    ]
+];
 
-$res = Hash::format($data, array('{n}.Person.first_name', '{n}.Person.something'), '%2$d, %1$s');
+$res = Hash::format($data, ['{n}.Person.first_name', '{n}.Person.something'], '%2$d, %1$s');
 /*
-Array
-(
+[
     [0] => 42, Nate
     [1] => 0, Larry
     [2] => 0, Garrett
-)
+]
 */
 
-$res = Hash::format($data, array('{n}.Person.first_name', '{n}.Person.something'), '%1$s, %2$d');
+$res = Hash::format($data, ['{n}.Person.first_name', '{n}.Person.something'], '%1$s, %2$d');
 /*
-Array
-(
+[
     [0] => Nate, 42
     [1] => Larry, 0
     [2] => Garrett, 0
-)
+]
 */
 ```
 
@@ -361,16 +340,16 @@ boolean
 一方のハッシュや配列の中に、もう一方のキーと値が厳密に見てすべて存在しているかを判定します:
 
 ``` php
-$a = array(
-    0 => array('name' => 'main'),
-    1 => array('name' => 'about')
-);
-$b = array(
-    0 => array('name' => 'main'),
-    1 => array('name' => 'about'),
-    2 => array('name' => 'contact'),
+$a = [
+    0 => ['name' => 'main'],
+    1 => ['name' => 'about']
+];
+$b = [
+    0 => ['name' => 'main'],
+    1 => ['name' => 'about'],
+    2 => ['name' => 'contact'],
     'a' => 'b'
-);
+];
 
 $result = Hash::contains($a, $a);
 // true
@@ -388,21 +367,21 @@ boolean
 配列の中に特定のパスがセットされているかをチェックします:
 
 ``` php
-$set = array(
-    'My Index 1' => array('First' => 'The first item')
-);
+$set = [
+    'My Index 1' => ['First' => 'The first item']
+];
 $result = Hash::check($set, 'My Index 1.First');
 // $result == True
 
 $result = Hash::check($set, 'My Index 1');
 // $result == True
 
-$set = array(
-    'My Index 1' => array('First' =>
-        array('Second' =>
-            array('Third' =>
-                array('Fourth' => 'Heavy. Nesting.'))))
-);
+$set = [
+    'My Index 1' => ['First' =>
+        ['Second' =>
+            ['Third' =>
+                ['Fourth' => 'Heavy. Nesting.']]]]
+];
 $result = Hash::check($set, 'My Index 1.First.Second');
 // $result == True
 
@@ -416,7 +395,7 @@ $result = Hash::check($set, 'My Index 1.First.Seconds.Third.Fourth');
 // $result == False
 ```
 
-`static` Hash::**filter**(array $data, $callback = array('Hash', 'filter'))
+`static` Hash::**filter**(array $data, $callback = ['Hash', 'filter'])
 
 rtype  
 array
@@ -426,27 +405,26 @@ array
 コールバック関数が `false` を返した場合、その要素は配列から取り除かれます:
 
 ``` php
-$data = array(
+$data = [
     '0',
     false,
     true,
     0,
-    array('one thing', 'I can tell you', 'is you got to be', false)
-);
+    ['one thing', 'I can tell you', 'is you got to be', false]
+];
 $res = Hash::filter($data);
 
 /* $data は以下のとおり:
-    Array (
+    [
         [0] => 0
         [2] => true
         [3] => 0
-        [4] => Array
-            (
+        [4] => [
                 [0] => one thing
                 [1] => I can tell you
                 [2] => is you got to be
-            )
-    )
+            ]
+    ]
 */
 ```
 
@@ -458,19 +436,19 @@ array
 多次元配列を１次元配列へと平坦化します:
 
 ``` php
-$arr = array(
-    array(
-        'Post' => array('id' => '1', 'title' => 'First Post'),
-        'Author' => array('id' => '1', 'user' => 'Kyle'),
-    ),
-    array(
-        'Post' => array('id' => '2', 'title' => 'Second Post'),
-        'Author' => array('id' => '3', 'user' => 'Crystal'),
-    ),
-);
+$arr = [
+    [
+        'Post' => ['id' => '1', 'title' => 'First Post'],
+        'Author' => ['id' => '1', 'user' => 'Kyle'],
+    ],
+    [
+        'Post' => ['id' => '2', 'title' => 'Second Post'],
+        'Author' => ['id' => '3', 'user' => 'Crystal'],
+    ],
+];
 $res = Hash::flatten($arr);
 /* $res は以下のようになります:
-    Array (
+    [
         [0.Post.id] => 1
         [0.Post.title] => First Post
         [0.Author.id] => 1
@@ -479,7 +457,7 @@ $res = Hash::flatten($arr);
         [1.Post.title] => Second Post
         [1.Author.id] => 3
         [1.Author.user] => Crystal
-    )
+    ]
 */
 ```
 
@@ -491,7 +469,7 @@ array
 `Hash::flatten()`:: によって前もって平坦化された配列を再構築します:
 
 ``` php
-$data = array(
+$data = [
     '0.Post.id' => 1,
     '0.Post.title' => First Post,
     '0.Author.id' => 1,
@@ -500,19 +478,19 @@ $data = array(
     '1.Post.title' => Second Post,
     '1.Author.id' => 3,
     '1.Author.user' => Crystal,
-);
+];
 $res = Hash::expand($data);
 /* $res は以下のとおり:
-array(
-    array(
-        'Post' => array('id' => '1', 'title' => 'First Post'),
-        'Author' => array('id' => '1', 'user' => 'Kyle'),
-    ),
-    array(
-        'Post' => array('id' => '2', 'title' => 'Second Post'),
-        'Author' => array('id' => '3', 'user' => 'Crystal'),
-    ),
-);
+[
+    [
+        'Post' => ['id' => '1', 'title' => 'First Post'],
+        'Author' => ['id' => '1', 'user' => 'Kyle'],
+    ],
+    [
+        'Post' => ['id' => '2', 'title' => 'Second Post'],
+        'Author' => ['id' => '3', 'user' => 'Crystal'],
+    ],
+];
 */
 ```
 
@@ -531,44 +509,41 @@ array
 > 配列へとキャストされます。
 
 ``` php
-$array = array(
-    array(
+$array = [
+    [
         'id' => '48c2570e-dfa8-4c32-a35e-0d71cbdd56cb',
         'name' => 'mysql raleigh-workshop-08 < 2008-09-05.sql ',
         'description' => 'Importing an sql dump'
-    ),
-    array(
+    ],
+    [
         'id' => '48c257a8-cf7c-4af2-ac2f-114ecbdd56cb',
         'name' => 'pbpaste | grep -i Unpaid | pbcopy',
         'description' => 'Remove all lines that say "Unpaid".',
-    )
-);
+    ]
+];
 $arrayB = 4;
-$arrayC = array(0 => "test array", "cats" => "dogs", "people" => 1267);
-$arrayD = array("cats" => "felines", "dog" => "angry");
+$arrayC = [0 => "test array", "cats" => "dogs", "people" => 1267];
+$arrayD = ["cats" => "felines", "dog" => "angry"];
 $res = Hash::merge($array, $arrayB, $arrayC, $arrayD);
 
 /* $res は以下のとおり:
-Array
-(
-    [0] => Array
-        (
+[
+    [0] => [
             [id] => 48c2570e-dfa8-4c32-a35e-0d71cbdd56cb
             [name] => mysql raleigh-workshop-08 < 2008-09-05.sql
             [description] => Importing an sql dump
-        )
-    [1] => Array
-        (
+        ]
+    [1] => [
             [id] => 48c257a8-cf7c-4af2-ac2f-114ecbdd56cb
             [name] => pbpaste | grep -i Unpaid | pbcopy
             [description] => Remove all lines that say "Unpaid".
-        )
+        ]
     [2] => 4
     [3] => test array
     [cats] => felines
     [people] => 1267
     [dog] => angry
-)
+]
 */
 ```
 
@@ -580,11 +555,11 @@ boolean
 配列内のすべての値が数値であるかをチェックします:
 
 ``` php
-$data = array('one');
+$data = ['one'];
 $res = Hash::numeric(array_keys($data));
 // $res は true
 
-$data = array(1 => 'one');
+$data = [1 => 'one'];
 $res = Hash::numeric($data);
 // $res は false
 ```
@@ -597,24 +572,24 @@ integer
 配列の次元数を数えます。このメソッドは配列の１つ目の要素だけを見て次元を判定します:
 
 ``` php
-$data = array('one', '2', 'three');
+$data = ['one', '2', 'three'];
 $result = Hash::dimensions($data);
 // $result == 1
 
-$data = array('1' => '1.1', '2', '3');
+$data = ['1' => '1.1', '2', '3'];
 $result = Hash::dimensions($data);
 // $result == 1
 
-$data = array('1' => array('1.1' => '1.1.1'), '2', '3' => array('3.1' => '3.1.1'));
+$data = ['1' => ['1.1' => '1.1.1'], '2', '3' => ['3.1' => '3.1.1']];
 $result = Hash::dimensions($data);
 // $result == 2
 
-$data = array('1' => '1.1', '2', '3' => array('3.1' => '3.1.1'));
+$data = ['1' => '1.1', '2', '3' => ['3.1' => '3.1.1']];
 $result = Hash::dimensions($data);
 // $result == 1
 
 
-$data = array('1' => array('1.1' => '1.1.1'), '2', '3' => array('3.1' => array('3.1.1' => '3.1.1.1')));
+$data = ['1' => ['1.1' => '1.1.1'], '2', '3' => ['3.1' => ['3.1.1' => '3.1.1.1']]];
 $result = Hash::countDim($data);
 // $result == 2
 ```
@@ -624,11 +599,11 @@ $result = Hash::countDim($data);
 `~Hash::dimensions()` に似ていますが、このメソッドは配列内にあるもっとも大きな次元数を返します:
 
 ``` php
-$data = array('1' => '1.1', '2', '3' => array('3.1' => '3.1.1'));
+$data = ['1' => '1.1', '2', '3' => ['3.1' => '3.1.1']];
 $result = Hash::dimensions($data, true);
 // $result == 2
 
-$data = array('1' => array('1.1' => '1.1.1'), '2', '3' => array('3.1' => array('3.1.1' => '3.1.1.1')));
+$data = ['1' => ['1.1' => '1.1.1'], '2', '3' => ['3.1' => ['3.1.1' => '3.1.1.1']]];
 $result = Hash::countDim($data, true);
 // $result == 3
 ```
@@ -652,29 +627,24 @@ array
 このメソッドでは式のみがサポートされます:
 
 ``` php
-$a = array(
-    0 => array('Person' => array('name' => 'Jeff')),
-    1 => array('Shirt' => array('color' => 'black'))
-);
+$a = [
+    0 => ['Person' => ['name' => 'Jeff']],
+    1 => ['Shirt' => ['color' => 'black']]
+];
 $result = Hash::sort($a, '{n}.Person.name', 'asc');
 /* $result は以下のとおり:
-    Array
-    (
-        [0] => Array
-            (
-                [Shirt] => Array
-                    (
+    [
+        [0] => [
+                [Shirt] => [
                         [color] => black
-                    )
-            )
-        [1] => Array
-            (
-                [Person] => Array
-                    (
+                    ]
+            ]
+        [1] => [
+                [Person] => [
                         [name] => Jeff
-                    )
-            )
-    )
+                    ]
+            ]
+    ]
 */
 ```
 
@@ -699,25 +669,23 @@ array
 ２つの配列の差分を計算します:
 
 ``` php
-$a = array(
-    0 => array('name' => 'main'),
-    1 => array('name' => 'about')
-);
-$b = array(
-    0 => array('name' => 'main'),
-    1 => array('name' => 'about'),
-    2 => array('name' => 'contact')
-);
+$a = [
+    0 => ['name' => 'main'],
+    1 => ['name' => 'about']
+];
+$b = [
+    0 => ['name' => 'main'],
+    1 => ['name' => 'about'],
+    2 => ['name' => 'contact']
+];
 
 $result = Hash::diff($a, $b);
 /* $result は以下のとおり:
-    Array
-    (
-        [2] => Array
-            (
+    [
+        [2] => [
                 [name] => contact
-            )
-    )
+            ]
+    ]
 */
 ```
 
@@ -732,21 +700,19 @@ array
 :
 
 ``` php
-$array1 = array('ModelOne' => array('id' => 1001, 'field_one' => 'a1.m1.f1', 'field_two' => 'a1.m1.f2'));
-$array2 = array('ModelOne' => array('id' => 1003, 'field_one' => 'a3.m1.f1', 'field_two' => 'a3.m1.f2', 'field_three' => 'a3.m1.f3'));
+$array1 = ['ModelOne' => ['id' => 1001, 'field_one' => 'a1.m1.f1', 'field_two' => 'a1.m1.f2']];
+$array2 = ['ModelOne' => ['id' => 1003, 'field_one' => 'a3.m1.f1', 'field_two' => 'a3.m1.f2', 'field_three' => 'a3.m1.f3']];
 $res = Hash::mergeDiff($array1, $array2);
 
 /* $res は以下のとおり:
-    Array
-    (
-        [ModelOne] => Array
-            (
+    [
+        [ModelOne] => [
                 [id] => 1001
                 [field_one] => a1.m1.f1
                 [field_two] => a1.m1.f2
                 [field_three] => a3.m1.f3
-            )
-    )
+            ]
+    ]
 */
 ```
 
@@ -754,22 +720,20 @@ $res = Hash::mergeDiff($array1, $array2);
 :
 
 ``` php
-$array1 = array("a" => "b", 1 => 20938, "c" => "string");
-$array2 = array("b" => "b", 3 => 238, "c" => "string", array("extra_field"));
+$array1 = ["a" => "b", 1 => 20938, "c" => "string"];
+$array2 = ["b" => "b", 3 => 238, "c" => "string", ["extra_field"]];
 $res = Hash::mergeDiff($array1, $array2);
 /* $res は以下のとおり:
-    Array
-    (
+    [
         [a] => b
         [1] => 20938
         [c] => string
         [b] => b
         [3] => 238
-        [4] => Array
-            (
+        [4] => [
                 [0] => extra_field
-            )
-    )
+            ]
+    ]
 */
 ```
 
@@ -783,55 +747,50 @@ array
 配列を正規化すると、 `Hash::merge()` で扱いやすくなります:
 
 ``` php
-$a = array('Tree', 'CounterCache',
-    'Upload' => array(
+$a = ['Tree', 'CounterCache',
+    'Upload' => [
         'folder' => 'products',
-        'fields' => array('image_1_id', 'image_2_id')
-    )
-);
+        'fields' => ['image_1_id', 'image_2_id']
+    ]
+];
 $result = Hash::normalize($a);
 /* $result は以下のとおり:
-    Array
-    (
+    [
         [Tree] => null
         [CounterCache] => null
-        [Upload] => Array
-            (
+        [Upload] => [
                 [folder] => products
-                [fields] => Array
-                    (
+                [fields] => [
                         [0] => image_1_id
                         [1] => image_2_id
-                    )
-            )
-    )
+                    ]
+            ]
+    ]
 */
 
-$b = array(
-    'Cacheable' => array('enabled' => false),
+$b = [
+    'Cacheable' => ['enabled' => false],
     'Limit',
     'Bindable',
     'Validator',
     'Transactional'
-);
+];
 $result = Hash::normalize($b);
 /* $result は以下のとおり:
-    Array
-    (
-        [Cacheable] => Array
-            (
+    [
+        [Cacheable] => [
                 [enabled] => false
-            )
+            ]
 
         [Limit] => null
         [Bindable] => null
         [Validator] => null
         [Transactional] => null
-    )
+    ]
 */
 ```
 
-`static` Hash::**nest**(array $data, array $options = array())
+`static` Hash::**nest**(array $data, array $options = [])
 
 平坦な配列から、多次元配列もしくはスレッド状（threaded）の構造化データを生成します。
 `Model::find('threaded')` のようなメソッドで使われます。
@@ -848,58 +807,58 @@ $result = Hash::normalize($b);
 例:
 
 ``` php
-$data = array(
-    array('ModelName' => array('id' => 1, 'parent_id' => null)),
-    array('ModelName' => array('id' => 2, 'parent_id' => 1)),
-    array('ModelName' => array('id' => 3, 'parent_id' => 1)),
-    array('ModelName' => array('id' => 4, 'parent_id' => 1)),
-    array('ModelName' => array('id' => 5, 'parent_id' => 1)),
-    array('ModelName' => array('id' => 6, 'parent_id' => null)),
-    array('ModelName' => array('id' => 7, 'parent_id' => 6)),
-    array('ModelName' => array('id' => 8, 'parent_id' => 6)),
-    array('ModelName' => array('id' => 9, 'parent_id' => 6)),
-    array('ModelName' => array('id' => 10, 'parent_id' => 6))
-);
+$data = [
+    ['ModelName' => ['id' => 1, 'parent_id' => null]],
+    ['ModelName' => ['id' => 2, 'parent_id' => 1]],
+    ['ModelName' => ['id' => 3, 'parent_id' => 1]],
+    ['ModelName' => ['id' => 4, 'parent_id' => 1]],
+    ['ModelName' => ['id' => 5, 'parent_id' => 1]],
+    ['ModelName' => ['id' => 6, 'parent_id' => null]],
+    ['ModelName' => ['id' => 7, 'parent_id' => 6]],
+    ['ModelName' => ['id' => 8, 'parent_id' => 6]],
+    ['ModelName' => ['id' => 9, 'parent_id' => 6]],
+    ['ModelName' => ['id' => 10, 'parent_id' => 6]]
+];
 
-$result = Hash::nest($data, array('root' => 6));
+$result = Hash::nest($data, ['root' => 6]);
 /* $result は以下のとおり:
-array(
-        (int) 0 => array(
-            'ModelName' => array(
+[
+        (int) 0 => [
+            'ModelName' => [
                 'id' => (int) 6,
                 'parent_id' => null
-            ),
-            'children' => array(
-                (int) 0 => array(
-                    'ModelName' => array(
+            ],
+            'children' => [
+                (int) 0 => [
+                    'ModelName' => [
                         'id' => (int) 7,
                         'parent_id' => (int) 6
-                    ),
-                    'children' => array()
-                ),
-                (int) 1 => array(
-                    'ModelName' => array(
+                    ],
+                    'children' => []
+                ],
+                (int) 1 => [
+                    'ModelName' => [
                         'id' => (int) 8,
                         'parent_id' => (int) 6
-                    ),
-                    'children' => array()
-                ),
-                (int) 2 => array(
-                    'ModelName' => array(
+                    ],
+                    'children' => []
+                ],
+                (int) 2 => [
+                    'ModelName' => [
                         'id' => (int) 9,
                         'parent_id' => (int) 6
-                    ),
-                    'children' => array()
-                ),
-                (int) 3 => array(
-                    'ModelName' => array(
+                    ],
+                    'children' => []
+                ],
+                (int) 3 => [
+                    'ModelName' => [
                         'id' => (int) 10,
                         'parent_id' => (int) 6
-                    ),
-                    'children' => array()
-                )
-            )
-        )
-    )
+                    ],
+                    'children' => []
+                ]
+            ]
+        ]
+    ]
     */
 ```

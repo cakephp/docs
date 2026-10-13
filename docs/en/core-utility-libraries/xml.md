@@ -29,11 +29,11 @@ $xml = Xml::build('https://bakery.cakephp.org/articles.rss');
 // $xml now is a instance of SimpleXMLElement
 
 // or
-$xml = Xml::build('https://bakery.cakephp.org/articles.rss', array('return' => 'simplexml'));
+$xml = Xml::build('https://bakery.cakephp.org/articles.rss', ['return' => 'simplexml']);
 // $xml now is a instance of SimpleXMLElement
 
 // New method using DOMDocument
-$xml = Xml::build('https://bakery.cakephp.org/articles.rss', array('return' => 'domdocument'));
+$xml = Xml::build('https://bakery.cakephp.org/articles.rss', ['return' => 'domdocument']);
 // $xml now is a instance of DOMDocument
 ```
 
@@ -64,13 +64,13 @@ $xml = Xml::build('https://bakery.cakephp.org/articles.rss');
 You can also build Xml objects using an array:
 
 ``` php
-$data = array(
-    'post' => array(
+$data = [
+    'post' => [
         'id' => 1,
         'title' => 'Best post',
         'body' => ' ... '
-    )
-);
+    ]
+];
 $xml = Xml::build($data);
 ```
 
@@ -112,13 +112,13 @@ If your XML is invalid it will throw an Exception.
 
 ``` php
 // Old method:
-$xmlArray = array('root' => array('child' => 'value'));
-$xmlObject = new Xml($xmlArray, array('format' => 'tags'));
+$xmlArray = ['root' => ['child' => 'value']];
+$xmlObject = new Xml($xmlArray, ['format' => 'tags']);
 $xmlString = $xmlObject->toString();
 
 // New method:
-$xmlArray = array('root' => array('child' => 'value'));
-$xmlObject = Xml::fromArray($xmlArray, array('format' => 'tags')); // You can use Xml::build() too
+$xmlArray = ['root' => ['child' => 'value']];
+$xmlObject = Xml::fromArray($xmlArray, ['format' => 'tags']); // You can use Xml::build() too
 $xmlString = $xmlObject->asXML();
 ```
 
@@ -128,15 +128,15 @@ Examples of invalid arrays:
 
 ``` text
 // Top level with numeric key
-array(
-    array('key' => 'value')
-);
+[
+    ['key' => 'value']
+];
 
 // Multiple keys in top level
-array(
+[
     'key1' => 'first value',
     'key2' => 'other value'
-);
+];
 ```
 
 > [!WARNING]
@@ -149,13 +149,13 @@ array(
 > as the key.
 
 ``` php
-$xmlArray = array(
-    'project' => array(
+$xmlArray = [
+    'project' => [
         '@id' => 1,
         'name' => 'Name of project, as tag',
         '@' => 'Value of project'
-    )
-);
+    ]
+];
 $xmlObject = Xml::fromArray($xmlArray);
 $xmlString = $xmlObject->asXML();
 ```
@@ -173,33 +173,33 @@ The content of `$xmlString` will be:
 > `Inflector`. See the sample below:
 
 ``` php
-$oldArray = array(
-    'Projects' => array(
-        array(
-            'Project' => array('id' => 1, 'title' => 'Project 1'),
-            'Industry' => array('id' => 1, 'name' => 'Industry 1')
-        ),
-        array(
-            'Project' => array('id' => 2, 'title' => 'Project 2'),
-            'Industry' => array('id' => 2, 'name' => 'Industry 2')
-        )
-    )
-);
+$oldArray = [
+    'Projects' => [
+        [
+            'Project' => ['id' => 1, 'title' => 'Project 1'],
+            'Industry' => ['id' => 1, 'name' => 'Industry 1']
+        ],
+        [
+            'Project' => ['id' => 2, 'title' => 'Project 2'],
+            'Industry' => ['id' => 2, 'name' => 'Industry 2']
+        ]
+    ]
+];
 
-$newArray = array(
-    'projects' => array(
-        'project' => array(
-            array(
+$newArray = [
+    'projects' => [
+        'project' => [
+            [
                 'id' => 1, 'title' => 'Project 1',
-                'industry' => array('id' => 1, 'name' => 'Industry 1')
-            ),
-            array(
+                'industry' => ['id' => 1, 'name' => 'Industry 1']
+            ],
+            [
                 'id' => 2, 'title' => 'Project 2',
-                'industry' => array('id' => 2, 'name' => 'Industry 2')
-            )
-        )
-    )
-);
+                'industry' => ['id' => 2, 'name' => 'Industry 2']
+            ]
+        ]
+    ]
+];
 ```
 
 Both will result the XML below:
@@ -233,24 +233,24 @@ to generic namespace or input the prefix `xmlns:` in a custom namespace. See
 the samples:
 
 ``` php
-$xmlArray = array(
-    'root' => array(
+$xmlArray = [
+    'root' => [
         'xmlns:' => 'https://cakephp.org',
         'child' => 'value'
-    )
-);
+    ]
+];
 $xml1 = Xml::fromArray($xmlArray);
 
 $xmlArray(
-    'root' => array(
-        'tag' => array(
+    'root' => [
+        'tag' => [
             'xmlns:pref' => 'https://cakephp.org',
-            'pref:item' => array(
+            'pref:item' => [
                 'item 1',
                 'item 2'
-            )
-        )
-    )
+            ]
+        ]
+    ]
 );
 $xml2 = Xml::fromArray($xmlArray);
 ```
@@ -275,7 +275,7 @@ Below you see the steps for creating a child node with CakePHP:
 ``` php
 // CakePHP 1.3
 $myXmlOriginal = '<?xml version="1.0"?><root><child>value</child></root>';
-$xml = new Xml($myXmlOriginal, array('format' => 'tags'));
+$xml = new Xml($myXmlOriginal, ['format' => 'tags']);
 $xml->children[0]->createNode('young', 'new value');
 
 // CakePHP 2.0 - Using SimpleXML
@@ -285,7 +285,7 @@ $xml->root->addChild('young', 'new value');
 
 // CakePHP 2.0 - Using DOMDocument
 $myXmlOriginal = '<?xml version="1.0"?><root><child>value</child></root>';
-$xml = Xml::build($myXmlOriginal, array('return' => 'domdocument'));
+$xml = Xml::build($myXmlOriginal, ['return' => 'domdocument']);
 $child = $xml->createElement('young', 'new value');
 $xml->firstChild->appendChild($child);
 ```
@@ -299,7 +299,7 @@ $xml->firstChild->appendChild($child);
 A factory and conversion class for creating SimpleXml or DOMDocument objects
 from a number of sources including strings, arrays and remote URLs.
 
-`static` Xml::**build**($input, $options = array())
+`static` Xml::**build**($input, $options = [])
 
 Initialize SimpleXMLElement or DOMDocument from a given XML string, file
 path, URL or array
@@ -313,7 +313,7 @@ $xml = Xml::build('<example>text</example>');
 Building XML from string (output DOMDocument):
 
 ``` php
-$xml = Xml::build('<example>text</example>', array('return' => 'domdocument'));
+$xml = Xml::build('<example>text</example>', ['return' => 'domdocument']);
 ```
 
 Building XML from a file path:
@@ -331,20 +331,20 @@ $xml = Xml::build('http://example.com/example.xml');
 Building from an array:
 
 ``` php
-$value = array(
-    'tags' => array(
-        'tag' => array(
-            array(
+$value = [
+    'tags' => [
+        'tag' => [
+            [
                 'id' => '1',
                 'name' => 'defect'
-            ),
-            array(
+            ],
+            [
                 'id' => '2',
                 'name' => 'enhancement'
-        )
-        )
-    )
-);
+        ]
+        ]
+    ]
+];
 $xml = Xml::build($value);
 ```
 

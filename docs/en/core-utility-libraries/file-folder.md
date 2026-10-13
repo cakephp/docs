@@ -79,7 +79,7 @@ $path = Folder::addPathElement('/a/path/for', 'testing');
 \$element can also be an array:
 
 ``` php
-$path = Folder::addPathElement('/a/path/for', array('testing', 'another'));
+$path = Folder::addPathElement('/a/path/for', ['testing', 'another']);
 // $path equals /a/path/for/testing/another
 ```
 
@@ -89,9 +89,9 @@ $element parameter accepts an array as of 2.5
 
 `method` Folder::**cd**(string $path)
 
-`method` Folder::**chmod**(string $path, integer $mode = false, boolean $recursive = true, array $exceptions = array())
+`method` Folder::**chmod**(string $path, integer $mode = false, boolean $recursive = true, array $exceptions = [])
 
-`method` Folder::**copy**(array|string $options = array())
+`method` Folder::**copy**(array|string $options = [])
 
 `static` Folder::**correctSlashFor**(string $path)
 
@@ -196,7 +196,7 @@ The name of the file with the extension. Differs from
 :php:meth:`File::name()` which returns the name without the extension.
 
 
-An array of file info. Use :php:meth:`File::info()` instead.
+An array of file info. use :php:meth:`File::info()` instead.
 
 
 Holds the file handler resource if the file is opened.

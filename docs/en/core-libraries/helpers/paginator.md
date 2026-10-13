@@ -1,6 +1,6 @@
 # PaginatorHelper
 
-`class` **PaginatorHelper**(View $view, array $settings = array())
+`class` **PaginatorHelper**(View $view, array $settings = [])
 
 The Pagination helper is used to output pagination controls such as
 page numbers and next/previous links. It works in tandem with
@@ -11,7 +11,7 @@ create paginated datasets and do paginated queries.
 
 ## Creating sort links
 
-`method` PaginatorHelper::**sort**($key, $title = null, $options = array())
+`method` PaginatorHelper::**sort**($key, $title = null, $options = [])
 
 Generates a sorting link. Sets named or querystring parameters for the sort and
 direction. Links will default to sorting by asc. After the first click, links
@@ -64,7 +64,7 @@ If you are using HTML like images in your links remember to set escaping off:
 echo $this->Paginator->sort(
   'user_id',
   '<em>User account</em>',
-  array('escape' => false)
+  ['escape' => false]
 );
 ```
 
@@ -80,7 +80,7 @@ The direction option can be used to set the default direction for a link. Once a
 link is active, it will automatically switch directions like normal:
 
 ``` php
-echo $this->Paginator->sort('user_id', null, array('direction' => 'desc'));
+echo $this->Paginator->sort('user_id', null, ['direction' => 'desc']);
 ```
 
 Output:
@@ -92,16 +92,16 @@ Output:
 The lock option can be used to lock sorting into the specified direction:
 
 ``` php
-echo $this->Paginator->sort('user_id', null, array('direction' => 'asc', 'lock' => true));
+echo $this->Paginator->sort('user_id', null, ['direction' => 'asc', 'lock' => true]);
 ```
 
-`method` PaginatorHelper::**sortDir**(string $model = null, mixed $options = array())
+`method` PaginatorHelper::**sortDir**(string $model = null, mixed $options = [])
 
-`method` PaginatorHelper::**sortKey**(string $model = null, mixed $options = array())
+`method` PaginatorHelper::**sortKey**(string $model = null, mixed $options = [])
 
 ## Creating page number links
 
-`method` PaginatorHelper::**numbers**($options = array())
+`method` PaginatorHelper::**numbers**($options = [])
 
 Returns a set of numbers for the paged result set. Uses a modulus to
 decide how many numbers to show on each side of the current page By default
@@ -131,7 +131,7 @@ Supported options are:
   title:
 
   ``` php
-  echo $this->Paginator->numbers(array('first' => 'First page'));
+  echo $this->Paginator->numbers(['first' => 'First page']);
   ```
 
 - `last` Whether you want last links generated, set to an integer to define
@@ -163,7 +163,7 @@ and end of the page set. The following would create a set of page links that
 include links to the first 2 and last 2 pages in the paged results:
 
 ``` php
-echo $this->Paginator->numbers(array('first' => 2, 'last' => 2));
+echo $this->Paginator->numbers(['first' => 2, 'last' => 2]);
 ```
 
 ::: info Added in version 2.1
@@ -180,17 +180,17 @@ In addition to generating links that go directly to specific page numbers,
 you'll often want links that go to the previous and next links, first and last
 pages in the paged data set.
 
-`method` PaginatorHelper::**prev**($title = '<< Previous', $options = array(), $disabledTitle = null, $disabledOptions = array())
+`method` PaginatorHelper::**prev**($title = '<< Previous', $options = [], $disabledTitle = null, $disabledOptions = [])
 
 ::: info Changed in version 2.3
 For methods: `PaginatorHelper::prev()` and `PaginatorHelper::next()` it is now possible to set the `tag` option to `false` to disable the wrapper. New options `disabledTag` has been added.If you leave the `$disabledOptions` empty the `$options` parameter will be used. This can save some additional typing if both sets of options are the same.
 :::
 
-`method` PaginatorHelper::**next**($title = 'Next >>', $options = array(), $disabledTitle = null, $disabledOptions = array())
+`method` PaginatorHelper::**next**($title = 'Next >>', $options = [], $disabledTitle = null, $disabledOptions = [])
 
-`method` PaginatorHelper::**first**($first = '<< first', $options = array())
+`method` PaginatorHelper::**first**($first = '<< first', $options = [])
 
-`method` PaginatorHelper::**last**($last = 'last >>', $options = array())
+`method` PaginatorHelper::**last**($last = 'last >>', $options = [])
 
 `method` PaginatorHelper::**current**(string $model = null)
 
@@ -202,7 +202,7 @@ For methods: `PaginatorHelper::prev()` and `PaginatorHelper::next()` it is now p
 
 ## Creating a page counter
 
-`method` PaginatorHelper::**counter**($options = array())
+`method` PaginatorHelper::**counter**($options = [])
 
 Returns a counter string for the paged result set. Using a provided format
 string and a number of options you can create localized and application
@@ -238,9 +238,9 @@ There are a number of options for `counter()`. The supported ones are:
   Setting 'format' to range would output like '1 - 3 of 13':
 
   ``` php
-  echo $this->Paginator->counter(array(
+  echo $this->Paginator->counter([
       'format' => 'range'
-  ));
+  ]);
   ```
 
 - `separator` The separator between the actual page and the number of
@@ -248,9 +248,9 @@ There are a number of options for `counter()`. The supported ones are:
   'pages' which is 'format' default value:
 
   ``` php
-  echo $this->Paginator->counter(array(
+  echo $this->Paginator->counter([
       'separator' => ' of a total of '
-  ));
+  ]);
   ```
 
 - `model` The name of the model being paginated, defaults to
@@ -259,7 +259,7 @@ There are a number of options for `counter()`. The supported ones are:
 
 ## Modifying the options PaginatorHelper uses
 
-`method` PaginatorHelper::**options**($options = array())
+`method` PaginatorHelper::**options**($options = [])
 
 Sets all the options for the Paginator Helper. Supported options are:
 
@@ -274,12 +274,12 @@ Sets all the options for the Paginator Helper. Supported options are:
   helper:
 
   ``` php
-  $this->Paginator->options(array(
-      'url' => array(
+  $this->Paginator->options([
+      'url' => [
           'sort' => 'email', 'direction' => 'desc', 'page' => 6,
           'lang' => 'en'
-      )
-  ));
+      ]
+  ]);
   ```
 
   The above adds the `en` route parameter to all links the helper will
@@ -294,7 +294,7 @@ Sets all the options for the Paginator Helper. Supported options are:
   pagination calls. If not specified, regular links will be created:
 
   ``` php
-  $this->Paginator->options(array('update' => '#content'));
+  $this->Paginator->options(['update' => '#content']);
   ```
 
   This is useful when doing [Ajax Pagination](../../core-libraries/helpers/js#ajax-pagination). Keep in mind that the value
@@ -313,9 +313,9 @@ control in the view. You can use `options()` to indicate that you want other
 named parameters to be converted:
 
 ``` php
-$this->Paginator->options(array(
-  'convertKeys' => array('your', 'keys', 'here')
-));
+$this->Paginator->options([
+  'convertKeys' => ['your', 'keys', 'here']
+]);
 ```
 
 ### Configuring the PaginatorHelper to use a JavaScript helper
@@ -328,7 +328,7 @@ After running `paginate()` do the following:
 ``` php
 // In your controller action.
 $this->set('posts', $this->paginate());
-$this->helpers['Paginator'] = array('ajax' => 'CustomJs');
+$this->helpers['Paginator'] = ['ajax' => 'CustomJs'];
 ```
 
 Will change the `PaginatorHelper` to use the `CustomJs` for
@@ -397,13 +397,13 @@ echo $this->Paginator->prev(
   '« Previous',
   null,
   null,
-  array('class' => 'disabled')
+  ['class' => 'disabled']
 );
 echo $this->Paginator->next(
   'Next »',
   null,
   null,
-  array('class' => 'disabled')
+  ['class' => 'disabled']
 );
 
 // prints X of Y, where X is current page and Y is number of pages
@@ -414,17 +414,17 @@ The wording output by the counter() method can also be customized
 using special markers:
 
 ``` php
-echo $this->Paginator->counter(array(
+echo $this->Paginator->counter([
     'format' => 'Page {:page} of {:pages}, showing {:current} records out of
              {:count} total, starting on record {:start}, ending on {:end}'
-));
+]);
 ```
 
 ## Other Methods
 
-`method` PaginatorHelper::**link**($title, $url = array(), $options = array())
+`method` PaginatorHelper::**link**($title, $url = [], $options = [])
 
-`method` PaginatorHelper::**url**($options = array(), $asArray = false, $model = null)
+`method` PaginatorHelper::**url**($options = [], $asArray = false, $model = null)
 
 `method` PaginatorHelper::**defaultModel**()
 
@@ -436,7 +436,7 @@ echo $this->Paginator->counter(array(
 The `param()` method was added in 2.4.
 :::
 
-`method` PaginatorHelper::**meta**(array $options = array())
+`method` PaginatorHelper::**meta**(array $options = [])
 
 ::: info Added in version 2.6
 The `meta()` method was added in 2.6.

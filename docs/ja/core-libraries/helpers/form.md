@@ -1,6 +1,6 @@
 # FormHelper
 
-`class` **FormHelper**(View $view, array $settings = array())
+`class` **FormHelper**(View $view, array $settings = [])
 
 FormHelper はフォーム作成時の力作業のほとんどを代行してくれます。
 フォームをすばやく作成する機能に特化して、バリデーション
@@ -14,7 +14,7 @@ FormHelper はまた柔軟でもあります。
 FormHelper の利点を活用するために最初に使うメソッドは `create()`
 です。この特別なメソッドはフォームの開始タグを出力します。
 
-`method` FormHelper::**create**(string $model = null, array $options = array())
+`method` FormHelper::**create**(string $model = null, array $options = [])
 
 ### create() のオプション
 
@@ -26,7 +26,7 @@ create() には多くのオプションがあります:
   'post' と 'get' は、フォームの送信用メソッドをこの通り変更します:
 
   ``` php
-  echo $this->Form->create('User', array('type' => 'get'));
+  echo $this->Form->create('User', ['type' => 'get']);
   ```
 
   出力結果:
@@ -41,7 +41,7 @@ create() には多くのオプションがあります:
   enctype 属性が抜けていると、ファイルのアップロードがうまく動きません:
 
   ``` php
-  echo $this->Form->create('User', array('type' => 'file'));
+  echo $this->Form->create('User', ['type' => 'file']);
   ```
 
   出力結果:
@@ -62,7 +62,7 @@ create() には多くのオプションがあります:
   以下のように指定します:
 
   ``` php
-  echo $this->Form->create('User', array('action' => 'login'));
+  echo $this->Form->create('User', ['action' => 'login']);
   ```
 
   出力結果:
@@ -81,10 +81,10 @@ create() には多くのオプションがあります:
   対する相対値を指定できます:
 
   ``` php
-  echo $this->Form->create(false, array(
-      'url' => array('controller' => 'recipes', 'action' => 'add'),
+  echo $this->Form->create(false, [
+      'url' => ['controller' => 'recipes', 'action' => 'add'],
       'id' => 'RecipesAdd'
-  ));
+  ]);
   ```
 
   出力結果:
@@ -96,10 +96,10 @@ create() には多くのオプションがあります:
   もしくは、外部ドメインも指定可能です:
 
   ``` php
-  echo $this->Form->create(false, array(
+  echo $this->Form->create(false, [
       'url' => 'https://www.google.com/search',
       'type' => 'get'
-  ));
+  ]);
   ```
 
   出力結果:
@@ -126,12 +126,12 @@ create() には多くのオプションがあります:
   標準の振る舞いをカスタマイズできます。:
 
   ``` php
-  echo $this->Form->create('User', array(
-      'inputDefaults' => array(
+  echo $this->Form->create('User', [
+      'inputDefaults' => [
           'label' => false,
           'div' => false
-      )
-  ));
+      ]
+  ]);
   ```
 
   これ以降に生成される入力項目は、すべて inputDefaults で宣言された
@@ -143,13 +143,13 @@ create() には多くのオプションがあります:
   // label 要素を持つ
   echo $this->Form->input(
       'username',
-      array('label' => 'Username')
+      ['label' => 'Username']
   );
   ```
 
 ## フォームを閉じる
 
-`method` FormHelper::**end**($options = null, $secureAttributes = array())
+`method` FormHelper::**end**($options = null, $secureAttributes = [])
 
 ## フォーム要素の生成
 
@@ -158,9 +158,9 @@ FormHelper でフォームの input 要素を作る方法はいくつかあり�
 項目を自動的に調べて、それらの項目に対応する適切な入力項目を作ります。
 内部的には `input()` は FormHelper 内で他のメソッドに処理を委託します。
 
-`method` FormHelper::**input**(string $fieldName, array $options = array())
+`method` FormHelper::**input**(string $fieldName, array $options = [])
 
-`method` FormHelper::**inputs**(mixed $fields = null, array $blacklist = null, $options = array())
+`method` FormHelper::**inputs**(mixed $fields = null, array $blacklist = null, $options = [])
 
 ### 項目名の命名規則
 
@@ -205,10 +205,10 @@ FormHelper は日時項目の入力を生成する際、内部的に複数の �
 上書きすることができます:
 
 ``` php
-echo $this->Form->input('Model.year', array(
+echo $this->Form->input('Model.year', [
     'type' => 'text',
     'name' => 'data[Model][year]'
-));
+]);
 ```
 
 ### オプション
@@ -224,8 +224,8 @@ HTML 属性などもオプションとして設定可能です。ここでは
   'file', 'password' 等のタイプも生成可能です:
 
   ``` php
-  echo $this->Form->input('field', array('type' => 'file'));
-  echo $this->Form->input('email', array('type' => 'email'));
+  echo $this->Form->input('field', ['type' => 'file']);
+  echo $this->Form->input('email', ['type' => 'email']);
   ```
 
   出力はこうなります:
@@ -250,9 +250,9 @@ HTML 属性などもオプションとして設定可能です。ここでは
   クラス名の指定:
 
   ``` php
-  echo $this->Form->input('User.name', array(
+  echo $this->Form->input('User.name', [
       'div' => 'class_name'
-  ));
+  ]);
   ```
 
   出力結果:
@@ -267,13 +267,13 @@ HTML 属性などもオプションとして設定可能です。ここでは
   複数の属性の指定:
 
   ``` php
-  echo $this->Form->input('User.name', array(
-      'div' => array(
+  echo $this->Form->input('User.name', [
+      'div' => [
           'id' => 'mainDiv',
           'title' => 'Div Title',
           'style' => 'display:block'
-      )
-  ));
+      ]
+  ]);
   ```
 
   出力結果:
@@ -289,7 +289,7 @@ HTML 属性などもオプションとして設定可能です。ここでは
   div の出力抑制:
 
   ``` php
-  echo $this->Form->input('User.name', array('div' => false)); ?>
+  echo $this->Form->input('User.name', ['div' => false]); ?>
   ```
 
   出力結果:
@@ -302,9 +302,9 @@ HTML 属性などもオプションとして設定可能です。ここでは
 - `$options['label']` input とともに指定されることの多い label のテキストを文字列で指定します:
 
   ``` php
-  echo $this->Form->input('User.name', array(
+  echo $this->Form->input('User.name', [
       'label' => 'The User Alias'
-  ));
+  ]);
   ```
 
   出力結果:
@@ -319,7 +319,7 @@ HTML 属性などもオプションとして設定可能です。ここでは
   このキーに false を指定すると、label タグが出力されなくなります:
 
   ``` php
-  echo $this->Form->input('User.name', array('label' => false));
+  echo $this->Form->input('User.name', ['label' => false]);
   ```
 
   出力結果:
@@ -335,12 +335,12 @@ HTML 属性などもオプションとして設定可能です。ここでは
   するには `text` キーを使います:
 
   ``` php
-  echo $this->Form->input('User.name', array(
-      'label' => array(
+  echo $this->Form->input('User.name', [
+      'label' => [
           'class' => 'thingy',
           'text' => 'The User Alias'
-      )
-  ));
+      ]
+  ]);
   ```
 
   出力結果:
@@ -363,45 +363,45 @@ HTML 属性などもオプションとして設定可能です。ここでは
   error キーに false を設定します:
 
   ``` php
-  $this->Form->input('Model.field', array('error' => false));
+  $this->Form->input('Model.field', ['error' => false]);
   ```
 
   エラーメッセージのみを無効にし、フィールドのクラス名は有効にするには
   errorMessage キーを false にします:
 
   ``` php
-  $this->Form->input('Model.field', array('errorMessage' => false));
+  $this->Form->input('Model.field', ['errorMessage' => false]);
   ```
 
   外側の要素のタイプやそのクラスを変更するには以下の書式を
   使います:
 
   ``` php
-  $this->Form->input('Model.field', array(
-      'error' => array(
-          'attributes' => array('wrap' => 'span', 'class' => 'bzzz')
-      )
-  ));
+  $this->Form->input('Model.field', [
+      'error' => [
+          'attributes' => ['wrap' => 'span', 'class' => 'bzzz']
+      ]
+  ]);
   ```
 
   エラーメッセージ出力において HTML が自動的にエスケープされるのを
   抑制するには、escape サブオプションを false にします:
 
   ``` php
-  $this->Form->input('Model.field', array(
-      'error' => array(
-          'attributes' => array('escape' => false)
-      )
-  ));
+  $this->Form->input('Model.field', [
+      'error' => [
+          'attributes' => ['escape' => false]
+      ]
+  ]);
   ```
 
   モデルのエラーメッセージを上書きするには、
   バリデーションの rule 名にマッチしたキーを持つ配列を使います:
 
   ``` php
-  $this->Form->input('Model.field', array(
-      'error' => array('tooShort' => __('This is not long enough'))
-  ));
+  $this->Form->input('Model.field', [
+      'error' => ['tooShort' => __('This is not long enough')]
+  ]);
   ```
 
   これまで見てきたように、モデルの中にあるそれぞれのバリデーション
@@ -419,11 +419,11 @@ HTML 属性などもオプションとして設定可能です。ここでは
   これらのキーを使います:
 
   ``` php
-  echo $this->Form->input('field', array(
+  echo $this->Form->input('field', [
       'before' => '--before--',
       'after' => '--after--',
       'between' => '--between---'
-  ));
+  ]);
   ```
 
   出力結果:
@@ -442,14 +442,14 @@ HTML 属性などもオプションとして設定可能です。ここでは
   label のペアを分けるためのマークアップを挿入できます:
 
   ``` php
-  echo $this->Form->input('field', array(
+  echo $this->Form->input('field', [
       'before' => '--before--',
       'after' => '--after--',
       'between' => '--between---',
       'separator' => '--separator--',
-      'options' => array('1', '2'),
+      'options' => ['1', '2'],
       'type' => 'radio'
-  ));
+  ]);
   ```
 
   出力結果:
@@ -475,19 +475,19 @@ HTML 属性などもオプションとして設定可能です。ここでは
   です。'format' オプションは文字列の配列を取り、希望する要素の
   並び順を表すテンプレートを指定します。サポートされている配列キーは
   以下の通りです:
-  `array('before', 'input', 'between', 'label', 'after','error')`
+  `['before', 'input', 'between', 'label', 'after','error']`
 
 - `$options['inputDefaults']` 複数の input() コールで同じオプションを
   使いたい場合、 `inputDefaults` を使うことで繰り返し指定を避ける事が
   できます:
 
   ``` php
-  echo $this->Form->create('User', array(
-      'inputDefaults' => array(
+  echo $this->Form->create('User', [
+      'inputDefaults' => [
           'label' => false,
           'div' => false
-      )
-  ));
+      ]
+  ]);
   ```
 
   その時点より先で生成されるすべての input において、inputDefaults
@@ -499,7 +499,7 @@ HTML 属性などもオプションとして設定可能です。ここでは
   echo $this->Form->input('password');
 
   // label 要素あり
-  echo $this->Form->input('username', array('label' => 'Username'));
+  echo $this->Form->input('username', ['label' => 'Username']);
   ```
 
   ここより先のデフォルトを変更するには
@@ -520,14 +520,14 @@ HTML 属性などもオプションとして設定可能です。ここでは
 echo $this->Form->input('User.email');
 
 // <select name="Tags" multiple="multiple"> になります
-echo $this->Form->input('Tags.Tags', array('multiple' => true));
+echo $this->Form->input('Tags.Tags', ['multiple' => true]);
 ```
 
 もし、生成された name 属性を上書きしたい場合、 `name` オプションが使えます。 :
 
 ``` php
 // より典型的な <input name="data[User][email]" type="text" /> になります
-echo $this->Form->input('User.email', array('name' => 'data[User][email]'));
+echo $this->Form->input('User.email', ['name' => 'data[User][email]']);
 ```
 
 ## 特殊なタイプの入力を生成する
@@ -549,7 +549,7 @@ input 要素に関連するメソッドの多くは、一般的なオプショ�
 - `$options['class']` input のクラス名を指定できます:
 
   ``` php
-  echo $this->Form->input('title', array('class' => 'custom-class'));
+  echo $this->Form->input('title', ['class' => 'custom-class']);
   ```
 
 - `$options['id']` input の DOM id の値を強制的に設定します。
@@ -562,16 +562,16 @@ input 要素に関連するメソッドの多くは、一般的なオプショ�
   使用例:
 
   ``` php
-  echo $this->Form->input('ingredient', array('default' => 'Sugar'));
+  echo $this->Form->input('ingredient', ['default' => 'Sugar']);
   ```
 
   select フィールドを持つ例（"Medium" サイズがデフォルトで選択されます）:
 
   ``` php
-  $sizes = array('s' => 'Small', 'm' => 'Medium', 'l' => 'Large');
+  $sizes = ['s' => 'Small', 'm' => 'Medium', 'l' => 'Large'];
   echo $this->Form->input(
       'size',
-      array('options' => $sizes, 'default' => 'm')
+      ['options' => $sizes, 'default' => 'm']
   );
   ```
 
@@ -600,10 +600,10 @@ input 要素に関連するメソッドの多くは、一般的なオプショ�
   その項目が選択されます:
 
   ``` php
-  echo $this->Form->input('close_time', array(
+  echo $this->Form->input('close_time', [
       'type' => 'time',
       'selected' => '13:30:00'
-  ));
+  ]);
   ```
 
   > [!NOTE]
@@ -619,10 +619,10 @@ input 要素に関連するメソッドの多くは、一般的なオプショ�
   文字列を設定してください:
 
   ``` php
-  echo $this->Form->input('field', array(
-      'options' => array(1, 2, 3, 4, 5),
+  echo $this->Form->input('field', [
+      'options' => [1, 2, 3, 4, 5],
       'empty' => '(choose one)'
-  ));
+  ]);
   ```
 
   出力結果:
@@ -649,12 +649,12 @@ input 要素に関連するメソッドの多くは、一般的なオプショ�
 
   ``` php
   echo $this->Form->dateTime('Contact.date', 'DMY', '12',
-      array(
-          'empty' => array(
+      [
+          'empty' => [
               'day' => 'DAY', 'month' => 'MONTH', 'year' => 'YEAR',
               'hour' => 'HOUR', 'minute' => 'MINUTE', 'meridian' => false
-          )
-      )
+          ]
+      ]
   );
   ```
 
@@ -706,7 +706,7 @@ input 要素に関連するメソッドの多くは、一般的なオプショ�
   これは `$options['hiddenField'] = false` とすることで無効にできます:
 
   ``` php
-  echo $this->Form->checkbox('published', array('hiddenField' => false));
+  echo $this->Form->checkbox('published', ['hiddenField' => false]);
   ```
 
   出力結果:
@@ -756,10 +756,10 @@ input 要素に関連するメソッドの多くは、一般的なオプショ�
   設定できます:
 
   ``` php
-  echo $this->Form->checkbox('published', array(
+  echo $this->Form->checkbox('published', [
       'value' => 'Y',
       'hiddenField' => 'N',
-  ));
+  ]);
   ```
 
 ### 日時関連オプション
@@ -782,10 +782,10 @@ input 要素に関連するメソッドの多くは、一般的なオプショ�
   分間隔の数値を指定します:
 
   ``` php
-  echo $this->Form->input('Model.time', array(
+  echo $this->Form->input('Model.time', [
       'type' => 'time',
       'interval' => 15
-  ));
+  ]);
   ```
 
   この例では分の select で 15 分間隔で４つのオプションを生成します。
@@ -828,7 +828,8 @@ input 要素に関連するメソッドの多くは、一般的なオプショ�
 検証するためのバリデーションメソッドの例を以下に示します:
 
 ``` php
-public function isUploadedFile($params) {
+public function isUploadedFile($params)
+{
     $val = array_shift($params);
     if ((isset($val['error']) && $val['error'] == 0) ||
         (!empty( $val['tmp_name']) && $val['tmp_name'] != 'none')
@@ -842,7 +843,7 @@ public function isUploadedFile($params) {
 file タイプの入力フィールドを生成:
 
 ``` php
-echo $this->Form->create('User', array('type' => 'file'));
+echo $this->Form->create('User', ['type' => 'file']);
 echo $this->Form->file('avatar');
 ```
 
@@ -862,15 +863,15 @@ echo $this->Form->file('avatar');
 
 `method` FormHelper::**submit**(string $caption, array $options)
 
-`method` FormHelper::**button**(string $title, array $options = array())
+`method` FormHelper::**button**(string $title, array $options = [])
 
-`method` FormHelper::**postButton**(string $title, mixed $url, array $options = array ())
+`method` FormHelper::**postButton**(string $title, mixed $url, array $options = [])
 
-`method` FormHelper::**postLink**(string $title, mixed $url = null, array $options = array ())
+`method` FormHelper::**postLink**(string $title, mixed $url = null, array $options = [])
 
 ## 日付と時刻入力の生成
 
-`method` FormHelper::**dateTime**($fieldName, $dateFormat = 'DMY', $timeFormat = '12', $attributes = array())
+`method` FormHelper::**dateTime**($fieldName, $dateFormat = 'DMY', $timeFormat = '12', $attributes = [])
 
 `method` FormHelper::**year**(string $fieldName, int $minYear, int $maxYear, array $attributes)
 
@@ -903,11 +904,11 @@ echo $this->Form->file('avatar');
 メソッドの呼び出しに統合できます:
 
 ``` php
-$this->Form->inputDefaults(array(
+$this->Form->inputDefaults([
         'label' => false,
         'div' => false,
         'class' => 'fancy'
-    )
+    ]
 );
 ```
 
@@ -920,7 +921,7 @@ echo $this->Form->input('password'); // No div, no label with class 'fancy'
 // has a label element same defaults
 echo $this->Form->input(
     'username',
-    array('label' => 'Username')
+    ['label' => 'Username']
 );
 ```
 
@@ -936,7 +937,7 @@ SecurityComponent を利用する際は、前述のようにフォームを閉�
 
 `method` FormHelper::**unlockField**($name)
 
-`method` FormHelper::**secure**(array $fields = array())
+`method` FormHelper::**secure**(array $fields = [])
 
 ## 2.0 アップデート内容
 

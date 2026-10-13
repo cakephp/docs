@@ -217,7 +217,7 @@ If \$showFrom is not set to false, the debug output will start with the line fro
 which it was called.
 Also see [Debugging](../development/debugging)
 
-`function` **stackTrace(array $options = array())**
+`function` **stackTrace(array $options = [])**
 
 If the application's DEBUG level is non-zero, the stack trace is printed out.
 

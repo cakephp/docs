@@ -19,7 +19,8 @@ we'll be creating will be saved to `/app/Model/Post.php`. The
 completed file should look like this:
 
 ``` php
-class Post extends AppModel {
+class Post extends AppModel
+{
 }
 ```
 
@@ -49,8 +50,9 @@ called `PostsController.php` inside the `/app/Controller`
 directory. Here's what the basic controller should look like:
 
 ``` php
-class PostsController extends AppController {
-    public $helpers = array('Html', 'Form');
+class PostsController extends AppController
+{
+    public $helpers = ['Html', 'Form'];
 }
 ```
 
@@ -61,10 +63,12 @@ as www.example.com/posts/), they might expect to see a listing of
 posts. The code for that action would look something like this:
 
 ``` php
-class PostsController extends AppController {
-    public $helpers = array('Html', 'Form');
+class PostsController extends AppController
+{
+    public $helpers = ['Html', 'Form'];
 
-    public function index() {
+    public function index()
+    {
         $this->set('posts', $this->Post->find('all'));
     }
 }
@@ -114,42 +118,42 @@ to the view that would look something like this:
 ``` text
 // print_r($posts) output:
 
-Array
-(
-    [0] => Array
-        (
-            [Post] => Array
-                (
+
+[
+    [0] => 
+        [
+            [Post] => 
+                [
                     [id] => 1
                     [title] => The title
                     [body] => This is the post body.
                     [created] => 2008-02-13 18:34:55
                     [modified] =>
-                )
-        )
-    [1] => Array
-        (
-            [Post] => Array
-                (
+                ]
+        ]
+    [1] => 
+        [
+            [Post] => 
+                [
                     [id] => 2
                     [title] => A title once again
                     [body] => And the post body follows.
                     [created] => 2008-02-13 18:34:56
                     [modified] =>
-                )
-        )
-    [2] => Array
-        (
-            [Post] => Array
-                (
+                ]
+        ]
+    [2] => 
+        [
+            [Post] => 
+                [
                     [id] => 3
                     [title] => Title strikes back
                     [body] => This is really exciting! Not.
                     [created] => 2008-02-13 18:34:57
                     [modified] =>
-                )
-        )
-)
+                ]
+        ]
+]
 ```
 
 CakePHP's view files are stored in `/app/View` inside a folder
@@ -175,7 +179,7 @@ nice table, our view code might look something like this
         <td><?php echo $post['Post']['id']; ?></td>
         <td>
             <?php echo $this->Html->link($post['Post']['title'],
-array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
+['controller' => 'posts', 'action' => 'view', $post['Post']['id']]); ?>
         </td>
         <td><?php echo $post['Post']['created']; ?></td>
     </tr>
@@ -214,14 +218,17 @@ PostsController now:
 
 ``` php
 // File: /app/Controller/PostsController.php
-class PostsController extends AppController {
-    public $helpers = array('Html', 'Form');
+class PostsController extends AppController
+{
+    public $helpers = ['Html', 'Form'];
 
-    public function index() {
+    public function index()
+    {
          $this->set('posts', $this->Post->find('all'));
     }
 
-    public function view($id = null) {
+    public function view($id = null)
+    {
         if (!$id) {
             throw new NotFoundException(__('Invalid post'));
         }
@@ -275,15 +282,18 @@ First, start by creating an `add()` action in the
 PostsController:
 
 ``` php
-class PostsController extends AppController {
-    public $helpers = array('Html', 'Form', 'Flash');
-    public $components = array('Flash');
+class PostsController extends AppController
+{
+    public $helpers = ['Html', 'Form', 'Flash'];
+    public $components = ['Flash'];
 
-    public function index() {
+    public function index()
+    {
         $this->set('posts', $this->Post->find('all'));
     }
 
-    public function view($id) {
+    public function view($id)
+    {
         if (!$id) {
             throw new NotFoundException(__('Invalid post'));
         }
@@ -295,12 +305,13 @@ class PostsController extends AppController {
         $this->set('post', $post);
     }
 
-    public function add() {
+    public function add()
+    {
         if ($this->request->is('post')) {
             $this->Post->create();
             if ($this->Post->save($this->request->data)) {
                 $this->Flash->success(__('Your post has been saved.'));
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Unable to add your post.'));
         }
@@ -341,7 +352,7 @@ redirection. In the layout we have
 `FlashHelper::render()` which displays the
 message and clears the corresponding session variable. The
 controller's `Controller::redirect` function
-redirects to another URL. The param `array('action' => 'index')`
+redirects to another URL. The param `['action' => 'index']`
 translates to URL /posts (that is, the index action of the posts controller).
 You can refer to `Router::url()` function on the
 [API](https://api.cakephp.org) to see the formats in which you can specify a
@@ -375,7 +386,7 @@ Here's our add view:
 <?php
 echo $this->Form->create('Post');
 echo $this->Form->input('title');
-echo $this->Form->input('body', array('rows' => '3'));
+echo $this->Form->input('body', ['rows' => '3']);
 echo $this->Form->end('Save Post');
 ?>
 ```
@@ -413,7 +424,7 @@ the following line:
 ``` php
 <?php echo $this->Html->link(
     'Add Post',
-    array('controller' => 'posts', 'action' => 'add')
+    ['controller' => 'posts', 'action' => 'add']
 ); ?>
 ```
 
@@ -422,15 +433,16 @@ requirements? Validation rules are defined in the model. Let's look
 back at our Post model and make a few adjustments:
 
 ``` php
-class Post extends AppModel {
-    public $validate = array(
-        'title' => array(
+class Post extends AppModel
+{
+    public $validate = [
+        'title' => [
             'rule' => 'notBlank'
-        ),
-        'body' => array(
+        ],
+        'body' => [
             'rule' => 'notBlank'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -456,7 +468,8 @@ Here's what the `edit()` action of the PostsController would look
 like:
 
 ``` php
-public function edit($id = null) {
+public function edit($id = null)
+{
     if (!$id) {
         throw new NotFoundException(__('Invalid post'));
     }
@@ -466,11 +479,11 @@ public function edit($id = null) {
         throw new NotFoundException(__('Invalid post'));
     }
 
-    if ($this->request->is(array('post', 'put'))) {
+    if ($this->request->is(['post', 'put'])) {
         $this->Post->id = $id;
         if ($this->Post->save($this->request->data)) {
             $this->Flash->success(__('Your post has been updated.'));
-            return $this->redirect(array('action' => 'index'));
+            return $this->redirect(['action' => 'index']);
         }
         $this->Flash->error(__('Unable to update your post.'));
     }
@@ -501,8 +514,8 @@ The edit view might look something like this:
 <?php
 echo $this->Form->create('Post');
 echo $this->Form->input('title');
-echo $this->Form->input('body', array('rows' => '3'));
-echo $this->Form->input('id', array('type' => 'hidden'));
+echo $this->Form->input('body', ['rows' => '3']);
+echo $this->Form->input('id', ['type' => 'hidden']);
 echo $this->Form->end('Save Post');
 ?>
 ```
@@ -522,7 +535,7 @@ posts:
 <!-- File: /app/View/Posts/index.ctp  (edit links added) -->
 
 <h1>Blog posts</h1>
-<p><?php echo $this->Html->link("Add Post", array('action' => 'add')); ?></p>
+<p><?php echo $this->Html->link("Add Post", ['action' => 'add']); ?></p>
 <table>
     <tr>
         <th>Id</th>
@@ -540,7 +553,7 @@ posts:
             <?php
                 echo $this->Html->link(
                     $post['Post']['title'],
-                    array('action' => 'view', $post['Post']['id'])
+                    ['action' => 'view', $post['Post']['id']]
                 );
             ?>
         </td>
@@ -548,7 +561,7 @@ posts:
             <?php
                 echo $this->Html->link(
                     'Edit',
-                    array('action' => 'edit', $post['Post']['id'])
+                    ['action' => 'edit', $post['Post']['id']]
                 );
             ?>
         </td>
@@ -567,7 +580,8 @@ Next, let's make a way for users to delete posts. Start with a
 `delete()` action in the PostsController:
 
 ``` php
-public function delete($id) {
+public function delete($id)
+{
     if ($this->request->is('get')) {
         throw new MethodNotAllowedException();
     }
@@ -582,7 +596,7 @@ public function delete($id) {
         );
     }
 
-    return $this->redirect(array('action' => 'index'));
+    return $this->redirect(['action' => 'index']);
 }
 ```
 
@@ -603,7 +617,7 @@ links that allow users to delete posts, however:
 <!-- File: /app/View/Posts/index.ctp -->
 
 <h1>Blog posts</h1>
-<p><?php echo $this->Html->link('Add Post', array('action' => 'add')); ?></p>
+<p><?php echo $this->Html->link('Add Post', ['action' => 'add']); ?></p>
 <table>
     <tr>
         <th>Id</th>
@@ -621,7 +635,7 @@ links that allow users to delete posts, however:
             <?php
                 echo $this->Html->link(
                     $post['Post']['title'],
-                    array('action' => 'view', $post['Post']['id'])
+                    ['action' => 'view', $post['Post']['id']]
                 );
             ?>
         </td>
@@ -629,13 +643,13 @@ links that allow users to delete posts, however:
             <?php
                 echo $this->Form->postLink(
                     'Delete',
-                    array('action' => 'delete', $post['Post']['id']),
-                    array('confirm' => 'Are you sure?')
+                    ['action' => 'delete', $post['Post']['id']],
+                    ['confirm' => 'Are you sure?']
                 );
             ?>
             <?php
                 echo $this->Html->link(
-                    'Edit', array('action' => 'edit', $post['Post']['id'])
+                    'Edit', ['action' => 'edit', $post['Post']['id']]
                 );
             ?>
         </td>
@@ -681,7 +695,7 @@ route. It looks like this:
 ``` php
 Router::connect(
     '/',
-    array('controller' => 'pages', 'action' => 'display', 'home')
+    ['controller' => 'pages', 'action' => 'display', 'home']
 );
 ```
 
@@ -690,7 +704,7 @@ We want it to connect with our own controller, so replace that line
 with this one:
 
 ``` php
-Router::connect('/', array('controller' => 'posts', 'action' => 'index'));
+Router::connect('/', ['controller' => 'posts', 'action' => 'index']);
 ```
 
 This should connect users requesting '/' to the index() action of
@@ -699,7 +713,7 @@ our PostsController.
 > [!NOTE]
 > CakePHP also makes use of 'reverse routing'. If, with the above
 > route defined, you pass
-> `array('controller' => 'posts', 'action' => 'index')` to a
+> `['controller' => 'posts', 'action' => 'index']` to a
 > function expecting an array, the resulting URL used will be '/'.
 > It's therefore a good idea to always use arrays for URLs, as this
 > means your routes define where a URL goes, and also ensures that

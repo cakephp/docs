@@ -66,7 +66,7 @@ pieceofcake2 フォークは MySQL 5.6、5.7、8.0 以降（`pdo_mysql`）、Pos
 - `calculate($model, $func, $params)`
 - 少なくとも以下のうちのひとつ:
   - `create(Model $model, $fields = null, $values = null)`
-  - `read(Model $model, $queryData = array(), $recursive = null)`
+  - `read(Model $model, $queryData = [], $recursive = null)`
   - `update(Model $model, $fields = null, $values = null, $conditions = null)`
   - `delete(Model $model, $id = null)`
 
@@ -95,7 +95,8 @@ pieceofcake2 フォークは MySQL 5.6、5.7、8.0 以降（`pdo_mysql`）、Pos
 ``` php
 App::uses('HttpSocket', 'Network/Http');
 
-class FarAwaySource extends DataSource {
+class FarAwaySource extends DataSource
+{
 
 /**
  * データソースの説明（オプション）
@@ -106,37 +107,38 @@ class FarAwaySource extends DataSource {
  * デフォルトの設定オプション。これらは ``app/Config/database.php`` 
  * でカスタマイズされ、 ``__construct()`` の中でマージされます。
  */
-    public $config = array(
+    public $config = [
         'apiKey' => '',
-    );
+    ];
 
 /**
  * create() や update() を行いたい（実装したい）場合、利用できる
  * 項目を指定する必要があります。たとえば固定情報やスキーマの
  * 移行など、CakeSchema でやる場合と同じ配列キーを使います。
  */
-    protected $_schema = array(
-        'id' => array(
+    protected $_schema = [
+        'id' => [
             'type' => 'integer',
             'null' => false,
             'key' => 'primary',
             'length' => 11,
-        ),
-        'name' => array(
+        ],
+        'name' => [
             'type' => 'string',
             'null' => true,
             'length' => 255,
-        ),
-        'message' => array(
+        ],
+        'message' => [
             'type' => 'text',
             'null' => true,
-        ),
-    );
+        ],
+    ];
 
 /**
  * HttpSocket を生成し、設定の調整を行う。
  */
-    public function __construct($config) {
+    public function __construct($config)
+    {
         parent::__construct($config);
         $this->Http = new HttpSocket();
     }
@@ -151,7 +153,8 @@ class FarAwaySource extends DataSource {
  * データソースでも独自のやり方でキャッシュ機構を実装したいと思う
  * かもしれません。とりあえず、単に ``return null`` してください。
  */
-    public function listSources($data = null) {
+    public function listSources($data = null)
+    {
         return null;
     }
 
@@ -164,7 +167,8 @@ class FarAwaySource extends DataSource {
  * 対して ``schema`` プロパティをセットし、ここでは単に 
  * ``$model->schema`` を返すようにします。
  */
-    public function describe($model) {
+    public function describe($model)
+    {
         return $this->_schema;
     }
 
@@ -178,7 +182,8 @@ class FarAwaySource extends DataSource {
  * ``read()`` の中で ``$data['fields'] === 'COUNT'`` かどうかを
  * 聞くようにすることです。
  */
-    public function calculate(Model $model, $func, $params = array()) {
+    public function calculate(Model $model, $func, $params = [])
+    {
         return 'COUNT';
     }
 
@@ -186,8 +191,9 @@ class FarAwaySource extends DataSource {
  * CRUD のうちの R を実装します。 ``Model::find()`` への呼び出しは
  * ここに来ます。
  */
-    public function read(Model $model, $queryData = array(),
-        $recursive = null) {
+    public function read(Model $model, $queryData = [],
+        $recursive = null)
+    {
         /**
          * ここでは、前述の calculate() メソッドで返されるカウントの
          * 実際の処理を行います。リモートソースのチェックをするか、
@@ -196,7 +202,7 @@ class FarAwaySource extends DataSource {
          * ``delete()`` ではレコードが存在するものとみなされます。
          */
         if ($queryData['fields'] === 'COUNT') {
-            return array(array(array('count' => 1)));
+            return [[['count' => 1]]];
         }
         /**
          * ここではリモートデータを取得およびデコードして返します。
@@ -211,14 +217,15 @@ class FarAwaySource extends DataSource {
             $error = json_last_error();
             throw new CakeException($error);
         }
-        return array($model->alias => $res);
+        return [$model->alias => $res];
     }
 
 /**
  * CRUD のうちの C を実装します。 ``Model::save()`` への呼び出しのうち
  *  $model->id がセットされないケースがここに来ます。
  */
-    public function create(Model $model, $fields = null, $values = null) {
+    public function create(Model $model, $fields = null, $values = null)
+    {
         $data = array_combine($fields, $values);
         $data['apiKey'] = $this->config['apiKey'];
         $json = $this->Http->post('http://example.com/api/set.json', $data);
@@ -236,7 +243,8 @@ class FarAwaySource extends DataSource {
  *  に依存するためここでは単に ``$this->create()`` をコールできます。
  */
     public function update(Model $model, $fields = null, $values = null,
-        $conditions = null) {
+        $conditions = null)
+    {
         return $this->create($model, $fields, $values);
     }
 
@@ -244,11 +252,12 @@ class FarAwaySource extends DataSource {
  * CRUD のうちの D を実装します。 
  * ``Model::delete()`` への呼び出しがここに来ます。
  */
-    public function delete(Model $model, $id = null) {
-        $json = $this->Http->get('http://example.com/api/remove.json', array(
+    public function delete(Model $model, $id = null)
+    {
+        $json = $this->Http->get('http://example.com/api/remove.json', [
             'id' => $id[$model->alias . '.id'],
             'apiKey' => $this->config['apiKey'],
-        ));
+        ]);
         $res = json_decode($json, true);
         if (is_null($res)) {
             $error = json_last_error();
@@ -256,7 +265,6 @@ class FarAwaySource extends DataSource {
         }
         return true;
     }
-
 }
 ```
 
@@ -264,16 +272,17 @@ class FarAwaySource extends DataSource {
 ファイルの中で以下のように追加します:
 
 ``` php
-public $faraway = array(
+public $faraway = [
     'datasource' => 'FarAwaySource',
     'apiKey'     => '1234abcd',
-);
+];
 ```
 
 そしてモデルの中でデータベースを以下のように使います:
 
 ``` php
-class MyModel extends AppModel {
+class MyModel extends AppModel
+{
     public $useDbConfig = 'faraway';
 }
 ```
@@ -283,9 +292,9 @@ class MyModel extends AppModel {
 
 ``` php
 // Get all messages from 'Some Person'
-$messages = $this->MyModel->find('all', array(
-    'conditions' => array('name' => 'Some Person'),
-));
+$messages = $this->MyModel->find('all', [
+    'conditions' => ['name' => 'Some Person'],
+]);
 ```
 
 > [!TIP]
@@ -295,19 +304,19 @@ $messages = $this->MyModel->find('all', array(
 同様に、新しいメッセージを保存できます:
 
 ``` php
-$this->MyModel->save(array(
+$this->MyModel->save([
     'name' => 'Some Person',
     'message' => 'New Message',
-));
+]);
 ```
 
 以前のメッセージを更新します:
 
 ``` php
 $this->MyModel->id = 42;
-$this->MyModel->save(array(
+$this->MyModel->save([
     'message' => 'Updated message',
-));
+]);
 ```
 
 そしてそのメッセージを削除します:
@@ -325,10 +334,10 @@ $this->MyModel->delete(42);
 に置いて、それをプラグイン記法で参照するだけです:
 
 ``` php
-public $faraway = array(
+public $faraway = [
     'datasource' => 'MyPlugin.FarAwaySource',
     'apiKey'     => 'abcd1234',
-);
+];
 ```
 
 ## SQL Server に接続する

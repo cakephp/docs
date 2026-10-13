@@ -20,16 +20,16 @@ CakePHP には、様々な共通のタスクを支援するための素晴らし
 
 ``` php
 class PostsController extends AppController {
-    public $components = array(
-        'Auth' => array(
-            'authorize' => array('controller'),
-            'loginAction' => array(
+    public $components = [
+        'Auth' => [
+            'authorize' => ['controller'],
+            'loginAction' => [
                 'controller' => 'users',
                 'action' => 'login'
-            )
-        ),
-        'Cookie' => array('name' => 'CookieMonster')
-    );
+            ]
+        ],
+        'Cookie' => ['name' => 'CookieMonster']
+    ];
 ```
 
 これは `$components` 配列でコンポーネントを設定している例です。
@@ -39,12 +39,13 @@ class PostsController extends AppController {
 上記は、次のように表現することもできます。 :
 
 ``` php
-public function beforeFilter() {
-    $this->Auth->authorize = array('controller');
-    $this->Auth->loginAction = array(
+public function beforeFilter()
+{
+    $this->Auth->authorize = ['controller'];
+    $this->Auth->loginAction = [
         'controller' => 'users',
         'action' => 'login'
-    );
+    ];
 
     $this->Cookie->name = 'CookieMonster';
 }
@@ -56,9 +57,9 @@ public function beforeFilter() {
 できるものがあります。 :
 
 ``` php
-public $components = array(
-    'DebugKit.Toolbar' => array('panels' => array('history', 'session'))
-);
+public $components = [
+    'DebugKit.Toolbar' => ['panels' => ['history', 'session']]
+];
 ```
 
 各コンポーネントがどのような設定オプションを提供しているかは関連ドキュメントを参照してください。
@@ -69,17 +70,19 @@ public $components = array(
 
 ``` php
 // app/Controller/PostsController.php
-class PostsController extends AppController {
-    public $components = array(
-        'Auth' => array(
+class PostsController extends AppController
+{
+    public $components = [
+        'Auth' => [
             'className' => 'MyAuth'
-        )
-    );
+        ]
+    ];
 }
 
 // app/Controller/Component/MyAuthComponent.php
 App::uses('AuthComponent', 'Controller/Component');
-class MyAuthComponent extends AuthComponent {
+class MyAuthComponent extends AuthComponent
+{
     // コア AuthComponent を上書きするコードを追加して
 }
 ```
@@ -99,12 +102,13 @@ class MyAuthComponent extends AuthComponent {
 
 ``` php
 class PostsController extends AppController {
-    public $components = array('Session', 'Cookie');
+    public $components = ['Session', 'Cookie'];
 
-    public function delete() {
+    public function delete()
+    {
         if ($this->Post->delete($this->request->data('Post.id'))) {
             $this->Session->setFlash('Post deleted.');
-            return $this->redirect(array('action' => 'index'));
+            return $this->redirect(['action' => 'index']);
         }
     }
 ```
@@ -151,8 +155,10 @@ pieceofcake2 フォークのモダンレイアウトでは `src/Controller/Compo
 
 ``` php
 App::uses('Component', 'Controller');
-class MathComponent extends Component {
-    public function doComplexOperation($amount1, $amount2) {
+class MathComponent extends Component
+{
+    public function doComplexOperation($amount1, $amount2)
+    {
         return $amount1 + $amount2;
     }
 }
@@ -172,7 +178,7 @@ class MathComponent extends Component {
 ``` php
 /* 標準の $this->Session と同様に新しいコンポーネントを
    $this->Math で利用できるようにします。*/
-public $components = array('Math', 'Session');
+public $components = ['Math', 'Session'];
 ```
 
 `AppController` の中で宣言されているコンポーネントは他のコントローラで宣言されているコンポーネントと
@@ -182,13 +188,13 @@ public $components = array('Math', 'Session');
 宣言することもできます。このパラメータはコンポーネントによって処理することができます。 :
 
 ``` php
-public $components = array(
-    'Math' => array(
+public $components = [
+    'Math' => [
         'precision' => 2,
         'randomGenerator' => 'srand'
-    ),
+    ],
     'Session', 'Auth'
-);
+];
 ```
 
 上記の例では precision と randomGenerator を含む配列が `MathComponent::__construct()` の
@@ -204,24 +210,29 @@ public $components = array(
 ``` php
 // app/Controller/Component/CustomComponent.php
 App::uses('Component', 'Controller');
-class CustomComponent extends Component {
+class CustomComponent extends Component
+{
     // 実装中のコンポーネントが使っている他のコンポーネント
-    public $components = array('Existing');
+    public $components = ['Existing'];
 
-    public function initialize(Controller $controller) {
+    public function initialize(Controller $controller)
+    {
         $this->Existing->foo();
     }
 
-    public function bar() {
+    public function bar()
+    {
         // ...
    }
 }
 
 // app/Controller/Component/ExistingComponent.php
 App::uses('Component', 'Controller');
-class ExistingComponent extends Component {
+class ExistingComponent extends Component
+{
 
-    public function foo() {
+    public function foo()
+    {
         // ...
     }
 }
@@ -235,7 +246,7 @@ class ExistingComponent extends Component {
 
 `class` **Component**
 
-`method` Component::**__construct**(ComponentCollection $collection, $settings = array())
+`method` Component::**__construct**(ComponentCollection $collection, $settings = [])
 
 ### コールバック
 

@@ -101,10 +101,10 @@ $this->start('sidebar');
 ?>
 <li>
 <?php
-echo $this->Html->link('edit', array(
+echo $this->Html->link('edit', [
     'action' => 'edit',
     $post['Post']['id']
-)); ?>
+]); ?>
 </li>
 <?php $this->end(); ?>
 
@@ -263,8 +263,8 @@ fetch を使うとブロックが存在するかどうかによってブロッ�
 ``` php
 <?php
 // ビューファイルの中
-$this->Html->script('carousel', array('inline' => false));
-$this->Html->css('carousel', array('inline' => false));
+$this->Html->script('carousel', ['inline' => false]);
+$this->Html->css('carousel', ['inline' => false]);
 ?>
 
 // レイアウトファイルの中
@@ -282,7 +282,7 @@ $this->Html->css('carousel', array('inline' => false));
 
 ``` php
 // ビューの中
-$this->Html->script('carousel', array('block' => 'scriptBottom'));
+$this->Html->script('carousel', ['block' => 'scriptBottom']);
 
 // レイアウトの中
 echo $this->fetch('scriptBottom');
@@ -365,7 +365,8 @@ CSS ファイルが含まれるのは便利です。
 
 ``` php
 // コントローラから
-public function admin_view() {
+public function admin_view()
+{
     // Stuff
     $this->layout = 'admin';
 }
@@ -378,13 +379,16 @@ $this->layout = 'loggedin';
 新しいレイアウトを作って、以下のように全コントローラのアクションで指定するかもしれません。 :
 
 ``` php
-class UsersController extends AppController {
-    public function view_active() {
+class UsersController extends AppController
+{
+    public function view_active()
+    {
         $this->set('title_for_layout', 'View Active Users');
         $this->layout = 'default_small_ad';
     }
 
-    public function view_image() {
+    public function view_image()
+    {
         $this->layout = 'image';
         //output user image
     }
@@ -409,8 +413,10 @@ xml, js, rss があります。
 コンタクトプラグインからコンタクトのレイアウトを使う場合は以下のようになります。 :
 
 ``` php
-class UsersController extends AppController {
-    public function view_active() {
+class UsersController extends AppController
+{
+    public function view_active()
+    {
         $this->layout = 'Contacts.contact';
     }
 }
@@ -439,9 +445,9 @@ echo $this->element('helpbox');
 element メソッドの第二引数を通してエレメントにデータを渡すことができます。 :
 
 ``` php
-echo $this->element('helpbox', array(
+echo $this->element('helpbox', [
     "helptext" => "Oh, this text is very helpful."
-));
+]);
 ```
 
 エレメントファイルの内部では、引数で渡されたすべての変数をパラメータ配列のメンバとして利用できます。
@@ -457,16 +463,16 @@ echo $helptext; //"Oh, this text is very helpful." と出力されます
 サポートされるオプションは、'cache' と 'callbacks' です。例えば:
 
 ``` php
-echo $this->element('helpbox', array(
+echo $this->element('helpbox', [
         "helptext" => "This is passed to the element as $helptext",
         "foobar" => "This is passed to the element as $foobar",
-    ),
-    array(
+    ],
+    [
         // "long_view" のキャッシュ設定を使います
         "cache" => "long_view",
         // エレメントから before/afterRender が呼び出されるには true に設定して下さい
         "callbacks" => true
-    )
+    ]
 );
 ```
 
@@ -477,9 +483,9 @@ echo $this->element('helpbox', array(
 次の書式を使ってユニークなキャッシュキーを提供して下さい。 :
 
 ``` php
-$this->element('helpbox', array(), array(
-        "cache" => array('config' => 'short', 'key' => 'unique value')
-    )
+$this->element('helpbox', [], [
+        "cache" => ['config' => 'short', 'key' => 'unique value']
+    ]
 );
 ```
 
@@ -493,9 +499,11 @@ $this->element('helpbox', array(), array(
 これを実際確認するため、Post の例のコントローラに以下のようなコードを追加して下さい。 :
 
 ``` php
-class PostsController extends AppController {
+class PostsController extends AppController
+{
     // ...
-    public function index() {
+    public function index()
+    {
         $posts = $this->paginate();
         if ($this->request->is('requested')) {
             return $posts;
@@ -531,7 +539,7 @@ false の場合、どのキャッシュ設定を使うかを設定すること�
 エレメントキャッシュの単純な例は以下のようになります。 :
 
 ``` php
-echo $this->element('helpbox', array(), array('cache' => true));
+echo $this->element('helpbox', [], ['cache' => true]);
 ```
 
 あるビューの中で同じエレメントが二回以上描画される場合、毎回違う名前の 'key' パラメータを
@@ -541,15 +549,15 @@ echo $this->element('helpbox', array(), array('cache' => true));
 ``` php
 echo $this->element(
     'helpbox',
-    array('var' => $var),
-    array('cache' => array('key' => 'first_use', 'config' => 'view_long')
-);
+    ['var' => $var],
+    ['cache' => ['key' => 'first_use', 'config' => 'view_long']
+];
 
 echo $this->element(
     'helpbox',
-    array('var' => $differenVar),
-    array('cache' => array('key' => 'second_use', 'config' => 'view_long')
-);
+    ['var' => $differenVar],
+    ['cache' => ['key' => 'second_use', 'config' => 'view_long']
+];
 ```
 
 上の例では、2つの element() の結果が別々にキャッシュされていることが保証されています。
@@ -565,7 +573,7 @@ CakePHP は element() に何も設定されていない場合、この設定を�
 (バージョン 1.x の <span class="title-ref">data</span> オプションから移動しました。) :
 
 ``` php
-echo $this->element('helpbox', array(), array('plugin' => 'Contacts'));
+echo $this->element('helpbox', [], ['plugin' => 'Contacts']);
 ```
 
 ### 2.1
@@ -612,8 +620,10 @@ CakePHP のビュークラスのほとんどのコンポーネントと同様に
 // In App/View/PdfView.php
 
 App::uses('View', 'View');
-class PdfView extends View {
-    public function render($view = null, $layout = null) {
+class PdfView extends View
+{
+    public function render($view = null, $layout = null)
+    {
         // Custom logic here.
     }
 }
@@ -636,7 +646,7 @@ render メソッドを置き換えると、コンテンツがレンダリング�
 
 `method` View::**getVars**()
 
-`method` View::**element**(string $elementPath, array $data, array $options = array())
+`method` View::**element**(string $elementPath, array $data, array $options = [])
 
 `method` View::**uuid**(string $object, mixed $url)
 

@@ -24,7 +24,7 @@ using attributes you use methods. Example:
 
 ``` php
 $Email = new CakeEmail();
-$Email->from(array('me@example.com' => 'My Site'));
+$Email->from(['me@example.com' => 'My Site']);
 $Email->to('you@example.com');
 $Email->subject('About');
 $Email->send('My message');
@@ -35,7 +35,7 @@ You can re-write the above code as:
 
 ``` php
 $Email = new CakeEmail();
-$Email->from(array('me@example.com' => 'My Site'))
+$Email->from(['me@example.com' => 'My Site'])
     ->to('you@example.com')
     ->subject('About')
     ->send('My message');
@@ -77,8 +77,10 @@ config. If you have dynamic data to put in the configs, you can use the
 constructor to do that:
 
 ``` php
-class EmailConfig {
-    public function __construct() {
+class EmailConfig
+{
+    public function __construct()
+    {
         // Do conditional assignments here.
     }
 }
@@ -107,28 +109,29 @@ you can also just load an array of configs:
 
 ``` php
 $Email = new CakeEmail();
-$Email->config(array('from' => 'me@example.org', 'transport' => 'MyCustom'));
+$Email->config(['from' => 'me@example.org', 'transport' => 'MyCustom']);
 
 //or in constructor::
-$Email = new CakeEmail(array('from' => 'me@example.org', 'transport' => 'MyCustom'));
+$Email = new CakeEmail(['from' => 'me@example.org', 'transport' => 'MyCustom']);
 ```
 
 > [!NOTE]
 > Use `$Email->config()` or the constructor to set the log level to log email headers and message.
-> Using `$Email->config(array('log' => true));` will use LOG_DEBUG. See also `CakeLog::write()`
+> Using `$Email->config(['log' => true]);` will use LOG_DEBUG. See also `CakeLog::write()`
 
 You can configure SSL SMTP servers such as Gmail. To do so, prefix the host with
 `'ssl://'` and configure the port value accordingly. Example:
 
 ``` php
-class EmailConfig {
-    public $gmail = array(
+class EmailConfig
+{
+    public $gmail = [
         'host' => 'ssl://smtp.gmail.com',
         'port' => 465,
         'username' => 'my@gmail.com',
         'password' => 'secret',
         'transport' => 'Smtp'
-    );
+    ];
 }
 ```
 
@@ -147,15 +150,16 @@ You can also use `tls://` to prefer TLS for connection level encryption.
 As of 2.3.0 you can also enable STARTTLS SMTP extension using the `tls` option:
 
 ``` php
-class EmailConfig {
-    public $gmail = array(
+class EmailConfig
+{
+    public $gmail = [
         'host' => 'smtp.gmail.com',
         'port' => 465,
         'username' => 'my@gmail.com',
         'password' => 'secret',
         'transport' => 'Smtp',
         'tls' => true
-    );
+    ];
 }
 ```
 
@@ -210,7 +214,7 @@ other configurations.
 > The values of above keys using Email or array, like from, to, cc, etc will be passed
 > as first parameter of corresponding methods. The equivalent for:
 > `CakeEmail::from('my@example.com', 'My Site')`
-> would be defined as `'from' => array('my@example.com' => 'My Site')` in your config.
+> would be defined as `'from' => ['my@example.com' => 'My Site']` in your config.
 
 ### Setting headers
 
@@ -272,7 +276,7 @@ You can set view variables with `CakeEmail::viewVars()`:
 
 ``` php
 $Email = new CakeEmail('templated');
-$Email->viewVars(array('value' => 12345));
+$Email->viewVars(['value' => 12345]);
 ```
 
 In your email templates you can use these with:
@@ -286,7 +290,7 @@ By default only the `HtmlHelper` is loaded. You can load additional
 helpers using the `helpers()` method:
 
 ``` php
-$Email->helpers(array('Html', 'Custom', 'Text'));
+$Email->helpers(['Html', 'Custom', 'Text']);
 ```
 
 When setting helpers be sure to include 'Html' or it will be removed from the
@@ -327,24 +331,24 @@ you want the filenames to appear in the recipient's mail client:
 1.  String: `$Email->attachments('/full/file/path/file.png')` will attach this
     file with the name file.png.
 
-2.  Array: `$Email->attachments(array('/full/file/path/file.png'))` will have
+2.  Array: `$Email->attachments(['/full/file/path/file.png'])` will have
     the same behavior as using a string.
 
 3.  Array with key:
-    `$Email->attachments(array('photo.png' => '/full/some_hash.png'))` will
+    `$Email->attachments(['photo.png' => '/full/some_hash.png'])` will
     attach some_hash.png with the name photo.png. The recipient will see
     photo.png, not some_hash.png.
 
 4.  Nested arrays:
 
     ``` php
-    $Email->attachments(array(
-        'photo.png' => array(
+    $Email->attachments([
+        'photo.png' => [
             'file' => '/full/some_hash.png',
             'mimetype' => 'image/png',
             'contentId' => 'my-unique-id'
-        )
-    ));
+        ]
+    ]);
     ```
 
     The above will attach the file with different mimetype and with custom
@@ -395,12 +399,13 @@ transport). To start off your file should look like:
 ``` php
 App::uses('AbstractTransport', 'Network/Email');
 
-class ExampleTransport extends AbstractTransport {
+class ExampleTransport extends AbstractTransport
+{
 
-    public function send(CakeEmail $Email) {
+    public function send(CakeEmail $Email)
+    {
         // magic inside!
     }
-
 }
 ```
 

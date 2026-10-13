@@ -16,7 +16,7 @@ pieceofcake2 フォークは、このページで説明している CakePHP 2 �
 フォークの `phpcs.xml` で CakePHP 2 特有の除外 (名前空間なし、型宣言を必須にしない、
 行の長さをチェックしない、など) を加えています。
 以下のルールとの主な違いは、インデントがタブではなく 4 スペースであること、
-`array()` ではなく短縮構文 `[]` を使うこと、クラスとメソッドの開き中括弧を
+`[]` ではなく短縮構文 `[]` を使うこと、クラスとメソッドの開き中括弧を
 次の行に置くことです。
 [pieceofcake2/app](https://github.com/pieceofcake2/app) スケルトンにも同じ
 スニッファーが入っているので、アプリケーションで `vendor/bin/phpcs` を実行できます。
@@ -147,12 +147,12 @@ if (expr) {
 }
 
 // 間違い＝インラインの代入
-if ($variable = Class::function()) {
+if ($variable = class::function()) {
     statement;
 }
 
 // よろしい
-$variable = Class::function();
+$variable = class::function();
 if ($variable) {
     statement;
 }
@@ -263,7 +263,8 @@ class Foo
 メソッドの定義の例:
 
 ``` php
-public function someFunction($arg1, $arg2 = '') {
+public function someFunction($arg1, $arg2 = '')
+{
     if (expr) {
         statement;
     }
@@ -276,7 +277,8 @@ public function someFunction($arg1, $arg2 = '') {
 関数呼び出しが成功したかどうかを判定できるように、返すように作ってみてください。 :
 
 ``` php
-public function connection($dns, $persistent = false) {
+public function connection($dns, $persistent = false)
+{
     if (is_array($dns)) {
         $dnsInfo = $dns;
     } else {
@@ -311,7 +313,8 @@ public function connection($dns, $persistent = false) {
  * @param array $array 配列。
  * @param boolean $boolean 真偽値。
  */
-public function foo(Model $Model, array $array, $boolean) {
+public function foo(Model $Model, array $array, $boolean)
+{
 }
 ```
 
@@ -326,7 +329,8 @@ public function foo(Model $Model, array $array, $boolean) {
  *
  * @param array|ArrayObject $array 配列。
  */
-public function foo($array) {
+public function foo($array)
+{
 }
 ```
 
@@ -394,7 +398,8 @@ $email->from('foo@example.com')
  * @see Bar
  * @link https://book.cakephp.org/2.0/en/foo.html
  */
-class Foo {
+class Foo
+{
 
 }
 ```
@@ -457,7 +462,8 @@ protected $_bar = null;
  * @deprecated 3.0.0 Deprecated as of 2.5.0. Will be removed in 3.0.0. Use Bar::baz instead.
  * @see Bar::baz
  */
- public function bar($param1, $param2 = null) {
+ public function bar($param1, $param2 = null)
+ {
  }
 ```
 
@@ -527,7 +533,8 @@ callable
  *
  * @return $this
  */
-public function foo() {
+public function foo()
+{
     return $this;
 }
 ```
@@ -570,14 +577,15 @@ function longFunctionName() {
 クラス名はキャメルケースで書かれる必要があります。例:
 
 ``` php
-class ExampleClass {
+class ExampleClass
+{
 }
 ```
 
 ### 変数
 
 ::: pieceofcake2
-フォークでは配列の短縮構文が必須です。`array('John', 'Hans', 'Arne')` ではなく
+フォークでは配列の短縮構文が必須です。`['John', 'Hans', 'Arne']` ではなく
 `['John', 'Hans', 'Arne']` と書きます (`Generic.Arrays.DisallowLongArraySyntax`)。
 :::
 
@@ -587,7 +595,7 @@ class ExampleClass {
 
 ``` php
 $user = 'John';
-$users = array('John', 'Hans', 'Arne');
+$users = ['John', 'Hans', 'Arne'];
 
 $dispatcher = new Dispatcher();
 ```
@@ -599,10 +607,12 @@ $dispatcher = new Dispatcher();
 例:
 
 ``` php
-class A {
+class A
+{
     protected $_iAmAProtectedVariable;
 
-    protected function _iAmAProtectedMethod() {
+    protected function _iAmAProtectedMethod()
+    {
        /*...*/
     }
 }
@@ -612,10 +622,12 @@ private なメソッドまたは変数の名前は二つのアンダースコア
 例:
 
 ``` php
-class A {
+class A
+{
     private $__iAmAPrivateVariable;
 
-    private function __iAmAPrivateMethod() {
+    private function __iAmAPrivateMethod()
+    {
         /*...*/
     }
 }

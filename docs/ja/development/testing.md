@@ -82,14 +82,14 @@ PHPUnit 4.x または 5.x のいずれかがインストールされます。
 フィクスチャテーブルやデータで使われます。 :
 
 ``` php
-public $test = array(
+public $test = [
     'datasource' => 'Database/Mysql',
     'persistent' => false,
     'host'       => 'dbhost',
     'login'      => 'dblogin',
     'password'   => 'dbpassword',
     'database'   => 'test_database'
-);
+];
 ```
 
 > [!NOTE]
@@ -154,8 +154,10 @@ PHPUnit 9 には `PHPUnit_Framework_TestCase` が存在しないため、CakePHP
 おおよそこのような感じです。 :
 
 ``` php
-class ProgressHelper extends AppHelper {
-    public function bar($value) {
+class ProgressHelper extends AppHelper
+{
+    public function bar($value)
+    {
         $width = round($value / 100, 2) * 100;
         return sprintf(
             '<div class="progress-container">
@@ -174,12 +176,15 @@ App::uses('Controller', 'Controller');
 App::uses('View', 'View');
 App::uses('ProgressHelper', 'View/Helper');
 
-class ProgressHelperTest extends CakeTestCase {
-    public function setUp() {
+class ProgressHelperTest extends CakeTestCase
+{
+    public function setUp()
+    {
 
     }
 
-    public function testBar() {
+    public function testBar()
+    {
 
     }
 }
@@ -191,7 +196,8 @@ class ProgressHelperTest extends CakeTestCase {
 初期化や設定を行います。今回のセットアップメソッドには次のように書き加えます。 :
 
 ``` php
-public function setUp() {
+public function setUp()
+{
     parent::setUp();
     $Controller = new Controller();
     $View = new View($Controller);
@@ -207,7 +213,8 @@ public function setUp() {
 出力するかどうか保証するため、アサーションを使います。 :
 
 ``` php
-public function testBar() {
+public function testBar()
+{
     $result = $this->Progress->bar(90);
     $this->assertContains('width: 90%', $result);
     $this->assertContains('progress-bar', $result);
@@ -437,53 +444,54 @@ CakePHP はフィクスチャに基づいたテストケースを実行するに
 以下のとおりに記述してください。:
 
 ``` php
-class ArticleFixture extends CakeTestFixture {
+class ArticleFixture extends CakeTestFixture
+{
 
       // 任意。
       // 異なるテスト用データソースにフィクスチャを読み込む時にこのプロパティを指定してください。
       public $useDbConfig = 'test';
-      public $fields = array(
-          'id' => array('type' => 'integer', 'key' => 'primary'),
-          'title' => array(
+      public $fields = [
+          'id' => ['type' => 'integer', 'key' => 'primary'],
+          'title' => [
             'type' => 'string',
             'length' => 255,
             'null' => false
-          ),
+          ],
           'body' => 'text',
-          'published' => array(
+          'published' => [
             'type' => 'integer',
             'default' => '0',
             'null' => false
-          ),
+          ],
           'created' => 'datetime',
           'updated' => 'datetime'
-      );
-      public $records = array(
-          array(
+      ];
+      public $records = [
+          [
             'id' => 1,
             'title' => 'First Article',
             'body' => 'First Article Body',
             'published' => '1',
             'created' => '2007-03-18 10:39:23',
             'updated' => '2007-03-18 10:41:31'
-          ),
-          array(
+          ],
+          [
             'id' => 2,
             'title' => 'Second Article',
             'body' => 'Second Article Body',
             'published' => '1',
             'created' => '2007-03-18 10:41:23',
             'updated' => '2007-03-18 10:43:31'
-          ),
-          array(
+          ],
+          [
             'id' => 3,
             'title' => 'Third Article',
             'body' => 'Third Article Body',
             'published' => '1',
             'created' => '2007-03-18 10:43:23',
             'updated' => '2007-03-18 10:45:31'
-          )
-      );
+          ]
+      ];
  }
 ```
 
@@ -547,28 +555,30 @@ CakePHP の内部型定義です。現在サポートしているのは以下の
 以下のようにするとよいでしょう。 :
 
 ``` php
-class ArticleFixture extends CakeTestFixture {
+class ArticleFixture extends CakeTestFixture
+{
 
-    public $fields = array(
-        'id' => array('type' => 'integer', 'key' => 'primary'),
-        'title' => array('type' => 'string', 'length' => 255, 'null' => false),
+    public $fields = [
+        'id' => ['type' => 'integer', 'key' => 'primary'],
+        'title' => ['type' => 'string', 'length' => 255, 'null' => false],
         'body' => 'text',
-        'published' => array('type' => 'integer', 'default' => '0', 'null' => false),
+        'published' => ['type' => 'integer', 'default' => '0', 'null' => false],
         'created' => 'datetime',
         'updated' => 'datetime'
-    );
+    ];
 
-    public function init() {
-        $this->records = array(
-            array(
+    public function init()
+    {
+        $this->records = [
+            [
                 'id' => 1,
                 'title' => 'First Article',
                 'body' => 'First Article Body',
                 'published' => '1',
                 'created' => date('Y-m-d H:i:s'),
                 'updated' => date('Y-m-d H:i:s'),
-            ),
-        );
+            ],
+        ];
         parent::init();
     }
 }
@@ -593,7 +603,8 @@ class ArticleFixture extends CakeTestFixture {
 次のように書き換えてください。 :
 
 ``` php
-class ArticleFixture extends CakeTestFixture {
+class ArticleFixture extends CakeTestFixture
+{
     public $import = 'Article';
 }
 ```
@@ -604,8 +615,9 @@ class ArticleFixture extends CakeTestFixture {
 コードを次のように変更してください。 :
 
 ``` php
-class ArticleFixture extends CakeTestFixture {
-    public $import = array('model' => 'Article', 'records' => true);
+class ArticleFixture extends CakeTestFixture
+{
+    public $import = ['model' => 'Article', 'records' => true];
 }
 ```
 
@@ -613,8 +625,9 @@ class ArticleFixture extends CakeTestFixture {
 読み込みよう定義することができます。例は次の通りです。 :
 
 ``` php
-class ArticleFixture extends CakeTestFixture {
-    public $import = array('table' => 'articles');
+class ArticleFixture extends CakeTestFixture
+{
+    public $import = ['table' => 'articles'];
 }
 ```
 
@@ -623,8 +636,9 @@ class ArticleFixture extends CakeTestFixture {
 次のように書き換えます。 :
 
 ``` php
-class ArticleFixture extends CakeTestFixture {
-    public $import = array('table' => 'articles', 'connection' => 'other');
+class ArticleFixture extends CakeTestFixture
+{
+    public $import = ['table' => 'articles', 'connection' => 'other'];
 }
 ```
 
@@ -633,8 +647,9 @@ CakePHP のデータベース接続においてテーブル名のプレフィッ
 レコードは読み込まれません。読み込むには、次のようにします。 :
 
 ``` php
-class ArticleFixture extends CakeTestFixture {
-    public $import = array('table' => 'articles', 'records' => true);
+class ArticleFixture extends CakeTestFixture
+{
+    public $import = ['table' => 'articles', 'records' => true];
 }
 ```
 
@@ -642,34 +657,35 @@ class ArticleFixture extends CakeTestFixture {
 フィクスチャに対して読み込むレコードを直接定義することができます。方法は例のとおりです。 :
 
 ``` php
-class ArticleFixture extends CakeTestFixture {
+class ArticleFixture extends CakeTestFixture
+{
     public $import = 'Article';
-    public $records = array(
-        array(
+    public $records = [
+        [
           'id' => 1,
           'title' => 'First Article',
           'body' => 'First Article Body',
           'published' => '1',
           'created' => '2007-03-18 10:39:23',
           'updated' => '2007-03-18 10:41:31'
-        ),
-        array(
+        ],
+        [
           'id' => 2,
           'title' => 'Second Article',
           'body' => 'Second Article Body',
           'published' => '1',
           'created' => '2007-03-18 10:41:23',
           'updated' => '2007-03-18 10:43:31'
-        ),
-        array(
+        ],
+        [
           'id' => 3,
           'title' => 'Third Article',
           'body' => 'Third Article Body',
           'published' => '1',
           'created' => '2007-03-18 10:43:23',
           'updated' => '2007-03-18 10:45:31'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -680,8 +696,9 @@ class ArticleFixture extends CakeTestFixture {
 フィクスチャをロードするには、テストケースに `$fixtures` プロパティを設定します。 :
 
 ``` php
-class ArticleTest extends CakeTestCase {
-    public $fixtures = array('app.article', 'app.comment');
+class ArticleTest extends CakeTestCase
+{
+    public $fixtures = ['app.article', 'app.comment'];
 }
 ```
 
@@ -690,8 +707,9 @@ class ArticleTest extends CakeTestCase {
 プラグインからもロードすることができます。 :
 
 ``` php
-class ArticleTest extends CakeTestCase {
-    public $fixtures = array('plugin.debug_kit.article', 'core.comment');
+class ArticleTest extends CakeTestCase
+{
+    public $fixtures = ['plugin.debug_kit.article', 'core.comment'];
 }
 ```
 
@@ -703,11 +721,13 @@ class ArticleTest extends CakeTestCase {
 `CakeTestCase::loadFixtures()` を使って制御することもできます。 :
 
 ``` php
-class ArticleTest extends CakeTestCase {
-    public $fixtures = array('app.article', 'app.comment');
+class ArticleTest extends CakeTestCase
+{
+    public $fixtures = ['app.article', 'app.comment'];
     public $autoFixtures = false;
 
-    public function testMyFunction() {
+    public function testMyFunction()
+    {
         $this->loadFixtures('Article', 'Comment');
     }
 }
@@ -718,8 +738,9 @@ class ArticleTest extends CakeTestCase {
 ロードするためには、フィクスチャ名にサブディレクトリを加えてください。 :
 
 ``` php
-class ArticleTest extends CakeTestCase {
-    public $fixtures = array('app.blog/article', 'app.blog/comment');
+class ArticleTest extends CakeTestCase
+{
+    public $fixtures = ['app.blog/article', 'app.blog/comment'];
 }
 ```
 
@@ -734,14 +755,16 @@ class ArticleTest extends CakeTestCase {
 まず `app/Model/Article.php` に「Article」モデルを定義しましょう。以下のように記述します。 :
 
 ``` php
-class Article extends AppModel {
-    public function published($fields = null) {
-        $params = array(
-            'conditions' => array(
+class Article extends AppModel
+{
+    public function published($fields = null)
+    {
+        $params = [
+            'conditions' => [
                 $this->name . '.published' => 1
-            ),
+            ],
             'fields' => $fields
-        );
+        ];
 
         return $this->find('all', $params);
     }
@@ -760,8 +783,9 @@ class Article extends AppModel {
 ``` php
 App::uses('Article', 'Model');
 
-class ArticleTest extends CakeTestCase {
-    public $fixtures = array('app.article');
+class ArticleTest extends CakeTestCase
+{
+    public $fixtures = ['app.article'];
 }
 ```
 
@@ -781,21 +805,24 @@ class ArticleTest extends CakeTestCase {
 ``` php
 App::uses('Article', 'Model');
 
-class ArticleTest extends CakeTestCase {
-    public $fixtures = array('app.article');
+class ArticleTest extends CakeTestCase
+{
+    public $fixtures = ['app.article'];
 
-    public function setUp() {
+    public function setUp()
+    {
         parent::setUp();
         $this->Article = ClassRegistry::init('Article');
     }
 
-    public function testPublished() {
-        $result = $this->Article->published(array('id', 'title'));
-        $expected = array(
-            array('Article' => array('id' => 1, 'title' => 'First Article')),
-            array('Article' => array('id' => 2, 'title' => 'Second Article')),
-            array('Article' => array('id' => 3, 'title' => 'Third Article'))
-        );
+    public function testPublished()
+    {
+        $result = $this->Article->published(['id', 'title']);
+        $expected = [
+            ['Article' => ['id' => 1, 'title' => 'First Article']],
+            ['Article' => ['id' => 2, 'title' => 'Second Article']],
+            ['Article' => ['id' => 3, 'title' => 'Third Article']]
+        ];
 
         $this->assertEquals($expected, $result);
     }
@@ -821,8 +848,9 @@ class ArticleTest extends CakeTestCase {
 このメソッドは、モック自体のプロパティが反映されてしまう問題を回避します。 :
 
 ``` php
-public function testSendingEmails() {
-    $model = $this->getMockForModel('EmailVerification', array('send'));
+public function testSendingEmails()
+{
+    $model = $this->getMockForModel('EmailVerification', ['send']);
     $model->expects($this->once())
         ->method('send')
         ->will($this->returnValue(true));
@@ -848,15 +876,17 @@ CakeTestCase::getMockForModel() は 2.3 で追加されました。
 下記のように、「Article」モデルに対応した典型的なコントローラーがあるとします。 :
 
 ``` php
-class ArticlesController extends AppController {
-    public $helpers = array('Form', 'Html');
+class ArticlesController extends AppController
+{
+    public $helpers = ['Form', 'Html'];
 
-    public function index($short = null) {
+    public function index($short = null)
+    {
         if (!empty($this->request->data)) {
             $this->Article->save($this->request->data);
         }
         if (!empty($short)) {
-            $result = $this->Article->find('all', array('id', 'title'));
+            $result = $this->Article->find('all', ['id', 'title']);
         } else {
             $result = $this->Article->find('all');
         }
@@ -875,48 +905,54 @@ class ArticlesController extends AppController {
 というファイルを作成し、次のように記述します。 :
 
 ``` php
-class ArticlesControllerTest extends ControllerTestCase {
-    public $fixtures = array('app.article');
+class ArticlesControllerTest extends ControllerTestCase
+{
+    public $fixtures = ['app.article'];
 
-    public function testIndex() {
+    public function testIndex()
+    {
         $result = $this->testAction('/articles/index');
         debug($result);
     }
 
-    public function testIndexShort() {
+    public function testIndexShort()
+    {
         $result = $this->testAction('/articles/index/short');
         debug($result);
     }
 
-    public function testIndexShortGetRenderedHtml() {
+    public function testIndexShortGetRenderedHtml()
+    {
         $result = $this->testAction(
            '/articles/index/short',
-            array('return' => 'contents')
+            ['return' => 'contents']
         );
         debug($result);
     }
 
-    public function testIndexShortGetViewVars() {
+    public function testIndexShortGetViewVars()
+    {
         $result = $this->testAction(
             '/articles/index/short',
-            array('return' => 'vars')
+            ['return' => 'vars']
         );
         debug($result);
     }
 
-    public function testIndexPostData() {
-        $data = array(
-            'Article' => array(
+    public function testIndexPostData()
+    {
+        $data = [
+            'Article' => [
                 'user_id' => 1,
                 'published' => 1,
                 'slug' => 'new-article',
                 'title' => 'New Article',
                 'body' => 'New Body'
-            )
-        );
+            ]
+        ];
         $result = $this->testAction(
             '/articles/index',
-            array('data' => $data, 'method' => 'post')
+            ['data' => $data, 'method' => 'post']
         );
         debug($result);
     }
@@ -934,11 +970,13 @@ class ArticlesControllerTest extends ControllerTestCase {
 例を示します。 :
 
 ``` php
-class ArticlesController extends AppController {
-    public function add() {
+class ArticlesController extends AppController
+{
+    public function add()
+    {
         if ($this->request->is('post')) {
             if ($this->Article->save($this->request->data)) {
-                $this->redirect(array('action' => 'index'));
+                $this->redirect(['action' => 'index']);
             }
         }
         // more code
@@ -950,11 +988,13 @@ class ArticlesController extends AppController {
 実行されてしまいます。代わりに、このようなコードを書くべきです。 :
 
 ``` php
-class ArticlesController extends AppController {
-    public function add() {
+class ArticlesController extends AppController
+{
+    public function add()
+    {
         if ($this->request->is('post')) {
             if ($this->Article->save($this->request->data)) {
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(['action' => 'index']);
             }
         }
         // more code
@@ -972,14 +1012,15 @@ POST されるであろう値を設定します。規定ではすべてのリク
 GET リクエストをシミュレートしたい場合は `method` キーを設定します。 :
 
 ``` php
-public function testAdding() {
-    $data = array(
-        'Post' => array(
+public function testAdding()
+{
+    $data = [
+        'Post' => [
             'title' => 'New post',
             'body' => 'Secret sauce'
-        )
-    );
-    $this->testAction('/posts/add', array('data' => $data, 'method' => 'get'));
+        ]
+    ];
+    $this->testAction('/posts/add', ['data' => $data, 'method' => 'get']);
     // some assertions.
 }
 ```
@@ -1001,7 +1042,8 @@ public function testAdding() {
 テストケース内で他の種類の戻り値の属性にアクセスすることができます。 :
 
 ``` php
-public function testIndex() {
+public function testIndex()
+{
     $this->testAction('/posts/index');
     $this->assertInternalType('array', $this->vars['posts']);
 }
@@ -1016,19 +1058,19 @@ public function testIndex() {
 モックを生成できます。 :
 
 ``` php
-$Posts = $this->generate('Posts', array(
-    'methods' => array(
+$Posts = $this->generate('Posts', [
+    'methods' => [
         'isAuthorized'
-    ),
-    'models' => array(
-        'Post' => array('save')
-    ),
-    'components' => array(
-        'RequestHandler' => array('isPut'),
-        'Email' => array('send'),
+    ],
+    'models' => [
+        'Post' => ['save']
+    ],
+    'components' => [
+        'RequestHandler' => ['isPut'],
+        'Email' => ['send'],
         'Session'
-    )
-));
+    ]
+]);
 ```
 
 上の例では `isAuthorized` というメソッドをスタブにしている `PostsController` のモックを
@@ -1055,13 +1097,14 @@ $Posts = $this->generate('Posts', array(
 アクセスすることができ、リダイレクトを確認することができます。 :
 
 ``` php
-public function testAdd() {
-    $Posts = $this->generate('Posts', array(
-        'components' => array(
+public function testAdd()
+{
+    $Posts = $this->generate('Posts', [
+        'components' => [
             'Session',
-            'Email' => array('send')
-        )
-    ));
+            'Email' => ['send']
+        ]
+    ]);
     $Posts->Session
         ->expects($this->once())
         ->method('setFlash');
@@ -1070,19 +1113,20 @@ public function testAdd() {
         ->method('send')
         ->will($this->returnValue(true));
 
-    $this->testAction('/posts/add', array(
-        'data' => array(
-            'Post' => array('title' => 'New Post')
-        )
-    ));
+    $this->testAction('/posts/add', [
+        'data' => [
+            'Post' => ['title' => 'New Post']
+        ]
+    ]);
     $this->assertContains('/posts', $this->headers['Location']);
 }
 
-public function testAddGet() {
-    $this->testAction('/posts/add', array(
+public function testAddGet()
+{
+    $this->testAction('/posts/add', [
         'method' => 'GET',
         'return' => 'contents'
-    ));
+    ]);
     $this->assertRegExp('/<html/', $this->contents);
     $this->assertRegExp('/<form/', $this->view);
 }
@@ -1104,13 +1148,14 @@ SessionComponent がモックされたことで、それを用いたテストメ
 たとえば `AuthComponent::user()` のモックを使いたい場合は以下のようにします。 :
 
 ``` php
-public function testAdd() {
-    $Posts = $this->generate('Posts', array(
-        'components' => array(
+public function testAdd()
+{
+    $Posts = $this->generate('Posts', [
+        'components' => [
             'Session',
-            'Auth' => array('user')
-        )
-    ));
+            'Auth' => ['user']
+        ]
+    ]);
     $Posts->Auth->staticExpects($this->any())
         ->method('user')
         ->with('id')
@@ -1133,9 +1178,11 @@ CakePHP を用いたウェブサービスのエンドポイントのテストは
 JSON を返すコントローラーの簡単な例を示します。 :
 
 ``` php
-class MarkersController extends AppController {
+class MarkersController extends AppController
+{
     public $autoRender = false;
-    public function index() {
+    public function index()
+    {
         $data = $this->Marker->find('first');
         $this->response->body(json_encode($data));
     }
@@ -1147,13 +1194,15 @@ class MarkersController extends AppController {
 というファイルを以下のように作成します。 :
 
 ``` php
-class MarkersControllerTest extends ControllerTestCase {
-    public function testIndex() {
+class MarkersControllerTest extends ControllerTestCase
+{
+    public function testIndex()
+    {
         $result = $this->testAction('/markers/index.json');
         $result = json_decode($result, true);
-        $expected = array(
-            'Marker' => array('id' => 1, 'lng' => 66, 'lat' => 45),
-        );
+        $expected = [
+            'Marker' => ['id' => 1, 'lng' => 66, 'lat' => 45],
+        ];
         $this->assertEquals($expected, $result);
     }
 }
@@ -1176,19 +1225,22 @@ class MarkersControllerTest extends ControllerTestCase {
 `app/Controller/Component/PagematronComponent.php` にあったとします。 :
 
 ``` php
-class PagematronComponent extends Component {
+class PagematronComponent extends Component
+{
     public $Controller = null;
 
-    public function startup(Controller $controller) {
+    public function startup(Controller $controller)
+    {
         parent::startup($controller);
         $this->Controller = $controller;
         // コントローラがページネーションを使っているか確かめる
         if (!isset($this->Controller->paginate)) {
-            $this->Controller->paginate = array();
+            $this->Controller->paginate = [];
         }
     }
 
-    public function adjust($length = 'short') {
+    public function adjust($length = 'short')
+    {
         switch ($length) {
             case 'long':
                 $this->Controller->paginate['limit'] = 100;
@@ -1217,15 +1269,18 @@ App::uses('ComponentCollection', 'Controller');
 App::uses('PagematronComponent', 'Controller/Component');
 
 // テストの対象となる偽物のコントローラ
-class TestPagematronController extends Controller {
+class TestPagematronController extends Controller
+{
     public $paginate = null;
 }
 
-class PagematronComponentTest extends CakeTestCase {
+class PagematronComponentTest extends CakeTestCase
+{
     public $PagematronComponent = null;
     public $Controller = null;
 
-    public function setUp() {
+    public function setUp()
+    {
         parent::setUp();
         // コンポーネントと偽のテストコントローラをセットアップする
         $Collection = new ComponentCollection();
@@ -1236,7 +1291,8 @@ class PagematronComponentTest extends CakeTestCase {
         $this->PagematronComponent->startup($this->Controller);
     }
 
-    public function testAdjust() {
+    public function testAdjust()
+    {
         // 異なる値の設定を用いて adjust メソッドをテストする
         $this->PagematronComponent->adjust();
         $this->assertEquals(20, $this->Controller->paginate['limit']);
@@ -1248,7 +1304,8 @@ class PagematronComponentTest extends CakeTestCase {
         $this->assertEquals(100, $this->Controller->paginate['limit']);
     }
 
-    public function tearDown() {
+    public function tearDown()
+    {
         parent::tearDown();
         // 終了した後のお掃除
         unset($this->PagematronComponent);
@@ -1267,8 +1324,10 @@ class PagematronComponentTest extends CakeTestCase {
 
 ``` php
 // app/View/Helper/CurrencyRendererHelper.php
-class CurrencyRendererHelper extends AppHelper {
-    public function usd($amount) {
+class CurrencyRendererHelper extends AppHelper
+{
+    public function usd($amount)
+    {
         return 'USD ' . number_format($amount, 2, '.', ',');
     }
 }
@@ -1286,11 +1345,13 @@ App::uses('Controller', 'Controller');
 App::uses('View', 'View');
 App::uses('CurrencyRendererHelper', 'View/Helper');
 
-class CurrencyRendererHelperTest extends CakeTestCase {
+class CurrencyRendererHelperTest extends CakeTestCase
+{
     public $CurrencyRenderer = null;
 
     // ここでヘルパーをインスタンス化する
-    public function setUp() {
+    public function setUp()
+    {
         parent::setUp();
         $Controller = new Controller();
         $View = new View($Controller);
@@ -1298,7 +1359,8 @@ class CurrencyRendererHelperTest extends CakeTestCase {
     }
 
     // usd() 関数をテストする
-    public function testUsd() {
+    public function testUsd()
+    {
         $this->assertEquals('USD 5.30', $this->CurrencyRenderer->usd(5.30));
 
         // 常に小数点第二桁までになるべき
@@ -1332,8 +1394,10 @@ class CurrencyRendererHelperTest extends CakeTestCase {
 作成したいときは、 `app/Test/Case/AllModelTest.php` を作成します。内容は以下のとおりです。 :
 
 ``` php
-class AllModelTest extends CakeTestSuite {
-    public static function suite() {
+class AllModelTest extends CakeTestSuite
+{
+    public static function suite()
+    {
         $suite = new CakeTestSuite('All model tests');
         $suite->addTestDirectory(TESTS . 'Case/Model');
         return $suite;
@@ -1353,8 +1417,10 @@ $suite->addTestDirectoryRecursive(TESTS . 'Case/Model');
 アプリケーションのテストをすべて実行するスイートを構築するためにテストスイートを使用することができます。 :
 
 ``` php
-class AllTestsTest extends CakeTestSuite {
-    public static function suite() {
+class AllTestsTest extends CakeTestSuite
+{
+    public static function suite()
+    {
         $suite = new CakeTestSuite('All tests');
         $suite->addTestDirectoryRecursive(TESTS . 'Case');
         return $suite;
@@ -1395,13 +1461,15 @@ $ Console/cake test app AllTests
 ``` php
 App::uses('BlogPost', 'Blog.Model');
 
-class BlogPostTest extends CakeTestCase {
+class BlogPostTest extends CakeTestCase
+{
 
     // プラグインのフィクスチャは /app/Plugin/Blog/Test/Fixture/ に配置される
-    public $fixtures = array('plugin.blog.blog_post');
+    public $fixtures = ['plugin.blog.blog_post'];
     public $BlogPost;
 
-    public function testSomething() {
+    public function testSomething()
+    {
         // ClassRegistry はテスト用のデータベースコネクションをモデルが使うようにしてくれる
         $this->BlogPost = ClassRegistry::init('Blog.BlogPost');
 
@@ -1440,15 +1508,16 @@ Jenkins のために別のデータベースを用意するのは、初歩的な
 ``` php
 cat > app/Config/database.php <<'DATABASE_PHP'
 <?php
-class DATABASE_CONFIG {
-    public $test = array(
+class DATABASE_CONFIG
+{
+    public $test = [
         'datasource' => 'Database/Mysql',
         'host'       => 'localhost',
         'database'   => 'jenkins_test',
         'login'      => 'jenkins',
         'password'   => 'cakephp_jenkins',
         'encoding'   => 'utf8'
-    );
+    ];
 }
 DATABASE_PHP
 ```

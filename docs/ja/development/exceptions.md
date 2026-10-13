@@ -13,11 +13,11 @@ CakePHP はまた、HTTP エラーで使うことのできる数多くの例外�
 例外の設定として使えるキーがいくつかあります:
 
 ``` php
-Configure::write('Exception', array(
+Configure::write('Exception', [
     'handler' => 'ErrorHandler::handleException',
     'renderer' => 'ExceptionRenderer',
     'log' => true
-));
+]);
 ```
 
 - `handler` - callback - 例外をハンドルするコールバック。無名関数を含め、
@@ -70,7 +70,8 @@ HTTP 方式の例外がいくつか存在します。
 下記は、見つからなかったものがある場合の、 404 ページをレンダリングする HTTP 例外の使用例です:
 
 ``` php
-public function view($id) {
+public function view($id)
+{
     $post = $this->Post->findById($id);
     if (!$post) {
         throw new NotFoundException('この Post は見つかりませんでした');
@@ -139,7 +140,8 @@ HTTP 例外と CakePHP 例外はすべて、CakeBaseException クラスを継承
 コントローラのアクションから失敗を示すために、 HTTP 関連のどの例外でも投げることができます。例:
 
 ``` php
-public function view($id) {
+public function view($id)
+{
     $post = $this->Post->read(null, $id);
     if (!$post) {
         throw new NotFoundException();
@@ -196,7 +198,9 @@ application exceptions
 これにて有益な情報を提供します。独自のアプリケーション次の例外が含まれていたなら:
 
 ``` php
-class MissingWidgetException extends CakeException {};
+class MissingWidgetException extends CakeException
+{
+};
 ```
 
 `app/View/Errors/missing_widget.ctp` を作成することにより、素晴らしい開発用エラーを
@@ -208,11 +212,12 @@ view の中にも、付け加えられます。これにより、あなたのエ
 メソッドで通常で使われることになるメッセージテンプレートを提供することができます:
 
 ``` php
-class MissingWidgetException extends CakeException {
+class MissingWidgetException extends CakeException
+{
     protected $_messageTemplate = '%s が見つかりません。';
 }
 
-throw new MissingWidgetException(array('widget' => 'Pointy'));
+throw new MissingWidgetException(['widget' => 'Pointy']);
 ```
 
 組み込みの例外ハンドラでこれがキャッチされると、あなたのエラー view テンプレート内で変数
@@ -263,8 +268,10 @@ Configure::write('Exception.handler', 'AppExceptionHandler::handle');
 App::uses('AppExceptionHandler', 'Lib');
 
 // app/Lib/AppExceptionHandler.php の中で
-class AppExceptionHandler {
-    public static function handle($error) {
+class AppExceptionHandler
+{
+    public static function handle($error)
+    {
         echo 'Oh noes! ' . $error->getMessage();
         // ...
     }
@@ -287,8 +294,10 @@ Configure::write('Exception.handler', function ($error) {
 
 ``` php
 // app/Lib/AppErrorHandler.php の中で
-class AppErrorHandler {
-    public static function handleException($error) {
+class AppErrorHandler
+{
+    public static function handleException($error)
+    {
         if ($error instanceof MissingWidgetException) {
             return self::handleMissingWidget($error);
         }
@@ -312,8 +321,10 @@ appError
 このメソッドの中で独自のエラーハンドリングを実装します:
 
 ``` php
-class AppController extends Controller {
-    public function appError($error) {
+class AppController extends Controller
+{
+    public function appError($error)
+    {
         // ここに独自ロジックを書きます。
     }
 }
@@ -334,8 +345,10 @@ Lib のパスの中にある、 `Error` ディレクトリ内に置いてくだ�
 // app/Lib/Error/AppExceptionRenderer.php の中で
 App::uses('ExceptionRenderer', 'Error');
 
-class AppExceptionRenderer extends ExceptionRenderer {
-    public function missingWidget($error) {
+class AppExceptionRenderer extends ExceptionRenderer
+{
+    public function missingWidget($error)
+    {
         echo 'おっと、widget が見つかりません！';
     }
 }
@@ -364,8 +377,10 @@ class AppExceptionRenderer extends ExceptionRenderer {
 好きなコントローラを使うことができます:
 
 ``` php
-class AppExceptionRenderer extends ExceptionRenderer {
-    protected function _getController($exception) {
+class AppExceptionRenderer extends ExceptionRenderer
+{
+    protected function _getController($exception)
+    {
         App::uses('SuperCustomErrorController', 'Controller');
         return new SuperCustomErrorController();
     }

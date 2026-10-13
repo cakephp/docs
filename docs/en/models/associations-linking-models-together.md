@@ -43,15 +43,16 @@ be as simple as a string, but can be as complex as a
 multidimensional array used to define association specifics.
 
 ``` php
-class User extends AppModel {
+class User extends AppModel
+{
     public $hasOne = 'Profile';
-    public $hasMany = array(
-        'Recipe' => array(
+    public $hasMany = [
+        'Recipe' => [
             'className' => 'Recipe',
-            'conditions' => array('Recipe.approved' => '1'),
+            'conditions' => ['Recipe.approved' => '1'],
             'order' => 'Recipe.created DESC'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -63,60 +64,64 @@ choose the same name as the class that it references. However,
 appropriate to have:
 
 ``` php
-class User extends AppModel {
-    public $hasMany = array(
-        'MyRecipe' => array(
+class User extends AppModel
+{
+    public $hasMany = [
+        'MyRecipe' => [
             'className' => 'Recipe',
-        )
-    );
-    public $hasAndBelongsToMany = array(
-        'MemberOf' => array(
+        ]
+    ];
+    public $hasAndBelongsToMany = [
+        'MemberOf' => [
             'className' => 'Group',
-        )
-    );
+        ]
+    ];
 }
 
-class Group extends AppModel {
-    public $hasMany = array(
-        'MyRecipe' => array(
+class Group extends AppModel
+{
+    public $hasMany = [
+        'MyRecipe' => [
             'className' => 'Recipe',
-        )
-    );
-    public $hasAndBelongsToMany = array(
-        'Member' => array(
+        ]
+    ];
+    public $hasAndBelongsToMany = [
+        'Member' => [
             'className' => 'User',
-        )
-    );
+        ]
+    ];
 }
 ```
 
 but the following will not work well in all circumstances:
 
 ``` php
-class User extends AppModel {
-    public $hasMany = array(
-        'MyRecipe' => array(
+class User extends AppModel
+{
+    public $hasMany = [
+        'MyRecipe' => [
             'className' => 'Recipe',
-        )
-    );
-    public $hasAndBelongsToMany = array(
-        'Member' => array(
+        ]
+    ];
+    public $hasAndBelongsToMany = [
+        'Member' => [
             'className' => 'Group',
-        )
-    );
+        ]
+    ];
 }
 
-class Group extends AppModel {
-    public $hasMany = array(
-        'MyRecipe' => array(
+class Group extends AppModel
+{
+    public $hasMany = [
+        'MyRecipe' => [
             'className' => 'Recipe',
-        )
-    );
-    public $hasAndBelongsToMany = array(
-        'Member' => array(
+        ]
+    ];
+    public $hasAndBelongsToMany = [
+        'Member' => [
             'className' => 'User',
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -175,7 +180,8 @@ property to the model class. Remember to have a Profile model in
 /app/Model/Profile.php, or the association won't work:
 
 ``` php
-class User extends AppModel {
+class User extends AppModel
+{
     public $hasOne = 'Profile';
 }
 ```
@@ -190,14 +196,15 @@ array syntax. For example, you might want to limit the association
 to include only certain records.
 
 ``` php
-class User extends AppModel {
-    public $hasOne = array(
-        'Profile' => array(
+class User extends AppModel
+{
+    public $hasOne = [
+        'Profile' => [
             'className' => 'Profile',
-            'conditions' => array('Profile.published' => '1'),
+            'conditions' => ['Profile.published' => '1'],
             'dependent' => true
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -216,11 +223,11 @@ Possible keys for hasOne association arrays include:
   Model class (in the example above, in the 'Profile' Model class). Otherwise
   cascade deletes will not work.
 - **conditions**: an array of find()-compatible conditions or SQL
-  strings such as array('Profile.approved' =\> true)
+  strings such as ['Profile.approved' =\> true]
 - **fields**: A list of fields to be retrieved when the associated
   model data is fetched. Returns all fields by default.
 - **order**: an array of find()-compatible order clauses or SQL
-  strings such as array('Profile.last_name' =\> 'ASC')
+  strings such as ['Profile.last_name' =\> 'ASC']
 - **dependent**: When the dependent key is set to true, and the
   model's delete() method is called with the cascade parameter set to
   true, associated model records are also deleted. In this case, we
@@ -233,22 +240,22 @@ model will also fetch a related Profile record if it exists:
 ``` php
 //Sample results from a $this->User->find() call.
 
-Array
-(
-    [User] => Array
-        (
+
+[
+    [User] => 
+        [
             [id] => 121
             [name] => Gwoo the Kungwoo
             [created] => 2007-05-01 10:31:01
-        )
-    [Profile] => Array
-        (
+        ]
+    [Profile] => 
+        [
             [id] => 12
             [user_id] => 121
             [skill] => Baking Cakes
             [created] => 2007-05-01 10:31:01
-        )
-)
+        ]
+]
 ```
 
 ## belongsTo
@@ -278,7 +285,8 @@ We can define the belongsTo association in our Profile model at
 /app/Model/Profile.php using the string syntax as follows:
 
 ``` php
-class Profile extends AppModel {
+class Profile extends AppModel
+{
     public $belongsTo = 'User';
 }
 ```
@@ -287,13 +295,14 @@ We can also define a more specific relationship using array
 syntax:
 
 ``` php
-class Profile extends AppModel {
-    public $belongsTo = array(
-        'User' => array(
+class Profile extends AppModel
+{
+    public $belongsTo = [
+        'User' => [
             'className' => 'User',
             'foreignKey' => 'user_id'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -308,7 +317,7 @@ Possible keys for belongsTo association arrays include:
   underscored, singular name of the other model, suffixed with
   `_id`.
 - **conditions**: an array of find() compatible conditions or SQL
-  strings such as `array('User.active' => true)`
+  strings such as `['User.active' => true]`
 - **type**: the type of the join to use in the SQL query. The default
   is 'LEFT', which may not fit your needs in all situations. The value
   'INNER' may be helpful (when used with some conditions) when you want
@@ -316,7 +325,7 @@ Possible keys for belongsTo association arrays include:
 - **fields**: A list of fields to be retrieved when the associated
   model data is fetched. Returns all fields by default.
 - **order**: an array of find() compatible order clauses or SQL
-  strings such as `array('User.username' => 'ASC')`
+  strings such as `['User.username' => 'ASC']`
 - **counterCache**: If set to true, the associated Model will
   automatically increase or decrease the
   "\[singular_model_name\]\_count" field in the foreign table
@@ -333,22 +342,22 @@ Profile model will also fetch a related User record if it exists:
 ``` php
 //Sample results from a $this->Profile->find() call.
 
-Array
-(
-   [Profile] => Array
-        (
+
+[
+   [Profile] => 
+        [
             [id] => 12
             [user_id] => 121
             [skill] => Baking Cakes
             [created] => 2007-05-01 10:31:01
-        )
-    [User] => Array
-        (
+        ]
+    [User] => 
+        [
             [id] => 121
             [name] => Gwoo the Kungwoo
             [created] => 2007-05-01 10:31:01
-        )
-)
+        ]
+]
 ```
 
 ### counterCache - Cache your count()
@@ -381,12 +390,13 @@ counter-cache in your association by adding a `counterCache` key
 and set the value to `true`:
 
 ``` php
-class ImageComment extends AppModel {
-    public $belongsTo = array(
-        'Image' => array(
+class ImageComment extends AppModel
+{
+    public $belongsTo = [
+        'Image' => [
             'counterCache' => true,
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -403,16 +413,17 @@ to, depending on how you look at it) the counter value.
 Using our Image model example, we can specify it like so:
 
 ``` php
-class ImageComment extends AppModel {
-    public $belongsTo = array(
-        'Image' => array(
+class ImageComment extends AppModel
+{
+    public $belongsTo = [
+        'Image' => [
             'counterCache' => 'active_comment_count', //custom field name
             // only count if "ImageComment" is active = 1
-            'counterScope' => array(
+            'counterScope' => [
               'ImageComment.active' => 1
-            )
-        )
-    );
+            ]
+        ]
+    ];
 }
 ```
 
@@ -434,15 +445,16 @@ to count the amount of read and unread messages for each user.
 With this setup, your `belongsTo` would look like this:
 
 ``` php
-class Message extends AppModel {
-    public $belongsTo = array(
-        'User' => array(
-            'counterCache' => array(
-                'messages_read' => array('Message.is_read' => 1),
-                'messages_unread' => array('Message.is_read' => 0)
-            )
-        )
-    );
+class Message extends AppModel
+{
+    public $belongsTo = [
+        'User' => [
+            'counterCache' => [
+                'messages_read' => ['Message.is_read' => 1],
+                'messages_unread' => ['Message.is_read' => 0]
+            ]
+        ]
+    ];
 }
 ```
 
@@ -467,7 +479,8 @@ We can define the hasMany association in our User model at
 /app/Model/User.php using the string syntax as follows:
 
 ``` php
-class User extends AppModel {
+class User extends AppModel
+{
     public $hasMany = 'Comment';
 }
 ```
@@ -476,17 +489,18 @@ We can also define a more specific relationship using array
 syntax:
 
 ``` php
-class User extends AppModel {
-    public $hasMany = array(
-        'Comment' => array(
+class User extends AppModel
+{
+    public $hasMany = [
+        'Comment' => [
             'className' => 'Comment',
             'foreignKey' => 'user_id',
-            'conditions' => array('Comment.status' => '1'),
+            'conditions' => ['Comment.status' => '1'],
             'order' => 'Comment.created DESC',
             'limit' => '5',
             'dependent' => true
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -501,9 +515,9 @@ Possible keys for hasMany association arrays include:
   underscored, singular name of the actual model, suffixed with
   '\_id'.
 - **conditions**: an array of find() compatible conditions or SQL
-  strings such as array('Comment.visible' =\> true)
+  strings such as ['Comment.visible' =\> true]
 - **order**: an array of find() compatible order clauses or SQL
-  strings such as array('Profile.last_name' =\> 'ASC')
+  strings such as ['Profile.last_name' =\> 'ASC']
 - **limit**: The maximum number of associated rows you want
   returned.
 - **offset**: The number of associated rows to skip over (given
@@ -530,25 +544,25 @@ model will also fetch related Comment records if they exist:
 ``` php
 //Sample results from a $this->User->find() call.
 
-Array
+array
 (
-    [User] => Array
-        (
+    [User] => 
+        [
             [id] => 121
             [name] => Gwoo the Kungwoo
             [created] => 2007-05-01 10:31:01
-        )
-    [Comment] => Array
+        ]
+    [Comment] => array
         (
-            [0] => Array
-                (
+            [0] => 
+                [
                     [id] => 123
                     [user_id] => 121
                     [title] => On Gwoo the Kungwoo
                     [body] => The Kungwooness is not so Gwooish
                     [created] => 2006-05-01 10:31:01
-                )
-            [1] => Array
+                ]
+            [1] => array
                 (
                     [id] => 124
                     [user_id] => 121
@@ -622,10 +636,11 @@ association in the model files. We're going to skip straight to the
 array syntax this time:
 
 ``` php
-class Recipe extends AppModel {
-    public $hasAndBelongsToMany = array(
+class Recipe extends AppModel
+{
+    public $hasAndBelongsToMany = [
         'Ingredient' =>
-            array(
+            [
                 'className' => 'Ingredient',
                 'joinTable' => 'ingredients_recipes',
                 'foreignKey' => 'recipe_id',
@@ -638,8 +653,8 @@ class Recipe extends AppModel {
                 'offset' => '',
                 'finderQuery' => '',
                 'with' => ''
-            )
-    );
+            ]
+    ];
 }
 ```
 
@@ -717,34 +732,34 @@ Recipe model will also fetch related Ingredient records if they exist:
 ``` php
 // Sample results from a $this->Recipe->find() call.
 
-Array
-(
-    [Recipe] => Array
-        (
+
+[
+    [Recipe] => 
+        [
             [id] => 2745
             [name] => Chocolate Frosted Sugar Bombs
             [created] => 2007-05-01 10:31:01
             [user_id] => 2346
-        )
-    [Ingredient] => Array
-        (
-            [0] => Array
-                (
+        ]
+    [Ingredient] => 
+        [
+            [0] => 
+                [
                     [id] => 123
                     [name] => Chocolate
-                )
-           [1] => Array
-                (
+                ]
+           [1] => 
+                [
                     [id] => 124
                     [name] => Sugar
-                )
-           [2] => Array
-                (
+                ]
+           [2] => 
+                [
                     [id] => 125
                     [name] => Bombs
-                )
-        )
-)
+                ]
+        ]
+]
 ```
 
 Remember to define a HABTM association in the Ingredient model if you'd
@@ -798,26 +813,29 @@ model CourseMembership. Take a look at the following models. :
 
 ``` php
 // Student.php
-class Student extends AppModel {
-    public $hasMany = array(
+class Student extends AppModel
+{
+    public $hasMany = [
         'CourseMembership'
-    );
+    ];
 }
 
 // Course.php
 
-class Course extends AppModel {
-    public $hasMany = array(
+class Course extends AppModel
+{
+    public $hasMany = [
         'CourseMembership'
-    );
+    ];
 }
 
 // CourseMembership.php
 
-class CourseMembership extends AppModel {
-    public $belongsTo = array(
+class CourseMembership extends AppModel
+{
+    public $belongsTo = [
         'Student', 'Course'
-    );
+    ];
 }
 ```
 
@@ -849,16 +867,18 @@ up a few models so we can see how bindModel() and unbindModel()
 work. We'll start with two models:
 
 ``` php
-class Leader extends AppModel {
-    public $hasMany = array(
-        'Follower' => array(
+class Leader extends AppModel
+{
+    public $hasMany = [
+        'Follower' => [
             'className' => 'Follower',
             'order' => 'Follower.rank'
-        )
-    );
+        ]
+    ];
 }
 
-class Follower extends AppModel {
+class Follower extends AppModel
+{
     public $name = 'Follower';
 }
 ```
@@ -871,13 +891,14 @@ purposes, let's use unbindModel() to remove that association in a
 controller action:
 
 ``` php
-public function some_action() {
+public function some_action()
+{
     // This fetches Leaders, and their associated Followers
     $this->Leader->find('all');
 
     // Let's remove the hasMany...
     $this->Leader->unbindModel(
-        array('hasMany' => array('Follower'))
+        ['hasMany' => ['Follower']]
     );
 
     // Now using a find function will return
@@ -906,7 +927,7 @@ Here's the basic usage pattern for unbindModel():
 
 ``` php
 $this->Model->unbindModel(
-    array('associationType' => array('associatedModelClassName'))
+    ['associationType' => ['associatedModelClassName']]
 );
 ```
 
@@ -919,7 +940,8 @@ following find operation). This function appears in the
 LeadersController:
 
 ``` php
-public function another_action() {
+public function another_action()
+{
     // There is no Leader hasMany Principles in
     // the leader.php model file, so a find here
     // only fetches Leaders.
@@ -928,23 +950,23 @@ public function another_action() {
     // Let's use bindModel() to add a new association
     // to the Leader model:
     $this->Leader->bindModel(
-        array('hasMany' => array(
-                'Principle' => array(
+        ['hasMany' => [
+                'Principle' => [
                     'className' => 'Principle'
-                )
-            )
-        )
+                ]
+            ]
+        ]
     );
 
     // If we need keep this association after model reset
     // we will pass a second boolean parameter like this:
     $this->Leader->bindModel(
-        array('hasMany' => array(
-                'Principle' => array(
+        ['hasMany' => [
+                'Principle' => [
                     'className' => 'Principle'
-                )
-            )
-        ),
+                ]
+            ]
+        ],
         false
     );
 
@@ -962,12 +984,12 @@ create:
 
 ``` php
 $this->Model->bindModel(
-    array('associationName' => array(
-            'associatedModelClassName' => array(
+    ['associationName' => [
+            'associatedModelClassName' => [
                 // normal association keys go here...
-            )
-        )
-    )
+            ]
+        ]
+    ]
 );
 ```
 
@@ -985,17 +1007,18 @@ messages table will have a field user_id, but also a field
 recipient_id. Now your Message model can look something like:
 
 ``` php
-class Message extends AppModel {
-    public $belongsTo = array(
-        'Sender' => array(
+class Message extends AppModel
+{
+    public $belongsTo = [
+        'Sender' => [
             'className' => 'User',
             'foreignKey' => 'user_id'
-        ),
-        'Recipient' => array(
+        ],
+        'Recipient' => [
             'className' => 'User',
             'foreignKey' => 'recipient_id'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -1003,38 +1026,40 @@ Recipient is an alias for the User model. Now let's see what the
 User model would look like:
 
 ``` php
-class User extends AppModel {
-    public $hasMany = array(
-        'MessageSent' => array(
+class User extends AppModel
+{
+    public $hasMany = [
+        'MessageSent' => [
             'className' => 'Message',
             'foreignKey' => 'user_id'
-        ),
-        'MessageReceived' => array(
+        ],
+        'MessageReceived' => [
             'className' => 'Message',
             'foreignKey' => 'recipient_id'
-        )
-    );
+        ]
+    ];
 }
 ```
 
 It is also possible to create self associations as shown below:
 
 ``` php
-class Post extends AppModel {
+class Post extends AppModel
+{
 
-    public $belongsTo = array(
-        'Parent' => array(
+    public $belongsTo = [
+        'Parent' => [
             'className' => 'Post',
             'foreignKey' => 'parent_id'
-        )
-    );
+        ]
+    ];
 
-    public $hasMany = array(
-        'Children' => array(
+    public $hasMany = [
+        'Children' => [
             'className' => 'Post',
             'foreignKey' => 'parent_id'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -1070,15 +1095,15 @@ for Model::find(), adding a 'joins' key to the \$options array. For
 example:
 
 ``` php
-$options['joins'] = array(
-    array('table' => 'channels',
+$options['joins'] = [
+    ['table' => 'channels',
         'alias' => 'Channel',
         'type' => 'LEFT',
-        'conditions' => array(
+        'conditions' => [
             'Channel.id = Item.channel_id',
-        )
-    )
-);
+        ]
+    ]
+];
 
 $Item->find('all', $options);
 ```
@@ -1102,19 +1127,19 @@ With joins, you could add conditions based on Related model
 fields:
 
 ``` php
-$options['joins'] = array(
-    array('table' => 'channels',
+$options['joins'] = [
+    ['table' => 'channels',
         'alias' => 'Channel',
         'type' => 'LEFT',
-        'conditions' => array(
+        'conditions' => [
             'Channel.id = Item.channel_id',
-        )
-    )
-);
+        ]
+    ]
+];
 
-$options['conditions'] = array(
+$options['conditions'] = [
     'Channel.private' => 1
-);
+];
 
 $privateItems = $Item->find('all', $options);
 ```
@@ -1127,26 +1152,26 @@ books table to the books_tags table, and this with the tags
 table:
 
 ``` php
-$options['joins'] = array(
-    array('table' => 'books_tags',
+$options['joins'] = [
+    ['table' => 'books_tags',
         'alias' => 'BooksTag',
         'type' => 'inner',
-        'conditions' => array(
+        'conditions' => [
             'Book.id = BooksTag.book_id'
-        )
-    ),
-    array('table' => 'tags',
+        ]
+    ],
+    ['table' => 'tags',
         'alias' => 'Tag',
         'type' => 'inner',
-        'conditions' => array(
+        'conditions' => [
             'BooksTag.tag_id = Tag.id'
-        )
-    )
-);
+        ]
+    ]
+];
 
-$options['conditions'] = array(
+$options['conditions'] = [
     'Tag.tag' => 'Novel'
-);
+];
 
 $books = $Book->find('all', $options);
 ```

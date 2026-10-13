@@ -12,17 +12,17 @@
 定義の例としては、以下のようになります。 :
 
 ``` php
-public $virtualFields = array(
+public $virtualFields = [
     'name' => 'CONCAT(User.first_name, " ", User.last_name)'
-);
+];
 ```
 
 PostgreSQLだと、以下のようになります。 :
 
 ``` php
-public $virtualFields = array(
+public $virtualFields = [
     'name' => 'User.first_name || \' \' || User.last_name'
-);
+];
 ```
 
 これを行った後、find 操作で取得したデータの User には
@@ -82,14 +82,14 @@ $this->User->getVirtualField('name');
 $results = $this->User->find('first');
 
 // 返り値は以下のものを含みます。
-array(
-    'User' => array(
+[
+    'User' => [
         'first_name' => 'Mark',
         'last_name' => 'Story',
         'name' => 'Mark Story',
         //more fields.
-    )
-);
+    ]
+];
 ```
 
 ### ページネーションとバーチャルフィールド
@@ -105,7 +105,8 @@ array(
 モデルのコンストラクタでバーチャルフィールドを定義するのがベストでしょう。 :
 
 ``` php
-public function __construct($id = false, $table = null, $ds = null) {
+public function __construct($id = false, $table = null, $ds = null)
+{
     parent::__construct($id, $table, $ds);
     $this->virtualFields['name'] = sprintf(
         'CONCAT(%s.first_name, " ", %s.last_name)', $this->alias, $this->alias
@@ -134,23 +135,23 @@ $this->Products->recursive = -1;
 $this->Products->ProductsItems->virtualFields['Total'] = 'count(ProductsItems.products_id)';
 
 // ORM の条件
-$where = array(
-    'fields' => array(
+$where = [
+    'fields' => [
         'Products.*',
         'count(ProductsItems.products_id) AS ProductsItems__Total',
-    ),
-    'joins' => array(
-        array(
+    ],
+    'joins' => [
+        [
             'table' => 'products_items',
             'alias' => 'ProductsItems',
             'type' => 'LEFT',
-            'conditions' => array(
+            'conditions' => [
                 'ProductsItems.products_id = Products.id',
-            )
-        )
-    ),
+            ]
+        ]
+    ],
     'group' => 'ProductsItems.products_id'
-);
+];
 
 // Paginator に条件を設定
 $this->paginate = $where;
@@ -162,33 +163,33 @@ $data = $this->Paginator->paginate();
 次のようなものを返すでしょう。 :
 
 ``` text
-Array
-(
-    [0] => Array
-        (
-            [Products] => Array
-                (
+
+[
+    [0] => 
+        [
+            [Products] => 
+                [
                     [id] => 1234,
                     [description] => 'テキストなどなど...',
-                )
-             [ProductsItems] => Array
-                 (
+                ]
+             [ProductsItems] => 
+                 [
                      [Total] => 25
-                 )
-        )
-     [1] => Array
-        (
-            [Products] => Array
-                (
+                 ]
+        ]
+     [1] => 
+        [
+            [Products] => 
+                [
                     [id] => 4321,
                     [description] => 'テキスト 2 などなど...',
-                )
-             [ProductsItems] => Array
-                 (
+                ]
+             [ProductsItems] => 
+                 [
                      [Total] => 50
-                 )
-        )
- )
+                 ]
+        ]
+ ]
 ```
 
 ## SQL クエリ内でのバーチャルフィールドの利用
@@ -212,20 +213,20 @@ $this->Timelog->query(
 戻り値はこのようになります。 :
 
 ``` text
-Array
-(
-    [0] => Array
-        (
-            [Timelog] => Array
-                (
+
+[
+    [0] => 
+        [
+            [Timelog] => 
+                [
                     [project_id] => 1234
-                )
-             [0] => Array
-                 (
+                ]
+             [0] => 
+                 [
                      [TotalHours] => 25.5
-                 )
-        )
- )
+                 ]
+        ]
+ ]
 ```
 
 もし TotalHours を Timelog 配列にグループ化したい場合、集計カラムのためのバーチャルフィールドを
@@ -257,17 +258,17 @@ $this->Timelog->query(
 バーチャルフィールドを設定した後クエリを再度実行すると、きれいな値のグループになるはずです。 :
 
 ``` text
-Array
-(
-    [0] => Array
-        (
-            [Timelog] => Array
-                (
+
+[
+    [0] => 
+        [
+            [Timelog] => 
+                [
                     [project_id] => 1234
                     [TotalHours] => 25.5
-                )
-        )
-)
+                ]
+        ]
+]
 ```
 
 ## バーチャルフィールドの制限

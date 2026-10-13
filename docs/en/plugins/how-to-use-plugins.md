@@ -13,11 +13,11 @@ certain plugins.
 No problem:
 
 ``` php
-CakePlugin::loadAll(array(
-    'Blog' => array('routes' => true),
-    'ContactManager' => array('bootstrap' => true),
-    'WebmasterTools' => array('bootstrap' => true, 'routes' => true),
-));
+CakePlugin::loadAll([
+    'Blog' => ['routes' => true],
+    'ContactManager' => ['bootstrap' => true],
+    'WebmasterTools' => ['bootstrap' => true, 'routes' => true],
+]);
 ```
 
 With this style of configuration, you no longer need to manually
@@ -32,10 +32,10 @@ every plugin that doesn't have a more specific configuration.
 Load the bootstrap file from all plugins, and additionally the routes from the Blog plugin:
 
 ``` php
-CakePlugin::loadAll(array(
-    array('bootstrap' => true),
-    'Blog' => array('routes' => true)
-));
+CakePlugin::loadAll([
+    ['bootstrap' => true],
+    'Blog' => ['routes' => true]
+]);
 ```
 
 Note that all files specified should actually exist in the configured
@@ -48,9 +48,9 @@ code needed to load all plugins using this:
 
 ``` php
 // Loads all plugins including any possible routes and bootstrap files
-CakePlugin::loadAll(array(
-    array('routes' => true, 'bootstrap' => true, 'ignoreMissing' => true)
-));
+CakePlugin::loadAll([
+    ['routes' => true, 'bootstrap' => true, 'ignoreMissing' => true]
+]);
 ```
 
 Some plugins additionally need to create one or more tables in your database. In
@@ -69,29 +69,30 @@ If you like to load more than one bootstrap file for a plugin. You can specify
 an array of files for the bootstrap configuration key:
 
 ``` php
-CakePlugin::loadAll(array(
-    'Blog' => array(
-        'bootstrap' => array(
+CakePlugin::loadAll([
+    'Blog' => [
+        'bootstrap' => [
             'config1',
             'config2'
-        )
-    )
-));
+        ]
+    ]
+]);
 ```
 
 You can also specify a callable function that needs to be called when the plugin
 has been loaded:
 
 ``` php
-function aCallableFunction($pluginName, $config) {
+function aCallableFunction($pluginName, $config)
+{
 
 }
 
-CakePlugin::loadAll(array(
-    'Blog' => array(
+CakePlugin::loadAll([
+    'Blog' => [
         'bootstrap' => 'aCallableFunction'
-    )
-));
+    ]
+]);
 ```
 
 ## Using a Plugin
@@ -106,7 +107,7 @@ one of your views. In your controller, your \$helpers array
 could look like this:
 
 ``` php
-public $helpers = array('ContactManager.ContactInfo');
+public $helpers = ['ContactManager.ContactInfo'];
 ```
 
 You would then be able to access the ContactInfoHelper just like

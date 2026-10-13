@@ -92,8 +92,8 @@ The basic format for a route definition is:
 ``` php
 Router::connect(
     'URL',
-    array('default' => 'defaultValue'),
-    array('option' => 'matchingRegex')
+    ['default' => 'defaultValue'],
+    ['option' => 'matchingRegex']
 );
 ```
 
@@ -116,7 +116,7 @@ parameter of connect():
 ``` php
 Router::connect(
     '/pages/*',
-    array('controller' => 'pages', 'action' => 'display')
+    ['controller' => 'pages', 'action' => 'display']
 );
 ```
 
@@ -134,7 +134,7 @@ included a `/` in it:
 ``` php
 Router::connect(
     '/pages/**',
-    array('controller' => 'pages', 'action' => 'show')
+    ['controller' => 'pages', 'action' => 'show']
 );
 ```
 
@@ -152,7 +152,7 @@ of the route:
 ``` php
 Router::connect(
     '/government',
-    array('controller' => 'pages', 'action' => 'display', 5)
+    ['controller' => 'pages', 'action' => 'display', 5]
 );
 ```
 
@@ -176,7 +176,7 @@ that:
 
 ``` php
 Router::connect(
-    '/cooks/:action/*', array('controller' => 'users')
+    '/cooks/:action/*', ['controller' => 'users']
 );
 ```
 
@@ -191,7 +191,7 @@ arguments will be made available in the [Passed Arguments](#passed-arguments)
 array.
 
 When generating URLs, routes are used too. Using
-`array('controller' => 'users', 'action' => 'some_action', 5)` as
+`['controller' => 'users', 'action' => 'some_action', 5]` as
 a url will output /cooks/some_action/5 if the above route is the
 first match found.
 
@@ -219,8 +219,8 @@ treated as part of the parameter:
 ``` php
 Router::connect(
     '/:controller/:id',
-    array('action' => 'view'),
-    array('id' => '[0-9]+')
+    ['action' => 'view'],
+    ['id' => '[0-9]+']
 );
 ```
 
@@ -249,7 +249,7 @@ in your controller. For example, to map all URLs to actions of the
 `/home/demo`, you can do the following:
 
 ``` php
-Router::connect('/:action', array('controller' => 'home'));
+Router::connect('/:action', ['controller' => 'home']);
 ```
 
 If you would like to provide a case insensitive URL, you can use regular
@@ -258,8 +258,8 @@ expression inline modifiers:
 ``` php
 Router::connect(
     '/:userShortcut',
-    array('controller' => 'teachers', 'action' => 'profile', 1),
-    array('userShortcut' => '(?i:principal)')
+    ['controller' => 'teachers', 'action' => 'profile', 1],
+    ['userShortcut' => '(?i:principal)']
 );
 ```
 
@@ -268,12 +268,12 @@ One more example, and you'll be a routing pro:
 ``` php
 Router::connect(
     '/:controller/:year/:month/:day',
-    array('action' => 'index'),
-    array(
+    ['action' => 'index'],
+    [
         'year' => '[12][0-9]{3}',
         'month' => '0[1-9]|1[012]',
         'day' => '0[1-9]|[12][0-9]|3[01]'
-    )
+    ]
 );
 ```
 
@@ -313,20 +313,21 @@ elements should also be made available as passed arguments:
 
 ``` php
 // SomeController.php
-public function view($articleId = null, $slug = null) {
+public function view($articleId = null, $slug = null)
+{
     // some code here...
 }
 
 // routes.php
 Router::connect(
     '/blog/:id-:slug', // E.g. /blog/3-CakePHP_Rocks
-    array('controller' => 'blog', 'action' => 'view'),
-    array(
+    ['controller' => 'blog', 'action' => 'view'],
+    [
         // order matters since this will simply map ":id" to
         // $articleId in your action
-        'pass' => array('id', 'slug'),
+        'pass' => ['id', 'slug'],
         'id' => '[0-9]+'
-    )
+    ]
 );
 ```
 
@@ -337,12 +338,12 @@ as defined in the routes:
 ``` php
 // view.ctp
 // this will return a link to /blog/3-CakePHP_Rocks
-echo $this->Html->link('CakePHP Rocks', array(
+echo $this->Html->link('CakePHP Rocks', [
     'controller' => 'blog',
     'action' => 'view',
     'id' => 3,
     'slug' => 'CakePHP_Rocks'
-));
+]);
 ```
 
 ### Per-Route Named Parameters
@@ -354,15 +355,15 @@ behavior at the route level using the 3rd argument of `Router::connect()`:
 ``` php
 Router::connect(
     '/:controller/:action/*',
-    array(),
-    array(
-        'named' => array(
+    [],
+    [
+        'named' => [
             'wibble',
-            'fish' => array('action' => 'index'),
-            'fizz' => array('controller' => array('comments', 'other')),
+            'fish' => ['action' => 'index'],
+            'fizz' => ['controller' => ['comments', 'other']],
             'buzz' => 'val-[\d]+'
-        )
-    )
+        ]
+    ]
 );
 ```
 
@@ -403,7 +404,7 @@ related to the router, are to be configured in
 `app/Config/core.php`:
 
 ``` php
-Configure::write('Routing.prefixes', array('admin'));
+Configure::write('Routing.prefixes', ['admin']);
 ```
 
 In your controller, any action with an `admin_` prefix will be
@@ -418,7 +419,7 @@ controller using following route:
 ``` php
 Router::connect(
     '/admin',
-    array('controller' => 'pages', 'action' => 'index', 'admin' => true)
+    ['controller' => 'pages', 'action' => 'index', 'admin' => true]
 );
 ```
 
@@ -426,7 +427,7 @@ You can configure the Router to use multiple prefixes too. By
 adding additional values to `Routing.prefixes`. If you set:
 
 ``` php
-Configure::write('Routing.prefixes', array('admin', 'manager'));
+Configure::write('Routing.prefixes', ['admin', 'manager']);
 ```
 
 CakePHP will automatically generate routes for both the admin and
@@ -436,19 +437,19 @@ routes generated for it:
 ``` php
 Router::connect(
     "/{$prefix}/:plugin/:controller",
-    array('action' => 'index', 'prefix' => $prefix, $prefix => true)
+    ['action' => 'index', 'prefix' => $prefix, $prefix => true]
 );
 Router::connect(
     "/{$prefix}/:plugin/:controller/:action/*",
-    array('prefix' => $prefix, $prefix => true)
+    ['prefix' => $prefix, $prefix => true]
 );
 Router::connect(
     "/{$prefix}/:controller",
-    array('action' => 'index', 'prefix' => $prefix, $prefix => true)
+    ['action' => 'index', 'prefix' => $prefix, $prefix => true]
 );
 Router::connect(
     "/{$prefix}/:controller/:action/*",
-    array('prefix' => $prefix, $prefix => true)
+    ['prefix' => $prefix, $prefix => true]
 );
 ```
 
@@ -466,13 +467,13 @@ Here's how to build this link using the HTML helper:
 // Go into a prefixed route.
 echo $this->Html->link(
     'Manage posts',
-    array('manager' => true, 'controller' => 'posts', 'action' => 'add')
+    ['manager' => true, 'controller' => 'posts', 'action' => 'add']
 );
 
 // leave a prefix
 echo $this->Html->link(
     'View Post',
-    array('manager' => false, 'controller' => 'posts', 'action' => 'view', 5)
+    ['manager' => false, 'controller' => 'posts', 'action' => 'view', 5]
 );
 ```
 
@@ -490,7 +491,7 @@ point to a plugin, but adding the plugin key to your URL array:
 ``` php
 echo $this->Html->link(
     'New todo',
-    array('plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create')
+    ['plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create']
 );
 ```
 
@@ -500,7 +501,7 @@ to create a link that has no plugin you can do the following:
 ``` php
 echo $this->Html->link(
     'New todo',
-    array('plugin' => null, 'controller' => 'users', 'action' => 'profile')
+    ['plugin' => null, 'controller' => 'users', 'action' => 'profile']
 );
 ```
 
@@ -533,10 +534,10 @@ would create your route as illustrated below:
 ``` php
 Router::connect(
     '/page/:title',
-    array('controller' => 'pages', 'action' => 'view'),
-    array(
-        'pass' => array('title')
-    )
+    ['controller' => 'pages', 'action' => 'view'],
+    [
+        'pass' => ['title']
+    ]
 );
 ```
 
@@ -545,12 +546,12 @@ Then to create links which map back to the routes simply use:
 ``` php
 $this->Html->link(
     'Link title',
-    array(
+    [
         'controller' => 'pages',
         'action' => 'view',
         'title' => 'super-article',
         'ext' => 'html'
-    )
+    ]
 );
 ```
 
@@ -579,8 +580,8 @@ option to create a custom RESTful route:
 ``` php
 Router::connect(
     "/:controller/:id",
-    array("action" => "edit", "[method]" => "PUT"),
-    array("id" => "[0-9]+")
+    ["action" => "edit", "[method]" => "PUT"],
+    ["id" => "[0-9]+"]
 );
 ```
 
@@ -626,11 +627,11 @@ CalendarsController extends AppController {
 You would get the following output:
 
 ``` text
-Array
-(
+
+[
     [0] => recent
     [1] => mark
-)
+]
 ```
 
 This same data is also available at `$this->request->params['pass']`
@@ -646,11 +647,11 @@ debug($this->passedArgs);
 Either of the above would output:
 
 ``` text
-Array
-(
+
+[
     [0] => recent
     [1] => mark
-)
+]
 ```
 
 > [!NOTE]
@@ -661,7 +662,7 @@ When generating URLs, using a `routing array` you add passed
 arguments as values without string keys in the array:
 
 ``` text
-array('controller' => 'posts', 'action' => 'view', 5)
+['controller' => 'posts', 'action' => 'view', 5]
 ```
 
 Since `5` has a numeric key, it is treated as a passed argument.
@@ -725,7 +726,7 @@ intended them to be routed parameters. To connect named parameters
 in the router use `Router::connectNamed()`:
 
 ``` php
-Router::connectNamed(array('chapter', 'section'));
+Router::connectNamed(['chapter', 'section']);
 ```
 
 Will ensure that your chapter and section parameters reverse route
@@ -735,7 +736,7 @@ When generating URLs, using a `routing array` you add named
 parameters as values with string keys matching the name:
 
 ``` text
-array('controller' => 'posts', 'action' => 'view', 'chapter' => 'association')
+['controller' => 'posts', 'action' => 'view', 'chapter' => 'association']
 ```
 
 Since 'chapter' doesn't match any defined route elements, it's treated
@@ -752,14 +753,14 @@ for GET parameters. When generating URLs you can use the following
 syntax:
 
 ``` php
-$url = Router::url(array(
+$url = Router::url([
     'controller' => 'posts',
     'action' => 'index',
-    'filter' => array(
+    'filter' => [
         'published' => 1,
         'frontpage' => 1
-    )
-));
+    ]
+]);
 ```
 
 The above would generate the URL `/posts/index/filter[published]:1/filter[frontpage]:1`.
@@ -767,35 +768,35 @@ The parameters are then parsed and stored in your controller's passedArgs variab
 as an array, just as you sent them to `Router::url`:
 
 ``` php
-$this->passedArgs['filter'] = array(
+$this->passedArgs['filter'] = [
     'published' => 1,
     'frontpage' => 1
-);
+];
 ```
 
 Arrays can be deeply nested as well, allowing you even more flexibility in
 passing arguments:
 
 ``` php
-$url = Router::url(array(
+$url = Router::url([
     'controller' => 'posts',
     'action' => 'search',
-    'models' => array(
-        'post' => array(
+    'models' => [
+        'post' => [
             'order' => 'asc',
-            'filter' => array(
+            'filter' => [
                 'published' => 1
-            )
-        ),
-        'comment' => array(
+            ]
+        ],
+        'comment' => [
             'order' => 'desc',
-            'filter' => array(
+            'filter' => [
                 'spam' => 0
-            )
-        ),
-    ),
-    'users' => array(1, 2, 3)
-));
+            ]
+        ],
+    ],
+    'users' => [1, 2, 3]
+]);
 ```
 
 You would end up with a pretty long url like this (wrapped for easy reading):
@@ -809,20 +810,20 @@ And the resulting array that would be passed to the controller would match that
 which you passed to the router:
 
 ``` php
-$this->passedArgs['models'] = array(
-    'post' => array(
+$this->passedArgs['models'] = [
+    'post' => [
         'order' => 'asc',
-        'filter' => array(
+        'filter' => [
             'published' => 1
-        )
-    ),
-    'comment' => array(
+        ]
+    ],
+    'comment' => [
         'order' => 'desc',
-        'filter' => array(
+        'filter' => [
             'spam' => 0
-        )
-    ),
-);
+        ]
+    ],
+];
 ```
 
 <a id="controlling-named-parameters"></a>
@@ -843,15 +844,15 @@ Router::connectNamed(false);
 Parse only default parameters used for CakePHP's pagination:
 
 ``` php
-Router::connectNamed(false, array('default' => true));
+Router::connectNamed(false, ['default' => true]);
 ```
 
 Parse only the page parameter if its value is a number:
 
 ``` php
 Router::connectNamed(
-    array('page' => '[\d]+'),
-    array('default' => false, 'greedy' => false)
+    ['page' => '[\d]+'],
+    ['default' => false, 'greedy' => false]
 );
 ```
 
@@ -859,8 +860,8 @@ Parse only the page parameter no matter what:
 
 ``` php
 Router::connectNamed(
-    array('page'),
-    array('default' => false, 'greedy' => false)
+    ['page'],
+    ['default' => false, 'greedy' => false]
 );
 ```
 
@@ -868,8 +869,8 @@ Parse only the page parameter if the current action is 'index':
 
 ``` php
 Router::connectNamed(
-    array('page' => array('action' => 'index')),
-    array('default' => false, 'greedy' => false)
+    ['page' => ['action' => 'index']],
+    ['default' => false, 'greedy' => false]
 );
 ```
 
@@ -877,8 +878,8 @@ Parse only the page parameter if the current action is 'index' and the controlle
 
 ``` php
 Router::connectNamed(
-    array('page' => array('action' => 'index', 'controller' => 'pages')),
-    array('default' => false, 'greedy' => false)
+    ['page' => ['action' => 'index', 'controller' => 'pages']],
+    ['default' => false, 'greedy' => false]
 );
 ```
 
@@ -911,7 +912,7 @@ application renaming URLs. However, if you defined your link like:
 ``` php
 $this->Html->link(
     'View',
-    array('controller' => 'posts', 'action' => 'view', $id)
+    ['controller' => 'posts', 'action' => 'view', $id]
 );
 ```
 
@@ -923,12 +924,12 @@ When using array URLs, you can define both query string parameters and
 document fragments using special keys:
 
 ``` php
-Router::url(array(
+Router::url([
     'controller' => 'posts',
     'action' => 'index',
-    '?' => array('page' => 1),
+    '?' => ['page' => 1],
     '#' => 'top'
-));
+]);
 
 // will generate a URL like.
 /posts/index?page=1#top
@@ -950,10 +951,10 @@ a destination within your application or an outside location:
 ``` php
 Router::redirect(
     '/home/*',
-    array('controller' => 'posts', 'action' => 'view'),
-    // or array('persist'=>array('id')) for default routing where the
+    ['controller' => 'posts', 'action' => 'view'],
+    // or ['persist'=>['id']] for default routing where the
     // view action expects $id as an argument
-    array('persist' => true)
+    ['persist' => true]
 );
 ```
 
@@ -964,7 +965,7 @@ redirected to. You can redirect to external locations using
 string URLs as the destination:
 
 ``` php
-Router::redirect('/posts/*', 'https://google.com', array('status' => 302));
+Router::redirect('/posts/*', 'https://google.com', ['status' => 302]);
 ```
 
 This would redirect `/posts/*` to `https://google.com` with a
@@ -1003,8 +1004,8 @@ App::uses('SlugRoute', 'Routing/Route');
 
 Router::connect(
      '/:slug',
-     array('controller' => 'posts', 'action' => 'view'),
-     array('routeClass' => 'SlugRoute')
+     ['controller' => 'posts', 'action' => 'view'],
+     ['routeClass' => 'SlugRoute']
 );
 ```
 
@@ -1015,7 +1016,7 @@ to implement custom parameter handling.
 
 `class` **Router**
 
-`static` Router::**connect**($route, $defaults = array(), $options = array())
+`static` Router::**connect**($route, $defaults = [], $options = [])
 
 param string \$route  
 A string describing the template of the route
@@ -1050,7 +1051,7 @@ it will match requests like `/posts/index` as well as requests like
 ``` php
 Router::connect(
     '/home-page',
-    array('controller' => 'pages', 'action' => 'display', 'home')
+    ['controller' => 'pages', 'action' => 'display', 'home']
 );
 ```
 
@@ -1060,8 +1061,8 @@ parameters for a static route. :
 ``` php
 Router::connect(
     '/:lang/:controller/:action/:id',
-    array(),
-    array('id' => '[0-9]+', 'lang' => '[a-z]{3}')
+    [],
+    ['id' => '[0-9]+', 'lang' => '[a-z]{3}']
 );
 ```
 
@@ -1074,18 +1075,18 @@ have special meaning in the \$options array.
 
 - `pass` is used to define which of the routed parameters should be
   shifted into the pass array. Adding a parameter to pass will remove
-  it from the regular route array. Ex. `'pass' => array('slug')`
+  it from the regular route array. Ex. `'pass' => ['slug']`
 - `persist` is used to define which route parameters should be automatically
   included when generating new URLs. You can override persistent parameters
   by redefining them in a URL or remove them by setting the parameter to
-  `false`. Ex. `'persist' => array('lang')`
+  `false`. Ex. `'persist' => ['lang']`
 - `routeClass` is used to extend and change how individual routes parse
   requests and handle reverse routing, via a custom routing class.
   Ex. `'routeClass' => 'SlugRoute'`
 - `named` is used to configure named parameters at the route level.
   This key uses the same options as `Router::connectNamed()`
 
-`static` Router::**redirect**($route, $url, $options = array())
+`static` Router::**redirect**($route, $url, $options = [])
 
 param string \$route  
 A route template that dictates which URLs should
@@ -1101,7 +1102,7 @@ An array of options for the redirect.
 Connects a new redirection Route in the router.
 See [Redirect Routing](#redirect-routing) for more information.
 
-`static` Router::**connectNamed**($named, $options = array())
+`static` Router::**connectNamed**($named, $options = [])
 
 param array \$named  
 A list of named parameters. Key value pairs are accepted where
@@ -1156,7 +1157,7 @@ There are a few 'special' parameters that can change the final URL string that i
 - `full_base` - If true the value of `Router::fullBaseUrl()` will
   be prepended to generated URLs.
 
-`static` Router::**mapResources**($controller, $options = array())
+`static` Router::**mapResources**($controller, $options = [])
 
 Creates REST resource routes for the given controller(s). See
 the [REST](../development/rest) section for more information.

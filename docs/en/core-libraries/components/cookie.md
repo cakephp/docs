@@ -1,6 +1,6 @@
 # Cookie
 
-`class` **CookieComponent**(ComponentCollection $collection, array $settings = array())
+`class` **CookieComponent**(ComponentCollection $collection, array $settings = [])
 
 The CookieComponent is a wrapper around the native PHP `setcookie`
 method. It also includes a host of delicious icing to make coding
@@ -75,9 +75,10 @@ a secure connection, is available on the path
 '/bakers/preferences/', expires in one hour and is HTTP only:
 
 ``` php
-public $components = array('Cookie');
+public $components = ['Cookie'];
 
-public function beforeFilter() {
+public function beforeFilter()
+{
     parent::beforeFilter();
     $this->Cookie->name = 'baker_id';
     $this->Cookie->time = 3600;  // or '1 hour'

@@ -19,16 +19,18 @@ If you need `TextHelper` functionalities outside of a `View`,
 use the `CakeText` class:
 
 ``` php
-class UsersController extends AppController {
+class UsersController extends AppController
+{
 
-    public $components = array('Auth');
+    public $components = ['Auth'];
 
-    public function afterLogin() {
+    public function afterLogin()
+    {
         App::uses('CakeText', 'Utility');
         $message = $this->User->find('new_message');
         if (!empty($message)) {
             // notify user of new message
-            $this->Session->setFlash(__('You have a new message: %s', CakeText::truncate($message['Message']['body'], 255, array('html' => true))));
+            $this->Session->setFlash(__('You have a new message: %s', CakeText::truncate($message['Message']['body'], 255, ['html' => true])));
         }
     }
 }
@@ -61,20 +63,20 @@ formatting such as tag lists:
 $data = "cakephp 'great framework' php";
 $result = CakeText::tokenize($data, ' ', "'", "'");
 // result contains
-array('cakephp', "'great framework'", 'php');
+['cakephp', "'great framework'", 'php'];
 ```
 
-`static` CakeText::**insert**($string, $data, $options = array())
+`static` CakeText::**insert**($string, $data, $options = [])
 
 The insert method is used to create string templates and to allow
 for key/value replacements:
 
 ``` php
-CakeText::insert('My name is :name and I am :age years old.', array('name' => 'Bob', 'age' => '65'));
+CakeText::insert('My name is :name and I am :age years old.', ['name' => 'Bob', 'age' => '65']);
 // generates: "My name is Bob and I am 65 years old."
 ```
 
-`static` CakeText::**cleanInsert**($string, $options = array())
+`static` CakeText::**cleanInsert**($string, $options = [])
 
 Cleans up a `CakeText::insert` formatted string with given \$options
 depending on the 'clean' key in \$options. The default method used
@@ -85,16 +87,16 @@ did not get replaced by Set::insert.
 You can use the following options in the options array:
 
 ``` php
-$options = array(
-    'clean' => array(
+$options = [
+    'clean' => [
         'method' => 'text', // or html
-    ),
+    ],
     'before' => '',
     'after' => ''
-);
+];
 ```
 
-`static` CakeText::**wrap**($text, $options = array())
+`static` CakeText::**wrap**($text, $options = [])
 
 Wraps a block of text to a set width, and indent blocks as well.
 Can intelligently wrap text so words are not sliced across lines:
@@ -118,7 +120,7 @@ supported options are:
 
 <!-- start-string -->
 
-`method` CakeText::**highlight**(string $haystack, string $needle, array $options = array() )
+`method` CakeText::**highlight**(string $haystack, string $needle, array $options = [] )
 
 `method` CakeText::**stripLinks**($text)
 

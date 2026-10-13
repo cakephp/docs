@@ -45,7 +45,7 @@ class HeadingHelper extends BaseShellHelper
 {
     public function output($args)
     {
-        $args += array('', '#', 3);
+        $args += ['', '#', 3];
         $marker = str_repeat($args[1], $args[2]);
         $this->_consoleOutput->out($marker . ' ' . $args[0] . ' ' . $marker);
     }
@@ -70,11 +70,11 @@ The TableHelper assists in making well formatted ASCII art tables. Using it is
 pretty simple:
 
 ``` php
-$data = array(
-    array('Header 1', 'Header', 'Long Header'),
-    array('short', 'Longish thing', 'short'),
-    array('Longer thing', 'short', 'Longest Value'),
-);
+$data = [
+    ['Header 1', 'Header', 'Long Header'],
+    ['short', 'Longish thing', 'short'],
+    ['Longer thing', 'short', 'Longest Value'],
+];
 $this->helper('table')->output($data);
 
 // Outputs
@@ -109,13 +109,13 @@ You can control the progress bar more by providing additional options:
 An example of all the options in use would be:
 
 ``` php
-$this->helper('progress')->output(array(
+$this->helper('progress')->output([
     'total' => 10,
     'width' => 20,
     'callback' => function ($progress) {
         $progress->increment(2);
     }
-));
+]);
 ```
 
 The progress helper can also be used manually to increment and re-render the
@@ -123,10 +123,10 @@ progress bar as necessary:
 
 ``` php
 $progress = $this->helper('Progress');
-$progress->init(array(
+$progress->init([
     'total' => 10,
     'width' => 20,
-));
+]);
 
 $progress->increment(4);
 $progress->draw();

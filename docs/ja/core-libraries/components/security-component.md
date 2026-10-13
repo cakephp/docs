@@ -1,6 +1,6 @@
 # セキュリティ
 
-`class` **SecurityComponent**(ComponentCollection $collection, array $settings = array())
+`class` **SecurityComponent**(ComponentCollection $collection, array $settings = [])
 
 Security コンポーネントを使うと、アプリケーションにさらに堅牢なセキュリティを導入できます。
 このコンポーネントは、以下の様々なタスクのためのメソッドを提供します。
@@ -114,11 +114,13 @@ Security コンポーネントは、一般的にコントローラの `beforeFil
 それらの制限を有効にします。 :
 
 ``` php
-class WidgetController extends AppController {
+class WidgetController extends AppController
+{
 
-    public $components = array('Security');
+    public $components = ['Security'];
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         $this->Security->requirePost('delete');
     }
 }
@@ -128,11 +130,13 @@ class WidgetController extends AppController {
 正しく実行されます。 :
 
 ``` php
-class WidgetController extends AppController {
+class WidgetController extends AppController
+{
 
-    public $components = array('Security');
+    public $components = ['Security'];
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         if (isset($this->request->params['admin'])) {
             $this->Security->requireSecure();
         }
@@ -143,18 +147,21 @@ class WidgetController extends AppController {
 上記の例では、 管理者用ルーティングの全てのアクションは、セキュアな SSL 通信のみを許可します。 :
 
 ``` php
-class WidgetController extends AppController {
+class WidgetController extends AppController
+{
 
-    public $components = array('Security');
+    public $components = ['Security'];
 
-    public function beforeFilter() {
+    public function beforeFilter()
+    {
         if (isset($this->params['admin'])) {
             $this->Security->blackHoleCallback = 'forceSSL';
             $this->Security->requireSecure();
         }
     }
 
-    public function forceSSL() {
+    public function forceSSL()
+    {
         return $this->redirect('https://' . env('SERVER_NAME') . $this->here);
     }
 }
@@ -193,17 +200,18 @@ CSRF 防御の恩恵を受けられます。デフォルトでは CSRF トーク
 コンポーネントの csfrExpires を設定することで有効期限を指定することができます。 :
 
 ``` php
-public $components = array(
-    'Security' => array(
+public $components = [
+    'Security' => [
         'csrfExpires' => '+1 hour'
-    )
-);
+    ]
+];
 ```
 
 コントローラの `beforeFilter` 中でこのプロパティをセットすることもできます。 :
 
 ``` php
-public function beforeFilter() {
+public function beforeFilter()
+{
     $this->Security->csrfExpires = '+1 hour';
     // ...
 }
@@ -229,11 +237,11 @@ csrfExpires プロパティは、
 ことができます。この設定は、コントローラの components 配列や `beforeFilter` で行います。 :
 
 ``` php
-public $components = array(
-    'Security' => array(
+public $components = [
+    'Security' => [
         'csrfUseOnce' => false
-    )
-);
+    ]
+];
 ```
 
 上記の例は、有効期限まで CSRF トークンを再利用したいことをコンポーネントに伝えます。

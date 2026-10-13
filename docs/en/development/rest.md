@@ -63,62 +63,68 @@ this:
 
 ``` php
 // Controller/RecipesController.php
-class RecipesController extends AppController {
+class RecipesController extends AppController
+{
 
-    public $components = array('RequestHandler');
+    public $components = ['RequestHandler'];
 
-    public function index() {
+    public function index()
+    {
         $recipes = $this->Recipe->find('all');
-        $this->set(array(
+        $this->set([
             'recipes' => $recipes,
-            '_serialize' => array('recipes')
-        ));
+            '_serialize' => ['recipes']
+        ]);
     }
 
-    public function view($id) {
+    public function view($id)
+    {
         $recipe = $this->Recipe->findById($id);
-        $this->set(array(
+        $this->set([
             'recipe' => $recipe,
-            '_serialize' => array('recipe')
-        ));
+            '_serialize' => ['recipe']
+        ]);
     }
 
-    public function add() {
+    public function add()
+    {
         $this->Recipe->create();
         if ($this->Recipe->save($this->request->data)) {
             $message = 'Saved';
         } else {
             $message = 'Error';
         }
-        $this->set(array(
+        $this->set([
             'message' => $message,
-            '_serialize' => array('message')
-        ));
+            '_serialize' => ['message']
+        ]);
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $this->Recipe->id = $id;
         if ($this->Recipe->save($this->request->data)) {
             $message = 'Saved';
         } else {
             $message = 'Error';
         }
-        $this->set(array(
+        $this->set([
             'message' => $message,
-            '_serialize' => array('message')
-        ));
+            '_serialize' => ['message']
+        ]);
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         if ($this->Recipe->delete($id)) {
             $message = 'Deleted';
         } else {
             $message = 'Error';
         }
-        $this->set(array(
+        $this->set([
             'message' => $message,
-            '_serialize' => array('message')
-        ));
+            '_serialize' => ['message']
+        ]);
     }
 }
 ```
@@ -142,7 +148,7 @@ our index view might look like:
 // app/View/Recipes/xml/index.ctp
 // Do some formatting and manipulation on
 // the $recipes array.
-$xml = Xml::fromArray(array('response' => $recipes));
+$xml = Xml::fromArray(['response' => $recipes]);
 echo $xml->asXML();
 ```
 
@@ -199,14 +205,14 @@ default routes that get set with `Router::mapResources()`. When using
 this method you need to set *all* the defaults you want to use:
 
 ``` php
-Router::resourceMap(array(
-    array('action' => 'index', 'method' => 'GET', 'id' => false),
-    array('action' => 'view', 'method' => 'GET', 'id' => true),
-    array('action' => 'add', 'method' => 'POST', 'id' => false),
-    array('action' => 'edit', 'method' => 'PUT', 'id' => true),
-    array('action' => 'delete', 'method' => 'DELETE', 'id' => true),
-    array('action' => 'update', 'method' => 'POST', 'id' => true)
-));
+Router::resourceMap([
+    ['action' => 'index', 'method' => 'GET', 'id' => false],
+    ['action' => 'view', 'method' => 'GET', 'id' => true],
+    ['action' => 'add', 'method' => 'POST', 'id' => false],
+    ['action' => 'edit', 'method' => 'PUT', 'id' => true],
+    ['action' => 'delete', 'method' => 'DELETE', 'id' => true],
+    ['action' => 'update', 'method' => 'POST', 'id' => true]
+]);
 ```
 
 By overwriting the default resource map, future calls to `mapResources()` will
@@ -229,9 +235,9 @@ You can provide `connectOptions` key in the `$options` array for
 `Router::connect()`:
 
 ``` php
-Router::mapResources('books', array(
-    'connectOptions' => array(
+Router::mapResources('books', [
+    'connectOptions' => [
         'routeClass' => 'ApiRoute',
-    )
-));
+    ]
+]);
 ```

@@ -4,14 +4,14 @@ CakePHP はモデルのデータを簡単に保存できます。保存するデ
 モデルの `save()` メソッドに、以下の形式の配列で渡されます。 :
 
 ``` text
-Array
-(
-    [ModelName] => Array
-    (
+
+[
+    [ModelName] => 
+    [
         [fieldname1] => 'value'
         [fieldname2] => 'value'
-    )
-)
+    ]
+]
 ```
 
 ほとんどの場合、このような形式を意識することはありません。
@@ -23,7 +23,8 @@ CakePHP の `FormHelper` やモデルの find メソッドは
 簡単なサンプルを以下に示します。 :
 
 ``` php
-public function edit($id) {
+public function edit($id)
+{
     // フォームからポストされたデータがあるかどうか
     if ($this->request->is('post')) {
         // フォームのデータを検証して保存する...
@@ -71,10 +72,10 @@ $this->Post->save();
 
 ``` php
 $this->Post->read(null, 1);
-$this->Post->set(array(
+$this->Post->set([
     'title' => 'New title',
     'published' => false
-));
+]);
 $this->Post->save();
 ```
 
@@ -88,7 +89,7 @@ $this->Post->save();
 ::: info Added in version 2.4
 :::
 
-## Model::save(array \$data = null, boolean \$validate = true, array \$fieldList = array())
+## Model::save(array \$data = null, boolean \$validate = true, array \$fieldList = [])
 
 このメソッドは配列の形式のデータを受け取ってそれを保存します。
 2つ目のパラメータはバリデーションをしない場合に使われ、
@@ -104,7 +105,7 @@ $this->Post->save();
 以下のような引数を受け取るsaveメソッドもあります。 :
 
 ``` php
-save(array $data = null, array $params = array())
+save(array $data = null, array $params = [])
 ```
 
 `$params` 配列には、以下のキーを指定できます。
@@ -152,12 +153,12 @@ $this->Recipe->save($this->request->data);
 data 配列にプライマリーキーのフィールドを渡してください。 :
 
 ``` php
-$data = array('id' => 10, 'title' => 'My new title');
+$data = ['id' => 10, 'title' => 'My new title'];
 // id が 10 のレシピを更新
 $this->Recipe->save($data);
 ```
 
-## Model::create(array \$data = array())
+## Model::create(array \$data = [])
 
 このメソッドはデータを保存するためにモデルの状態をリセットします。
 実際にはデータベースにデータは保存されませんが、 Model::\$id フィールドが
@@ -199,7 +200,7 @@ $this->Post->saveField('title', 'A New Title for a New Day');
 saveField メソッドは、別の構文を持っています:
 
 ``` php
-saveField(string $fieldName, string $fieldValue, array $params = array())
+saveField(string $fieldName, string $fieldValue, array $params = [])
 ```
 
 `$params` 配列には、以下のキーを指定できます。
@@ -224,8 +225,8 @@ saveField(string $fieldName, string $fieldValue, array $params = array())
 $thisYear = date('Y-m-d H:i:s', strtotime('-1 year'));
 
 $this->Baker->updateAll(
-    array('Baker.approved' => true),
-    array('Baker.created <=' => $thisYear)
+    ['Baker.approved' => true],
+    ['Baker.created <=' => $thisYear]
 );
 ```
 
@@ -237,8 +238,8 @@ $this->Baker->updateAll(
 $db = $this->getDataSource();
 $value = $db->value($value, 'string');
 $this->updateAll(
-    array('Baker.status' => $value),
-    array('Baker.status' => 'old')
+    ['Baker.status' => $value],
+    ['Baker.status' => 'old']
 );
 ```
 
@@ -251,15 +252,15 @@ $this->updateAll(
 
 ``` php
 $this->Ticket->updateAll(
-    array('Ticket.status' => "'closed'"),
-    array('Ticket.customer_id' => 453)
+    ['Ticket.status' => "'closed'"],
+    ['Ticket.customer_id' => 453]
 );
 ```
 
 デフォルトでは、updateAll() は自動的に belongsTo アソシエーション先を結合します。
 必要なければ、このメソッドを呼ぶ前に一時的にアソシエーションを解除してください。
 
-## Model::saveMany(array \$data = null, array \$options = array())
+## Model::saveMany(array \$data = null, array \$options = [])
 
 このメソッドは、同じモデルの複数のレコードを一度に保存するために使います。
 以下のオプションが指定できます。
@@ -280,10 +281,10 @@ $this->Ticket->updateAll(
 数値をインデックスとしてもつ配列である必要があります。 :
 
 ``` php
-$data = array(
-    array('title' => 'title 1'),
-    array('title' => 'title 2'),
-);
+$data = [
+    ['title' => 'title 1'],
+    ['title' => 'title 2'],
+];
 ```
 
 > [!NOTE]
@@ -295,47 +296,47 @@ $data = array(
 以下のような形式のデータでも受け取る事ができます。 :
 
 ``` php
-$data = array(
-    array('Article' => array('title' => 'title 1')),
-    array('Article' => array('title' => 'title 2')),
-);
+$data = [
+    ['Article' => ['title' => 'title 1']],
+    ['Article' => ['title' => 'title 2']],
+];
 ```
 
 2.1 以降、 `$options['deep'] = true` と指定することで、アソシエーションデータも
 保存できます。 以下の例を見てください。 :
 
 ``` php
-$data = array(
-    array('title' => 'title 1', 'Assoc' => array('field' => 'value')),
-    array('title' => 'title 2'),
-);
-$data = array(
-    array(
-        'Article' => array('title' => 'title 1'),
-        'Assoc' => array('field' => 'value')
-    ),
-    array('Article' => array('title' => 'title 2')),
-);
-$Model->saveMany($data, array('deep' => true));
+$data = [
+    ['title' => 'title 1', 'Assoc' => ['field' => 'value']],
+    ['title' => 'title 2'],
+];
+$data = [
+    [
+        'Article' => ['title' => 'title 1'],
+        'Assoc' => ['field' => 'value']
+    ],
+    ['Article' => ['title' => 'title 2']],
+];
+$Model->saveMany($data, ['deep' => true]);
 ```
 
 新しくレコードを作るのではなく、既存レコードの更新をしたい場合は、
 データ配列にプライマリーキーを追加してください。 :
 
 ``` php
-$data = array(
-    array(
+$data = [
+    [
         // これは新しくレコードを作ります
-        'Article' => array('title' => 'New article')),
-    array(
+        'Article' => ['title' => 'New article']],
+    [
         // これは既存のレコードを更新します
-        'Article' => array('id' => 2, 'title' => 'title 2')),
-);
+        'Article' => ['id' => 2, 'title' => 'title 2']],
+];
 ```
 
 <a id="Model-saveAssociated"></a>
 
-## Model::saveAssociated(array \$data = null, array \$options = array())
+## Model::saveAssociated(array \$data = null, array \$options = [])
 
 一度に複数のアソシエーションモデルのデータを保存するのに使われるメソッドです。
 \$options 配列には以下のキーが使われます。
@@ -354,51 +355,51 @@ hasOne または belongsTo アソシエーションの関連レコードと一�
 データ配列は以下のようになります。 :
 
 ``` php
-$data = array(
-    'User' => array('username' => 'billy'),
-    'Profile' => array('sex' => 'Male', 'occupation' => 'Programmer'),
-);
+$data = [
+    'User' => ['username' => 'billy'],
+    'Profile' => ['sex' => 'Male', 'occupation' => 'Programmer'],
+];
 ```
 
 hasMany アソシエーションの関連レコードを保存するには、
 以下のようなデータ配列を準備してください。 :
 
 ``` php
-$data = array(
-    'Article' => array('title' => 'My first article'),
-    'Comment' => array(
-        array('body' => 'Comment 1', 'user_id' => 1),
-        array('body' => 'Comment 2', 'user_id' => 12),
-        array('body' => 'Comment 3', 'user_id' => 40),
-    ),
-);
+$data = [
+    'Article' => ['title' => 'My first article'],
+    'Comment' => [
+        ['body' => 'Comment 1', 'user_id' => 1],
+        ['body' => 'Comment 2', 'user_id' => 12],
+        ['body' => 'Comment 3', 'user_id' => 40],
+    ],
+];
 ```
 
 2階層以上の hasMany アソシエーションの関連レコードを保存するには、
 以下のようなデータを準備してください。 :
 
 ``` php
-$data = array(
-    'User' => array('email' => 'john-doe@cakephp.org'),
-    'Cart' => array(
-        array(
+$data = [
+    'User' => ['email' => 'john-doe@cakephp.org'],
+    'Cart' => [
+        [
             'payment_status_id' => 2,
             'total_cost' => 250,
-            'CartItem' => array(
-                array(
+            'CartItem' => [
+                [
                     'cart_product_id' => 3,
                     'quantity' => 1,
                     'cost' => 100,
-                ),
-                array(
+                ],
+                [
                     'cart_product_id' => 5,
                     'quantity' => 1,
                     'cost' => 150,
-                )
-            )
-        )
-    )
-);
+                ]
+            ]
+        ]
+    ]
+];
 ```
 
 > [!NOTE]
@@ -409,22 +410,22 @@ hasMany アソシエーションの関連レコードを保存して、同時に
 アソシエーションのデータも保存するには、以下のようなデータ配列を準備します。 :
 
 ``` php
-$data = array(
-    'Article' => array('title' => 'My first article'),
-    'Comment' => array(
-        array('body' => 'Comment 1', 'user_id' => 1),
-        array(
+$data = [
+    'Article' => ['title' => 'My first article'],
+    'Comment' => [
+        ['body' => 'Comment 1', 'user_id' => 1],
+        [
             'body' => 'Save a new user as well',
-            'User' => array('first' => 'mad', 'last' => 'coder')
-        ),
-    ),
-);
+            'User' => ['first' => 'mad', 'last' => 'coder']
+        ],
+    ],
+];
 ```
 
 そしてこのようにして保存してください。 :
 
 ``` php
-$Article->saveAssociated($data, array('deep' => true));
+$Article->saveAssociated($data, ['deep' => true]);
 ```
 
 > [!WARNING]
@@ -434,12 +435,12 @@ $Article->saveAssociated($data, array('deep' => true));
 このようにして、複数モデルに対応する `fieldList` を渡すことができます。 :
 
 ``` php
-$this->SomeModel->saveAll($data, array(
-    'fieldList' => array(
-        'SomeModel' => array('field_1'),
-        'AssociatedModel' => array('field_2', 'field_3')
-    )
-));
+$this->SomeModel->saveAll($data, [
+    'fieldList' => [
+        'SomeModel' => ['field_1'],
+        'AssociatedModel' => ['field_2', 'field_3']
+    ]
+]);
 ```
 
 fieldList はキーにモデルのエイリアスを、値にフィールドの値一覧を配列で指定します。
@@ -449,7 +450,7 @@ fieldList はキーにモデルのエイリアスを、値にフィールドの�
 `Model::saveAll()` とそれに関連するメソッドは、複数モデルに対応する fieldList を 受け取ることができるようになりました。`$options['deep'] = true` とすることで、2階層以上のデータを保存できるようになりました。
 :::
 
-## Model::saveAll(array \$data = null, array \$options = array())
+## Model::saveAll(array \$data = null, array \$options = [])
 
 `saveAll` は `saveMany` と `saveAssociated` のラッパーです。
 このメソッドはデータ内容をみて、 `saveMany` か `saveAssociated` のどちらを使うのかを決定します。
@@ -475,7 +476,8 @@ Post と Comment の両方のモデルを使うことになります。
 FormHelper を使って POST したときの処理です。 :
 
 ``` php
-public function add() {
+public function add()
+{
     if (!empty($this->request->data)) {
         // $this->request->data['User'] のデータでユーザーデータを保存します。
         $user = $this->User->save($this->request->data);
@@ -518,12 +520,12 @@ POST された hidden フォームからの ID かもしれません
 (ここでは Company hasMany Account の関係があるとします) :
 
 ``` php
-echo $this->Form->create('Company', array('action' => 'add'));
-echo $this->Form->input('Company.name', array('label' => 'Company name'));
+echo $this->Form->create('Company', ['action' => 'add']);
+echo $this->Form->input('Company.name', ['label' => 'Company name']);
 echo $this->Form->input('Company.description');
 echo $this->Form->input('Company.location');
 
-echo $this->Form->input('Account.0.name', array('label' => 'Account name'));
+echo $this->Form->input('Account.0.name', ['label' => 'Account name']);
 echo $this->Form->input('Account.0.username');
 echo $this->Form->input('Account.0.email');
 
@@ -541,7 +543,8 @@ Company モデルがメインの場合、 `saveAssociated()` は、関連する�
 そして、CompaniesController に `add()` アクションを作ります。 :
 
 ``` php
-public function add() {
+public function add()
+{
     if (!empty($this->request->data)) {
         // バリデーションエラーを出さないために以下のようにします。
         unset($this->Company->Account->validate['company_id']);
@@ -564,20 +567,23 @@ public function add() {
 
 ``` php
 // Controller/CourseMembershipController.php
-class CourseMembershipsController extends AppController {
-    public $uses = array('CourseMembership');
+class CourseMembershipsController extends AppController
+{
+    public $uses = ['CourseMembership'];
 
-    public function index() {
+    public function index()
+    {
         $this->set(
              'courseMembershipsList',
              $this->CourseMembership->find('all')
          );
     }
 
-    public function add() {
+    public function add()
+    {
         if ($this->request->is('post')) {
             if ($this->CourseMembership->saveAssociated($this->request->data)) {
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(['action' => 'index']);
             }
         }
     }
@@ -598,26 +604,26 @@ class CourseMembershipsController extends AppController {
 このコードで、データをサブミットした時、以下のような配列が渡ってきます。 :
 
 ``` text
-Array
-(
-    [Student] => Array
-    (
+
+[
+    [Student] => 
+    [
         [first_name] => Joe
         [last_name] => Bloggs
-    )
+    ]
 
-    [Course] => Array
-    (
+    [Course] => 
+    [
         [name] => Cake
-    )
+    ]
 
-    [CourseMembership] => Array
-    (
+    [CourseMembership] => 
+    [
         [days_attended] => 5
         [grade] => A
-    )
+    ]
 
-)
+]
 ```
 
 CakePHP はこれらの配列を <span class="title-ref">saveAssociated</span> に渡すことで、各モデルのデータを同時に保存し、
@@ -626,33 +632,33 @@ CourseMembershipsController の index アクションが実行されると、そ
 以下のような構造のデータが取得できます。 :
 
 ``` text
-Array
-(
-    [0] => Array
-    (
-        [CourseMembership] => Array
-        (
+
+[
+    [0] => 
+    [
+        [CourseMembership] => 
+        [
             [id] => 1
             [student_id] => 1
             [course_id] => 1
             [days_attended] => 5
             [grade] => A
-        )
+        ]
 
-        [Student] => Array
-        (
+        [Student] => 
+        [
             [id] => 1
             [first_name] => Joe
             [last_name] => Bloggs
-        )
+        ]
 
-        [Course] => Array
-        (
+        [Course] => 
+        [
             [id] => 1
             [name] => Cake
-        )
-    )
-)
+        ]
+    ]
+]
 ```
 
 もちろん結合されたモデルを処理する方法は他にもあります。
@@ -670,21 +676,21 @@ Student と Course をそれぞれ別々に作りたい場合もあるでしょ�
     <?php
         echo $this->Form->input(
             'Student.id',
-            array(
+            [
                 'type' => 'text',
                 'label' => 'Student ID',
                 'default' => 1
-            )
+            ]
         );
     ?>
     <?php
         echo $this->Form->input(
             'Course.id',
-            array(
+            [
                 'type' => 'text',
                 'label' => 'Course ID',
                 'default' => 1
-            )
+            ]
         );
     ?>
     <?php echo $this->Form->input('CourseMembership.days_attended'); ?>
@@ -696,24 +702,24 @@ Student と Course をそれぞれ別々に作りたい場合もあるでしょ�
 POST されると以下のようなデータが渡ってきます。 :
 
 ``` text
-Array
-(
-    [Student] => Array
-    (
-        [id] => 1
-    )
 
-    [Course] => Array
-    (
+[
+    [Student] => 
+    [
         [id] => 1
-    )
+    ]
 
-    [CourseMembership] => Array
-    (
+    [Course] => 
+    [
+        [id] => 1
+    ]
+
+    [CourseMembership] => 
+    [
         [days_attended] => 10
         [grade] => 5
-    )
-)
+    ]
+]
 ```
 
 このデータを使えば <span class="title-ref">saveAssociated</span> は Student の ID と Course の ID を
@@ -728,70 +734,70 @@ hasOne, belongsTo, hasMany のアソシエーションがあるモデルの保�
 Tag モデルの `save()` に対しては、以下のような形式のデータを渡します。 :
 
 ``` text
-Array
-(
-    [Recipe] => Array
-        (
+
+[
+    [Recipe] => 
+        [
             [id] => 42
-        )
-    [Tag] => Array
-        (
+        ]
+    [Tag] => 
+        [
             [name] => Italian
-        )
-)
+        ]
+]
 ```
 
 以下のような配列を使えば、 `saveAll()` で HABTM アソシエーションに対して
 複数のレコードを保存するのにも使えます。 :
 
 ``` text
-Array
-(
-    [0] => Array
-        (
-            [Recipe] => Array
-                (
+
+[
+    [0] => 
+        [
+            [Recipe] => 
+                [
                     [id] => 42
-                )
-            [Tag] => Array
-                (
+                ]
+            [Tag] => 
+                [
                     [name] => Italian
-                )
-        )
-    [1] => Array
-        (
-            [Recipe] => Array
-                (
+                ]
+        ]
+    [1] => 
+        [
+            [Recipe] => 
+                [
                     [id] => 42
-                )
-            [Tag] => Array
-                (
+                ]
+            [Tag] => 
+                [
                     [name] => Pasta
-                )
-        )
-    [2] => Array
-        (
-            [Recipe] => Array
-                (
+                ]
+        ]
+    [2] => 
+        [
+            [Recipe] => 
+                [
                     [id] => 51
-                )
-            [Tag] => Array
-                (
+                ]
+            [Tag] => 
+                [
                     [name] => Mexican
-                )
-        )
-    [3] => Array
-        (
-            [Recipe] => Array
-                (
+                ]
+        ]
+    [3] => 
+        [
+            [Recipe] => 
+                [
                     [id] => 17
-                )
-            [Tag] => Array
-                (
+                ]
+            [Tag] => 
+                [
                     [name] => American (new)
-                )
-        )
-)
+                ]
+        ]
+]
 ```
 
 上記の配列を `saveAll()` に渡せば、それぞれの関連する Recipe に
@@ -803,56 +809,56 @@ Tag を含むデータが生成されます。
 しかし、再びネストする必要があります。 :
 
 ``` text
-Array
-(
-    [0] => Array
-        (
-            [Post] => Array
-                (
+
+[
+    [0] => 
+        [
+            [Post] => 
+                [
                     [title] => 'Saving HABTM arrays'
-                )
-            [Tag] => Array
-                (
-                    [Tag] => Array(1, 2, 5, 9)
-                )
-        )
-    [1] => Array
-        (
-            [Post] => Array
-                (
+                ]
+            [Tag] => 
+                [
+                    [Tag] => [1, 2, 5, 9]
+                ]
+        ]
+    [1] => 
+        [
+            [Post] => 
+                [
                     [title] => 'Dr Who\'s Name is Revealed'
-                )
-            [Tag] => Array
-                (
-                    [Tag] => Array(7, 9, 15, 19)
-                )
-        )
-    [2] => Array
-        (
-            [Post] => Array
-                (
+                ]
+            [Tag] => 
+                [
+                    [Tag] => [7, 9, 15, 19]
+                ]
+        ]
+    [2] => 
+        [
+            [Post] => 
+                [
                     [title] => 'I Came, I Saw and I Conquered'
-                )
-            [Tag] => Array
-                (
-                    [Tag] => Array(11, 12, 15, 19)
-                )
-        )
-    [3] => Array
-        (
-            [Post] => Array
-                (
+                ]
+            [Tag] => 
+                [
+                    [Tag] => [11, 12, 15, 19]
+                ]
+        ]
+    [3] => 
+        [
+            [Post] => 
+                [
                     [title] => 'Simplicity is the Ultimate Sophistication'
-                )
-            [Tag] => Array
-                (
-                    [Tag] => Array(12, 22, 25, 29)
-                )
-        )
-)
+                ]
+            [Tag] => 
+                [
+                    [Tag] => [12, 22, 25, 29]
+                ]
+        ]
+]
 ```
 
-`saveAll($data, array('deep' => true))` に上記の配列を渡すことで、
+`saveAll($data, ['deep' => true])` に上記の配列を渡すことで、
 Post に対する Tag のアソシエーションをもつ posts_tags 結合テーブルに登録します。
 
 Tag を新しく作って、いくつかのレシピに関連付けるための
@@ -865,7 +871,7 @@ Tag を新しく作って、いくつかのレシピに関連付けるための
 <?php echo $this->Form->create('Tag'); ?>
     <?php echo $this->Form->input(
         'Recipe.id',
-        array('type' => 'hidden', 'value' => $recipe_id)
+        ['type' => 'hidden', 'value' => $recipe_id]
     ); ?>
     <?php echo $this->Form->input('Tag.name'); ?>
 <?php echo $this->Form->end('Add Tag'); ?>
@@ -878,7 +884,8 @@ Tag を新しく作って、いくつかのレシピに関連付けるための
 HABTM データをデータベースに保存します。 :
 
 ``` php
-public function add() {
+public function add()
+{
     // アソシエーションデータを保存
     if ($this->Tag->save($this->request->data)) {
         // 保存が成功した時の処理
@@ -929,14 +936,15 @@ $this->Form->input('Tag');
 `className` をモデル名として設定し、エイリアスを使用してください。 :
 
 ``` php
-class Project extends AppModel {
-    public $hasAndBelongsToMany = array(
-        'RelatedProject' => array(
+class Project extends AppModel
+{
+    public $hasAndBelongsToMany = [
+        'RelatedProject' => [
             'className'              => 'Project',
             'foreignKey'             => 'projects_a_id',
             'associationForeignKey'  => 'projects_b_id',
-        ),
-    );
+        ],
+    ];
 }
 ```
 
@@ -1022,9 +1030,11 @@ Model::save() を呼び出す前に、 `created` や `modified` のキーが \$t
 オーバーライドして、常に unset の動作をするようにも出来ます。 :
 
 ``` php
-class AppModel extends Model {
+class AppModel extends Model
+{
 
-    public function save($data = null, $validate = true, $fieldList = array()) {
+    public function save($data = null, $validate = true, $fieldList = [])
+    {
         // 保存前に modified フィールドをクリアする
         $this->set($data);
         if (isset($this->data[$this->alias]['modified'])) {
@@ -1032,7 +1042,6 @@ class AppModel extends Model {
         }
         return parent::save($this->data, $validate, $fieldList);
     }
-
 }
 ```
 

@@ -158,7 +158,7 @@ Returns the package name where a class was defined to be located at.
 
 ## Adding paths for App to find packages in
 
-`static` App::**build**(array $paths = array(), mixed $mode = App::PREPEND)
+`static` App::**build**(array $paths = [], mixed $mode = App::PREPEND)
 
 rtype  
 void
@@ -176,15 +176,15 @@ Usage:
 
 ``` php
 //will setup a new search path for the Model package
-App::build(array('Model' => array('/a/full/path/to/models/')));
+App::build(['Model' => ['/a/full/path/to/models/']]);
 
 //will setup the path as the only valid path for searching models
-App::build(array('Model' => array('/path/to/models/')), App::RESET);
+App::build(['Model' => ['/path/to/models/']], App::RESET);
 
 //will setup multiple search paths for helpers
-App::build(array(
-    'View/Helper' => array('/path/to/helpers/', '/another/path/')
-));
+App::build([
+    'View/Helper' => ['/path/to/helpers/', '/another/path/']
+]);
 ```
 
 If reset is set to true, all loaded plugins will be forgotten and they will
@@ -193,13 +193,13 @@ be needed to be loaded again.
 Examples:
 
 ``` php
-App::build(array('controllers' => array('/full/path/to/controllers/')));
+App::build(['controllers' => ['/full/path/to/controllers/']]);
 //becomes
-App::build(array('Controller' => array('/full/path/to/Controller/')));
+App::build(['Controller' => ['/full/path/to/Controller/']]);
 
-App::build(array('helpers' => array('/full/path/to/views/helpers/')));
+App::build(['helpers' => ['/full/path/to/views/helpers/']]);
 //becomes
-App::build(array('View/Helper' => array('/full/path/to/View/Helper/')));
+App::build(['View/Helper' => ['/full/path/to/View/Helper/']]);
 ```
 
 ::: info Changed in version 2.0
@@ -215,9 +215,9 @@ when you want to add new top level packages or, sub-packages to your
 application:
 
 ``` php
-App::build(array(
-    'Service' => array('%s' . 'Service' . DS)
-), App::REGISTER);
+App::build([
+    'Service' => ['%s' . 'Service' . DS]
+], App::REGISTER);
 ```
 
 The `%s` in newly registered packages will be replaced with the
@@ -243,26 +243,26 @@ App knows about.
 Example usage:
 
 ``` php
-//returns array('DebugKit', 'Blog', 'User');
+//returns ['DebugKit', 'Blog', 'User'];
 App::objects('plugin');
 
-//returns array('PagesController', 'BlogController');
+//returns ['PagesController', 'BlogController'];
 App::objects('Controller');
 ```
 
 You can also search only within a plugin's objects by using the plugin dot syntax. :
 
 ``` php
-// returns array('MyPluginPost', 'MyPluginComment');
+// returns ['MyPluginPost', 'MyPluginComment'];
 App::objects('MyPlugin.Model');
 ```
 
 ::: info Changed in version 2.0
 :::
 
-1.  Returns `array()` instead of false for empty results or invalid types
+1.  Returns `[]` instead of false for empty results or invalid types
 2.  Does not return core objects anymore, `App::objects('core')` will
-    return `array()`.
+    return `[]`.
 3.  Returns the complete class name
 
 ## Locating plugins
@@ -293,7 +293,7 @@ Themes can be found `App::themePath('purple');`, would give the full path to the
 
 ## Including files with App::import()
 
-`static` App::**import**(mixed $type = null, string $name = null, mixed $parent = true, array $search = array(), string $file = null, boolean $return = false)
+`static` App::**import**(mixed $type = null, string $name = null, mixed $parent = true, array $search = [], string $file = null, boolean $return = false)
 
 rtype  
 boolean
@@ -377,7 +377,7 @@ with `App::build()`:
 ``` php
 // Load the class ClassInSomePackage in
 // app/Vendor/SomePackage/ClassInSomePackage.php
-App::build(array('Vendor' => array(APP . 'Vendor' . DS . 'SomePackage' . DS)));
+App::build(['Vendor' => [APP . 'Vendor' . DS . 'SomePackage' . DS]]);
 App::uses('ClassInSomePackage', 'Vendor');
 ```
 
@@ -400,13 +400,13 @@ App::import('Vendor', 'geshi');
 To load **app/Vendor/flickr/flickr.php**:
 
 ``` php
-App::import('Vendor', 'flickr', array('file' => 'flickr/flickr.php'));
+App::import('Vendor', 'flickr', ['file' => 'flickr/flickr.php']);
 ```
 
 To load **app/Vendor/some.name.php**:
 
 ``` php
-App::import('Vendor', 'SomeName', array('file' => 'some.name.php'));
+App::import('Vendor', 'SomeName', ['file' => 'some.name.php']);
 ```
 
 To load **app/Vendor/services/well.named.php**:
@@ -415,7 +415,7 @@ To load **app/Vendor/services/well.named.php**:
 App::import(
     'Vendor',
     'WellNamed',
-    array('file' => 'services' . DS . 'well.named.php')
+    ['file' => 'services' . DS . 'well.named.php']
 );
 ```
 
@@ -425,7 +425,7 @@ To load **app/Plugin/Awesome/Vendor/services/well.named.php**:
 App::import(
     'Vendor',
     'Awesome.WellNamed',
-    array('file' => 'services' . DS . 'well.named.php')
+    ['file' => 'services' . DS . 'well.named.php']
 );
 ```
 
@@ -435,7 +435,7 @@ To load **app/Plugin/Awesome/Vendor/Folder/Foo.php**:
 App::import(
     'Vendor',
     'Awesome.Foo',
-    array('file' => 'Folder' . DS . 'Foo.php'));
+    ['file' => 'Folder' . DS . 'Foo.php']);
 ```
 
 It wouldn't make a difference if your vendor files are inside your /vendors
@@ -447,7 +447,7 @@ To load **vendors/vendorName/libFile.php**:
 App::import(
     'Vendor',
     'aUniqueIdentifier',
-    array('file' => 'vendorName' . DS . 'libFile.php')
+    ['file' => 'vendorName' . DS . 'libFile.php']
 );
 ```
 

@@ -44,12 +44,14 @@ generating the response, you should use view files. The value of `_serialize`
 can be either a string or an array of view variables to serialize:
 
 ``` php
-class PostsController extends AppController {
-    public $components = array('RequestHandler');
+class PostsController extends AppController
+{
+    public $components = ['RequestHandler'];
 
-    public function index() {
+    public function index()
+    {
         $this->set('posts', $this->Paginator->paginate());
-        $this->set('_serialize', array('posts'));
+        $this->set('_serialize', ['posts']);
     }
 }
 ```
@@ -57,13 +59,15 @@ class PostsController extends AppController {
 You can also define `_serialize` as an array of view variables to combine:
 
 ``` php
-class PostsController extends AppController {
-    public $components = array('RequestHandler');
+class PostsController extends AppController
+{
+    public $components = ['RequestHandler'];
 
-    public function index() {
+    public function index()
+    {
         // some code that created $posts and $comments
         $this->set(compact('posts', 'comments'));
-        $this->set('_serialize', array('posts', 'comments'));
+        $this->set('_serialize', ['posts', 'comments']);
     }
 }
 ```
@@ -83,8 +87,10 @@ JSON response. This is a situation where a view file would be useful:
 
 ``` php
 // Controller code
-class PostsController extends AppController {
-    public function index() {
+class PostsController extends AppController
+{
+    public function index()
+    {
         $this->set(compact('posts', 'comments'));
     }
 }

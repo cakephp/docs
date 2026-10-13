@@ -10,8 +10,9 @@ actsAs 配列にそれを追加した時、関連した Acl 入力を ARO また
 選びます。 デフォルトでは、ACO を作成します。 :
 
 ``` php
-class User extends AppModel {
-    public $actsAs = array('Acl' => array('type' => 'requester'));
+class User extends AppModel
+{
+    public $actsAs = ['Acl' => ['type' => 'requester']];
 }
 ```
 
@@ -19,23 +20,25 @@ class User extends AppModel {
 ビヘイビアを追加するには:
 
 ``` php
-class Post extends AppModel {
-    public $actsAs = array('Acl' => array('type' => 'controlled'));
+class Post extends AppModel
+{
+    public $actsAs = ['Acl' => ['type' => 'controlled']];
 }
 ```
 
 以下のようにすると User モデルは、ACO と ARO ノードの両方を持つことができます:
 
 ``` php
-class User extends AppModel {
-    public $actsAs = array('Acl' => array('type' => 'both'));
+class User extends AppModel
+{
+    public $actsAs = ['Acl' => ['type' => 'both']];
 }
 ```
 
 以下のようにビヘイビアを動的にアタッチできます。 :
 
 ``` php
-$this->Post->Behaviors->load('Acl', array('type' => 'controlled'));
+$this->Post->Behaviors->load('Acl', ['type' => 'controlled']);
 ```
 
 ::: info Changed in version 2.1
@@ -51,7 +54,8 @@ AppModel に AclBehavior を安全にアタッチできるようになりまし�
 返さなければなりません。 :
 
 ``` php
-public function parentNode() {
+public function parentNode()
+{
     return null;
 }
 ```
@@ -60,7 +64,8 @@ public function parentNode() {
 ACO や ARO ノードのエイリアスを返さなければなりません。 :
 
 ``` php
-public function parentNode() {
+public function parentNode()
+{
     return 'root_node';
 }
 ```
@@ -68,7 +73,8 @@ public function parentNode() {
 より詳しい例。 「User belongsTo Group」の User モデルの例です。 :
 
 ``` php
-public function parentNode() {
+public function parentNode()
+{
     if (!$this->id && empty($this->data)) {
         return null;
     }
@@ -79,7 +85,7 @@ public function parentNode() {
     if (!$data['User']['group_id']) {
         return null;
     }
-    return array('Group' => array('id' => $data['User']['group_id']));
+    return ['Group' => ['id' => $data['User']['group_id']]];
 }
 ```
 
@@ -99,9 +105,9 @@ AclBehavior は、モデルレコードと関連した Acl ノードを検索で
 $this->User->id = 1;
 $node = $this->User->node();
 
-$user = array('User' => array(
+$user = ['User' => [
     'id' => 1
-));
+]];
 $node = $this->User->node($user);
 ```
 
@@ -114,8 +120,8 @@ $node = $this->User->node($user);
 $this->User->id = 1;
 $node = $this->User->node(null, 'Aro');
 
-$user = array('User' => array(
+$user = ['User' => [
     'id' => 1
-));
+]];
 $node = $this->User->node($user, 'Aro');
 ```

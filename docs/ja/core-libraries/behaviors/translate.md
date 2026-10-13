@@ -30,10 +30,11 @@ i18n データベースを初期化するには、 `[I]` を選択してくだ�
 モデルに Translate ビヘイビアを追加します。 :
 
 ``` php
-class Post extends AppModel {
-    public $actsAs = array(
+class Post extends AppModel
+{
+    public $actsAs = [
         'Translate'
-    );
+    ];
 }
 ```
 
@@ -47,12 +48,13 @@ Translate ビヘイビアは、動作する前に一組のオプションがあ�
 の値を拡張するだけです。次のようになります。 :
 
 ``` php
-class Post extends AppModel {
-    public $actsAs = array(
-        'Translate' => array(
+class Post extends AppModel
+{
+    public $actsAs = [
+        'Translate' => [
             'fieldOne', 'fieldTwo', 'and_so_on'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -61,12 +63,13 @@ class Post extends AppModel {
 モデルの例は次のようになるはずです。 :
 
 ``` php
-class Post extends AppModel {
-    public $actsAs = array(
-        'Translate' => array(
+class Post extends AppModel
+{
+    public $actsAs = [
+        'Translate' => [
             'title'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -100,9 +103,9 @@ TranslateBehavior のために翻訳するフィールドを定義するとき�
 ``` php
 // Read the spanish locale data.
 $this->Post->locale = 'es';
-$results = $this->Post->find('first', array(
-    'conditions' => array('Post.id' => $id)
-));
+$results = $this->Post->find('first', [
+    'conditions' => ['Post.id' => $id]
+]);
 // $results will contain the spanish translation.
 ```
 
@@ -113,12 +116,13 @@ $results = $this->Post->find('first', array(
 名前は好きにつけてください。 :
 
 ``` php
-class Post extends AppModel {
-    public $actsAs = array(
-        'Translate' => array(
+class Post extends AppModel
+{
+    public $actsAs = [
+        'Translate' => [
             'title' => 'titleTranslation'
-        )
-    );
+        ]
+    ];
 }
 ```
 
@@ -126,40 +130,40 @@ class Post extends AppModel {
 :
 
 ``` text
-Array
-(
-     [Post] => Array
-         (
+
+[
+     [Post] => 
+         [
              [id] => 1
              [title] => Beispiel Eintrag
              [body] => lorem ipsum...
              [locale] => de_de
-         )
+         ]
 
-     [titleTranslation] => Array
-         (
-             [0] => Array
-                 (
+     [titleTranslation] => 
+         [
+             [0] => 
+                 [
                      [id] => 1
                      [locale] => en_us
                      [model] => Post
                      [foreign_key] => 1
                      [field] => title
                      [content] => Example entry
-                 )
+                 ]
 
-             [1] => Array
-                 (
+             [1] => 
+                 [
                      [id] => 2
                      [locale] => de_de
                      [model] => Post
                      [foreign_key] => 1
                      [field] => title
                      [content] => Beispiel Eintrag
-                 )
+                 ]
 
-         )
-)
+         ]
+]
 ```
 
 > [!NOTE]
@@ -181,48 +185,48 @@ bindTranslation メソッドを使用することで、あなたが必要な時�
 キーは翻訳フィールドで、値は仮のアソシエーション名です。 :
 
 ``` php
-$this->Post->bindTranslation(array('title' => 'titleTranslation'));
+$this->Post->bindTranslation(['title' => 'titleTranslation']);
 // 動作させるためには、少なくとも recursive は 1 が必要です。
-$this->Post->find('all', array('recursive' => 1));
+$this->Post->find('all', ['recursive' => 1]);
 ```
 
 このようにセットアップすると、find() の結果は次のようになります。 :
 
 ``` text
-Array
-(
-     [Post] => Array
-         (
+
+[
+     [Post] => 
+         [
              [id] => 1
              [title] => Beispiel Eintrag
              [body] => lorem ipsum...
              [locale] => de_de
-         )
+         ]
 
-     [titleTranslation] => Array
-         (
-             [0] => Array
-                 (
+     [titleTranslation] => 
+         [
+             [0] => 
+                 [
                      [id] => 1
                      [locale] => en_us
                      [model] => Post
                      [foreign_key] => 1
                      [field] => title
                      [content] => Example entry
-                 )
+                 ]
 
-             [1] => Array
-                 (
+             [1] => 
+                 [
                      [id] => 2
                      [locale] => de_de
                      [model] => Post
                      [foreign_key] => 1
                      [field] => title
                      [content] => Beispiel Eintrag
-                 )
+                 ]
 
-         )
-)
+         ]
+]
 ```
 
 ## 別の言語で保存する
@@ -237,15 +241,17 @@ TranslateBehavior を使ったモデルが何かを保存する時に、検出�
 **例 A:** コントローラの中で:
 
 ``` php
-class PostsController extends AppController {
+class PostsController extends AppController
+{
 
-    public function add() {
+    public function add()
+    {
         if (!empty($this->request->data)) {
             // ドイツ語版を保存する
             $this->Post->locale = 'de_de';
             $this->Post->create();
             if ($this->Post->save($this->request->data)) {
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(['action' => 'index']);
             }
         }
     }
@@ -255,18 +261,20 @@ class PostsController extends AppController {
 **例 B:** モデルの中で:
 
 ``` php
-class Post extends AppModel {
-    public $actsAs = array(
-        'Translate' => array(
+class Post extends AppModel
+{
+    public $actsAs = [
+        'Translate' => [
             'title'
-        )
-    );
+        ]
+    ];
 
     // オプション 1) 直接プロパティを定義する
     public $locale = 'en_us';
 
     // オプション 2) 簡単なメソッドを作成する 
-    public function setLanguage($locale) {
+    public function setLanguage($locale)
+    {
         $this->locale = $locale;
     }
 }
@@ -284,12 +292,13 @@ class Post extends AppModel {
 使用するとしましょう。これには、モデルを次のようにセットアップします。 :
 
 ``` php
-class Post extends AppModel {
-    public $actsAs = array(
-        'Translate' => array(
+class Post extends AppModel
+{
+    public $actsAs = [
+        'Translate' => [
             'title'
-        )
-    );
+        ]
+    ];
 
     // 別のモデル(あるいはテーブル)を使用する。
     public $translateModel = 'PostI18n';
@@ -311,7 +320,8 @@ TranslateModel を動作させるには、モデルのフォルダに実際に�
 `$displayField` を `'field'` に変更することを忘れないでください。 :
 
 ``` php
-class PostI18n extends AppModel {
+class PostI18n extends AppModel
+{
     public $displayField = 'field'; // 重要
 }
 // ファイル名: PostI18n.php
@@ -327,12 +337,13 @@ class PostI18n extends AppModel {
 \$translateTable を定義します。 :
 
 ``` php
-class Post extends AppModel {
-    public $actsAs = array(
-        'Translate' => array(
+class Post extends AppModel
+{
+    public $actsAs = [
+        'Translate' => [
             'title'
-        )
-    );
+        ]
+    ];
 
     // 別のモデルを使う
     public $translateModel = 'PostI18n';

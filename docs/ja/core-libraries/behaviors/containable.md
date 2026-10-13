@@ -18,8 +18,9 @@ Containable が、存在しているリレーションを更新するだけの�
 追加します。 :
 
 ``` php
-class Post extends AppModel {
-    public $actsAs = array('Containable');
+class Post extends AppModel
+{
+    public $actsAs = ['Containable'];
 }
 ```
 
@@ -40,19 +41,19 @@ Comment と hasMany 、 Tag と hasAndBelongsToMany のアソシエーション�
 ``` php
 debug($this->Post->find('all'));
 
-[0] => Array
-        (
-            [Post] => Array
-                (
+[0] => 
+        [
+            [Post] => 
+                [
                     [id] => 1
                     [title] => First article
                     [content] => aaa
                     [created] => 2008-05-18 00:00:00
-                )
-            [Comment] => Array
-                (
-                    [0] => Array
-                        (
+                ]
+            [Comment] => 
+                [
+                    [0] => 
+                        [
                             [id] => 1
                             [post_id] => 1
                             [author] => Daniel
@@ -60,9 +61,9 @@ debug($this->Post->find('all'));
                             [website] => http://example.com
                             [comment] => First comment
                             [created] => 2008-05-18 00:00:00
-                        )
-                    [1] => Array
-                        (
+                        ]
+                    [1] => 
+                        [
                             [id] => 2
                             [post_id] => 1
                             [author] => Sam
@@ -70,25 +71,25 @@ debug($this->Post->find('all'));
                             [website] => http://example.net
                             [comment] => Second comment
                             [created] => 2008-05-18 00:00:00
-                        )
-                )
-            [Tag] => Array
-                (
-                    [0] => Array
-                        (
+                        ]
+                ]
+            [Tag] => 
+                [
+                    [0] => 
+                        [
                             [id] => 1
                             [name] => Awesome
-                        )
-                    [1] => Array
-                        (
+                        ]
+                    [1] => 
+                        [
                             [id] => 2
                             [name] => Baking
-                        )
-                )
-        )
-[1] => Array
+                        ]
+                ]
+        ]
+[1] => array
         (
-            [Post] => Array
+            [Post] => array
                 (...
 ```
 
@@ -106,32 +107,32 @@ $this->Post->find('all');
 find() の呼び出し中に Containable の機能の起動を含めることも出来ます。 :
 
 ``` php
-$this->Post->find('all', array('contain' => false));
+$this->Post->find('all', ['contain' => false]);
 ```
 
 この実行結果として、より簡潔なデータを取得できます。 :
 
 ``` text
-[0] => Array
-        (
-            [Post] => Array
-                (
+[0] => 
+        [
+            [Post] => 
+                [
                     [id] => 1
                     [title] => First article
                     [content] => aaa
                     [created] => 2008-05-18 00:00:00
-                )
-        )
-[1] => Array
-        (
-            [Post] => Array
-                (
+                ]
+        ]
+[1] => 
+        [
+            [Post] => 
+                [
                     [id] => 2
                     [title] => Second article
                     [content] => bbb
                     [created] => 2008-05-19 00:00:00
-                )
-        )
+                ]
+        ]
 ```
 
 この類の呼び出しの補助機能は特に目新しいものではありません。実際のところ、これは
@@ -161,7 +162,7 @@ $this->Post->find('all');
 find() の呼び出しの中に contain キーを含める場合の記述を見てみましょう。 :
 
 ``` php
-$this->Post->find('all', array('contain' => 'Tag'));
+$this->Post->find('all', ['contain' => 'Tag']);
 ```
 
 Containable を使わないならモデルの `unbindModel()` を使用することになります。
@@ -182,7 +183,7 @@ $this->Post->find('all');
 
 // or..
 
-$this->Post->find('all', array('contain' => 'Comment.author'));
+$this->Post->find('all', ['contain' => 'Comment.author']);
 ```
 
 ここまでで、Containable で投稿 (*post*) の情報を取得し、アソシエーションで
@@ -190,29 +191,29 @@ $this->Post->find('all', array('contain' => 'Comment.author'));
 find() による出力は、次のようになるでしょう。 :
 
 ``` text
-[0] => Array
-        (
-            [Post] => Array
-                (
+[0] => 
+        [
+            [Post] => 
+                [
                     [id] => 1
                     [title] => First article
                     [content] => aaa
                     [created] => 2008-05-18 00:00:00
-                )
-            [Comment] => Array
-                (
-                    [0] => Array
-                        (
+                ]
+            [Comment] => 
+                [
+                    [0] => 
+                        [
                             [author] => Daniel
                             [post_id] => 1
-                        )
-                    [1] => Array
-                        (
+                        ]
+                    [1] => 
+                        [
                             [author] => Sam
                             [post_id] => 1
-                        )
-                )
-        )
+                        ]
+                ]
+        ]
 [1] => Array
         (...
 ```
@@ -229,25 +230,25 @@ $this->Post->find('all');
 
 //or...
 
-$this->Post->find('all', array('contain' => 'Comment.author = "Daniel"'));
+$this->Post->find('all', ['contain' => 'Comment.author = "Daniel"']);
 ```
 
 これにより、投稿 (*post*) とダニエルによるコメントを取得できます。 :
 
 ``` text
-[0] => Array
-        (
-            [Post] => Array
-                (
+[0] => 
+        [
+            [Post] => 
+                [
                     [id] => 1
                     [title] => First article
                     [content] => aaa
                     [created] => 2008-05-18 00:00:00
-                )
-            [Comment] => Array
-                (
-                    [0] => Array
-                        (
+                ]
+            [Comment] => 
+                [
+                    [0] => 
+                        [
                             [id] => 1
                             [post_id] => 1
                             [author] => Daniel
@@ -255,32 +256,32 @@ $this->Post->find('all', array('contain' => 'Comment.author = "Daniel"'));
                             [website] => http://example.com
                             [comment] => First comment
                             [created] => 2008-05-18 00:00:00
-                        )
-                )
-        )
+                        ]
+                ]
+        ]
 ```
 
 深いアソシエーションのフィルタリングでの Containable の使用には重要な注意があります。
 前の例で、データベース中に３つの投稿があり、ダニエルがこれらの投稿の２つにコメントした
 と仮定します。
-\$this-\>Post-\>find('all', array('contain' =\> 'Comment.author = "Daniel"'));
+\$this-\>Post-\>find('all', ['contain' =\> 'Comment.author = "Daniel"']);
 は、ダニエルがコメントした２つの投稿ではなく、全部で３つの投稿を返します。
 ダニエルによるコメントを返して欲しいのあって、全ての投稿を返したくはありません。 :
 
 ``` text
-[0] => Array
-        (
-            [Post] => Array
-                (
+[0] => 
+        [
+            [Post] => 
+                [
                     [id] => 1
                     [title] => First article
                     [content] => aaa
                     [created] => 2008-05-18 00:00:00
-                )
-            [Comment] => Array
-                (
-                    [0] => Array
-                        (
+                ]
+            [Comment] => 
+                [
+                    [0] => 
+                        [
                             [id] => 1
                             [post_id] => 1
                             [author] => Daniel
@@ -288,35 +289,35 @@ $this->Post->find('all', array('contain' => 'Comment.author = "Daniel"'));
                             [website] => http://example.com
                             [comment] => First comment
                             [created] => 2008-05-18 00:00:00
-                        )
-                )
-        )
-[1] => Array
-        (
-            [Post] => Array
-                (
+                        ]
+                ]
+        ]
+[1] => 
+        [
+            [Post] => 
+                [
                     [id] => 2
                     [title] => Second article
                     [content] => bbb
                     [created] => 2008-05-18 00:00:00
-                )
-            [Comment] => Array
-                (
-                )
-        )
-[2] => Array
-        (
-            [Post] => Array
-                (
+                ]
+            [Comment] => 
+                [
+                ]
+        ]
+[2] => 
+        [
+            [Post] => 
+                [
                     [id] => 3
                     [title] => Third article
                     [content] => ccc
                     [created] => 2008-05-18 00:00:00
-                )
-            [Comment] => Array
-                (
-                    [0] => Array
-                        (
+                ]
+            [Comment] => 
+                [
+                    [0] => 
+                        [
                             [id] => 22
                             [post_id] => 3
                             [author] => Daniel
@@ -324,9 +325,9 @@ $this->Post->find('all', array('contain' => 'Comment.author = "Daniel"'));
                             [website] => http://example.com
                             [comment] => Another comment
                             [created] => 2008-05-18 00:00:00
-                        )
-                )
-        )
+                        ]
+                ]
+        ]
 ```
 
 コメントによって投稿をフィルタリングしたい場合、例えばダニエルによってコメントされた
@@ -334,22 +335,22 @@ $this->Post->find('all', array('contain' => 'Comment.author = "Daniel"'));
 コメントとそれに含まれる投稿を検索することです。 :
 
 ``` php
-$this->Comment->find('all', array(
+$this->Comment->find('all', [
     'conditions' => 'Comment.author = "Daniel"',
     'contain' => 'Post'
-));
+]);
 ```
 
 標準の [Model Find](../../models/retrieving-your-data#model-find) オプションを指定することで、追加のフィルタリングは
 動作します。 :
 
 ``` php
-$this->Post->find('all', array('contain' => array(
-    'Comment' => array(
-        'conditions' => array('Comment.author =' => "Daniel"),
+$this->Post->find('all', ['contain' => [
+    'Comment' => [
+        'conditions' => ['Comment.author =' => "Daniel"],
         'order' => 'Comment.created DESC'
-    )
-)));
+    ]
+]]);
 ```
 
 深く複雑なモデルのリレーションがある時に `ContainableBehavior` を使用する例は
@@ -367,27 +368,27 @@ User->Post->Tag
 上記のアソシエーションにおいて Containable を使った検索は次のように行います。 :
 
 ``` php
-$this->User->find('all', array(
-    'contain' => array(
+$this->User->find('all', [
+    'contain' => [
         'Profile',
-        'Account' => array(
+        'Account' => [
             'AccountSummary'
-        ),
-        'Post' => array(
-            'PostAttachment' => array(
-                'fields' => array('id', 'name'),
-                'PostAttachmentHistory' => array(
-                    'HistoryNotes' => array(
-                        'fields' => array('id', 'note')
-                    )
-                )
-            ),
-            'Tag' => array(
-                'conditions' => array('Tag.name LIKE' => '%happy%')
-            )
-        )
-    )
-));
+        ],
+        'Post' => [
+            'PostAttachment' => [
+                'fields' => ['id', 'name'],
+                'PostAttachmentHistory' => [
+                    'HistoryNotes' => [
+                        'fields' => ['id', 'note']
+                    ]
+                ]
+            ],
+            'Tag' => [
+                'conditions' => ['Tag.name LIKE' => '%happy%']
+            ]
+        ]
+    ]
+]);
 ```
 
 メインのモデルで `contain` キーは一度しか使わないことに留意してください。
@@ -421,14 +422,14 @@ $this->User->find('all', array(
 以下は、投稿を最終更新日で並び替える例です。 :
 
 ``` php
-$this->User->find('all', array(
-    'contain' => array(
+$this->User->find('all', [
+    'contain' => [
         'Profile',
-        'Post' => array(
+        'Post' => [
             'order' => 'Post.updated DESC'
-        )
-    )
-));
+        ]
+    ]
+]);
 ```
 
 [ビヘイビア](../../models/behaviors) (ビヘイビアの使用) にある通り、
@@ -441,7 +442,7 @@ ContainableBehavior は、他のビヘイビアや GROUP BY 構文などの集�
 `autoFields` 設定を無効化してみてください。 :
 
 ``` php
-$this->Post->Behaviors->load('Containable', array('autoFields' => false));
+$this->Post->Behaviors->load('Containable', ['autoFields' => false]);
 ```
 
 ### ページネーションでの Containable 使用
@@ -454,10 +455,10 @@ $this->Post->Behaviors->load('Containable', array('autoFields' => false));
 以下は、ページネーション時にアソシエーションを行う方法の例です。 :
 
 ``` php
-$this->paginate['User'] = array(
-    'contain' => array('Profile', 'Account'),
+$this->paginate['User'] = [
+    'contain' => ['Profile', 'Account'],
     'order' => 'User.username'
-);
+];
 
 $users = $this->paginate('User');
 ```
@@ -469,7 +470,7 @@ $users = $this->paginate('User');
 >
 > ``` bash
 > $this->User->recursive = -1;
-> $this->User->contain(array('Profile', 'Account'));
+> $this->User->contain(['Profile', 'Account']);
 >
 > $users = $this->paginate('User');
 > ```
