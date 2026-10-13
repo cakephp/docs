@@ -461,7 +461,7 @@ See [Coding Standards](/contributing/cakephp-coding-conventions).
 
 **Changes:**
 
-- `[]` → `[]`
+- `array()` → `[]`
 - `get_class()` → `::class`
 - `list()` → `[]` for array destructuring
 - `dirname(__FILE__)` → `__DIR__`

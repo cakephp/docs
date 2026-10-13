@@ -152,7 +152,7 @@ versions of CakePHP these values changed depending on your environment.
 - `e()` was removed. Use `echo`.
 - `r()` was removed. Use `str_replace`.
 - `a()` was removed. `Use []`
-- `aa()` was removed. Use `[]`
+- `aa()` was removed. Use `array()`
 - `up()` was removed. Use `strtoupper()`
 - `low()` was removed. Use `strtolower()`
 - `params()` was removed. It was not used anywhere in CakePHP.
@@ -377,7 +377,7 @@ same (ie. Prepending new paths to existing list).
 
 - Now supports plugins, App::objects('Users.Model') will return the models in
   plugin Users.
-- Returns [] instead of false for empty results or invalid types.
+- Returns array() instead of false for empty results or invalid types.
 - Does not return core objects anymore, App::objects('core') will return [].
 - Returns the complete class name.
 
