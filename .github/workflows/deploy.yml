@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - 2.x
+  repository_dispatch:
+    types: [skeleton-updated]
   workflow_dispatch:
 
 permissions:
@@ -23,14 +25,25 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Clone docs-skeleton
+        run: git clone --depth 1 https://github.com/pieceofcake2/docs-skeleton.git .skeleton
+
+      - name: Merge docs into skeleton
+        run: |
+          rsync -a docs/ .skeleton/docs/
+          cp config.js toc_en.json toc_ja.json .skeleton/
+
       - uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
+          cache-dependency-path: .skeleton/package-lock.json
 
       - run: npm ci
+        working-directory: .skeleton
 
       - run: npm run docs:build
+        working-directory: .skeleton
         env:
           NODE_OPTIONS: --max-old-space-size=8192
 
@@ -38,7 +51,7 @@ jobs:
 
       - uses: actions/upload-pages-artifact@v4
         with:
-          path: .vitepress/dist
+          path: .skeleton/.vitepress/dist
 
   deploy:
     needs: build

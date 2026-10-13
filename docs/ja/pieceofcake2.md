@@ -1,12 +1,14 @@
-# Piece of Cake 2
+# pieceofcake2 フォークについて
 
 ::: pieceofcake2
-このページは **Piece of Cake 2** 固有の内容で、本家 CakePHP 2.x のドキュメントには含まれません。
-このドキュメント全体で、このような枠で囲まれた部分は Piece of Cake 2 にのみ当てはまる内容です。
+このページは **pieceofcake2 フォーク** 固有の内容で、本家 CakePHP 2.x のドキュメントには含まれません。
+このドキュメント全体で、このような枠で囲まれた部分はフォークにのみ当てはまる内容です。
 :::
 
-[Piece of Cake 2](https://github.com/pieceofcake2) は、CakePHP 2.x を PHP 8.0 以降で動作させるための
-コミュニティメンテナンス版フォークです。本家 CakePHP 2.x は
+[pieceofcake2/cakephp](https://github.com/pieceofcake2/cakephp) は、CakePHP 2.x を PHP 8.0 以降で
+動作させるためのコミュニティメンテナンス版フォークです。
+[Piece of Cake 2](https://github.com/pieceofcake2) プロジェクトがメンテナンスしており、
+主要な CakePHP 2 プラグインのフォークも提供しています。本家 CakePHP 2.x は
 [2021年6月にサポートを終了](https://bakery.cakephp.org/2021/10/02/cakephp_2_eol.html)しています。
 
 ::: warning

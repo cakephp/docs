@@ -1,13 +1,16 @@
-# Piece of Cake 2
+# About the pieceofcake2 Fork
 
 ::: pieceofcake2
-This page is specific to **Piece of Cake 2** and is not part of the original
-CakePHP 2.x documentation. Throughout this book, boxes like this one mark
-content that only applies to Piece of Cake 2.
+This page is specific to the **pieceofcake2 fork** and is not part of the
+original CakePHP 2.x documentation. Throughout this book, boxes like this one
+mark content that only applies to the fork.
 :::
 
-[Piece of Cake 2](https://github.com/pieceofcake2) is a community-maintained
-fork of CakePHP 2.x that provides compatibility with PHP 8.0 and newer.
+[pieceofcake2/cakephp](https://github.com/pieceofcake2/cakephp) is a
+community-maintained fork of CakePHP 2.x that provides compatibility with
+PHP 8.0 and newer. It is maintained by the
+[Piece of Cake 2](https://github.com/pieceofcake2) project, which also
+maintains forks of popular CakePHP 2 plugins.
 The original CakePHP 2.x branch
 [reached End of Life in June 2021](https://bakery.cakephp.org/2021/10/02/cakephp_2_eol.html).
 
