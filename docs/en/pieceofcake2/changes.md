@@ -308,7 +308,7 @@ modern directory layout.
   - Files placed in `src/Model`, `src/Controller`, `templates/Posts`, `config/routes.php`
   - `view()` and `delete()` take `$id = null` so a missing ID raises NotFoundException instead of an ArgumentCountError on PHP 8
 - [Simple Acl controlled Application - part 2](/tutorials-and-examples/simple-acl-controlled-application/part-two)
-  - AclExtras installed with Composer (`markstory/acl_extras`, same code as pieceofcake2/acl_extras) into `plugins/AclExtras`, run with `bin/cake AclExtras.AclExtras`
+  - AclExtras installed with Composer (`pieceofcake2/acl_extras`) into `plugins/AclExtras`, run with `bin/cake AclExtras.AclExtras`
   - Session flash calls replaced with FlashComponent/FlashHelper; complete `login()` action shown
 - [Simple Acl controlled Application](/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application)
   - Setup via `composer create-project pieceofcake2/app acl`, Bake plugin loaded in `config/bootstrap.php`, `bin/cake` commands, modern paths

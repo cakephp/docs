@@ -302,7 +302,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - ファイルの配置を `src/Model`、`src/Controller`、`templates/Posts`、`config/routes.php` に変更
   - `view()` と `delete()` の引数を `$id = null` にし、ID がない場合に PHP 8 で ArgumentCountError ではなく NotFoundException になるよう修正
 - [ACL を制御するシンプルなアプリケーション - パート2](/ja/tutorials-and-examples/simple-acl-controlled-application/part-two)
-  - AclExtras を Composer (`markstory/acl_extras`、pieceofcake2/acl_extras と同じコード) で `plugins/AclExtras` にインストールし、`bin/cake AclExtras.AclExtras` で実行
+  - AclExtras を Composer (`pieceofcake2/acl_extras`) で `plugins/AclExtras` にインストールし、`bin/cake AclExtras.AclExtras` で実行
   - Session のフラッシュメッセージを FlashComponent/FlashHelper に置き換え。`login()` アクションの全体を記載
 - [ACLを制御するシンプルなアプリケーション](/ja/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application)
   - `composer create-project pieceofcake2/app acl` によるセットアップ、`config/bootstrap.php` での Bake プラグインのロード、`bin/cake` コマンド、モダンなパスに変更

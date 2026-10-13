@@ -9,11 +9,10 @@
 という名のとても便利なプラグインが存在します。
 全ての ACO を生成するための使用方法を簡単に説明しましょう。
 
-プラグインは Composer でインストールします。Packagist では `markstory/acl_extras`
-という名前で公開されています。 :
+プラグインは Composer でインストールします。
 
 ``` bash
-composer require markstory/acl_extras
+composer require pieceofcake2/acl_extras
 ```
 
 スケルトンの `composer.json` には

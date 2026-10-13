@@ -11,11 +11,10 @@ For this purpose exists a very handy plugin called
 [AclExtras](https://github.com/pieceofcake2/acl_extras).
 We're going to briefly describe how to use it to generate all our ACO's.
 
-Install the plugin with Composer. It is published on Packagist as
-`markstory/acl_extras`:
+Install the plugin with Composer:
 
 ``` bash
-composer require markstory/acl_extras
+composer require pieceofcake2/acl_extras
 ```
 
 Composer installs it into `plugins/AclExtras/`, because the skeleton's
