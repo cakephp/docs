@@ -1,5 +1,23 @@
 # Code Generation with Bake
 
+::: pieceofcake2 Bake is a separate plugin
+In the pieceofcake2 fork, Bake has been removed from the core and is provided by the
+[pieceofcake2/bake](https://github.com/pieceofcake2/bake) plugin. Install it as a development
+dependency and load it before running `cake bake`:
+
+```bash
+composer require --dev pieceofcake2/bake
+```
+
+```php
+// app/Config/bootstrap.php (legacy) or config/bootstrap.php (modern)
+CakePlugin::load('Bake');
+```
+
+Run it with `app/Console/cake bake` (legacy) or `bin/cake bake` (modern); `vendor/bin/cake bake`
+works with both. See [Plugins](/pieceofcake2/plugins).
+:::
+
 CakePHP's Bake console is another effort to get you up and running
 in CakePHP – fast. The Bake console can create any of CakePHP's
 basic ingredients: models, views and controllers. And we aren't
@@ -62,6 +80,13 @@ Test files produced by `bake test` include calls to [PHPunit's markTestIncomplet
 :::
 
 ## Modify default HTML produced by "baked" templates
+
+::: pieceofcake2
+In the pieceofcake2 fork, `lib/Cake/Console/Templates/` no longer exists. The default bake templates
+(`default/`) and the application skeleton (`skel/`) are in the Bake plugin's `Console/Templates/`
+directory. Put your own bake themes in `app/Console/Templates/[themename]/` (legacy) or
+`src/Console/Templates/[themename]/` (modern).
+:::
 
 If you wish to modify the default HTML output produced by the
 "bake" command, follow these simple steps:

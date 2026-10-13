@@ -1,5 +1,17 @@
 # Documentation
 
+::: pieceofcake2
+This book is the pieceofcake2 fork of the CakePHP 2.x Cookbook. Its source is
+hosted at [pieceofcake2/docs](https://github.com/pieceofcake2/docs) (branch
+`2.x`); send issues and pull requests for it there, not to cakephp/docs.
+The fork's documentation is written in **Markdown** and built with VitePress,
+not reStructuredText/Sphinx, and changes pushed to `2.x` are deployed to
+GitHub Pages by GitHub Actions (there is no Jenkins build). Only English (`en`)
+and Japanese (`ja`) are maintained. Mark any content that applies only to the
+fork with a `::: pieceofcake2` container; the repository's README explains how
+to run the site locally.
+:::
+
 Contributing to the documentation is simple. The files are hosted on
 <https://github.com/cakephp/docs>. Feel free to fork the repo, add your
 changes/improvements/translations and give back by issuing a pull request.
@@ -103,6 +115,12 @@ For example, if a new English file is created in **en/file.rst**, we should:
   that first.
 
 ## Documentation Formatting Guide
+
+::: pieceofcake2
+The reStructuredText syntax described in this section applies to the upstream
+Cookbook. The pieceofcake2 docs are Markdown files rendered by VitePress, so
+follow the Markdown style of the existing pages instead.
+:::
 
 The new CakePHP documentation is written with
 [ReST formatted text](https://en.wikipedia.org/wiki/ReStructuredText). ReST

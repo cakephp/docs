@@ -1,4 +1,4 @@
-# pieceofcake2 フォークについて
+# Piece of Cake 2
 
 ::: pieceofcake2
 このページは **pieceofcake2 フォーク** 固有の内容で、本家 CakePHP 2.x のドキュメントには含まれません。
@@ -36,6 +36,15 @@
 
 `pieceofcake2/cakephp` は Composer の `replace` で `cakephp/cakephp` を置き換えるため、
 `cakephp/cakephp:^2.x` に依存するプラグインもそのまま動作します。
+
+## フォークのドキュメント
+
+- [インストール](/ja/pieceofcake2/installation) - 動作要件、Composer での導入、インストール後の作業
+- [アップグレードガイド](/ja/pieceofcake2/upgrade) - CakePHP 2.10.24 からの移行と破壊的変更
+- [ディレクトリ構成](/ja/pieceofcake2/directory-structure) - レガシー（`app/`）とモダン（`src/`）の構成、CakePHP 5 への段階的な移行
+- [コーディング規約](/ja/pieceofcake2/coding-standards) - フォークが採用している CakePHP 5 ベースの規約
+- [セキュリティ](/ja/pieceofcake2/security) - セキュリティ修正と推奨設定
+- [リポジトリとプラグイン](/ja/pieceofcake2/plugins) - メンテナンス中のリポジトリとプラグインのフォーク
 
 ## リソース
 

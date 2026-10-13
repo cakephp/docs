@@ -14,6 +14,20 @@ AppHelper (`/app/View/Helper/AppHelper.php` に配置) と、
 AppModel (`/app/Model/AppModel.php` に配置) は、すべてのコントローラ、
 ヘルパー、モデルで共有するようなメソッドを置くのに良い場所です。
 
+::: pieceofcake2 ディレクトリ構成
+ファイルの場所はアプリケーションのディレクトリ構成によって異なります。
+
+| ファイル                    | 従来の構成 (legacy)                  | モダンな構成 (modern)            |
+|-----------------------------|--------------------------------------|----------------------------------|
+| AppController               | `app/Controller/AppController.php`   | `src/Controller/AppController.php` |
+| AppHelper                   | `app/View/Helper/AppHelper.php`      | `src/View/Helper/AppHelper.php`  |
+| AppModel                    | `app/Model/AppModel.php`             | `src/Model/AppModel.php`         |
+| ルート                      | `app/Config/routes.php`              | `config/routes.php`              |
+| レイアウト / エレメント     | `app/View/Layouts/`, `app/View/Elements/` | `templates/Layouts/`, `templates/Elements/` |
+
+[ディレクトリ構成](/ja/pieceofcake2/directory-structure) を参照してください。
+:::
+
 クラスやファイルではありませんがルートは、CakePHP にリクエストを送る役割を果たしています。
 ルートを定義することによって、URL とコントローラのアクションをどのように結びつける (*map*) が
 CakePHP に伝えられます。 URL `/controller/action/var1/var2` は、デフォルトの動作では、

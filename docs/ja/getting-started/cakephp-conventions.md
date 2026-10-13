@@ -91,6 +91,14 @@ CakePHP の URL とパラメータの取り扱いに関するより詳細な情�
 
 各ファイルは、 app フォルダ内のそれぞれ適切なフォルダの中に配置します。
 
+::: pieceofcake2
+モダンな構成では、PHP のクラスファイルは `app/` ではなく `src/` 以下
+(`src/Controller/`、`src/Model/`、`src/View/Helper/` など) に配置します。
+`composer.json` で `"classmap": ["src/"]` によるオートロードを設定している場合は、
+新しいクラスファイルを追加するたびに `composer dump-autoload` を実行してください。
+[ディレクトリ構成](/ja/pieceofcake2/directory-structure) を参照してください。
+:::
+
 ## モデルとデータベースの規約
 
 モデルのクラス名は単数形でキャメル記法です。
@@ -156,6 +164,15 @@ CREATE TABLE posts_tags (
 - コントローラクラス： "PeopleController"、 場所は
   /app/Controller/PeopleController.php
 - ビューのテンプレート、場所は /app/View/People/index.ctp
+
+::: pieceofcake2 モダンな構成
+モダンな構成では、同じファイルは次の場所に置きます。
+
+- モデルクラス: `src/Model/Person.php`
+- コントローラクラス: `src/Controller/PeopleController.php`
+- ビューのテンプレート: `templates/People/index.ctp`
+  (基本パターンは `templates/コントローラ名/アンダースコア記法_関数名.ctp`)
+:::
 
 これらの規約により、 CakePHP は <http://example.com/people/> へのリクエストを、
 PeopleController の index() 関数にマップします。そして、Person モデルが自動的に使える

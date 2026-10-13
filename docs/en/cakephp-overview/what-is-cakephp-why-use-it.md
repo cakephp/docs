@@ -53,3 +53,9 @@ Here's a quick list of features you'll enjoy when using CakePHP:
 - Localization
 - Works from any web site directory, with little to no
   [Apache](https://httpd.apache.org/) configuration involved
+
+::: pieceofcake2
+The pieceofcake2 fork requires PHP 8.0 or newer (PHP 8.0 to 8.5 are supported).
+Code generation (Bake) is provided by the separate `pieceofcake2/bake` plugin.
+See [About the pieceofcake2 Fork](/pieceofcake2).
+:::

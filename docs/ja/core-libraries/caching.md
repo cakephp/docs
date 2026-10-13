@@ -36,6 +36,13 @@ CakePHP のキャッシュは、主に `Cache` クラスを使用します。
   (2.2.3 以上) を使用します。Redis は、memcache と同様に高速で永続化した
   キャッシュシステムを提供し、アトミックな操作を提供します。
 
+::: pieceofcake2 削除されたキャッシュエンジン
+pieceofcake2 フォークでは `Wincache` と `Xcache` エンジンが削除されています。
+利用できるエンジンは `File`、`Apc` (APCu)、`Memcache`、`Memcached`、`Redis` です。
+Wincache や Xcache を使っていた場合は、APCu、Memcached、Redis のいずれかに移行してください。
+詳しくは [アップグレードガイド](/ja/pieceofcake2/upgrade) を参照してください。
+:::
+
 ::: info Changed in version 2.3
 FileEngine がデフォルトのキャッシュエンジンです。以前、多くの人々にとって APC を CLI とウェブの両方での適切な設定やデプロイが困難ででした。ファイルを利用することで、 CakePHP の設定が新しい開発者にとってシンプルになりました。
 :::

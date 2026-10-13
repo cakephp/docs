@@ -2,6 +2,15 @@
 
 # Upgrade shell
 
+::: pieceofcake2
+In the pieceofcake2 fork, `UpgradeShell` has been removed from the core and moved to the
+[pieceofcake2/upgrade](https://github.com/pieceofcake2/upgrade) plugin
+(`composer require --dev pieceofcake2/upgrade`, then `CakePlugin::load('Upgrade');`).
+Note that the fork itself only supports applications already running on CakePHP 2.10.24,
+and the download/copy steps below do not apply to it (the fork is installed with Composer only).
+Most applications will never need this shell. See [Upgrade guide](/pieceofcake2/upgrade).
+:::
+
 The upgrade shell will do most of the work to upgrade your CakePHP application
 from 1.3 to 2.0.
 

@@ -13,6 +13,16 @@ hashing and encrypting data.
 > If you are using the default behaviour using PHP\>=7.1 you will need to
 > install `mcrypt` via PECL.
 
+::: pieceofcake2
+PHP 8 does not ship the `mcrypt` extension. On the pieceofcake2 fork, add
+`Configure::write('Security.useOpenSsl', true);` to your `core.php` so that
+`Security::encrypt()` and `Security::decrypt()` use OpenSSL.
+`Security::rijndael()` always requires `mcrypt`, and `Security::cipher()`
+(used by the default `'cipher'` type of `CookieComponent`) is insecure:
+use `encrypt()`/`decrypt()` or the `'aes'` cookie type instead.
+See [Security](/pieceofcake2/security).
+:::
+
 ## Security API
 
 `static` Security::**cipher**( $text, $key )

@@ -95,6 +95,25 @@ httpd.conf を見てください（ユーザーやサイト独自の httpd.conf 
     </IfModule>
     ```
 
+    ::: pieceofcake2 モダンな構成
+    モダンな構成 ([pieceofcake2/app](https://github.com/pieceofcake2/app)) では
+    `webroot/.htaccess` だけが存在し、プロジェクトルートや `src/` には `.htaccess` がありません。
+    そのため、`DocumentRoot` をプロジェクトルートの `webroot/` ディレクトリに設定してください。
+    スケルトンの `webroot/.htaccess` は次のとおりです。
+
+    ``` html
+    <IfModule mod_rewrite.c>
+        RewriteEngine On
+        RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteRule ^ index.php [L]
+    </IfModule>
+    ```
+
+    従来の構成 (`app/`) では、上記の 3 つの `.htaccess` をそのまま使います。
+    :::
+
     まだあなたの CakePHP サイトで mod_rewrite の問題が起きているなら、仮想ホスト
     (*virtualhosts*) の設定の変更を試してみるといいかもしれません。Ubuntu 上なら、
     /etc/apache2/sites-available/default (場所はディストリビューションによる)
@@ -204,6 +223,11 @@ server {
 }
 ```
 
+::: pieceofcake2
+モダンな構成では、`root` にプロジェクトルートの `webroot/` ディレクトリを指定してください。
+例: `root /var/www/example.com/public/webroot/;`
+:::
+
 もし、特殊な理由で、ルートディレクトリが変更できず、example.com/subfolder/ のように
 サブフォルダ以下でプロジェクトを実行する必要があるなら、全てのリクエストに "/webroot" を
 追加しなければなりません。
@@ -275,6 +299,11 @@ IIS7 はネイティブで .htaccess ファイルをサポートしていませ�
 
 一旦 IIS フレンドリーな書き換えルールを含む web.config が作成されれば、CakePHP のリンク、
 CSS、JS、再ルーティング (*rerouting*) は正しく動作するでしょう。
+
+::: pieceofcake2
+このルールは従来の構成 (legacy) を前提としています。モダンな構成では `webroot/` がプロジェクトルートにあるため、
+ルール中の `app/webroot/` を `webroot/` に置き換えるか、サイトの物理パスを `webroot/` に設定してください。
+:::
 
 ## lighttpd での URL 書き換え
 

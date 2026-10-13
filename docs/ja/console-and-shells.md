@@ -44,6 +44,21 @@ $ cd /path/to/cakephp/app
 $ ./Console/cake
 ```
 
+::: pieceofcake2 コンソールの実行ファイル
+pieceofcake2 フォークでは、`cake` 実行ファイルとシェルの置き場所はアプリケーションのレイアウトによって異なります。
+
+| レイアウト | 実行ファイル | シェル / タスク |
+|---|---|---|
+| レガシー | `app/Console/cake` | `app/Console/Command/`, `app/Console/Command/Task/` |
+| モダン | `bin/cake` | `src/Console/Command/`, `src/Console/Command/Task/` |
+
+Composer がインストールする `vendor/bin/cake` はどちらのレイアウトでも使えます。`composer.json`
+の場所からプロジェクトルートを特定し、`src/` があればそれを、なければ `app/` をアプリケーション
+ディレクトリとして使います。レガシーレイアウトでは Bake プラグインから新しい `app/Console/cake`
+をコピーする必要があります。`cake.bat` と `cake.php` は削除されました。
+詳しくは [インストール](/ja/pieceofcake2/installation) を参照してください。
+:::
+
 システムのパスの中にコアとなる cake 実行ファイル（を含むディレクトリ）を
 追加するのもよいでしょう。これでどこにいても cake コマンドが使えるように
 なり、新しいプロジェクトを生成する際にも便利です。 `cake` をシステム全体
@@ -81,6 +96,13 @@ $ ./Console/cake
     コマンドを実行するには 'cake シェル名 [引数]' にようにタイプします。
     'cake シェル名 help' で特定のコマンドに対するヘルプが表示されます。
 
+::: pieceofcake2
+pieceofcake2 フォークでは、`bake` と `upgrade` はコアのシェルではなくなりました。Bake は
+[pieceofcake2/bake](https://github.com/pieceofcake2/bake) プラグイン、1.3 から 2.0 への
+アップグレードシェルは [pieceofcake2/upgrade](https://github.com/pieceofcake2/upgrade)
+プラグインとして提供されています。必要な場合はプラグインとしてインストールし、ロードしてください。
+:::
+
 先頭部分にはパスに関連する情報が表示されます。これはファイルシステム上の
 異なる場所からコンソールを動かしている場合に便利です。
 
@@ -100,6 +122,13 @@ $ cake -app /path/to/cakephp/app
 <a id="adding-cake-to-your-path"></a>
 
 ### システムパスに cake を追加
+
+::: pieceofcake2
+pieceofcake2 フォークには `lib/Cake/Console/cake` はありません。フレームワークの実行ファイルは
+パッケージ内の `bin/cake` で、Composer によってプロジェクトの `vendor/bin/cake` として配置されます。
+プロジェクトルートから `vendor/bin/cake`（モダンレイアウトでは `bin/cake`）を実行するか、
+以下の手順のパスの代わりにプロジェクトの `vendor/bin` ディレクトリを `PATH` に追加してください。
+:::
 
 \*nix システム (linux, MacOSX) をお使いの場合は、以下の手順により
 cake の実行ファイルへのパスをシステムパスに追加します。

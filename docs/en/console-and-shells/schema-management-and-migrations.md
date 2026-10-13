@@ -17,6 +17,12 @@ $ Console/cake schema generate
 This will generate a schema.php file in your `app/Config/Schema`
 directory.
 
+::: pieceofcake2
+In the pieceofcake2 fork with the modern layout, schema files are read from and written to
+`config/Schema/` instead of `app/Config/Schema/`. (`SchemaShell` itself is now in
+`src/Cake/Console/Command/` of the framework package.)
+:::
+
 > [!NOTE]
 > The schema shell will only process tables for which there are
 > models defined. To force the schema shell to process all the

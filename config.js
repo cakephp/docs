@@ -32,14 +32,14 @@ export default {
     },
     sidebar: toc_en,
     nav: [
-      { text: "pieceofcake2 fork", link: "/pieceofcake2" },
+      { text: "Piece of Cake 2", link: "/pieceofcake2" },
       { text: "Getting Started", link: "/getting-started" },
       { text: "API", link: "https://api.cakephp.org/2.10/" },
       { text: "Documentation", link: "/" },
       { ...links },
     ],
     versionBanner: {
-      message: 'This is the documentation for pieceofcake2/cakephp, a community-maintained fork of CakePHP 2.x for PHP 8 by the Piece of Cake 2 project.',
+      message: 'This is the documentation for pieceofcake2/cakephp, a community-maintained fork of CakePHP 2.x for PHP 8.',
       link: '/docs/pieceofcake2',
       linkText: 'About this fork.'
     }
@@ -59,7 +59,7 @@ export default {
       lang: "ja",
       themeConfig: {
         nav: [
-          { text: "pieceofcake2 fork", link: "/ja/pieceofcake2" },
+          { text: "Piece of Cake 2", link: "/ja/pieceofcake2" },
           { text: "はじめに", link: "/ja/getting-started" },
           { text: "API", link: "https://api.cakephp.org/2.10/" },
           { text: "ドキュメント", link: "/ja/" },
@@ -67,7 +67,7 @@ export default {
         ],
         sidebar: toc_ja,
         versionBanner: {
-          message: 'このドキュメントは、Piece of Cake 2 プロジェクトがメンテナンスしている CakePHP 2.x の PHP 8 対応フォーク pieceofcake2/cakephp のものです。',
+          message: 'このドキュメントは、CakePHP 2.x の PHP 8 対応フォーク pieceofcake2/cakephp のものです。',
           link: '/docs/ja/pieceofcake2',
           linkText: 'フォークについて'
         },

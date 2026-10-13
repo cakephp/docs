@@ -35,6 +35,20 @@ can find your classes you need to tell App, where it can find the files.
 By telling App which package a class can be found in, it can properly locate
 the file and load it the first time a class is used.
 
+::: pieceofcake2 Composer autoloading
+In the pieceofcake2 fork, framework classes are loaded by Composer's classmap
+autoloader, so `App::uses()` is no longer needed for core classes such as
+`CakeTime`, `HttpSocket` or `Xml`. You still need it for:
+
+- application classes, unless your `composer.json` has a classmap for them
+  (for example `"classmap": ["src/"]` in the modern layout; run
+  `composer dump-autoload` after adding a class)
+- plugin classes, unless the plugin supports Composer autoloading
+
+Existing `App::uses()` calls keep working.
+See the [upgrade guide](/pieceofcake2/upgrade).
+:::
+
 Some examples for common types of classes are:
 
 Console Commands  
@@ -336,6 +350,16 @@ the internal structure of the framework. Some examples to follow:
 
 When you load the overridden classes now, the files in `app/Lib` will be loaded
 instead of the built-in core ones.
+
+::: pieceofcake2
+In the pieceofcake2 fork, the framework no longer calls `App::uses()` for its
+own classes; they are loaded through Composer's classmap. `App::load()` only
+searches `app/Lib` for classes registered with `App::uses()`, so an override
+is used only if the matching `App::uses()` call (for example
+`App::uses('HttpSocket', 'Network/Http');`) runs before the class is first
+loaded. In the modern layout the folder is `src/Lib` instead of `app/Lib`.
+Check your overrides after upgrading.
+:::
 
 ## Loading Vendor Files
 

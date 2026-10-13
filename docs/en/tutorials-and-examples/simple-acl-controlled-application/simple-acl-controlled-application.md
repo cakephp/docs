@@ -1,5 +1,18 @@
 # Simple Acl controlled Application
 
+::: pieceofcake2 Following this tutorial with the pieceofcake2 fork
+Instead of downloading CakePHP, create the project with Composer
+(`composer create-project pieceofcake2/app acl`, PHP 8.0 or later) as described at the top of the
+[Blog Tutorial](../blog/blog), which also lists the equivalent modern-layout paths
+(`config/core.php`, `src/...`, `templates/...`). Other differences:
+
+- `cake bake` requires the [pieceofcake2/bake](../../console-and-shells/code-generation-with-bake)
+  plugin (it is already a dev dependency of `pieceofcake2/app`; load it with `CakePlugin::load('Bake');`).
+- Run console commands as `bin/cake ...` (modern) instead of `./Console/cake ...`.
+- `groups` is a reserved word in MySQL 8.0.2 and later, so quote it as `` `groups` `` in the
+  `CREATE TABLE` statement below.
+:::
+
 > [!NOTE]
 > This isn't a beginner level tutorial. If you are just starting out with
 > CakePHP we would advise you to get a better overall experience of the

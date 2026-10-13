@@ -31,6 +31,12 @@ CakePHP は、いくつかの Shell ヘルパーを用意していますが、�
 単純なヘルパーを作成してみましょう。最初に **app/Console/Helper/HeadingHelper.php** を
 作成し、以下のように記述します。 :
 
+::: pieceofcake2
+pieceofcake2 フォークのモダンレイアウトでは `src/Console/Helper/HeadingHelper.php` に作成します。
+`BaseShellHelper` などのフレームワークのクラスは Composer でオートロードされるため、
+`App::uses()` の行は省略できます。
+:::
+
 ``` php
 <?php
 App::uses("BaseShellHelper", "Console/Helper");

@@ -47,6 +47,21 @@ $ cd /path/to/cakephp/app
 $ Console/cake
 ```
 
+::: pieceofcake2 Console executable
+In the pieceofcake2 fork, where the `cake` executable and your shells live depends on the
+application layout:
+
+| Layout | Executable | Shells / tasks |
+|---|---|---|
+| Legacy | `app/Console/cake` | `app/Console/Command/`, `app/Console/Command/Task/` |
+| Modern | `bin/cake` | `src/Console/Command/`, `src/Console/Command/Task/` |
+
+`vendor/bin/cake` (installed by Composer) works with both layouts: it locates the project root
+from `composer.json` and uses `src/` as the application directory if it exists, otherwise `app/`.
+Legacy applications must copy an updated `app/Console/cake` from the Bake plugin; `cake.bat` and
+`cake.php` were removed. See [Installation](/pieceofcake2/installation).
+:::
+
 It's often wise to add the core cake executable to your system path
 so you can use the cake command anywhere. This comes in handy when you are
 creating new projects. See [Adding Cake To Your Path](#adding-cake-to-your-path) for how to make `cake`
@@ -83,6 +98,13 @@ Running the Console with no arguments produces this help message:
     To run a command, type 'cake shell_name [args]'
     To get help on a specific command, type 'cake shell_name help'
 
+::: pieceofcake2
+In the pieceofcake2 fork, `bake` and `upgrade` are no longer core shells. Bake is provided by the
+[pieceofcake2/bake](https://github.com/pieceofcake2/bake) plugin and the 1.3 to 2.0 upgrade shell
+by [pieceofcake2/upgrade](https://github.com/pieceofcake2/upgrade). Install and load them
+as plugins if you need them.
+:::
+
 The first information printed relates to paths. This is especially
 helpful if you're running the console from different parts of the
 filesystem.
@@ -105,6 +127,13 @@ or supplied as an absolute path.
 <a id="adding-cake-to-your-path"></a>
 
 ### Adding cake to your system path
+
+::: pieceofcake2
+In the pieceofcake2 fork, `lib/Cake/Console/cake` no longer exists. The framework's executable is
+`bin/cake` in the package, which Composer exposes as `vendor/bin/cake` in your project.
+Run it from the project root (`vendor/bin/cake`, or `bin/cake` in the modern layout),
+or add your project's `vendor/bin` directory to `PATH` instead of the paths shown below.
+:::
 
 If you are on a \*nix system (linux, MacOSX) the following steps will let you add the
 cake executable to your system path.

@@ -20,4 +20,4 @@ Several `TextHelper` methods have been moved into the `String` class to allow ea
 
 `method` TextHelper::**autoParagraph**(string $text)
 
-<!--@include: ../../core-utility-libraries/string.md{115,131}-->
+<!--@include: ../../core-utility-libraries/string.md{120,136}-->

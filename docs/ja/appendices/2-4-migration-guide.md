@@ -15,6 +15,12 @@ CakePHP 2.4 は、2.3 の API の完全上位互換です。
 
 ### BakeShell
 
+::: pieceofcake2
+pieceofcake2 フォークでは Bake はコアに含まれていません。`cake bake` を使うには
+[pieceofcake2/bake](https://github.com/pieceofcake2/bake) プラグインをインストールしてください
+(`composer require --dev pieceofcake2/bake`)。
+:::
+
 - `cake bake model` は `$behaviors` をサポートしました。
   例えば、Tree ビヘイビアを追加した場合、テーブルから <span class="title-ref">lft</span> や <span class="title-ref">rght</span> 、
   <span class="title-ref">parent_id</span> のフィールドを探します。

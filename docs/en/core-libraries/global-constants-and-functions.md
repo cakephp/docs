@@ -270,6 +270,24 @@ the modified array.
 
 Most of the following constants refer to paths in your application.
 
+::: pieceofcake2 Path constants
+Several path constants depend on the application layout:
+
+| Constant | Legacy layout | Modern layout |
+|----------|---------------|---------------|
+| `APP_DIR` | `app` | `src` |
+| `CONFIG` | `app/Config/` | `config/` |
+| `TESTS` | `app/Test/` | `tests/` |
+| `TMP` | `app/tmp/` | `tmp/` |
+| `LOGS` | `app/tmp/logs/` | `logs/` |
+| `WWW_ROOT` | `app/webroot/` | `webroot/` |
+
+The framework itself lives in `vendor/pieceofcake2/cakephp/`: `CAKE_CORE_INCLUDE_PATH`
+points to its `src/` directory and `CAKE` to `src/Cake/`. The new `CORE_ROOT`
+constant is the framework's root directory.
+See [Directory Structure](/pieceofcake2/directory-structure).
+:::
+
 `constant` **APP**
 
 Absolute path to your application directory, including a trailing slash.

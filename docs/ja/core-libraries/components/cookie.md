@@ -102,3 +102,13 @@ CookieComponent は Cookie を使った動作をするためにいくつかの�
 `method` CookieComponent::**destroy**()
 
 `method` CookieComponent::**type**($type)
+
+::: pieceofcake2 暗号化方式は 'aes' を使う
+後方互換性のため、デフォルトの暗号化方式は今も `'cipher'` ですが、
+これは脆弱な XOR 暗号なので使用しないでください。`'aes'` を指定してください。
+PHP 8 には `mcrypt` 拡張が同梱されていないため、`'aes'` を OpenSSL で動かすには
+`core.php` に `Configure::write('Security.useOpenSsl', true);` も追加します。
+`'rijndael'` は常に `mcrypt` が必要です。
+暗号化方式を変更すると、既存のクッキーは読めなくなります。
+詳しくは [アップグレードガイド](/ja/pieceofcake2/upgrade) を参照してください。
+:::

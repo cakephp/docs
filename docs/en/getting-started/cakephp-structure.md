@@ -19,6 +19,20 @@ application-wide changes. AppController (located at
 `/app/Model/AppModel.php`) are great places to put methods you want to share
 between all controllers, helpers or models.
 
+::: pieceofcake2 Directory layout
+The locations depend on your application layout:
+
+| File                        | Legacy layout                        | Modern layout                    |
+|-----------------------------|--------------------------------------|----------------------------------|
+| AppController               | `app/Controller/AppController.php`   | `src/Controller/AppController.php` |
+| AppHelper                   | `app/View/Helper/AppHelper.php`      | `src/View/Helper/AppHelper.php`  |
+| AppModel                    | `app/Model/AppModel.php`             | `src/Model/AppModel.php`         |
+| Routes                      | `app/Config/routes.php`              | `config/routes.php`              |
+| Layouts / Elements          | `app/View/Layouts/`, `app/View/Elements/` | `templates/Layouts/`, `templates/Elements/` |
+
+See [Directory Structure](/pieceofcake2/directory-structure).
+:::
+
 Although routes aren't classes or files, they play a role in
 requests made to CakePHP. Route definitions tell CakePHP how to map
 URLs to controller actions. The default behavior assumes that the

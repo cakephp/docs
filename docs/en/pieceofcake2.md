@@ -1,4 +1,4 @@
-# About the pieceofcake2 Fork
+# Piece of Cake 2
 
 ::: pieceofcake2
 This page is specific to the **pieceofcake2 fork** and is not part of the
@@ -40,6 +40,15 @@ The fork is based on CakePHP **2.10.24**. Earlier versions are not supported.
 
 `pieceofcake2/cakephp` uses Composer's `replace` directive for
 `cakephp/cakephp`, so plugins that depend on `cakephp/cakephp:^2.x` keep working.
+
+## Fork documentation
+
+- [Installation](/pieceofcake2/installation) - requirements, Composer setup and post-installation steps
+- [Upgrade Guide](/pieceofcake2/upgrade) - migrating from CakePHP 2.10.24 and breaking changes
+- [Directory Structure](/pieceofcake2/directory-structure) - legacy (`app/`) and modern (`src/`) layouts, gradual migration to CakePHP 5
+- [Coding Standards](/pieceofcake2/coding-standards) - the CakePHP 5 based standard used by the fork
+- [Security](/pieceofcake2/security) - security fixes and recommended settings
+- [Repositories and Plugins](/pieceofcake2/plugins) - maintained repositories and plugin forks
 
 ## Resources
 

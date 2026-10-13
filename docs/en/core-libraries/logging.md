@@ -150,6 +150,16 @@ $this->log("Something didn't work!");
 // 2007-11-02 10:22:02 Error: Something didn't work!
 ```
 
+::: pieceofcake2 Log directory
+FileLog writes to the directory in the `LOGS` constant. Its default depends on
+the application layout:
+
+- Legacy layout: `app/tmp/logs/`
+- Modern layout: `logs/` at the project root (separate from `tmp/`)
+
+See [Directory Structure](/pieceofcake2/directory-structure).
+:::
+
 You can specify a custom log name using the first parameter. The
 default built-in FileLog class will treat this log name as the file
 you wish to write logs to:

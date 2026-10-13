@@ -189,6 +189,18 @@ features. They work by adding a special token to each form request. This token,
 once used, cannot be used again. If an attempt is made to re-use an expired
 token the request will be blackholed.
 
+::: pieceofcake2 CSRF fixes
+The pieceofcake2 fork fixes two CSRF vulnerabilities in CakePHP 2.10.24:
+
+- CVE-2020-15400 (token fixation): new tokens are HMAC-SHA1 signed with
+  `Security.salt`. Tokens issued before the upgrade are still accepted.
+- CVE-2015-8379 (bypass via `_method`): every request other than GET, HEAD
+  and OPTIONS is validated, including custom methods and methods overridden
+  with `_method`.
+
+No code changes are required. See [Security](/pieceofcake2/security).
+:::
+
 ### Using CSRF protection
 
 Simply by adding the `SecurityComponent` to your components array,

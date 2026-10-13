@@ -1,5 +1,11 @@
 # ブログチュートリアル - レイヤーの追加
 
+::: pieceofcake2
+`pieceofcake2/app` でプロジェクトを作成した場合（モダンレイアウト）は、`app/Model/`、`app/Controller/`、
+`app/View/` の代わりに、モデルを `src/Model/`、コントローラを `src/Controller/`、ビューを `templates/`
+（例: `templates/Posts/index.ctp`）に置いてください。[ブログチュートリアル](blog) 冒頭のボックスも参照してください。
+:::
+
 ## Post モデルの作成
 
 モデルクラスは、CakePHP アプリケーションの基本中の基本 (*bread and butter*) です。

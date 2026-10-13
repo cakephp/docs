@@ -167,6 +167,13 @@ ExceptionRenderer クラスは `CakeErrorController` を活用して、あなた
 `error400.ctp` と `error500.ctp` に `$this->layout = 'my_error';` のステートメントを
 加えてください。
 
+::: pieceofcake2
+モダン構成では、エラー view は `app/View/Errors/` ではなく `templates/Errors/` に、
+レイアウトは `app/View/Layouts/` ではなく `templates/Layouts/` に置きます。
+フォーク自体のデフォルトのエラーテンプレートは、フレームワークパッケージの
+`templates/Errors/` にあります (以前の `lib/Cake/View/Errors/`)。
+:::
+
 フレームワーク層の例外はそれぞれ、自身の view ファイルをコアテンプレートの中に持っていますが、
 それらは開発時にのみ使われるものですから、カスタマイズを思い悩む必要はまったくありません。
 デバッグモードが OFF の場合は、フレームワーク層の例外はすべて `InternalErrorException` に

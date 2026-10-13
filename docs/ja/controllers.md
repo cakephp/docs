@@ -17,6 +17,16 @@ RecipesController と IngredientsController を作るでしょう。
 `/app/Controller/AppController.php` に定義し、アプリケーションのコントローラ全体で
 共有されるメソッドを含めるようにしましょう。
 
+::: pieceofcake2 ファイルの配置場所
+pieceofcake2 フォークは 2 種類のアプリケーションレイアウトをサポートしています。
+コントローラとコンポーネントの置き場所は次のとおりです。
+
+- レガシー: `app/Controller/`, `app/Controller/Component/`
+- モダン: `src/Controller/`, `src/Controller/Component/`
+
+[ディレクトリ構成](/ja/pieceofcake2/directory-structure) を参照してください。
+:::
+
 コントローラは、リクエストを操作するための *アクション* と呼ばれるいくつかのメソッドを提供します。
 デフォルトで、コントローラ上のすべての public メソッドはアクションとなり、URL からアクセスが出来ます。
 アクションはリクエストを解釈してレスポンスを返す役割があります。
@@ -106,6 +116,12 @@ class RecipesController extends AppController {
 これらのアクションのビューは `app/View/Recipes/view.ctp` 、
 `app/View/Recipes/share.ctp` 、 `app/View/Recipes/search.ctp` にあります。
 規約に従ったビューのファイル名は、アクション名を小文字にしてアンダースコアでつないだものです。
+
+::: pieceofcake2
+pieceofcake2 フォークのモダンレイアウトでは、ビューファイルは `app/View/` ではなく `templates/` に置きます
+（例: `templates/Recipes/view.ctp`）。以下の例も同様です（`templates/Posts/custom_file.ctp`）。
+プラグイン内のテンプレートは、引き続きプラグインの `View/` ディレクトリに置きます。
+:::
 
 通常、コントローラのアクションは `View` クラスがビューを描画するために使うコンテキストを
 作るために `~Controller::set()` を使います。CakePHP の規約に従うと、手動でビューを

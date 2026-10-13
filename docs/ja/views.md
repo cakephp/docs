@@ -30,6 +30,22 @@ CakePHP のビューレイヤーはユーザとの対話の手段です。ほと
 関連するアクション名で保存されます。例えば、Products コントローラの "view()"
 アクションのビューファイルは通常、 `/app/View/Products/view.ctp` となります。
 
+::: pieceofcake2 テンプレートの配置場所
+pieceofcake2 フォークのモダンレイアウトでは、テンプレート（`.ctp` ファイル）は PHP クラスと分けて配置します。
+
+| | レガシー | モダン |
+|---|---|---|
+| ビューテンプレート | `app/View/Products/view.ctp` | `templates/Products/view.ctp` |
+| レイアウト | `app/View/Layouts/` | `templates/Layouts/` |
+| エレメント | `app/View/Elements/` | `templates/Elements/` |
+| ヘルパー | `app/View/Helper/` | `src/View/Helper/` |
+| ビュークラス | `app/View/PdfView.php` | `src/View/PdfView.php` |
+
+この章で `.ctp` ファイルの場所として `app/View/...` と書かれている箇所は、モダンレイアウトでは
+`templates/...` と読み替えてください。プラグイン内のテンプレートは引き続きプラグインの `View/`
+ディレクトリに置きます。[ディレクトリ構成](/ja/pieceofcake2/directory-structure) を参照してください。
+:::
+
 CakePHP のビューレイヤーはいくつかの異なるパーツによって作り上げられています。
 各パーツはそれぞれ役割を持っており、この章で説明していきます。
 

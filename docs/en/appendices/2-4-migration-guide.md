@@ -16,6 +16,12 @@ the changes and improvements made in 2.4.
 
 ### BakeShell
 
+::: pieceofcake2
+In the pieceofcake2 fork, Bake is not part of the core. Install the
+[pieceofcake2/bake](https://github.com/pieceofcake2/bake) plugin
+(`composer require --dev pieceofcake2/bake`) to use `cake bake`.
+:::
+
 - `cake bake model` now supports baking `$behaviors`. Finding <span class="title-ref">lft</span>, <span class="title-ref">rght</span> and <span class="title-ref">parent_id</span> fields
   in your table it will add the Tree behavior, for example. You can also extend the ModelTask to support your own
   behaviors to be recognized.

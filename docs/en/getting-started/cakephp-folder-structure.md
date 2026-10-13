@@ -22,11 +22,70 @@ You'll notice three main folders:
 - Finally, the *vendors* folder is where you'll place third-party
   PHP libraries you need to use with your CakePHP applications.
 
+::: pieceofcake2 Directory layout
+With the pieceofcake2 fork there is no archive to extract and no `lib/` folder.
+CakePHP is installed by Composer into `vendor/pieceofcake2/cakephp` (framework
+code in `src/Cake/`), and third-party libraries also go into `vendor/`. Two
+application layouts are supported:
+
+**Legacy layout** (the layout described on this page):
+
+```text
+your-project/
+├── app/            (Config/, Controller/, Model/, View/, Test/, tmp/, webroot/, ...)
+├── plugins/        (Composer-installed plugins)
+├── vendor/         (Composer, including pieceofcake2/cakephp)
+└── composer.json
+```
+
+**Modern layout** (CakePHP 5-style, see [pieceofcake2/app](https://github.com/pieceofcake2/app)):
+
+```text
+your-project/
+├── bin/cake
+├── config/         (configuration files)
+├── src/            (all PHP code: Controller/, Model/, View/Helper/, Console/, Lib/)
+├── templates/      (all .ctp view files)
+├── resources/locales/
+├── tests/          (TestCase/, Fixture/)
+├── plugins/
+├── vendor/
+├── logs/
+├── tmp/
+├── webroot/        (document root)
+└── composer.json
+```
+
+See [Directory Structure](/pieceofcake2/directory-structure) for details and a migration map.
+:::
+
 ## The App Folder
 
 CakePHP's *app* folder is where you will do most of your application
 development. Let's look a little closer at the folders inside
 *app*.
+
+::: pieceofcake2 Modern layout
+In the modern layout these folders are located as follows:
+
+| Legacy (`app/`)          | Modern                       |
+|--------------------------|------------------------------|
+| `app/Config`             | `config/`                    |
+| `app/Console`            | `src/Console/`               |
+| `app/Controller`         | `src/Controller/`            |
+| `app/Lib`                | `src/Lib/`                   |
+| `app/Locale`             | `resources/locales/`         |
+| `app/Model`              | `src/Model/`                 |
+| `app/Plugin`             | `plugins/` (use Composer)    |
+| `app/Test`               | `tests/` (`TestCase/`, `Fixture/`) |
+| `app/tmp`                | `tmp/` (logs in `logs/`)     |
+| `app/Vendor`             | `vendor/` (use Composer)     |
+| `app/View` (`.ctp` files)| `templates/`                 |
+| `app/View/Helper`        | `src/View/Helper/`           |
+| `app/webroot`            | `webroot/`                   |
+
+The framework detects both layouts automatically.
+:::
 
 Config  
 Holds the (few) configuration files CakePHP uses. Database

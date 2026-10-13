@@ -143,6 +143,12 @@ $this->OneTimer->getTime();
 `/app/Controller/Component/MathComponent.php` にファイルを作成して下さい。
 コンポーネントの基本構造は以下のようになります。 :
 
+::: pieceofcake2
+pieceofcake2 フォークのモダンレイアウトでは `src/Controller/Component/MathComponent.php` に作成します。
+`Component` や `AuthComponent` などのフレームワークのクラスは Composer でオートロードされるため、
+これらに対する `App::uses()` は省略できます。
+:::
+
 ``` php
 App::uses('Component', 'Controller');
 class MathComponent extends Component {

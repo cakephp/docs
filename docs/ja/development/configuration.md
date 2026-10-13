@@ -10,6 +10,21 @@ CakePHP アプリケーションの設定は非常に簡単です。CakePHP の
 マッピングルール(route)を追加／設定したり、単語の語尾変化
 ルール(inflection)を追加／変更したりできます。
 
+::: pieceofcake2 設定ファイルの場所
+フォークは 2 つのアプリケーション構成に対応しています。このページで `app/Config/...`
+と書かれている設定ファイルは、モダン構成では `config/` にあります。
+
+| | レガシー構成 | モダン構成 |
+|---|---|---|
+| データベース | `app/Config/database.php` | `config/database.php` |
+| コア設定 | `app/Config/core.php` | `config/core.php` |
+| ブートストラップ | `app/Config/bootstrap.php` | `config/bootstrap.php` |
+| スキーマファイル | `app/Config/Schema/` | `config/Schema/` |
+
+`CONFIG` 定数は、プロジェクトルートに `config/` があればそこを、無ければ `app/Config/`
+を指します。[ディレクトリ構成](/ja/pieceofcake2/directory-structure) も参照してください。
+:::
+
 <div class="index">
 
 database.php, database.php.default
@@ -83,8 +98,21 @@ SQL ステートメントをサーバに送る際に使用する文字コード�
 mysql/mysqli 接続で UTF-8 をエンコーディングを使いたい場合、
 'utf8'（ハイフンなし）と指定してください。
 
+::: pieceofcake2
+フォークでは、`encoding` は接続後に `SET NAMES` を発行するのではなく、PDO の DSN
+(MySQL は `charset=...`、PostgreSQL は `options='--client_encoding=...'`) で渡されます。
+既存の設定はそのまま動きます。
+:::
+
 schema  
 どのスキーマを使うかを指定（PostgreSQL データベース利用時のみ）
+
+::: pieceofcake2
+フォークの SQL Server ドライバー (SQL Server 2022 以降) も `schema` を使い (デフォルトは
+`dbo`)、ポートは `port` から取得し、`'TrustServerCertificate' => 'yes'` のような接続オプションを
+`options` 配列で受け付けます。PostgreSQL では、任意の `sslmode` キーが DSN に追加されます。
+[アップグレードガイド](/ja/pieceofcake2/upgrade) を参照してください。
+:::
 
 unix_socket  
 UNIX のソケットファイル経由での接続をサポートするドライバで使われます。
@@ -134,6 +162,14 @@ SQLServer, Postgres,MySQL といった、それぞれのデータベースベン
 </div>
 
 ## 追加のクラスパス
+
+::: pieceofcake2
+フォークでも `App::build()` は使えます。[pieceofcake2/app](https://github.com/pieceofcake2/app)
+スケルトンのように Composer の classmap オートロード
+(`"autoload": {"classmap": ["src/"]}`) を設定すれば、クラスは Composer が見つけるので
+`App::uses()` は不要です。クラスファイルを追加したら `composer dump-autoload` を実行してください。
+フレームワークのクラスには、フォークでは `App::uses()` は一切不要です。
+:::
 
 同一システム上の複数のアプリケーション間で MVC クラスを共有できると
 有用な場合があります。両方のアプリケーションで同一のコントローラーを
@@ -397,6 +433,14 @@ Security.salt
 Security.cipherSeed  
 文字列を暗号化／復号化するのに使われるランダムな文字列（数字のみ）
 
+::: pieceofcake2
+フォークでは `Security.salt` は CSRF トークンの署名 (HMAC) にも使われるので、
+アプリケーションごとに一意な値を秘密にしておいてください。`Security.cipherSeed` は脆弱な
+`Security::cipher()` (`CookieComponent` のデフォルトの暗号化タイプ `'cipher'`) でしか
+使われません。Cookie の暗号化タイプは `'aes'` に変更してください。
+[セキュリティ](/ja/pieceofcake2/security) を参照してください。
+:::
+
 Asset.timestamp  
 適切なヘルパーを使っている場合、静的ファイルの URL
 (CSS, JavaScript, 画像) の末尾に個々のファイルの最終更新時刻
@@ -431,6 +475,11 @@ CakePHP が参照する定数がいくつか存在します。
 現在 PHP は LOG_DEBUG をサポートします。
 
 ### コアのキャッシュ設定
+
+::: pieceofcake2
+フォークでは Xcache と Wincache のキャッシュエンジンが削除されています。使えるエンジンは
+File、Apc (利用可能なら APCu を使用)、Memcached、Memcache、Redis です。
+:::
 
 CakePHP は内部的に `_cake_model_` と `_cake_core_`
 という２つのキャッシュ設定を使います。`_cake_core_` はファイルの
@@ -848,6 +897,11 @@ Inflector::rules('plural', array('irregular' => array('phylum' => 'phyla')));
 優先度の高いルールとして追加します。
 
 ## CakePHP の起動(bootstrap)
+
+::: pieceofcake2
+モダン構成ではブートストラップファイルは `config/bootstrap.php` です。コアの inflection
+ルールはフォークの `src/Cake/Utility/Inflector.php` にあります (`lib/Cake` はもうありません)。
+:::
 
 もし何からの追加設定が必要な場合、app/Config/bootstrap.php
 にある CakePHP の bootstrap ファイルを使います。このファイルは

@@ -14,6 +14,12 @@ $ Console/cake schema generate
 
 上のコマンドで schema.php ファイルが `app/Config/Schema` ディレクトリに生成されるはずです。
 
+::: pieceofcake2
+pieceofcake2 フォークのモダンレイアウトでは、スキーマファイルの読み書きは `app/Config/Schema/` ではなく
+`config/Schema/` で行われます（`SchemaShell` 自体はフレームワークパッケージの
+`src/Cake/Console/Command/` にあります）。
+:::
+
 > [!NOTE]
 > スキーマシェルはモデルが定義されたテーブルのみを対象として処理します。
 > 強制的に全てのテーブルを対象にするためには、 `-f` オプションを加える必要があります。

@@ -176,6 +176,12 @@ class MathComponent extends Component {
 > All components must extend `Component`. Failing to do this
 > will trigger an exception.
 
+::: pieceofcake2
+In the pieceofcake2 fork with the modern layout, create the file in
+`src/Controller/Component/MathComponent.php`. Framework classes such as `Component` and
+`AuthComponent` are autoloaded by Composer, so `App::uses()` for them is optional.
+:::
+
 ### Including your component in your controllers
 
 Once our component is finished, we can use it in the application's

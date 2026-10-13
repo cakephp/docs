@@ -6,7 +6,7 @@ Modifications copyright (c) Piece of Cake 2 contributors.
 
 Based on the CakePHP Cookbook (https://github.com/cakephp/docs, branch 2.x).
 Changes: adapted for the pieceofcake2/cakephp fork, added content specific to
-the pieceofcake2 fork (marked with "pieceofcake2 fork" boxes), and replaced the
+the pieceofcake2 fork (marked with "Piece of Cake 2 fork" boxes), and replaced the
 build and deployment setup.
 
 Licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0

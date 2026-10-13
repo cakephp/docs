@@ -35,6 +35,22 @@ For example, the view file for the Products
 controller's "view()" action would normally be found in
 `/app/View/Products/view.ctp`.
 
+::: pieceofcake2 Template locations
+In the pieceofcake2 fork's modern layout, templates (`.ctp` files) are separated from PHP classes:
+
+| | Legacy | Modern |
+|---|---|---|
+| View templates | `app/View/Products/view.ctp` | `templates/Products/view.ctp` |
+| Layouts | `app/View/Layouts/` | `templates/Layouts/` |
+| Elements | `app/View/Elements/` | `templates/Elements/` |
+| Helpers | `app/View/Helper/` | `src/View/Helper/` |
+| View classes | `app/View/PdfView.php` | `src/View/PdfView.php` |
+
+Wherever this chapter says `app/View/...` for a `.ctp` file, use `templates/...` in the modern layout.
+Templates inside plugins stay in the plugin's `View/` directory.
+See [Directory structure](/pieceofcake2/directory-structure).
+:::
+
 The view layer in CakePHP can be made up of a number of different
 parts. Each part has different uses, and will be covered in this
 chapter:

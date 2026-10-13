@@ -123,3 +123,8 @@ public function admin_view($id = null) {
     app/View/Scaffolds/index.ctp
     app/View/Scaffolds/form.ctp
     app/View/Scaffolds/view.ctp
+
+::: pieceofcake2
+pieceofcake2 フォークのモダンレイアウトでは、これらのファイルを `app/View/` ではなく `templates/` 以下に置きます
+（例: `templates/Posts/scaffold.index.ctp`、`templates/Scaffolds/index.ctp`）。
+:::

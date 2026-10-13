@@ -25,6 +25,12 @@ $this->theme = 'AnotherExample';
 Themed フォルダの中にテーマ名のフォルダを作成して下さい。上記の例でいうと、テーマは
 `/app/View/Themed/AnotherExample` に配置するかたちになります。
 
+::: pieceofcake2
+pieceofcake2 フォークのモダンレイアウトでは、テーマは `app/View/Themed/` ではなく `templates/Themed/`
+に置きます（例: `templates/Themed/Example/Posts/edit.ctp`、
+`templates/Themed/Example/webroot/css/main.css`）。このページの以降の説明も、このパスに読み替えてください。
+:::
+
 > [!NOTE]
 > これは大事なことなのですが、CakePHP は CamelCase のテーマ名を期待しているということを
 > 覚えておいてください。
@@ -86,3 +92,8 @@ CakePHP によって使われている `app/webroot` のパスに一致するデ
   `app/webroot/debug_kit/js/my_file.js` になります。
 - `app/View/Themed/Navy/webroot/css/navy.css` は
   `app/webroot/theme/Navy/css/navy.css` になります。
+
+::: pieceofcake2
+モダンレイアウトではウェブルートは `webroot/`、Composer でインストールしたプラグインは `plugins/` にあるため、
+例えば `plugins/DebugKit/webroot/js/my_file.js` は `webroot/debug_kit/js/my_file.js` になります。
+:::

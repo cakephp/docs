@@ -98,6 +98,25 @@ You may also take a look at <https://wiki.apache.org/httpd/DistrosDefaultLayout>
     </IfModule>
     ```
 
+    ::: pieceofcake2 Modern layout
+    In the modern layout ([pieceofcake2/app](https://github.com/pieceofcake2/app)),
+    only `webroot/.htaccess` exists. There is no `.htaccess` at the project root
+    or in `src/`, so set the `DocumentRoot` to the `webroot/` directory at the
+    project root. The skeleton's `webroot/.htaccess` is:
+
+    ``` html
+    <IfModule mod_rewrite.c>
+        RewriteEngine On
+        RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteRule ^ index.php [L]
+    </IfModule>
+    ```
+
+    The legacy layout (`app/`) keeps the three `.htaccess` files shown above.
+    :::
+
     If your CakePHP site still has problems with mod_rewrite, you might
     want to try modifying settings for Virtual Hosts. On Ubuntu,
     edit the file /etc/apache2/sites-available/default (location is
@@ -208,6 +227,11 @@ server {
 }
 ```
 
+::: pieceofcake2
+For the modern layout, point `root` at the `webroot/` directory at the project
+root instead, e.g. `root /var/www/example.com/public/webroot/;`.
+:::
+
 If for some exotic reason you cannot change your root directory and need to run
 your project from a subfolder like example.com/subfolder/, you will have to
 inject "/webroot" in each request.
@@ -276,6 +300,12 @@ these steps:
 Once the web.config file is created with the correct IIS-friendly
 rewrite rules, CakePHP's links, CSS, JavaScipt, and rerouting should work
 correctly.
+
+::: pieceofcake2
+These rules assume the legacy layout. For the modern layout, `webroot/` is at the
+project root: use `webroot/` instead of `app/webroot/` in the rules, or point the
+site's physical path at `webroot/`.
+:::
 
 ## URL-Rewriting on lighttpd
 

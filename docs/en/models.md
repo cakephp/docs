@@ -60,6 +60,13 @@ Back to our Ingredient model. In order to work on it, create the PHP file in the
 `/app/Model/` directory. By convention, it should have the same name as the
 class, which for this example will be `Ingredient.php`.
 
+::: pieceofcake2
+Model files go in `app/Model/` in the legacy layout and in `src/Model/` in the
+modern layout. If your `composer.json` has a classmap for `src/`, the
+`App::uses('AppModel', 'Model');` line can be omitted.
+See [Directory structure](/pieceofcake2/directory-structure).
+:::
+
 > [!NOTE]
 > CakePHP will dynamically create a model object for you if it cannot find a
 > corresponding file in /app/Model. This also means that if your model file

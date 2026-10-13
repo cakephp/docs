@@ -110,6 +110,12 @@ Debugger::dump(), but to the debug.log instead of the output
 buffer. Note your app/tmp directory (and its contents) must be
 writable by the web server for log() to work correctly.
 
+::: pieceofcake2
+In the modern layout, logs are written to `logs/` in the project root
+(instead of `app/tmp/logs/`) and temporary files to `tmp/`; both must be
+writable.
+:::
+
 ::: info Changed in version 2.5.0
 The `depth` parameter was added.
 :::
@@ -217,6 +223,17 @@ DebugKit is a plugin that provides a number of good debugging tools. It
 primarily provides a toolbar in the rendered HTML, that provides a plethora of
 information about your application and the current request. You can download
 [DebugKit](https://github.com/cakephp/debug_kit/tree/2.2) from GitHub.
+
+::: pieceofcake2
+For the fork, use [pieceofcake2/debug_kit](https://github.com/pieceofcake2/debug_kit),
+the maintained PHP 8 compatible fork of DebugKit 2.x, installed with Composer:
+
+```bash
+composer require --dev pieceofcake2/debug_kit
+```
+
+See [Plugins](/pieceofcake2/plugins).
+:::
 
 ## Xdebug
 

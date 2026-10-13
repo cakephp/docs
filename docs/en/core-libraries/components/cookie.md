@@ -108,3 +108,13 @@ The CookieComponent offers a number of methods for working with Cookies.
 `method` CookieComponent::**destroy**()
 
 `method` CookieComponent::**type**($type)
+
+::: pieceofcake2 Use 'aes' encryption
+The default encryption type is still `'cipher'` for backwards compatibility,
+but it is a weak XOR cipher and should not be used. Set the type to `'aes'`.
+Because PHP 8 does not ship the `mcrypt` extension, `'aes'` also needs
+`Configure::write('Security.useOpenSsl', true);` in `core.php` so that it uses
+OpenSSL. `'rijndael'` always requires `mcrypt`. Changing the type invalidates
+existing cookies.
+See the [upgrade guide](/pieceofcake2/upgrade).
+:::

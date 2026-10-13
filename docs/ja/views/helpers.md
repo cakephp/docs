@@ -159,6 +159,14 @@ CakePHP の他の箇所でも使われているコレクション API をサポ�
 これから作るヘルパーを LinkHelper と呼ぶことにしましょう。実際の PHP クラスファイルは
 このようになるでしょう。 :
 
+::: pieceofcake2
+pieceofcake2 フォークのモダンレイアウトでは、ヘルパーは `src/View/Helper/` に置きます
+（例: `src/View/Helper/LinkHelper.php`）。`Helper` や `HtmlHelper` などのフレームワークのクラスは
+Composer でオートロードされるため、これらに対する `App::uses()` は省略できます。`AppHelper`
+など自分のアプリケーションのクラスに対する `App::uses()` を省略できるのは、アプリケーションのクラスを
+Composer でオートロードしている場合だけです（[ディレクトリ構成](/ja/pieceofcake2/directory-structure) を参照）。
+:::
+
 ``` php
 /* /app/View/Helper/LinkHelper.php */
 App::uses('AppHelper', 'View/Helper');

@@ -1,5 +1,12 @@
 # Blog Tutorial - Adding a layer
 
+::: pieceofcake2
+If you created the project with `pieceofcake2/app` (modern layout), put models in `src/Model/`,
+controllers in `src/Controller/` and views in `templates/` (e.g. `templates/Posts/index.ctp`)
+instead of `app/Model/`, `app/Controller/` and `app/View/`. See the box at the top of the
+[Blog Tutorial](blog).
+:::
+
 ## Create a Post Model
 
 The Model class is the bread and butter of CakePHP applications. By

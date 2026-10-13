@@ -100,6 +100,11 @@ Car::stop()
 log() が正常に動作するためには、あなたの app/tmp ディレクトリ（と、その中）はウェブサーバにより
 書き込み可能でなければならないことに気をつけてください。
 
+::: pieceofcake2
+モダン構成では、ログは `app/tmp/logs/` ではなくプロジェクトルートの `logs/` に、
+一時ファイルは `tmp/` に書き込まれます。どちらも書き込み可能にしておく必要があります。
+:::
+
 ::: info Changed in version 2.5.0
 `depth` パラメータが追加されました。
 :::
@@ -201,6 +206,18 @@ DebugKit は便利なデバッグツールをたくさん提供してくれる�
 まずは、レンダリングされた HTML 内にツールバーを表示して、あなたのアプリケーションや
 現在のリクエストについての情報を大量に提供してくれます。GitHub の
 [DebugKit](https://github.com/cakephp/debug_kit/tree/2.2) からダウンロードが可能です。
+
+::: pieceofcake2
+フォークでは、PHP 8 に対応した DebugKit 2.x のフォーク
+[pieceofcake2/debug_kit](https://github.com/pieceofcake2/debug_kit) を Composer で
+インストールして使います。
+
+```bash
+composer require --dev pieceofcake2/debug_kit
+```
+
+[プラグイン](/ja/pieceofcake2/plugins) も参照してください。
+:::
 
 ## Xdebug
 

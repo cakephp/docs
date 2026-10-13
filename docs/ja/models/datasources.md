@@ -21,6 +21,23 @@ CakePHP は、以下の一覧にあるようないくつかのデータベース
 使用します。このため、それらのデータソースに関する知識がなくても
 利用できるようになっています。
 
+::: pieceofcake2 対応データベース
+pieceofcake2 フォークは MySQL 5.6、5.7、8.0 以降（`pdo_mysql`）、PostgreSQL 9.4 以降
+（`pdo_pgsql`）、SQLite 3（`pdo_sqlite`）、Microsoft SQL Server 2022 以降（`pdo_sqlsrv`）に
+対応しています。主な違いは次の通りです。
+
+- ドライバクラスは `src/Cake/Model/Datasource/Database` にあります。
+- 接続設定ファイルはレガシーレイアウトでは `app/Config/database.php`、
+  モダンレイアウトでは `config/database.php` です。
+- `encoding` の設定は、接続後の `SET NAMES` ではなく PDO の DSN で渡すようになりました。
+  PostgreSQL の `sslmode` は省略できます。設定の変更は不要です。
+- ドライバに `getVersion()`（MySQL、PostgreSQL）、`getServerType()`、
+  `utf8mb4Supported()`、`integerDisplayWidthDeprecated()`（MySQL）が追加されました。
+  これらのクラスを継承した独自ドライバでは実装が必要になる場合があります。
+
+詳しくは [アップグレードガイド](/ja/pieceofcake2/upgrade) を参照してください。
+:::
+
 前述のソースはどれも `DboSource` から派生したもので、これにより
 ほとんどのリレーショナルデータベースで共通な、いくつかのロジックを
 集約しています。新しく RDBMS のデータソースを書いてみようという向きには、
@@ -332,3 +349,33 @@ PHP の基本構成には含まれておらず、別途インストールする�
 を出す場合は、まず SQL Server の PHP エクステンション pdo_sqlsrv
 と SQL Server のネイティブクライアントが正しくインストール
 されているかどうかを確認して下さい。
+
+::: pieceofcake2
+pieceofcake2 フォークは SQL Server 2022 以降に対応しており、Linux 上で `pdo_sqlsrv` と
+Microsoft ODBC Driver for SQL Server を使ってテストされています。Windows は必須ではありません。
+設定には次のオプションが追加されています。
+
+``` php
+public $default = [
+    'datasource' => 'Database/Sqlserver',
+    'host' => 'localhost',
+    'port' => 1433, // サーバー名の後ろに付加される
+    'login' => 'sa',
+    'password' => 'secret',
+    'database' => 'cakephp',
+    'encoding' => 'utf8',
+    'schema' => [ // スキーマのマッピング（デフォルトは 'dbo'）
+        'default' => 'dbo',
+    ],
+    'options' => [ // SSL/TLS などの追加の DSN オプション
+        'TrustServerCertificate' => 'yes',
+        'Encrypt' => 'no',
+    ],
+];
+```
+
+`Sqlserver` クラスを継承している場合、`describe()` の戻り値の型が `array` と宣言され、
+`insertMulti()` が `bool` を返すようになった点に注意してください。
+詳しくは [アップグレードガイド](/ja/pieceofcake2/upgrade) を参照してください。
+:::
+

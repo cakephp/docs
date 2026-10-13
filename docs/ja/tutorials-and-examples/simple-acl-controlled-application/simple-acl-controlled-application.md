@@ -1,5 +1,18 @@
 # ACLを制御するシンプルなアプリケーション
 
+::: pieceofcake2 pieceofcake2 フォークでこのチュートリアルを進める場合
+CakePHP をダウンロードする代わりに、[ブログチュートリアル](../blog/blog) 冒頭の説明のとおり Composer で
+プロジェクトを作成してください（`composer create-project pieceofcake2/app acl`、PHP 8.0 以上）。
+モダンレイアウトでのパスの読み替え（`config/core.php`、`src/...`、`templates/...`）もそちらにあります。
+その他の違いは次のとおりです。
+
+- `cake bake` には [pieceofcake2/bake](../../console-and-shells/code-generation-with-bake) プラグインが
+  必要です（`pieceofcake2/app` では開発用の依存に含まれています。`CakePlugin::load('Bake');` でロードします）。
+- コンソールコマンドは `./Console/cake ...` ではなく `bin/cake ...`（モダン）で実行します。
+- `groups` は MySQL 8.0.2 以降で予約語になったため、以下の `CREATE TABLE` 文では
+  `` `groups` `` のようにクォートしてください。
+:::
+
 > [!NOTE]
 > このチュートリアルは初心者向けではありません。もし CakePHP を始めたばかりなら、
 > このチュートリアルに挑戦する前にまずはフレームワークの機能をひととおり体験しておくことを

@@ -1,5 +1,12 @@
 # CakePHP の開発プロセス
 
+::: pieceofcake2
+このページは本家 CakePHP チームのプロセスを説明したものです。pieceofcake2 フォークは
+GitHub 上でコミュニティによってメンテナンスされています。メンテナンス中のブランチは
+`2.x` のみで、議論は IRC ではなく
+[pieceofcake2/cakephp](https://github.com/pieceofcake2/cakephp) の Issue や Pull Request で行います。
+:::
+
 ここで CakePHP フレームワークの開発をする時に使ってるプロセスを説明しようと思います。
 私たちはチケットや IRC チャットを通したコミュニティの対話に非常に信頼しています。
 IRC は [開発チーム](https://github.com/cakephp?tab=members) のメンバーを見つけて

@@ -1,5 +1,13 @@
 # シンプルな認証と承認のアプリケーション
 
+::: pieceofcake2
+pieceofcake2 フォークのモダンレイアウトでは、以下の `app/...` のパスの代わりに `src/Model/User.php`、
+`src/Controller/UsersController.php`、`templates/Users/` を使います
+（[ブログチュートリアル](../blog/blog) 冒頭のボックスを参照）。bake でコードを生成するには
+[pieceofcake2/bake](../../console-and-shells/code-generation-with-bake) プラグインが必要です。
+`BlowfishPasswordHasher` などフレームワークのクラスに対する `App::uses()` の行は省略できます。
+:::
+
 [ブログチュートリアル](../../tutorials-and-examples/blog/blog) の例の続きで、ユーザーログインを基に、
 一定の URL へのアクセスを安全にしたいとしましょう。その他の要件として、ブログに複数の
 執筆者 (*authors*) がいて、それぞれが各々の意思により投稿を作成、編集、削除でき、

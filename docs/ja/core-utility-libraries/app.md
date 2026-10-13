@@ -33,6 +33,20 @@ CakePHP ではクラスは遅延ロードされますが、オートローダが
 どのパッケージでクラスを発見できるのかを App に伝えることで、あるクラスを初めて使用するときに
 適切にファイルを見つけることができるのです。
 
+::: pieceofcake2 Composer オートロード
+pieceofcake2 フォークでは、フレームワークのクラスは Composer の classmap
+オートローダで読み込まれます。そのため `CakeTime`、`HttpSocket`、`Xml` などの
+コアクラスに `App::uses()` は不要です。次の場合は引き続き必要です。
+
+- アプリケーションのクラス（`composer.json` に classmap を設定している場合は不要。
+  例えばモダンレイアウトでは `"classmap": ["src/"]`。クラスを追加したら
+  `composer dump-autoload` を実行してください）
+- プラグインのクラス（プラグインが Composer オートロードに対応している場合は不要）
+
+既存の `App::uses()` 呼び出しはそのまま動作します。
+詳しくは [アップグレードガイド](/ja/pieceofcake2/upgrade) を参照してください。
+:::
+
 一般的なクラスの例をいくつか挙げます:
 
 Console Commands  
@@ -319,6 +333,16 @@ App::uses() を用いた、正しいパッケージを参照したロードが�
 - `Model` クラスをオーバーライドするためには `app/Lib/Model/Model.php` を作成します
 
 置き換えたファイルをロードすると、 `app/Lib` のファイルが組み込みのコアクラスの代わりにロードされます。
+
+::: pieceofcake2
+pieceofcake2 フォークでは、フレームワーク自身のクラスに対する `App::uses()` 呼び出しが
+削除され、Composer の classmap で読み込まれます。`App::load()` が `app/Lib` を探すのは
+`App::uses()` で登録されたクラスだけなので、オーバーライドが使われるのは、対応する
+`App::uses()`（例: `App::uses('HttpSocket', 'Network/Http');`）がそのクラスの
+最初の読み込みより前に実行された場合に限られます。モダンレイアウトでは
+`app/Lib` の代わりに `src/Lib` を使います。アップグレード後はオーバーライドが
+効いているか確認してください。
+:::
 
 ## Vendor ファイルをローディングする
 

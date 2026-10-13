@@ -124,6 +124,14 @@ SSL のサービスへのリクエストを作成する場合、 HttpSocket は�
 モジラ証明書認証局ファイルを使用します。どのように SSL 証明書を処理するか設定するために
 以下のオプションが使えます。
 
+::: pieceofcake2 CA 証明書
+同梱されていた `lib/Cake/Config/cacert.pem` (最終更新 2016 年) は削除されました。
+`ssl_cafile` を指定しない場合、フォークはシステムの CA バンドル (`openssl.cafile` / `openssl.capath`) を使い、
+見つからなければ [composer/ca-bundle](https://github.com/composer/ca-bundle) の Mozilla バンドルを使います。
+このバンドルは Composer で最新の状態に保たれます。
+詳しくは [セキュリティ](/ja/pieceofcake2/security) を参照してください。
+:::
+
 - `ssl_verify_peer` false にセットすると、SSL の検証を無効にします。これは、\*\*非推奨\*\* です。
 - `ssl_verify_host` 証明書を検証する際にホスト名の照合エラーを無視したい場合に false をセットします。
 - `ssl_allow_self_signed` 自己署名証明書を受け入れられるようにするために true をセットします。

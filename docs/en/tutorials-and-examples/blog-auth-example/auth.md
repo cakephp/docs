@@ -1,5 +1,13 @@
 # Simple Authentication and Authorization Application
 
+::: pieceofcake2
+With the modern layout of the pieceofcake2 fork, use `src/Model/User.php`,
+`src/Controller/UsersController.php` and `templates/Users/` instead of the `app/...` paths below
+(see the box at the top of the [Blog Tutorial](../blog/blog)). Baking code requires the
+[pieceofcake2/bake](../../console-and-shells/code-generation-with-bake) plugin.
+The `App::uses()` lines for framework classes such as `BlowfishPasswordHasher` are optional.
+:::
+
 Following our [Blog Tutorial](../../tutorials-and-examples/blog/blog) example, imagine we wanted to
 secure the access to certain URLs, based on the logged in
 user. We also have another requirement, to allow our blog to have multiple authors

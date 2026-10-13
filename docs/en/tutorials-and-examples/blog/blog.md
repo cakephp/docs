@@ -1,5 +1,33 @@
 # Blog Tutorial
 
+::: pieceofcake2 Following this tutorial with the pieceofcake2 fork
+This tutorial downloads CakePHP as an archive and uses the legacy `app/` layout. The pieceofcake2 fork
+can only be installed with Composer and needs **PHP 8.0 or later** (not PHP 5.2.8). Instead of the
+"Getting CakePHP" steps below, create a project from the application skeleton (modern layout):
+
+```bash
+composer create-project pieceofcake2/app blog
+cd blog
+```
+
+Point your web server's document root at the `webroot/` directory, or use the built-in development
+server: `bin/cake server -p 8765`. Then follow the tutorial with these paths:
+
+| Tutorial (legacy) | Modern layout |
+|---|---|
+| `app/tmp` | `tmp/` (logs are in `logs/`) |
+| `app/Config/database.php.default`, `app/Config/core.php` | `config/database.php.default`, `config/core.php` |
+| `app/Model/Post.php` | `src/Model/Post.php` |
+| `app/Controller/PostsController.php` | `src/Controller/PostsController.php` |
+| `app/View/Posts/index.ctp` | `templates/Posts/index.ctp` |
+| `app/View/Layouts/default.ctp` | `templates/Layouts/default.ctp` |
+
+Database notes: the MySQL driver needs the `pdo_mysql` extension. On PHP 8.1+, PDO returns integer
+and float columns as PHP `int`/`float` instead of strings; `config/database.php.default` shows the
+`PDO::ATTR_STRINGIFY_FETCHES` flag to restore the old behavior if needed.
+See [Installation](/pieceofcake2/installation) and [Directory structure](/pieceofcake2/directory-structure).
+:::
+
 Welcome to CakePHP. You're probably checking out this tutorial
 because you want to learn more about how CakePHP works. It's our
 aim to increase productivity and make coding more enjoyable: we

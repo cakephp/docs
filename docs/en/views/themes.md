@@ -27,6 +27,12 @@ Theme view files need to be within the `/app/View/Themed/` folder. Within the
 themed folder, create a folder using the same name as your theme name. For
 example, the above theme would be found in `/app/View/Themed/AnotherExample`.
 
+::: pieceofcake2
+In the pieceofcake2 fork's modern layout, themes live in `templates/Themed/` instead of
+`app/View/Themed/` (e.g. `templates/Themed/Example/Posts/edit.ctp`,
+`templates/Themed/Example/webroot/css/main.css`). The rest of this page applies with that prefix.
+:::
+
 > [!NOTE]
 > It is important to remember that CakePHP expects CamelCase theme names.
 
@@ -87,3 +93,8 @@ directories in `app/webroot` with paths matching those used by CakePHP.
   `app/webroot/debug_kit/js/my_file.js`
 - `app/View/Themed/Navy/webroot/css/navy.css` becomes
   `app/webroot/theme/Navy/css/navy.css`
+
+::: pieceofcake2
+In the modern layout the web root is `webroot/` and Composer-installed plugins are in `plugins/`,
+so e.g. `plugins/DebugKit/webroot/js/my_file.js` becomes `webroot/debug_kit/js/my_file.js`.
+:::

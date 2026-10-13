@@ -1,5 +1,24 @@
 # Bakeでコード生成
 
+::: pieceofcake2 Bake は別プラグイン
+pieceofcake2 フォークでは Bake はコアから削除され、
+[pieceofcake2/bake](https://github.com/pieceofcake2/bake) プラグインとして提供されています。
+開発用の依存としてインストールし、`cake bake` を実行する前にロードしてください。
+
+```bash
+composer require --dev pieceofcake2/bake
+```
+
+```php
+// app/Config/bootstrap.php（レガシー）または config/bootstrap.php（モダン）
+CakePlugin::load('Bake');
+```
+
+実行は `app/Console/cake bake`（レガシー）または `bin/cake bake`（モダン）です。
+`vendor/bin/cake bake` はどちらのレイアウトでも使えます。
+[プラグイン](/ja/pieceofcake2/plugins) も参照してください。
+:::
+
 CakePHP の Bake は、あなたがやることを代わりに CakePHP にまかせることができます。
 Bake は CakePHP の基本的な素材(モデル、ビュー、コントローラ)を作れます。
 Bake では、簡単にフル機能をそなえたアプリケーションを作ることができますが
@@ -58,6 +77,13 @@ $ cake bake all
 :::
 
 ## bakeテンプレートから生成されるデフォルトのHTMLを変更する
+
+::: pieceofcake2
+pieceofcake2 フォークには `lib/Cake/Console/Templates/` はありません。デフォルトの bake テンプレート
+（`default/`）とアプリケーションのスケルトン（`skel/`）は Bake プラグインの `Console/Templates/`
+ディレクトリにあります。独自の bake テーマは `app/Console/Templates/[themename]/`（レガシー）または
+`src/Console/Templates/[themename]/`（モダン）に置いてください。
+:::
 
 bake コマンドで生成されるデフォルトの HTML 出力を変更したい場合、
 次のようなステップでやります。

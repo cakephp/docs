@@ -25,6 +25,18 @@ CakePHPは種々のデータベース・ストレージのエンジンをサポ�
 > 組み込みのドライバは全てPDOを必要とします。
 > 正しいPDO拡張モジュールがインストールされているか必ず確かめてください。
 
+::: pieceofcake2 システム要件
+pieceofcake2 フォークのシステム要件は次のとおりです。
+
+- PHP 8.0〜8.5
+- Composer (Composer を使わないインストールはサポートしていません)
+- MySQL 5.6 以上、PostgreSQL 9.4 以上、SQLite 3、Microsoft SQL Server 2022 以上 (それぞれ対応する PDO 拡張が必要)
+- `mbstring` 拡張を強く推奨します。`intl` と `openssl` は任意です
+  (`mbstring` や `intl` が無い場合は Symfony の polyfill が使われます)
+
+フォークは CakePHP 2.10.24 をベースにしています。詳しくは [インストール](/ja/pieceofcake2/installation) を参照してください。
+:::
+
 ## ライセンス
 
 CakePHPはMIT Licenseの元にライセンスされています。
@@ -48,6 +60,21 @@ CakePHPのリリースは [GitHub tags](https://github.com/cakephp/cakephp/tags)
 
     git clone -b 2.x git://github.com/cakephp/cakephp.git
 
+::: pieceofcake2 Composer でのインストール
+pieceofcake2 フォークは Composer でのみインストールできます。`cakephp/cakephp` のアーカイブや
+git リポジトリを取得する方法は使えません。アプリケーションの `composer.json` にフォークを追加します
+(`cakephp/cakephp` を `replace` します)。
+
+```bash
+composer require pieceofcake2/cakephp
+```
+
+新しいディレクトリ構成のアプリケーションには [pieceofcake2/app](https://github.com/pieceofcake2/app)
+スケルトンを使ってください。`app/` を使う従来の構成 (legacy) の既存アプリケーションでは、ディスパッチャファイル
+(`app/webroot/index.php`、`app/webroot/test.php`、`app/Console/cake`) の更新も必要です。
+インストール後の手順は [インストール](/ja/pieceofcake2/installation) を参照してください。
+:::
+
 ## パーミッション
 
 CakePHP は、幾つかの操作のために `app/tmp` ディレクトリを使用します。
@@ -64,6 +91,15 @@ setfacl -R -m u:${HTTPDUSER}:rwx app/tmp
 setfacl -R -d -m u:${HTTPDUSER}:rwx app/tmp
 ```
 
+::: pieceofcake2 ディレクトリ構成
+書き込み権限が必要なディレクトリは、アプリケーションのディレクトリ構成によって異なります。
+
+- 従来の構成 (legacy): `app/tmp` (ログは `app/tmp/logs`)
+- モダンな構成 (modern): プロジェクトルートの `tmp/` と `logs/`
+
+[ディレクトリ構成](/ja/pieceofcake2/directory-structure) を参照してください。
+:::
+
 ## 設定
 
 CakePHP のインストールは、ウェブサーバのドキュメントルートに放り込むだけの簡単インストールから、好きなだけ複雑かつ柔軟に設定することまでもできます。
@@ -74,6 +110,14 @@ CakePHP のインストールは、ウェブサーバのドキュメントルー
 - 運用(*Production*): ウェブサーバのドキュメントルートを設定できる必要がありますが、URLをクリーンにでき、セキュリティを固くできます。
 - 応用(*Advanced*): 幾つかの設定により、CakePHPの重要な各ディレクトリをファイルシステムの異なる場所に配置することができるので、
   多くのCakePHPアプリケーションがひとつのCakePHPコアライブラリのフォルダを共有することなどが可能です。
+
+::: pieceofcake2
+pieceofcake2 フォークでは CakePHP 本体は Composer によって `vendor/` にインストールされます。
+そのため、以下で説明するアーカイブを展開した構成 (`app/` の隣に `lib/` がある構成) や、
+`include_path` で 1 つのコアを複数アプリケーションで共有する方法は当てはまりません。
+「運用」で説明しているように、ウェブサーバのドキュメントルートをアプリケーションの webroot に設定してください。
+従来の構成では `app/webroot/`、モダンな構成ではプロジェクトルートの `webroot/` です。
+:::
 
 ## 開発(*Development*)
 
@@ -146,6 +190,16 @@ Apache を使用する場合は、そのドメインの `DocumentRoot` ディレ
 
     DocumentRoot /cake_install/app/webroot
 
+::: pieceofcake2 モダンな構成
+モダンな構成 ([pieceofcake2/app](https://github.com/pieceofcake2/app)) では `webroot/` がプロジェクトルートにあり、
+リクエストを転送する `.htaccess` や `index.php` がプロジェクトルートにありません。
+そのため、ドキュメントルートを `webroot/` に設定する必要があります。
+
+```text
+DocumentRoot /cake_install/webroot
+```
+:::
+
 もしウェブサーバが適切に設定されていれば、 <http://www.example.com> で CakePHP アプリケーションがアクセス可能になっているはずです。
 
 ## 応用インストールと URL リライティング
@@ -165,6 +219,10 @@ Apache を使用する場合は、そのドメインの `DocumentRoot` ディレ
 
 動きませんか？
 もし PHP のタイムゾーンに関連するエラーが出るなら、 `app/Config/core.php` の中のとある一行のコメントを外してください :
+
+::: pieceofcake2
+モダンな構成では、このファイルは `config/core.php` です。
+:::
 
 ``` text
 /**

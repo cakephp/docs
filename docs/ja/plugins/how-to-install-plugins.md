@@ -9,6 +9,31 @@ CakePHP プラグインのインストール方法は４つあります:
 
 後で、 [Enable Plugins](#enable-plugins) するのを忘れないでください。
 
+::: pieceofcake2
+pieceofcake2 フォークでは、プラグインは Composer でインストールすることを推奨します。まず
+[プラグイン](/ja/pieceofcake2/plugins) で PHP 8 対応のフォーク（例: `pieceofcake2/debug_kit`）があるか確認してください。
+プラグインは `app/Plugin/` とプロジェクトルートの `plugins/` から探されるため、`plugins/` はどちらの
+レイアウトでも使え、モダンレイアウトでは標準の場所です。Composer で `cakephp-plugin` タイプの
+パッケージをそこにインストールするには、`composer.json` に `installer-paths` を設定します。
+
+```json
+{
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    },
+    "extra": {
+        "installer-paths": {
+            "plugins/{$name}/": ["type:cakephp-plugin"]
+        }
+    }
+}
+```
+
+手動や Git でインストールする場合も、モダンレイアウトでは `app/Plugin/` の代わりに `plugins/` を使います。
+:::
+
 ## マニュアル
 
 マニュアルでプラグインをインストールするには、 app/Plugin/ フォルダの中に
@@ -70,6 +95,12 @@ app フォルダ内で以下のコマンドを実行してください。 :
 ## プラグインの有効化
 
 プラグインは、 `app/Config/bootstrap.php` 内で、手動でロードする必要があります。
+
+::: pieceofcake2
+pieceofcake2 フォークのモダンレイアウトでは、プラグインは `config/bootstrap.php` でロードします。
+Composer のオートロードに対応していないプラグインでは、これまでどおり `App::uses()` でクラスを
+読み込む必要があります（例: `App::uses('MyPluginHelper', 'MyPlugin.View/Helper');`）。
+:::
 
 一つずつロードするか、もしくは一度に全てをロードすることができます。 :
 

@@ -248,6 +248,23 @@ context は、同じドメイン内で一意にする翻訳文字列の一意の
 
 以下のほとんどの定数はあなたのアプリケーション内部のパスへの参照です。
 
+::: pieceofcake2 パスの定数
+いくつかのパス定数は、アプリケーションのレイアウトによって値が変わります。
+
+| 定数 | レガシーレイアウト | モダンレイアウト |
+|------|--------------------|------------------|
+| `APP_DIR` | `app` | `src` |
+| `CONFIG` | `app/Config/` | `config/` |
+| `TESTS` | `app/Test/` | `tests/` |
+| `TMP` | `app/tmp/` | `tmp/` |
+| `LOGS` | `app/tmp/logs/` | `logs/` |
+| `WWW_ROOT` | `app/webroot/` | `webroot/` |
+
+フレームワーク本体は `vendor/pieceofcake2/cakephp/` にあります。`CAKE_CORE_INCLUDE_PATH` はその `src/` ディレクトリを、
+`CAKE` は `src/Cake/` を指します。新しく追加された `CORE_ROOT` 定数はフレームワークのルートディレクトリです。
+詳しくは [ディレクトリ構成](/ja/pieceofcake2/directory-structure) を参照してください。
+:::
+
 `constant` **APP**
 
 末尾にスラッシュを含むアプリケーションディレクトリへの絶対パス。

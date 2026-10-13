@@ -18,6 +18,14 @@
 プラグインフォルダーの名前は、 ‘'\*\*ContactManager\*\*'‘ となります。 プラグインと同じ
 名前のフォルダになることが重要です。
 
+::: pieceofcake2
+pieceofcake2 フォークのモダンレイアウトでは、プラグインは `app/Plugin/ContactManager/` ではなく
+`plugins/ContactManager/` に置きます。プラグイン *内部* の構成（`Controller/`、`Model/`、`View/`、
+`Config/`、`webroot/` など）は変わりません。プラグインのテストのみ、`Test/Case/` と `Test/Fixture/` の代わりに
+`tests/TestCase/` と `tests/Fixture/` も使えます。ひな形として
+[pieceofcake2/plugin](https://github.com/pieceofcake2/plugin) を利用できます。
+:::
+
 プラグインフォルダー内では、CakePHP アプリケーションのような構成が多くあるのに気づくと
 思いますが、 それが基本的な構成です。 使わないフォルダには、何も入れる必要はありません。
 コンポーネントとビヘイビアだけで定義されるプラグインもあれば、 'View' ディレクトリが
@@ -180,6 +188,10 @@ ContactManager プラグインでは、ContactsController::index()
 このファイルを作れば、
 ”/app/Plugin/ContactManager/View/Contacts/index.ctp”
 を上書きできます。
+
+::: pieceofcake2
+モダンレイアウトでは `templates/Plugin/ContactManager/Contacts/index.ctp` を使います。
+:::
 
 ## プラグインアセット
 

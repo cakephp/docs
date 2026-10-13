@@ -21,6 +21,24 @@ When specifying a database connection configuration in
 database datasource for all model operations. So, even though you might not have
 known about datasources, you've been using them all along.
 
+::: pieceofcake2 Supported databases
+The pieceofcake2 fork supports MySQL 5.6, 5.7 and 8.0+ (`pdo_mysql`),
+PostgreSQL 9.4+ (`pdo_pgsql`), SQLite 3 (`pdo_sqlite`) and Microsoft SQL Server
+2022+ (`pdo_sqlsrv`). Notable differences:
+
+- The driver classes are in `src/Cake/Model/Datasource/Database`.
+- The connection config is `app/Config/database.php` (legacy layout) or
+  `config/database.php` (modern layout).
+- The `encoding` setting is now passed in the PDO DSN instead of running
+  `SET NAMES` after connecting, and PostgreSQL `sslmode` is optional.
+  No configuration change is needed.
+- New driver methods: `getVersion()` (MySQL, PostgreSQL), `getServerType()`,
+  `utf8mb4Supported()` and `integerDisplayWidthDeprecated()` (MySQL). Custom
+  drivers that extend these classes may need to implement them.
+
+See the [upgrade guide](/pieceofcake2/upgrade).
+:::
+
 All of the above sources derive from a base `DboSource` class, which
 aggregates some logic that is common to most relational databases. If you decide
 to write a RDBMS datasource, working from one of these (e.g. MySQL, or SQLite)
@@ -317,3 +335,33 @@ So if the Sqlserver Datasource errors out with:
 
 First check if the SQL Server PHP extension pdo_sqlsrv and the SQL Server Native
 Client are installed properly.
+
+::: pieceofcake2
+The pieceofcake2 fork supports SQL Server 2022+ and is tested with
+`pdo_sqlsrv` and the Microsoft ODBC Driver for SQL Server on Linux, so Windows
+is not required. The configuration has new options:
+
+``` php
+public $default = [
+    'datasource' => 'Database/Sqlserver',
+    'host' => 'localhost',
+    'port' => 1433, // appended to the server name
+    'login' => 'sa',
+    'password' => 'secret',
+    'database' => 'cakephp',
+    'encoding' => 'utf8',
+    'schema' => [ // schema mapping (default: 'dbo')
+        'default' => 'dbo',
+    ],
+    'options' => [ // extra DSN options such as SSL/TLS
+        'TrustServerCertificate' => 'yes',
+        'Encrypt' => 'no',
+    ],
+];
+```
+
+If you extend the `Sqlserver` class, note that `describe()` now declares an
+`array` return type and `insertMulti()` returns `bool`.
+See the [upgrade guide](/pieceofcake2/upgrade).
+:::
+

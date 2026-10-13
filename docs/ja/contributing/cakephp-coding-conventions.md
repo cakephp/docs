@@ -8,6 +8,22 @@ CakePHP の開発者は以下のコーディング規約を使います。
 [CakePHP Code Sniffer](https://github.com/cakephp/cakephp-codesniffer) を使って、
 コードが規約に沿っているかどうかをチェックすることができます。
 
+::: pieceofcake2 フォークのコーディング規約
+pieceofcake2 フォークは、このページで説明している CakePHP 2 の規約を**使っていません**。
+フォークのコードは
+[cakephp/cakephp-codesniffer](https://github.com/cakephp/cakephp-codesniffer)
+`^5.0`、つまり CakePHP 5 の `CakePHP` ルールセット (PSR-12 ベース) でチェックしており、
+フォークの `phpcs.xml` で CakePHP 2 特有の除外 (名前空間なし、型宣言を必須にしない、
+行の長さをチェックしない、など) を加えています。
+以下のルールとの主な違いは、インデントがタブではなく 4 スペースであること、
+`array()` ではなく短縮構文 `[]` を使うこと、クラスとメソッドの開き中括弧を
+次の行に置くことです。
+[pieceofcake2/app](https://github.com/pieceofcake2/app) スケルトンにも同じ
+スニッファーが入っているので、アプリケーションで `vendor/bin/phpcs` を実行できます。
+このドキュメントのサンプルコードはフォークのスタイルで書かれています。
+詳しくは [コーディング規約](/ja/pieceofcake2/coding-standards) を参照してください。
+:::
+
 ## 言語
 
 全てのコードやコメントは、英語で書かなければなりません。
@@ -18,6 +34,11 @@ CakePHP の開発者は以下のコーディング規約を使います。
 このテストはレポジトリにコミットされる前にパスする必要があります。
 
 ## インデント
+
+::: pieceofcake2
+フォークではタブではなく **4 スペース** でインデントします (PSR-12。フォークの
+`.editorconfig` でも同じ設定です)。
+:::
 
 インデントには単一のタブが用いられます。
 
@@ -71,6 +92,11 @@ $matches = array_intersect_key(
 
 ## 行の長さ
 
+::: pieceofcake2
+フォークの `phpcs.xml` は行の長さのチェック (`Generic.Files.LineLength`)
+を除外しているため、以下の制限は推奨にとどまり、チェックはされません。
+:::
+
 コードを読みやすくするために、だいたい 100 文字程度の長さで改行することを推奨します。
 行を 120 文字より長くしてはいけません。
 
@@ -102,6 +128,11 @@ if ((expr_1) || (expr_2)) {
   新しい行で始まり、その中に含まれるコードは、新しいレベルのインデントが付けられる必要があります。
 - インラインの代入は、制御構造の中で使用するべきではありません。
 
+::: pieceofcake2
+フォークの `phpcs.xml` は条件式内の代入のチェックを除外しているため、
+`while ($row = $result->fetch())` のようなインラインの代入はフォークのコードでは許容されます。
+:::
+
 ``` php
 // 間違い＝中括弧が無い、ステートメントの場所が悪い
 if (expr) statement;
@@ -128,6 +159,13 @@ if ($variable) {
 ```
 
 ### 三項演算子
+
+::: pieceofcake2
+CakePHP 5 の規約では、使える場面では null 合体演算子が必須です。
+`isset($options['variable']) ? $options['variable'] : true` ではなく
+`$options['variable'] ?? true` と書きます。
+また `$a ? $a : $b` ではなく短縮形の `$a ?: $b` を使います。
+:::
 
 三項演算子は、三項演算子全体が1行に収まる場合に許容されます。
 長い三項演算子は `if else` ステートメントに分割するべきです。
@@ -202,6 +240,26 @@ $var = foo($bar, $bar2, $bar3);
 
 ## メソッドの定義
 
+::: pieceofcake2
+PSR-12 に従い、**クラスとメソッド**の開き中括弧は次の行に置きます
+(制御構造の中括弧は同じ行のままです)。複数行にわたる配列、関数呼び出し、
+引数宣言では末尾のカンマが必須です。
+
+```php
+class Foo
+{
+    public function someFunction($arg1, $arg2 = '')
+    {
+        if (expr) {
+            statement;
+        }
+
+        return $var;
+    }
+}
+```
+:::
+
 メソッドの定義の例:
 
 ``` php
@@ -236,6 +294,12 @@ public function connection($dns, $persistent = false) {
 
 ### タイプヒンティング
 
+::: pieceofcake2
+フォークの `phpcs.xml` は CakePHP 5 規約の `SlevomatCodingStandard.TypeHints`
+ルールを除外しているため、引数・戻り値・プロパティのネイティブな型宣言や
+`declare(strict_types=1)` は必須ではありません。ドキュメントブロックの型は引き続き書きます。
+:::
+
 オブジェクトや配列を期待する引数はタイプヒンティングを指定することができます。
 しかしながらタイプヒンティングはコストフリーではないので、public メソッドにだけ指定します。 :
 
@@ -267,6 +331,10 @@ public function foo($array) {
 ```
 
 ## メソッドチェーン
+
+::: pieceofcake2
+フォークでは、メソッドチェーンはタブではなく 4 スペースでインデントします。
+:::
 
 メソッドチェーンは複数の行にまたがる複数のメソッドとなり、
 単一のタブでインデントする必要があります。 :
@@ -507,6 +575,11 @@ class ExampleClass {
 ```
 
 ### 変数
+
+::: pieceofcake2
+フォークでは配列の短縮構文が必須です。`array('John', 'Hans', 'Arne')` ではなく
+`['John', 'Hans', 'Arne']` と書きます (`Generic.Arrays.DisallowLongArraySyntax`)。
+:::
 
 変数名はできる限り説明的に、しかしできる限り短くもしてください。すべての変数は小文字で始まり、
 複数の単語の場合はキャメルバックで書く必要があります。オブジェクトを参照する変数は、

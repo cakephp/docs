@@ -165,6 +165,22 @@ you've created. CakePHP will attempt to load the handler from inside
 `AppSessionHandler` the file should be
 `app/Model/Datasource/Session/AppSessionHandler.php`.
 
+::: pieceofcake2
+In the modern layout, put the handler in
+`src/Model/Datasource/Session/AppSessionHandler.php`.
+
+The fork wraps `CakeSessionHandlerInterface` handlers in `SessionHandlerAdapter`,
+which also supports `session.use_strict_mode` (enabled by default since PHP 8.6):
+an incoming session ID is accepted only when your `read()` returns a non-empty
+string. Make `read()` return `''` for unknown IDs and `destroy()` return `true`
+for sessions that were never written, as the core `CacheSession` and
+`DatabaseSession` do.
+
+The array-of-callables form of `handler` shown above is passed directly to
+`session_set_save_handler()`, whose callable signature is deprecated as of
+PHP 8.4; prefer the `engine` form.
+:::
+
 ### Database sessions
 
 The changes in session configuration change how you define database sessions.
@@ -212,7 +228,17 @@ provided in the default app skeleton:
 $ Console/cake schema create sessions
 ```
 
+::: pieceofcake2
+In the modern layout the schema file is `config/Schema/sessions.php` and the
+console is `bin/cake`: `bin/cake schema create sessions`.
+:::
+
 ### Cache Sessions
+
+::: pieceofcake2
+The Xcache cache engine has been removed in the fork. Use APC (APCu),
+Memcached, Memcache or Redis instead.
+:::
 
 The Cache class can be used to store sessions as well. This allows you to store
 sessions in a cache like APC, memcache, or Xcache. There are some caveats to

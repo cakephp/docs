@@ -11,6 +11,24 @@ CakePHP のテストフレームワークは、PHPUnit を基礎としていま�
 ユニットテストにおいてデファクトスタンダードとなっています。それはあなたが思い通りのコードを
 確実に書くための、深遠で強力な機能を提供します。
 
+::: pieceofcake2 PHPUnit 9.6
+pieceofcake2 フォークでは **PHPUnit 9.6** を使います (PHPUnit 3.7、4.x、5.x は動きません)。
+Composer で開発用依存としてインストールしてください。
+
+```bash
+composer require --dev phpunit/phpunit:^9.6
+```
+
+[pieceofcake2/app](https://github.com/pieceofcake2/app) スケルトンには最初から含まれています。
+フォークは Composer でインストールし、Composer のオートローダーでクラスを読み込むため、
+以下の `.phar` の手順や `Config/bootstrap.php` でのオートローダーの回避策は不要です。
+
+PHPUnit 9 ではテストの書き方も変わります。`setUp()`/`tearDown()` をオーバーライドする際は
+戻り値の型 `: void` が必要で、テストクラスは `PHPUnit_Framework_TestCase` ではなく
+`PHPUnit\Framework\TestCase` を継承し、`assertContains()` は文字列を受け付けなくなりました。
+詳しくは以下の各ボックスを参照してください。
+:::
+
 ### Composer でのインストール
 
 長い間、CakePHP 2.x は PHPUnit 3.7.x のみをサポートしてきました。
@@ -52,6 +70,11 @@ PHPUnit 4.x または 5.x のいずれかがインストールされます。
 > を URL に付け足してください。
 
 ## テスト用データベースのセットアップ
+
+::: pieceofcake2
+モダンなアプリケーション構成では、`core.php` と `database.php` は `app/Config/` ではなく
+`config/` にあります。
+:::
 
 テストを実行する前に、 `app/Config/core.php` のデバッグレベルを必ず1以上にしておきましょう。
 デバッグレベルが 0 のとき、テストライブラリはウェブランナーからアクセスすることができません。
@@ -108,6 +131,21 @@ CakePHP におけるほとんどのことがそうであるように、テスト
     ./Console/cake test app Model/Post
 
 この例では、Post モデルをテストしています。
+
+::: pieceofcake2 テストディレクトリ
+フォークは両方のアプリケーション構成に対応しています。テストディレクトリは自動的に選ばれ、
+プロジェクトルートに `tests/` ディレクトリがあればそれを、無ければ `app/Test/` を使います。
+
+| | レガシー構成 | モダン構成 |
+|---|---|---|
+| テストケース | `app/Test/Case/[Type]` | `tests/TestCase/[Type]` |
+| フィクスチャ | `app/Test/Fixture` | `tests/Fixture` |
+| コンソール | `app/Console/cake` (または `vendor/bin/cake`) | `bin/cake` |
+
+PHPUnit 9 には `PHPUnit_Framework_TestCase` が存在しないため、CakePHP の拡張機能が不要な
+テストクラスは `PHPUnit\Framework\TestCase` を継承します。
+[ディレクトリ構成](/ja/pieceofcake2/directory-structure) も参照してください。
+:::
 
 ## 最初のテストケースを作成する
 
@@ -184,6 +222,29 @@ public function testBar() {
 含まれていることを保証しています。もし期待した文字列が含まれていなければテストは失敗し、
 コードが正しくないことがわかります。
 
+::: pieceofcake2
+PHPUnit 9 の `assertContains()` は配列などの iterable 専用で、文字列を渡すと失敗します。
+文字列には `assertStringContainsString()` (または CakePHP の `assertTextContains()`)
+を使ってください。また `setUp()` は `CakeTestCase` と同じく戻り値の型 `void` を付けて
+宣言する必要があります。
+
+```php
+public function setUp(): void
+{
+    parent::setUp();
+    $Controller = new Controller();
+    $View = new View($Controller);
+    $this->Progress = new ProgressHelper($View);
+}
+
+public function testBar()
+{
+    $result = $this->Progress->bar(90);
+    $this->assertStringContainsString('width: 90%', $result);
+}
+```
+:::
+
 テストケースを使うことにより、 あなたは既知の入力セットと期待される出力結果との関係を
 簡単に記述することができます。これにより、あなたの書いたコードが期待した動作を満たしているかどうか
 簡単に確かめることができます。あなたはより自信を持ってコードを書くことができるようになる
@@ -197,6 +258,14 @@ PHPUnit をインストールし、テストケースをいくつか書いたら
 何らかの変更をコミットする前に、テストを実行することで何も壊していないか確認することはとてもいい考えです。
 
 ### ブラウザからテストを実行する
+
+::: pieceofcake2
+フォークにもブラウザ用のテストランナーは残っています。レガシー構成では Bake プラグインの
+`plugins/Bake/Console/Templates/skel/webroot/test.php` を `app/webroot/test.php` に
+コピーします。モダン構成では [pieceofcake2/app](https://github.com/pieceofcake2/app)
+スケルトンの `webroot/test.php` を使います。`debug` が 1 以上である必要があります。
+なお、フォーク自体のテストはコマンドラインで実行しています。
+:::
 
 CakePHP はテストを実行するためのウェブベースのインタフェースを提供しており、ブラウザを通して
 テストを実行することができます。ウェブランナーには `http://localhost/your_app/test.php` から
@@ -221,6 +290,30 @@ CakePHP はテストを実行するためのウェブベースのインタフェ
 グレーの行は Xdebug によって実行できないと考えられた行です。
 
 ### コマンドラインからのテスト実行
+
+::: pieceofcake2
+`./Console/cake` や `lib/Cake/Console/cake` の代わりに、構成に合ったコンソールを使います
+(`lib/Cake` はもうありません)。
+
+```bash
+# レガシー構成 (app/)。app ディレクトリから実行
+./Console/cake test app Model/Article
+# またはプロジェクトルートから実行
+vendor/bin/cake test app Model/Article
+
+# モダン構成。プロジェクトルートから実行
+bin/cake test app Model/Article
+```
+
+フォークの CI と同じように PHPUnit を直接実行することもできます。
+[pieceofcake2/app](https://github.com/pieceofcake2/app) スケルトンの `phpunit.xml.dist` は
+`CakeFixtureInjector` リスナーの登録、`tests/TestCase/` の実行、`stderr="true"`
+(セッションを使うテストのため) を設定済みです。
+
+```bash
+vendor/bin/phpunit
+```
+:::
 
 CakePHP はテストを実行するために `test` シェルを提供します。test シェルを使うことでアプリやコア、
 プラグインのテストを簡単に行うことができます。
@@ -301,6 +394,18 @@ PHPUnit の出力先を標準エラーに切り替えることで、この問題
 - `tearDownAfterClass` はクラスのテストメソッドをすべて実行した後に一度だけ呼ばれます。
   このメソッドは *static* でなければなりません。
 
+::: pieceofcake2
+PHPUnit 9 ではこれらのメソッドに戻り値の型があり、オーバーライドする側も同じ型を
+宣言しないと PHP の Fatal error になります。
+
+```php
+public function setUp(): void
+public function tearDown(): void
+public static function setUpBeforeClass(): void
+public static function tearDownAfterClass(): void
+```
+:::
+
 ## フィクスチャ
 
 テストコードの挙動がデータベースやモデルに依存するとき、テストに使うためのテーブルを生成し、
@@ -320,6 +425,10 @@ CakePHP はフィクスチャに基づいたテストケースを実行するに
 5.  データベースからフィクスチャが作成していたテーブルを削除する
 
 ### フィクスチャの作成
+
+::: pieceofcake2
+モダン構成では、フィクスチャは `app/Test/Fixture` ではなく `tests/Fixture` に置きます。
+:::
 
 フィクスチャを作成するときは主にふたつのことを定義します。ひとつはどのようなフィールドを持った
 テーブルを作成するか、もうひとつは初期状態でどのようなレコードをテーブルに配置するかです。
@@ -1210,6 +1319,13 @@ class CurrencyRendererHelperTest extends CakeTestCase {
 
 ## テストスイートの作成
 
+::: pieceofcake2
+モダン構成ではテストケースは `tests/TestCase/` にあるため、以下の例の `TESTS . 'Case'`
+は `TESTS . 'TestCase'` (例: `TESTS . 'TestCase/Model'`) に読み替えてください。
+スケルトンのような `phpunit.xml.dist` で PHPUnit を直接実行する場合は、テストディレクトリは
+そこで設定されるので `AllTests` スイートは必須ではありません。
+:::
+
 いくつかのテストを同時に実行したいときはテストスイートを作成することができます。テストスイートはいくつかの
 テストケースから構成されています。 `CakeTestSuite` は少しばかりですがファイルシステムをベースに
 簡単にテストスイートを作成するためのメソッドを提供します。すべてのモデルに対してのテストスイートを
@@ -1253,6 +1369,13 @@ $ Console/cake test app AllTests
 ```
 
 ## プラグインのテスト作成
+
+::: pieceofcake2
+フォークではプラグインのテストもモダン構成にできます。プラグインディレクトリ内に
+`tests/TestCase` と `tests/Fixture` があればそれを使い、無ければ `Test/Case` と
+`Test/Fixture` を使います。Composer でインストールしたプラグインは、モダン構成では通常
+`app/Plugin/` ではなく `plugins/` に置かれます。
+:::
 
 プラグインのテストは、プラグインのフォルダ内の指定されたディレクトリに作成します。 :
 

@@ -4,6 +4,13 @@
 You are viewing documentation for an **unsupported version** of CakePHP. For the most recent stable version, please visit the [official documentation](https://book.cakephp.org/).
 :::
 
+::: pieceofcake2
+This is the CakePHP 2.x Cookbook adapted for **pieceofcake2/cakephp**, a
+community-maintained fork of CakePHP 2.x that runs on PHP 8.0 and newer.
+Boxes like this one mark where the fork differs from the original book.
+See [About the pieceofcake2 Fork](/pieceofcake2) for an overview.
+:::
+
 The CakePHP cookbook is an openly developed and community editable documentation
 project. We hope to maintain a high level of quality, validity and accuracy for
 the documentation. Notice the "Improve this Doc" button in the upper right-hand
@@ -23,6 +30,12 @@ EPUB, you can now read it on more devices, as well as offline.
 - [PDF](../_downloads/en/CakePHPCookbook.pdf)
 - [EPUB](../_downloads/en/CakePHPCookbook.epub)
 - [Original Source](https://github.com/cakephp/docs)
+
+::: pieceofcake2
+PDF and EPUB downloads are not provided for this edition of the book.
+The links above are kept from the original Cookbook and do not work on this site.
+The source of this edition is [pieceofcake2/docs](https://github.com/pieceofcake2/docs).
+:::
 
 </div>
 

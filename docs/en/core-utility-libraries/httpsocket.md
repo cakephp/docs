@@ -127,6 +127,14 @@ exception will be thrown. By default HttpSocket will use the mozilla certificate
 authority file to verify SSL certificates. You can use the following options to
 configure how SSL certificates are handled:
 
+::: pieceofcake2 CA certificates
+The bundled `lib/Cake/Config/cacert.pem` (last updated in 2016) has been removed.
+When `ssl_cafile` is not set, the fork uses the system CA bundle
+(`openssl.cafile` / `openssl.capath`) and falls back to the Mozilla bundle from
+[composer/ca-bundle](https://github.com/composer/ca-bundle), which is kept up to
+date through Composer. See [Security](/pieceofcake2/security).
+:::
+
 - `ssl_verify_peer` Set to false to disable SSL verification. This is
   **not recommended**.
 - `ssl_verify_host` Set to false if you wish to ignore hostname match errors

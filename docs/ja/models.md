@@ -60,6 +60,13 @@ Ingredient モデルの話に戻りましょう。これを動作させるには
 クラス名と同じファイル名をつけることになっています。
 この例の場合は `Ingredient.php` です。
 
+::: pieceofcake2
+モデルのファイルは、レガシーレイアウトでは `app/Model/`、モダンレイアウトでは
+`src/Model/` に置きます。`composer.json` で `src/` を classmap に指定していれば、
+`App::uses('AppModel', 'Model');` の行は省略できます。
+詳しくは [ディレクトリ構成](/ja/pieceofcake2/directory-structure) を参照してください。
+:::
+
 > [!NOTE]
 > CakePHP は対応するファイルが /app/Model に見つからない場合、
 > 動的にモデルオブジェクトを生成します。

@@ -24,6 +24,13 @@ this command will be the file `app/Locale/default.pot`. You use the pot file
 as a template for creating po files. If you are manually creating po files from
 the pot file, be sure to correctly set the `Plural-Forms` header line.
 
+::: pieceofcake2
+In the pieceofcake2 fork with the modern layout, translation files live in `resources/locales/`
+instead of `app/Locale/`. The extract shell still suggests `<app dir>/Locale` (`src/Locale`) as
+the output directory, so pass the path explicitly, e.g.
+`bin/cake i18n extract --output resources/locales`.
+:::
+
 ### Generating POT files for plugins
 
 You can generate a POT file for a specific plugin using:

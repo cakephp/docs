@@ -158,6 +158,20 @@ Configure::write('Session', array(
 `AppSessionHandler` というクラス名なら、
 `app/Model/Datasource/Session/AppSessionHandler.php` となります。
 
+::: pieceofcake2
+モダン構成では、ハンドラーは `src/Model/Datasource/Session/AppSessionHandler.php` に置きます。
+
+フォークは `CakeSessionHandlerInterface` のハンドラーを `SessionHandlerAdapter` で包んでおり、
+このアダプターは `session.use_strict_mode` (PHP 8.6 からデフォルトで有効) にも対応しています。
+受け取ったセッション ID は、ハンドラーの `read()` が空でない文字列を返したときだけ受け入れられます。
+未知の ID に対して `read()` は `''` を返し、一度も書き込まれていないセッションの `destroy()` は
+`true` を返すようにしてください (コアの `CacheSession` と `DatabaseSession` も同様です)。
+
+上記の `handler` に callable の配列を指定する方式は `session_set_save_handler()` に
+そのまま渡されますが、この callable 形式のシグネチャは PHP 8.4 で非推奨になっています。
+`engine` を指定する方式を使ってください。
+:::
+
 ### データーベースセッション
 
 セッションの設定方法の変更はデータベースセッションの定義の仕方も
@@ -203,7 +217,17 @@ schema シェルを実行して、このテーブルを作成できます。 :
 $ Console/cake schema create sessions
 ```
 
+::: pieceofcake2
+モダン構成では、スキーマファイルは `config/Schema/sessions.php`、コンソールは `bin/cake` です
+(`bin/cake schema create sessions`)。
+:::
+
 ### キャッシュセッション
+
+::: pieceofcake2
+フォークでは Xcache キャッシュエンジンは削除されています。代わりに APC (APCu)、
+Memcached、Memcache、Redis を使ってください。
+:::
 
 キャッシュクラスはセッションの格納にも使用されます。これはキャッシュ内の
 セッションを APC, memcache, または Xcache のように格納することを可能に

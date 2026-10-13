@@ -1,5 +1,16 @@
 # Backwards Compatibility Guide
 
+::: pieceofcake2
+This guide describes the policy of the original CakePHP 2.x releases.
+The pieceofcake2 fork keeps the 2.x API, but to support PHP 8 its releases
+(2.10.24.x, 2.11, 2.12, ...) include changes that can break applications
+upgrading from CakePHP 2.10.24, such as the Composer-only installation, the new
+framework directory layout and the extraction of Bake. Read the
+[Upgrade Guide](/pieceofcake2/upgrade) and the
+[CHANGELOG](https://github.com/pieceofcake2/cakephp/blob/2.x/CHANGELOG.md)
+before upgrading.
+:::
+
 Ensuring that you can upgrade your applications easily and smoothly is important
 to us. That's why we only break compatibility at major release milestones.
 You might be familiar with [semantic versioning](https://semver.org/), which is

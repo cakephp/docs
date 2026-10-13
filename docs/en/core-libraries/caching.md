@@ -36,6 +36,13 @@ to implement your own caching systems. The built-in caching engines are:
   extension (2.2.3 minimum). Redis provides a fast and persistent cache system
   similar to memcached, also provides atomic operations.
 
+::: pieceofcake2 Removed cache engines
+The `Wincache` and `Xcache` engines have been removed in the pieceofcake2 fork.
+The available engines are `File`, `Apc` (APCu), `Memcache`, `Memcached` and
+`Redis`. If you used Wincache or Xcache, switch to APCu, Memcached or Redis.
+See the [upgrade guide](/pieceofcake2/upgrade).
+:::
+
 ::: info Changed in version 2.3
 FileEngine is always the default cache engine. In the past a number of people had difficulty setting up and deploying APC correctly both in CLI + web. Using files should make setting up CakePHP simpler for new developers.
 :::

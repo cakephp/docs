@@ -8,6 +8,22 @@ standards.
 You can use the [CakePHP Code Sniffer](https://github.com/cakephp/cakephp-codesniffer) to check that your code
 follows required standards.
 
+::: pieceofcake2 Coding standard used by the fork
+The pieceofcake2 fork does **not** use the CakePHP 2 standard described on this
+page. Its code is checked with
+[cakephp/cakephp-codesniffer](https://github.com/cakephp/cakephp-codesniffer)
+`^5.0`, i.e. the `CakePHP` ruleset of CakePHP 5 (based on PSR-12), with a few
+CakePHP 2 specific exclusions in the fork's `phpcs.xml` (no namespaces,
+no required type declarations, no line length check, etc.).
+The main differences from the rules below are 4-space indentation instead of
+tabs, short array syntax `[]` instead of `array()`, and opening braces of
+classes and methods on their own line. The
+[pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton ships the same
+sniffer, so you can run `vendor/bin/phpcs` in your application.
+Code samples in this book follow the fork's style.
+See [Coding Standards](/pieceofcake2/coding-standards) for details.
+:::
+
 ## Language
 
 All code and comments should be written in English.
@@ -18,6 +34,11 @@ No new features should be added, without having their own tests – which
 should be passed before committing them to the repository.
 
 ## Indentation
+
+::: pieceofcake2
+The fork indents with **4 spaces**, not tabs (PSR-12; also set in the fork's
+`.editorconfig`).
+:::
 
 One tab will be used for indentation.
 
@@ -71,6 +92,12 @@ $matches = array_intersect_key(
 
 ## Line Length
 
+::: pieceofcake2
+The fork's `phpcs.xml` excludes the line length sniff
+(`Generic.Files.LineLength`), so these limits are a recommendation only and
+are not checked.
+:::
+
 It is recommended to keep lines at approximately 100 characters long for better code readability.
 Lines must not be longer than 120 characters.
 
@@ -108,6 +135,12 @@ if ((expr_1) || (expr_2)) {
   indentation.
 - Inline assignments should not be used inside of the control structures.
 
+::: pieceofcake2
+The fork's `phpcs.xml` excludes the assignment-in-condition sniff, so
+inline assignments such as `while ($row = $result->fetch())` are allowed in
+the fork's code.
+:::
+
 ``` php
 // wrong = no brackets, badly placed statement
 if (expr) statement;
@@ -134,6 +167,13 @@ if ($variable) {
 ```
 
 ### Ternary Operator
+
+::: pieceofcake2
+The CakePHP 5 standard requires the null coalescing operator where it
+applies: write `$options['variable'] ?? true` instead of
+`isset($options['variable']) ? $options['variable'] : true`.
+It also requires the short ternary `$a ?: $b` instead of `$a ? $a : $b`.
+:::
 
 Ternary operators are permissible when the entire ternary operation fits
 on one line. Longer ternaries should be split into `if else`
@@ -212,6 +252,26 @@ sign (=).
 
 ## Method Definition
 
+::: pieceofcake2
+Following PSR-12, the opening brace of a **class or method** goes on its own
+line (control structures keep the brace on the same line). Multi-line arrays,
+function calls and declarations require a trailing comma.
+
+```php
+class Foo
+{
+    public function someFunction($arg1, $arg2 = '')
+    {
+        if (expr) {
+            statement;
+        }
+
+        return $var;
+    }
+}
+```
+:::
+
 Example of a method definition:
 
 ``` php
@@ -247,6 +307,13 @@ There are spaces on both side of the equals sign.
 
 ### Typehinting
 
+::: pieceofcake2
+The fork's `phpcs.xml` excludes the `SlevomatCodingStandard.TypeHints` rules of
+the CakePHP 5 standard, so native parameter, return and property type
+declarations and `declare(strict_types=1)` are not required. DocBlock types are
+still expected.
+:::
+
 Arguments that expect objects or arrays can be typehinted:
 
 ``` php
@@ -277,6 +344,10 @@ public function foo($array) {
 ```
 
 ## Method Chaining
+
+::: pieceofcake2
+In the fork, chained calls are indented with 4 spaces, not a tab.
+:::
 
 Method chaining should have multiple methods spread across separate lines, and
 indented with one tab:
@@ -515,6 +586,12 @@ class ExampleClass {
 ```
 
 ### Variables
+
+::: pieceofcake2
+The fork requires short array syntax: write `['John', 'Hans', 'Arne']`
+instead of `array('John', 'Hans', 'Arne')`
+(`Generic.Arrays.DisallowLongArraySyntax`).
+:::
 
 Variable names should be as descriptive as possible, but also as short
 as possible. All variables should start with a lowercase letter, and

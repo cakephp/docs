@@ -4,6 +4,13 @@
 > この文書のバージョンは CakePHP 2.x 用です。
 > [CakePHP 3.x の文書はここにあります](https://book.cakephp.org/3.0/) 。
 
+::: pieceofcake2
+このサイトは、CakePHP 2.x クックブックを **pieceofcake2/cakephp** 向けに調整したものです。
+pieceofcake2/cakephp は、PHP 8.0 以降で動作するようにコミュニティが保守している CakePHP 2.x のフォークです。
+このような枠は、オリジナルのクックブックとフォークとの違いを示します。
+概要は [pieceofcake2 フォークについて](/ja/pieceofcake2) を参照してください。
+:::
+
 CakePHP クックブックは、オープンに開発されている、コミュニティで編集可能なドキュメントのプロジェクトです。
 ドキュメンテーションの品質、正当性、正確性の高さを維持することを期待しています。
 右上の "Improve this Doc" (この文書を改善する) ボタンに注目してください。
@@ -22,6 +29,12 @@ CakePHP クックブックは、オープンに開発されている、コミュ
 - [PDF(英語)](../_downloads/en/CakePHPCookbook.pdf)
 - [EPUB](../_downloads/ja/CakePHPCookbook.epub)
 - [オリジナルソース](https://github.com/cakephp/docs)
+
+::: pieceofcake2
+このサイトでは PDF 版と EPUB 版を提供していません。
+上のリンクはオリジナルのクックブックから引き継いだもので、このサイトでは機能しません。
+このサイトのソースは [pieceofcake2/docs](https://github.com/pieceofcake2/docs) にあります。
+:::
 
 </div>
 

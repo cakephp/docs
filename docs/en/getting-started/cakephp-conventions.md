@@ -105,6 +105,13 @@ classes you would typically use in a CakePHP application:
 
 Each file would be located in the appropriate folder in your app folder.
 
+::: pieceofcake2
+In the modern layout, PHP class files go under `src/` instead of `app/`
+(e.g. `src/Controller/`, `src/Model/`, `src/View/Helper/`). If your `composer.json`
+autoloads them with `"classmap": ["src/"]`, run `composer dump-autoload` after adding
+a new class file. See [Directory Structure](/pieceofcake2/directory-structure).
+:::
+
 ## Model and Database Conventions
 
 Model class names are singular and CamelCased. Person, BigPerson,
@@ -185,6 +192,15 @@ together:
 - Controller class: "PeopleController", found at
   /app/Controller/PeopleController.php
 - View template, found at /app/View/People/index.ctp
+
+::: pieceofcake2 Modern layout
+In the modern layout the same files are located at:
+
+- Model class: `src/Model/Person.php`
+- Controller class: `src/Controller/PeopleController.php`
+- View template: `templates/People/index.ctp`
+  (the pattern is `templates/Controller/underscored_function_name.ctp`)
+:::
 
 Using these conventions, CakePHP knows that a request to
 <http://example.com/people/> maps to a call on the index() function

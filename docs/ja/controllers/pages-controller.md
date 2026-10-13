@@ -9,6 +9,15 @@ CakePHPのコンソールユーティリティ"bake"を使って新しいアプ�
 `app/Controller/` フォルダに作られます。また、 `lib/Cake/Console/Templates/skel/Controller/PagesController.php`
 からファイルをコピーすることもできます。
 
+::: pieceofcake2
+pieceofcake2 フォークには `lib/Cake/Console/Templates/skel/` はありません。`PagesController.php` は
+Bake プラグインの `Console/Templates/skel/Controller/` か、
+[pieceofcake2/app](https://github.com/pieceofcake2/app) スケルトンからコピーしてください。
+モダンレイアウトではコントローラを `src/Controller/` に、ページのビューを `templates/Pages/`
+（例: `templates/Pages/about_us.ctp`）に置きます。フレームワーク本体は Composer によって
+`vendor/pieceofcake2/cakephp/` にインストールされます。こちらも直接編集しないでください。
+:::
+
 ::: info Changed in version 2.1
 CakePHP 2.0ではPages Controllerは `lib/Cake` の一部でした。2.1からPages Controllerはコアの一部ではなくなり、 appフォルダに提供されるようになりました。
 :::

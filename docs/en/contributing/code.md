@@ -16,6 +16,15 @@ setup. You'll need the following software:
 - PHPUnit 3.7.0 or greater (3.7.38 recommended)
 - MySQL, SQLite, or Postgres
 
+::: pieceofcake2
+To work on the pieceofcake2 fork you need PHP 8.0 or newer and Composer instead
+of the versions above. PHPUnit 9.6, PHP_CodeSniffer and PHPStan are installed as
+dev dependencies by `composer install`; you don't install PHPUnit separately.
+`ext/mcrypt` is not required (`ext/mbstring` is strongly recommended; a polyfill
+is used otherwise). Supported databases are MySQL, PostgreSQL, SQLite and
+SQL Server 2022+.
+:::
+
 Set up your user information with your name/handle and working email address:
 
     git config --global user.name 'Bob Barker'
@@ -41,6 +50,22 @@ to date with CakePHP:
 
     cd cakephp
     git remote add upstream git://github.com/cakephp/cakephp.git
+
+::: pieceofcake2
+For the fork, fork and clone
+[pieceofcake2/cakephp](https://github.com/pieceofcake2/cakephp) instead, and add
+it as `upstream`. Then install the dependencies and run the checks the fork's CI runs:
+
+```bash
+git remote add upstream https://github.com/pieceofcake2/cakephp.git
+composer install
+./vendor/bin/phpunit
+./vendor/bin/phpcs
+```
+
+The fork's README also describes running the tests against each database
+with Docker (`DB=mysql docker-compose exec web ./vendor/bin/phpunit`).
+:::
 
 Now that you have CakePHP setup you should be able to define a `$test`
 [database connection](../development/configuration#database-configuration), and
@@ -109,6 +134,13 @@ git push origin <branch-name>
 Once your branch is on GitHub, you can submit a pull request on GitHub.
 
 ### Choosing where your changes will be merged into
+
+::: pieceofcake2
+The pieceofcake2 fork has a single maintained branch, **2.x**; base your branch
+on it and target it with your pull request. The fork focuses on PHP 8
+compatibility, bug and security fixes and the migration path to CakePHP 5, and
+does not aim to add new features.
+:::
 
 When making pull requests you should make sure you select the correct base
 branch, as you cannot edit it once the pull request is created.

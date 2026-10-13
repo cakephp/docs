@@ -21,10 +21,68 @@ CakePHP をダウンロードして展開すると、次のようなファイル
 - 最後の *vendors* フォルダは、あなたが必要とする外部作成の PHP ライブラリを置いて、
   CakePHP アプリケーションで使用できるようにする場所です。
 
+::: pieceofcake2 ディレクトリ構成
+pieceofcake2 フォークでは、展開するアーカイブも `lib/` フォルダもありません。
+CakePHP は Composer によって `vendor/pieceofcake2/cakephp` にインストールされ (フレームワークのコードは `src/Cake/`)、
+外部ライブラリも `vendor/` に入ります。アプリケーションのディレクトリ構成は次の 2 種類をサポートしています。
+
+**従来の構成 (legacy)** (このページで説明している構成):
+
+```text
+your-project/
+├── app/            (Config/, Controller/, Model/, View/, Test/, tmp/, webroot/ など)
+├── plugins/        (Composer でインストールしたプラグイン)
+├── vendor/         (Composer。pieceofcake2/cakephp もここ)
+└── composer.json
+```
+
+**モダンな構成 (modern)** (CakePHP 5 風。[pieceofcake2/app](https://github.com/pieceofcake2/app) を参照):
+
+```text
+your-project/
+├── bin/cake
+├── config/         (設定ファイル)
+├── src/            (PHP コードすべて: Controller/, Model/, View/Helper/, Console/, Lib/)
+├── templates/      (.ctp ビューファイルすべて)
+├── resources/locales/
+├── tests/          (TestCase/, Fixture/)
+├── plugins/
+├── vendor/
+├── logs/
+├── tmp/
+├── webroot/        (ドキュメントルート)
+└── composer.json
+```
+
+詳細と移行対応表は [ディレクトリ構成](/ja/pieceofcake2/directory-structure) を参照してください。
+:::
+
 ## App フォルダ
 
 アプリケーション開発の大部分は、CakePHP の *app* フォルダ内で行われます。
 *app* の内部フォルダについて調べてみましょう。
+
+::: pieceofcake2 モダンな構成
+モダンな構成では、これらのフォルダは次の場所にあります。
+
+| 従来の構成 (`app/`)        | モダンな構成                 |
+|--------------------------|------------------------------|
+| `app/Config`             | `config/`                    |
+| `app/Console`            | `src/Console/`               |
+| `app/Controller`         | `src/Controller/`            |
+| `app/Lib`                | `src/Lib/`                   |
+| `app/Locale`             | `resources/locales/`         |
+| `app/Model`              | `src/Model/`                 |
+| `app/Plugin`             | `plugins/` (Composer で管理) |
+| `app/Test`               | `tests/` (`TestCase/`, `Fixture/`) |
+| `app/tmp`                | `tmp/` (ログは `logs/`)      |
+| `app/Vendor`             | `vendor/` (Composer で管理)  |
+| `app/View` (`.ctp` ファイル) | `templates/`             |
+| `app/View/Helper`        | `src/View/Helper/`           |
+| `app/webroot`            | `webroot/`                   |
+
+フレームワークはどちらの構成も自動的に判別します。
+:::
 
 Config  
 CakePHP が使用する（数個の）設定ファイルが入る場所です。

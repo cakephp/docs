@@ -10,6 +10,11 @@ manipulating strings and is normally accessed statically. Example:
 The `String` class was deprecated in 2.7 in favour of the `CakeText` class. While the `String` class is still available for backwards compatibility, using `CakeText` is recommended as it offers compatibility with PHP7 and HHVM.
 :::
 
+::: pieceofcake2
+The `String` class is not available in the pieceofcake2 fork (`String` is a
+reserved word since PHP 7). Use `CakeText` instead.
+:::
+
 If you need `TextHelper` functionalities outside of a `View`,
 use the `CakeText` class:
 

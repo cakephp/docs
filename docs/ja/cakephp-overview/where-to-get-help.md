@@ -1,5 +1,11 @@
 # 情報の探し方
 
+::: pieceofcake2
+以下は本家 CakePHP プロジェクトの情報源で、CakePHP 2.x はすでにサポートが終了 (EOL) しています。
+pieceofcake2 フォーク固有の問題 (PHP 8 対応など) は
+[pieceofcake2/cakephp の Issue](https://github.com/pieceofcake2/cakephp/issues) に報告してください。
+:::
+
 ## 公式 CakePHP ウェブサイト
 
 <https://cakephp.org>
@@ -44,6 +50,11 @@ API で提供される情報が十分ではないと感じる場合、CakePHP �
 関数の実践的な例やクラスのメンバーの使用法として使用できます。 :
 
     lib/Cake/Test/Case
+
+::: pieceofcake2
+pieceofcake2 フォークでは、フレームワークのテストケースは `tests/TestCase/` にあります
+(Composer でインストールした場合は `vendor/pieceofcake2/cakephp/tests/TestCase/`)。
+:::
 
 ## IRC チャンネル
 

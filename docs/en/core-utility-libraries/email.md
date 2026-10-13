@@ -63,6 +63,15 @@ Similar to database configuration, email configuration can be centralized in a c
 Create the file `app/Config/email.php` with the class `EmailConfig`.
 The `app/Config/email.php.default` has an example of this file.
 
+::: pieceofcake2 Config file location
+`email.php` is loaded from the application's config directory:
+
+- Legacy layout: `app/Config/email.php`
+- Modern layout: `config/email.php`
+
+See [Directory Structure](/pieceofcake2/directory-structure).
+:::
+
 `CakeEmail` will create an instance of the `EmailConfig` class to access the
 config. If you have dynamic data to put in the configs, you can use the
 constructor to do that:
@@ -249,6 +258,13 @@ This would use the following view files:
 - `app/View/Emails/html/welcome.ctp`
 - `app/View/Layouts/Emails/html/fancy.ctp`
 
+::: pieceofcake2
+In the modern layout, email templates live under `templates/` instead of
+`app/View/`: `templates/Emails/html/welcome.ctp` and
+`templates/Layouts/Emails/html/fancy.ctp`.
+See [Directory structure](/pieceofcake2/directory-structure).
+:::
+
 When sending templated emails you have the option of sending either
 `text`, `html` or `both`.
 
@@ -362,6 +378,13 @@ CakePHP supports the Mail (default), Debug and SMTP transports.
 To configure your method, you must use the `CakeEmail::transport()`
 method or have the transport in your configuration.
 
+::: pieceofcake2 MailTransport signature
+If you extend `MailTransport` and override `_mail()`, update it to the new
+typed signature:
+`protected function _mail(string $to, string $subject, string $message, array|string $headers = [], string $params = ''): void`.
+See the [upgrade guide](/pieceofcake2/upgrade).
+:::
+
 #### Creating custom Transports
 
 You are able to create your custom transports to integrate with others email
@@ -385,6 +408,10 @@ You must implement the method `send(CakeEmail $Email)` with your custom logic.
 Optionally, you can implement the `config($config)` method. `config()` is
 called before send() and allows you to accept user configurations. By default,
 this method puts the configuration in protected attribute `$_config`.
+
+::: pieceofcake2
+In the modern layout, put custom transports in `src/Lib/Network/Email/`.
+:::
 
 If you need to call additional methods on the transport before send, you can use
 `CakeEmail::transportClass()` to get an instance of the transport.

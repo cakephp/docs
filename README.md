@@ -1,4 +1,4 @@
-# CakePHP 2 Documentation (pieceofcake2 fork)
+# CakePHP 2 Documentation (Piece of Cake 2 fork)
 
 Documentation for [pieceofcake2/cakephp](https://github.com/pieceofcake2/cakephp),
 a community-maintained fork of CakePHP 2.x for PHP 8, maintained by the

@@ -10,6 +10,22 @@ can easily add to the functionality inherited from the CakePHP
 core, configure additional/different URL mappings (routes), and
 define additional/different inflections.
 
+::: pieceofcake2 Configuration file locations
+The fork supports two application layouts. Configuration files referred to as
+`app/Config/...` on this page are in `config/` in the modern layout:
+
+| | Legacy layout | Modern layout |
+|---|---|---|
+| Database | `app/Config/database.php` | `config/database.php` |
+| Core settings | `app/Config/core.php` | `config/core.php` |
+| Bootstrap | `app/Config/bootstrap.php` | `config/bootstrap.php` |
+| Schema files | `app/Config/Schema/` | `config/Schema/` |
+
+The `CONFIG` constant points to `config/` when that directory exists in the
+project root, otherwise to `app/Config/`. See
+[Directory Structure](/pieceofcake2/directory-structure).
+:::
+
 <div class="index">
 
 database.php, database.php.default
@@ -86,8 +102,22 @@ all databases other than DB2. If you wish to use UTF-8 encoding
 with mysql/mysqli connections you must use 'utf8' without the
 hyphen.
 
+::: pieceofcake2
+In the fork, `encoding` is passed in the PDO DSN when connecting
+(`charset=...` for MySQL, `options='--client_encoding=...'` for PostgreSQL)
+instead of issuing `SET NAMES` afterwards. Existing configurations keep working.
+:::
+
 schema  
 Used in PostgreSQL database setups to specify which schema to use.
+
+::: pieceofcake2
+The fork's SQL Server driver (SQL Server 2022+) also uses `schema` (default
+`dbo`), takes the port from `port`, and accepts an `options` array of
+connection options such as `'TrustServerCertificate' => 'yes'`. For PostgreSQL,
+an optional `sslmode` key is added to the DSN. See the
+[Upgrade Guide](/pieceofcake2/upgrade).
+:::
 
 unix_socket  
 Used by drivers that support it to connect via unix socket files. If you are
@@ -139,6 +169,14 @@ vendors, such as Microsoft SQL Server, PostgreSQL and MySQL.
 </div>
 
 ## Additional Class Paths
+
+::: pieceofcake2
+`App::build()` still works in the fork. With Composer classmap autoloading
+(as in the [pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton,
+`"autoload": {"classmap": ["src/"]}`), classes are found by Composer and
+`App::uses()` is not needed for them; run `composer dump-autoload` after adding
+a class file. Framework classes never need `App::uses()` in the fork.
+:::
 
 It's occasionally useful to be able to share MVC classes between
 applications on the same system. If you want the same controller in
@@ -387,6 +425,14 @@ Security.cipherSeed
 A random numeric string (digits only) used to encrypt/decrypt
 strings.
 
+::: pieceofcake2
+In the fork, `Security.salt` is also used to sign CSRF tokens (HMAC), so keep it
+secret and unique per application. `Security.cipherSeed` is only used by the
+weak `Security::cipher()`, which is the default `'cipher'` type of
+`CookieComponent`; switch cookies to `'aes'` instead. See
+[Security](/pieceofcake2/security).
+:::
+
 Asset.timestamp  
 Appends a timestamp which is last modified time of the particular
 file at the end of asset files URLs (CSS, JavaScript, Image) when
@@ -422,6 +468,11 @@ Error constant. Used for differentiating error logging and
 debugging. Currently PHP supports LOG_DEBUG.
 
 ### Core Cache Configuration
+
+::: pieceofcake2
+The fork removed the Xcache and Wincache cache engines. The available engines
+are File, Apc (uses APCu when available), Memcached, Memcache and Redis.
+:::
 
 CakePHP uses two cache configurations internally. `_cake_model_` and `_cake_core_`.
 `_cake_core_` is used to store file paths, and object locations. `_cake_model_` is
@@ -846,6 +897,12 @@ lib/Cake/Utility/Inflector.php, with the added rules taking precedence
 over the core rules.
 
 ## Bootstrapping CakePHP
+
+::: pieceofcake2
+In the modern layout the bootstrap file is `config/bootstrap.php`. The core
+inflection rules are in `src/Cake/Utility/Inflector.php` of the fork
+(`lib/Cake` no longer exists).
+:::
 
 If you have any additional configuration needs, use CakePHP's
 bootstrap file, found in app/Config/bootstrap.php. This file is

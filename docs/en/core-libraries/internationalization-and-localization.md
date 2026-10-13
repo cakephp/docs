@@ -68,6 +68,16 @@ look something like this:
 /app/Locale/por/LC_MESSAGES/default.po (Portuguese)
 ```
 
+::: pieceofcake2 Locale directory
+The pieceofcake2 fork looks for locale files in both locations:
+
+- Legacy layout: `app/Locale/<locale>/LC_MESSAGES/<domain>.po`
+- Modern layout: `resources/locales/<locale>/LC_MESSAGES/<domain>.po`
+
+Plugin translations still go in the plugin's `Locale/` directory.
+See [Directory Structure](/pieceofcake2/directory-structure).
+:::
+
 To create or edit your po files it's recommended that you do *not*
 use your favorite editor. To create a po file for the first time it
 is possible to copy the pot file to the correct location and change

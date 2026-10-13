@@ -170,6 +170,14 @@ CakePHP's existing helper structure, you'll need to create a new
 class in `/app/View/Helper`. Let's call our helper LinkHelper. The
 actual PHP class file would look something like this:
 
+::: pieceofcake2
+In the pieceofcake2 fork with the modern layout, helpers go in `src/View/Helper/`
+(e.g. `src/View/Helper/LinkHelper.php`). Framework classes such as `Helper` and `HtmlHelper`
+are autoloaded by Composer, so `App::uses()` for them is optional. `App::uses()` for your own
+classes such as `AppHelper` is only unnecessary if your application classes are autoloaded
+by Composer (see [Directory structure](/pieceofcake2/directory-structure)).
+:::
+
 ``` php
 /* /app/View/Helper/LinkHelper.php */
 App::uses('AppHelper', 'View/Helper');

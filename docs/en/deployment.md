@@ -27,7 +27,19 @@ In all cases you will want to set the virtual host/domain's document to be
 `app/webroot/`. This removes the possibility of files outside of the webroot
 directory being executed.
 
+::: pieceofcake2 Modern layout
+In the modern layout ([pieceofcake2/app](https://github.com/pieceofcake2/app)),
+set the document root to `webroot/` at the project root. There is no `.htaccess`
+at the project root that forwards requests, so this is required, not optional.
+In both layouts, make sure `vendor/` is not inside the document root.
+:::
+
 ## Update core.php
+
+::: pieceofcake2
+`core.php` is `app/Config/core.php` in the legacy layout and `config/core.php`
+in the modern layout.
+:::
 
 Updating core.php, specifically the value of `debug` is extremely important.
 Turning debug = 0 disables a number of development features that should never be
@@ -71,3 +83,12 @@ through the Dispatcher is incredibly inefficient, it is strongly recommended to 
 them for production. For example like this:
 
     ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css
+
+::: pieceofcake2
+Adjust the paths to your layout. In the modern layout, Composer-installed plugins
+are in `plugins/` and the webroot is `webroot/`, for example:
+
+```bash
+ln -s ../../plugins/YourPlugin/webroot/css/yourplugin.css webroot/css/yourplugin.css
+```
+:::

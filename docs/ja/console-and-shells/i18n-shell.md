@@ -23,6 +23,13 @@ i18n シェルは、素早く容易に po テンプレートファイルを生�
 作成するためのテンプレートとして使用します。もし、手動で pot ファイルから po ファイルを
 作成するなら、 `Plural-Forms` ヘッダー行を正しく設定してください。
 
+::: pieceofcake2
+pieceofcake2 フォークのモダンレイアウトでは、翻訳ファイルは `app/Locale/` ではなく
+`resources/locales/` に置きます。extract シェルが出力先として提案するのは `<アプリケーションディレクトリ>/Locale`
+（`src/Locale`）のままなので、`bin/cake i18n extract --output resources/locales`
+のように出力先を明示してください。
+:::
+
 ### プラグイン用 POT ファイルの生成
 
 特定のプラグインで使用される POT ファイルを生成することができます。 :

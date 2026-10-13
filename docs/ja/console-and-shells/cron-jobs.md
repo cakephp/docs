@@ -1,5 +1,11 @@
 # cronjobに登録してシェルを実行する
 
+::: pieceofcake2
+pieceofcake2 フォークのモダンレイアウトでは、プロジェクトルートに移動して `bin/cake` を使います
+（例: `cd /full/path/to/project && bin/cake myshell myparam`）。
+`vendor/bin/cake` はどちらのレイアウトでも使えます。
+:::
+
 通常シェルは、ニュースレターを送ったり、たまにデータベースをクリーンアップしたりすることを、
 cronjobとして実行します。
 

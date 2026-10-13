@@ -2,6 +2,10 @@
 
 ## PEAR インストーラで CakePHP をインストール
 
+::: pieceofcake2
+pieceofcake2 フォークは PEAR パッケージとして公開されていません。Composer を使ってください。
+:::
+
 CakePHP はあなたが PEAR インストーラを使用してインストールできるように
 PEAR パッケージを公開しています。PEAR インストーラでインストールすると、
 複数のアプリケーションで CakePHP ライブラリを共有するのが簡単になります。
@@ -18,6 +22,20 @@ PEAR で CakePHP をインストールした後、PEAR が正しく設定され�
 CakePHP は PHP の `include_path` 上に配置されるので、とくに他の変更を行う必要はありません。
 
 ## Composer で CakePHP をインストール
+
+::: pieceofcake2
+pieceofcake2 フォークでは、この節の内容は古くなっています。
+
+- PHP 8.0 以上が必要で、インストール方法は Composer のみをサポートしています。
+- `cakephp/cakephp` の代わりに `pieceofcake2/cakephp` を require してください。
+  Composer の標準どおり、プロジェクトルートの `vendor/` を使います。
+- `CAKE_CORE_INCLUDE_PATH` は使われなくなりました。ディスパッチャファイルが `vendor/autoload.php` を読み込み、
+  フレームワークのクラスは Composer の classmap でオートロードされます。
+- Bake はコアに含まれていません。`cake bake` を使うには `pieceofcake2/bake` をインストールするか、
+  [pieceofcake2/app](https://github.com/pieceofcake2/app) スケルトンから始めてください。
+
+[インストール](/ja/pieceofcake2/installation) を参照してください。
+:::
 
 始める前に、最新の PHP バージョンであることを確認してください。
 
@@ -128,6 +146,14 @@ spl_autoload_register(array('App', 'load'), true, true);
 ソースコードの残りの部分と composer.json と composer.lock ファイルを保存しておいてください。
 
 ## 複数のアプリケーションで CakePHP を共有する
+
+::: pieceofcake2
+pieceofcake2 フォークでは CakePHP 本体はアプリケーションごとに Composer でインストールされ、
+`CAKE_CORE_INCLUDE_PATH` も使われないため、以下で説明する複数アプリケーションでのコア共有は当てはまりません。
+`ROOT`、`APP_DIR`、`WEBROOT_DIR` は引き続き変更できます。従来の構成 (legacy) ではディスパッチャファイルで、
+モダンな構成 (modern) では `config/define.php` で定義します。
+[ディレクトリ構成](/ja/pieceofcake2/directory-structure) を参照してください。
+:::
 
 時には、CakePHP のディレクトリをファイルシステムの別な場所に配置したいと思う場合があるかもしれません。
 共有しているホストの制限であったり、複数のアプリが同じ CakePHP のライブラリを共有したい場合などです。

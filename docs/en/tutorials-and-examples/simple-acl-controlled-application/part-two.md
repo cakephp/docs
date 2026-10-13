@@ -1,5 +1,13 @@
 # Simple Acl controlled Application - part 2
 
+::: pieceofcake2
+With the pieceofcake2 fork, use the PHP 8 compatible
+[pieceofcake2/acl_extras](https://github.com/pieceofcake2/acl_extras) fork of AclExtras. Install it
+with Composer as described in its README (see [Plugins](/pieceofcake2/plugins)), load it in
+`config/bootstrap.php` (modern) or `app/Config/bootstrap.php` (legacy), and run the commands
+below as `bin/cake AclExtras.AclExtras aco_sync`.
+:::
+
 ## An Automated tool for creating ACOs
 
 As mentioned before, there is no pre-built way to input all of our

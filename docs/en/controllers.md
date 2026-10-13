@@ -20,6 +20,15 @@ extends the core `Controller` class. The `AppController`
 class can be defined in `/app/Controller/AppController.php` and it should
 contain methods that are shared between all of your application's controllers.
 
+::: pieceofcake2 File locations
+The pieceofcake2 fork supports two application layouts. Controllers and components go in:
+
+- Legacy: `app/Controller/`, `app/Controller/Component/`
+- Modern: `src/Controller/`, `src/Controller/Component/`
+
+See [Directory structure](/pieceofcake2/directory-structure).
+:::
+
 Controllers provide a number of methods that handle requests. These are called
 *actions*. By default, each public method in
 a controller is an action, and is accessible from a URL. An action is responsible
@@ -118,6 +127,12 @@ The view files for these actions would be `app/View/Recipes/view.ctp`,
 `app/View/Recipes/share.ctp`, and `app/View/Recipes/search.ctp`. The
 conventional view file name is the lowercased and underscored version of the
 action name.
+
+::: pieceofcake2
+In the modern layout of the pieceofcake2 fork, view files are in `templates/` instead of
+`app/View/`, e.g. `templates/Recipes/view.ctp`. The same applies to the examples below
+(`templates/Posts/custom_file.ctp`). Templates inside a plugin stay in the plugin's `View/` directory.
+:::
 
 Controller actions generally use `~Controller::set()` to create a
 context that `View` uses to render the view. Because of the

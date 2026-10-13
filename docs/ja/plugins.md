@@ -12,6 +12,14 @@ CakePHP では、コントローラ・モデル・ビューのコンビをセッ
 しかし、プラグインはそれ自身の狭い環境で動作しますが、
 あたかもそれ自身がアプリケーションであるかのように振る舞います。
 
+::: pieceofcake2 メンテナンスされているプラグインのフォーク
+CakePHP 2 の有名なプラグインの多くは PHP 8 では動作しません。Piece of Cake 2 プロジェクトでは、
+その一部（DebugKit、Bake、Upload、TwigView など）の PHP 8 対応フォークをメンテナンスしています。
+一覧は [プラグイン](/ja/pieceofcake2/plugins) を参照してください。`cakephp/cakephp:^2.x` に依存する
+プラグインも、`pieceofcake2/cakephp` がそのパッケージを置き換える（replace）ためインストールはできますが、
+PHP 8 で動作する保証はありません。
+:::
+
 - [プラグインのインストール](plugins/how-to-install-plugins)
 - [プラグインの使い方](plugins/how-to-use-plugins)
 - [プラグインの作成](plugins/how-to-create-plugins)

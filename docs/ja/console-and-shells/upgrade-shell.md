@@ -1,5 +1,14 @@
 # Upgrade シェル
 
+::: pieceofcake2
+pieceofcake2 フォークでは `UpgradeShell` はコアから削除され、
+[pieceofcake2/upgrade](https://github.com/pieceofcake2/upgrade) プラグインに移されました
+（`composer require --dev pieceofcake2/upgrade` を実行し、`CakePlugin::load('Upgrade');` でロードします）。
+なお、フォーク自体は CakePHP 2.10.24 で動作しているアプリケーションのみをサポートしており、
+以下のダウンロードやコピーの手順はフォークには当てはまりません（インストールは Composer のみ）。
+ほとんどのアプリケーションではこのシェルは不要です。[アップグレードガイド](/ja/pieceofcake2/upgrade) を参照してください。
+:::
+
 upgrade シェルは、 CakePHP アプリケーションを 1.3 から 2.0 へアップグレードするのに役立ちます。
 
 全てのアップグレード工程を実行するには:

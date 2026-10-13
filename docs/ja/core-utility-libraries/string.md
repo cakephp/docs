@@ -9,6 +9,11 @@ CakeText クラスは文字列の作成や走査に関する便利なクラス�
 `String` クラスは、2.7 で非推奨になりました。 `CakeText` クラスを 推奨します。 `String` クラスは、後方互換のために提供し、 PHP7 や HHVM との 互換性に備えて `CakeText` の使用をお勧めします。
 :::
 
+::: pieceofcake2
+pieceofcake2 フォークには `String` クラスがありません (PHP 7 以降 `String` は予約語です)。
+代わりに `CakeText` を使ってください。
+:::
+
 もし、 `View` 以外で `TextHelper` が必要な場合、
 `CakeText` クラスを使ってください。 :
 

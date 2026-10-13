@@ -12,6 +12,25 @@ CakePHP uses PHPUnit as its underlying test framework. PHPUnit is the de-facto
 standard for unit testing in PHP. It offers a deep and powerful set of features
 for making sure your code does what you think it does.
 
+::: pieceofcake2 PHPUnit 9.6
+The pieceofcake2 fork uses **PHPUnit 9.6** (PHPUnit 3.7, 4.x and 5.x do not work
+with it). Install it with Composer as a dev dependency:
+
+```bash
+composer require --dev phpunit/phpunit:^9.6
+```
+
+The [pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton already
+requires it. The `.phar` instructions and the autoloader workaround for
+`Config/bootstrap.php` below are not needed: the fork is installed with Composer
+and loads classes through Composer's autoloader.
+
+PHPUnit 9 also changes how tests are written: `setUp()`/`tearDown()` overrides
+need a `: void` return type, test classes extend `PHPUnit\Framework\TestCase`
+instead of `PHPUnit_Framework_TestCase`, and `assertContains()` no longer
+accepts strings. The boxes below point these out.
+:::
+
 ### Install via Composer
 
 For a long time, CakePHP 2.x supported PHPunit 3.7.x only.
@@ -67,6 +86,11 @@ from <https://phar.phpunit.de/>. Make sure /usr/local/bin is in your php.ini fil
 > runner to display output.
 
 ## Test Database Setup
+
+::: pieceofcake2
+In the modern application layout, `core.php` and `database.php` are in
+`config/` instead of `app/Config/`.
+:::
 
 Remember to have a debug level of at least 1 in your `app/Config/core.php`
 file before running any tests. Tests are not accessible via the web runner when
@@ -127,6 +151,22 @@ line using the test shell:
     ./Console/cake test app Model/Post
 
 For example, would run the tests for your Post model.
+
+::: pieceofcake2 Test directories
+The fork supports both application layouts. The test directory is chosen
+automatically: if a `tests/` directory exists in the project root it is used,
+otherwise `app/Test/`.
+
+| | Legacy layout | Modern layout |
+|---|---|---|
+| Test cases | `app/Test/Case/[Type]` | `tests/TestCase/[Type]` |
+| Fixtures | `app/Test/Fixture` | `tests/Fixture` |
+| Console | `app/Console/cake` (or `vendor/bin/cake`) | `bin/cake` |
+
+With PHPUnit 9, classes that don't need CakePHP's extensions extend
+`PHPUnit\Framework\TestCase`; `PHPUnit_Framework_TestCase` no longer exists.
+See [Directory Structure](/pieceofcake2/directory-structure).
+:::
 
 ## Creating Your First Test Case
 
@@ -206,6 +246,29 @@ string that contains the content we expect. If the result did not contain the
 expected content the test would fail, and we would know that our code is
 incorrect.
 
+::: pieceofcake2
+In PHPUnit 9, `assertContains()` only works with arrays and other iterables;
+passing a string fails. Use `assertStringContainsString()` (or CakePHP's
+`assertTextContains()`) for strings. Also note that `setUp()` must be declared
+with the `void` return type, as in `CakeTestCase`:
+
+```php
+public function setUp(): void
+{
+    parent::setUp();
+    $Controller = new Controller();
+    $View = new View($Controller);
+    $this->Progress = new ProgressHelper($View);
+}
+
+public function testBar()
+{
+    $result = $this->Progress->bar(90);
+    $this->assertStringContainsString('width: 90%', $result);
+}
+```
+:::
+
 By using test cases you can easily describe the relationship between a set of
 known inputs and their expected output. This helps you be more confident of the
 code you're writing as you can easily check that the code you wrote fulfills the
@@ -222,6 +285,15 @@ the test cases very frequently. It's a good idea to run tests before committing
 any changes to help ensure you haven't broken anything.
 
 ### Running tests from a browser
+
+::: pieceofcake2
+The fork still ships the browser runner. In the legacy layout copy
+`app/webroot/test.php` from the Bake plugin
+(`plugins/Bake/Console/Templates/skel/webroot/test.php`); in the modern layout
+it is `webroot/test.php` from the
+[pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton. It requires
+`debug` to be 1 or higher. The fork itself is tested from the command line.
+:::
 
 CakePHP provides a web interface for running tests, so you can execute your
 tests through a browser if you're more comfortable in that environment. You can
@@ -251,6 +323,30 @@ lines are considered unexecutable code by Xdebug.
 <a id="run-tests-from-command-line"></a>
 
 ### Running tests from command line
+
+::: pieceofcake2
+Use the console of your layout instead of `./Console/cake` or
+`lib/Cake/Console/cake` (`lib/Cake` no longer exists):
+
+```bash
+# Legacy layout (app/), from the app directory
+./Console/cake test app Model/Article
+# or from the project root
+vendor/bin/cake test app Model/Article
+
+# Modern layout, from the project root
+bin/cake test app Model/Article
+```
+
+You can also run PHPUnit directly, as the fork's CI does. The
+[pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton includes a
+`phpunit.xml.dist` that registers the `CakeFixtureInjector` listener, runs
+`tests/TestCase/` and sets `stderr="true"` (so session tests work):
+
+```bash
+vendor/bin/phpunit
+```
+:::
 
 CakePHP provides a `test` shell for running tests. You can run app, core and
 plugin tests easily using the test shell. It accepts all the arguments you would
@@ -335,6 +431,18 @@ Test cases have a number of lifecycle callbacks you can use when doing testing:
 - `tearDownAfterClass` is called once after test methods in a case are started.
   This method must be *static*.
 
+::: pieceofcake2
+With PHPUnit 9 these methods have return types, and your overrides must declare
+them too, otherwise PHP raises a fatal error:
+
+```php
+public function setUp(): void
+public function tearDown(): void
+public static function setUpBeforeClass(): void
+public static function tearDownAfterClass(): void
+```
+:::
+
 ## Fixtures
 
 When testing code that depends on models and the database, one can use
@@ -356,6 +464,11 @@ CakePHP performs the following during the course of a fixture based test case:
 5.  Removes fixture tables from database.
 
 ### Creating fixtures
+
+::: pieceofcake2
+In the modern layout, fixtures go in `tests/Fixture` instead of
+`app/Test/Fixture`.
+:::
 
 When creating a fixture you will mainly define two things: how the table is
 created (which fields are part of the table), and which records will be
@@ -1273,6 +1386,14 @@ indicating 1 pass and 4 assertions.
 
 ## Creating Test Suites
 
+::: pieceofcake2
+In the modern layout test cases live in `tests/TestCase/`, so use
+`TESTS . 'TestCase'` (e.g. `TESTS . 'TestCase/Model'`) instead of
+`TESTS . 'Case'` in the examples below. When you run PHPUnit directly with a
+`phpunit.xml.dist` like the skeleton's, the test directory is configured there and
+an `AllTests` suite is not required.
+:::
+
 If you want several of your tests to run at the same time, you can
 create a test suite. A test suite is composed of several test cases.
 `CakeTestSuite` offers a few methods for easily creating test suites based on
@@ -1319,6 +1440,13 @@ $ Console/cake test app AllTests
 ```
 
 ## Creating Tests for Plugins
+
+::: pieceofcake2
+In the fork, plugin tests can also use the modern layout: `tests/TestCase` and
+`tests/Fixture` inside the plugin directory are used when they exist, otherwise
+`Test/Case` and `Test/Fixture`. Composer-installed plugins are usually in
+`plugins/` (modern layout) instead of `app/Plugin/`.
+:::
 
 Tests for plugins are created in their own directory inside the
 plugins folder. :

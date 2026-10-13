@@ -46,3 +46,9 @@ CakePHP の使用で益を受ける幾つかの点をざっと挙げると次の
 - ローカライゼーション
 - どんなウェブサイトのディレクトリ構造からでも動作。最小限の
   [Apache](https://httpd.apache.org/) の設定、または設定なしで可能。
+
+::: pieceofcake2
+pieceofcake2 フォークには PHP 8.0 以上が必要です (PHP 8.0〜8.5 をサポート)。
+コード生成 (Bake) は別パッケージの `pieceofcake2/bake` プラグインで提供されます。
+[pieceofcake2 フォークについて](/ja/pieceofcake2) を参照してください。
+:::

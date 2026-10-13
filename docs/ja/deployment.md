@@ -25,7 +25,18 @@ WEBサーバー特有の情報についていは [URLリライティング](inst
 どの場合においても `app/webroot/` をバーチャルホスト（バーチャルドメイン）のドキュメントルートに
 設定すべきでしょう。これは webroot ディレクトリの外側のファイルを実行される可能性を取り除きます。
 
+::: pieceofcake2 モダンな構成
+モダンな構成 ([pieceofcake2/app](https://github.com/pieceofcake2/app)) では、
+プロジェクトルートの `webroot/` をドキュメントルートに設定してください。
+プロジェクトルートにはリクエストを転送する `.htaccess` が無いため、この設定は必須です。
+どちらの構成でも、`vendor/` がドキュメントルート配下に入らないようにしてください。
+:::
+
 ## core.php の更新
+
+::: pieceofcake2
+`core.php` は、従来の構成では `app/Config/core.php`、モダンな構成では `config/core.php` です。
+:::
 
 core.php の更新、とりわけ `debug` 値は非常に重要です。 debug = 0 にすることで、
 広くインターネットに晒されることがあってはならない多くの開発用の機能を無効にできます。
@@ -64,3 +75,12 @@ if (getenv('CAKEPHP_DEBUG')) {
 本番環境においては、次のようにシンボリックリンクを張ることを強くお勧めします。 :
 
     ln -s app/Plugin/YourPlugin/webroot/css/yourplugin.css app/webroot/css/yourplugin.css
+
+::: pieceofcake2
+パスはディレクトリ構成に合わせて読み替えてください。モダンな構成では、Composer でインストールしたプラグインは
+`plugins/` に、webroot は `webroot/` にあります。例:
+
+```bash
+ln -s ../../plugins/YourPlugin/webroot/css/yourplugin.css webroot/css/yourplugin.css
+```
+:::

@@ -1,5 +1,13 @@
 # ACL を制御するシンプルなアプリケーション - パート2
 
+::: pieceofcake2
+pieceofcake2 フォークでは、AclExtras の PHP 8 対応フォークである
+[pieceofcake2/acl_extras](https://github.com/pieceofcake2/acl_extras) を使ってください。
+README に従って Composer でインストールし（[プラグイン](/ja/pieceofcake2/plugins) を参照）、
+`config/bootstrap.php`（モダン）または `app/Config/bootstrap.php`（レガシー）でロードしたうえで、
+以下のコマンドを `bin/cake AclExtras.AclExtras aco_sync` のように実行します。
+:::
+
 ## ACO の作成を自動化するツール
 
 前述した通り、全てのコントローラとアクションを ACL にあらかじめ入力し、構築しておく方法はありません。

@@ -39,4 +39,4 @@ echo $this->Time->format(
 Time ヘルパーのメソッドは多くが \$timezone パラメーターを持っています。このパラメーターは
 タイムゾーンを表す文字列か、 <span class="title-ref">DateTimeZone</span> クラスのインスタンスを渡すことができます。
 
-<!--@include: ../../core-utility-libraries/time.md{28,88}-->
+<!--@include: ../../core-utility-libraries/time.md{28,97}-->

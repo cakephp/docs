@@ -1,5 +1,12 @@
 # CakePHP Development Process
 
+::: pieceofcake2
+This page describes the upstream CakePHP team's process. The pieceofcake2 fork
+is maintained by the community on GitHub: it has a single maintained branch
+(`2.x`), and discussion happens in the issues and pull requests of
+[pieceofcake2/cakephp](https://github.com/pieceofcake2/cakephp), not on IRC.
+:::
+
 Here we attempt to explain the process we use when developing the
 CakePHP framework. We rely heavily on community interaction through
 tickets and IRC chat. IRC is the best place to find members of the

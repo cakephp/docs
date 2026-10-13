@@ -9,6 +9,12 @@ other pages in this guide for all the new features and API changes.
 > Be sure to checkout the [Upgrade Shell](../console-and-shells/upgrade-shell#upgrade-shell) included in the 2.0 core to help you
 > migrate your 1.3 code to 2.0.
 
+::: pieceofcake2
+In the pieceofcake2 fork, the Upgrade Shell is no longer part of the core. Install
+the [pieceofcake2/upgrade](https://github.com/pieceofcake2/upgrade) plugin
+(`composer require --dev pieceofcake2/upgrade`) and load it with `CakePlugin::load('Upgrade')`.
+:::
+
 ## PHP Version Support
 
 CakePHP 2.x supports PHP Version 5.2.8 and above. PHP4 support has been dropped.
@@ -956,6 +962,12 @@ PHPUnit 3.7. Of course you can continue to use SimpleTest in your application by
 replacing the related files. No further support will be given for SimpleTest and
 it is recommended that you migrate to PHPUnit as well. For some additional
 information on how to migrate your tests see PHPUnit migration hints.
+
+::: pieceofcake2
+The pieceofcake2 fork uses PHPUnit 9.6, not PHPUnit 3.7. PHPUnit classes use
+namespaced names, e.g. `PHPUnit\Framework\TestSuite` instead of
+`PHPUnit_Framework_TestSuite`. See the [Upgrade Guide](/pieceofcake2/upgrade).
+:::
 
 ### No more group tests
 

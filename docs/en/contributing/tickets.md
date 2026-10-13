@@ -4,6 +4,14 @@ Getting feedback and help from the community in the form of tickets is an
 extremely important part of the CakePHP development process. All of CakePHP's
 tickets are hosted on [GitHub](https://github.com/cakephp/cakephp/issues).
 
+::: pieceofcake2
+Issues with the pieceofcake2 fork belong in
+[pieceofcake2/cakephp issues](https://github.com/pieceofcake2/cakephp/issues)
+(or the issues of the relevant `pieceofcake2/*` plugin repository), not in
+cakephp/cakephp. Include your PHP version, your pieceofcake2/cakephp version,
+the error message and, if possible, minimal code that reproduces the problem.
+:::
+
 ## Reporting bugs
 
 Well written bug reports are very helpful. There are a few steps to help create
@@ -24,6 +32,15 @@ the best bug report possible:
   for that.
 
 ## Reporting security issues
+
+::: pieceofcake2
+CakePHP 2.x is no longer supported by the CakePHP core team, so vulnerabilities
+in the pieceofcake2 fork should not be sent to the address below. Report them
+privately to the pieceofcake2 maintainers through the
+[pieceofcake2/cakephp](https://github.com/pieceofcake2/cakephp) repository
+instead of opening a public issue. Security issues already fixed in the fork are
+listed in [Security](/pieceofcake2/security).
+:::
 
 If you've found a security issue in CakePHP, please use the following procedure
 instead of the normal bug reporting system. Instead of using the bug tracker,

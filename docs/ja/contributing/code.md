@@ -16,6 +16,14 @@ CakePHP の修正に取りかかる前に自分の環境を整えることをお
 - PHPUnit 3.7.0 以上 (3.7.38 推奨)
 - MySQL, SQLite, または Postgres
 
+::: pieceofcake2
+pieceofcake2 フォークの開発には、上記のバージョンではなく PHP 8.0 以上と Composer が必要です。
+PHPUnit 9.6、PHP_CodeSniffer、PHPStan は `composer install` で開発用依存として
+インストールされるので、PHPUnit を別途インストールする必要はありません。
+`ext/mcrypt` は不要です (`ext/mbstring` は強く推奨。無い場合はポリフィルが使われます)。
+対応データベースは MySQL、PostgreSQL、SQLite、SQL Server 2022 以降です。
+:::
+
 ユーザ情報（自分の名前/ハンドル名とメールアドレス）をセットしてください。 :
 
     git config --global user.name 'Bob Barker'
@@ -41,6 +49,22 @@ Fork できたら、Fork したものを自分のローカルマシンへと clo
 
     cd cakephp
     git remote add upstream git://github.com/cakephp/cakephp.git
+
+::: pieceofcake2
+フォークの場合は [pieceofcake2/cakephp](https://github.com/pieceofcake2/cakephp)
+を Fork・clone し、これを `upstream` として追加します。そのうえで依存パッケージを
+インストールし、フォークの CI と同じチェックを実行します。
+
+```bash
+git remote add upstream https://github.com/pieceofcake2/cakephp.git
+composer install
+./vendor/bin/phpunit
+./vendor/bin/phpcs
+```
+
+Docker を使ってデータベースごとにテストを実行する方法
+(`DB=mysql docker-compose exec web ./vendor/bin/phpunit`) もフォークの README に書かれています。
+:::
 
 いまや CakePHP はセットアップされましたので
 [データベース接続](../development/configuration#database-configuration) で `$test` を定義すれば、
@@ -108,6 +132,13 @@ git push origin <branch-name>
 あなたのブランチが GitHub に上がったら、GitHub で Pull Request を送ってください。
 
 ### 変更対象のマージ先を選ぶ
+
+::: pieceofcake2
+pieceofcake2 フォークでメンテナンスしているブランチは **2.x** だけです。
+このブランチを元に作業し、Pull Request の対象にしてください。
+フォークの目的は PHP 8 対応、バグ・セキュリティ修正、CakePHP 5 への移行パスの提供であり、
+新機能の追加は目指していません。
+:::
 
 Pull Request を作る際には、ベースとなるブランチが正しく選ばれているか良く確認してください。
 ひとたび Pull Request を作った後ではもう変更することはできません。

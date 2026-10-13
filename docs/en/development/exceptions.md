@@ -176,6 +176,13 @@ for error pages too. If for eg. you want to use another layout `app/Layouts/my_e
 for your error pages, then simply edit the error views and add the statement
 `$this->layout = 'my_error';` to the `error400.ctp` and `error500.ctp`.
 
+::: pieceofcake2
+In the modern layout, error views are in `templates/Errors/` and layouts in
+`templates/Layouts/` instead of `app/View/Errors/` and `app/View/Layouts/`.
+The fork's own default error templates are in the `templates/Errors/` directory
+of the framework package (formerly `lib/Cake/View/Errors/`).
+:::
+
 Each framework layer exception has its own view file located in the core templates but
 you really don't need to bother customizing them as they are used only during development.
 With debug turned off all framework layer exceptions are converted to `InternalErrorException`.

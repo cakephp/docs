@@ -1,5 +1,34 @@
 # ブログチュートリアル
 
+::: pieceofcake2 pieceofcake2 フォークでこのチュートリアルを進める場合
+このチュートリアルは CakePHP をアーカイブでダウンロードし、レガシーの `app/` レイアウトを使う前提で
+書かれています。pieceofcake2 フォークは Composer でのみインストールでき、**PHP 8.0 以上**が必要です
+（PHP 5.2.8 ではありません）。以下の「CakePHP のダウンロード」の手順の代わりに、アプリケーション
+スケルトンからプロジェクトを作成してください（モダンレイアウト）。
+
+```bash
+composer create-project pieceofcake2/app blog
+cd blog
+```
+
+ウェブサーバのドキュメントルートは `webroot/` ディレクトリに向けるか、開発用の組み込みサーバ
+`bin/cake server -p 8765` を使います。そのうえで、以下のようにパスを読み替えてチュートリアルを進めてください。
+
+| チュートリアル（レガシー） | モダンレイアウト |
+|---|---|
+| `app/tmp` | `tmp/`（ログは `logs/`） |
+| `app/Config/database.php.default`, `app/Config/core.php` | `config/database.php.default`, `config/core.php` |
+| `app/Model/Post.php` | `src/Model/Post.php` |
+| `app/Controller/PostsController.php` | `src/Controller/PostsController.php` |
+| `app/View/Posts/index.ctp` | `templates/Posts/index.ctp` |
+| `app/View/Layouts/default.ctp` | `templates/Layouts/default.ctp` |
+
+データベースについて: MySQL ドライバには `pdo_mysql` 拡張が必要です。PHP 8.1 以降の PDO は、整数や
+浮動小数点数のカラムを文字列ではなく PHP の `int`/`float` として返します。必要であれば、
+`config/database.php.default` にある `PDO::ATTR_STRINGIFY_FETCHES` フラグで以前の動作に戻せます。
+[インストール](/ja/pieceofcake2/installation) と [ディレクトリ構成](/ja/pieceofcake2/directory-structure) も参照してください。
+:::
+
 CakePHP をさっそく使ってみましょう。このチュートリアルを読んでいるのは、
 CakePHP の動作に関してさらに学びたいと思っているからだと思います。
 私たちは、生産性を高め、コーディングがさらに楽しいものになることを目指しています。

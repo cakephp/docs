@@ -9,6 +9,31 @@ There are four ways to install a CakePHP plugin:
 
 But don't forget to [Enable Plugins](#enable-plugins) afterwards.
 
+::: pieceofcake2
+In the pieceofcake2 fork, Composer is the recommended way to install plugins. Check
+[Plugins](/pieceofcake2/plugins) first for a PHP 8 compatible fork (e.g. `pieceofcake2/debug_kit`).
+Plugins are looked up in `app/Plugin/` and in `plugins/` at the project root, so `plugins/` works
+for both layouts and is the standard location in the modern layout. To have Composer install
+`cakephp-plugin` packages there, set `installer-paths` in your `composer.json`:
+
+```json
+{
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    },
+    "extra": {
+        "installer-paths": {
+            "plugins/{$name}/": ["type:cakephp-plugin"]
+        }
+    }
+}
+```
+
+When installing manually or with Git, use `plugins/` instead of `app/Plugin/` in the modern layout.
+:::
+
 ## Manually
 
 To install a plugin manually, you just have to drop the plugin folder
@@ -71,6 +96,12 @@ Execute the following commands in your app folder:
 ## Enable the Plugin
 
 Plugins need to be loaded manually in `app/Config/bootstrap.php`.
+
+::: pieceofcake2
+In the modern layout of the pieceofcake2 fork, load plugins in `config/bootstrap.php`.
+Plugins that do not support Composer autoloading still need `App::uses()` to load their classes,
+e.g. `App::uses('MyPluginHelper', 'MyPlugin.View/Helper');`.
+:::
 
 You can either load one by one or all of them in a single call:
 

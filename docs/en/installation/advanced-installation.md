@@ -2,6 +2,10 @@
 
 ## Installing CakePHP with PEAR Installer
 
+::: pieceofcake2
+The pieceofcake2 fork is not published as a PEAR package. Use Composer instead.
+:::
+
 CakePHP publishes a PEAR package that you can install using the PEAR installer.
 Installing with the PEAR installer can simplify sharing CakePHP libraries
 across multiple applications. To install CakePHP with PEAR you'll need to do the
@@ -19,6 +23,20 @@ will be located on PHP's `include_path` you won't need to make any other
 changes.
 
 ## Installing CakePHP with Composer
+
+::: pieceofcake2
+For the pieceofcake2 fork, this section is outdated:
+
+- PHP 8.0 or newer is required, and Composer is the only supported installation method.
+- Require `pieceofcake2/cakephp` instead of `cakephp/cakephp`. Composer's default
+  `vendor/` directory at the project root is used.
+- `CAKE_CORE_INCLUDE_PATH` is no longer used. The dispatcher files load
+  `vendor/autoload.php`, and framework classes are autoloaded through Composer's classmap.
+- Bake is not part of the core. Install `pieceofcake2/bake` to use `cake bake`, or start from the
+  [pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton.
+
+See [Installation](/pieceofcake2/installation).
+:::
 
 Before starting you should make sure that you have got an up to date PHP
 version:
@@ -135,6 +153,14 @@ sure to keep the composer.json and composer.lock file with the rest of your
 source code.
 
 ## Sharing CakePHP Libraries with multiple Applications
+
+::: pieceofcake2
+With the pieceofcake2 fork, the core is installed per application by Composer, and
+`CAKE_CORE_INCLUDE_PATH` is no longer used, so sharing one core across applications
+as described below does not apply. `ROOT`, `APP_DIR` and `WEBROOT_DIR` can still be
+customised: in the dispatcher files for the legacy layout, or in `config/define.php`
+for the modern layout. See [Directory Structure](/pieceofcake2/directory-structure).
+:::
 
 There may be some situations where you wish to place CakePHP's directories on
 different places on the filesystem. This may be due to a shared host

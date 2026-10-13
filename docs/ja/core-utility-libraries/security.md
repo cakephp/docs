@@ -11,6 +11,16 @@
 > PHP=\>7.1 でデフォルトの設定を使用している場合、PECL 経由で `mcrypt` を
 > インストールする必要があります。
 
+::: pieceofcake2
+PHP 8 には `mcrypt` 拡張が同梱されていません。pieceofcake2 フォークでは
+`core.php` に `Configure::write('Security.useOpenSsl', true);` を追加し、
+`Security::encrypt()` と `Security::decrypt()` が OpenSSL を使うようにしてください。
+`Security::rijndael()` は常に `mcrypt` を必要とします。また `Security::cipher()`
+（`CookieComponent` のデフォルトの `'cipher'` タイプが使用）は安全ではありません。
+代わりに `encrypt()`/`decrypt()` や Cookie の `'aes'` タイプを使ってください。
+詳しくは [セキュリティ](/ja/pieceofcake2/security) を参照してください。
+:::
+
 ## Security API
 
 `static` Security::**cipher**( $text, $key )

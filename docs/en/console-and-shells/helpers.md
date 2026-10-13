@@ -31,6 +31,12 @@ application or plugins. As an example, we'll create a simple helper to generate
 fancy headings. First create the **app/Console/Helper/HeadingHelper.php** and put
 the following in it:
 
+::: pieceofcake2
+In the pieceofcake2 fork with the modern layout, use `src/Console/Helper/HeadingHelper.php`.
+Framework classes such as `BaseShellHelper` are autoloaded by Composer, so the `App::uses()`
+line is optional.
+:::
+
 ``` php
 <?php
 App::uses("BaseShellHelper", "Console/Helper");

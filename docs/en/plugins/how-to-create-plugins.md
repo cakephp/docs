@@ -18,6 +18,14 @@ basic directory structure. It should look like this:
 Note the name of the plugin folder, '\*\*ContactManager\*\*'. It is important
 that this folder has the same name as the plugin.
 
+::: pieceofcake2
+In the pieceofcake2 fork's modern layout, plugins live in `plugins/ContactManager/` instead of
+`app/Plugin/ContactManager/`. The structure *inside* a plugin is unchanged (`Controller/`, `Model/`,
+`View/`, `Config/`, `webroot/` ...); only plugin tests may also use `tests/TestCase/` and
+`tests/Fixture/` instead of `Test/Case/` and `Test/Fixture/`. A starting point is available at
+[pieceofcake2/plugin](https://github.com/pieceofcake2/plugin).
+:::
+
 Inside the plugin folder, you'll notice it looks a lot like a CakePHP
 application, and that's basically what it is. You don't actually have to
 include any of those folders if you do not use them. Some plugins might
@@ -196,6 +204,10 @@ Contacts controller you could make the following file:
 
 Creating this file, would allow you to override
 "/app/Plugin/ContactManager/View/Contacts/index.ctp".
+
+::: pieceofcake2
+In the modern layout, use `templates/Plugin/ContactManager/Contacts/index.ctp`.
+:::
 
 <a id="plugin-assets"></a>
 

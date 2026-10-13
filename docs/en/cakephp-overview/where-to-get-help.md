@@ -1,5 +1,12 @@
 # Where to Get Help
 
+::: pieceofcake2
+The resources below are for the original CakePHP project, where CakePHP 2.x has
+reached end of life. For problems specific to the pieceofcake2 fork (for example
+PHP 8 compatibility), use the
+[pieceofcake2/cakephp issue tracker](https://github.com/pieceofcake2/cakephp/issues).
+:::
+
 ## The Official CakePHP website
 
 <https://cakephp.org>
@@ -42,6 +49,11 @@ out the code of the test cases provided with CakePHP. They can serve as
 practical examples for function and data member usage for a class. :
 
     lib/Cake/Test/Case
+
+::: pieceofcake2
+In the pieceofcake2 fork, the framework's test cases are in `tests/TestCase/`
+(`vendor/pieceofcake2/cakephp/tests/TestCase/` when installed with Composer).
+:::
 
 ## The IRC channel
 

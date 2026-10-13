@@ -28,6 +28,15 @@ class UsersController extends AppController {
 
 ## フォーマット
 
+::: pieceofcake2 strftime() の置き換え
+PHP の `strftime()` は PHP 8.1 で非推奨になりました。`strftime()` 形式のフォーマットを受け取るメソッド
+(`i18nFormat()`、`nice()`、`format()` など) は、`php81_bc/strftime` を通じて
+`IntlDateFormatter` を使います (`intl` 拡張、未導入の場合は Symfony のポリフィル)。
+ほとんどのフォーマットは同じ結果になりますが、細かいケースで出力が異なることがあるので、
+日付のフォーマットをテストしてください。
+詳しくは [アップグレードガイド](/ja/pieceofcake2/upgrade) を参照してください。
+:::
+
 `method` CakeTime::**convert**($serverTime, $timezone = NULL)
 
 `method` CakeTime::**convertSpecifiers**($format, $time = NULL)

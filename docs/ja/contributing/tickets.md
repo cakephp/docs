@@ -4,6 +4,14 @@
 CakePHP の開発プロセスの極めて重要な部分です。CakePHP のチケットの全ては
 [GitHub](https://github.com/cakephp/cakephp/issues) にホストされています。
 
+::: pieceofcake2
+pieceofcake2 フォークの問題は cakephp/cakephp ではなく
+[pieceofcake2/cakephp の Issues](https://github.com/pieceofcake2/cakephp/issues)
+(またはプラグインなら該当する `pieceofcake2/*` リポジトリの Issues) に報告してください。
+PHP のバージョン、pieceofcake2/cakephp のバージョン、エラーメッセージ、
+可能であれば問題を再現する最小限のコードを添えてください。
+:::
+
 ## バグの報告
 
 よく書かれたバグの報告は非常に有用です。
@@ -23,6 +31,14 @@ CakePHP の開発プロセスの極めて重要な部分です。CakePHP のチ�
   を使用してください。
 
 ## セキュリティ問題の報告
+
+::: pieceofcake2
+CakePHP 2.x は CakePHP コアチームのサポート対象外のため、pieceofcake2 フォークの脆弱性を
+以下のアドレスに送らないでください。公開の Issue は作らず、
+[pieceofcake2/cakephp](https://github.com/pieceofcake2/cakephp) リポジトリを通じて
+pieceofcake2 のメンテナーに非公開で報告してください。
+フォークで修正済みのセキュリティ問題は [セキュリティ](/ja/pieceofcake2/security) にまとめています。
+:::
 
 もし CakePHP でセキュリティ問題を見つけたら、通常のバグ報告システムの代わりに、
 以下の手順を使用してください。バグトラッカー、メーリングリスト、IRC を使う代わりに、

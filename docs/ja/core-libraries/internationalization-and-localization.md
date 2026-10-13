@@ -59,6 +59,16 @@ pot ファイル自身は、 CakePHP では使用しません。それらのフ�
 /app/Locale/por/LC_MESSAGES/default.po (ポルトガル語)
 ```
 
+::: pieceofcake2 ロケールディレクトリ
+pieceofcake2 フォークは、次のどちらの場所からもロケールファイルを読み込みます。
+
+- レガシーレイアウト: `app/Locale/<locale>/LC_MESSAGES/<domain>.po`
+- モダンレイアウト: `resources/locales/<locale>/LC_MESSAGES/<domain>.po`
+
+プラグインの翻訳ファイルは、これまでどおりプラグインの `Locale/` ディレクトリに置きます。
+詳しくは [ディレクトリ構成](/ja/pieceofcake2/directory-structure) を参照してください。
+:::
+
 po ファイルの作成や編集は、あなたの好きなエディタを使用することは、 **お勧めしません** 。
 最初に po ファイルを作成するときは、 pot ファイルを適切な場所にコピーし、
 (見慣れない書式だと思いますが) 拡張子を変更します。それでは、不正な po ファイルを

@@ -1,5 +1,16 @@
 # ドキュメント
 
+::: pieceofcake2
+このドキュメントは CakePHP 2.x Cookbook の pieceofcake2 フォーク版です。ソースは
+[pieceofcake2/docs](https://github.com/pieceofcake2/docs) (`2.x` ブランチ) にあり、
+Issue や Pull Request は cakephp/docs ではなくこちらに送ってください。
+フォーク版は reStructuredText/Sphinx ではなく **Markdown** で書かれ、VitePress でビルドされます。
+`2.x` へのプッシュは GitHub Actions で GitHub Pages にデプロイされます (Jenkins のビルドはありません)。
+メンテナンスしている言語は英語 (`en`) と日本語 (`ja`) のみです。フォークだけに当てはまる
+内容は `::: pieceofcake2` コンテナで囲んでください。ローカルでサイトを動かす方法は
+リポジトリの README に書かれています。
+:::
+
 ドキュメントへの貢献の方法はシンプルです。
 ファイルは <https://github.com/cakephp/docs> にホストされています。
 自由にレポジトリをフォークして、変更・改善・翻訳を追加し、プルリクエストを発行してください。
@@ -93,6 +104,12 @@ CakePHP のドキュメントは、
 - 元のコンテンツに不備がある場合は、まずそれを編集するようにしてください。
 
 ## ドキュメントのフォーマットガイド
+
+::: pieceofcake2
+このセクションで説明している reStructuredText の記法は本家 Cookbook のものです。
+pieceofcake2 のドキュメントは VitePress で表示する Markdown ファイルなので、
+既存ページの Markdown の書き方に合わせてください。
+:::
 
 新しい CakePHP のドキュメントは
 [ReST フォーマットテキスト](https://en.wikipedia.org/wiki/ReStructuredText)

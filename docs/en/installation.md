@@ -34,6 +34,18 @@ engines:
 > for your applications. Earlier PHP versions are end-of-life, and
 > provide an increased security risk.
 
+::: pieceofcake2 Requirements
+The pieceofcake2 fork has different requirements:
+
+- PHP 8.0 to 8.5
+- Composer (installation without Composer is not supported)
+- MySQL 5.6+, PostgreSQL 9.4+, SQLite 3, or Microsoft SQL Server 2022+, with the matching PDO extension
+- `mbstring` is strongly recommended; `intl` and `openssl` are optional
+  (Symfony polyfills are used when `mbstring` / `intl` are missing)
+
+The fork is based on CakePHP 2.10.24. See [Installation](/pieceofcake2/installation).
+:::
+
 ## License
 
 CakePHP is licensed under the MIT license. This means that you are free to
@@ -61,6 +73,21 @@ up to the minute enhancements. These can be accessed from GitHub by cloning the
 
     git clone -b 2.x git://github.com/cakephp/cakephp.git
 
+::: pieceofcake2 Install with Composer
+The pieceofcake2 fork can only be installed with Composer. Archive downloads and
+git checkouts of `cakephp/cakephp` do not apply. Require the fork in your
+application's `composer.json` (it `replace`s `cakephp/cakephp`):
+
+```bash
+composer require pieceofcake2/cakephp
+```
+
+For a new application layout, use the [pieceofcake2/app](https://github.com/pieceofcake2/app)
+skeleton. Existing `app/` (legacy layout) applications must also update their
+dispatcher files (`app/webroot/index.php`, `app/webroot/test.php`, `app/Console/cake`).
+See [Installation](/pieceofcake2/installation) for the post-install steps.
+:::
+
 ## Permissions
 
 CakePHP uses the `app/tmp` directory for a number of different operations. A
@@ -81,6 +108,15 @@ setfacl -R -m u:${HTTPDUSER}:rwx app/tmp
 setfacl -R -d -m u:${HTTPDUSER}:rwx app/tmp
 ```
 
+::: pieceofcake2 Directory layout
+The writable directories depend on your application layout:
+
+- Legacy layout: `app/tmp` (logs in `app/tmp/logs`)
+- Modern layout: `tmp/` and `logs/` at the project root
+
+See [Directory Structure](/pieceofcake2/directory-structure).
+:::
+
 ## Setup
 
 Setting up CakePHP can be as simple as slapping it in your web server's document
@@ -94,6 +130,14 @@ main installation types for CakePHP: development, production, and advanced.
 - Advanced: With some configuration, allows you to place key CakePHP
   directories in different parts of the filesystem, possibly sharing a single
   CakePHP core library folder amongst many CakePHP applications.
+
+::: pieceofcake2
+With the pieceofcake2 fork, CakePHP is installed into `vendor/` by Composer, so
+the archive-based layouts below (with `lib/` next to `app/`) and sharing one core
+checkout through `include_path` do not apply. Point the web server's document root
+at the application's webroot as described under Production: `app/webroot/` for the
+legacy layout, or `webroot/` at the project root for the modern layout.
+:::
 
 ## Development
 
@@ -181,6 +225,16 @@ to:
 
     DocumentRoot /cake_install/app/webroot
 
+::: pieceofcake2 Modern layout
+In the modern layout ([pieceofcake2/app](https://github.com/pieceofcake2/app)),
+`webroot/` is at the project root and there is no `.htaccess` or `index.php` at the
+project root to forward requests, so the document root must be set to it:
+
+```text
+DocumentRoot /cake_install/webroot
+```
+:::
+
 If your web server is configured correctly, you should now find your CakePHP
 application accessible at <http://www.example.com>.
 
@@ -201,6 +255,10 @@ Congratulations! You are ready to [create your first CakePHP application](gettin
 
 Not working? If you're getting timezone related errors from PHP uncomment one
 line in `app/Config/core.php`:
+
+::: pieceofcake2
+In the modern layout this file is `config/core.php`.
+:::
 
 ``` text
 /**

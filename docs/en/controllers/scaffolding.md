@@ -141,3 +141,8 @@ Custom scaffolding views for all controllers should be placed like so:
     app/View/Scaffolds/index.ctp
     app/View/Scaffolds/form.ctp
     app/View/Scaffolds/view.ctp
+
+::: pieceofcake2
+In the modern layout of the pieceofcake2 fork, put these files under `templates/` instead of
+`app/View/` (e.g. `templates/Posts/scaffold.index.ctp`, `templates/Scaffolds/index.ctp`).
+:::
