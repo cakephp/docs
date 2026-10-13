@@ -1,11 +1,8 @@
-# PHPUnitへの移行のヒント
+# SimpleTest から PHPUnit 3.7 への移行
 
-::: pieceofcake2
-このページは SimpleTest から PHPUnit 3.7 への移行について説明しています。Piece of Cake 2 フォークは PHPUnit 9.6 を使うため、
-`PHPUnit_Framework_TestSuite` のようなクラス名は `PHPUnit\Framework\TestSuite` になり、
-ここで紹介している PHPUnit 3.7 の API の一部は存在しません。
-[アップグレードガイド](/ja/appendices/migrating-from-cakephp-2-10) と [テスト](/ja/development/testing) を参照してください。
-:::
+このページでは、CakePHP 2.0 のリリース時に行われた、SimpleTest から PHPUnit 3.7 へのテストケースの移行について説明します。
+Piece of Cake 2 フォークで使う PHPUnit 9.6 への移行は
+[PHPUnit 9.6 への移行](/ja/appendices/phpunit-9-migration-hints) を参照してください。
 
 テストケースの [PHPUnit 3.7](https://www.phpunit.de/manual/current/ja/) への移行は、うまくいけばかなり苦痛の無い遷移となります。
 しかしながら、PHPUnitと [SimpleTest](https://www.simpletest.org/) の間では、いくつかの既知の違いがあります。

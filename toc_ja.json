@@ -615,6 +615,10 @@
           "link": "/ja/appendices/security-fixes"
         },
         {
+          "text": "PHPUnit 9.6 への移行",
+          "link": "/ja/appendices/phpunit-9-migration-hints"
+        },
+        {
           "text": "1.2 から 2.0 への移行",
           "link": "/ja/appendices/2-0-migration-guide"
         },
@@ -675,7 +679,7 @@
           "link": "/ja/appendices/new-features-in-cakephp-2-1"
         },
         {
-          "text": "PHPUnit 移行ヒント",
+          "text": "SimpleTest から PHPUnit 3.7 への移行",
           "link": "/ja/appendices/phpunit-migration-hints"
         },
         {

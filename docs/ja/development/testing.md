@@ -28,6 +28,7 @@ Piece of Cake 2 フォークでは、PHPUnit 3.7 (または 4.x/5.x) ではな�
 実行します。`setUp()` などのライフサイクルメソッドには戻り値の型 `: void` が必要です。
 また `PHPUnit_Framework_TestCase`、`staticExpects()`、`assertInternalType()`、
 `@expectedException` アノテーションなど、PHPUnit から削除された API は使えません。
+[PHPUnit 9.6 への移行](/ja/appendices/phpunit-9-migration-hints) を参照してください。
 :::
 
 ## テスト用データベースのセットアップ

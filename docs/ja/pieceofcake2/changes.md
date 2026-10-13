@@ -35,6 +35,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 - [CakePHP 2.10 からの移行](/ja/appendices/migrating-from-cakephp-2-10)
 - [モダン構成への移行](/ja/appendices/migrating-to-the-modern-layout)
 - [脆弱性への対応](/ja/appendices/security-fixes)
+- [PHPUnit 9.6 への移行](/ja/appendices/phpunit-9-migration-hints)
 - [メンテナンスされているプラグイン](/ja/plugins/maintained-plugins)
 
 ### はじめに
@@ -345,6 +346,11 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - 書き直し: フォークのリリースで変わること (キャッシュエンジン、ディレクトリ構成、オートロードなど互換性のない変更を含んだリリースもある)、移行ガイド、貢献者向けガイドライン。本家のセマンティックバージョニングの表を削除
 - [CakePHP の開発プロセス](/ja/contributing/cakephp-development-process)
   - フォークのメンテナンス中心のプロセスに書き直し: 目的、2.x のみのブランチ、タグによるリリース (2.10.24.x、2.11.0、2.12.x)、CHANGELOG/UPGRADE。IRC と本家のブランチモデルを削除
+
+### 付録
+
+- [SimpleTest から PHPUnit 3.7 への移行](/ja/appendices/phpunit-migration-hints)
+  - 題を「SimpleTest から PHPUnit 3.7 への移行」に変更し、PHPUnit 9.6 への移行ガイドへのリンクを追加
 
 ### 追加トピック
 

@@ -38,6 +38,7 @@ modern directory layout.
 - [Migrating from CakePHP 2.10](/appendices/migrating-from-cakephp-2-10)
 - [Migrating to the Modern Layout](/appendices/migrating-to-the-modern-layout)
 - [Security Fixes](/appendices/security-fixes)
+- [Migrating Tests to PHPUnit 9.6](/appendices/phpunit-9-migration-hints)
 - [Maintained Plugins](/plugins/maintained-plugins)
 
 ### Getting Started
@@ -351,6 +352,11 @@ modern directory layout.
   - Rewritten: what to expect from fork releases (some included breaking changes, e.g. cache engines, directory layout, autoloading), migration guides, guidelines for contributors; upstream semver tables removed
 - [CakePHP Development Process](/contributing/cakephp-development-process)
   - Rewritten for the fork's maintenance-only process: goals, single 2.x branch, releases as tags (2.10.24.x, 2.11.0, 2.12.x), CHANGELOG/UPGRADE; IRC and upstream branch model removed
+
+### Appendices
+
+- [Migrating from SimpleTest to PHPUnit 3.7](/appendices/phpunit-migration-hints)
+  - Retitled "Migrating from SimpleTest to PHPUnit 3.7" and linked to the new PHPUnit 9.6 guide
 
 ### Additional Topics
 

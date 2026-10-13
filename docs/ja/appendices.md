@@ -53,7 +53,8 @@ CakePHP 2.10.24 から Piece of Cake 2 フォークへ移行する方法は [ア
 
 - [2.0 移行ガイド](appendices/2-0-migration-guide)
 - [CakePHP 2.0の新機能](appendices/new-features-in-cakephp-2-0)
-- [PHPUnitへの移行のヒント](appendices/phpunit-migration-hints)
+- [PHPUnit 9.6 への移行](appendices/phpunit-9-migration-hints)
+- [SimpleTest から PHPUnit 3.7 への移行](appendices/phpunit-migration-hints)
 
 ## 1.2から1.3への移行
 

@@ -54,7 +54,8 @@ application from CakePHP 2.10.24 to the Piece of Cake 2 fork, see the
 
 - [2.0 Migration Guide](appendices/2-0-migration-guide)
 - [New Features in CakePHP 2.0](appendices/new-features-in-cakephp-2-0)
-- [PHPUnit Migration Hints](appendices/phpunit-migration-hints)
+- [Migrating Tests to PHPUnit 9.6](appendices/phpunit-9-migration-hints)
+- [Migrating from SimpleTest to PHPUnit 3.7](appendices/phpunit-migration-hints)
 
 ## Migration from 1.2 to 1.3
 

@@ -615,6 +615,10 @@
           "link": "/appendices/security-fixes"
         },
         {
+          "text": "Migrating Tests to PHPUnit 9.6",
+          "link": "/appendices/phpunit-9-migration-hints"
+        },
+        {
           "text": "Migration from 1.2 to 2.0",
           "link": "/appendices/2-0-migration-guide"
         },
@@ -675,7 +679,7 @@
           "link": "/appendices/new-features-in-cakephp-2-1"
         },
         {
-          "text": "PHPUnit Migration Hints",
+          "text": "Migrating from SimpleTest to PHPUnit 3.7",
           "link": "/appendices/phpunit-migration-hints"
         },
         {

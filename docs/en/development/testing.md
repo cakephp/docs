@@ -30,7 +30,8 @@ Tests run on PHPUnit 9.6 instead of
 PHPUnit 3.7 (or 4.x/5.x). Lifecycle methods such as `setUp()` need a `: void`
 return type, and APIs removed from PHPUnit, such as `PHPUnit_Framework_TestCase`,
 `staticExpects()`, `assertInternalType()` and the `@expectedException`
-annotation, can no longer be used.
+annotation, can no longer be used. See
+[Migrating Tests to PHPUnit 9.6](/appendices/phpunit-9-migration-hints).
 :::
 
 ## Test Database Setup
