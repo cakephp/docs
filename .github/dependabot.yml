@@ -1,15 +1,10 @@
 version: 2
 updates:
-- package-ecosystem: pip
+- package-ecosystem: npm
   directory: "/"
   schedule:
     interval: weekly
   open-pull-requests-limit: 10
-  ignore:
-  - dependency-name: sphinx
-    versions:
-    - ">= 3.a"
-    - "< 4"
 - package-ecosystem: github-actions
   directory: "/"
   schedule:

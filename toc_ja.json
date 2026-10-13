@@ -1,6 +1,16 @@
 {
   "/ja/": [
     {
+      "text": "Piece of Cake 2",
+      "collapsed": false,
+      "items": [
+        {
+          "text": "概要",
+          "link": "/ja/pieceofcake2"
+        }
+      ]
+    },
+    {
       "text": "はじめに",
       "collapsed": false,
       "items": [

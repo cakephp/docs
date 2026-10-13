@@ -1,97 +1,54 @@
-CakePHP Documentation
-=====================
+# Piece of Cake 2 Documentation
 
-[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgreen.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-[![Build Status](https://github.com/cakephp/docs/actions/workflows/ci.yml/badge.svg?branch=5.x)](https://github.com/cakephp/docs/actions/workflows/ci.yml)
+Documentation for [Piece of Cake 2](https://github.com/pieceofcake2/cakephp),
+a community-maintained fork of CakePHP 2.x for PHP 8.
 
-This is the official documentation for the CakePHP project. It is available
-online at https://book.cakephp.org.
+Published at https://pieceofcake2.github.io/docs/
 
-Contributing to the documentation is pretty simple. Please read the
-documentation on contributing to the documentation over on [the
-cookbook](https://book.cakephp.org/5/en/contributing/documentation.html) for
-help. You can read all the documentation within as it is just in plain text
-files, marked up with Markdown formatting.
+This repository is a fork of the `2.x` branch of
+[cakephp/docs](https://github.com/cakephp/docs/tree/2.x) (the CakePHP Cookbook).
+Content specific to Piece of Cake 2 is marked in the documentation with a
+`::: pieceofcake2` box.
 
 ## Local Development
 
-For working with the documentation markdown files locally, use the provided development server script:
-
 ```bash
-./bin/dev-server.sh
+npm ci
+npm run docs:dev
 ```
 
-This script will:
-- Set up a clean `.temp` working directory
-- Clone the VitePress skeleton repository
-- Sync your documentation files
-- Install dependencies
-- Start a local development server with hot-reload
-
-The documentation will be available at `http://localhost:5173`
-
-### Development Server Options
+Build the static site into `.vitepress/dist`:
 
 ```bash
-# Start on a custom port
-./bin/dev-server.sh --port 3000
-
-# Adjust docs sync interval (default: 1 second)
-./bin/dev-server.sh --sync-interval 2
+npm run docs:build
 ```
 
-### Prerequisites
+Pushes to the `2.x` branch are deployed to GitHub Pages by
+`.github/workflows/deploy.yml`.
 
-The development server requires:
-- `git` - Version control
-- `node` - JavaScript runtime
-- `npm` - Package manager
-- `rsync` - File synchronization
+## Writing Piece of Cake 2 specific content
 
-Press `Ctrl+C` to stop the development server.
+Wrap anything that differs from the original CakePHP 2.x documentation in a
+`pieceofcake2` container so readers can tell it apart:
 
-## Build the Documentation with Docker
+```md
+::: pieceofcake2
+Piece of Cake 2 requires PHP 8.0 or newer.
+:::
 
-Docker will let you create a container with all packages needed to build the
-docs. You need to have docker installed, see the [official docs of
-docker](https://docs.docker.com/desktop/) for more information.
-
-### Build the image locally
-
-Starting in the top-level directory, you can build the provided `Dockerfile`
-and tag it with the name `cakephp/docs` by running:
-
-```bash
-docker build -f Dockerfile -t cakephp/docs .
+::: pieceofcake2 Custom title
+...
+:::
 ```
 
-This can take a little while, because all packages needs to be downloaded, but
-you'll only need to do this once.
+## License
 
-Now that the image is built, you can run the commands to build the docs:
+See [LICENSE](LICENSE).
 
-##### To build the static site:
-```bash
-docker build --progress=plain --no-cache -f Dockerfile -t cake-docs .
-```
+- Documentation content: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/),
+  © Cake Software Foundation, Inc., with modifications by Piece of Cake 2 contributors.
+- VitePress theme (`.vitepress/`): MIT, from
+  [cakephp/docs-skeleton](https://github.com/cakephp/docs-skeleton).
 
-##### To run the development server:
-```bash
-docker run -d -p 8080:80 --name cakedocs cake-vitepress
-```
-
-The built documentation will output to the `.vitepress/dist` directory.
-
-## Contributing
-
-You are welcome to make suggestions for new content as commits in a
-GitHub fork. Please make any totally new sections in a separate branch. This
-makes changes far easier to integrate later on.
-
-The documentation is written in Markdown and uses VitePress for static site generation.
-All documentation files are located in the `docs/` directory, organized by version.
-
-## Search Functionality
-
-The documentation includes built-in search functionality powered by VitePress's local search feature.
-Search works automatically in both development and production builds without requiring any additional setup.
+This project is not affiliated with or endorsed by the Cake Software Foundation.
+CakePHP is a trademark of the Cake Software Foundation.
