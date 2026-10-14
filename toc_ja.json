@@ -222,6 +222,7 @@
         },
         {
           "text": "ビヘイビア",
+          "link": "/ja/core-libraries/toc-behaviors",
           "collapsed": true,
           "items": [
             {
@@ -244,6 +245,7 @@
         },
         {
           "text": "コンポーネント",
+          "link": "/ja/core-libraries/toc-components",
           "collapsed": true,
           "items": [
             {
@@ -282,6 +284,7 @@
         },
         {
           "text": "ヘルパー",
+          "link": "/ja/core-libraries/toc-helpers",
           "collapsed": true,
           "items": [
             {
@@ -496,6 +499,7 @@
         },
         {
           "text": "ブログチュートリアル",
+          "link": "/ja/tutorials-and-examples/blog/blog",
           "collapsed": true,
           "items": [
             {
@@ -510,6 +514,7 @@
         },
         {
           "text": "ブログ認証サンプル",
+          "link": "/ja/tutorials-and-examples/blog-auth-example/auth",
           "collapsed": true,
           "items": [
             {
@@ -520,6 +525,7 @@
         },
         {
           "text": "シンプル ACL 制御アプリケーション",
+          "link": "/ja/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application",
           "collapsed": true,
           "items": [
             {
