@@ -6,6 +6,25 @@ offered by PHPUnit, CakePHP offers some additional features to make testing
 easier. This section will cover installing PHPUnit, and getting started with
 Unit Testing, and how you can use the extensions that CakePHP offers.
 
+## Types of Tests
+
+A CakePHP application is usually tested on three levels:
+
+- **Unit tests** test a single class, such as a model, a component, a helper
+  or a library class, in the PHPUnit process. [Fixtures](#fixtures) fill the
+  test database with known data. Most of your tests should be unit tests:
+  they are fast and point directly to the code that broke.
+- **Controller tests** dispatch a request to a controller inside the PHPUnit
+  process with `ControllerTestCase::testAction()`, without an HTTP server, and
+  check the result, the view variables, the rendered view or the redirect.
+  They also run in milliseconds. See [Testing Controllers](#testing-controllers).
+- **Browser end-to-end (E2E) tests** start the application with a web server
+  and use it through a real browser, including JavaScript, cookies, sessions
+  and `SecurityComponent` tokens. They are slower, so keep them for the main
+  user flows. See [E2E Testing](/development/e2e-testing).
+
+This page covers unit and controller tests.
+
 ## Installing PHPUnit
 
 CakePHP uses PHPUnit as its underlying test framework. PHPUnit is the de-facto

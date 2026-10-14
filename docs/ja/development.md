@@ -8,6 +8,7 @@
 - [例外(Exception)](development/exceptions)
 - [エラーハンドリング](development/errors)
 - [デバッグ](development/debugging)
+- [E2E テスト](development/e2e-testing)
 - [テスト](development/testing)
 - [REST](development/rest)
 - [ディスパッチャー・フィルター](development/dispatch-filters)

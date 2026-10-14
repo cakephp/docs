@@ -23,3 +23,4 @@ to check yourself whether they work on PHP 8.
 - [How To Install Plugins](plugins/how-to-install-plugins)
 - [How To Use Plugins](plugins/how-to-use-plugins)
 - [How To Create Plugins](plugins/how-to-create-plugins)
+- [Captcha](plugins/captcha)

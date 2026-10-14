@@ -39,6 +39,8 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 - [モダン構成への移行](/ja/appendices/migrating-to-the-modern-layout)
 - [脆弱性への対応](/ja/appendices/security-fixes)
 - [PHPUnit 9.6 への移行](/ja/appendices/phpunit-9-migration-hints)
+- [E2E テスト](/ja/development/e2e-testing)
+- [Captcha](/ja/plugins/captcha)
 - [メンテナンスされているプラグイン](/ja/plugins/maintained-plugins)
 
 ### はじめに
@@ -289,6 +291,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - テストスイートは TESTS . 'TestCase' を使用。phpunit.xml.dist を使う場合 AllTests は不要と記載
   - プラグインのテストは plugins/&lt;Name>/tests/TestCase (Test/Case も可)
   - Jenkins: composer install の手順、config/database.php、vendor/bin/phpunit、jenkins.io へのリンク
+  - 「テストの種類」の節を追加: フィクスチャを使うユニットテスト、testAction() によるコントローラーのテスト、ブラウザーによる E2E テスト (E2E テストのページへのリンク)。testing-controllers のアンカーを明示的に追加
 - [REST](/ja/development/rest)
   - パスを config/routes.php、src/Controller、templates/Recipes/xml に更新
   - HTTP メソッド上書きの優先順位を修正（X-HTTP-Method-Override ヘッダが _method より優先）
@@ -322,6 +325,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 
 - [プラグイン](/ja/plugins)
   - CakePHP 2 プラグインの PHP 8 対応状況を説明し、Piece of Cake 2 がメンテナンスするフォークへのリンクを追加
+  - 新しい Captcha のページへのリンクを追加
 - [プラグインの作成](/ja/plugins/how-to-create-plugins)
   - プラグインのパスを plugins/ に、ビューの上書きを templates/Plugin に変更し、プラグイン内部の構成とテストディレクトリを説明、プラグインのコードで App::uses() を残す理由を記載
   - Bake のコマンドを Bake プラグインの bin/cake に変更し、欠けていたアセットのプラグイン記法の例を追加、flash/ フォルダを削除

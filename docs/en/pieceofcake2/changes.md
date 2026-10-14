@@ -42,6 +42,8 @@ modern directory layout.
 - [Migrating to the Modern Layout](/appendices/migrating-to-the-modern-layout)
 - [Security Fixes](/appendices/security-fixes)
 - [Migrating Tests to PHPUnit 9.6](/appendices/phpunit-9-migration-hints)
+- [E2E Testing](/development/e2e-testing)
+- [Captcha](/plugins/captcha)
 - [Maintained Plugins](/plugins/maintained-plugins)
 
 ### Getting Started
@@ -295,6 +297,7 @@ modern directory layout.
   - Test suites use TESTS . 'TestCase'; note that phpunit.xml.dist makes AllTests optional
   - Plugin tests in plugins/&lt;Name>/tests/TestCase (Test/Case fallback)
   - Jenkins: composer install step, config/database.php, vendor/bin/phpunit, jenkins.io links
+  - New "Types of Tests" section: unit tests with fixtures, controller tests with testAction() and browser E2E tests (links to E2E Testing); ja: explicit testing-controllers anchor
 - [REST](/development/rest)
   - Paths updated to config/routes.php, src/Controller and templates/Recipes/xml
   - Corrected HTTP method override precedence (X-HTTP-Method-Override header before _method)
@@ -328,6 +331,7 @@ modern directory layout.
 
 - [Plugins](/plugins)
   - Intro explains PHP 8 compatibility of CakePHP 2 plugins and links to the maintained Piece of Cake 2 forks
+  - Links to the new Captcha page
 - [How To Create Plugins](/plugins/how-to-create-plugins)
   - Plugin paths use plugins/ and templates/Plugin overrides; internal plugin structure and test directories explained; App::uses() kept in plugin code with the reason
   - Bake commands use bin/cake with the Bake plugin; added the missing asset plugin-syntax example; removed flash/ asset folder

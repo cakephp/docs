@@ -477,6 +477,10 @@
           "link": "/ja/development/debugging"
         },
         {
+          "text": "E2E テスト",
+          "link": "/ja/development/e2e-testing"
+        },
+        {
           "text": "テスト",
           "link": "/ja/development/testing"
         },
@@ -557,6 +561,10 @@
         {
           "text": "メンテナンスされているプラグイン",
           "link": "/ja/plugins/maintained-plugins"
+        },
+        {
+          "text": "Captcha",
+          "link": "/ja/plugins/captcha"
         }
       ]
     },

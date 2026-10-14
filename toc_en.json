@@ -477,6 +477,10 @@
           "link": "/development/debugging"
         },
         {
+          "text": "E2E Testing",
+          "link": "/development/e2e-testing"
+        },
+        {
           "text": "Testing",
           "link": "/development/testing"
         },
@@ -557,6 +561,10 @@
         {
           "text": "Maintained Plugins",
           "link": "/plugins/maintained-plugins"
+        },
+        {
+          "text": "Captcha",
+          "link": "/plugins/captcha"
         }
       ]
     },
