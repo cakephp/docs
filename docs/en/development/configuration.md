@@ -633,7 +633,7 @@ is set.
 ::: pieceofcake2
 CSRF tokens issued by `SecurityComponent`
 are signed with an HMAC using `Security.salt` (CVE-2020-15400). Changing the salt
-invalidates outstanding tokens. See [Security Fixes](/appendices/security-fixes).
+invalidates outstanding tokens. See [Security Fixes](/security/fixes).
 :::
 
 Security.cipherSeed  

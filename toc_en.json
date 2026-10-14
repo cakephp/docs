@@ -499,6 +499,32 @@
       ]
     },
     {
+      "text": "Security",
+      "collapsed": true,
+      "items": [
+        {
+          "text": "Security",
+          "link": "/security/"
+        },
+        {
+          "text": "Reporting a Vulnerability",
+          "link": "/security/reporting"
+        },
+        {
+          "text": "Security Fixes",
+          "link": "/security/fixes"
+        },
+        {
+          "text": "Upstream Advisories",
+          "link": "/security/upstream-advisories"
+        },
+        {
+          "text": "Hardening Checklist",
+          "link": "/security/hardening"
+        }
+      ]
+    },
+    {
       "text": "Tutorials & Examples",
       "collapsed": true,
       "items": [
@@ -621,10 +647,6 @@
         {
           "text": "Migrating to the Modern Layout",
           "link": "/appendices/migrating-to-the-modern-layout"
-        },
-        {
-          "text": "Security Fixes",
-          "link": "/appendices/security-fixes"
         },
         {
           "text": "Changes from the Original Book",

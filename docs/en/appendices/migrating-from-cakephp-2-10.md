@@ -33,7 +33,7 @@ Changes in v2.12.5 that may affect applications already running on the fork.
 ### Security fixes
 
 This release fixes three vulnerabilities. Most applications only need to
-update. See [Security Fixes](/appendices/security-fixes) for details.
+update. See [Security Fixes](/security/fixes) for details.
 
 - **Email headers** ([GHSA-4f9q-3c4x-52cv](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-4f9q-3c4x-52cv)):
   `SmtpTransport` and `MailTransport` remove line breaks from header names and
@@ -107,7 +107,7 @@ Changes in v2.12.3 that may affect applications already running on the fork.
   `https://` URLs because of a missing pair of parentheses (inherited from the
   original CakePHP 2.x). With `'readFile' => false`, neither `http://` nor
   `https://` URLs are fetched now; an `XmlException` is thrown instead. See
-  [Security Fixes](/appendices/security-fixes#xml-build-ssrf).
+  [Security Fixes](/security/fixes#xml-build-ssrf).
 
 **Migration:**
 
@@ -561,7 +561,7 @@ CakePlugin::load('Upgrade');
 - Existing tokens continue to work
 - New tokens generated with enhanced security
 
-See [Security](/appendices/security-fixes) for details.
+See [Security](/security/fixes) for details.
 
 ### strftime() Replacement
 

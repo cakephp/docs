@@ -12,6 +12,7 @@
 - [Shells, Tasks & Console Tools](console-and-shells)
 - [Development](development)
 - [Deployment](deployment)
+- [Security](security/)
 - [Tutorials & Examples](tutorials-and-examples)
 - [Contributing](contributing)
 - [Appendices](appendices)

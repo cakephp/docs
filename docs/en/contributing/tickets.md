@@ -28,4 +28,4 @@ Report them privately with GitHub's private vulnerability reporting, as
 described in the
 [security policy](https://github.com/pieceofcake2/.github/blob/master/SECURITY.md)
 of the organization. Fixed vulnerabilities are listed in
-[Security Fixes](/appendices/security-fixes).
+[Security Fixes](/security/fixes).

@@ -19,15 +19,15 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 | テスト | PHPUnit 3.7 | PHPUnit 9.6 | [テスト](/ja/development/testing) |
 | コントローラーのテスト | `ControllerTestCase::testAction()` | `IntegrationTestTrait` と `EmailTrait` も使える（v2.12.4、CakePHP 5 からのバックポート） | [統合テスト](/ja/development/integration-testing) |
 | コーディング規約 | CakePHP 2 の規約（タブ、`array()`） | CakePHP 5 の codesniffer（4 スペース、`[]`） | [コーディング規約](/ja/contributing/cakephp-coding-conventions) |
-| CSRF 対策 | 署名なしのトークン。一部のメソッドは検証されない | HMAC で署名したトークン。GET・HEAD・OPTIONS 以外はすべて検証 | [脆弱性への対応](/ja/appendices/security-fixes) |
-| SSL 証明書 | 同梱の `cacert.pem`（2016年） | システムの CA バンドルまたは composer/ca-bundle | [脆弱性への対応](/ja/appendices/security-fixes) |
+| CSRF 対策 | 署名なしのトークン。一部のメソッドは検証されない | HMAC で署名したトークン。GET・HEAD・OPTIONS 以外はすべて検証 | [脆弱性への対応](/ja/security/fixes) |
+| SSL 証明書 | 同梱の `cacert.pem`（2016年） | システムの CA バンドルまたは composer/ca-bundle | [脆弱性への対応](/ja/security/fixes) |
 | `String` クラス | `CakeText` の別名 | 削除。`CakeText` を使用 | [CakeText](/ja/core-utility-libraries/string) |
-| `'readFile' => false` を指定した `Xml::build()` | `https://` の URL は取得される (SSRF) | ファイルも URL も読み込まない | [脆弱性への対応](/ja/appendices/security-fixes#xml-build-ssrf) |
+| `'readFile' => false` を指定した `Xml::build()` | `https://` の URL は取得される (SSRF) | ファイルも URL も読み込まない | [脆弱性への対応](/ja/security/fixes#xml-build-ssrf) |
 | `$components` での CookieComponent の `'type'` | 無視される（常に `'cipher'`） | 反映される | [Cookie](/ja/core-libraries/components/cookie) |
 | `cake server` のデフォルトポート | 80 | 8765 | [インストール](/ja/installation#development-server) |
-| メールのヘッダーの値に含まれる改行 | `SmtpTransport` はそのまま送信、`MailTransport` は `\r\n` のみ削除（ヘッダーインジェクション） | 削除（折り返したヘッダー行は残す） | [脆弱性への対応](/ja/appendices/security-fixes#email-header-injection) |
-| `..` を含むビュー・レイアウト・エレメントの名前 | サーバー上の任意のファイルを指せる（パストラバーサル） | ビューのパスの中のファイルのみ。それ以外は存在しないものとして扱う | [脆弱性への対応](/ja/appendices/security-fixes#view-path-traversal) |
-| プロトコル相対 URL の `Auth.redirect` | ログイン後に別のホストへリダイレクトされる（オープンリダイレクト） | ローカルのパスに変換 | [脆弱性への対応](/ja/appendices/security-fixes#auth-redirect) |
+| メールのヘッダーの値に含まれる改行 | `SmtpTransport` はそのまま送信、`MailTransport` は `\r\n` のみ削除（ヘッダーインジェクション） | 削除（折り返したヘッダー行は残す） | [脆弱性への対応](/ja/security/fixes#email-header-injection) |
+| `..` を含むビュー・レイアウト・エレメントの名前 | サーバー上の任意のファイルを指せる（パストラバーサル） | ビューのパスの中のファイルのみ。それ以外は存在しないものとして扱う | [脆弱性への対応](/ja/security/fixes#view-path-traversal) |
+| プロトコル相対 URL の `Auth.redirect` | ログイン後に別のホストへリダイレクトされる（オープンリダイレクト） | ローカルのパスに変換 | [脆弱性への対応](/ja/security/fixes#auth-redirect) |
 | `order` のソート方向 | 指定どおり SQL に追加される | `ASC` / `DESC` と省略可能な `NULLS FIRST` / `NULLS LAST`。それ以外は `E_USER_DEPRECATED` (v2.12.5)、将来のバージョンでは例外 | [並び順](/ja/models/retrieving-your-data#sort-order) |
 | `.env` ファイル | 非対応 | `pieceofcake2/app` スケルトン (v2.4.0) が josegonzalez/dotenv で読み込み (フレームワークは読み込まない) | [環境変数](/ja/development/configuration#environment-variables) |
 
@@ -45,7 +45,11 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 
 - [CakePHP 2.10 からの移行](/ja/appendices/migrating-from-cakephp-2-10)
 - [モダン構成への移行](/ja/appendices/migrating-to-the-modern-layout)
-- [脆弱性への対応](/ja/appendices/security-fixes)
+- [セキュリティ](/ja/security/)
+- [脆弱性の報告](/ja/security/reporting)
+- [脆弱性への対応](/ja/security/fixes) (付録から移動)
+- [本家のアドバイザリ](/ja/security/upstream-advisories)
+- [セキュリティチェックリスト](/ja/security/hardening)
 - [PHPUnit 9.6 への移行](/ja/appendices/phpunit-9-migration-hints)
 - [統合テスト](/ja/development/integration-testing)
 - [E2E テスト](/ja/development/e2e-testing)
@@ -332,6 +336,21 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 - [AWS Lambda へのデプロイ](/ja/deployment/aws-lambda)
   - 新しいページ: pieceofcake2/app スケルトンを Bref 3 と Docker コンテナイメージで AWS Lambda にデプロイする方法 (TMP/LOGS を /tmp に、Bref の FPM ランタイム用の SCRIPT_NAME と HTTPS、stderr へのログ出力)、環境変数と SSM パラメータストア (`bref-ssm:`) による設定、pieceofcake2/aws による DynamoDB のセッションと SES のメール、キャッシュ、署名付き URL による S3 へのアップロード、Lift (S3 + CloudFront) による静的なアセット、RDS、コンソールのコマンドとスケジュール、Runtime Interface Emulator によるローカルでのテスト、OIDC を使った GitHub Actions からのデプロイ
 
+### セキュリティ
+
+- [セキュリティ](/ja/security/)
+  - 新しいセクションと概要のページ: Organization の SECURITY.md に基づくサポートするバージョン (最新のリリースにセキュリティ修正を提供。これまではパッチリリースとして提供)、修正の告知 (GitHub のセキュリティアドバイザリ、CHANGELOG/UPGRADE.md、このドキュメント)
+- [脆弱性の報告](/ja/security/reporting)
+  - 新しいページ: 非公開の脆弱性報告 (Security タブの Report a vulnerability)、報告に含める情報、SECURITY.md の公開までの流れ。脆弱性への対応の「脆弱性の報告」の節から移動
+- [脆弱性への対応](/ja/security/fixes)
+  - `/ja/appendices/security-fixes` から移動 (古い URL はこのページにリダイレクト)。報告の節は脆弱性の報告に移動
+  - `'readFile' => false` を指定した `Xml::build()` の SSRF (2.12.3 で修正) を追加。Cookie のタイプを `$components` で設定。Security.useOpenSsl のスケルトンについての注記
+  - SmtpTransport/MailTransport のメールヘッダーインジェクション (GHSA-4f9q-3c4x-52cv)、ビュー・レイアウト・エレメント名のパストラバーサル (GHSA-w2mh-x92p-5p95)、AuthComponent のログイン後のオープンリダイレクト (GHSA-x4p9-p4cx-gxwx) を追加 (いずれも 2.12.5 で修正)。表に GHSA の ID を記載。本家の CakePHP 2.x を使うアプリケーションは pieceofcake2/cakephp に切り替えると修正を適用できることを記載
+- [本家のアドバイザリ](/ja/security/upstream-advisories)
+  - 新しいページ: CakePHP 2.x に関係する本家 CakePHP のアドバイザリの対応状況 (フォークで修正済み、または対象外)。フォークの CHANGELOG、UPGRADE.md、アドバイザリに基づく
+- [セキュリティチェックリスト](/ja/security/hardening)
+  - 新しいページ: debug 0、固有のソルトとシード値、Composer での更新、SecurityComponent/CSRF、クッキーとセッションのフラグ、ファイルのパーミッション、HTTPS、サポートされている PHP。各設定を説明しているページへのリンク
+
 ### チュートリアル & 例
 
 - [チュートリアル & 例](/ja/tutorials-and-examples)
@@ -400,9 +419,6 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 
 - [本家ドキュメントからの変更点](/ja/appendices/changes-from-the-original-book)
   - このページ。削除したサイドバーの「Piece of Cake 2」グループ (`/ja/pieceofcake2/changes`) から付録に移動
-- [脆弱性への対応](/ja/appendices/security-fixes)
-  - `'readFile' => false` を指定した `Xml::build()` の SSRF (2.12.3 で修正) を追加。Cookie のタイプを `$components` で設定。Security.useOpenSsl のスケルトンについての注記
-  - SmtpTransport/MailTransport のメールヘッダーインジェクション (GHSA-4f9q-3c4x-52cv)、ビュー・レイアウト・エレメント名のパストラバーサル (GHSA-w2mh-x92p-5p95)、AuthComponent のログイン後のオープンリダイレクト (GHSA-x4p9-p4cx-gxwx) を追加 (いずれも 2.12.5 で修正)。表に GHSA の ID を記載。本家の CakePHP 2.x を使うアプリケーションは pieceofcake2/cakephp に切り替えると修正を適用できることを記載
 - [CakePHP 2.10 からの移行](/ja/appendices/migrating-from-cakephp-2-10)
   - v2.12.3 の節を追加 (Xml::build() の SSRF 修正、Cookie の `'type'` 設定、ServerShell のポート、テストケースの一覧、SQL Server の ERRMODE)。Cookie の例で `$components` を使用
   - v2.12.5 の節を追加 (メールのヘッダー、ビュー・レイアウト・エレメントの名前、ログイン後のリダイレクトのセキュリティ修正。不正な ORDER BY のソート方向の非推奨化)

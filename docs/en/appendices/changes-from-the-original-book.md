@@ -20,15 +20,15 @@ and lists the pages of this book that were changed from the original.
 | Tests | PHPUnit 3.7 | PHPUnit 9.6 | [Testing](/development/testing) |
 | Controller tests | `ControllerTestCase::testAction()` | Also `IntegrationTestTrait` and `EmailTrait` (v2.12.4, backports from CakePHP 5) | [Integration Testing](/development/integration-testing) |
 | Coding standard | CakePHP 2 standard (tabs, `array()`) | CakePHP 5 codesniffer (4 spaces, `[]`) | [Coding Standards](/contributing/cakephp-coding-conventions) |
-| CSRF protection | Unsigned tokens; some methods not validated | HMAC-signed tokens; all methods except GET/HEAD/OPTIONS validated | [Security Fixes](/appendices/security-fixes) |
-| SSL certificates | Bundled `cacert.pem` (2016) | System CA bundle or composer/ca-bundle | [Security Fixes](/appendices/security-fixes) |
+| CSRF protection | Unsigned tokens; some methods not validated | HMAC-signed tokens; all methods except GET/HEAD/OPTIONS validated | [Security Fixes](/security/fixes) |
+| SSL certificates | Bundled `cacert.pem` (2016) | System CA bundle or composer/ca-bundle | [Security Fixes](/security/fixes) |
 | `String` class | Alias of `CakeText` | Removed; use `CakeText` | [CakeText](/core-utility-libraries/string) |
-| `Xml::build()` with `'readFile' => false` | `https://` URLs still fetched (SSRF) | Neither files nor URLs are read | [Security Fixes](/appendices/security-fixes#xml-build-ssrf) |
+| `Xml::build()` with `'readFile' => false` | `https://` URLs still fetched (SSRF) | Neither files nor URLs are read | [Security Fixes](/security/fixes#xml-build-ssrf) |
 | CookieComponent `'type'` in `$components` | Ignored (always `'cipher'`) | Honored | [Cookie](/core-libraries/components/cookie) |
 | `cake server` default port | 80 | 8765 | [Installation](/installation#development-server) |
-| Line breaks in email header values | Sent as is by `SmtpTransport`; only `\r\n` removed by `MailTransport` (header injection) | Removed (folded header lines are kept) | [Security Fixes](/appendices/security-fixes#email-header-injection) |
-| View, layout and element names with `..` | Can resolve to any file on the server (path traversal) | Must resolve inside the view paths; other files are treated as missing | [Security Fixes](/appendices/security-fixes#view-path-traversal) |
-| Protocol-relative `Auth.redirect` URL | Redirects to another host after login (open redirect) | Collapsed to a local path | [Security Fixes](/appendices/security-fixes#auth-redirect) |
+| Line breaks in email header values | Sent as is by `SmtpTransport`; only `\r\n` removed by `MailTransport` (header injection) | Removed (folded header lines are kept) | [Security Fixes](/security/fixes#email-header-injection) |
+| View, layout and element names with `..` | Can resolve to any file on the server (path traversal) | Must resolve inside the view paths; other files are treated as missing | [Security Fixes](/security/fixes#view-path-traversal) |
+| Protocol-relative `Auth.redirect` URL | Redirects to another host after login (open redirect) | Collapsed to a local path | [Security Fixes](/security/fixes#auth-redirect) |
 | Sort direction in `order` | Appended to the SQL as given | `ASC` / `DESC` with optional `NULLS FIRST` / `NULLS LAST`; anything else triggers `E_USER_DEPRECATED` (v2.12.5), an exception in a future version | [Sort Order](/models/retrieving-your-data#sort-order) |
 | `.env` files | Not supported | Loaded by the `pieceofcake2/app` skeleton (v2.4.0) with josegonzalez/dotenv, not by the framework | [Environment Variables](/development/configuration#environment-variables) |
 
@@ -47,7 +47,11 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
 
 - [Migrating from CakePHP 2.10](/appendices/migrating-from-cakephp-2-10)
 - [Migrating to the Modern Layout](/appendices/migrating-to-the-modern-layout)
-- [Security Fixes](/appendices/security-fixes)
+- [Security](/security/)
+- [Reporting a Vulnerability](/security/reporting)
+- [Security Fixes](/security/fixes) (moved from the Appendices)
+- [Upstream Advisories](/security/upstream-advisories)
+- [Hardening Checklist](/security/hardening)
 - [Migrating Tests to PHPUnit 9.6](/appendices/phpunit-9-migration-hints)
 - [Integration Testing](/development/integration-testing)
 - [E2E Testing](/development/e2e-testing)
@@ -337,6 +341,21 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
 - [Deploying to AWS Lambda](/deployment/aws-lambda)
   - New page: deploying the pieceofcake2/app skeleton to AWS Lambda with Bref 3 and Docker container images (TMP/LOGS in /tmp, SCRIPT_NAME and HTTPS for Bref's FPM runtime, logs to stderr), configuration with environment variables and SSM Parameter Store (`bref-ssm:`), DynamoDB sessions and SES email with pieceofcake2/aws, cache, S3 uploads with presigned URLs, static assets with Lift (S3 + CloudFront), RDS, console commands and schedules, local testing with the Runtime Interface Emulator, and deployment from GitHub Actions with OIDC
 
+### Security
+
+- [Security](/security/)
+  - New section and overview page: supported versions from the organization's SECURITY.md (security fixes for the latest release; so far released as patch releases), how fixes are announced (GitHub Security Advisories, CHANGELOG/UPGRADE.md, this book)
+- [Reporting a Vulnerability](/security/reporting)
+  - New page: private vulnerability reporting (Security tab, Report a vulnerability), what to include and the disclosure process from SECURITY.md; moved from the "Reporting a Vulnerability" section of Security Fixes
+- [Security Fixes](/security/fixes)
+  - Moved from `/appendices/security-fixes` (the old URL redirects to this page); the reporting section moved to Reporting a Vulnerability
+  - Added the `Xml::build()` SSRF with `'readFile' => false` (fixed in 2.12.3); Cookie type set in `$components`; skeleton note for Security.useOpenSsl
+  - Added the email header injection in SmtpTransport/MailTransport (GHSA-4f9q-3c4x-52cv), the path traversal in view, layout and element names (GHSA-w2mh-x92p-5p95) and the open redirect after login in AuthComponent (GHSA-x4p9-p4cx-gxwx), all fixed in 2.12.5; the table lists GHSA IDs; note that applications on the original CakePHP 2.x can switch to pieceofcake2/cakephp to get the fixes
+- [Upstream Advisories](/security/upstream-advisories)
+  - New page: status of the upstream CakePHP advisories that concern CakePHP 2.x (fixed in the fork, or not applicable), from the fork's CHANGELOG, UPGRADE.md and advisories
+- [Hardening Checklist](/security/hardening)
+  - New page: debug 0, unique salt and cipher seed, Composer updates, SecurityComponent/CSRF, cookie and session flags, file permissions, HTTPS, supported PHP versions; links to the pages that describe each setting
+
 ### Tutorials & Examples
 
 - [Tutorials & Examples](/tutorials-and-examples)
@@ -405,9 +424,6 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
 
 - [Changes from the Original Book](/appendices/changes-from-the-original-book)
   - This page; moved from `/pieceofcake2/changes` in the removed "Piece of Cake 2" sidebar group to the Appendices
-- [Security Fixes](/appendices/security-fixes)
-  - Added the `Xml::build()` SSRF with `'readFile' => false` (fixed in 2.12.3); Cookie type set in `$components`; skeleton note for Security.useOpenSsl
-  - Added the email header injection in SmtpTransport/MailTransport (GHSA-4f9q-3c4x-52cv), the path traversal in view, layout and element names (GHSA-w2mh-x92p-5p95) and the open redirect after login in AuthComponent (GHSA-x4p9-p4cx-gxwx), all fixed in 2.12.5; the table lists GHSA IDs; note that applications on the original CakePHP 2.x can switch to pieceofcake2/cakephp to get the fixes
 - [Migrating from CakePHP 2.10](/appendices/migrating-from-cakephp-2-10)
   - Added a v2.12.3 section (Xml::build() SSRF fix, Cookie `'type'` setting, ServerShell port, test case listing, SQL Server ERRMODE); Cookie example uses `$components`
   - Added a v2.12.5 section (security fixes for email headers, view/layout/element names and the login redirect; deprecation of invalid ORDER BY directions)

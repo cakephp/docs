@@ -132,7 +132,7 @@ SSL のサービスへのリクエストを作成する場合、 HttpSocket は�
 ::: pieceofcake2
 2016 年に最終更新された同梱の `cacert.pem` は削除され、
 システムの CA 証明書と `composer/ca-bundle` を使うようになりました。
-詳しくは [脆弱性への対応](/ja/appendices/security-fixes) を参照してください。
+詳しくは [脆弱性への対応](/ja/security/fixes) を参照してください。
 :::
 
 これらのオプションは、コンストラクタの引数として指定します。

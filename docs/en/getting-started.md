@@ -59,7 +59,7 @@ the points that changed:
   [Static Analysis](development/static-analysis).
 - **Security fixes.** Known vulnerabilities of CakePHP 2.10.24 are fixed, for
   example CSRF tokens are now HMAC-signed. See
-  [Security Fixes](/appendices/security-fixes).
+  [Security Fixes](/security/fixes).
 - **Backports from CakePHP 5.** `IntegrationTestTrait` and `EmailTrait`
   (CakePHP 2.12.4) test controllers through the real dispatcher with the
   CakePHP 5 method names, see
