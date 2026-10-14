@@ -32,6 +32,7 @@ GitHub のリポジトリにリンクしています。
 ### インフラ
 
 - [Aws Plugin](https://pieceofcake2.github.io/aws/) - AWS SDK との連携
+- [AsyncAws Plugin](https://pieceofcake2.github.io/async-aws/) - AsyncAws との連携
 - [Bref Plugin](https://github.com/pieceofcake2/bref) - Bref による AWS Lambda へのデプロイ
 
 ### ログとモニタリング
