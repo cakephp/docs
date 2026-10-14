@@ -70,7 +70,7 @@ If you forgot to define these special classes, CakePHP will hand
 you "Missing Controller" errors until you've done so.
 
 Please note that the process of creating plugins can be greatly
-simplified by using the [Bake plugin](https://github.com/pieceofcake2/bake).
+simplified by using the [Bake plugin](https://pieceofcake2.github.io/bake/).
 
 In order to bake a plugin please use the following command:
 
@@ -388,4 +388,4 @@ So if you created a plugin "Logging" with your GitHub account "FooBar", a good
 name would be `foo-bar/cakephp-logging`.
 And the CakePHP owned "Localized" plugin can be found under `cakephp/localized`
 respectively. Its PHP 8 compatible fork is maintained at
-[pieceofcake2/localized](https://github.com/pieceofcake2/localized).
+[pieceofcake2/localized](https://pieceofcake2.github.io/localized/).

@@ -6,7 +6,7 @@ The Piece of Cake 2 fork supports two application layouts:
   directory.
 - **Modern layout**: a CakePHP 5.x-style layout with `config/`, `src/`,
   `templates/`, `tests/` and so on at the project root. The
-  [pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton uses it.
+  [pieceofcake2/app](https://pieceofcake2.github.io/app/) skeleton uses it.
 
 Both layouts work with the same framework version; you can stay on the legacy
 layout, or move to the modern one gradually.

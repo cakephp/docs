@@ -88,7 +88,7 @@ public function beforeFilter()
 
 The examples in this book don't start with `App::uses()` statements. CakePHP's
 own classes are autoloaded by Composer, and the application skeleton
-([pieceofcake2/app](https://github.com/pieceofcake2/app)) registers your
+([pieceofcake2/app](https://pieceofcake2.github.io/app/)) registers your
 application classes with a Composer classmap in `composer.json`:
 
 ``` json

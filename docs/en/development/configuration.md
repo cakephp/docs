@@ -194,7 +194,7 @@ skeleton can load them from a `.env` file.
 ### Loading .env Files
 
 Applications created from the
-[pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton load
+[pieceofcake2/app](https://pieceofcake2.github.io/app/) skeleton load
 environment variables from `.env` files at the top of `config/core.php`, using
 [josegonzalez/dotenv](https://github.com/josegonzalez/php-dotenv). Because
 `config/core.php` is read first, the variables are available to the rest of
@@ -346,7 +346,7 @@ export DB_DATABASE="my_app"
 CakePHP framework classes are loaded by Composer's autoloader, so you never
 need `App::uses()` for them. Your own classes can be autoloaded the same way by
 adding a classmap to your application's `composer.json`, as the
-[pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton does:
+[pieceofcake2/app](https://pieceofcake2.github.io/app/) skeleton does:
 
 ``` json
 "autoload": {
@@ -654,7 +654,7 @@ Configure::write('Security.useOpenSsl', true);
 ```
 
 The default is false. Applications created from the
-[pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton (v2.3.1 and
+[pieceofcake2/app](https://pieceofcake2.github.io/app/) skeleton (v2.3.1 and
 later) already have this line; add it to existing applications.
 
 Asset.timestamp  

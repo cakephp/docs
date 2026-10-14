@@ -551,10 +551,6 @@
         {
           "text": "メンテナンスされているプラグイン",
           "link": "/ja/plugins/maintained-plugins"
-        },
-        {
-          "text": "Captcha",
-          "link": "/ja/plugins/captcha"
         }
       ]
     },

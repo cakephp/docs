@@ -44,7 +44,7 @@ CakePHP 2 plugins are published as packages of the type `cakephp-plugin`,
 which [composer/installers](https://github.com/composer/installers) installs
 into a plugin directory rather than into `vendor/`. The following settings in
 your `composer.json` are required so that each plugin is installed into
-`plugins/<Name>/`. The [pieceofcake2/app](https://github.com/pieceofcake2/app)
+`plugins/<Name>/`. The [pieceofcake2/app](https://pieceofcake2.github.io/app/)
 skeleton already contains them:
 
 ``` json

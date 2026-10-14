@@ -1,7 +1,7 @@
 # CakePHP Folder Structure
 
 After you've created a new application from the
-[pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton (see
+[pieceofcake2/app](https://pieceofcake2.github.io/app/) skeleton (see
 [Installation](../installation)), these are the files and folders you should
 see:
 

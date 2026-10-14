@@ -4,89 +4,89 @@ The [Piece of Cake 2](https://github.com/pieceofcake2) project maintains the
 framework fork together with related repositories and forks of popular
 CakePHP 2 plugins. All maintained plugins are compatible with PHP 8.x, and
 their CI checks them with [PHPStan](/development/static-analysis) at level 5.
+Names link to the documentation site of each package, or to the GitHub
+repository where the package has no documentation site.
 
 ## Core repositories
 
 - [CakePHP](https://github.com/pieceofcake2/cakephp) - CakePHP 2.x framework
-- [App Skeleton](https://github.com/pieceofcake2/app) - Application skeleton
+- [App Skeleton](https://pieceofcake2.github.io/app/) - Application skeleton
 - [Plugin Skeleton](https://github.com/pieceofcake2/plugin) - Plugin skeleton
-- [Bake Plugin](https://github.com/pieceofcake2/bake) - Code generation tool
-- [Upgrade Plugin](https://github.com/pieceofcake2/upgrade) - Upgrade utility (CakePHP 1.3 to 2.0)
+- [Bake Plugin](https://pieceofcake2.github.io/bake/) - Code generation tool
+- [Upgrade Plugin](https://pieceofcake2.github.io/upgrade/) - Upgrade utility (CakePHP 1.3 to 2.0)
 
 ## Development tools
 
-- [PHPStan CakePHP](https://github.com/pieceofcake2/phpstan-cakephp2) - PHPStan extension for static analysis
+- [PHPStan CakePHP](https://pieceofcake2.github.io/phpstan-cakephp2/) - PHPStan extension for static analysis
   (see [Static Analysis](/development/static-analysis))
-- [E2E Test](https://github.com/pieceofcake2/e2e-test) - Browser end-to-end tests
+- [E2E Test](https://pieceofcake2.github.io/e2e-test/) - Browser end-to-end tests
   with PHPUnit and Symfony Panther (Chrome, PC and mobile)
-  ([documentation](https://github.com/pieceofcake2/e2e-test/blob/1.x/docs/README.md))
+  (see [E2E Testing](/development/e2e-testing))
 
 ## Maintained plugins
 
 ### Debugging
 
-- [DebugKit Plugin](https://github.com/pieceofcake2/debug_kit) - Debug toolbar
-  ([documentation](https://github.com/pieceofcake2/debug_kit/blob/2.x/docs/README.md))
+- [DebugKit Plugin](https://pieceofcake2.github.io/debug_kit/) - Debug toolbar
 
 ### Infrastructure
 
-- [Aws Plugin](https://github.com/pieceofcake2/aws) - AWS SDK integration
+- [Aws Plugin](https://pieceofcake2.github.io/aws/) - AWS SDK integration
 - [Bref Plugin](https://github.com/pieceofcake2/bref) - AWS Lambda deployment with Bref
 
 ### Logging & Monitoring
 
-- [Monolog Plugin](https://github.com/pieceofcake2/monolog) - Monolog integration
-- [Sentry Plugin](https://github.com/pieceofcake2/sentry) - Error tracking and monitoring
+- [Monolog Plugin](https://pieceofcake2.github.io/monolog/) - Monolog integration
+- [Sentry Plugin](https://pieceofcake2.github.io/sentry/) - Error tracking and monitoring
 
 ### Templating
 
-- [TwigView Plugin](https://github.com/pieceofcake2/twig-view) - Twig template engine
-- [CsvView Plugin](https://github.com/pieceofcake2/csv-view) - CSV view class
+- [TwigView Plugin](https://pieceofcake2.github.io/twig-view/) - Twig template engine
+- [CsvView Plugin](https://pieceofcake2.github.io/csv-view/) - CSV view class
 
 ### View Helpers
 
-- [Markdown Plugin](https://github.com/pieceofcake2/markdown) - Markdown helper
-- [MenuBuilder Plugin](https://github.com/pieceofcake2/menu_builder) - Navigation menu helper
-- [Vite Plugin](https://github.com/pieceofcake2/vite) - Vite asset helper with dev server support
-- [WebpackEncore Plugin](https://github.com/pieceofcake2/webpack-encore) - Webpack Encore asset helper
+- [Markdown Plugin](https://pieceofcake2.github.io/markdown/) - Markdown helper
+- [MenuBuilder Plugin](https://pieceofcake2.github.io/menu_builder/) - Navigation menu helper
+- [Vite Plugin](https://pieceofcake2.github.io/vite/) - Vite asset helper with dev server support
+- [WebpackEncore Plugin](https://pieceofcake2.github.io/webpack-encore/) - Webpack Encore asset helper
 
 ### Forms & Validation
 
-- [Xform Plugin](https://github.com/pieceofcake2/xform) - Extended form helper
-- [Cakeplus Plugin](https://github.com/pieceofcake2/cakeplus) - Form utilities and enhancements
-- [Captcha Plugin](https://github.com/pieceofcake2/captcha) - CAPTCHA widget and
+- [Xform Plugin](https://pieceofcake2.github.io/xform/) - Extended form helper
+- [Cakeplus Plugin](https://pieceofcake2.github.io/cakeplus/) - Form utilities and enhancements
+- [Captcha Plugin](https://pieceofcake2.github.io/captcha/) - CAPTCHA widget and
   server-side verification with Cloudflare Turnstile (default), Google
   reCAPTCHA v2/v3 or hCaptcha
-  ([documentation](https://github.com/pieceofcake2/captcha/blob/1.x/docs/README.md))
 
 ### Database
 
-- [Datasources Plugin](https://github.com/pieceofcake2/datasources) - Additional datasources (CSV / TSV files, arrays and more)
+- [Datasources Plugin](https://pieceofcake2.github.io/datasources/) - Additional datasources (CSV / TSV files, arrays and more)
 
 ### Authentication and Authorization
 
-- [Authenticate Plugin](https://github.com/pieceofcake2/authenticate) - Authentication classes
-- [AclExtras Plugin](https://github.com/pieceofcake2/acl_extras) - Console tools for managing ACL tables
+- [Authenticate Plugin](https://pieceofcake2.github.io/authenticate/) - Authentication classes
+- [AclExtras Plugin](https://pieceofcake2.github.io/acl_extras/) - Console tools for managing ACL tables
 
 ### Files
 
-- [Upload Plugin](https://github.com/pieceofcake2/upload) - File upload handling
-- [Imagine Plugin](https://github.com/pieceofcake2/imagine) - Image processing library wrapper
-- [CakePdf Plugin](https://github.com/pieceofcake2/cakepdf) - PDF generation
+- [Upload Plugin](https://pieceofcake2.github.io/upload/) - File upload handling
+- [Imagine Plugin](https://pieceofcake2.github.io/imagine/) - Image processing library wrapper
+- [CakePdf Plugin](https://pieceofcake2.github.io/cakepdf/) - PDF generation
 
 ### SEO
 
-- [Seo Plugin](https://github.com/pieceofcake2/seo) - Search engine optimization
-- [Sitemap Plugin](https://github.com/pieceofcake2/sitemap) - Sitemap generation
+- [Seo Plugin](https://pieceofcake2.github.io/seo/) - Search engine optimization
+- [Sitemap Plugin](https://pieceofcake2.github.io/sitemap/) - Sitemap generation
 
 ### I18n
 
-- [Localized Plugin](https://github.com/pieceofcake2/localized) - Localization utilities
+- [Localized Plugin](https://pieceofcake2.github.io/localized/) - Localization utilities
 
 ## Installing a plugin
 
 Install plugins with Composer and load them as usual with `CakePlugin::load()`.
-See each repository's README for the package name and setup. With the
+See each plugin's documentation site for the package name and setup. With the
 [modern layout](/appendices/migrating-to-the-modern-layout), Composer installs plugins
 into `plugins/` through the `installer-paths` setting.
 

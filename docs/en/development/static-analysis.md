@@ -8,7 +8,7 @@ an old application that has few of them.
 CakePHP 2 creates many objects on the fly. Models are available as
 `$this->Post` in a controller, components as `$this->Auth`, and behavior
 methods can be called on the model. PHPStan cannot see these by itself. The
-[pieceofcake2/phpstan-cakephp2](https://github.com/pieceofcake2/phpstan-cakephp2)
+[pieceofcake2/phpstan-cakephp2](https://pieceofcake2.github.io/phpstan-cakephp2/)
 extension teaches it how CakePHP 2 works.
 
 ## Installation
@@ -30,7 +30,7 @@ same way `webroot/index.php` does.
 ### Modern Layout
 
 This is the configuration of the
-[pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton:
+[pieceofcake2/app](https://pieceofcake2.github.io/app/) skeleton:
 
 ```yaml
 # phpstan.neon

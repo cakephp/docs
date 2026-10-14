@@ -9,7 +9,7 @@ to take once an application has been scaffolded.
 
 ## Installing Bake
 
-Bake is provided by the [pieceofcake2/bake](https://github.com/pieceofcake2/bake)
+Bake is provided by the [pieceofcake2/bake](https://pieceofcake2.github.io/bake/)
 plugin. Applications created from the pieceofcake2/app skeleton already have it
 as a development dependency. Otherwise install it with Composer:
 

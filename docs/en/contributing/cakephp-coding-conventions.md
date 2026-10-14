@@ -24,7 +24,7 @@ original CakePHP 2 standard, see
 
 ## Checking Your Code
 
-The framework and the [pieceofcake2/app](https://github.com/pieceofcake2/app)
+The framework and the [pieceofcake2/app](https://pieceofcake2.github.io/app/)
 application skeleton install the sniffer as a development dependency. To add it to an
 existing application, run:
 
@@ -842,7 +842,7 @@ is allowed in `database.php`.
 
 ## A phpcs.xml for Your Application
 
-The [pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton ships the
+The [pieceofcake2/app](https://pieceofcake2.github.io/app/) skeleton ships the
 following `phpcs.xml` for the modern directory layout. It uses the same
 exclusions as the framework, except that it excludes only the parameter and
 property type rules and requires native return types in `tests/TestCase/`:

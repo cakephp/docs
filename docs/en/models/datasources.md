@@ -17,7 +17,7 @@ extension must be installed:
 
 > [!NOTE]
 > You can find additional datasources (CSV/TSV files, arrays and more) in the
-> [Datasources plugin](https://github.com/pieceofcake2/datasources).
+> [Datasources plugin](https://pieceofcake2.github.io/datasources/).
 
 When specifying a database connection configuration in
 `config/database.php` (`app/Config/database.php` in the legacy layout),

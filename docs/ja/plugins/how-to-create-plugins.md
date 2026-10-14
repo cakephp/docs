@@ -65,7 +65,7 @@ class ContactManagerAppModel extends AppModel
 
 もしこれらの特別なクラスの定義を忘れると、”Missing Controller” エラーがでます。
 
-プラグインの作成は、 [Bake プラグイン](https://github.com/pieceofcake2/bake) を使えば非常に簡単です。
+プラグインの作成は、 [Bake プラグイン](https://pieceofcake2.github.io/bake/) を使えば非常に簡単です。
 
 プラグインを bake するのは以下のコマンドになります。
 
@@ -355,4 +355,4 @@ CakePHP 名前空間 (cakephp) を **使用しない** でください。
 もし、あなたの GitHub アカウントが "FooBar" で "Logging" プラグインを作成する場合、
 `foo-bar/cakephp-logging` と名付けるといいでしょう。
 そして、CakePHP 自身の "Localized" プラグインは、 `cakephp/localized` で見つけられます。
-その PHP 8 対応フォークは [pieceofcake2/localized](https://github.com/pieceofcake2/localized) でメンテナンスされています。
+その PHP 8 対応フォークは [pieceofcake2/localized](https://pieceofcake2.github.io/localized/) でメンテナンスされています。

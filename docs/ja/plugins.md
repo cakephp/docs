@@ -23,4 +23,3 @@ TwigView など、よく使われているプラグインの PHP 8 対応フォ�
 - [プラグインのインストール](plugins/how-to-install-plugins)
 - [プラグインの使い方](plugins/how-to-use-plugins)
 - [プラグインの作成](plugins/how-to-create-plugins)
-- [Captcha](plugins/captcha)

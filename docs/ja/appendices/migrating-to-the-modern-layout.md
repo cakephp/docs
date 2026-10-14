@@ -4,7 +4,7 @@ Piece of Cake 2 フォークは、2 種類のアプリケーション構成に�
 
 - **レガシー構成**: `app/` ディレクトリを使う従来の CakePHP 2.x の構成です。
 - **モダン構成**: プロジェクト直下に `config/`、`src/`、`templates/`、`tests/` などを置く
-  CakePHP 5.x 風の構成です。[pieceofcake2/app](https://github.com/pieceofcake2/app)
+  CakePHP 5.x 風の構成です。[pieceofcake2/app](https://pieceofcake2.github.io/app/)
   スケルトンはこの構成を使っています。
 
 どちらの構成も同じバージョンのフレームワークで動作します。レガシー構成のまま使い続けることも、

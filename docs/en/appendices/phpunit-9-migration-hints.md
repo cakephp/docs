@@ -14,7 +14,7 @@ Install PHPUnit with Composer as a development dependency:
 composer require --dev phpunit/phpunit:^9.6
 ```
 
-The [pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton contains a
+The [pieceofcake2/app](https://pieceofcake2.github.io/app/) skeleton contains a
 `phpunit.xml.dist` that loads `tests/bootstrap.php` and registers the
 `CakeFixtureInjector` listener, which loads fixtures:
 

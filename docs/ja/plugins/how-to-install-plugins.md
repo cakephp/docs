@@ -41,7 +41,7 @@ CakePHP 2 のプラグインはタイプが `cakephp-plugin` のパッケージ�
 [composer/installers](https://github.com/composer/installers) によって `vendor/` ではなく
 プラグイン用のディレクトリにインストールされます。各プラグインを `plugins/<Name>/` に
 インストールするには、 `composer.json` に次の設定が必要です。
-[pieceofcake2/app](https://github.com/pieceofcake2/app) スケルトンには最初から含まれています。
+[pieceofcake2/app](https://pieceofcake2.github.io/app/) スケルトンには最初から含まれています。
 
 ``` json
 {

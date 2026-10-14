@@ -17,7 +17,7 @@ CakePHP プロジェクトによる CakePHP 2.x のサポートは
 [2021年6月に終了](https://bakery.cakephp.org/2021/10/02/cakephp_2_eol.html)しました。
 
 このクックブックは、フォーク上で動く CakePHP 2 に合わせて、Composer でのインストール、PHP 8、
-[pieceofcake2/app](https://github.com/pieceofcake2/app) で使っているモダンなディレクトリ構成を前提に説明しています。
+[pieceofcake2/app](https://pieceofcake2.github.io/app/) で使っているモダンなディレクトリ構成を前提に説明しています。
 本家の CakePHP 2.x のドキュメントとの違いは [本家ドキュメントからの変更点](/ja/appendices/changes-from-the-original-book)
 にまとめています。フォークのほかのプロジェクトやリソースは
 [Piece of Cake 2 のサイト](https://pieceofcake2.github.io/) から参照できます。
@@ -45,7 +45,7 @@ CakePHP 2.10 を知っていれば、その知識のほとんどはそのまま�
 - **コーディング規約。** フォークのコードとこのドキュメントのサンプルは、CakePHP 5 の codesniffer の
   ルール (スペース 4 つのインデント、短い配列構文) に従っています。
   [コーディング規約](contributing/cakephp-coding-conventions) を参照してください。
-- **静的解析。** [pieceofcake2/phpstan-cakephp2](https://github.com/pieceofcake2/phpstan-cakephp2)
+- **静的解析。** [pieceofcake2/phpstan-cakephp2](https://pieceofcake2.github.io/phpstan-cakephp2/)
   拡張を使うと、PHPStan がモデル、コンポーネント、ビヘイビアを理解できるようになります。
   [静的解析](development/static-analysis) を参照してください。
 - **セキュリティ修正。** CakePHP 2.10.24 の既知の脆弱性を修正しています。たとえば CSRF トークンは

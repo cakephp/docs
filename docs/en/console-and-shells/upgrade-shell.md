@@ -5,7 +5,7 @@
 The upgrade shell does most of the mechanical work of upgrading an application
 from CakePHP 1.3 to 2.0: it moves files to their 2.0 locations and rewrites
 removed APIs, helper calls, constants and so on. It is provided by the
-[pieceofcake2/upgrade](https://github.com/pieceofcake2/upgrade) plugin.
+[pieceofcake2/upgrade](https://pieceofcake2.github.io/upgrade/) plugin.
 
 ::: pieceofcake2
 `UpgradeShell` was removed from the core and moved to the

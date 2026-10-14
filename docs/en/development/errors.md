@@ -123,7 +123,7 @@ This class/method will print out 'There has been an error!' each time an error
 occurs. The error handlers are registered after `config/bootstrap.php` has been
 loaded, so loading the class there with `App::uses()` is enough. If your
 `composer.json` autoloads `src/` with a classmap, as in
-[pieceofcake2/app](https://github.com/pieceofcake2/app), the class is also
+[pieceofcake2/app](https://pieceofcake2.github.io/app/), the class is also
 found by Composer after you run `composer dump-autoload`.
 
 PHP 8 no longer passes the fifth `$context` argument to error handlers, so

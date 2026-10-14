@@ -16,7 +16,7 @@ CakePHP にはデータベースごとのデータソースが同梱されてい
 
 > [!NOTE]
 > 上記以外のデータソース (CSV/TSV ファイル、配列など) は
-> [Datasources プラグイン](https://github.com/pieceofcake2/datasources) にあります。
+> [Datasources プラグイン](https://pieceofcake2.github.io/datasources/) にあります。
 
 `config/database.php` (レガシーレイアウトでは `app/Config/database.php`)
 でデータベースの接続設定を行うと、

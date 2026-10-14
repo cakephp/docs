@@ -213,7 +213,7 @@ Clicking it opens a toolbar with panels that show information about the
 current request, such as the SQL queries, timers, log messages, view variables
 and session data. The History panel lists previous requests, including
 redirects and ajax requests, so you can inspect them too.
-Use [pieceofcake2/debug_kit](https://github.com/pieceofcake2/debug_kit), a
+Use [pieceofcake2/debug_kit](https://pieceofcake2.github.io/debug_kit/), a
 PHP 8 compatible version of DebugKit 2.x maintained by the Piece of Cake 2
 project. Install it as a development dependency with Composer:
 
@@ -229,7 +229,7 @@ CakePlugin::load('DebugKit');
 ```
 
 See the
-[DebugKit documentation](https://github.com/pieceofcake2/debug_kit/blob/2.x/docs/README.md)
+[DebugKit documentation](https://pieceofcake2.github.io/debug_kit/)
 for how to enable the toolbar, the toolbar panels and their configuration, and
 how to write your own panels. See [Maintained Plugins](/plugins/maintained-plugins)
 for the other maintained plugins.

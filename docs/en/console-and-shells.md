@@ -85,8 +85,8 @@ Running the Console with no arguments produces this help message:
 
 ::: pieceofcake2
 `bake` and `upgrade` are no longer core shells. Install
-[pieceofcake2/bake](https://github.com/pieceofcake2/bake) or
-[pieceofcake2/upgrade](https://github.com/pieceofcake2/upgrade) as plugins if you need them.
+[pieceofcake2/bake](https://pieceofcake2.github.io/bake/) or
+[pieceofcake2/upgrade](https://pieceofcake2.github.io/upgrade/) as plugins if you need them.
 :::
 
 The first information printed relates to paths. This is especially

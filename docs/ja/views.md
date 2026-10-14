@@ -25,7 +25,7 @@ CSV ファイルを出力する必要があるかもしれません。
 データの取得に必要なロジックが書かれています。もし Twig や Smarty のような
 テンプレート言語を使いたいのであれば、ビューのサブクラスがテンプレート言語と CakePHP の
 橋渡しをしてくれるでしょう。Twig の場合は
-[TwigView プラグイン](https://github.com/pieceofcake2/twig-view) がそのようなビュークラスを提供しています。
+[TwigView プラグイン](https://pieceofcake2.github.io/twig-view/) がそのようなビュークラスを提供しています。
 
 ビューファイルは、 `templates/` にあるコントローラ名のフォルダに、
 関連するアクション名で保存されます。例えば、Products コントローラの "view()"

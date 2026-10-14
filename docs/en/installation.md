@@ -115,7 +115,7 @@ CakePHP 2.10.24.
 
 ## Creating a New Application
 
-The [pieceofcake2/app](https://github.com/pieceofcake2/app) package is the
+The [pieceofcake2/app](https://pieceofcake2.github.io/app/) package is the
 application skeleton. Create a new application with Composer's
 `create-project` command:
 
@@ -125,9 +125,8 @@ composer create-project pieceofcake2/app my_app
 
 This creates a `my_app` directory, installs CakePHP (`pieceofcake2/cakephp`)
 into `vendor/`, and installs the [Bake](console-and-shells/code-generation-with-bake)
-and [DebugKit](https://github.com/pieceofcake2/debug_kit) plugins as
-development dependencies (see the
-[DebugKit documentation](https://github.com/pieceofcake2/debug_kit/blob/2.x/docs/README.md)). The skeleton uses the following layout:
+and [DebugKit](https://pieceofcake2.github.io/debug_kit/) plugins as
+development dependencies. The skeleton uses the following layout:
 
 ```text
 my_app/

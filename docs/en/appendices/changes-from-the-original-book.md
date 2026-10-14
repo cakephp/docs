@@ -14,8 +14,8 @@ and lists the pages of this book that were changed from the original.
 | Application layout | `app/` | Modern layout (`src/`, `templates/`, `config/`, ...) or `app/` | [Folder Structure](/getting-started/cakephp-folder-structure) |
 | Framework layout | `lib/Cake/` | `vendor/pieceofcake2/cakephp/src/Cake/` | [Migrating from CakePHP 2.10](/appendices/migrating-from-cakephp-2-10) |
 | Class loading | `App::uses()` | Composer classmap; `App::uses()` only for classes Composer does not know | [Controllers](/controllers#autoloading-classes) |
-| Bake | Core shell | [pieceofcake2/bake](https://github.com/pieceofcake2/bake) plugin | [Code Generation with Bake](/console-and-shells/code-generation-with-bake) |
-| UpgradeShell | Core shell | [pieceofcake2/upgrade](https://github.com/pieceofcake2/upgrade) plugin | [Upgrade Shell](/console-and-shells/upgrade-shell) |
+| Bake | Core shell | [pieceofcake2/bake](https://pieceofcake2.github.io/bake/) plugin | [Code Generation with Bake](/console-and-shells/code-generation-with-bake) |
+| UpgradeShell | Core shell | [pieceofcake2/upgrade](https://pieceofcake2.github.io/upgrade/) plugin | [Upgrade Shell](/console-and-shells/upgrade-shell) |
 | Cache engines | Includes Xcache and Wincache | Xcache and Wincache removed | [Caching](/core-libraries/caching) |
 | Tests | PHPUnit 3.7 | PHPUnit 9.6 | [Testing](/development/testing) |
 | Coding standard | CakePHP 2 standard (tabs, `array()`) | CakePHP 5 codesniffer (4 spaces, `[]`) | [Coding Standards](/contributing/cakephp-coding-conventions) |
@@ -35,7 +35,8 @@ For the complete list of breaking changes, see
 
 Besides the changes listed below, all code samples follow the CakePHP 5 coding
 standard (short array syntax, braces on their own line), and paths use the
-modern directory layout.
+modern directory layout. Links to the app skeleton, Bake and the maintained
+plugins point to their documentation sites (`https://pieceofcake2.github.io/<repository>/`).
 
 ### New pages
 
@@ -44,7 +45,6 @@ modern directory layout.
 - [Security Fixes](/appendices/security-fixes)
 - [Migrating Tests to PHPUnit 9.6](/appendices/phpunit-9-migration-hints)
 - [E2E Testing](/development/e2e-testing)
-- [Captcha](/plugins/captcha)
 - [Maintained Plugins](/plugins/maintained-plugins)
 - [Static Analysis](/development/static-analysis)
 
@@ -341,7 +341,6 @@ modern directory layout.
 
 - [Plugins](/plugins)
   - Intro explains PHP 8 compatibility of CakePHP 2 plugins and links to the maintained Piece of Cake 2 forks
-  - Links to the new Captcha page
 - [How To Create Plugins](/plugins/how-to-create-plugins)
   - Plugin paths use plugins/ and templates/Plugin overrides; internal plugin structure and test directories explained; App::uses() kept in plugin code with the reason
   - Bake commands use bin/cake with the Bake plugin; added the missing asset plugin-syntax example; removed flash/ asset folder

@@ -11,7 +11,7 @@ other pages in this guide for all the new features and API changes.
 
 ::: pieceofcake2
 In the Piece of Cake 2 fork, the Upgrade Shell is no longer part of the core. Install
-the [pieceofcake2/upgrade](https://github.com/pieceofcake2/upgrade) plugin
+the [pieceofcake2/upgrade](https://pieceofcake2.github.io/upgrade/) plugin
 (`composer require --dev pieceofcake2/upgrade`) and load it with `CakePlugin::load('Upgrade')`.
 :::
 

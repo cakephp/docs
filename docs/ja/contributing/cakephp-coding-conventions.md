@@ -22,7 +22,7 @@ CakePHP の開発者は以下のコーディング規約を使います。これ
 
 ## コードのチェック
 
-フレームワークと [pieceofcake2/app](https://github.com/pieceofcake2/app) アプリケーションスケルトンは、
+フレームワークと [pieceofcake2/app](https://pieceofcake2.github.io/app/) アプリケーションスケルトンは、
 CodeSniffer を開発用の依存パッケージとしてインストールします。
 既存のアプリケーションに追加するには次のコマンドを実行します。
 
@@ -812,7 +812,7 @@ CakePHP 5 の規約は、名前空間とネイティブの型宣言を使うコ�
 
 ## アプリケーション用の phpcs.xml
 
-[pieceofcake2/app](https://github.com/pieceofcake2/app) スケルトンには、
+[pieceofcake2/app](https://pieceofcake2.github.io/app/) スケルトンには、
 モダンなディレクトリ構成用の次の `phpcs.xml` が含まれています。
 フレームワークと同じ除外ルールを使いますが、型宣言については引数とプロパティのルールだけを除外し、
 `tests/TestCase/` ではネイティブの戻り値の型を必須にしています。

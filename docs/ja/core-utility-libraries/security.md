@@ -13,7 +13,7 @@
 > Configure::write('Security.useOpenSsl', true);
 > ```
 >
-> [pieceofcake2/app](https://github.com/pieceofcake2/app) のスケルトン (v2.3.1 以降) から作成したアプリケーションには
+> [pieceofcake2/app](https://pieceofcake2.github.io/app/) のスケルトン (v2.3.1 以降) から作成したアプリケーションには
 > この行が含まれています。既存のアプリケーションでは追加してください。
 >
 > OpenSSL による実装は `mcrypt` と同じ形式で暗号化するため、以前に暗号化した値も復号できます。

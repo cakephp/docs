@@ -81,8 +81,8 @@ Composer はフレームワーク自体の実行ファイルも `vendor/bin/cake
 
 ::: pieceofcake2
 `bake` と `upgrade` はコアのシェルではなくなりました。
-必要な場合は [pieceofcake2/bake](https://github.com/pieceofcake2/bake) や
-[pieceofcake2/upgrade](https://github.com/pieceofcake2/upgrade) をプラグインとしてインストールしてください。
+必要な場合は [pieceofcake2/bake](https://pieceofcake2.github.io/bake/) や
+[pieceofcake2/upgrade](https://pieceofcake2.github.io/upgrade/) をプラグインとしてインストールしてください。
 :::
 
 先頭部分にはパスに関連する情報が表示されます。これはファイルシステム上の
