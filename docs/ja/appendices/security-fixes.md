@@ -16,13 +16,19 @@ GitHub の非公開の脆弱性報告を使ってください。対象のリポ�
 
 ## 修正した脆弱性
 
-| CVE | 概要 | 修正バージョン |
-|-----|------|----------------|
+| ID | 概要 | 修正バージョン |
+|----|------|----------------|
 | [CVE-2015-8379](https://nvd.nist.gov/vuln/detail/CVE-2015-8379) | `_method` パラメーターや独自の HTTP メソッドによる CSRF 対策の回避 | 2.11.0 |
 | [CVE-2020-15400](https://nvd.nist.gov/vuln/detail/CVE-2020-15400) | CSRF トークンの固定化 | 2.11.0 |
 | [GHSA-wgww-24w3-wfqp](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-wgww-24w3-wfqp) | SSRF: `'readFile' => false` でも `Xml::build()` が `https://` の URL を取得する | 2.12.3 |
+| [GHSA-4f9q-3c4x-52cv](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-4f9q-3c4x-52cv) | `SmtpTransport` と `MailTransport` のメールヘッダーインジェクション（CVE-2026-77634 に相当する CakePHP 2 の脆弱性） | 2.12.5 |
+| [GHSA-w2mh-x92p-5p95](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-w2mh-x92p-5p95) | ビュー・レイアウト・エレメント名のパストラバーサル（CVE-2026-48820 に相当する CakePHP 2 の脆弱性） | 2.12.5 |
+| [GHSA-x4p9-p4cx-gxwx](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-x4p9-p4cx-gxwx) | プロトコル相対 URL の `Auth.redirect` によるログイン後のオープンリダイレクト | 2.12.5 |
 
-いずれの脆弱性も、本家の CakePHP 2.10.24 に存在します。
+いずれの脆弱性も本家の CakePHP 2.10.24 に存在し、CakePHP チームによる修正はリリースされません。
+`cakephp/cakephp` を使っているアプリケーションは、`pieceofcake2/cakephp` に切り替えると修正を適用できます。
+`pieceofcake2/cakephp` は `cakephp/cakephp` を `replace` として宣言しています。PHP 8.0 以降が必要です。
+[CakePHP 2.10 からの移行](/ja/appendices/migrating-from-cakephp-2-10) を参照してください。
 
 ### CVE-2015-8379: `_method` パラメーターによる CSRF 対策の回避
 
@@ -70,6 +76,57 @@ CSRF トークンはセッションに保存されたランダムな値でした
 **必要な対応:** 2.12.3 以降に更新してください。ユーザーの入力を渡す可能性がある場合は `'readFile' => false` を指定してください。
 `'readFile' => false` を指定したまま `https://` の URL を取得させていたコードは、オプションを削除する（既定値は `true`）か、
 `HttpSocket` などで自分で文書を取得して XML 文字列を渡すように変更してください。
+
+### `SmtpTransport` と `MailTransport` のメールヘッダーインジェクション {#email-header-injection}
+
+`SmtpTransport` は、ヘッダーの値から改行を取り除かずに、メッセージのヘッダーを SMTP の `DATA` コマンドに書き込んでいました。
+`MailTransport` は、ヘッダーの値、件名、宛先から `\r\n` を取り除いていましたが、単独の `\r` や `\n` は残していました。
+多くのメールサーバーは、これらも改行として扱います。`CakeEmail::setHeaders()` や `addHeaders()` で設定する独自のヘッダーなど、
+メールのヘッダーにユーザーの入力を使っているアプリケーションでは、攻撃者が `Bcc:` などのヘッダーを追加したり、
+メッセージの本文を始めたりできました。
+
+これは CakePHP 4.x・5.x で修正された CVE-2026-77634 に相当する、CakePHP 2 の脆弱性です。2.12.5 で修正しました。
+`SmtpTransport` はヘッダーの名前と値から CR と LF を取り除き、折り返したヘッダー行
+（長いヘッダーを MIME エンコードしたときのような、改行の後に空白が続く行）だけを残します。
+`MailTransport` は単独の `\r` と `\n` も取り除きます。
+セキュリティアドバイザリ [GHSA-4f9q-3c4x-52cv](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-4f9q-3c4x-52cv) を参照してください。
+
+**必要な対応:** 2.12.5 以降に更新してください。ヘッダーの値に改行を入れてヘッダーを追加していたコードは、
+`CakeEmail::setHeaders()` や `addHeaders()` にヘッダーを 1 つずつ渡すように変更してください。
+すぐに更新できない場合は、ヘッダーの値、件名、アドレスに使うユーザーの入力から CR と LF を取り除いてください。
+
+### ビュー・レイアウト・エレメント名のパストラバーサル {#view-path-traversal}
+
+`View` は、ビュー・レイアウト・エレメントの名前から見つけたファイルがビューのパスの中にあるかどうかを確認していませんでした。
+`$this->element('widgets/' . $type)` のように、アプリケーションがユーザーの入力から名前を組み立てている場合、
+`..` を含む名前でサーバー上の別のファイルを指定でき、そのファイルが PHP のテンプレートとして読み込まれ実行されました。
+
+これは CakePHP 4.x・5.x で修正された CVE-2026-48820 に相当する、CakePHP 2 の脆弱性です。2.12.5 で修正しました。
+名前に `..` が含まれる場合、ファイルの実際のパスがビューのパス（`App::path('View')` とプラグインやテーマのビューのパス）の中に
+なければなりません。それ以外のファイルは存在しないものとして扱います。`element()` はエレメントが無い場合と同じ動作になり、
+`elementExists()` は `false` を返し、ビューとレイアウトは `MissingViewException` と `MissingLayoutException` を投げます。
+ビューのパスの中に収まる名前は、これまでどおり使えます。
+セキュリティアドバイザリ [GHSA-w2mh-x92p-5p95](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-w2mh-x92p-5p95) を参照してください。
+
+**必要な対応:** 2.12.5 以降に更新してください。`../../other/file` のような名前でビューのパスの外にあるテンプレートを
+表示している場合は、そのテンプレートをビューのパスに移動してください。ビュー・レイアウト・エレメントの名前をユーザーの入力から
+組み立てないでください。組み立てる場合は、先に許可リストで入力を確認してください。
+
+### `AuthComponent` のログイン後のオープンリダイレクト {#auth-redirect}
+
+ログインしていないユーザーが保護されたアクションにアクセスすると、`AuthComponent` はアクセスされた URL を
+セッションの `Auth.redirect` に保存し、ログインに成功すると `AuthComponent::redirectUrl()` がその URL を返します。
+ブラウザーは、`//` や、`/\`・`\\` のようにバックスラッシュを使った形で始まる URL を別のホストの URL として扱います。
+そのため、パスが `//` で始まる細工したリンクを使うと、ログイン後にユーザーを攻撃者のサイトへリダイレクトさせることができました
+（オープンリダイレクト）。
+
+CakePHP 2 についての本家のアドバイザリはありません。`cakephp/authentication` プラグインの CVE-2026-55590 に似た問題です。
+2.12.5 で修正しました。`redirectUrl()` は保存された URL の先頭のスラッシュとバックスラッシュを 1 つの `/` にまとめるため、
+リダイレクト先は常に同じホストになります。
+セキュリティアドバイザリ [GHSA-x4p9-p4cx-gxwx](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-x4p9-p4cx-gxwx) を参照してください。
+
+**必要な対応:** 2.12.5 以降に更新してください。コードの変更は不要です。すぐに更新できない場合は、
+リダイレクトする前に `Auth.redirect` の値を確認し、`//`、`/\`、`\/`、`\\` で始まる値を拒否してください。
 
 ## その他のセキュリティ関連の変更
 
