@@ -212,9 +212,12 @@ CakeLog::write('debug', 'Got here');
 
 ## Debug Kit
 
-DebugKit is a plugin that provides a number of good debugging tools. It
-primarily provides a toolbar in the rendered HTML, that provides a plethora of
-information about your application and the current request.
+DebugKit is a plugin that provides a number of good debugging tools. It adds
+a small CakePHP icon to the bottom right-hand corner of your HTML pages.
+Clicking it opens a toolbar with panels that show information about the
+current request, such as the SQL queries, timers, log messages, view variables
+and session data. The History panel lists previous requests, including
+redirects and ajax requests, so you can inspect them too.
 Use [pieceofcake2/debug_kit](https://github.com/pieceofcake2/debug_kit), a
 PHP 8 compatible version of DebugKit 2.x maintained by the Piece of Cake 2
 project. Install it as a development dependency with Composer:
