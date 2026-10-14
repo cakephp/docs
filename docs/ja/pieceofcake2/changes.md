@@ -24,6 +24,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 | `'readFile' => false` を指定した `Xml::build()` | `https://` の URL は取得される (SSRF) | ファイルも URL も読み込まない | [脆弱性への対応](/ja/appendices/security-fixes#xml-build-ssrf) |
 | `$components` での CookieComponent の `'type'` | 無視される（常に `'cipher'`） | 反映される | [Cookie](/ja/core-libraries/components/cookie) |
 | `cake server` のデフォルトポート | 80 | 8765 | [インストール](/ja/installation#development-server) |
+| `.env` ファイル | 非対応 | `CakeDotenv` で読み込み (オプトイン、v2.13.0) | [環境変数](/ja/development/configuration#environment-variables) |
 
 破壊的変更の一覧は [CakePHP 2.10 からの移行](/ja/appendices/migrating-from-cakephp-2-10) と
 [CHANGELOG](https://github.com/pieceofcake2/cakephp/blob/2.x/CHANGELOG.md) を参照してください。
@@ -40,6 +41,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 - [脆弱性への対応](/ja/appendices/security-fixes)
 - [PHPUnit 9.6 への移行](/ja/appendices/phpunit-9-migration-hints)
 - [メンテナンスされているプラグイン](/ja/plugins/maintained-plugins)
+- [静的解析](/ja/development/static-analysis)
 
 ### はじめに
 
@@ -51,6 +53,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - パーミッションの対象を tmp/ と logs/ に変更、ビルトインサーバ (`bin/cake server`) と webroot/ 向けバーチャルホストの例を追加
   - ビルトインサーバのデフォルトポートは 8765 (v2.12.3 より前は 80 だったことを変更点として記載)
   - 「composer.json の設定」を追加: 最小限の composer.json、cakephp-plugin パッケージのために composer/installers の allow-plugins と plugins/{$name}/ への installer-paths が必須であることを説明
+  - 新規アプリケーション: デバッグレベル、ソルト、データベースの設定を環境変数 (`config/.env`) でもセットできることを記載
 - [応用インストール](/ja/installation/advanced-installation)
   - PEAR でのインストール、旧来の Composer/bake によるプロジェクト作成、CAKE_CORE_INCLUDE_PATH によるコア共有を削除
   - Composer 設定の詳細を追加: replace、プラグインの installer-paths、classmap オートロード、exclude-from-classmap
@@ -244,6 +247,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - キャッシュ: 使用可能なエンジンを列挙 (File、Apc/APCu、Memcached、Memcache、Redis)。Xcache/Wincache の削除を変更点として記載
   - 設定リーダー: デフォルトの読み込み先は `CONFIG`。独自リーダーの例を `src/Lib/Configure` に移し、プロパティを宣言 (PHP 8.2)、`App::uses()` を削除。ja の例のクラス名を PHP の XMLReader と衝突する `XmlReader` から `MyXmlReader` に変更。ConfigReaderInterface/ConfigureException の説明を修正
   - Inflector のパス `src/Cake/Utility/Inflector.php` と `config/bootstrap.php` を本文に反映。古い IE/Chrome Frame や AMF/SOAP の例を更新。ja: `$merge` の説明を修正し `Configure::consume()` を追加
+  - 「環境変数」の節を追加: `CakeDotenv::loadDefaults()` による `.env` ファイルの読み込み (CakePHP 3〜5 のスケルトンの `.env` サポートのバックポート。変更点: v2.13.0 で追加)、`.env` の書式、pieceofcake2/app スケルトンが読み込む環境変数 (`DEBUG`、`SECURITY_SALT`、`SECURITY_CIPHER_SEED`、`DB_*`、`DB_TEST_*`)
 - [ルーティング](/ja/development/routing)
   - ルート設定ファイルのパスを config/routes.php に変更（従来の app/Config/routes.php はフォルダ構造ページへのリンク付きで併記）
   - 組み込みルートの場所を vendor/pieceofcake2/cakephp/config/routes.php に修正し、無効化は config/routes.php の require 行を削除すると説明
@@ -276,6 +280,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - debug() のシグネチャを更新し、trace/excerpt の例をフォークのパスに変更、invoke() を getInstance() に置き換え
   - ログの出力先を logs/（debug.log/error.log）に変更し、Object を CakeObject に、App::uses('CakeLog') を削除
   - DebugKit: pieceofcake2/debug_kit を Composer でインストールし、config/bootstrap.php で読み込む。フォークの DebugKit のドキュメントへのリンクを追加
+  - DebugKit: 現在のツールバー (右下の CakePHP アイコン、パネル、リクエスト履歴) の説明に更新
 - [テスト](/ja/development/testing)
   - PHPUnit 9.6 を Composer (require-dev) でインストール。PHPUnit 3.7/4.x/5.x、.phar、オートローダー回避策の手順を削除
   - テストケースは tests/TestCase、フィクスチャは tests/Fixture、設定は config/ に変更。レガシーな app/Test 構成は代替として記載
@@ -372,6 +377,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 - [デプロイ](/ja/deployment)
   - ドキュメントルート、core.php、プラグインのシンボリックリンクのパスをモダンな構成に変更
   - `composer install --no-dev --optimize-autoloader` と開発用プラグインの条件付き読み込みを追加
+  - デバッグレベルは独自の `CAKEPHP_DEBUG` ではなく、スケルトンの環境変数 `DEBUG` から読み込む例に変更。ほかの設定は環境変数の節へのリンクを追加
 
 ### その他
 
