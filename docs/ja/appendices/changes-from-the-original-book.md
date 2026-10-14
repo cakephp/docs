@@ -24,6 +24,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 | `'readFile' => false` を指定した `Xml::build()` | `https://` の URL は取得される (SSRF) | ファイルも URL も読み込まない | [脆弱性への対応](/ja/appendices/security-fixes#xml-build-ssrf) |
 | `$components` での CookieComponent の `'type'` | 無視される（常に `'cipher'`） | 反映される | [Cookie](/ja/core-libraries/components/cookie) |
 | `cake server` のデフォルトポート | 80 | 8765 | [インストール](/ja/installation#development-server) |
+| `order` のソート方向 | 指定どおり SQL に追加される | `ASC` / `DESC` と省略可能な `NULLS FIRST` / `NULLS LAST`。それ以外は `E_USER_DEPRECATED` (v2.12.5)、将来のバージョンでは例外 | [並び順](/ja/models/retrieving-your-data#sort-order) |
 | `.env` ファイル | 非対応 | `pieceofcake2/app` スケルトン (v2.4.0) が josegonzalez/dotenv で読み込み (フレームワークは読み込まない) | [環境変数](/ja/development/configuration#environment-variables) |
 
 破壊的変更の一覧は [CakePHP 2.10 からの移行](/ja/appendices/migrating-from-cakephp-2-10) と
@@ -119,6 +120,8 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 
 - [モデル](/ja/models)
   - モデルと AppModel は `src/Model/` に配置、AppModel はコアに含まれない、`App::uses()` は classmap を使わない場合のみ必要
+- [データを取得する](/ja/models/retrieving-your-data)
+  - 「並び順」の節を追加: `order` の書式、使用できるソート方向、ソート方向の検証 (v2.12.5) の変更点の注記、非推奨エラーが出るコードの直し方、ユーザーが並び順を選ぶ場合のホワイトリストの例
 - [アソシエーション: モデル同士を繋ぐ](/ja/models/associations-linking-models-together)
   - モデルファイルのパスを src/Model/ に変更
 - [データを保存する](/ja/models/saving-your-data)
@@ -137,6 +140,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - 旧 cakephp/datasources リポジトリの代わりに pieceofcake2/datasources プラグインへリンク
 - [モデルの属性](/ja/models/model-attributes)
   - データベース設定ファイルのパスを config/database.php に変更
+  - `order`: 使用できるソート方向と「並び順」へのリンクを追加
 
 ### コアライブラリ
 
@@ -166,6 +170,8 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - タイプは `$components` の `'Cookie' => ['type' => 'aes']` で設定 (type() でも設定可能)。v2.12.3 より前はこの設定が無視されていたことを変更点として記載。pieceofcake2/app v2.3.1 のスケルトンでは Security.useOpenSsl が有効
 - [フラッシュ](/ja/core-libraries/components/flash)
   - フラッシュ用エレメントの場所を templates/Elements/Flash に変更
+- [ページ制御](/ja/core-libraries/components/pagination)
+  - PaginatorComponent が受け付けるソートのフィールドと方向、「並び順」へのリンクを追加
 - [セキュリティ](/ja/core-libraries/components/security-component)
   - 変更点の注記: CSRF トークンの HMAC 署名 (CVE-2020-15400) と _method で上書きしたリクエストの検証 (CVE-2015-8379)
 - [CacheHelper](/ja/core-libraries/helpers/cache)

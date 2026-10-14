@@ -48,6 +48,95 @@ find はデータ取得のための、非常に多機能でとても良く働い
 `having` と `lock` オプションが追加されました。
 :::
 
+<a id="sort-order"></a>
+
+### 並び順
+
+`order` オプションには文字列または配列を指定します。`Model::$order`、`$paginate` の
+`order` キー、アソシエーションの `order` 設定も同じ形式です。各項目はフィールド
+(または SQL 式) と、省略可能なソート方向からなります。
+
+``` php
+// フィールド => ソート方向 の組
+$this->Article->find('all', [
+    'order' => ['Article.created' => 'DESC', 'Article.title' => 'asc'],
+]);
+
+// 同じ指定を文字列で書く場合
+$this->Article->find('all', [
+    'order' => 'Article.created DESC, Article.title ASC',
+]);
+
+// NULL を最後に並べる (PostgreSQL、SQLite 3.30 以降)
+$this->Article->find('all', [
+    'order' => ['Article.published' => 'DESC NULLS LAST'],
+]);
+
+// 式はキーに、ソート方向は値に書きます
+$this->Article->find('all', [
+    'order' => ["Article.status = 'draft'" => 'DESC'],
+]);
+```
+
+ソート方向は `ASC` または `DESC` で、その後に `NULLS FIRST` または `NULLS LAST` を
+続けることもできます。大文字と小文字は区別せず、余分な空白は無視されるので、
+`'asc'`、`' Desc '`、`'desc  nulls  last'` はいずれも有効です。
+
+::: pieceofcake2
+v2.12.5 からソート方向を検証します。不正なソート方向を指定すると
+`E_USER_DEPRECATED` エラーが発生し、SQL はこれまでどおり生成されます。
+将来のバージョンでは代わりに例外を投げる予定です。
+:::
+
+不正なソート方向の多くは、式の一部をソート方向の側に書いているものです。
+式はキーに移すか、生の SQL をそのままキーとして指定してください。
+
+``` php
+// 変更前: 非推奨エラーが発生します
+$this->Article->find('all', [
+    'order' => ['Article.status' => "= 'draft' DESC"],
+]);
+
+// 変更後
+$this->Article->find('all', [
+    'order' => ["Article.status = 'draft'" => 'DESC'],
+]);
+```
+
+`'Article.title DESC LIMIT 1'` のように、文字列の `order` で `ASC` や `DESC` の後に
+別の SQL が続く場合も同様です。フィールドの後にはソート方向 (と `NULLS FIRST` /
+`NULLS LAST`) だけを書いてください。
+
+`order` のフィールド部分は SQL として使われます。可能な場合はクォートされますが
+エスケープはされないので、リクエストデータを含めてはいけません。ソート方向にも
+リクエストデータをそのまま渡さないでください。ユーザーが並び順を選べるようにする
+場合は、入力をフィールドとソート方向のホワイトリストに対応付けます。
+
+``` php
+// src/Controller/ArticlesController.php
+public function index()
+{
+    $sortable = [
+        'title' => 'Article.title',
+        'created' => 'Article.created',
+    ];
+    $sort = (string)$this->request->query('sort');
+    $field = $sortable[$sort] ?? 'Article.created';
+    $direction = strtolower((string)$this->request->query('direction'));
+    $direction = $direction === 'asc' ? 'ASC' : 'DESC';
+
+    $articles = $this->Article->find('all', [
+        'order' => [$field => $direction],
+    ]);
+    $this->set(compact('articles'));
+}
+```
+
+ページネーションでは `PaginatorComponent` がすでにこれを行っています。ソート方向は
+`asc` と `desc` だけを受け付け、フィールドはモデルのフィールドか
+[ソートのホワイトリスト](/ja/core-libraries/components/pagination#control-which-fields-used-for-ordering)
+にあるものだけを受け付けます。
+
 <a id="model-find-first"></a>
 
 ## find('first')

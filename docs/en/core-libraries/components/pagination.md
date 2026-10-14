@@ -302,6 +302,11 @@ $this->Paginator->paginate('Post', [], ['title', 'slug']);
 This would allow sorting on the title and slug columns only. A user that sets
 sort to any other value will be ignored.
 
+Without a whitelist, only fields of the paginated model and of its associated
+models are accepted. The `direction` parameter is always reduced to `asc` or
+`desc`. If you build an `order` option from request data yourself, validate it
+in the same way; see [Sort Order](/models/retrieving-your-data#sort-order).
+
 ## Limit the maximum number of rows per page
 
 The number of results that are fetched per page is exposed to the user as the
