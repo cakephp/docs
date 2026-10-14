@@ -282,6 +282,7 @@ modern directory layout.
   - debug() signature updated; trace/excerpt examples use fork paths (APP/CORE/ROOT); invoke() replaced with getInstance()
   - Logs written to logs/ (debug.log/error.log); Object replaced with CakeObject; App::uses('CakeLog') removed
   - DebugKit: install pieceofcake2/debug_kit with Composer and load it in config/bootstrap.php; links to the DebugKit documentation of the fork
+  - DebugKit: describes the current toolbar (CakePHP icon in the bottom right-hand corner, panels, request history)
 - [Testing](/development/testing)
   - PHPUnit 9.6 installed with Composer (require-dev); PHPUnit 3.7/4.x/5.x, .phar and autoloader workaround instructions removed
   - Test cases in tests/TestCase and fixtures in tests/Fixture; configuration in config/; legacy app/Test layout mentioned as fallback
