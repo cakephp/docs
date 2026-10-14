@@ -39,8 +39,8 @@ CakePHP also uses the following PHP extensions:
 - `mbstring` is strongly recommended. Without it, a Symfony polyfill is used.
   The polyfill does not provide `mb_encode_mimeheader()`, so `CakeEmail` falls
   back to `Multibyte::mimeEncode()` to encode mail headers.
-- `intl` is optional. It is used for date formatting in place of the
-  deprecated `strftime()`; a Symfony polyfill is used when it is missing.
+- `intl` is required. CakePHP depends on `php81_bc/strftime`, which replaces
+  the deprecated `strftime()` for date formatting and requires `intl`.
 - `openssl` is optional, but required for SSL/TLS connections and for AES
   encryption with [Security](core-utility-libraries/security).
 
