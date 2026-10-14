@@ -2,7 +2,7 @@
 
 - [Welcome](index)
 - [インストール](installation)
-- [入門](getting-started)
+- [はじめに](getting-started)
 - [CakePHPの概要](cakephp-overview)
 - [コントローラ](controllers)
 - [ビュー](views)

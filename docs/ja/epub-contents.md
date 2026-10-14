@@ -1,6 +1,6 @@
 # コンテンツ
 
-- [入門](getting-started)
+- [はじめに](getting-started)
 - [インストール](installation)
 - [CakePHPの概要](cakephp-overview)
 - [コントローラ](controllers)

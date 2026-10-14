@@ -47,6 +47,10 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 
 ### はじめに
 
+- [はじめに](/ja/getting-started)
+  - CakePHP 2 のアプリケーションを保守している方やモダンな PHP を知っている開発者に向けた入口のページとして書き直し: 「このフォークについて」(フォークの概要、CakePHP 2 のサポート終了、このドキュメントについて。サイドバーの「Piece of Cake 2」グループとともに削除した「Piece of Cake 2」ページの内容をここに移動)、詳しいページへのリンクを付けた「CakePHP 2.10 との違い」、「どこから始めるか」(既存のアプリケーションを先に、次に `composer create-project pieceofcake2/app` と CakePHP 5 を検討する旨の注記)、「モダンな PHP から来た方へ」(名前空間が無いこと、配列ベースの find、モデル、コンポーネント/ビヘイビア/ヘルパー、Configure、ディスパッチャー・フィルター、型宣言が少ないこと)
+  - 概要の文章と、ページに取り込んでいたブログチュートリアルを削除。チュートリアルは [チュートリアル & 例](/ja/tutorials-and-examples/blog/blog) にあります
+  - ページのタイトルを「入門」から「はじめに」に変更し、サイドバーの「はじめに」グループの先頭に移動。その他のページは、インストール、高度なインストール、URL リライト、フォルダ構造、規約、構造、典型的なリクエストの順に並べ替え
 - [インストール](/ja/installation)
   - 動作要件: PHP 8.0〜8.5、Composer、MySQL 5.6 以上など対応 DB、mbstring/intl/openssl の説明
   - `composer create-project pieceofcake2/app` による新規作成 (モダンな構成) と database.php、salt/cipherSeed の設定
@@ -56,6 +60,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - ビルトインサーバのデフォルトポートは 8765 (v2.12.3 より前は 80 だったことを変更点として記載)
   - 「composer.json の設定」を追加: 最小限の composer.json、cakephp-plugin パッケージのために composer/installers の allow-plugins と plugins/{$name}/ への installer-paths が必須であることを説明
   - 新規アプリケーション: デバッグレベル、ソルト、データベースの設定を環境変数 (`config/.env` またはプロジェクトルートの `.env`) でもセットできることを記載
+  - 「既存のアプリケーションへの導入」を「新しいアプリケーションの作成」の前に移動。最後のリンクは「入門」ではなくブログチュートリアルを指すように変更
 - [応用インストール](/ja/installation/advanced-installation)
   - PEAR でのインストール、旧来の Composer/bake によるプロジェクト作成、CAKE_CORE_INCLUDE_PATH によるコア共有を削除
   - Composer 設定の詳細を追加: replace、プラグインの installer-paths、classmap オートロード、exclude-from-classmap
@@ -63,13 +68,11 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 - [URLリライティング](/ja/installation/url-rewriting)
   - 例はドキュメントルートを webroot/ とする前提に変更、.htaccess をスケルトンの内容に更新、従来の構成の .htaccess は簡単な説明のみに
   - nginx の例を PHP-FPM ソケット向けに更新、IIS の web.config を webroot/ に配置、リンク切れ (Web Platform Installer、virtualhostx、Apache wiki) を削除
-- [入門](/ja/getting-started)
-  - ページの先頭に「このフォークについて」を追加 (フォークの概要、CakePHP 2 のサポート終了、新規プロジェクトには CakePHP 5、このドキュメントについて)。サイドバーの「Piece of Cake 2」グループとともに削除した「Piece of Cake 2」ページの内容をここに移動
-- [CakePHP の規約](/ja/getting-started/cakephp-conventions)
-  - ファイルの場所を src/ と templates/ に変更、String::uuid を CakeText::uuid() に変更
 - [CakePHP のフォルダ構造](/ja/getting-started/cakephp-folder-structure)
   - モダンな構成 (bin、config、logs、plugins、resources/locales、src、templates、tests、tmp、vendor、webroot) の説明に書き換え、従来の app/ との対応表を追加
   - 従来の app/ 構成からモダンな構成へ移行する手順を追加
+- [CakePHP の規約](/ja/getting-started/cakephp-conventions)
+  - ファイルの場所を src/ と templates/ に変更、String::uuid を CakeText::uuid() に変更
 - [CakePHP の構造](/ja/getting-started/cakephp-structure)
   - AppController/AppHelper/AppModel、ルート、レイアウト、エレメントのパスをモダンな構成に変更
   - 例を非推奨の EmailComponent と JsHelper から AuthComponent と FormHelper に変更
@@ -306,7 +309,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 
 ### チュートリアル & 例
 
-- [チュートリアルと例](/ja/tutorials-and-examples)
+- [チュートリアル & 例](/ja/tutorials-and-examples)
   - CakePackages と Bakery へのリンクを、メンテナンスされているプラグインのページへのリンクに置き換え
 - [シンプルな認証と承認のアプリケーション](/ja/tutorials-and-examples/blog-auth-example/auth)
   - パスを `src/` と `templates/` に更新。不要な `App::uses()` を削除。UsersController を Bake プラグインで生成したものとして説明

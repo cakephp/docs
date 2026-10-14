@@ -6,6 +6,10 @@ primarily on setting up on Apache (because it's the most commonly used), you
 can configure CakePHP to run on a variety of web servers such as nginx,
 lighttpd or Microsoft IIS.
 
+This page first describes how to move an existing CakePHP 2 application to
+this fork, and then how to create a new application. For an overview of what
+changed compared to CakePHP 2.10, see [Getting Started](getting-started).
+
 > [!WARNING]
 > CakePHP 2 is meant for maintaining existing applications. If you are starting
 > a new project, use [CakePHP 5](https://book.cakephp.org/5/en/) instead.
@@ -64,6 +68,51 @@ Windows you can use the
 The examples in this book assume that the `composer` command is in your
 `PATH`.
 
+## Adding CakePHP to an Existing Application
+
+If your application already uses Composer with `cakephp/cakephp`, replace it
+with `pieceofcake2/cakephp` in the `require` section of your `composer.json`,
+and add the `config` and `extra` settings described in
+[Configuring composer.json](#configuring-composer-json) if they are missing.
+Then run `composer update`. `pieceofcake2/cakephp` declares that it replaces
+`cakephp/cakephp`, so plugins and packages that require `cakephp/cakephp`
+2.x keep installing and working. Do not require both packages at the same
+time.
+
+CakePHP is loaded only through Composer's autoloader, so the dispatcher files of
+your application (`index.php`, `test.php` and the `cake` console script) must
+be replaced by current versions.
+
+For an application that uses the modern layout, copy `config/define.php`,
+`bin/cake`, `webroot/index.php` and `webroot/test.php` from the
+[pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton.
+
+For an application that still uses the legacy `app/` layout, install the Bake
+plugin, which contains the application templates, and copy the dispatcher
+files from it:
+
+```bash
+composer require --dev pieceofcake2/bake
+
+cp app/Plugin/Bake/Console/Templates/skel/webroot/index.php app/webroot/index.php
+cp app/Plugin/Bake/Console/Templates/skel/webroot/test.php app/webroot/test.php
+cp app/Plugin/Bake/Console/Templates/skel/Console/cake app/Console/cake
+chmod +x app/Console/cake
+
+# The Windows batch file and the PHP wrapper are no longer used
+rm -f app/Console/cake.bat app/Console/cake.php
+```
+
+In the legacy layout, Composer installs CakePHP plugins into `app/Plugin/`
+with the `installer-paths` setting shown in
+[Configuring composer.json](#configuring-composer-json).
+
+You can move a legacy application to the modern layout later, one directory
+at a time. See [CakePHP Folder Structure](getting-started/cakephp-folder-structure) for
+the mapping between the two layouts, and the
+[Upgrade Guide](/appendices/migrating-from-cakephp-2-10) for the other changes compared to
+CakePHP 2.10.24.
+
 ## Creating a New Application
 
 The [pieceofcake2/app](https://github.com/pieceofcake2/app) package is the
@@ -116,51 +165,6 @@ edit it; the skeleton loads it at the top of `config/core.php`. See
 The skeleton's `composer.json` already contains the plugin settings described
 in [Configuring composer.json](#configuring-composer-json). Keep them when you
 edit the file.
-
-## Adding CakePHP to an Existing Application
-
-If your application already uses Composer with `cakephp/cakephp`, replace it
-with `pieceofcake2/cakephp` in the `require` section of your `composer.json`,
-and add the `config` and `extra` settings described in
-[Configuring composer.json](#configuring-composer-json) if they are missing.
-Then run `composer update`. `pieceofcake2/cakephp` declares that it replaces
-`cakephp/cakephp`, so plugins and packages that require `cakephp/cakephp`
-2.x keep installing and working. Do not require both packages at the same
-time.
-
-CakePHP is loaded only through Composer's autoloader, so the dispatcher files of
-your application (`index.php`, `test.php` and the `cake` console script) must
-be replaced by current versions.
-
-For an application that uses the modern layout, copy `config/define.php`,
-`bin/cake`, `webroot/index.php` and `webroot/test.php` from the
-[pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton.
-
-For an application that still uses the legacy `app/` layout, install the Bake
-plugin, which contains the application templates, and copy the dispatcher
-files from it:
-
-```bash
-composer require --dev pieceofcake2/bake
-
-cp app/Plugin/Bake/Console/Templates/skel/webroot/index.php app/webroot/index.php
-cp app/Plugin/Bake/Console/Templates/skel/webroot/test.php app/webroot/test.php
-cp app/Plugin/Bake/Console/Templates/skel/Console/cake app/Console/cake
-chmod +x app/Console/cake
-
-# The Windows batch file and the PHP wrapper are no longer used
-rm -f app/Console/cake.bat app/Console/cake.php
-```
-
-In the legacy layout, Composer installs CakePHP plugins into `app/Plugin/`
-with the `installer-paths` setting shown in
-[Configuring composer.json](#configuring-composer-json).
-
-You can move a legacy application to the modern layout later, one directory
-at a time. See [CakePHP Folder Structure](getting-started/cakephp-folder-structure) for
-the mapping between the two layouts, and the
-[Upgrade Guide](/appendices/migrating-from-cakephp-2-10) for the other changes compared to
-CakePHP 2.10.24.
 
 ## Configuring composer.json {#configuring-composer-json}
 
@@ -311,7 +315,8 @@ CakePHP's default home, which tells you whether the `tmp/` directory is
 writable, whether caching works and whether CakePHP can connect to your
 database.
 
-Congratulations! You are ready to [create your first CakePHP application](getting-started).
+Congratulations! Your application is up and running. If you are new to
+CakePHP 2, continue with the [Blog Tutorial](tutorials-and-examples/blog/blog).
 
 Not working? If you're getting timezone related errors from PHP uncomment one
 line in `config/core.php` and set your server's timezone:
