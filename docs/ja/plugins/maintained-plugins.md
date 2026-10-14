@@ -49,6 +49,9 @@
 
 - [Xform Plugin](https://github.com/pieceofcake2/xform) - 拡張フォームヘルパー
 - [Cakeplus Plugin](https://github.com/pieceofcake2/cakeplus) - フォーム関連のユーティリティと機能拡張
+- [Captcha Plugin](https://github.com/pieceofcake2/captcha) - CAPTCHA ウィジェットの表示とサーバー側での検証。
+  Cloudflare Turnstile (デフォルト)、Google reCAPTCHA v2/v3、hCaptcha に対応
+  ([ドキュメント](https://github.com/pieceofcake2/captcha/blob/1.x/docs/README.md) (英語))
 
 ### データベース
 

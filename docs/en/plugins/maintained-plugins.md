@@ -49,6 +49,10 @@ CakePHP 2 plugins. All maintained plugins are compatible with PHP 8.x.
 
 - [Xform Plugin](https://github.com/pieceofcake2/xform) - Extended form helper
 - [Cakeplus Plugin](https://github.com/pieceofcake2/cakeplus) - Form utilities and enhancements
+- [Captcha Plugin](https://github.com/pieceofcake2/captcha) - CAPTCHA widget and
+  server-side verification with Cloudflare Turnstile (default), Google
+  reCAPTCHA v2/v3 or hCaptcha
+  ([documentation](https://github.com/pieceofcake2/captcha/blob/1.x/docs/README.md))
 
 ### Database
 
