@@ -15,6 +15,9 @@ CakePHP 2 plugins. All maintained plugins are compatible with PHP 8.x.
 ## Development tools
 
 - [PHPStan CakePHP](https://github.com/pieceofcake2/phpstan-cakephp2) - PHPStan extension for static analysis
+- [E2E Test](https://github.com/pieceofcake2/e2e-test) - Browser end-to-end tests
+  with PHPUnit and Symfony Panther (Chrome, PC and mobile)
+  ([documentation](https://github.com/pieceofcake2/e2e-test/blob/1.x/docs/README.md))
 
 ## Maintained plugins
 
