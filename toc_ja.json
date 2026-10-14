@@ -5,6 +5,10 @@
       "collapsed": false,
       "items": [
         {
+          "text": "はじめに",
+          "link": "/ja/getting-started"
+        },
+        {
           "text": "インストール",
           "link": "/ja/installation"
         },
@@ -17,24 +21,20 @@
           "link": "/ja/installation/url-rewriting"
         },
         {
-          "text": "はじめに",
-          "link": "/ja/getting-started"
-        },
-        {
-          "text": "典型的な CakePHP リクエスト",
-          "link": "/ja/getting-started/a-typical-cakephp-request"
+          "text": "CakePHP フォルダ構造",
+          "link": "/ja/getting-started/cakephp-folder-structure"
         },
         {
           "text": "CakePHP 規約",
           "link": "/ja/getting-started/cakephp-conventions"
         },
         {
-          "text": "CakePHP フォルダ構造",
-          "link": "/ja/getting-started/cakephp-folder-structure"
-        },
-        {
           "text": "CakePHP 構造",
           "link": "/ja/getting-started/cakephp-structure"
+        },
+        {
+          "text": "典型的な CakePHP リクエスト",
+          "link": "/ja/getting-started/a-typical-cakephp-request"
         }
       ]
     },

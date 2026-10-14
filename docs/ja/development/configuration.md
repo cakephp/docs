@@ -710,7 +710,7 @@ Xcache と Wincache のキャッシュエンジンは削除されました。
 `Cache` に保存されたすべてのキャッシュデータと同じく、
 `Cache::clear()` を使ってクリアできます。
 
-## Configure クラス
+## Configure クラス {#configure-class}
 
 `class` **Configure**
 

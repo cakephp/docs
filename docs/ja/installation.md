@@ -5,6 +5,10 @@ CakePHP は [Composer](https://getcomposer.org) を使ってインストール�
 このマニュアルでは主に(最も一般的である) Apache でのセットアップに主眼を置いていますが、
 CakePHP を nginx や lighttpd、Microsoft IIS のような様々なウェブサーバで走らせるよう設定することもできます。
 
+このページでは、まず既存の CakePHP 2 アプリケーションをこのフォークに移行する方法を、
+次に新しいアプリケーションを作成する方法を説明します。CakePHP 2.10 からの変更点の概要は
+[はじめに](getting-started) を参照してください。
+
 > [!WARNING]
 > CakePHP 2 は既存アプリケーションの保守のためのものです。
 > 新しくプロジェクトを始める場合は [CakePHP 5](https://book.cakephp.org/5/ja/) を使ってください。
@@ -58,7 +62,44 @@ Composer をまだ入れていない場合は、[公式の Composer ドキュメ
 [Composer の Windows インストーラ](https://github.com/composer/windows-setup/releases/) を使えます。
 このマニュアルの例では、`composer` コマンドに `PATH` が通っているものとします。
 
-## 新しいアプリケーションの作成
+## 既存のアプリケーションへの導入 {#adding-cakephp-to-an-existing-application}
+
+Composer で `cakephp/cakephp` を使っているアプリケーションでは、`composer.json` の `require` にある
+`cakephp/cakephp` を `pieceofcake2/cakephp` に置き換えます。
+また、[composer.json の設定](#configuring-composer-json) で説明する `config` と `extra` の設定が無ければ追加します。
+そのうえで `composer update` を実行します。`pieceofcake2/cakephp` は `cakephp/cakephp` を
+置き換える (replace する) パッケージとして宣言されているので、`cakephp/cakephp` 2.x に依存する
+プラグインやパッケージもそのままインストールでき、動作します。両方のパッケージを同時に require しないでください。
+
+CakePHP は Composer のオートローダーからのみ読み込まれるため、アプリケーションのディスパッチャファイル
+(`index.php`、`test.php`、コンソールの `cake` スクリプト) を新しいものに置き換える必要があります。
+
+モダンな構成のアプリケーションでは、[pieceofcake2/app](https://github.com/pieceofcake2/app)
+スケルトンから `config/define.php`、`bin/cake`、`webroot/index.php`、`webroot/test.php` をコピーします。
+
+従来の `app/` 構成のアプリケーションでは、アプリケーションのテンプレートを含む Bake プラグインをインストールし、
+そこからディスパッチャファイルをコピーします。
+
+```bash
+composer require --dev pieceofcake2/bake
+
+cp app/Plugin/Bake/Console/Templates/skel/webroot/index.php app/webroot/index.php
+cp app/Plugin/Bake/Console/Templates/skel/webroot/test.php app/webroot/test.php
+cp app/Plugin/Bake/Console/Templates/skel/Console/cake app/Console/cake
+chmod +x app/Console/cake
+
+# Windows 用バッチファイルと PHP ラッパーは使われなくなりました
+rm -f app/Console/cake.bat app/Console/cake.php
+```
+
+従来の構成では、[composer.json の設定](#configuring-composer-json) にある `installer-paths` によって、
+Composer が CakePHP のプラグインを `app/Plugin/` にインストールします。
+
+従来の構成のアプリケーションは、あとからディレクトリ単位で少しずつモダンな構成に移行できます。
+2 つの構成の対応関係は [CakePHP のフォルダ構造](getting-started/cakephp-folder-structure) を、
+CakePHP 2.10.24 からのその他の変更点は [アップグレードガイド](/ja/appendices/migrating-from-cakephp-2-10) を参照してください。
+
+## 新しいアプリケーションの作成 {#creating-a-new-application}
 
 アプリケーションのスケルトンは [pieceofcake2/app](https://github.com/pieceofcake2/app)
 パッケージとして提供されています。Composer の `create-project` コマンドで新しいアプリケーションを作成します。
@@ -104,43 +145,6 @@ my_app/
 
 スケルトンの `composer.json` には、[composer.json の設定](#configuring-composer-json) で説明するプラグイン用の設定が
 すでに含まれています。ファイルを編集するときも、この設定は残しておいてください。
-
-## 既存のアプリケーションへの導入
-
-Composer で `cakephp/cakephp` を使っているアプリケーションでは、`composer.json` の `require` にある
-`cakephp/cakephp` を `pieceofcake2/cakephp` に置き換えます。
-また、[composer.json の設定](#configuring-composer-json) で説明する `config` と `extra` の設定が無ければ追加します。
-そのうえで `composer update` を実行します。`pieceofcake2/cakephp` は `cakephp/cakephp` を
-置き換える (replace する) パッケージとして宣言されているので、`cakephp/cakephp` 2.x に依存する
-プラグインやパッケージもそのままインストールでき、動作します。両方のパッケージを同時に require しないでください。
-
-CakePHP は Composer のオートローダーからのみ読み込まれるため、アプリケーションのディスパッチャファイル
-(`index.php`、`test.php`、コンソールの `cake` スクリプト) を新しいものに置き換える必要があります。
-
-モダンな構成のアプリケーションでは、[pieceofcake2/app](https://github.com/pieceofcake2/app)
-スケルトンから `config/define.php`、`bin/cake`、`webroot/index.php`、`webroot/test.php` をコピーします。
-
-従来の `app/` 構成のアプリケーションでは、アプリケーションのテンプレートを含む Bake プラグインをインストールし、
-そこからディスパッチャファイルをコピーします。
-
-```bash
-composer require --dev pieceofcake2/bake
-
-cp app/Plugin/Bake/Console/Templates/skel/webroot/index.php app/webroot/index.php
-cp app/Plugin/Bake/Console/Templates/skel/webroot/test.php app/webroot/test.php
-cp app/Plugin/Bake/Console/Templates/skel/Console/cake app/Console/cake
-chmod +x app/Console/cake
-
-# Windows 用バッチファイルと PHP ラッパーは使われなくなりました
-rm -f app/Console/cake.bat app/Console/cake.php
-```
-
-従来の構成では、[composer.json の設定](#configuring-composer-json) にある `installer-paths` によって、
-Composer が CakePHP のプラグインを `app/Plugin/` にインストールします。
-
-従来の構成のアプリケーションは、あとからディレクトリ単位で少しずつモダンな構成に移行できます。
-2 つの構成の対応関係は [CakePHP のフォルダ構造](getting-started/cakephp-folder-structure) を、
-CakePHP 2.10.24 からのその他の変更点は [アップグレードガイド](/ja/appendices/migrating-from-cakephp-2-10) を参照してください。
 
 ## composer.json の設定 {#configuring-composer-json}
 
@@ -274,9 +278,8 @@ nginx、lighttpd、IIS での設定や mod_rewrite のトラブルシューテ�
 この時点では、CakePHP のデフォルトのホーム画面が表示され、`tmp/` ディレクトリに書き込めるか、
 キャッシュが動作しているか、データベースに接続できるかが確認できます。
 
-おめでとうございます!
-[CakePHP の最初のアプリケーションを作る](getting-started)
-準備ができました。
+おめでとうございます! アプリケーションが動作しました。
+CakePHP 2 を初めて使う場合は、続けて [ブログチュートリアル](tutorials-and-examples/blog/blog) を読んでください。
 
 動きませんか？
 もし PHP のタイムゾーンに関連するエラーが出るなら、 `config/core.php` の中のとある一行のコメントを外し、

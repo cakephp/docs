@@ -50,6 +50,10 @@ modern directory layout.
 
 ### Getting Started
 
+- [Getting Started](/getting-started)
+  - Rewritten as the entry page for readers who maintain a CakePHP 2 application or know modern PHP: "About This Fork" (what the fork is, CakePHP 2 end of life, about this book; it replaces the separate "Piece of Cake 2" page, which was removed together with its sidebar group), "What's Different from CakePHP 2.10" with links to the detailed pages, "Where to Start" (existing application first, then `composer create-project pieceofcake2/app` with a note to consider CakePHP 5) and "Coming from Modern PHP" (no namespaces, array-based finders, models, components/behaviors/helpers, Configure, dispatcher filters, few native types)
+  - Removed the introduction and the blog tutorial that was included in the page; the tutorial is under [Tutorials & Examples](/tutorials-and-examples/blog/blog)
+  - Moved to the top of the "Getting Started" sidebar group; the other pages follow in the order Installation, Advanced Installation, URL Rewriting, Folder Structure, Conventions, Structure, A Typical CakePHP Request
 - [Installation](/installation)
   - Requirements: PHP 8.0-8.5, Composer, MySQL 5.6+/PostgreSQL 9.4+/SQLite 3/SQL Server 2022+, mbstring/intl/openssl notes
   - New application via `composer create-project pieceofcake2/app` (modern layout) with database.php and salt/cipherSeed setup
@@ -59,6 +63,7 @@ modern directory layout.
   - Built-in server: default port 8765 (change note: 80 before v2.12.3)
   - Added "Configuring composer.json": minimal composer.json; config.allow-plugins for composer/installers and extra.installer-paths to plugins/{$name}/ are required for cakephp-plugin packages
   - New application: debug level, salts and database settings can also be set with environment variables (`config/.env` or `.env` in the project root)
+  - "Adding CakePHP to an Existing Application" comes before "Creating a New Application"; the closing link points to the blog tutorial instead of Getting Started
 - [Advanced Installation](/installation/advanced-installation)
   - Removed PEAR installation, the old Composer/bake project setup and CAKE_CORE_INCLUDE_PATH core sharing
   - Added Composer setup details: replace directive, plugin installer-paths, classmap autoloading, exclude-from-classmap
@@ -66,13 +71,11 @@ modern directory layout.
 - [URL Rewriting](/installation/url-rewriting)
   - Examples assume the document root is webroot/; .htaccess updated to the skeleton version; legacy root/app .htaccess explained briefly
   - nginx example updated for PHP-FPM sockets; IIS web.config placed in webroot/; removed dead links (Web Platform Installer, virtualhostx, Apache wiki)
-- [Getting Started](/getting-started)
-  - Added "About This Fork" at the top of the page (what the fork is, CakePHP 2 end of life, CakePHP 5 for new projects, about this book); it replaces the separate "Piece of Cake 2" page, which was removed together with its sidebar group
-- [CakePHP Conventions](/getting-started/cakephp-conventions)
-  - File locations use src/ and templates/; String::uuid replaced by CakeText::uuid()
 - [CakePHP Folder Structure](/getting-started/cakephp-folder-structure)
   - Describes the modern layout (bin, config, logs, plugins, resources/locales, src, templates, tests, tmp, vendor, webroot) with a legacy app/ mapping table
   - Added steps for moving a legacy app/ application to the modern layout
+- [CakePHP Conventions](/getting-started/cakephp-conventions)
+  - File locations use src/ and templates/; String::uuid replaced by CakeText::uuid()
 - [CakePHP Structure](/getting-started/cakephp-structure)
   - AppController/AppHelper/AppModel, routes, layouts and elements paths use the modern layout
   - Examples use AuthComponent and FormHelper instead of the deprecated EmailComponent and JsHelper
