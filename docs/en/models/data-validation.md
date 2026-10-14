@@ -940,7 +940,7 @@ public $validate = [
 
 This rule allows you to check filesizes. You can use `$operator` to
 decide the type of comparison you want to use. All the operators supported
-by `~Validation::comparison()` are supported here as well. This
+by `Validation::comparison()` are supported here as well. This
 method will automatically handle array values from `$_FILES` by reading
 from the `tmp_name` key if `$check` is an array and contains that key:
 

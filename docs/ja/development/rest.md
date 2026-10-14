@@ -218,7 +218,7 @@ Router::resourceMap([
 :::
 
 `Router::mapResources()` の `$options` 配列の `connectOptions`
-キーで `Router::connect()`\` を使った設定ができます。 :
+キーで `Router::connect()` を使った設定ができます。 :
 
 ``` php
 Router::mapResources('books', [

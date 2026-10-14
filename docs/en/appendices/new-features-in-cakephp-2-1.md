@@ -4,7 +4,7 @@
 
 ### Model::saveAll(), Model::saveAssociated(), Model::validateAssociated()
 
-`Model::saveAll()` and friends now support passing the <span class="title-ref">fieldList</span> for multiple models. Example:
+`Model::saveAll()` and friends now support passing the `fieldList` for multiple models. Example:
 
 ``` php
 $this->SomeModel->saveAll($data, [
@@ -45,7 +45,7 @@ Blocks are output by calling the `fetch` method on the `View`. For example, the 
 
 This will echo the content of the block if available, or an empty string if it is undefined.
 
-Setting the content of a block can be done in a number of ways. A simple assignment of data can be done using \`assign\`:
+Setting the content of a block can be done in a number of ways. A simple assignment of data can be done using `assign`:
 
 ``` php
 <?php $this->assign('my_block', 'Hello Block'); ?>
@@ -172,7 +172,7 @@ and much more.
 
 When those methods are combined with having the `RequestHandlerComponent`
 enabled in your controller, the component will automatically decide if the
-response is already cached in the client and will send a <span class="title-ref">304 Not Modified</span>
+response is already cached in the client and will send a `304 Not Modified`
 status code before rendering the view. Skipping the view rendering process saves
 CPU cycles and memory. :
 
@@ -191,7 +191,7 @@ class ArticlesController extends AppController
 ```
 
 In the above example the view will not be rendered if the client sent the
-header <span class="title-ref">If-Modified-Since</span>, and the response will have a 304 status.
+header `If-Modified-Since`, and the response will have a 304 status.
 
 ## Helpers
 

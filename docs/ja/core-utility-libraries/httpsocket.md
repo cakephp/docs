@@ -183,8 +183,8 @@ HttpSocket は `App::uses()` で `Network/Http` パッケージとしてクラ�
 
 ### 結果のダウンロード
 
-HttpSocket は、 <span class="title-ref">setContentResponse()</span> と呼ばれる新しいメソッドを持ちます。
-このメソッドでリソースをセットすることによって、 <span class="title-ref">fwrite()</span> を使ってこのリソースに
+HttpSocket は、 `setContentResponse()` と呼ばれる新しいメソッドを持ちます。
+このメソッドでリソースをセットすることによって、 `fwrite()` を使ってこのリソースに
 内容を書き込ませられます。 ファイルをダウンロードするためには、以下のようにします。 :
 
 ``` php

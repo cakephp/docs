@@ -30,7 +30,7 @@ place Security Component before those components in your `$components` array.
 > your forms. In addition, you must **not** override any of the fields' "name"
 > attributes. The Security Component looks for certain indicators that are
 > created and managed by the FormHelper (especially those created in
-> `~FormHelper::create()` and `~FormHelper::end()`).
+> `FormHelper::create()` and `FormHelper::end()`).
 > Dynamically altering the fields that are submitted in a POST request (e.g.
 > disabling, deleting or creating new fields via JavaScript) is likely to
 > trigger a black-holing of the request. See the `$validatePost` or

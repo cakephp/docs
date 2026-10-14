@@ -40,6 +40,6 @@ echo $this->Time->format(
 ```
 
 Most of the Time Helper methods have a \$timezone parameter. The \$timezone parameter
-accepts a valid timezone identifier string or an instance of <span class="title-ref">DateTimeZone</span> class.
+accepts a valid timezone identifier string or an instance of `DateTimeZone` class.
 
 <!--@include: ../../core-utility-libraries/time.md{27,101}-->

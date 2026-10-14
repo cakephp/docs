@@ -697,7 +697,7 @@ Possible keys for HABTM association arrays include:
   - When false, CakePHP will insert the specified new relationship records
     and leave any existing relationship records in place, possibly
     resulting in duplicate relationship records.
-  - When set to `keepExisting`, the behavior is similar to <span class="title-ref">true</span>,
+  - When set to `keepExisting`, the behavior is similar to `true`,
     but with an additional check so that if any of the records
     to be added are duplicates of an existing relationship record, the
     existing relationship record is not deleted, and the duplicate
@@ -781,9 +781,9 @@ like to fetch Recipe data when using the Ingredient model.
 It is sometimes desirable to store additional data with a many-to-many
 association. Consider the following
 
-<span class="title-ref">Student hasAndBelongsToMany Course</span>
+`Student hasAndBelongsToMany Course`
 
-<span class="title-ref">Course hasAndBelongsToMany Student</span>
+`Course hasAndBelongsToMany Student`
 
 In other words, a Student can take many Courses and a Course can be
 taken by many Students. This is a simple many-to-many association

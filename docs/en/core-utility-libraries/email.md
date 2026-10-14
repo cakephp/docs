@@ -292,7 +292,7 @@ $Email->template('Blog.new_comment', 'Blog.auto_message');
 $Email->theme('TestTheme');
 ```
 
-This allows you to override the <span class="title-ref">new_comment</span> template in your theme without modifying
+This allows you to override the `new_comment` template in your theme without modifying
 the Blog plugin. The template file needs to be created in the following path:
 `templates/Themed/TestTheme/Blog/Emails/text/new_comment.ctp`.
 

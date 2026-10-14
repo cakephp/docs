@@ -288,7 +288,7 @@ $Email->template('Blog.new_comment', 'Blog.auto_message');
 $Email->theme('TestTheme');
 ```
 
-これは、Blog プラグインを更新せずにあなたのテーマの <span class="title-ref">new_comment</span> テンプレートで上書きできます。
+これは、Blog プラグインを更新せずにあなたのテーマの `new_comment` テンプレートで上書きできます。
 テンプレートファイルは、以下のパスで作成する必要があります:
 `templates/Themed/TestTheme/Blog/Emails/text/new_comment.ctp`.
 

@@ -249,7 +249,7 @@ throw new MissingWidgetHelperException('それはここではありません', 5
 
 次のいくつかのセクションでは、さまざまな方法とそれらが持つメリットについて詳しく説明します。
 
-## <span class="title-ref">Exception.handler</span> を使って独自の例外ハンドラを作成する
+## `Exception.handler` を使って独自の例外ハンドラを作成する
 
 あなた独自の例外ハンドラを作成すれば、例外ハンドリング処理のすべてを完全に制御できるようになります。
 選択したクラスは、あなたの `config/bootstrap.php` でロードすべきものですので、

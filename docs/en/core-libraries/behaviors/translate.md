@@ -196,7 +196,7 @@ something like this:
 > The model record contains a *virtual* field called
 > "locale". It indicates which locale is used in this result.
 
-Note that only fields of the model you are directly doing \`find\`
+Note that only fields of the model you are directly doing `find`
 on will be translated. Models attached via associations won't be
 translated because triggering callbacks on associated models is
 currently not supported.

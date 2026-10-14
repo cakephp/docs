@@ -43,7 +43,7 @@ class PostsController extends AppController
 }
 ```
 
-`fields` のような、上記以外の `~Model::find()` のオプションを
+`fields` のような、上記以外の `Model::find()` のオプションを
 入れることもできます。 :
 
 ``` php
@@ -400,10 +400,10 @@ $this->Paginator->settings['paramType'] = 'querystring';
 
 2.3 の時点では、存在しないページ、すなわちリクエストされたページ番号が
 全ページ数より大きいページにアクセスしようとすると、
-PaginatorComponent が <span class="title-ref">NotFoundException</span> を投げます。
+PaginatorComponent が `NotFoundException` を投げます。
 
 その場合、通常のエラーページを生成することもできますが、
-try ～ catch ブロックで <span class="title-ref">NotFoundException</span> を捕捉して、
+try ～ catch ブロックで `NotFoundException` を捕捉して、
 適切なアクションを起こさせることも可能です。 :
 
 ``` php

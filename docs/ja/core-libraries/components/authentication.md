@@ -296,17 +296,17 @@ public function getUser($request)
 ### 認証されていないリクエストの扱い
 
 認証されていないユーザーが最初に保護されたページにアクセスしようとすると、
-チェーンの最後のオーセンティケータの <span class="title-ref">unauthenticated()</span> メソッドが呼び出されます。
+チェーンの最後のオーセンティケータの `unauthenticated()` メソッドが呼び出されます。
 認証オブジェクトが適切に応答またはリダイレクトを送信処理し、
-それ以上のアクションは必要ないということを示すために <span class="title-ref">true</span> を返すことができます。
-<span class="title-ref">AuthComponent::\$authenticate</span> プロパティで認証オブジェクトを指定する順序を設定できます。
+それ以上のアクションは必要ないということを示すために `true` を返すことができます。
+`AuthComponent::$authenticate` プロパティで認証オブジェクトを指定する順序を設定できます。
 
-オーセンティケータが null を返した場合、 <span class="title-ref">AuthComponent</span> は、ユーザーをログインアクションに
-リダイレクトします。Ajax リクエストでかつ <span class="title-ref">AuthComponent::\$ajaxLogin</span> が指定されていた場合、
+オーセンティケータが null を返した場合、 `AuthComponent` は、ユーザーをログインアクションに
+リダイレクトします。Ajax リクエストでかつ `AuthComponent::$ajaxLogin` が指定されていた場合、
 その要素は描画され、そうでなければ HTTP ステータスコード 403 が返されます。
 
 > [!NOTE]
-> 2.4 より前では、認証オブジェクトは <span class="title-ref">unauthenticated()</span> メソッドを提供しません。
+> 2.4 より前では、認証オブジェクトは `unauthenticated()` メソッドを提供しません。
 
 ### 認証についてのフラッシュメッセージの表示
 
@@ -819,7 +819,7 @@ AuthComponent は CakePHP に組み込み済みの認可・認証メカニズム
 > - `params` - 追加で使用するパラメータの配列。デフォルトで []。
 >
 > ログインを扱うコントローラとアクションを表す (文字列や配列で定義した) URL。
-> デフォルトは <span class="title-ref">/users/login</span> 。
+> デフォルトは `/users/login` 。
 >
 > ログイン後のリダイレクト先のコントローラとアクションを表す (文字列や配列で定義した) URL。
 > この値はユーザーが `Auth.redirect` をセッション内に持っている場合には無視されます。

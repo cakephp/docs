@@ -137,7 +137,7 @@ echo $this->Paginator->sort('user_id', null, ['direction' => 'asc', 'lock' => tr
 
 - `last` 最終ページヘのリンクを生成したい場合、最後から何ページ分を
   作るかを整数で定義します。デフォルトは false です。'first' オプションと
-  同じロジックに従います。 `~PaginatorHelper::last()`\`
+  同じロジックに従います。 `PaginatorHelper::last()`
   を使って別々に定義することも可能です。
 
 - `ellipsis` 省略されていることを表す文字列。デフォルトは '...' です。

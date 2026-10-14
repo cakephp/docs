@@ -14,13 +14,13 @@ CakePHP では、このようなケースについて、実行サイクルに対
 を適用するための、クリーンで拡張可能なインターフェースを備えています。
 ちょうど、リクエスト毎のスタッカブルなサービスやルーチンを提供する、
 ミドルウェアのレイヤーのようなものです。私たちはこれを
-<span class="title-ref">Dispatcher Filters</span> と呼んでいます。
+`Dispatcher Filters` と呼んでいます。
 
 ## フィルターを設定する
 
 フィルターは通常 `config/bootstrap.php` ファイルの中で設定されますが、
 リクエストがディスパッチされる（制御が移る）前であれば、どの設定ファイル
-からでも気軽にロードして構いません。フィルターの追加や削除は、 <span class="title-ref">Configure</span>
+からでも気軽にロードして構いません。フィルターの追加や削除は、 `Configure`
 クラスの中で特別な `Dispatcher.filters` キーを使って行われます。
 CakePHP にはデフォルトで２つのフィルタークラスが備わっており、すべての
 リクエストですでに有効になっています。ここでは、それらがどのように追加
@@ -64,7 +64,7 @@ Configure::write('Dispatcher.filters', [
 ```
 
 これに示されるように、PHP で有効な [callback](https://www.php.net/callback)
-であれば、何でも渡すことができます。覚えていると思いますが、 <span class="title-ref">callback</span>
+であれば、何でも渡すことができます。覚えていると思いますが、 `callback`
 は PHP が `call_user_func` で実行することのできるものすべでです。
 ただ小さな例外があります。もし文字列が渡されると、それは関数名としては
 見てもらえず、クラス名として扱われます。無名関数もフィルターとして
@@ -152,7 +152,7 @@ Configure::write('Dispatcher.filters', [
 ## フィルタークラス
 
 ディスパッチフィルターが設定の中でクラス名として定義されている場合、
-それは CakePHP ディレクトリの <span class="title-ref">Routing</span> の中で `DispatcherFilter`
+それは CakePHP ディレクトリの `Routing` の中で `DispatcherFilter`
 を継承している必要があります。ここで特定の URL に対して 'Hello World'
 を返すようなシンプルなフィルターを作ってみましょう。:
 
@@ -284,5 +284,5 @@ Configure::write('Dispatcher.filters', [
 決して好ましいことではありません。しかしながら、本当にそれが必要な状況であれば、
 身近にあるクリーンな解決策です。すべてのケースをフィルターにする必要が
 ないことだけは覚えておいてください。あなたのアプリケーションにリクエスト
-ハンドラーを追加する場合、通常は <span class="title-ref">Controllers</span> と <span class="title-ref">Components</span> が正しい
+ハンドラーを追加する場合、通常は `Controllers` と `Components` が正しい
 選択であるはずです。

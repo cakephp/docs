@@ -114,8 +114,8 @@ CakeEventManager::instance()->attach(
 
 ### イベントのディスパッチ
 
-一度、イベントマネージャのインスタンスを取得すると、 `~CakeEventManager::dispatch()`
-メソッドを使ってイベントをディスパッチできます。このメソッドは :php:class\`CakeEvent\` クラスの
+一度、イベントマネージャのインスタンスを取得すると、 `CakeEventManager::dispatch()`
+メソッドを使ってイベントをディスパッチできます。このメソッドは `CakeEvent` クラスの
 インスタンスを受け取ります。さぁ、イベントをディスパッチしてみましょう。 :
 
 ``` php

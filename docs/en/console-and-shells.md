@@ -296,10 +296,10 @@ $ProgressBar = $this->Tasks->load('ProgressBar.ProgressBar');
 
 ## Invoking other shells from your shell
 
-Shells no longer have direct access to the ShellDispatcher any more through <span class="title-ref">\$this-\>Dispatch</span>.
+Shells no longer have direct access to the ShellDispatcher any more through `$this->Dispatch`.
 There are still many cases where you will want to invoke one shell from another though.
-<span class="title-ref">Shell::dispatchShell()</span> gives you the ability to call other shells by providing the
-<span class="title-ref">argv</span> for the sub shell. You can provide arguments and options either
+`Shell::dispatchShell()` gives you the ability to call other shells by providing the
+`argv` for the sub shell. You can provide arguments and options either
 as var args or as a string:
 
 ``` php
@@ -360,7 +360,7 @@ are several built-in styles, and you can create more. The built-in ones are
 - `comment` Additional text. Blue text.
 - `question` Text that is a question, added automatically by shell.
 
-You can create additional styles using <span class="title-ref">\$this-\>stdout-\>styles()</span>. To declare a
+You can create additional styles using `$this->stdout->styles()`. To declare a
 new output style you could do:
 
 ``` php
@@ -370,7 +370,7 @@ $this->stdout->styles('flashy', ['text' => 'magenta', 'blink' => true]);
 This would then allow you to use a `<flashy>` tag in your shell output, and if ansi
 colours are enabled, the following would be rendered as blinking magenta text
 `$this->out('<flashy>Whoooa</flashy> Something went wrong');`. When defining
-styles you can use the following colours for the <span class="title-ref">text</span> and <span class="title-ref">background</span> attributes:
+styles you can use the following colours for the `text` and `background` attributes:
 
 - black
 - red

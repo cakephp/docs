@@ -587,7 +587,7 @@ will validate all values passed and then try to perform a save for each.
 ## Saving hasMany through data
 
 Let's see how data stored in a join table for two models is saved. As shown in the [Hasmany Through](../models/associations-linking-models-together#hasMany-through)
-section, the join table is associated to each model using a <span class="title-ref">hasMany</span> type of relationship.
+section, the join table is associated to each model using a `hasMany` type of relationship.
 Our example involves the Head of Cake School asking us to write an application that allows
 him to log a student's attendance on a course with days attended and grade. Take
 a look at the following code. :
@@ -655,7 +655,7 @@ The data array will look like this when submitted. :
 
 CakePHP will happily be able to save the lot together and assign
 the foreign keys of the Student and Course into CourseMembership
-with a <span class="title-ref">saveAssociated</span> call with this data structure. If we run the index
+with a `saveAssociated` call with this data structure. If we run the index
 action of our CourseMembershipsController the data structure
 received now from a find('all') is:
 
@@ -751,7 +751,7 @@ And the resultant POST:
 ```
 
 Again CakePHP is good to us and pulls the Student id and Course id
-into the CourseMembership with the <span class="title-ref">saveAssociated</span>.
+into the CourseMembership with the `saveAssociated`.
 
 <a id="saving-habtm"></a>
 

@@ -42,7 +42,7 @@ public $virtualFields = [
 ### Model::hasField()
 
 Model::hasField() は、モデルが実際に持っているフィールドを一番目の引数で渡すと true を返します。
-<span class="title-ref">hasField()</span> の二番目の引数を true にすることによって、バーチャルフィールドもチェックされるように
+`hasField()` の二番目の引数を true にすることによって、バーチャルフィールドもチェックされるように
 なります。上記の例を用いれば:
 
 ``` php

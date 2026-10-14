@@ -624,7 +624,7 @@ $result = Hash::dimensions($data);
 
 `static` Hash::**maxDimensions**(array $data)
 
-Similar to `~Hash::dimensions()`, however this method returns,
+Similar to `Hash::dimensions()`, however this method returns,
 the deepest number of dimensions of any element in the array:
 
 ``` php

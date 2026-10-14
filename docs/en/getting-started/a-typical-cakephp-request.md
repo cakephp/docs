@@ -43,6 +43,6 @@ Black = required element, Gray = optional element, Blue = callback
     before the data is sent. The view logic is performed, which may
     include the use of elements and/or helpers. By default, the view is
     rendered inside a layout.
-8.  Additional controller callbacks (like `~Controller::afterFilter`) may be
+8.  Additional controller callbacks (like `Controller::afterFilter`) may be
     applied. The complete, rendered view code is sent to Ricardo's
     browser.

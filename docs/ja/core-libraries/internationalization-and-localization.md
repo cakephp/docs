@@ -80,7 +80,7 @@ po ファイルを更新する際に便利です。
 
 ３文字ロケールコードは、
 [ISO 639-2](https://www.loc.gov/standards/iso639-2/php/code_list.php)
-標準に準拠します。もし、地域ロケール (<span class="title-ref">en_US</span>, <span class="title-ref">en_GB</span>, その他) を作成した場合、
+標準に準拠します。もし、地域ロケール (`en_US`, `en_GB`, その他) を作成した場合、
 CakePHP はそちらを使用します。
 
 > [!WARNING]
@@ -131,7 +131,7 @@ resources/locales/por/LC_TIME (ポルトガル語)
 
 もし、あなたのアプリケーションに翻訳ファイルを含めたい場合、いくつかの規約に従う必要があります。
 
-<span class="title-ref">\_\_()</span> や <span class="title-ref">\_\_n()</span> の代わりに <span class="title-ref">\_\_d()</span> や <span class="title-ref">\_\_dn()</span> を使用してください。"d" はドメインを
+`__()` や `__n()` の代わりに `__d()` や `__dn()` を使用してください。"d" はドメインを
 意味します。 'DebugKit' というプラグインを使う際、以下のように記述します。 :
 
 ``` text
@@ -182,7 +182,7 @@ Configure::write('I18n.preferApp', true);
 Configure::write('Config.language', 'fra');
 ```
 
-上記は、どのロケールを使用するかを CakePHP に伝えます。 (例えば、 <span class="title-ref">fr_FR</span>
+上記は、どのロケールを使用するかを CakePHP に伝えます。 (例えば、 `fr_FR`
 の様な地域ロケールを使用していて、 もし翻訳が存在しない時は代わりに [ISO 639-2](https://www.loc.gov/standards/iso639-2/php/code_list.php)
 ロケールを使用します。) リクエストの間にいつでも言語を変更できます。
 例えば、bootstrap 中でアプリケションのデフォルトの言語を設定した場合、

@@ -255,7 +255,7 @@ $path = App::pluginPath('DebugKit');
 
 戻り値の型: `string`
 
-`App::themePath('purple');` のように呼ぶと、 <span class="title-ref">purple</span> テーマのフルパスを取得することができます。
+`App::themePath('purple');` のように呼ぶと、 `purple` テーマのフルパスを取得することができます。
 
 ## App::import() でファイルをインクルードする
 

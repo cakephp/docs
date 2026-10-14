@@ -582,7 +582,7 @@ $result = Hash::countDim($data);
 
 `static` Hash::**maxDimensions**(array $data)
 
-`~Hash::dimensions()` に似ていますが、このメソッドは配列内にあるもっとも大きな次元数を返します:
+`Hash::dimensions()` に似ていますが、このメソッドは配列内にあるもっとも大きな次元数を返します:
 
 ``` php
 $data = ['1' => '1.1', '2', '3' => ['3.1' => '3.1.1']];

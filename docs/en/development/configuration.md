@@ -756,7 +756,7 @@ is decided by the config reader attached as \$config. For example, if the
 configuration file loadable by the `PhpReader`
 
 Given that the 'default' reader is an instance of PhpReader.
-Save all data in Configure to the file \`my_config.php\`:
+Save all data in Configure to the file `my_config.php`:
 
 ``` php
 Configure::dump('my_config.php', 'default');

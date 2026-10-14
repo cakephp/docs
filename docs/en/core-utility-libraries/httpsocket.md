@@ -191,9 +191,9 @@ As of 2.3.0 you should extend `HttpSocketResponse` instead of `HttpResponse`. Th
 
 ### Downloading the results
 
-HttpSocket has a new method called <span class="title-ref">setContentResource()</span>. By setting a resource
+HttpSocket has a new method called `setContentResource()`. By setting a resource
 with this method, the content will be written to this resource, using
-<span class="title-ref">fwrite()</span>. To you download a file, you can do:
+`fwrite()`. To you download a file, you can do:
 
 ``` php
 $http = new HttpSocket();

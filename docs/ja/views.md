@@ -257,8 +257,8 @@ fetch を使うとブロックが存在するかどうかによってブロッ�
 
 ブロックは 非推奨のレイアウト変数 `$scripts_for_layout` を置き換えます。
 この変数の代わりにブロックを使うべきです。 `HtmlHelper` はビューブロックを
-結びつけます。`~HtmlHelper::script()`, `~HtmlHelper::css()`,
-`~HtmlHelper::meta()` の各メソッドは `inline = false` オプションが
+結びつけます。`HtmlHelper::script()`, `HtmlHelper::css()`,
+`HtmlHelper::meta()` の各メソッドは `inline = false` オプションが
 渡されたとき、それぞれ同じ名前のブロックを更新します。
 
 ``` php
@@ -362,7 +362,7 @@ CSS ファイルが含まれるのは便利です。
 
 好きなだけレイアウトを作ることが出来ます。レイアウトは、 `templates/Layouts`
 ディレクトリにファイルを作って、コントローラアクションの中かビューの
-`~View::$layout` プロパティを切り替えるだけで作成できます。 :
+`View::$layout` プロパティを切り替えるだけで作成できます。 :
 
 ``` php
 // コントローラから
@@ -571,8 +571,8 @@ CakePHP は element() に何も設定されていない場合、この設定を�
 
 ### 2.0
 
-プラグインからエレメントを読み込むために、 <span class="title-ref">plugin</span> オプションを使って下さい。
-(バージョン 1.x の <span class="title-ref">data</span> オプションから移動しました。) :
+プラグインからエレメントを読み込むために、 `plugin` オプションを使って下さい。
+(バージョン 1.x の `data` オプションから移動しました。) :
 
 ``` php
 echo $this->element('helpbox', [], ['plugin' => 'Contacts']);

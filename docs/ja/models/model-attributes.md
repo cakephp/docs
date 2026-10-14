@@ -259,7 +259,7 @@ protected $_schema = [
 > save() はデータを実際に保存する前に自動的にバリデーションを行うので、
 > save() の前に validate() を呼ぶ必要はありません。
 
-バリデーションに関する詳しい情報は、このマニュアルの後にある <span class="title-ref">/models/data-validation</span> を
+バリデーションに関する詳しい情報は、このマニュアルの後にある `/models/data-validation` を
 ご覧ください。
 
 ## virtualFields

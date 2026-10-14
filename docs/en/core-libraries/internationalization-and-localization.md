@@ -91,7 +91,7 @@ file with a newly updated pot file.
 
 The three-character locale codes conform to the
 [ISO 639-2](https://www.loc.gov/standards/iso639-2/php/code_list.php)
-standard, although if you create regional locales (<span class="title-ref">en_US</span>, <span class="title-ref">en_GB</span>,
+standard, although if you create regional locales (`en_US`, `en_GB`,
 etc.) cake will use them if appropriate.
 
 > [!WARNING]
@@ -144,7 +144,7 @@ repo.
 If you want to include translation files within your application you'll need to
 follow a few conventions.
 
-Instead of <span class="title-ref">\_\_()</span> and <span class="title-ref">\_\_n()</span> you will have to use <span class="title-ref">\_\_d()</span> and <span class="title-ref">\_\_dn()</span>. The D means
+Instead of `__()` and `__n()` you will have to use `__d()` and `__dn()`. The D means
 domain. So if you have a plugin called 'DebugKit' you would have to do this:
 
 ``` text
@@ -199,7 +199,7 @@ Configure::write('Config.language', 'fra');
 ```
 
 This tells CakePHP which locale to use (if you use a regional locale, such as
-<span class="title-ref">fr_FR</span>, it will use the [ISO 639-2](https://www.loc.gov/standards/iso639-2/php/code_list.php) locale as a fallback
+`fr_FR`, it will use the [ISO 639-2](https://www.loc.gov/standards/iso639-2/php/code_list.php) locale as a fallback
 if it doesn't exist), you can change the language at any time during a request.
 e.g. in your bootstrap if you're setting the application default language, in
 your (app) controller beforeFilter if it's specific to the request or user, or

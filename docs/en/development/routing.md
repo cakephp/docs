@@ -898,7 +898,7 @@ connectNamed() supports a number of options:
 - `default` Set this to true to merge in the default set of named parameters.
 - `reset` Set to true to clear existing rules and start fresh.
 - `separator` Change the string used to separate the key & value in a named
-  parameter. Defaults to <span class="title-ref">:</span>
+  parameter. Defaults to `:`
 
 ## Reverse Routing
 

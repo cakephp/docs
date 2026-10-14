@@ -31,7 +31,7 @@ The PHP version requirement for CakePHP 2.7 has been bumped up to PHP 5.3.0.
 
 - `CakeSession::consume()` has been added to read and delete from
   session in a single step.
-- Argument <span class="title-ref">\$renew</span> has been added to `CakeSession::clear()` to allow
+- Argument `$renew` has been added to `CakeSession::clear()` to allow
   emptying the session without forcing a new id and renewing the session. It
   defaults to `true`.
 
@@ -39,7 +39,7 @@ The PHP version requirement for CakePHP 2.7 has been bumped up to PHP 5.3.0.
 
 ### TreeBehavior
 
-- New setting <span class="title-ref">level</span> is now available. You can use it to specify field name in
+- New setting `level` is now available. You can use it to specify field name in
   which the depth of tree nodes will be stored.
 - New method `TreeBehavior::getLevel()` has been added which fetches depth of
   a node.
@@ -64,7 +64,7 @@ a `String` class provided as well for compatibility reasons.
 ### Validation
 
 - `Validation::notEmpty()` has been renamed to `Validation::notBlank()`.
-  This aims to avoid confusion around the PHP <span class="title-ref">notEmpty()</span> function and that the
+  This aims to avoid confusion around the PHP `notEmpty()` function and that the
   validation rule accepts `0` as valid input.
 
 ## Controller

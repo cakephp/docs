@@ -137,7 +137,7 @@ Supported options are:
 - `last` Whether you want last links generated, set to an integer to define
   the number of 'last' links to generate. Defaults to false. Follows the same
   logic as the `first` option. There is a
-  `~PaginatorHelper::last()`\` method to be used separately as well if
+  `PaginatorHelper::last()` method to be used separately as well if
   you wish.
 
 - `ellipsis` Ellipsis content, defaults to '...'

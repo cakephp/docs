@@ -220,9 +220,9 @@ type
 `smallinteger` 型と `tinyinteger` 型は 2.10.0 で追加されました。
 :::
 
-## テーブルキー <span class="title-ref">indexes</span>
+## テーブルキー `indexes`
 
-キー名 <span class="title-ref">indexes</span> は、フィールド名の代わりにテーブル配列の中に置きます。
+キー名 `indexes` は、フィールド名の代わりにテーブル配列の中に置きます。
 
 column  
 これは単一のカラム名またはカラムの配列です。
@@ -255,7 +255,7 @@ column
 unique  
 ユニークインデックスなら 1、そうでなければ 0。
 
-## テーブルキー <span class="title-ref">tableParameters</span>
+## テーブルキー `tableParameters`
 
 tableParameters は、 MySQL のみサポートします。
 

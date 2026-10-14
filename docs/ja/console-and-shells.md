@@ -290,10 +290,10 @@ $ProgressBar = $this->Tasks->load('ProgressBar.ProgressBar');
 
 ## シェルから他のシェルを呼び出し
 
-シェルからは、もはや <span class="title-ref">\$this-\>Dispatch</span> を通した ShellDispatcher への直接の
+シェルからは、もはや `$this->Dispatch` を通した ShellDispatcher への直接の
 アクセスができません。あるシェルから他のシェルを呼び出したいケースは多々
-あると思います。他のシェルを呼び出すには <span class="title-ref">Shell::dispatchShell()</span> を使います。
-サブシェル側では引数を受け取るための <span class="title-ref">argv</span> が使えます。引数やオプションは
+あると思います。他のシェルを呼び出すには `Shell::dispatchShell()` を使います。
+サブシェル側では引数を受け取るための `argv` が使えます。引数やオプションは
 可変引数もしくは文字列として指定できます。 :
 
 ``` php
@@ -353,7 +353,7 @@ $this->out('extra message', 1, Shell::VERBOSE);
 - `comment` 追加情報。青色のテキスト
 - `question` 質問事項。シェルが自動的に追加する。
 
-<span class="title-ref">\$this-\>stdout-\>styles()</span> を使ってさらに多くのスタイルを追加できます。
+`$this->stdout->styles()` を使ってさらに多くのスタイルを追加できます。
 新しいスタイルを追加するには以下のようにします。 :
 
 ``` php
@@ -362,7 +362,7 @@ $this->stdout->styles('flashy', ['text' => 'magenta', 'blink' => true]);
 
 これで `<flashy>` というタグが有効になり、ansi カラーが有効な端末であれば、
 `$this->out('<flashy>うわ！</flashy> 何か変になった');` の場合の表示は
-色がマゼンタでブリンクになります。スタイルを定義する際は <span class="title-ref">text</span> と <span class="title-ref">background</span>
+色がマゼンタでブリンクになります。スタイルを定義する際は `text` と `background`
 属性として以下の色が指定できます:
 
 - black

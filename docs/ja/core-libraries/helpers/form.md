@@ -537,8 +537,8 @@ echo $this->Form->input('User.email', ['name' => 'data[User][email]']);
 一般的な `input()` メソッド以外にも、 `FormHelper` には様々に
 異なったタイプの input を生成するための特別なメソッドがあります。
 これらは input ウィジェットそのものを生成するのに使えますが、
-さらに `~FormHelper::label()` や
-`~FormHelper::error()` といった別のメソッドと組み合わせる
+さらに `FormHelper::label()` や
+`FormHelper::error()` といった別のメソッドと組み合わせる
 ことで、完全にカスタムメイドのフォームレイアウトを生成できます。
 
 ### 一般的なオプション
@@ -795,9 +795,9 @@ input 要素に関連するメソッドの多くは、一般的なオプショ�
 
   この例では分の select で 15 分間隔で４つのオプションを生成します。
 
-- `$options['round']` それぞれの命令で <span class="title-ref">up</span> または <span class="title-ref">down</span> を指定する
+- `$options['round']` それぞれの命令で `up` または `down` を指定する
   ことで強制的な端数の切り上げ／切り下げを指示します。デフォルトは null
-  で、これは <span class="title-ref">interval</span> にしたがって四捨五入します。
+  で、これは `interval` にしたがって四捨五入します。
 
   ::: info Added in version 2.4
   :::

@@ -31,7 +31,7 @@ CakePHP 2.7 で必要な PHP バージョンは、 PHP 5.3.0 に引き上げら�
 
 - １ステップでセッションから読み込みと削除をするための
   `CakeSession::consume()` が追加されました。
-- `CakeSession::clear()` に引数 <span class="title-ref">\$renew</span> が追加されました。
+- `CakeSession::clear()` に引数 `$renew` が追加されました。
   新しい id を強制せずにセッションを空し、セッションを更新します。
   デフォルトは　`true` です。
 
@@ -39,7 +39,7 @@ CakePHP 2.7 で必要な PHP バージョンは、 PHP 5.3.0 に引き上げら�
 
 ### TreeBehavior
 
-- 新しい <span class="title-ref">レベル</span> 設定が利用可能になりました。ツリーノードの深さが保存されている
+- 新しい `レベル` 設定が利用可能になりました。ツリーノードの深さが保存されている
   フィールド名を指定できるようになりました。
 - ノードの深さを取得する新しいメソッド `TreeBehavior::getLevel()` が追加されました。
 - `TreeBehavior::generateTreeList()` のフォーマット処理は、
@@ -64,7 +64,7 @@ PHP7 以上や HHVM に関連するいくつかの互換性の衝突を解決し
 ### Validation
 
 - `Validation::notEmpty()` は、 `Validation::notBlank()` に名前を変更しました。
-  PHP の <span class="title-ref">notEmpty()</span> 関数との混乱を避けることが狙いです。このバリデーション規則は、
+  PHP の `notEmpty()` 関数との混乱を避けることが狙いです。このバリデーション規則は、
   `0` も正しい入力として受け入れます。
 
 ## コントローラ

@@ -105,7 +105,7 @@ since the last time the client asked for it.
 
 If response is evaluated as not modified, then the view rendering process is
 stopped, saving processing time, saving bandwidth and no content is returned to
-the client. The response status code is then set to <span class="title-ref">304 Not Modified</span>.
+the client. The response status code is then set to `304 Not Modified`.
 
 You can opt-out this automatic checking by setting the `checkHttpCache`
 setting to false:

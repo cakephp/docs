@@ -22,8 +22,8 @@ Piece of Cake 2 フォークでは Bake はコアに含まれていません。`
 :::
 
 - `cake bake model` は `$behaviors` をサポートしました。
-  例えば、Tree ビヘイビアを追加した場合、テーブルから <span class="title-ref">lft</span> や <span class="title-ref">rght</span> 、
-  <span class="title-ref">parent_id</span> のフィールドを探します。
+  例えば、Tree ビヘイビアを追加した場合、テーブルから `lft` や `rght` 、
+  `parent_id` のフィールドを探します。
   また、独自のビヘイビアをサポートするために ModelTask を拡張することができます。
 - ビューやモデル、コントローラ、テストおよびフィクスチャの `cake bake` において、
   ファイルを強制的に上書きする `-f` もしくは `--force` パラメータがサポートされました。
@@ -165,13 +165,13 @@ Piece of Cake 2 フォークでは Bake はコアに含まれていません。`
 
 - ギリシャ語のデフォルトロケールが ISO 639-3 で定義された `ell` になりました。
   `gre` はそのエイリアスです。これに伴いロケールのフォルダが変更となりました。
-  （ <span class="title-ref">/Locale/gre/</span> から <span class="title-ref">/Locale/ell/</span> へ）
+  （ `/Locale/gre/` から `/Locale/ell/` へ）
 - ペルシア語のデフォルトロケールが ISO 639-3 で定義された `fas` になりました。
   `per` はそのエイリアスです。これに伴いロケールのフォルダが変更となりました。
-  （ <span class="title-ref">/Locale/per/</span> から <span class="title-ref">/Locale/fas/</span> へ）
+  （ `/Locale/per/` から `/Locale/fas/` へ）
 - サーミ語のデフォルトロケールが ISO 639-3 で定義された `sme` になりました。
   `smi` はそのエイリアスです。これに伴いロケールのフォルダが変更となりました。
-  （ <span class="title-ref">/Locale/smi/</span> から <span class="title-ref">/Locale/sme/</span> へ）
+  （ `/Locale/smi/` から `/Locale/sme/` へ）
 - マケドニア語のデフォルトロケールが ISO 639-3 で定義された `mkd` になりました。
   `mk` はそのエイリアスです。これに伴い同様にロケールのフォルダが変更となりました。
 - カタログコード `in` は削除され `id` になりました（インドネシア語）、

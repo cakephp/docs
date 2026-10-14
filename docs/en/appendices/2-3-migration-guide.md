@@ -13,7 +13,7 @@ as they are conditionally defined by CakePHP now.
 - FileEngine is always the default cache engine. In the past a number of people
   had difficulty setting up and deploying APC correctly both in CLI + web.
   Using files should make setting up CakePHP simpler for new developers.
-- <span class="title-ref">Configure::write('Cache.viewPrefix', 'YOURPREFIX');</span> has been added to <span class="title-ref">core.php</span>
+- `Configure::write('Cache.viewPrefix', 'YOURPREFIX');` has been added to `core.php`
   to allow multiple domains/languages per setup.
 
 ## Component
@@ -35,7 +35,7 @@ as they are conditionally defined by CakePHP now.
 - PaginatorComponent now supports the `findType` option. This can be used to
   specify what find method you want used for pagination. This is a bit easier
   to manage and set than the 0'th index.
-- PaginatorComponent now throws a <span class="title-ref">NotFoundException</span> when trying to access a page
+- PaginatorComponent now throws a `NotFoundException` when trying to access a page
   which is out of range (i.e. requested page is greater than total page count).
 
 ### SecurityComponent
@@ -66,7 +66,7 @@ as they are conditionally defined by CakePHP now.
 ### L10n
 
 - `nld` is now the default locale for Dutch as specified by ISO 639-3 and `dut` its alias.
-  The locale folders have to be adjusted accordingly (from <span class="title-ref">/Locale/dut/</span> to <span class="title-ref">/Locale/nld/</span>).
+  The locale folders have to be adjusted accordingly (from `/Locale/dut/` to `/Locale/nld/`).
 - Albanian is now `sqi`, Basque is now `eus`, Chinese is now `zho`, Tibetan is now `bod`,
   Czech is now `ces`, Farsi is now `fas`, French is now `fra`, Icelandic is now `isl`,
   Macedonian is now `mkd`, Malaysian is now `msa`, Romanian is now `ron`, Serbian is now `srp`
@@ -88,7 +88,7 @@ as they are conditionally defined by CakePHP now.
   `CakeSession::check()` does.
 - `ConfigReaderInterface::dump()` was added. Please ensure any custom readers you have now
   implement a `dump()` method.
-- The `$key` parameter of `IniReader::dump()` now supports keys like <span class="title-ref">PluginName.keyname</span>
+- The `$key` parameter of `IniReader::dump()` now supports keys like `PluginName.keyname`
   similar to `PhpReader::dump()`.
 
 ## Error
@@ -131,8 +131,8 @@ as they are conditionally defined by CakePHP now.
 ### CakeResponse
 
 - `CakeResponse::file()` was added.
-- The content types <span class="title-ref">application/javascript</span>, <span class="title-ref">application/xml</span>,
-  <span class="title-ref">application/rss+xml</span> now also send the application charset.
+- The content types `application/javascript`, `application/xml`,
+  `application/rss+xml` now also send the application charset.
 
 ### CakeEmail
 
@@ -214,7 +214,7 @@ as they are conditionally defined by CakePHP now.
 ### TextHelper
 
 - `TextHelper::tail()` was added to truncate text starting from the end.
-- <span class="title-ref">ending</span> in `TextHelper::truncate()` is deprecated in favor of <span class="title-ref">ellipsis</span>
+- `ending` in `TextHelper::truncate()` is deprecated in favor of `ellipsis`
 
 ### PaginatorHelper
 
@@ -222,7 +222,7 @@ as they are conditionally defined by CakePHP now.
   allow specifying extra tag for wrapping current page number.
 - For methods: `PaginatorHelper::prev()` and `PaginatorHelper::next()` it
   is now possible to set the `tag` option to `false` to disable the wrapper.
-  Also a new option <span class="title-ref">disabledTag</span> has been added for these two methods.
+  Also a new option `disabledTag` has been added for these two methods.
 
 ## Testing
 
@@ -248,7 +248,7 @@ as they are conditionally defined by CakePHP now.
 ### String
 
 - `String::tail()` was added to truncate text starting from the end.
-- <span class="title-ref">ending</span> in `String::truncate()` is deprecated in favor of <span class="title-ref">ellipsis</span>
+- `ending` in `String::truncate()` is deprecated in favor of `ellipsis`
 
 ### Debugger
 

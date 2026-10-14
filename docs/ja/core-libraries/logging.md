@@ -178,8 +178,8 @@ CakeLog::config('custom_path', [
 前処理を記述したり、ログを完全に別のストレージを使うことができます。
 
 syslog を使うためには、デフォルトの FileLog エンジンを使うのとよく似ています。
-ロギングに使用するエンジンとして <span class="title-ref">Syslog</span> を指定する必要があります。下記の設定は、
-デフォルトのロガーを syslog に置き換えるものです。これは、 <span class="title-ref">bootstrap.php</span> ファイルで
+ロギングに使用するエンジンとして `Syslog` を指定する必要があります。下記の設定は、
+デフォルトのロガーを syslog に置き換えるものです。これは、 `bootstrap.php` ファイルで
 設定します。 :
 
 ``` php
@@ -190,16 +190,16 @@ CakeLog::config('default', [
 
 Syslog ロギングエンジンのための設定配列は、以下のキーを認識します。
 
-- \`format\`: ２つのプレースホルダーを持つ sprintf テンプレート文字列。１つ目は、
+- `format`: ２つのプレースホルダーを持つ sprintf テンプレート文字列。１つ目は、
   エラー種別で、２つ目はメッセージのためのものです。このキーは、ロギングメッセージ内の
   サーバやプロセスに関する追加の情報を付加するのに便利です。例えば、
   `%s - Web Server 1 - %s` は、プレースホルダーが置き換えられると、
   `error - Web Server 1 - An error occurred in this request` のようになります。
-- \`prefix\`: 全てのログメッセージの先頭につく文字列です。
-- \`flag\`: ロガーへの接続を開くために使用される整数値のフラグです。デフォルトは、
-  <span class="title-ref">LOG_ODELAY</span> が使用されます。 詳しくは、 <span class="title-ref">openlog</span> 文書をご覧ください。
-- \`facility\`: syslog で使用するロギングスロット。デフォルトでは、 <span class="title-ref">LOG_USER</span> が
-  使用されます。詳しくは、 <span class="title-ref">syslog</span> 文書をご覧ください。
+- `prefix`: 全てのログメッセージの先頭につく文字列です。
+- `flag`: ロガーへの接続を開くために使用される整数値のフラグです。デフォルトは、
+  `LOG_ODELAY` が使用されます。 詳しくは、 `openlog` 文書をご覧ください。
+- `facility`: syslog で使用するロギングスロット。デフォルトでは、 `LOG_USER` が
+  使用されます。詳しくは、 `syslog` 文書をご覧ください。
 
 ## ログへの書込み {#writing-to-logs}
 

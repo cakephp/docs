@@ -654,7 +654,7 @@ HABTM アソシエーションは次のキーを含ませることができま�
     既存の関連するレコードを削除します。更新時にも、再び処理する必要があります。
   - false を指定すれば、既存の関連するレコードはそのままにして、新しい関連する
     レコードを挿入します。場合によっては重複した関連レコードができることがあります。
-  - `keepExisting` を指定すれば、 <span class="title-ref">true</span> を指定した時と似ていますが、
+  - `keepExisting` を指定すれば、 `true` を指定した時と似ていますが、
     追加されたレコードが既存の関連レコードで重複している場合、追加のチェックによって、
     既存の関連レコードは削除されず、重複は無視されます。例えば、join テーブルに
     必要なデータのみ保存したい場合に便利です。
@@ -733,9 +733,9 @@ Ingredient モデルに HABTM アソシエーションを定義することに�
 多 対 多のアソシエーションを使って追加データを保存する方が
 良い場合があります。以下のような状況を考えてみてください。
 
-<span class="title-ref">Student hasAndBelongsToMany Course</span>
+`Student hasAndBelongsToMany Course`
 
-<span class="title-ref">Course hasAndBelongsToMany Student</span>
+`Course hasAndBelongsToMany Student`
 
 言い換えると、Student (生徒) はいくつかの Courses (授業) を取っていて、
 Course (授業) は Student (生徒) に取られています。これは単純に多 対 多のアソシエーションで

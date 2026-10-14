@@ -358,7 +358,7 @@ $results = Cache::read('results');
 ```
 
 もし、 `Cache::set()` を繰り返し呼ぶところを見つけたなら、 新たな
-`Cache::config()`<span class="title-ref"> を作成するべきです。これで </span><span class="title-ref">Cache::set()</span>\` を
+`Cache::config()` を作成するべきです。これで `Cache::set()` を
 呼ぶ必要が削減できます。
 
 `static` Cache::**increment**($key, $offset = 1, $config = 'default')

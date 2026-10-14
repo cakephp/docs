@@ -561,7 +561,7 @@ public function add()
 ## hasMany を保存する
 
 結合された2つのテーブルのモデルのデータがどうやって保存されるのかを見て行きましょう。
-[Hasmany Through](../models/associations-linking-models-together#hasMany-through) セクションにあるように、結合されたそれぞれのテーブルは <span class="title-ref">hasMany</span>
+[Hasmany Through](../models/associations-linking-models-together#hasMany-through) セクションにあるように、結合されたそれぞれのテーブルは `hasMany`
 アソシエーションで関連付けられています。ここでは、生徒の授業への出席日数と成績を
 記録するアプリケーションをサンプルとして書いてみたいと思います。
 以下のコードを見て下さい。 :
@@ -627,7 +627,7 @@ class CourseMembershipsController extends AppController
 ]
 ```
 
-CakePHP はこれらの配列を <span class="title-ref">saveAssociated</span> に渡すことで、各モデルのデータを同時に保存し、
+CakePHP はこれらの配列を `saveAssociated` に渡すことで、各モデルのデータを同時に保存し、
 CourseMembership モデルに対して Student と Course を外部キーとして割り当てることができます。
 CourseMembershipsController の index アクションが実行されると、そこの find('all') で
 以下のような構造のデータが取得できます。 :
@@ -723,7 +723,7 @@ POST されると以下のようなデータが渡ってきます。 :
 ]
 ```
 
-このデータを使えば <span class="title-ref">saveAssociated</span> は Student の ID と Course の ID を
+このデータを使えば `saveAssociated` は Student の ID と Course の ID を
 CourseMembership モデルに保存してくれます。
 
 <a id="saving-habtm"></a>

@@ -70,9 +70,9 @@ CakePHP の内部で使っている重要で役に立つパラメータが存在
 - `controller` 現在のリクエストを処理するコントローラです。
 - `action` 現在のリクエストを処理するアクションです。
 - `prefix` 現在のアクションのプレフィックスです。詳しくは、 [Prefix Routing](../development/routing#prefix-routing) をご覧ください。
-- `bare` リクエストが `~Controller::requestAction()` から始まり
+- `bare` リクエストが `Controller::requestAction()` から始まり
   bare オプションを含んでいたとき定義されます。生のリクエストは描画されたレイアウトを持ちません。
-- `requested` アクションが `~Controller::requestAction()` から始まったとき定義され
+- `requested` アクションが `Controller::requestAction()` から始まったとき定義され
   true が設定されます。
 
 ## クエリ文字列パラメータにアクセス
@@ -88,7 +88,7 @@ $this->request->query['page'];
 $this->request['url']['page'];
 ```
 
-`~CakeRequest::$query` プロパティに直接アクセスするか、エラーが発生しない方法で
+`CakeRequest::$query` プロパティに直接アクセスするか、エラーが発生しない方法で
 URL クエリ配列を読むために `CakeRequest::query()` を使うことができます。
 キーが存在しない場合、 `null` が返ります。 :
 
@@ -107,7 +107,7 @@ $foo = $this->request->query('value_that_does_not_exist');
 $this->request->data['Post']['title'];
 ```
 
-`~CakeRequest::$data` プロパティに直接アクセスするか、エラーが発生しない方法で
+`CakeRequest::$data` プロパティに直接アクセスするか、エラーが発生しない方法で
 data 配列を読むために `CakeRequest::data()` を使うことができます。
 キーが存在しない場合、 `null` が返ります。 :
 
@@ -329,7 +329,7 @@ CakePHP はデフォルトで `CakeResponse` を使います。
 これにより、アプリケーションのすべてのコントローラが `CakeResponse` の代わりに
 `CustomResponse` を使うようになります。またコントローラの中で `$this->response`
 を設定することでレスポンスインスタンスを置き換えることができます。
-レスポンスオブジェクトのオーバーライドは `~CakeResponse::header()`
+レスポンスオブジェクトのオーバーライドは `CakeResponse::header()`
 とやりとりするメソッドをスタブ化しやすくするので、テストで使いやすいです。
 詳しくは [Cakeresponse Testing](#cakeresponse-testing) を参照して下さい。
 
@@ -348,7 +348,7 @@ $this->response->type(['vcf' => 'text/v-card']);
 $this->response->type('vcf');
 ```
 
-大抵の場合、追加のコンテンツタイプはコントローラの `~Controller::beforeFilter()`
+大抵の場合、追加のコンテンツタイプはコントローラの `Controller::beforeFilter()`
 コールバックの中で設定したいと思うので、
 `RequestHandlerComponent` が提供するビューの自動切り替え機能を活用できます。
 
@@ -425,7 +425,7 @@ $this->response->header([
 ]);
 ```
 
-同じ `~CakeResponse::header()` を複数回設定すると、
+同じ `CakeResponse::header()` を複数回設定すると、
 普通の header 呼び出しと同じように、以前の値を上書きしていしまいます。
 `CakeResponse::header()` が呼び出されなければヘッダは送られません。
 これらのヘッダはレスポンスが実際に送られるまでバッファリングされます。
@@ -500,11 +500,11 @@ Cache-Control ヘッダは以下の通りです。 :
 `CakeResponse` のいくつかのユーティリティメソッドを用いることで、最終的に有効な
 `Cache-Control` ヘッダを生成します。 一つ目は、`CakeResponse::sharable()` メソッドです。
 このメソッドは異なるユーザやクライアントの間で共有出来ることを考慮されたレスポンスかどうかを示します。
-このメソッドは実際には、このヘッダが <span class="title-ref">public</span> または <span class="title-ref">private</span> のどちらなのかを制御しています。
+このメソッドは実際には、このヘッダが `public` または `private` のどちらなのかを制御しています。
 private としてレスポンスを設定することは、レスポンスのすべてまたはその一部が特定のユーザ用であることを示しています。
 共有キャッシュのメリットを活かすためにはコントロールディレクティブを public に設定する必要があります。
 
-このメソッドの二番目のパラメータはキャッシュの <span class="title-ref">max-age</span> を指定するために使われます。
+このメソッドの二番目のパラメータはキャッシュの `max-age` を指定するために使われます。
 このパラメータはレスポンスが古いと見なされる秒数を表しています。 :
 
 ``` php
@@ -555,7 +555,7 @@ HTTP におけるキャッシュの検証はコンテンツが定期的に変化
 アプリケーションに毎回リソースが変更されたかどうかを尋ねます。
 これは画像や他のアセットといった静的なリソースに対して使われる場合が多いです。
 
-`~CakeResponse::etab()` メソッド (entity tag と呼ばれる) は要求されたリソースを
+`CakeResponse::etab()` メソッド (entity tag と呼ばれる) は要求されたリソースを
 識別するための一意な文字列です。大抵の場合はファイルのチェックサムのようなもので、
 リソースが一致するかどうかを調べるためにキャッシュはチェックサムを比較するでしょう。
 

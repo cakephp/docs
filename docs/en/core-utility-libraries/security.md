@@ -68,7 +68,7 @@ $decrypted = Security::rijndael($encrypted, Configure::read('Security.key'), 'de
 `rijndael()` can be used to store data you need to decrypt later, like the
 contents of cookies. It should **never** be used to store passwords.
 Instead you should use the one way hashing methods provided by
-`~Security::hash()`
+`Security::hash()`
 
 ::: info Added in version 2.2
 `Security::rijndael()` was added in 2.2.
@@ -85,7 +85,7 @@ lots of variance in the data, much like a good password. The returned result
 will be the encrypted value with an HMAC checksum.
 
 This method should **never** be used to store passwords. Instead you should
-use the one way hashing methods provided by `~Security::hash()`.
+use the one way hashing methods provided by `Security::hash()`.
 An example use would be:
 
 ``` php

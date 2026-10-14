@@ -268,7 +268,7 @@ $path = App::pluginPath('DebugKit');
 Return type: `string`
 
 Themes can be found `App::themePath('purple');`, would give the full path to the
-<span class="title-ref">purple</span> theme.
+`purple` theme.
 
 <a id="app-import"></a>
 

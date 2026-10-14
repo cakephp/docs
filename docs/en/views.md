@@ -277,8 +277,8 @@ The `$default` argument was added in 2.3.
 
 Blocks replace the deprecated `$scripts_for_layout` layout variable. Instead
 you should use blocks. The `HtmlHelper` ties into view blocks, and
-its `~HtmlHelper::script()`, `~HtmlHelper::css()`, and
-`~HtmlHelper::meta()` methods each update a block with the same name
+its `HtmlHelper::script()`, `HtmlHelper::css()`, and
+`HtmlHelper::meta()` methods each update a block with the same name
 when used with the `inline = false` option:
 
 ``` php
@@ -389,7 +389,7 @@ you would any other view variable.
 You can create as many layouts as you wish: just place them in the
 `templates/Layouts` directory, and switch between them inside of your
 controller actions using the controller or view's
-`~View::$layout` property:
+`View::$layout` property:
 
 ``` php
 // From a controller
@@ -618,8 +618,8 @@ is given.
 
 ### 2.0
 
-To load an element from a plugin, use the <span class="title-ref">plugin</span> option (moved out of the
-<span class="title-ref">data</span> option in 1.x):
+To load an element from a plugin, use the `plugin` option (moved out of the
+`data` option in 1.x):
 
 ``` php
 echo $this->element('helpbox', [], ['plugin' => 'Contacts']);

@@ -939,7 +939,7 @@ public $validate = [
 
 ファイルサイズのチェックを行います。使用したい比較のタイプを
 `$operator` （演算子）として指定できます。ここでは
-`~Validation::comparison()` がサポートしている演算子を
+`Validation::comparison()` がサポートしている演算子を
 すべてサポートしています。 `$check` が `tmp_name` キーを
 含んでいる場合、このメソッドは `$_FILES` から渡される値を
 自動的に解析し、`tmp_name` キーがあれば取り出します。 :

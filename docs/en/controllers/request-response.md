@@ -74,9 +74,9 @@ are also all found in the request parameters:
 - `action` The action handling the current request.
 - `prefix` The prefix for the current action. See [Prefix Routing](../development/routing#prefix-routing) for
   more information.
-- `bare` Present when the request came from `~Controller::requestAction()` and included the
+- `bare` Present when the request came from `Controller::requestAction()` and included the
   bare option. Bare requests do not have layouts rendered.
-- `requested` Present and set to true when the action came from `~Controller::requestAction()`.
+- `requested` Present and set to true when the action came from `Controller::requestAction()`.
 
 ## Accessing Querystring parameters
 
@@ -91,7 +91,7 @@ $this->request->query['page'];
 $this->request['url']['page'];
 ```
 
-You can either directly access the `~CakeRequest::$query` property, or you can use
+You can either directly access the `CakeRequest::$query` property, or you can use
 `CakeRequest::query()` to read the URL query array in an error-free manner.
 Any keys that do not exist will return `null`:
 
@@ -111,7 +111,7 @@ that contains a `data` prefix will have that data prefix removed. For example:
 $this->request->data['MyModel']['title'];
 ```
 
-You can either directly access the `~CakeRequest::$data` property, or you can use
+You can either directly access the `CakeRequest::$data` property, or you can use
 `CakeRequest::data()` to read the data array in an error-free manner.
 Any keys that do not exist will return `null`:
 
@@ -353,7 +353,7 @@ This will make all the controllers in your application use `CustomResponse`
 instead of `CakeResponse`. You can also replace the response
 instance by setting `$this->response` in your controllers. Overriding the
 response object is handy during testing, as it allows you to stub
-out the methods that interact with `~CakeResponse::header()`. See the section on
+out the methods that interact with `CakeResponse::header()`. See the section on
 [Cakeresponse Testing](#cakeresponse-testing) for more information.
 
 ## Dealing with content types
@@ -372,7 +372,7 @@ $this->response->type('vcf');
 ```
 
 Usually, you'll want to map additional content types in your controller's
-`~Controller::beforeFilter()` callback, so you can leverage the automatic view switching
+`Controller::beforeFilter()` callback, so you can leverage the automatic view switching
 features of `RequestHandlerComponent` if you are using it.
 
 <a id="cake-response-file"></a>
@@ -452,7 +452,7 @@ $this->response->header([
 ]);
 ```
 
-Setting the same `~CakeResponse::header()` multiple times will result in overwriting the previous
+Setting the same `CakeResponse::header()` multiple times will result in overwriting the previous
 values, just as regular header calls do. Headers are not sent when
 `CakeResponse::header()` is called; instead they are buffered
 until the response is actually sent.
@@ -587,7 +587,7 @@ cache, but it asks the application every time
 whether the resource has changed, instead of using it directly.
 This is commonly used with static resources such as images and other assets.
 
-The `~CakeResponse::etag()` method (called entity tag) is a string that uniquely identifies the
+The `CakeResponse::etag()` method (called entity tag) is a string that uniquely identifies the
 requested resource, as a checksum does for a file, in order to determine whether
 it matches a cached resource.
 

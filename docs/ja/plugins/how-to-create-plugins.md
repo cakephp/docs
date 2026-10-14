@@ -353,6 +353,6 @@ CakePHP 名前空間 (cakephp) を **使用しない** でください。
 小文字と区切り文字のダッシュを使用することが決まりです。
 
 もし、あなたの GitHub アカウントが "FooBar" で "Logging" プラグインを作成する場合、
-<span class="title-ref">foo-bar/cakephp-logging</span> と名付けるといいでしょう。
-そして、CakePHP 自身の "Localized" プラグインは、 <span class="title-ref">cakephp/localized</span> で見つけられます。
+`foo-bar/cakephp-logging` と名付けるといいでしょう。
+そして、CakePHP 自身の "Localized" プラグインは、 `cakephp/localized` で見つけられます。
 その PHP 8 対応フォークは [pieceofcake2/localized](https://github.com/pieceofcake2/localized) でメンテナンスされています。

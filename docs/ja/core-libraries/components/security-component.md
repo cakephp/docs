@@ -28,8 +28,8 @@ Security コンポーネントのフォーム保護機能と、 `startup()` コ�
 > Security コンポーネントを使用している時、フォームの作成に FormHelper を
 > **使わなければなりません** 。また、フィールドの "name" 属性を
 > **上書きしてはいけません** 。Security コンポーネントは、FormHelper で作成され、
-> 管理されるインジケーターを確認します。(これらは `~FormHelper::create()`
-> と `~FormHelper::end()` の中で作成されます。) 例えば JavaScript で無効化・
+> 管理されるインジケーターを確認します。(これらは `FormHelper::create()`
+> と `FormHelper::end()` の中で作成されます。) 例えば JavaScript で無効化・
 > 削除・新規作成するなどして POST リクエスト中の投稿されたフィールドを動的に差し替えることは、
 > リクエストが破棄されるきっかけになります。 `$validatePost` や `$disabledFields`
 > 設定パラメータをご覧ください。

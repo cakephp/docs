@@ -140,8 +140,8 @@ CakePHP 2.5 は、2.4 の API の完全上位互換です。
 ### Validation
 
 - `Validation::inList()` と `Validation::multiple()` の
-  第三引数は、 <span class="title-ref">\$strict</span> から <span class="title-ref">\$caseInsensitive</span> に修正されました。
-  <span class="title-ref">\$strict</span> は、間違った動作をしていて誤解されやすいため、廃止になりました。
+  第三引数は、 `$strict` から `$caseInsensitive` に修正されました。
+  `$strict` は、間違った動作をしていて誤解されやすいため、廃止になりました。
   今は、大文字と小文字を区別せずに比較するために、このパラメータに true を設定します。
   デフォルト値は false で、今までのように大文字と小文字を区別して値やリストを比較します。
 - `Validation::mimeType()` の `$mimeTypes` パラメータは、正規表現が使用できます。
@@ -165,7 +165,7 @@ ExceptionRenderer は、エラーテンプレートに "code"、"message"、"url
 
 - フィクスチャファイルはサブディレクトリに配置できるようになりました。
   `.` の後にディレクトリ名を加えることで、サブディレクトリ内のフィクスチャを利用できます。
-  例えば、 <span class="title-ref">app.my_dir/article</span> は `App/Test/Fixture/my_dir/ArticleFixture` を読み込みます。
+  例えば、 `app.my_dir/article` は `App/Test/Fixture/my_dir/ArticleFixture` を読み込みます。
 - フィクスチャは、 `$canUseMemory` に false を設定することで、MySQL の MEMORY ストレージエンジンの使用を無効にすることが出来ます。
 
 ## ビュー
