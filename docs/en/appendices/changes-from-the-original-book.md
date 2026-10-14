@@ -324,7 +324,7 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
   - Coverage requires Xdebug or PCOV; output to tmp/coverage
   - Test suites use TESTS . 'TestCase'; note that phpunit.xml.dist makes AllTests optional
   - Plugin tests in plugins/&lt;Name>/tests/TestCase (Test/Case fallback)
-  - Jenkins: composer install step, config/database.php, vendor/bin/phpunit, jenkins.io links; link to Continuous Integration for GitHub Actions; ja: explicit test-database-setup, generating-code-coverage and integration-with-jenkins anchors
+  - Jenkins: moved to the end of the new Continuous Integration page (after the GitHub Actions workflow), with composer install step, config/database.php, vendor/bin/phpunit and jenkins.io links; the old section is a short pointer that keeps the `integration-with-jenkins` anchor; ja: explicit test-database-setup and generating-code-coverage anchors
   - New "Types of Tests" section: unit tests with fixtures, controller tests with testAction() and browser E2E tests (links to E2E Testing); ja: explicit testing-controllers anchor
   - "Types of Tests" also lists integration tests with `IntegrationTestTrait` (links to Integration Testing) and notes that `ControllerTestCase` remains supported; tip linking to Integration Testing in "Testing Controllers"
 - [REST](/development/rest)

@@ -6,7 +6,8 @@ before the change is merged. This page shows a GitHub Actions workflow for an
 application built on the [pieceofcake2/app](https://pieceofcake2.github.io/app/)
 skeleton, introduces each of its jobs with a link to the page that covers the
 tool in detail, and shows how to add a short summary of each job to the run
-page.
+page. Running the tests on a Jenkins server is described at the end, in
+[Jenkins](#jenkins).
 
 ## What to Run
 
@@ -344,7 +345,7 @@ does.
 In an application with the legacy `app/` layout, the files are in `app/`
 (`app/Config/database.php`), and the database configuration may not read
 environment variables; write a `database.php` for CI in a step instead, as in
-[Integration with Jenkins](/development/testing#integration-with-jenkins).
+[Jenkins](#jenkins).
 
 ## The Jobs
 
@@ -538,3 +539,80 @@ new optional inputs but no breaking changes. To pin an exact release, use
 `@v1.0.0` or a commit SHA. See the
 [ci-summary README](https://github.com/pieceofcake2/.github/tree/master/actions/ci-summary#readme)
 for all inputs and for reports of other tools.
+
+## Jenkins {#jenkins}
+
+[Jenkins](https://www.jenkins.io) is a continuous integration server, that can
+help you automate the running of your test cases. This helps ensure that all
+your tests stay passing and your application is always ready.
+
+Integrating a CakePHP application with Jenkins is fairly straightforward. The
+following assumes you've already installed Jenkins on \*nix system, and are able
+to administer it. You also know how to create jobs, and run builds. If you are
+unsure of any of these, refer to the [Jenkins documentation](https://www.jenkins.io/doc/).
+
+### Create a job
+
+Start off by creating a job for your application, and connect your repository
+so that jenkins can access your code. Add a *shell script step* that installs
+the dependencies, including PHPUnit:
+
+``` bash
+composer install --no-interaction
+```
+
+### Add test database config
+
+Using a separate database just for Jenkins is generally a good idea, as it stops
+bleed through and avoids a number of basic problems. Once you've created a new
+database in a database server that jenkins can access (usually localhost). Add
+a *shell script step* to the build that contains the following:
+
+``` bash
+cat > config/database.php <<'DATABASE_PHP'
+<?php
+class DATABASE_CONFIG
+{
+    public $test = [
+        'datasource' => 'Database/Mysql',
+        'host' => 'localhost',
+        'database' => 'jenkins_test',
+        'login' => 'jenkins',
+        'password' => 'cakephp_jenkins',
+        'encoding' => 'utf8mb4',
+    ];
+}
+DATABASE_PHP
+```
+
+This ensures that you'll always have the correct database configuration that
+Jenkins requires. Do the same for any other configuration files you need to.
+It's often a good idea to drop and re-create the database before each build as
+well. This insulates you from chained failures, where one broken build causes
+others to fail. Add another *shell script step* to the build that contains the
+following:
+
+``` bash
+mysql -u jenkins -pcakephp_jenkins -e 'DROP DATABASE IF EXISTS jenkins_test; CREATE DATABASE jenkins_test';
+```
+
+### Add your tests
+
+Add another *shell script step* to your build. In this step run the tests for
+your application. Creating a junit log file, or clover coverage is often a nice
+bonus, as it gives you a nice graphical view of your testing results:
+
+``` bash
+vendor/bin/phpunit \
+    --log-junit junit.xml \
+    --coverage-clover clover.xml
+```
+
+If you use clover coverage, or the junit results, make sure to configure those
+in Jenkins as well. Failing to configure those steps will mean you won't see the
+results.
+
+### Run a build
+
+You should be able to run a build now. Check the console output and make any
+necessary changes to get a passing build.
