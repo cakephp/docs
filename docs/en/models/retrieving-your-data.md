@@ -47,6 +47,94 @@ If your `find()` operation fails to match any records, you will get an empty arr
 The `having` and `lock` options were added.
 :::
 
+### Sort Order
+
+The `order` option takes a string or an array. The same format is used by
+`Model::$order`, the `order` key of `$paginate` and the `order` setting of
+associations. Each item is a field (or SQL expression) followed by an
+optional sort direction:
+
+``` php
+// Field => direction pairs
+$this->Article->find('all', [
+    'order' => ['Article.created' => 'DESC', 'Article.title' => 'asc'],
+]);
+
+// The same as a string
+$this->Article->find('all', [
+    'order' => 'Article.created DESC, Article.title ASC',
+]);
+
+// Put NULL values last (PostgreSQL, SQLite 3.30 or later)
+$this->Article->find('all', [
+    'order' => ['Article.published' => 'DESC NULLS LAST'],
+]);
+
+// An expression goes in the key, the direction in the value
+$this->Article->find('all', [
+    'order' => ["Article.status = 'draft'" => 'DESC'],
+]);
+```
+
+The direction must be `ASC` or `DESC`, optionally followed by `NULLS FIRST` or
+`NULLS LAST`. It is case-insensitive and extra whitespace is ignored, so
+`'asc'`, `' Desc '` and `'desc  nulls  last'` are all valid.
+
+::: pieceofcake2
+The sort direction is validated since v2.12.5. An invalid direction triggers
+an `E_USER_DEPRECATED` error and the SQL is generated as before; a future
+version will throw an exception instead.
+:::
+
+An invalid direction is usually part of an expression written in the
+direction. Move the expression into the key, or pass raw SQL as the key on
+its own:
+
+``` php
+// Before: triggers the deprecation error
+$this->Article->find('all', [
+    'order' => ['Article.status' => "= 'draft' DESC"],
+]);
+
+// After
+$this->Article->find('all', [
+    'order' => ["Article.status = 'draft'" => 'DESC'],
+]);
+```
+
+The same applies to a string order where other SQL follows `ASC` or `DESC`,
+such as `'Article.title DESC LIMIT 1'`: keep only the direction (and
+`NULLS FIRST` / `NULLS LAST`) after the field.
+
+The field part of `order` is used as SQL. It is quoted where possible, but not
+escaped, so it must never contain request data. Do not pass request data as
+the direction either. When users choose the sort order, map their input onto
+a whitelist of fields and directions:
+
+``` php
+// src/Controller/ArticlesController.php
+public function index()
+{
+    $sortable = [
+        'title' => 'Article.title',
+        'created' => 'Article.created',
+    ];
+    $sort = (string)$this->request->query('sort');
+    $field = $sortable[$sort] ?? 'Article.created';
+    $direction = strtolower((string)$this->request->query('direction'));
+    $direction = $direction === 'asc' ? 'ASC' : 'DESC';
+
+    $articles = $this->Article->find('all', [
+        'order' => [$field => $direction],
+    ]);
+    $this->set(compact('articles'));
+}
+```
+
+`PaginatorComponent` already does this for paginated results: it accepts only
+`asc` and `desc` as the direction and only fields of the model or of the
+[sort whitelist](/core-libraries/components/pagination#control-which-fields-used-for-ordering).
+
 <a id="model-find-first"></a>
 
 ## find('first')

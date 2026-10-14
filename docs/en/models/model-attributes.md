@@ -165,6 +165,9 @@ $order = 'Model.field DESC';
 $order = ['Model.field' => 'asc', 'Model.field2' => 'DESC'];
 ```
 
+The direction must be `ASC` or `DESC`, optionally followed by `NULLS FIRST` or
+`NULLS LAST`. See [Sort Order](/models/retrieving-your-data#sort-order).
+
 ## data
 
 The container for the model's fetched data. While data returned

@@ -157,6 +157,9 @@ $order = 'Model.field DESC';
 $order = ['Model.field' => 'asc', 'Model.field2' => 'DESC'];
 ```
 
+ソート方向は `ASC` または `DESC` で、その後に `NULLS FIRST` または `NULLS LAST` を
+続けることもできます。[並び順](/ja/models/retrieving-your-data#sort-order) を参照してください。
+
 ## data
 
 モデルの取得したデータ用のコンテナになります。モデルクラスから返されたデータは通常 find()

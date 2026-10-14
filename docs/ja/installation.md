@@ -36,8 +36,8 @@ CakePHP は次の PHP 拡張モジュールも使用します。
 - `mbstring` は強く推奨します。無い場合は Symfony の polyfill が使われます。
   polyfill には `mb_encode_mimeheader()` が無いため、`CakeEmail` はメールヘッダーのエンコードに
   `Multibyte::mimeEncode()` を使います。
-- `intl` は任意です。非推奨となった `strftime()` の代わりに日付の書式化に使われます。
-  無い場合は Symfony の polyfill が使われます。
+- `intl` は必須です。CakePHP は、非推奨となった `strftime()` の代わりに日付の書式化を行う
+  `php81_bc/strftime` に依存しており、このパッケージが `intl` を必要とします。
 - `openssl` は任意ですが、SSL/TLS 接続と [Security](core-utility-libraries/security)
   による AES 暗号化には必要です。
 

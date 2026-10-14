@@ -25,6 +25,7 @@ and lists the pages of this book that were changed from the original.
 | `Xml::build()` with `'readFile' => false` | `https://` URLs still fetched (SSRF) | Neither files nor URLs are read | [Security Fixes](/appendices/security-fixes#xml-build-ssrf) |
 | CookieComponent `'type'` in `$components` | Ignored (always `'cipher'`) | Honored | [Cookie](/core-libraries/components/cookie) |
 | `cake server` default port | 80 | 8765 | [Installation](/installation#development-server) |
+| Sort direction in `order` | Appended to the SQL as given | `ASC` / `DESC` with optional `NULLS FIRST` / `NULLS LAST`; anything else triggers `E_USER_DEPRECATED` (v2.12.5), an exception in a future version | [Sort Order](/models/retrieving-your-data#sort-order) |
 | `.env` files | Not supported | Loaded by the `pieceofcake2/app` skeleton (v2.4.0) with josegonzalez/dotenv, not by the framework | [Environment Variables](/development/configuration#environment-variables) |
 
 For the complete list of breaking changes, see
@@ -121,6 +122,8 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
 
 - [Models](/models)
   - Model files and AppModel live in `src/Model/`; AppModel is not shipped by the core; `App::uses()` only needed without a Composer classmap
+- [Retrieving Your Data](/models/retrieving-your-data)
+  - New "Sort Order" section: `order` formats, allowed sort directions, change note on the direction validation (v2.12.5), fixing code that triggers the deprecation, and a whitelist example for user-selected sorting
 - [Associations: Linking Models Together](/models/associations-linking-models-together)
   - Model file paths use src/Model/
 - [Saving Your Data](/models/saving-your-data)
@@ -139,6 +142,7 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
   - Link to the pieceofcake2/datasources plugin instead of the old cakephp/datasources repository
 - [Model Attributes](/models/model-attributes)
   - Database configuration file path is config/database.php
+  - `order`: allowed sort directions, link to Sort Order
 
 ### Core Libraries
 
@@ -171,6 +175,8 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
   - Type set with `'Cookie' => ['type' => 'aes']` in `$components` (type() as an alternative); change note that the setting was ignored before v2.12.3; Security.useOpenSsl already enabled in the pieceofcake2/app v2.3.1 skeleton
 - [Flash](/core-libraries/components/flash)
   - Flash elements in templates/Elements/Flash
+- [Pagination](/core-libraries/components/pagination)
+  - Which sort fields and directions PaginatorComponent accepts, with a link to Sort Order
 - [Security](/core-libraries/components/security-component)
   - Change note: HMAC-signed CSRF tokens (CVE-2020-15400) and validation of _method-overridden requests (CVE-2015-8379)
 - [CacheHelper](/core-libraries/helpers/cache)
