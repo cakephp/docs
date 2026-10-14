@@ -58,8 +58,7 @@ Windows machines.
 
 `static` Folder::**addPathElement**(string $path, string $element)
 
-rtype  
-string
+Return type: `string`
 
 Returns \$path with \$element added, with correct slash in-between:
 
@@ -87,8 +86,7 @@ $element parameter accepts an array as of 2.5
 
 `static` Folder::**correctSlashFor**(string $path)
 
-rtype  
-string
+Return type: `string`
 
 Returns a correct set of slashes for given \$path ('\\ for
 Windows paths and '/' for other paths).
@@ -116,15 +114,13 @@ Windows paths and '/' for other paths).
 
 `static` Folder::**isAbsolute**(string $path)
 
-rtype  
-boolean
+Return type: `boolean`
 
 Returns true if the given \$path is an absolute path.
 
 `static` Folder::**isSlashTerm**(string $path)
 
-rtype  
-boolean
+Return type: `boolean`
 
 Returns true if given \$path ends in a slash (i.e. is slash-terminated):
 
@@ -137,8 +133,7 @@ $result = Folder::isSlashTerm('/my/test/path/');
 
 `static` Folder::**isWindowsPath**(string $path)
 
-rtype  
-boolean
+Return type: `boolean`
 
 Returns true if the given \$path is a Windows path.
 
@@ -148,8 +143,7 @@ Returns true if the given \$path is a Windows path.
 
 `static` Folder::**normalizePath**(string $path)
 
-rtype  
-string
+Return type: `string`
 
 Returns a correct set of slashes for given \$path ('\\ for
 Windows paths and '/' for other paths).
@@ -162,8 +156,7 @@ Windows paths and '/' for other paths).
 
 `static` Folder::**slashTerm**(string $path)
 
-rtype  
-string
+Return type: `string`
 
 Returns \$path with added terminating slash (corrected for
 Windows or other OS).
@@ -246,8 +239,7 @@ The current file's absolute path.
 
 <File::prepare(string> \$data, boolean \$forceWindows = false)
 
-rtype  
-string
+Return type: `string`
 
 Prepares a ascii string for writing. Converts line endings to the
 correct terminator for the current platform. For Windows "rn"

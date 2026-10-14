@@ -23,8 +23,7 @@
 
 `static` Security::**cipher**( $text, $key )
 
-rtype  
-string
+戻り値の型: `string`
 
 与えられたキーにを利用してテキストを暗号化・復号します。 :
 
@@ -45,14 +44,9 @@ $nosecret = Security::cipher($secret, 'my_key');
 
 `static` Security::**rijndael**($text, $key, $mode)
 
-param string \$text  
-暗号化するテキスト
-
-param string \$key  
-暗号化に利用するキー。32バイトより長くする必要があります。
-
-param string \$mode  
-モード。'encrypt' もしくは 'decrypt'
+- `string $text`: 暗号化するテキスト
+- `string $key`: 暗号化に利用するキー。32バイトより長くする必要があります。
+- `string $mode`: モード。'encrypt' もしくは 'decrypt'
 
 rijndael-256 暗号を使って、テキストを暗号化・復号します。
 このメソッドを使うには PECL から [mcrypt エクステンション](https://pecl.php.net/package/mcrypt)
@@ -73,14 +67,9 @@ $decrypted = Security::rijndael($encrypted, Configure::read('Security.key'), 'de
 
 `static` Security::**encrypt**($text, $key, $hmacSalt = null)
 
-param string \$plain  
-暗号化する値。
-
-param string \$key  
-暗号キーとして使用する 256 ビット (32 バイト) キー。
-
-param string \$hmacSalt  
-HMAC 処理で使用するソルト。 null なら Security.salt を使用。
+- `string $plain`: 暗号化する値。
+- `string $key`: 暗号キーとして使用する 256 ビット (32 バイト) キー。
+- `string $hmacSalt`: HMAC 処理で使用するソルト。 null なら Security.salt を使用。
 
 AES-256 で `$text` を暗号化します。 `$key` は、適切なパスワードのように
 データの中の値はバラバラに分散した値にすべきです。戻り値は、HMAC チェックサムで
@@ -107,14 +96,9 @@ $result = Security::encrypt($value, $key);
 
 `static` Security::**decrypt**($cipher, $key, $hmacSalt = null)
 
-param string \$cipher  
-復号する暗号文字列。
-
-param string \$key  
-暗号キーとして使用する 256 ビット (32 バイト) キー。
-
-param string \$hmacSalt  
-HMAC 処理で使用するソルト。 null なら Security.salt を使用。
+- `string $cipher`: 復号する暗号文字列。
+- `string $key`: 暗号キーとして使用する 256 ビット (32 バイト) キー。
+- `string $hmacSalt`: HMAC 処理で使用するソルト。 null なら Security.salt を使用。
 
 事前に暗号化された値を復号します。 `$key` と `$hmacSalt` パラメータは、
 暗号化に使用した値と一致しなければなりません。そうでなければ復号に失敗します。
@@ -139,8 +123,7 @@ $result = Security::decrypt($cipher, $key);
 
 `static` Security::**hash**( $string, $type = NULL, $salt = false )
 
-rtype  
-string
+戻り値の型: `string`
 
 与えられたハッシュ用メソッドを利用して、文字列からハッシュを生成します。
 指定されなかった場合は、順次利用可能なメソッドで生成を試みます。
@@ -185,8 +168,7 @@ bcrypt への対応は、2.3 で追加されました。
 
 `static` Security::**setHash**( $hash )
 
-rtype  
-void
+戻り値の型: `void`
 
 Security オブジェクトがデフォルトで利用するハッシュ化メソッドを設定します。
 この操作は、 Security::hash() を利用する全てのオブジェクトへ影響します。

@@ -54,8 +54,7 @@ CakePHP の Hash クラスは Inflector クラスと同様で、どのモデル�
 
 `static` Hash::**get**(array $data, $path, $default = null)
 
-rtype  
-mixed
+戻り値の型: `mixed`
 
 `get()` は `extract()` のシンプル版で、直接的に指定するパス式のみがサポートされます。
 `{n}` や `{s}` 、マッチャーを使ったパスはサポートされません。
@@ -63,8 +62,7 @@ mixed
 
 `static` Hash::**extract**(array $data, $path)
 
-rtype  
-array
+戻り値の型: `array`
 
 `Hash::extract()` は [Hash Path Syntax](#hash-path-syntax) にあるすべての式とマッチャーを
 サポートします。extract を使うことで、配列から好きなパスに沿ったデータを手早く
@@ -81,8 +79,7 @@ $results = Hash::extract($users, '{n}.User.id');
 
 `static` Hash::**insert**(array $data, $path, $values = null)
 
-rtype  
-array
+戻り値の型: `array`
 
 \$data を `$path` の定義に従って配列の中に挿入します。　:
 
@@ -119,8 +116,7 @@ $users = Hash::insert($users, '{n}.User.new', 'value');
 
 `static` Hash::**remove**(array $data, $path)
 
-rtype  
-array
+戻り値の型: `array`
 
 \$path に合致するすべての要素を配列から削除します。 :
 
@@ -148,8 +144,7 @@ $result = Hash::remove($a, 'files');
 
 `static` Hash::**combine**(array $data, $keyPath, $valuePath = null, $groupPath = null)
 
-rtype  
-array
+戻り値の型: `array`
 
 \$keyPath のパスをキー、\$valuePath （省略可） のパスを値として使って連想配列を作ります。
 \$valuePath が省略された場合や、\$valuePath に合致するものが無かった場合は、値は null で初期化されます。
@@ -277,8 +272,7 @@ $result = Hash::combine(
 
 `static` Hash::**format**(array $data, array $paths, $format)
 
-rtype  
-array
+戻り値の型: `array`
 
 配列から取り出し、フォーマット文字列でフォーマットされた文字列の配列を返します:
 
@@ -334,8 +328,7 @@ $res = Hash::format($data, ['{n}.Person.first_name', '{n}.Person.something'], '%
 
 `static` Hash::**contains**(array $data, array $needle)
 
-rtype  
-boolean
+戻り値の型: `boolean`
 
 一方のハッシュや配列の中に、もう一方のキーと値が厳密に見てすべて存在しているかを判定します:
 
@@ -361,8 +354,7 @@ $result = Hash::contains($b, $a);
 
 `static` Hash::**check**(array $data, string $path = null)
 
-rtype  
-boolean
+戻り値の型: `boolean`
 
 配列の中に特定のパスがセットされているかをチェックします:
 
@@ -397,8 +389,7 @@ $result = Hash::check($set, 'My Index 1.First.Seconds.Third.Fourth');
 
 `static` Hash::**filter**(array $data, $callback = ['Hash', 'filter'])
 
-rtype  
-array
+戻り値の型: `array`
 
 配列から空の要素（ただし '0' 以外）を取り除きます。
 また、カスタム引数 \$callback を指定することで配列の要素を抽出することができます。
@@ -430,8 +421,7 @@ $res = Hash::filter($data);
 
 `static` Hash::**flatten**(array $data, string $separator = '.')
 
-rtype  
-array
+戻り値の型: `array`
 
 多次元配列を１次元配列へと平坦化します:
 
@@ -463,8 +453,7 @@ $res = Hash::flatten($arr);
 
 `static` Hash::**expand**(array $data, string $separator = '.')
 
-rtype  
-array
+戻り値の型: `array`
 
 `Hash::flatten()`:: によって前もって平坦化された配列を再構築します:
 
@@ -496,8 +485,7 @@ $res = Hash::expand($data);
 
 `static` Hash::**merge**(array $data, array $merge[, array $n])
 
-rtype  
-array
+戻り値の型: `array`
 
 この関数は PHP の `array_merge` と `array_merge_recursive` の
 両方の機能を持っていると考えることができます。この２つの関数との違いは、一方の配列キーが
@@ -549,8 +537,7 @@ $res = Hash::merge($array, $arrayB, $arrayC, $arrayD);
 
 `static` Hash::**numeric**(array $data)
 
-rtype  
-boolean
+戻り値の型: `boolean`
 
 配列内のすべての値が数値であるかをチェックします:
 
@@ -566,8 +553,7 @@ $res = Hash::numeric($data);
 
 `static` Hash::**dimensions **(array $data)
 
-rtype  
-integer
+戻り値の型: `integer`
 
 配列の次元数を数えます。このメソッドは配列の１つ目の要素だけを見て次元を判定します:
 
@@ -620,8 +606,7 @@ $result = Hash::countDim($data, true);
 
 `static` Hash::**sort**(array $data, $path, $dir, $type = 'regular')
 
-rtype  
-array
+戻り値の型: `array`
 
 [Hash Path Syntax](#hash-path-syntax) によって、どの次元のどの値によってでもソートすることができます。
 このメソッドでは式のみがサポートされます:
@@ -663,8 +648,7 @@ $result = Hash::sort($a, '{n}.Person.name', 'asc');
 
 `static` Hash::**diff**(array $data, array $compare)
 
-rtype  
-array
+戻り値の型: `array`
 
 ２つの配列の差分を計算します:
 
@@ -691,8 +675,7 @@ $result = Hash::diff($a, $b);
 
 `static` Hash::**mergeDiff**(array $data, array $compare)
 
-rtype  
-array
+戻り値の型: `array`
 
 この関数は２つの配列をマージし、差分は、その結果の配列の下部に push します。
 
@@ -739,8 +722,7 @@ $res = Hash::mergeDiff($array1, $array2);
 
 `static` Hash::**normalize**(array $data, $assoc = true)
 
-rtype  
-array
+戻り値の型: `array`
 
 配列を正規化します。 `$assoc` が true なら、連想配列へと正規化された配列が
 返ります。値を持つ数値キーは null を持つ文字列キーへと変換されます。

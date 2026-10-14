@@ -912,17 +912,12 @@ Router::connect(
 
 `static` Router::**connect**($route, $defaults = [], $options = [])
 
-param string \$route  
-ルーティングテンプレートを表現する文字列
-
-param array \$defaults  
-デフォルトのルーティングパラメーターを表現する配列。
-これらのパラメーターはデフォルトで使われ、ルーティングパラメーターを静的に提供します。
-
-param array \$options  
-名前要素に一致した配列かつルーティングの正規表現に一致したもの。
-また、渡されることになるルーティングパラメーターや、ルーティングパラメーターのパターンや
-カスタムルーティングクラスの名前の提供ができる追加のパラメーターを含みます。
+- `string $route`: ルーティングテンプレートを表現する文字列
+- `array $defaults`: デフォルトのルーティングパラメーターを表現する配列。
+  これらのパラメーターはデフォルトで使われ、ルーティングパラメーターを静的に提供します。
+- `array $options`: 名前要素に一致した配列かつルーティングの正規表現に一致したもの。
+  また、渡されることになるルーティングパラメーターや、ルーティングパラメーターのパターンや
+  カスタムルーティングクラスの名前の提供ができる追加のパラメーターを含みます。
 
 ルーティングはリクエストされたURLをオブジェクトで制御する方法です。
 それらのコアルーティングはリクエスト先を一致しさせるための正規表現のセットです。
@@ -975,26 +970,18 @@ Router::connect(
 
 `static` Router::**redirect**($route, $url, $options = [])
 
-param string \$route  
-どのURLがリダイレクトされるのかを決めるルーティングテンプレート
-
-param mixed \$url  
-`ルーティング配列` かリダイレクト先の文字列URLを入れる。
-
-param array \$options  
-リダイレクトオプションを表す配列。
+- `string $route`: どのURLがリダイレクトされるのかを決めるルーティングテンプレート
+- `mixed $url`: `ルーティング配列` かリダイレクト先の文字列URLを入れる。
+- `array $options`: リダイレクトオプションを表す配列。
 
 新しいリダイレクトにルーティング接続します。
 [Redirect Routing](#redirect-routing) に詳細があります。
 
 `static` Router::**connectNamed**($named, $options = [])
 
-param array \$named  
-名前付きパラメーターのリスト。添字のペアが
-正規表現に一致するか配列であった時に受け付けられます。
-
-param array \$options  
-separator, greedy, reset, default などの設定をすべてを制御します。
+- `array $named`: 名前付きパラメーターのリスト。添字のペアが
+  正規表現に一致するか配列であった時に受け付けられます。
+- `array $options`: separator, greedy, reset, default などの設定をすべてを制御します。
 
 CakePHP でどの名前付きパラメーターなのか特定するには、入ってきたURLを出力します。
 デフォルトの CakePHP は全部の入ってきたURLにある名前付きパラメーターをパースします。
@@ -1002,21 +989,17 @@ CakePHP でどの名前付きパラメーターなのか特定するには、入
 
 `static` Router::**promote**($which = null)
 
-param integer \$which  
-ゼロからはじまる配列の添え字はルーティングの移動先を表しています。
-例えば、３っつのルートが追加された時、最後の添字は２になります。
+- `integer $which`: ゼロからはじまる配列の添え字はルーティングの移動先を表しています。
+  例えば、３っつのルートが追加された時、最後の添字は２になります。
 
 リストの先頭にルート (デフォルトでは、最後に追加されたもの)を昇格させます。
 
 `static` Router::**url**($url = null, $full = false)
 
-param mixed \$url  
-"/products/edit/92" や "/presidents/elect/4" や `ルーティング配列`
-のようにCakeに関連するURL
-
-param mixed \$full  
-(boolean) true になっていたら、URLフルパスが出力されます。
-これは以下のキーを受け付けます。
+- `mixed $url`: "/products/edit/92" や "/presidents/elect/4" や `ルーティング配列`
+  のようにCakeに関連するURL
+- `mixed $full`: (boolean) true になっていたら、URLフルパスが出力されます。
+  これは以下のキーを受け付けます。
 
 - escape - used when making URLs embedded in HTML escapes query
   string '&'

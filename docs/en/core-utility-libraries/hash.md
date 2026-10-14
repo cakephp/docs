@@ -83,8 +83,7 @@ Matcher support was added to `insert()` and `remove()`.
 
 `static` Hash::**get**(array $data, $path, $default = null)
 
-rtype  
-mixed
+Return type: `mixed`
 
 `get()` is a simplified version of `extract()`, it only supports direct
 path expressions. Paths with `{n}`, `{s}` or matchers are not
@@ -98,8 +97,7 @@ The optional third argument `$default = null` was added.
 
 `static` Hash::**extract**(array $data, $path)
 
-rtype  
-array
+Return type: `array`
 
 `Hash::extract()` supports all expression, and matcher components of
 [Hash Path Syntax](#hash-path-syntax). You can use extract to retrieve data from arrays,
@@ -117,8 +115,7 @@ $results = Hash::extract($users, '{n}.User.id');
 
 `static` Hash::**insert**(array $data, $path, $values = null)
 
-rtype  
-array
+Return type: `array`
 
 Inserts \$data into an array as defined by `$path`:
 
@@ -155,8 +152,7 @@ As of 2.5.0 attribute matching expressions work with insert().
 
 `static` Hash::**remove**(array $data, $path)
 
-rtype  
-array
+Return type: `array`
 
 Removes all elements from an array that match \$path. :
 
@@ -184,8 +180,7 @@ As of 2.5.0 attribute matching expressions work with remove()
 
 `static` Hash::**combine**(array $data, $keyPath, $valuePath = null, $groupPath = null)
 
-rtype  
-array
+Return type: `array`
 
 Creates an associative array using a \$keyPath as the path to build its keys,
 and optionally \$valuePath as path to get the values. If \$valuePath is not
@@ -315,8 +310,7 @@ $result = Hash::combine(
 
 `static` Hash::**format**(array $data, array $paths, $format)
 
-rtype  
-array
+Return type: `array`
 
 Returns a series of values extracted from an array, formatted with a
 format string:
@@ -373,8 +367,7 @@ $res = Hash::format($data, ['{n}.Person.first_name', '{n}.Person.something'], '%
 
 `static` Hash::**contains**(array $data, array $needle)
 
-rtype  
-boolean
+Return type: `boolean`
 
 Determines if one Hash or array contains the exact keys and values
 of another:
@@ -401,8 +394,7 @@ $result = Hash::contains($b, $a);
 
 `static` Hash::**check**(array $data, string $path = null)
 
-rtype  
-boolean
+Return type: `boolean`
 
 Checks if a particular path is set in an array:
 
@@ -437,8 +429,7 @@ $result = Hash::check($set, 'My Index 1.First.Seconds.Third.Fourth');
 
 `static` Hash::**filter**(array $data, $callback = ['Hash', 'filter'])
 
-rtype  
-array
+Return type: `array`
 
 Filters empty elements out of array, excluding '0'. You can also supply a
 custom \$callback to filter the array elements. Your callback should return
@@ -470,8 +461,7 @@ $res = Hash::filter($data);
 
 `static` Hash::**flatten**(array $data, string $separator = '.')
 
-rtype  
-array
+Return type: `array`
 
 Collapses a multi-dimensional array into a single dimension:
 
@@ -503,8 +493,7 @@ $res = Hash::flatten($arr);
 
 `static` Hash::**expand**(array $data, string $separator = '.')
 
-rtype  
-array
+Return type: `array`
 
 Expands an array that was previously flattened with
 `Hash::flatten()`:
@@ -537,8 +526,7 @@ $res = Hash::expand($data);
 
 `static` Hash::**merge**(array $data, array $merge[, array $n])
 
-rtype  
-array
+Return type: `array`
 
 This function can be thought of as a hybrid between PHP's
 `array_merge` and `array_merge_recursive`. The difference to the two
@@ -591,8 +579,7 @@ $res = Hash::merge($array, $arrayB, $arrayC, $arrayD);
 
 `static` Hash::**numeric**(array $data)
 
-rtype  
-boolean
+Return type: `boolean`
 
 Checks to see if all the values in the array are numeric:
 
@@ -608,8 +595,7 @@ $res = Hash::numeric($data);
 
 `static` Hash::**dimensions **(array $data)
 
-rtype  
-integer
+Return type: `integer`
 
 Counts the dimensions of an array. This method will only
 consider the dimension of the first element in the array:
@@ -681,8 +667,7 @@ will get the extracted values as the first argument.
 
 `static` Hash::**sort**(array $data, $path, $dir, $type = 'regular')
 
-rtype  
-array
+Return type: `array`
 
 Sorts an array by any value, determined by a [Hash Path Syntax](#hash-path-syntax)
 Only expression elements are supported by this method:
@@ -724,8 +709,7 @@ The `$type` option now supports an array and the `ignoreCase` option enabled cas
 
 `static` Hash::**diff**(array $data, array $compare)
 
-rtype  
-array
+Return type: `array`
 
 Computes the difference between two arrays:
 
@@ -752,8 +736,7 @@ $result = Hash::diff($a, $b);
 
 `static` Hash::**mergeDiff**(array $data, array $compare)
 
-rtype  
-array
+Return type: `array`
 
 This function merges two arrays and pushes the differences in
 data to the bottom of the resultant array.
@@ -801,8 +784,7 @@ $res = Hash::mergeDiff($array1, $array2);
 
 `static` Hash::**normalize**(array $data, $assoc = true)
 
-rtype  
-array
+Return type: `array`
 
 Normalizes an array. If `$assoc` is true, the resulting array will be
 normalized to be an associative array. Numeric keys with values, will be

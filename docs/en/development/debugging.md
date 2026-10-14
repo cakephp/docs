@@ -10,16 +10,11 @@ your application.
 
 `function` **debug(mixed $var, ?bool $showHtml = null, bool $showFrom = true)**
 
-param mixed \$var  
-The contents to print out. Arrays and objects work well.
-
-param boolean \$showHtml  
-Set to true, to enable escaping. Escaping is enabled
-by default when serving web requests. In the console, or when set to false,
-the output is plain text.
-
-param boolean \$showFrom  
-Show the line and file the debug() occurred on.
+- `mixed $var`: The contents to print out. Arrays and objects work well.
+- `boolean $showHtml`: Set to true, to enable escaping. Escaping is enabled
+  by default when serving web requests. In the console, or when set to false,
+  the output is plain text.
+- `boolean $showFrom`: Show the line and file the debug() occurred on.
 
 The debug() function is a globally available function that works
 similarly to the PHP function print_r(). The debug() function

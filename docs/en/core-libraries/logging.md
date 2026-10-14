@@ -311,29 +311,24 @@ In order for scopes to work, you **must** do a few things:
 
 `static` CakeLog::**config**($name, $config)
 
-param string \$name  
-Name for the logger being connected, used
-to drop a logger later on.
-
-param array \$config  
-Array of configuration information and
-constructor arguments for the logger.
+- `string $name`: Name for the logger being connected, used
+  to drop a logger later on.
+- `array $config`: Array of configuration information and
+  constructor arguments for the logger.
 
 Connect a new logger to CakeLog. Each connected logger
 receives all log messages each time a log message is written.
 
 `static` CakeLog::**configured**()
 
-returns  
-An array of configured loggers.
+Returns: An array of configured loggers.
 
 Get the names of the configured loggers.
 
 `static` CakeLog::**drop**($name)
 
-param string \$name  
-Name of the logger you wish to no longer receive
-messages.
+- `string $name`: Name of the logger you wish to no longer receive
+  messages.
 
 `static` CakeLog::**write**($level, $message, $scope = [])
 
@@ -393,8 +388,7 @@ Calling `CakeLog::levels()` will result in:
 
 `static` CakeLog::**defaultLevels**()
 
-returns  
-An array of the default log levels values.
+Returns: An array of the default log levels values.
 
 Resets log levels to their original values:
 
@@ -413,29 +407,25 @@ Resets log levels to their original values:
 
 `static` CakeLog::**enabled**($streamName)
 
-returns  
-boolean
+Returns: `boolean`
 
 Checks whether `$streamName` has been enabled.
 
 `static` CakeLog::**enable**($streamName)
 
-returns  
-void
+Returns: `void`
 
 Enable the stream `$streamName`.
 
 `static` CakeLog::**disable**($streamName)
 
-returns  
-void
+Returns: `void`
 
 Disable the stream `$streamName`.
 
 `static` CakeLog::**stream**($streamName)
 
-returns  
-Instance of `BaseLog` or `false` if not found.
+Returns: Instance of `BaseLog` or `false` if not found.
 
 Gets `$streamName` from the active streams.
 

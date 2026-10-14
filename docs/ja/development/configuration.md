@@ -576,11 +576,8 @@ Configure::read('debug');
 
 `static` Configure::**write**($key, $value)
 
-param string \$key  
-書き込むキー。 `ドット記法` が使えます。
-
-param mixed \$value  
-保存する値
+- `string $key`: 書き込むキー。 `ドット記法` が使えます。
+- `mixed $value`: 保存する値
 
 アプリケーションの設定の中で `write()` を使ってデータを格納します。
 
@@ -612,8 +609,7 @@ JSON や XML のレスポンスではデバッグ情報がパースエラーの�
 
 `static` Configure::**read**($key = null)
 
-param string \$key  
-読み込むキー。 `ドット記法` が使えます。
+- `string $key`: 読み込むキー。 `ドット記法` が使えます。
 
 アプリケーションから設定データを読み込むのに使います。デフォルトは
 CakePHP で重要な debug 値です。何らかのキーが指定されたらその
@@ -635,16 +631,14 @@ Configure::read('Company');
 
 `static` Configure::**consume**($key)
 
-param string \$key  
-読み込むキー。 `ドット記法` が使えます。
+- `string $key`: 読み込むキー。 `ドット記法` が使えます。
 
 Configure からキーを読み込み、同時に削除します。値の読み込みと削除を
 1 回の操作で行いたい場合に便利です。
 
 `static` Configure::**check**($key)
 
-param string \$key  
-チェックするキー。
+- `string $key`: チェックするキー。
 
 key/path が存在し、かつ null でない値を持つかどうかをチェックします。
 
@@ -654,8 +648,7 @@ key/path が存在し、かつ null でない値を持つかどうかをチェ�
 
 `static` Configure::**delete**($key)
 
-param string \$key  
-削除するキー。 `ドット記法` が使えます。
+- `string $key`: 削除するキー。 `ドット記法` が使えます。
 
 アプリケーションの設定から情報を削除します。
 
@@ -669,11 +662,8 @@ Configure::delete('Company.name');
 
 `static` Configure::**config**($name, $reader)
 
-param string \$name  
-接続中のリーダー（読み込み機構）の名前
-
-param ConfigReaderInterface \$reader  
-接続されるリーダーのインスタンス
+- `string $name`: 接続中のリーダー（読み込み機構）の名前
+- `ConfigReaderInterface $reader`: 接続されるリーダーのインスタンス
 
 Configure に設定リーダーを接続します。接続されたリーダーは、
 設定ファイルをロードするのに使われます。設定ファイルを読み込む
@@ -681,9 +671,8 @@ Configure に設定リーダーを接続します。接続されたリーダー�
 
 `static` Configure::**configured**($name = null)
 
-param string \$name  
-チェックするリーダーの名前。指定しない場合、
-接続されているすべてのリーダーの一覧が返されます。
+- `string $name`: チェックするリーダーの名前。指定しない場合、
+  接続されているすべてのリーダーの一覧が返されます。
 
 指定された名前のリーダーが接続されているかをチェックするか、
 または接続されたリーダーの一覧を取得します。
@@ -741,15 +730,10 @@ Configure::configured('default');
 
 `static` Configure::**load**($key, $config = 'default', $merge = true)
 
-param string \$key  
-ロードする設定ファイルの識別子
-
-param string \$config  
-設定されたリーダーの別名
-
-param boolean \$merge  
-読まれたファイルの中身をマージするか、
-それとも既存の値を上書きするか。
+- `string $key`: ロードする設定ファイルの識別子
+- `string $config`: 設定されたリーダーの別名
+- `boolean $merge`: 読まれたファイルの中身をマージするか、
+  それとも既存の値を上書きするか。
 
 Configure に設定リーダーを接続して、設定ファイルを読み込みます。
 
@@ -767,15 +751,10 @@ Configure::load('my_file', 'default');
 
 `static` Configure::**dump**($key, $config = 'default', $keys = [])
 
-param string \$key  
-ファイル名、または生成されるストレージ設定
-
-param string \$config  
-データを格納するリーダーの名前
-
-param array \$keys  
-保存したいトップレベルのキーのリスト。デフォルトは
-すべてのキー。
+- `string $key`: ファイル名、または生成されるストレージ設定
+- `string $config`: データを格納するリーダーの名前
+- `array $keys`: 保存したいトップレベルのキーのリスト。デフォルトは
+  すべてのキー。
 
 Configure にある全部または一部のデータをダンプして、ファイルまたは
 設定リーダーでサポートされているストレージシステムに格納します。
@@ -808,15 +787,10 @@ Configure::dump('error.php', 'default', ['Error', 'Exception']);
 
 `static` Configure::**store**($name, $cacheConfig = 'default', $data = null)
 
-param string \$name  
-キャッシュファイルのストレージキー
-
-param string \$cacheConfig  
-設定データを保存するキャッシュ設定の名前
-
-param mixed \$data  
-保存するデータ、null にすると Configure 中のすべての
-データを保存。
+- `string $name`: キャッシュファイルのストレージキー
+- `string $cacheConfig`: 設定データを保存するキャッシュ設定の名前
+- `mixed $data`: 保存するデータ、null にすると Configure 中のすべての
+  データを保存。
 
 将来取り出して使えるように、実行時設定の値を保存することもできます。
 configure は現在のリクエストの値しか記憶しないので、何らかの変更した
@@ -836,11 +810,8 @@ Configure::store('user_1234', 'default');
 
 `static` Configure::**restore**($name, $cacheConfig = 'default')
 
-param string \$name  
-ロードするストレージキー
-
-param string \$cacheConfig  
-データをロードするキャッシュ設定
+- `string $name`: ロードするストレージキー
+- `string $cacheConfig`: データをロードするキャッシュ設定
 
 実行時設定を保存した後は、おそらくそこに再度アクセスして値を取り出す
 ことになります。これは `Configure::restore()` により行います。

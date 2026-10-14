@@ -931,10 +931,9 @@ and authentication mechanics in CakePHP.
 
 `static` AuthComponent::**user**($key = null)
 
-param string \$key  
-The user data key you want to fetch. If null,
-all user data will be returned. Can also be called as an instance
-method.
+- `string $key`: The user data key you want to fetch. If null,
+  all user data will be returned. Can also be called as an instance
+  method.
 
 Get data concerning the currently logged in user, you can use a
 property key to fetch specific data about the user:

@@ -48,8 +48,7 @@ $result = Set::sort($a, '{n}.Person.name', 'asc');
 
 `static` Set::**apply**($path, $array, $callback, $options = [])
 
-rtype  
-mixed
+戻り値の型: `mixed`
 
 Set::extract互換のパスで展開された配列の要素にコールバックを適用します :
 
@@ -70,8 +69,7 @@ $result = Set::apply('/Movie/title', $data, 'strtoupper', ['type' => 'map']);
 
 `static` Set::**check**($data, $path = null)
 
-rtype  
-boolean/array
+戻り値の型: `boolean/array`
 
 特定のパスが配列にセットされているかを調べます。
 もし\$pathが空なら、真偽(*boolean*)値の代わりに\$dataを返します:
@@ -104,8 +102,7 @@ $result = Set::check($set, 'My Index 1.First.Seconds.Third.Fourth');
 
 `static` Set::**classicExtract**($data, $path = null)
 
-rtype  
-array
+戻り値の型: `array`
 
 配列やオブジェクトから、配列のパス記法で与えられたパスに含まれる値を返します。
 配列のパス記法とは、すなわち次のことです。
@@ -274,8 +271,7 @@ $result = Set::classicExtract($a, '{dot\.test}.{n}');
 
 `static` Set::**combine**($data, $path1 = null, $path2 = null, $groupPath = null)
 
-rtype  
-array
+戻り値の型: `array`
 
 このメソッドは \$path1 で指定されたパスをキーに、そしてオプションで \$path2 で指定されたパスを値に、連想配列を作成します。
 もし \$path2 で指定されたパスが定義されていなかったら、全ての値は null として初期化されます(Set::merge で便利です)。
@@ -453,8 +449,7 @@ $result = Set::combine($a, ['%2$d: %1$s', '{n}.User.Data.user', '{n}.User.id'], 
 
 `static` Set::**contains**($val1, $val2 = null)
 
-rtype  
-boolean
+戻り値の型: `boolean`
 
 一つの配列が、もう片方の配列のキーと値を正確に含んでいるかを確認します。:
 
@@ -480,8 +475,7 @@ $result = Set::contains($b, $a);
 
 `static` Set::**countDim **($array = null, $all = false, $count = 0)
 
-rtype  
-integer
+戻り値の型: `integer`
 
 配列の次元の数を数えます。
 もし \$all を false (デフォルトの値です) に設定すると、配列の最初の要素を配列の次元の数とみなします。:
@@ -537,8 +531,7 @@ $result = Set::countDim($set, true);
 
 `static` Set::**diff**($val1, $val2 = null)
 
-rtype  
-array
+戻り値の型: `array`
 
 セットと配列、二つのセット、あるいは二つの配列の間の差分を計算します。 :
 
@@ -604,8 +597,7 @@ $result = Set::diff($a, $b);
 
 `static` Set::**enum**($select, $list = null)
 
-rtype  
-string
+戻り値の型: `string`
 
 enumメソッドは、HTMLのselect要素を使う時にうまく機能します。
 これは配列のリストから、キーが存在するものの値を返します。
@@ -631,8 +623,7 @@ $res = Set::enum('first', ['first' => 'one', 'second' => 'two']);
 
 `static` Set::**extract**($path, $data = null, $options = [])
 
-rtype  
-array
+戻り値の型: `array`
 
 Set::extract は、 find あるいは findAll で得られたデータのサブセットを、基本的な XPath 2.0 のシンタックスを使って返します。
 この関数を使うと、多次元配列にループを使ったり、木構造を走査することをせずに、データを速やかに検索することができます。
@@ -668,8 +659,7 @@ $results = Set::extract('/User/id', $users);
 
 `static` Set::**filter**($var)
 
-rtype  
-array
+戻り値の型: `array`
 
 ルート配列から空の要素を除きます。
 「0」の要素は除きません:
@@ -693,8 +683,7 @@ $res = Set::filter(['0', false, true, 0, ['one thing', 'I can tell you', 'is you
 
 `static` Set::**flatten**($data, $separator = '.')
 
-rtype  
-array
+戻り値の型: `array`
 
 多次元配列を1次元配列に潰します:
 
@@ -726,8 +715,7 @@ $res = Set::flatten($arr);
 
 `static` Set::**format**($data, $format, $keys)
 
-rtype  
-array
+戻り値の型: `array`
 
 配列から、文字列にフォーマットしたものを抜粋して返します:
 
@@ -791,8 +779,7 @@ $res = Set::format($data, '%1$s, %2$d', ['{n}.Person.first_name', '{n}.Person.so
 
 `static` Set::**insert **($list, $path, $data = null)
 
-rtype  
-array
+戻り値の型: `array`
 
 \$path で定義された配列の中に \$data を挿入します。:
 
@@ -851,8 +838,7 @@ $result = Set::insert($a, 'pages.1.vars', ['title' => 'page title']);
 
 `static` Set::**map**($class = 'stdClass', $tmp = 'stdClass')
 
-rtype  
-object
+戻り値の型: `object`
 
 このメソッドは、Setオブジェクトのコンテンツを、数値添字をオブジェクトの配列として保ちながら、ひとつのオブジェクトにマッピングします。
 
@@ -938,8 +924,7 @@ $mapped->[0]->sayHi();
 
 `static` Set::**matches**($conditions, $data = [], $i = null, $length = null)
 
-rtype  
-boolean
+戻り値の型: `boolean`
 
 Set::matches は単一のアイテムあるいは与えられた XPath が、ある条件にマッチするかどうかを確認します:
 
@@ -983,8 +968,7 @@ $res = Set::matches([], $a);
 
 `static` Set::**merge**($arr1, $arr2 = null)
 
-rtype  
-array
+戻り値の型: `array`
 
 この関数は PHP の array_merge と array_merge_recursive を混ぜ合わせたものと見なすことができます。
 array_merge と異なる点は、もし配列のキーが他の配列に含まれていたら、再帰的に振舞うことです。
@@ -1037,8 +1021,7 @@ $res = Set::merge($arry1, $arry2, $arry3, $arry4);
 
 `static` Set::**nest**($data, $options = [])
 
-rtype  
-array
+戻り値の型: `array`
 
 フラットな配列を引数にとり、ネストされた配列を返します:
 
@@ -1101,8 +1084,7 @@ $result = Set::nest($data, ['root' => 6]);
 
 `static` Set::**normalize**($list, $assoc = true, $sep = ',', $trim = true)
 
-rtype  
-array
+戻り値の型: `array`
 
 文字列や配列のリストを正規化します。:
 
@@ -1206,8 +1188,7 @@ $result = Set::normalize(Set::merge($a, $b)); // 2つをマージして正規化
 
 `static` Set::**numeric**($array=null)
 
-rtype  
-boolean
+戻り値の型: `boolean`
 
 配列の全ての値が数字かどうかチェックします:
 
@@ -1265,8 +1246,7 @@ $res = Set::numeric(array_keys($data));
 
 `static` Set::**pushDiff**($array1, $array2)
 
-rtype  
-array
+戻り値の型: `array`
 
 この関数は二つの配列を統合し、戻り値の配列の最後に array2 の差分を追加します。
 
@@ -1313,8 +1293,7 @@ $res = Set::pushDiff($array1, $array2);
 
 `static` Set::**remove**($list, $path = null)
 
-rtype  
-array
+戻り値の型: `array`
 
 セットや配列の中のから、\$pathで定義されたパスの要素を削除します。:
 
@@ -1337,8 +1316,7 @@ $result = Set::remove($a, 'files');
 
 `static` Set::**reverse**($object)
 
-rtype  
-array
+戻り値の型: `array`
 
 Set::reverse は基本的に `Set::map` の逆を行います。
 これは、オブジェクトを配列に変換します。
@@ -1435,8 +1413,7 @@ $result = Set::reverse($a['Post']); // ただ配列を返します
 
 `static` Set::**sort**($data, $path, $dir)
 
-rtype  
-array
+戻り値の型: `array`
 
 Set 互換のパスで確定したあらゆる値で配列をソートします。:
 

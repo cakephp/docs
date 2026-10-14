@@ -56,8 +56,7 @@ Windows マシンでは何も影響しません。
 
 `static` Folder::**addPathElement**(string $path, string $element)
 
-rtype  
-string
+戻り値の型: `string`
 
 \$path と \$element の間に適切なスラッシュを加えて返します。 :
 
@@ -78,8 +77,7 @@ $path = Folder::addPathElement('/a/path/for', 'testing');
 
 `static` Folder::**correctSlashFor**(string $path)
 
-rtype  
-string
+戻り値の型: `string`
 
 \$path に与えるべき適切なスラッシュを返します。
 （Windows のパスは '\\ で、その他のパスは '/'）
@@ -107,15 +105,13 @@ string
 
 `static` Folder::**isAbsolute**(string $path)
 
-rtype  
-boolean
+戻り値の型: `boolean`
 
 与えられた \$path が絶対パスであれば true を返します。
 
 `static` Folder::**isSlashTerm**(string $path)
 
-rtype  
-boolean
+戻り値の型: `boolean`
 
 与えられた \$path がスラッシュで終了していれば true を返します。（つまり、 slash-terminated） :
 
@@ -128,8 +124,7 @@ $result = Folder::isSlashTerm('/my/test/path/');
 
 `static` Folder::**isWindowsPath**(string $path)
 
-rtype  
-boolean
+戻り値の型: `boolean`
 
 与えられた \$path が Windows のパスであれば true を返します。
 
@@ -139,8 +134,7 @@ boolean
 
 `static` Folder::**normalizePath**(string $path)
 
-rtype  
-string
+戻り値の型: `string`
 
 与えられた \$path を適切なスラッシュに調整して返します。
 （Windows のパスは '\\ で、その他のパスは '/'）
@@ -153,8 +147,7 @@ string
 
 `static` Folder::**slashTerm**(string $path)
 
-rtype  
-string
+戻り値の型: `string`
 
 引数の \$path に (Windows や、その他の OS で正しい) 終端のスラッシュを付けたパスを返します。
 
@@ -236,8 +229,7 @@ $file = new File('/path/to/file.php', true, 0644);
 
 <File::prepare(string> \$data, boolean \$forceWindows = false)
 
-rtype  
-string
+戻り値の型: `string`
 
 ASCII 文字列をファイルへ書き出す事前処理を行います。
 現在の実行環境に合わせて改行文字を変換します。

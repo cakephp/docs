@@ -27,8 +27,7 @@ hashing and encrypting data.
 
 `static` Security::**cipher**( $text, $key )
 
-rtype  
-string
+Return type: `string`
 
 Encrypts/Decrypts text using the given key:
 
@@ -48,15 +47,10 @@ $nosecret = Security::cipher($secret, 'my_key');
 
 `static` Security::**rijndael**($text, $key, $mode)
 
-param string \$text  
-The text to encrypt
-
-param string \$key  
-The key to use for encryption. This must be longer than
-32 bytes.
-
-param string \$mode  
-The mode to use, either 'encrypt' or 'decrypt'
+- `string $text`: The text to encrypt
+- `string $key`: The key to use for encryption. This must be longer than
+  32 bytes.
+- `string $mode`: The mode to use, either 'encrypt' or 'decrypt'
 
 Encrypts/Decrypts text using the rijndael-256 cipher. This requires the
 [mcrypt extension](https://pecl.php.net/package/mcrypt) to be installed from
@@ -82,14 +76,9 @@ Instead you should use the one way hashing methods provided by
 
 `static` Security::**encrypt**($text, $key, $hmacSalt = null)
 
-param string \$plain  
-The value to encrypt.
-
-param string \$key  
-The 256 bit/32 byte key to use as a cipher key.
-
-param string \$hmacSalt  
-The salt to use for the HMAC process. Leave null to use Security.salt.
+- `string $plain`: The value to encrypt.
+- `string $key`: The 256 bit/32 byte key to use as a cipher key.
+- `string $hmacSalt`: The salt to use for the HMAC process. Leave null to use Security.salt.
 
 Encrypt `$text` using AES-256. The `$key` should be a value with a
 lots of variance in the data, much like a good password. The returned result
@@ -117,14 +106,9 @@ Set `Security.useOpenSsl` to use OpenSSL instead of the `mcrypt` extension.
 
 `static` Security::**decrypt**($cipher, $key, $hmacSalt = null)
 
-param string \$cipher  
-The ciphertext to decrypt.
-
-param string \$key  
-The 256 bit/32 byte key to use as a cipher key.
-
-param string \$hmacSalt  
-The salt to use for the HMAC process. Leave null to use Security.salt.
+- `string $cipher`: The ciphertext to decrypt.
+- `string $key`: The 256 bit/32 byte key to use as a cipher key.
+- `string $hmacSalt`: The salt to use for the HMAC process. Leave null to use Security.salt.
 
 Decrypt a previously encrypted value. The `$key` and `$hmacSalt`
 parameters must match the values used to encrypt or decryption will fail. An
@@ -151,8 +135,7 @@ Set `Security.useOpenSsl` to use OpenSSL instead of the `mcrypt` extension.
 
 `static` Security::**hash**( $string, $type = NULL, $salt = false )
 
-rtype  
-string
+Return type: `string`
 
 Create a hash from a string using given method or fallback to next
 available method. If `$salt` is set to true, the applications salt
@@ -198,8 +181,7 @@ Support for bcrypt was added in 2.3
 
 `static` Security::**setHash**( $hash )
 
-rtype  
-void
+Return type: `void`
 
 Sets the default hash method for the Security object. This
 affects all objects using Security::hash().

@@ -414,8 +414,7 @@ that requires manual eviction of cached data.
 
 `static` Cache::**groupConfigs**($group = null)
 
-return  
-Array of groups and its related configuration names.
+Returns: Array of groups and its related configuration names.
 
 Retrieve group names to config mapping.
 

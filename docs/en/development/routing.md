@@ -1026,20 +1026,15 @@ to implement custom parameter handling.
 
 `static` Router::**connect**($route, $defaults = [], $options = [])
 
-param string \$route  
-A string describing the template of the route
-
-param array \$defaults  
-An array describing the default route parameters.
-These parameters will be used by default
-and can supply routing parameters that are not dynamic.
-
-param array \$options  
-An array matching the named elements in the route
-to regular expressions which that element should match. Also contains
-additional parameters such as which routed parameters should be
-shifted into the passed arguments, supplying patterns for routing
-parameters and supplying the name of a custom routing class.
+- `string $route`: A string describing the template of the route
+- `array $defaults`: An array describing the default route parameters.
+  These parameters will be used by default
+  and can supply routing parameters that are not dynamic.
+- `array $options`: An array matching the named elements in the route
+  to regular expressions which that element should match. Also contains
+  additional parameters such as which routed parameters should be
+  shifted into the passed arguments, supplying patterns for routing
+  parameters and supplying the name of a custom routing class.
 
 Routes are a way of connecting request URLs to objects in your application.
 At their core routes are a set of regular expressions that are used to
@@ -1096,29 +1091,21 @@ have special meaning in the \$options array.
 
 `static` Router::**redirect**($route, $url, $options = [])
 
-param string \$route  
-A route template that dictates which URLs should
-be redirected.
-
-param mixed \$url  
-Either a `routing array` or a string url
-for the destination of the redirect.
-
-param array \$options  
-An array of options for the redirect.
+- `string $route`: A route template that dictates which URLs should
+  be redirected.
+- `mixed $url`: Either a `routing array` or a string url
+  for the destination of the redirect.
+- `array $options`: An array of options for the redirect.
 
 Connects a new redirection Route in the router.
 See [Redirect Routing](#redirect-routing) for more information.
 
 `static` Router::**connectNamed**($named, $options = [])
 
-param array \$named  
-A list of named parameters. Key value pairs are accepted where
-values are either regex strings to match, or arrays.
-
-param array \$options  
-Allows control of all settings:
-separator, greedy, reset, default
+- `array $named`: A list of named parameters. Key value pairs are accepted where
+  values are either regex strings to match, or arrays.
+- `array $options`: Allows control of all settings:
+  separator, greedy, reset, default
 
 Specifies what named parameters CakePHP should be parsing out of
 incoming URLs. By default CakePHP will parse every named parameter
@@ -1127,21 +1114,17 @@ more information.
 
 `static` Router::**promote**($which = null)
 
-param integer \$which  
-A zero-based array index representing the route to move.
-For example, if 3 routes have been added, the last route would be 2.
+- `integer $which`: A zero-based array index representing the route to move.
+  For example, if 3 routes have been added, the last route would be 2.
 
 Promote a route (by default, the last one added) to the beginning of the list.
 
 `static` Router::**url**($url = null, $full = false)
 
-param mixed \$url  
-Cake-relative URL, like "/products/edit/92" or
-"/presidents/elect/4" or a `routing array`
-
-param mixed \$full  
-If (boolean) true, the full base URL will be prepended
-to the result. If an array accepts the following keys
+- `mixed $url`: Cake-relative URL, like "/products/edit/92" or
+  "/presidents/elect/4" or a `routing array`
+- `mixed $full`: If (boolean) true, the full base URL will be prepended
+  to the result. If an array accepts the following keys
 
 - escape - used when making URLs embedded in HTML escapes query
   string '&'

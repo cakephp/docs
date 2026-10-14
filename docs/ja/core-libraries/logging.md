@@ -284,27 +284,22 @@ CakeLog::warning('これは、 shop と payments の両ストリームに書か�
 
 `static` CakeLog::**config**($name, $config)
 
-param string \$name  
-接続されるロガーの名前。後でロガーを削除するために
-使用されます。
-
-param array \$config  
-ロガーの設定情報とコンストラクタ引数の配列。
+- `string $name`: 接続されるロガーの名前。後でロガーを削除するために
+  使用されます。
+- `array $config`: ロガーの設定情報とコンストラクタ引数の配列。
 
 CakeLog と新しいロガーに接続します。接続されたロガーの各々は、
 ログメッセージが書かれるたびに全てのログメッセージを受け取ります。
 
 `static` CakeLog::**configured**()
 
-returns  
-設定されたロガーの配列
+戻り値: 設定されたロガーの配列
 
 設定されたロガーの名前を取得します。
 
 `static` CakeLog::**drop**($name)
 
-param string \$name  
-今後メッセージを受信させたくないロガーの名前。
+- `string $name`: 今後メッセージを受信させたくないロガーの名前。
 
 `static` CakeLog::**write**($level, $message, $scope = [])
 
@@ -363,8 +358,7 @@ CakeLog::levels(['user0', 'user1'], false);
 
 `static` CakeLog::**defaultLevels**()
 
-returns  
-デフォルトのログレベルの値配列
+戻り値: デフォルトのログレベルの値配列
 
 独自の値にログレベルをリセットします。 :
 
@@ -383,29 +377,25 @@ returns
 
 `static` CakeLog::**enabled**($streamName)
 
-returns  
-boolean
+戻り値: `boolean`
 
 `$streamName` が有効かどうかをチェック。
 
 `static` CakeLog::**enable**($streamName)
 
-returns  
-void
+戻り値: `void`
 
 `$streamName` ストリームを有効化。
 
 `static` CakeLog::**disable**($streamName)
 
-returns  
-void
+戻り値: `void`
 
 `$streamName` ストリームを無効化。
 
 `static` CakeLog::**stream**($streamName)
 
-returns  
-`BaseLog` のインスタンス、見つからない場合は `false`
+戻り値: `BaseLog` のインスタンス、見つからない場合は `false`
 
 `$streamName` に該当するストリームを取得します。
 

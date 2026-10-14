@@ -26,8 +26,7 @@ CakePHP のフレームワークのほぼすべてのクラスは、あなた独
 
 `static` App::**uses**(string $class, string $package)
 
-rtype  
-void
+戻り値の型: `void`
 
 CakePHP ではクラスは遅延ロードされます。CakePHP 自身のクラスは Composer の classmap
 オートローダで読み込まれるため、宣言する必要はありません。アプリケーションスケルトンのように
@@ -113,8 +112,7 @@ App::uses('CommentComponent', 'PluginName.Controller/Component');
 
 `static` App::**path**(string $package, string $plugin = null)
 
-rtype  
-array
+戻り値の型: `array`
 
 保存されたパス情報を読み込むために用いる:
 
@@ -133,8 +131,7 @@ App::path('Component', 'DebugKit');
 
 `static` App::**paths**( )
 
-rtype  
-array
+戻り値の型: `array`
 
 現在読み込まれているすべてのパスを App から取得します。
 App が把握している全てのパスを調べたり記憶したりするのに便利です。
@@ -142,8 +139,7 @@ App が把握している全てのパスを調べたり記憶したりするの�
 
 `static` App::**core**(string $package)
 
-rtype  
-array
+戻り値の型: `array`
 
 CakePHP 内部のパッケージのパスを見つけるために用いられます:
 
@@ -154,8 +150,7 @@ App::core('Cache/Engine');
 
 `static` App::**location**(string $className)
 
-rtype  
-string
+戻り値の型: `string`
 
 クラスが定義された場所のパッケージ名を返します。
 
@@ -163,8 +158,7 @@ string
 
 `static` App::**build**(array $paths = [], mixed $mode = App::PREPEND)
 
-rtype  
-void
+戻り値の型: `void`
 
 ファイルシステム上の各パッケージの場所を設定します。パッケージごとに複数の探索パスを設定することができ、
 それらは、ファイルがあるフォルダを一度だけ探すために指定された順序で使用されます。
@@ -217,8 +211,7 @@ App::build([
 
 `static` App::**objects**(string $type, mixed $path = null, boolean $cache = true)
 
-rtype  
-mixed 与えられた型のオブジェクトの配列か、不正な場合は false を返します。
+戻り値の型: `mixed`。与えられた型のオブジェクトの配列か、不正な場合は false を返します。
 
 `App::objects('Controller')` を用いて、Appが把握しているオブジェクト、例えば
 App が把握しているアプリケーションのコントローラ、を見出せます。
@@ -247,8 +240,7 @@ App::objects('MyPlugin.Model');
 
 `static` App::**pluginPath**(string $plugin)
 
-rtype  
-string
+戻り値の型: `string`
 
 プラグインも同じように App で配置できます。例えば `App::pluginPath('DebugKit');`
 を用いることで DebugKit プラグインへのフルパスをあなたに与えます:
@@ -261,8 +253,7 @@ $path = App::pluginPath('DebugKit');
 
 `static` App::**themePath**(string $theme)
 
-rtype  
-string
+戻り値の型: `string`
 
 `App::themePath('purple');` のように呼ぶと、 <span class="title-ref">purple</span> テーマのフルパスを取得することができます。
 
@@ -270,8 +261,7 @@ string
 
 `static` App::**import**(mixed $type = null, string $name = null, mixed $parent = true, array $search = [], string $file = null, boolean $return = false)
 
-rtype  
-boolean
+戻り値の型: `boolean`
 
 一見すると `App::import` は複雑に見えます。
 しかしながら、ほとんどのケースではただ二つの引数が要求されるのみです。
@@ -427,15 +417,13 @@ App::import(
 
 `static` App::**init**( )
 
-rtype  
-void
+戻り値の型: `void`
 
 App のキャッシュを初期化し、シャットダウン関数を登録します。
 
 `static` App::**load**(string $className)
 
-rtype  
-boolean
+戻り値の型: `boolean`
 
 自動的なクラスローディングを処理するメソッド。これは、`App::uses()`
 を使用して定義された各クラスのパッケージを探し出し、その情報を元に、クラスをロードするための
@@ -445,8 +433,7 @@ boolean
 
 `static` App::**shutdown**( )
 
-rtype  
-void
+戻り値の型: `void`
 
 オブジェクトのデストラクタ。
 `$_map` に変更が加えられている場合にキャッシュファイルに書き込みます。
