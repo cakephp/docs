@@ -479,6 +479,10 @@
           "link": "/ja/development/static-analysis"
         },
         {
+          "text": "継続的インテグレーション",
+          "link": "/ja/development/continuous-integration"
+        },
+        {
           "text": "REST",
           "link": "/ja/development/rest"
         }

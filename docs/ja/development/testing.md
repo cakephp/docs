@@ -61,6 +61,8 @@ Piece of Cake 2 フォークでは、PHPUnit 3.7 (または 4.x/5.x) ではな�
 [PHPUnit 9.6 への移行](/ja/appendices/phpunit-9-migration-hints) を参照してください。
 :::
 
+<a id="test-database-setup"></a>
+
 ## テスト用データベースのセットアップ
 
 テストを実行する前に、 `config/core.php` のデバッグレベルを必ず 1 以上にしておきましょう。
@@ -330,6 +332,8 @@ bin/cake test core Console/ConsoleOutput --filter testWriteArray
 ```
 
 実行したいテストメソッドは、大文字小文字を区別する正規表現を使ってフィルタリングすることができます。
+
+<a id="generating-code-coverage"></a>
 
 #### コードカバレッジの生成
 
@@ -1548,6 +1552,8 @@ class BlogPostTest extends CakeTestCase
 プラグインのテストケースは、 `bin/cake test Blog Model/BlogPost` のように
 test シェルで実行できます。
 
+<a id="integration-with-jenkins"></a>
+
 ## Jenkins によるインテグレーション
 
 [Jenkins](https://www.jenkins.io) は継続的インテグレーションサービスで、テストケースの自動化を
@@ -1559,6 +1565,8 @@ Unix ライクな環境に Jenkins がインストールされていて、管理
 また、ジョブの作成とビルドの方法も知っているものとします。もしわからない場合は
 [Jenkins のドキュメント](https://www.jenkins.io/doc/) を参考にしてください。
 同じ手順は他の CI サービスにも当てはまります。
+GitHub Actions のワークフローについては
+[継続的インテグレーション](/ja/development/continuous-integration) を参照してください。
 
 ### ジョブの作成
 

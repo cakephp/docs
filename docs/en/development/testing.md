@@ -1598,7 +1598,8 @@ Integrating a CakePHP application with Jenkins is fairly straightforward. The
 following assumes you've already installed Jenkins on \*nix system, and are able
 to administer it. You also know how to create jobs, and run builds. If you are
 unsure of any of these, refer to the [Jenkins documentation](https://www.jenkins.io/doc/).
-The same steps apply to other CI services.
+The same steps apply to other CI services. For a GitHub Actions workflow, see
+[Continuous Integration](/development/continuous-integration).
 
 ### Create a job
 

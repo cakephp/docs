@@ -12,5 +12,6 @@
 - [統合テスト](development/integration-testing)
 - [E2E テスト](development/e2e-testing)
 - [静的解析](development/static-analysis)
+- [継続的インテグレーション](development/continuous-integration)
 - [REST](development/rest)
 - [ディスパッチャー・フィルター](development/dispatch-filters)
