@@ -24,6 +24,66 @@
 4. **PHP をアップグレードする**: PHP 8.0 以降に更新します
 5. **十分にテストする**: アプリケーションのテストスイートを実行し、互換性を確認します
 
+## v2.12.5
+
+v2.12.5 の変更のうち、すでにフォークで動いているアプリケーションに影響する可能性があるものです。
+
+<a id="security-fixes"></a>
+
+### セキュリティ修正
+
+このリリースでは 3 件の脆弱性を修正しました。ほとんどのアプリケーションは更新するだけで対応できます。
+詳しくは [脆弱性への対応](/ja/appendices/security-fixes) を参照してください。
+
+- **メールのヘッダー** ([GHSA-4f9q-3c4x-52cv](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-4f9q-3c4x-52cv)):
+  `SmtpTransport` と `MailTransport` は、ヘッダーの名前と値から改行を取り除きます。
+  ヘッダーの値に改行を入れてヘッダーを追加していた場合は、代わりに `CakeEmail::setHeaders()` / `addHeaders()` に
+  ヘッダーを 1 つずつ渡してください。
+- **ビュー・レイアウト・エレメントの名前** ([GHSA-w2mh-x92p-5p95](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-w2mh-x92p-5p95)):
+  `..` を含む名前は、ビューのパス（`App::path('View')`、プラグインとテーマのビューのパス）の中のファイルを
+  指していなければなりません。それ以外のファイルは存在しないものとして扱います。`element()` はエレメントが無い場合と
+  同じ動作になり、`elementExists()` は `false` を返し、ビューとレイアウトは `MissingViewException` /
+  `MissingLayoutException` を投げます。ほかの場所から読み込んでいるテンプレートは、ビューのパスに移動してください。
+- **ログイン後のリダイレクト** ([GHSA-x4p9-p4cx-gxwx](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-x4p9-p4cx-gxwx)):
+  `AuthComponent::redirectUrl()` は、セッションに保存されたプロトコル相対 URL をローカルのパスに変換します。
+  コードの変更は不要です。
+
+### 不正な ORDER BY のソート方向を非推奨に ([PR #54](https://github.com/pieceofcake2/cakephp/pull/54))
+
+- `order`（find のオプション、`Model::$order`、アソシエーションの `'order'` 設定、`DboSource::order()`）に指定する
+  ソート方向は、`ASC` または `DESC` で、その後に `NULLS FIRST` か `NULLS LAST` を続けることもできます。
+  大文字と小文字は区別せず、前後や途中の空白が多くてもかまいません。`'asc'`、`'Desc'`、`' DESC '`、
+  `'ASC NULLS FIRST'`、`'desc  nulls  last'` はいずれも有効です。
+- それ以外のソート方向を指定すると `E_USER_DEPRECATED` エラー（`Invalid ORDER BY direction "..."`）が発生します。
+  対象は配列の値（`['Post.title' => $direction]`）、`DboSource::order()` の `$direction` 引数、文字列のキーで
+  `ASC` / `DESC` の後に続くテキスト（`'Post.title DESC LIMIT 1'`。括弧の中やクォートしたリテラルの中の
+  `ASC` / `DESC` は無視します）です。
+- **このリリースでの変更はこれだけです**: 生成される SQL はこれまでとまったく同じです。
+  将来のバージョンでは、不正なソート方向は `InvalidArgumentException` を投げるようになります。
+- `PaginatorComponent` はリクエストパラメーターの `direction` をすでに `asc` / `desc` に制限しているため、
+  ページネーションでは非推奨エラーは発生しません。
+- 検証するのはソート方向だけです。order のキーのフィールドや式の部分は信頼できる SQL として扱い
+  （可能な場合はクォートし、それ以外はそのまま使います）、ユーザーの入力を含めてはいけません。
+  `DboSource::expression()` のオブジェクトはそのまま使い、検証しません。
+
+[並び順](/ja/models/retrieving-your-data#sort-order) も参照してください。
+
+**移行:**
+
+- ソート方向の値に式を書いている場合: 式をキーに移動します。`['Page.name' => "='test' DESC"]` は
+  `["Page.name = 'test'" => 'DESC']` に置き換えるか、生の SQL には `DboSource::expression()` を使ってください。
+- 文字列のキーでソート方向の後に SQL を書いている場合（例: `'Post.title DESC LIMIT 1'`）:
+  `order` にはフィールドとソート方向だけを指定し、残りは対応する find のオプション（`limit` など）か
+  `DboSource::expression()` のオブジェクトで渡してください。
+- ソート方向を付けずに `NULLS FIRST` / `NULLS LAST` を指定している場合: `ASC` か `DESC` を追加してください
+  （`'ASC NULLS FIRST'`）。
+- 文字列以外のソート方向（`true`、`1` など）を指定している場合: `'ASC'` か `'DESC'` を渡してください。
+- リクエストデータからソート方向を受け取っている場合: `PaginatorComponent` と同じように、先に `asc` / `desc` に
+  制限してください。例:
+  `$direction = strtolower((string)$this->request->query('direction')) === 'desc' ? 'DESC' : 'ASC';`
+- 呼び出し箇所を探すには、メッセージが `Invalid ORDER BY direction` で始まる `E_USER_DEPRECATED` エラーを
+  ログに記録するか、そこで処理を止めてください。
+
 ## v2.12.3
 
 v2.12.3 の変更のうち、すでにフォークで動いているアプリケーションに影響する可能性があるものです。

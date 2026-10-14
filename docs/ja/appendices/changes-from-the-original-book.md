@@ -24,6 +24,9 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 | `'readFile' => false` を指定した `Xml::build()` | `https://` の URL は取得される (SSRF) | ファイルも URL も読み込まない | [脆弱性への対応](/ja/appendices/security-fixes#xml-build-ssrf) |
 | `$components` での CookieComponent の `'type'` | 無視される（常に `'cipher'`） | 反映される | [Cookie](/ja/core-libraries/components/cookie) |
 | `cake server` のデフォルトポート | 80 | 8765 | [インストール](/ja/installation#development-server) |
+| メールのヘッダーの値に含まれる改行 | `SmtpTransport` はそのまま送信、`MailTransport` は `\r\n` のみ削除（ヘッダーインジェクション） | 削除（折り返したヘッダー行は残す） | [脆弱性への対応](/ja/appendices/security-fixes#email-header-injection) |
+| `..` を含むビュー・レイアウト・エレメントの名前 | サーバー上の任意のファイルを指せる（パストラバーサル） | ビューのパスの中のファイルのみ。それ以外は存在しないものとして扱う | [脆弱性への対応](/ja/appendices/security-fixes#view-path-traversal) |
+| プロトコル相対 URL の `Auth.redirect` | ログイン後に別のホストへリダイレクトされる（オープンリダイレクト） | ローカルのパスに変換 | [脆弱性への対応](/ja/appendices/security-fixes#auth-redirect) |
 | `order` のソート方向 | 指定どおり SQL に追加される | `ASC` / `DESC` と省略可能な `NULLS FIRST` / `NULLS LAST`。それ以外は `E_USER_DEPRECATED` (v2.12.5)、将来のバージョンでは例外 | [並び順](/ja/models/retrieving-your-data#sort-order) |
 | `.env` ファイル | 非対応 | `pieceofcake2/app` スケルトン (v2.4.0) が josegonzalez/dotenv で読み込み (フレームワークは読み込まない) | [環境変数](/ja/development/configuration#environment-variables) |
 
@@ -385,8 +388,10 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - このページ。削除したサイドバーの「Piece of Cake 2」グループ (`/ja/pieceofcake2/changes`) から付録に移動
 - [脆弱性への対応](/ja/appendices/security-fixes)
   - `'readFile' => false` を指定した `Xml::build()` の SSRF (2.12.3 で修正) を追加。Cookie のタイプを `$components` で設定。Security.useOpenSsl のスケルトンについての注記
+  - SmtpTransport/MailTransport のメールヘッダーインジェクション (GHSA-4f9q-3c4x-52cv)、ビュー・レイアウト・エレメント名のパストラバーサル (GHSA-w2mh-x92p-5p95)、AuthComponent のログイン後のオープンリダイレクト (GHSA-x4p9-p4cx-gxwx) を追加 (いずれも 2.12.5 で修正)。表に GHSA の ID を記載。本家の CakePHP 2.x を使うアプリケーションは pieceofcake2/cakephp に切り替えると修正を適用できることを記載
 - [CakePHP 2.10 からの移行](/ja/appendices/migrating-from-cakephp-2-10)
   - v2.12.3 の節を追加 (Xml::build() の SSRF 修正、Cookie の `'type'` 設定、ServerShell のポート、テストケースの一覧、SQL Server の ERRMODE)。Cookie の例で `$components` を使用
+  - v2.12.5 の節を追加 (メールのヘッダー、ビュー・レイアウト・エレメントの名前、ログイン後のリダイレクトのセキュリティ修正。不正な ORDER BY のソート方向の非推奨化)
 - [SimpleTest から PHPUnit 3.7 への移行](/ja/appendices/phpunit-migration-hints)
   - 題を「SimpleTest から PHPUnit 3.7 への移行」に変更し、PHPUnit 9.6 への移行ガイドへのリンクを追加
 

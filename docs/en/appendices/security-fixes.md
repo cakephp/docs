@@ -17,13 +17,21 @@ for details.
 
 ## Fixed Vulnerabilities
 
-| CVE | Summary | Fixed in |
-|-----|---------|----------|
+| ID | Summary | Fixed in |
+|----|---------|----------|
 | [CVE-2015-8379](https://nvd.nist.gov/vuln/detail/CVE-2015-8379) | CSRF protection bypass via the `_method` parameter and custom HTTP methods | 2.11.0 |
 | [CVE-2020-15400](https://nvd.nist.gov/vuln/detail/CVE-2020-15400) | CSRF token fixation | 2.11.0 |
 | [GHSA-wgww-24w3-wfqp](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-wgww-24w3-wfqp) | SSRF: `Xml::build()` fetched `https://` URLs even with `'readFile' => false` | 2.12.3 |
+| [GHSA-4f9q-3c4x-52cv](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-4f9q-3c4x-52cv) | Email header injection in `SmtpTransport` and `MailTransport` (CakePHP 2 equivalent of CVE-2026-77634) | 2.12.5 |
+| [GHSA-w2mh-x92p-5p95](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-w2mh-x92p-5p95) | Path traversal in view, layout and element names (CakePHP 2 equivalent of CVE-2026-48820) | 2.12.5 |
+| [GHSA-x4p9-p4cx-gxwx](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-x4p9-p4cx-gxwx) | Open redirect after login via a protocol-relative `Auth.redirect` URL | 2.12.5 |
 
-All of these vulnerabilities are present in the original CakePHP 2.10.24.
+All of these vulnerabilities are present in the original CakePHP 2.10.24, and
+the CakePHP team no longer releases fixes for it. If your application still
+uses `cakephp/cakephp`, you can get the fixes by switching to
+`pieceofcake2/cakephp`, which declares `replace` for `cakephp/cakephp`. It
+requires PHP 8.0 or newer; see
+[Migrating from CakePHP 2.10](/appendices/migrating-from-cakephp-2-10).
 
 ### CVE-2015-8379: CSRF bypass with the `_method` parameter
 
@@ -80,6 +88,73 @@ whenever the input may come from users. If your code relied on fetching an
 `https://` URL with `'readFile' => false`, remove the option (it defaults to
 `true`) or fetch the document yourself, for example with `HttpSocket`, and
 pass the XML string.
+
+### Email header injection in `SmtpTransport` and `MailTransport` {#email-header-injection}
+
+`SmtpTransport` wrote the message headers into the SMTP `DATA` command without
+removing line breaks from header values. `MailTransport` removed `\r\n`
+sequences from header values, the subject and the recipient, but not a bare
+`\r` or `\n`, which many mail servers also treat as a line break. If an
+application put user input into an email header, for example a custom header
+set with `CakeEmail::setHeaders()` or `addHeaders()`, an attacker could add
+headers such as `Bcc:` or start the message body.
+
+This is the CakePHP 2 equivalent of CVE-2026-77634, which was fixed in CakePHP
+4.x and 5.x. It was fixed in 2.12.5: `SmtpTransport` removes CR and LF bytes
+from header names and values and keeps only folded header lines (a line break
+followed by whitespace, as produced by the MIME encoding of long headers), and
+`MailTransport` removes bare `\r` and `\n` as well. See the security advisory
+[GHSA-4f9q-3c4x-52cv](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-4f9q-3c4x-52cv).
+
+**What you need to do:** update to 2.12.5 or later. If your code put raw line
+breaks into a header value to add more headers, pass one entry per header to
+`CakeEmail::setHeaders()` or `addHeaders()` instead. Until you can update,
+remove CR and LF from user input before you use it in header values, the
+subject or addresses.
+
+### Path traversal in view, layout and element names {#view-path-traversal}
+
+`View` did not check that the file found for a view, layout or element name
+was inside the view paths. When an application built such a name from user
+input, for example `$this->element('widgets/' . $type)`, a name containing `..`
+could resolve to another file on the server, which was then included and run
+as a PHP template.
+
+This is the CakePHP 2 equivalent of CVE-2026-48820, which was fixed in CakePHP
+4.x and 5.x. It was fixed in 2.12.5: when a name contains `..`, the real path
+of the file must be inside one of the view paths (`App::path('View')` and the
+plugin and theme view paths). Files outside them are treated as missing:
+`element()` behaves as for a missing element, `elementExists()` returns
+`false`, and views and layouts throw `MissingViewException` and
+`MissingLayoutException`. Names that stay inside the view paths keep working.
+See the security advisory
+[GHSA-w2mh-x92p-5p95](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-w2mh-x92p-5p95).
+
+**What you need to do:** update to 2.12.5 or later. If you render templates
+from outside the view paths with names such as `../../other/file`, move those
+templates into a view path. Do not build view, layout or element names from
+user input, or check the input against an allow list first.
+
+### Open redirect after login in `AuthComponent` {#auth-redirect}
+
+When an unauthenticated user requests a protected action, `AuthComponent`
+stores the requested URL in the `Auth.redirect` session key, and
+`AuthComponent::redirectUrl()` returns it after a successful login. Browsers
+treat a URL that starts with `//`, or with a backslash variant such as `/\` or
+`\\`, as a URL on another host. A crafted link whose path started with `//`
+could therefore send the user to an attacker's site after logging in (open
+redirect).
+
+There is no upstream advisory for CakePHP 2; the issue is similar to
+CVE-2026-55590 in the `cakephp/authentication` plugin. It was fixed in 2.12.5:
+`redirectUrl()` collapses the leading slashes and backslashes of the stored URL
+into a single `/`, so the redirect always stays on the same host. See the
+security advisory
+[GHSA-x4p9-p4cx-gxwx](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-x4p9-p4cx-gxwx).
+
+**What you need to do:** update to 2.12.5 or later; no code changes are
+needed. Until you can update, check the value of `Auth.redirect` before
+redirecting, and reject values that start with `//`, `/\`, `\/` or `\\`.
 
 ## Other Security Changes
 

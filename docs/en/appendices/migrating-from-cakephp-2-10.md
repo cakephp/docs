@@ -26,6 +26,77 @@ Before migrating to this fork, ensure:
 4. **Upgrade PHP**: Update your PHP version to 8.0 or newer
 5. **Test Thoroughly**: Run your application's test suite to ensure compatibility
 
+## v2.12.5
+
+Changes in v2.12.5 that may affect applications already running on the fork.
+
+### Security fixes
+
+This release fixes three vulnerabilities. Most applications only need to
+update. See [Security Fixes](/appendices/security-fixes) for details.
+
+- **Email headers** ([GHSA-4f9q-3c4x-52cv](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-4f9q-3c4x-52cv)):
+  `SmtpTransport` and `MailTransport` remove line breaks from header names and
+  values. If you relied on putting raw line breaks in a header value to add
+  headers, use `CakeEmail::setHeaders()` / `addHeaders()` with one entry per
+  header instead.
+- **View, layout and element names** ([GHSA-w2mh-x92p-5p95](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-w2mh-x92p-5p95)):
+  a name containing `..` must resolve to a file inside the view paths
+  (`App::path('View')`, plugin and theme view paths). Files outside them are
+  treated as missing: `element()` behaves as for a missing element,
+  `elementExists()` returns `false`, and views and layouts throw
+  `MissingViewException` / `MissingLayoutException`. Move templates you load
+  from elsewhere into a view path.
+- **Login redirect** ([GHSA-x4p9-p4cx-gxwx](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-x4p9-p4cx-gxwx)):
+  `AuthComponent::redirectUrl()` turns a protocol-relative URL stored in the
+  session into a local path. No change is needed.
+
+### Invalid ORDER BY directions are deprecated ([PR #54](https://github.com/pieceofcake2/cakephp/pull/54))
+
+- The sort direction given to `order` (find options, `Model::$order`,
+  association `'order'` settings, `DboSource::order()`) should be `ASC` or
+  `DESC`, optionally followed by `NULLS FIRST` or `NULLS LAST`. It is matched
+  case-insensitively and surrounding / repeated whitespace is allowed, so
+  `'asc'`, `'Desc'`, `' DESC '`, `'ASC NULLS FIRST'` and `'desc  nulls  last'`
+  are all valid.
+- Any other direction now triggers an `E_USER_DEPRECATED` error
+  (`Invalid ORDER BY direction "..."`). This covers array values
+  (`['Post.title' => $direction]`), the `$direction` argument of
+  `DboSource::order()`, and text after an `ASC` / `DESC` in a string key
+  (`'Post.title DESC LIMIT 1'`; `ASC` / `DESC` inside parentheses or quoted
+  literals is ignored).
+- **Nothing else changes in this release**: the generated SQL is exactly the
+  same as before. Invalid directions will throw an `InvalidArgumentException`
+  in a future version.
+- `PaginatorComponent` already restricts the `direction` request parameter to
+  `asc` / `desc`, so pagination does not trigger the deprecation.
+- Only the direction is checked. The field / expression part of an order key
+  is trusted SQL (quoted where possible, otherwise used as is) and must never
+  contain user input. `DboSource::expression()` objects are used verbatim and
+  are not checked.
+
+See also [Sort Order](/models/retrieving-your-data#sort-order).
+
+**Migration:**
+
+- An expression in the direction value: move the expression into the key.
+  Replace `['Page.name' => "='test' DESC"]` with
+  `["Page.name = 'test'" => 'DESC']`, or use `DboSource::expression()` for raw
+  SQL.
+- SQL after the direction in a string key (for example
+  `'Post.title DESC LIMIT 1'`): put only the field and the direction in
+  `order`, and pass the rest with the matching find option (`limit`, ...) or
+  as a `DboSource::expression()` object.
+- `NULLS FIRST` / `NULLS LAST` without a direction: add `ASC` or `DESC`
+  (`'ASC NULLS FIRST'`).
+- A direction that is not a string (`true`, `1`, ...): pass `'ASC'` or
+  `'DESC'`.
+- A direction taken from request data: restrict it to `asc` / `desc` first,
+  as `PaginatorComponent` does, e.g.
+  `$direction = strtolower((string)$this->request->query('direction')) === 'desc' ? 'DESC' : 'ASC';`.
+- To find the call sites, log or break on `E_USER_DEPRECATED` errors whose
+  message starts with `Invalid ORDER BY direction`.
+
 ## v2.12.3
 
 Changes in v2.12.3 that may affect applications already running on the fork.

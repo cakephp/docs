@@ -25,6 +25,9 @@ and lists the pages of this book that were changed from the original.
 | `Xml::build()` with `'readFile' => false` | `https://` URLs still fetched (SSRF) | Neither files nor URLs are read | [Security Fixes](/appendices/security-fixes#xml-build-ssrf) |
 | CookieComponent `'type'` in `$components` | Ignored (always `'cipher'`) | Honored | [Cookie](/core-libraries/components/cookie) |
 | `cake server` default port | 80 | 8765 | [Installation](/installation#development-server) |
+| Line breaks in email header values | Sent as is by `SmtpTransport`; only `\r\n` removed by `MailTransport` (header injection) | Removed (folded header lines are kept) | [Security Fixes](/appendices/security-fixes#email-header-injection) |
+| View, layout and element names with `..` | Can resolve to any file on the server (path traversal) | Must resolve inside the view paths; other files are treated as missing | [Security Fixes](/appendices/security-fixes#view-path-traversal) |
+| Protocol-relative `Auth.redirect` URL | Redirects to another host after login (open redirect) | Collapsed to a local path | [Security Fixes](/appendices/security-fixes#auth-redirect) |
 | Sort direction in `order` | Appended to the SQL as given | `ASC` / `DESC` with optional `NULLS FIRST` / `NULLS LAST`; anything else triggers `E_USER_DEPRECATED` (v2.12.5), an exception in a future version | [Sort Order](/models/retrieving-your-data#sort-order) |
 | `.env` files | Not supported | Loaded by the `pieceofcake2/app` skeleton (v2.4.0) with josegonzalez/dotenv, not by the framework | [Environment Variables](/development/configuration#environment-variables) |
 
@@ -390,8 +393,10 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
   - This page; moved from `/pieceofcake2/changes` in the removed "Piece of Cake 2" sidebar group to the Appendices
 - [Security Fixes](/appendices/security-fixes)
   - Added the `Xml::build()` SSRF with `'readFile' => false` (fixed in 2.12.3); Cookie type set in `$components`; skeleton note for Security.useOpenSsl
+  - Added the email header injection in SmtpTransport/MailTransport (GHSA-4f9q-3c4x-52cv), the path traversal in view, layout and element names (GHSA-w2mh-x92p-5p95) and the open redirect after login in AuthComponent (GHSA-x4p9-p4cx-gxwx), all fixed in 2.12.5; the table lists GHSA IDs; note that applications on the original CakePHP 2.x can switch to pieceofcake2/cakephp to get the fixes
 - [Migrating from CakePHP 2.10](/appendices/migrating-from-cakephp-2-10)
   - Added a v2.12.3 section (Xml::build() SSRF fix, Cookie `'type'` setting, ServerShell port, test case listing, SQL Server ERRMODE); Cookie example uses `$components`
+  - Added a v2.12.5 section (security fixes for email headers, view/layout/element names and the login redirect; deprecation of invalid ORDER BY directions)
 - [Migrating from SimpleTest to PHPUnit 3.7](/appendices/phpunit-migration-hints)
   - Retitled "Migrating from SimpleTest to PHPUnit 3.7" and linked to the new PHPUnit 9.6 guide
 
