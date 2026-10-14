@@ -1587,8 +1587,3 @@ reference them using `plugin.pluginName.fixtureName` syntax in the
 
 You can run a plugin's test case with the test shell, for example
 `bin/cake test Blog Model/BlogPost`.
-
-## Continuous Integration {#integration-with-jenkins}
-
-To run the tests automatically on every push, with GitHub Actions or Jenkins,
-see [Continuous Integration](/development/continuous-integration).
