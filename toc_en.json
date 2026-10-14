@@ -467,6 +467,10 @@
           "link": "/development/testing"
         },
         {
+          "text": "Integration Testing",
+          "link": "/development/integration-testing"
+        },
+        {
           "text": "E2E Testing",
           "link": "/development/e2e-testing"
         },

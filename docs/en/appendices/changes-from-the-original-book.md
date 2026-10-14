@@ -18,6 +18,7 @@ and lists the pages of this book that were changed from the original.
 | UpgradeShell | Core shell | [pieceofcake2/upgrade](https://pieceofcake2.github.io/upgrade/) plugin | [Upgrade Shell](/console-and-shells/upgrade-shell) |
 | Cache engines | Includes Xcache and Wincache | Xcache and Wincache removed | [Caching](/core-libraries/caching) |
 | Tests | PHPUnit 3.7 | PHPUnit 9.6 | [Testing](/development/testing) |
+| Controller tests | `ControllerTestCase::testAction()` | Also `IntegrationTestTrait` and `EmailTrait` (v2.12.4, backports from CakePHP 5) | [Integration Testing](/development/integration-testing) |
 | Coding standard | CakePHP 2 standard (tabs, `array()`) | CakePHP 5 codesniffer (4 spaces, `[]`) | [Coding Standards](/contributing/cakephp-coding-conventions) |
 | CSRF protection | Unsigned tokens; some methods not validated | HMAC-signed tokens; all methods except GET/HEAD/OPTIONS validated | [Security Fixes](/appendices/security-fixes) |
 | SSL certificates | Bundled `cacert.pem` (2016) | System CA bundle or composer/ca-bundle | [Security Fixes](/appendices/security-fixes) |
@@ -48,6 +49,7 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
 - [Migrating to the Modern Layout](/appendices/migrating-to-the-modern-layout)
 - [Security Fixes](/appendices/security-fixes)
 - [Migrating Tests to PHPUnit 9.6](/appendices/phpunit-9-migration-hints)
+- [Integration Testing](/development/integration-testing)
 - [E2E Testing](/development/e2e-testing)
 - [Maintained Plugins](/plugins/maintained-plugins)
 - [Static Analysis](/development/static-analysis)
@@ -59,6 +61,7 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
   - Rewritten as the entry page for readers who maintain a CakePHP 2 application or know modern PHP: "About This Fork" (what the fork is, CakePHP 2 end of life, about this book; it replaces the separate "Piece of Cake 2" page, which was removed together with its sidebar group), "What's Different from CakePHP 2.10" with links to the detailed pages, "Where to Start" (existing application first, then `composer create-project pieceofcake2/app` with a note to consider CakePHP 5) and "Coming from Modern PHP" (no namespaces, array-based finders, models, components/behaviors/helpers, Configure, dispatcher filters, few native types)
   - Removed the introduction and the blog tutorial that was included in the page; the tutorial is under [Tutorials & Examples](/tutorials-and-examples/blog/blog)
   - Moved to the top of the "Getting Started" sidebar group; the other pages follow in the order Installation, Advanced Installation, URL Rewriting, Folder Structure, Conventions, Structure, A Typical CakePHP Request
+  - "What's Different from CakePHP 2.10": the backports item links to [Integration Testing](/development/integration-testing) instead of the upgrade guide on GitHub
 - [Installation](/installation)
   - Requirements: PHP 8.0-8.5, Composer, MySQL 5.6+/PostgreSQL 9.4+/SQLite 3/SQL Server 2022+, mbstring/intl/openssl notes
   - New application via `composer create-project pieceofcake2/app` (modern layout) with database.php and salt/cipherSeed setup
@@ -318,6 +321,7 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
   - Plugin tests in plugins/&lt;Name>/tests/TestCase (Test/Case fallback)
   - Jenkins: composer install step, config/database.php, vendor/bin/phpunit, jenkins.io links
   - New "Types of Tests" section: unit tests with fixtures, controller tests with testAction() and browser E2E tests (links to E2E Testing); ja: explicit testing-controllers anchor
+  - "Types of Tests" also lists integration tests with `IntegrationTestTrait` (links to Integration Testing) and notes that `ControllerTestCase` remains supported; tip linking to Integration Testing in "Testing Controllers"
 - [REST](/development/rest)
   - Paths updated to config/routes.php, src/Controller and templates/Recipes/xml
   - Corrected HTTP method override precedence (X-HTTP-Method-Override header before _method)

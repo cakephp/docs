@@ -51,9 +51,9 @@ CakePHP 2.10 を知っていれば、その知識のほとんどはそのまま�
 - **セキュリティ修正。** CakePHP 2.10.24 の既知の脆弱性を修正しています。たとえば CSRF トークンは
   HMAC で署名されるようになりました。[脆弱性への対応](/ja/appendices/security-fixes) を参照してください。
 - **CakePHP 5 からのバックポート。** `IntegrationTestTrait` と `EmailTrait` (CakePHP 2.12.4) を使うと、
-  実際のディスパッチャを通してコントローラを CakePHP 5 と同じメソッド名でテストできます。フォークの
-  [アップグレードガイド](https://github.com/pieceofcake2/cakephp/blob/2.x/UPGRADE.md#v2124) (英語)
-  を参照してください。アプリケーションスケルトンは `.env` ファイルを読み込みます (pieceofcake2/app 2.4.0)。
+  実際のディスパッチャを通してコントローラを CakePHP 5 と同じメソッド名でテストできます。
+  [統合テスト](development/integration-testing) を参照してください。アプリケーションスケルトンは
+  `.env` ファイルを読み込みます (pieceofcake2/app 2.4.0)。
   [環境変数](development/configuration#environment-variables) を参照してください。
 - **Bake とプラグイン。** Bake とアップグレード用のシェルはコアからプラグインに移りました。
   また、主要な CakePHP 2 のプラグインも PHP 8 対応版がメンテナンスされています。

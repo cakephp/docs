@@ -8,7 +8,7 @@ Unit Testing, and how you can use the extensions that CakePHP offers.
 
 ## Types of Tests
 
-A CakePHP application is usually tested on three levels:
+A CakePHP application is usually tested on these levels:
 
 - **Unit tests** test a single class, such as a model, a component, a helper
   or a library class, in the PHPUnit process. [Fixtures](#fixtures) fill the
@@ -18,10 +18,20 @@ A CakePHP application is usually tested on three levels:
   process with `ControllerTestCase::testAction()`, without an HTTP server, and
   check the result, the view variables, the rendered view or the redirect.
   They also run in milliseconds. See [Testing Controllers](#testing-controllers).
+- **Integration tests** use `IntegrationTestTrait`, a backport from CakePHP 5,
+  to send a request through the real dispatcher, with the real controller and
+  components, and check the response, the session, cookies, flash messages and
+  the emails sent. They also run in the PHPUnit process without an HTTP server.
+  See [Integration Testing](/development/integration-testing).
 - **Browser end-to-end (E2E) tests** start the application with a web server
   and use it through a real browser, including JavaScript, cookies, sessions
   and `SecurityComponent` tokens. They are slower, so keep them for the main
   user flows. See [E2E Testing](/development/e2e-testing).
+
+`ControllerTestCase` and `testAction()` remain supported. For new controller
+tests, integration tests are usually the better choice: they need fewer mocks
+and test `SecurityComponent` tokens, redirects and error pages as in
+production.
 
 This page covers unit and controller tests.
 
@@ -939,6 +949,11 @@ Using this class as the base class for your controller test cases allows you to
 use `testAction()` for simpler test cases. `ControllerTestCase` allows you
 to easily mock out components and models, as well as potentially difficult to
 test methods like `Controller::redirect()`.
+
+> [!TIP]
+> To test a controller through the real dispatcher, without mocking the
+> controller, use `IntegrationTestTrait`. See
+> [Integration Testing](/development/integration-testing).
 
 Say you have a typical Articles controller, and its corresponding
 model. The controller code looks like:

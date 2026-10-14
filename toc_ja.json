@@ -467,6 +467,10 @@
           "link": "/ja/development/testing"
         },
         {
+          "text": "統合テスト",
+          "link": "/ja/development/integration-testing"
+        },
+        {
           "text": "E2E テスト",
           "link": "/ja/development/e2e-testing"
         },
