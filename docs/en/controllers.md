@@ -65,12 +65,12 @@ child class will always override those in `AppController.`
 > CakePHP merges the following variables from the `AppController` into
 > your application's controllers:
 >
-> - `~Controller::$components`
-> - `~Controller::$helpers`
-> - `~Controller::$uses`
+> - `Controller::$components`
+> - `Controller::$helpers`
+> - `Controller::$uses`
 
 Remember to add the default Html and Form helpers if you define
-the `~Controller::$helpers` property in your `AppController`.
+the `Controller::$helpers` property in your `AppController`.
 
 Also remember to call `AppController`'s callbacks within child
 controller callbacks for best results:
@@ -156,7 +156,7 @@ conventional view file name is the lowercased and underscored version of the
 action name. In the legacy `app/` layout, view files are in `app/View/`
 instead of `templates/`.
 
-Controller actions generally use `~Controller::set()` to create a
+Controller actions generally use `Controller::set()` to create a
 context that `View` uses to render the view. Because of the
 conventions that CakePHP uses, you don't need to create and render the view
 manually. Instead, once a controller action has completed, CakePHP will handle
@@ -170,7 +170,7 @@ following techniques will bypass the default view rendering behavior.
 - You can return a `CakeResponse` object with the completely created
   response.
 
-When you use controller methods with `~Controller::requestAction()`,
+When you use controller methods with `Controller::requestAction()`,
 you will often want to return data that isn't a string. If you have controller
 methods that are used for normal web requests + requestAction, you should check
 the request type before returning:
@@ -190,10 +190,10 @@ class RecipesController extends AppController
 ```
 
 The above controller action is an example of how a method can be used with
-`~Controller::requestAction()` and normal requests. Returning array data to a
+`Controller::requestAction()` and normal requests. Returning array data to a
 non-requestAction request will cause errors and should be avoided. See the
-section on `~Controller::requestAction()` for more tips on using
-`~Controller::requestAction()`
+section on `Controller::requestAction()` for more tips on using
+`Controller::requestAction()`
 
 In order for you to use a controller effectively in your own application, we'll
 cover some of the core attributes and methods provided by CakePHP's controllers.
@@ -226,7 +226,7 @@ visit the [CakePHP API](https://api.cakephp.org/2.x/class-Controller.html).
 ### Interacting with Views
 
 Controllers interact with views in a number of ways. First, they
-are able to pass data to the views, using `~Controller::set()`. You can also
+are able to pass data to the views, using `Controller::set()`. You can also
 decide which view class to use, and which view file should be
 rendered from the controller.
 
@@ -238,7 +238,7 @@ rendered from the controller.
 
 In your controller, you may want to render a different view than
 the conventional one. You can do this by calling
-`~Controller::render()` directly. Once you have called `~Controller::render()`, CakePHP
+`Controller::render()` directly. Once you have called `Controller::render()`, CakePHP
 will not try to re-render the view:
 
 ``` php
@@ -311,7 +311,7 @@ CakePHP also supports callbacks related to scaffolding.
 For a complete list of controller attributes and their descriptions
 visit the [CakePHP API](https://api.cakephp.org/2.x/class-Controller.html).
 
-> The `~Controller::$name` attribute should be set to the
+> The `Controller::$name` attribute should be set to the
 > name of the controller. Usually this is just the plural form of the
 > primary model the controller uses. This property can be omitted,
 > but saves CakePHP from inflecting it:
@@ -327,12 +327,12 @@ visit the [CakePHP API](https://api.cakephp.org/2.x/class-Controller.html).
 ### \$components, \$helpers and \$uses
 
 The next most often used controller attributes tell CakePHP what
-`~Controller::$helpers`, `~Controller::$components`,
+`Controller::$helpers`, `Controller::$components`,
 and `models` you'll be using in conjunction with
 the current controller. Using these attributes make MVC classes
-given by `~Controller::$components` and `~Controller::$uses` available to the controller
+given by `Controller::$components` and `Controller::$uses` available to the controller
 as class variables (`$this->ModelName`, for example) and those
-given by `~Controller::$helpers` to the view as an object reference variable
+given by `Controller::$helpers` to the view as an object reference variable
 (`$this->{$helpername}`).
 
 > [!NOTE]
@@ -344,7 +344,7 @@ given by `~Controller::$helpers` to the view as an object reference variable
 > available at `$this->Recipe`, and our ProductsController also
 > features the Product model at `$this->Product`. However, when
 > allowing a controller to access additional models through the
-> `~Controller::$uses` variable, the name of the current controller's model must
+> `Controller::$uses` variable, the name of the current controller's model must
 > also be included. This is illustrated in the example below.
 >
 > If you do not wish to use a Model in your controller, set
@@ -355,12 +355,12 @@ given by `~Controller::$helpers` to the view as an object reference variable
 > `AppController`.
 >
 > ::: info Changed in version 2.1
-> `~Controller::$uses` now has a new default value, it also handles `false` differently.
+> `Controller::$uses` now has a new default value, it also handles `false` differently.
 > :::
 >
 > The `HtmlHelper`, `FormHelper`, and `SessionHelper` are available by
 > default, as is the `SessionComponent`. But if you choose to define
-> your own `~Controller::$helpers` array in `AppController`, make sure to include
+> your own `Controller::$helpers` array in `AppController`, make sure to include
 > `HtmlHelper` and `FormHelper` if you want them still available by default
 > in your Controllers. To learn more about these classes, be sure
 > to check out their respective sections later in this manual.
@@ -382,11 +382,11 @@ given by `~Controller::$helpers` to the view as an object reference variable
 > `FormHelper`, or anything that is declared in your `AppController`.
 >
 > The components array allows you to set which [Components](controllers/components)
-> a controller will use. Like `~Controller::$helpers` and
-> `~Controller::$uses` components in your controllers are
+> a controller will use. Like `Controller::$helpers` and
+> `Controller::$uses` components in your controllers are
 > merged with those in `AppController`. As with
-> `~Controller::$helpers` you can pass settings
-> into `~Controller::$components`. See [Configuring Components](controllers/components#configuring-components) for more information.
+> `Controller::$helpers` you can pass settings
+> into `Controller::$components`. See [Configuring Components](controllers/components#configuring-components) for more information.
 
 ### Other Attributes
 

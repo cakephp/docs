@@ -3,7 +3,7 @@
 `class` **CakeNumber**
 
 `NumberHelper` の機能を `View` の外で必要な場合、
-`CakeNumber` クラスを使用してください。 :
+`CakeNumber` クラスを使用してください。
 
 ``` php
 class UsersController extends AppController

@@ -20,7 +20,7 @@ FlashHelper は、非推奨となった `SessionHelper` の `flash()` メソッ�
 ## フラッシュメッセージの表示
 
 フラッシュメッセージを表示するためには、FlashHelper の `render()` メソッドを
-使用します。 :
+使用します。
 
 ``` php
 <?php echo $this->Flash->render() ?>
@@ -28,13 +28,13 @@ FlashHelper は、非推奨となった `SessionHelper` の `flash()` メソッ�
 
 デフォルトでは、CakePHP は、フラッシュメッセージのためにセッション中の "flash" キーを
 使用します。しかし、 [FlashComponent](../../core-libraries/components/flash)
-の中でフラッシュメッセージを設定した時にキーを指定した場合、そのキーを指定して表示します。 :
+の中でフラッシュメッセージを設定した時にキーを指定した場合、そのキーを指定して表示します。
 
 ``` php
 <?php echo $this->Flash->render('other') ?>
 ```
 
-FlashComponent 内で設定したオプションを上書きすることができます。 :
+FlashComponent 内で設定したオプションを上書きすることができます。
 
 ``` php
 // コントローラの中で

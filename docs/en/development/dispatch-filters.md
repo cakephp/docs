@@ -13,13 +13,13 @@ request dispatching cycle would take.
 CakePHP provides for such cases a clean and extensible interface for attaching
 filters to this dispatching cycle, similar to a middleware layer thought to
 provide stackable services or routines for every request. We call them
-<span class="title-ref">Dispatcher Filters</span>
+`Dispatcher Filters`
 
 ## Configuring Filters
 
 Filters are usually configured in the `config/bootstrap.php` file, but you could easily
 load them from any other configuration file before the request is dispatched.
-Adding and removing filters is done through the <span class="title-ref">Configure</span> class, using the
+Adding and removing filters is done through the `Configure` class, using the
 special key `Dispatcher.filters`. By default CakePHP comes with a couple filter
 classes already enabled for all requests, let's take a look at how they are
 added:
@@ -60,7 +60,7 @@ Configure::write('Dispatcher.filters', [
 ```
 
 As shown above, you can pass any valid PHP [callback](https://www.php.net/callback)
-type, as you may remember, a <span class="title-ref">callback</span> is anything that PHP can execute with
+type, as you may remember, a `callback` is anything that PHP can execute with
 `call_user_func`. We do make a little exception, if a string is provided it will
 be treated as a class name, not as a possible function name. This also lets
 you attach anonymous functions as filters:
@@ -144,7 +144,7 @@ You can now provide constructor settings to dispatch filters in 2.5.
 ## Filter Classes
 
 Dispatcher filters, when defined as class names in configuration, should extend
-the class `DispatcherFilter` provided in the <span class="title-ref">Routing</span> CakePHP's directory.
+the class `DispatcherFilter` provided in the `Routing` CakePHP's directory.
 Let's create a simple filter to respond to a specific URL with a 'Hello World'
 text:
 
@@ -266,5 +266,5 @@ For obvious reasons this has the potential of making your app very difficult
 to maintain. Filters are an extremely powerful tool when used wisely, adding
 response handlers for each URL in your app is not a good use for it. But if you
 got a valid reason to do so, then you have a clean solution at hand. Keep in
-mind that not everything needs to be a filter, <span class="title-ref">Controllers</span> and <span class="title-ref">Components</span> are
+mind that not everything needs to be a filter, `Controllers` and `Components` are
 usually a more accurate choice for adding any request handling code to your app.

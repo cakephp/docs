@@ -13,7 +13,7 @@ i18n シェルは、素早く容易に po テンプレートファイルを生�
 `extract` コマンドを使って、既存のアプリケーションのために POT ファイルを
 生成することができます。このコマンドは、 `__()` 形式の関数を呼び、メッセージ文字列を
 抽出するためにアプリケーション全体をスキャンします。アプリケーション中のユニークな文字列は
-それぞれ一つの POT ファイルの中に混合されます。 :
+それぞれ一つの POT ファイルの中に混合されます。
 
     bin/cake i18n extract
 
@@ -23,7 +23,7 @@ i18n シェルは、素早く容易に po テンプレートファイルを生�
 抽出できます。
 
 ビューテンプレートは `templates/` に、翻訳ファイルは `resources/locales/` に置くので、
-通常はこの 2 つの場所を明示的に指定します。 :
+通常はこの 2 つの場所を明示的に指定します。
 
     bin/cake i18n extract --paths src,templates --output resources/locales
 
@@ -38,7 +38,7 @@ pot ファイルから po ファイルを作成するなら、 `Plural-Forms` �
 
 ### プラグイン用 POT ファイルの生成
 
-特定のプラグインで使用される POT ファイルを生成することができます。 :
+特定のプラグインで使用される POT ファイルを生成することができます。
 
 ``` text
 bin/cake i18n extract --plugin <Plugin>
@@ -50,17 +50,17 @@ bin/cake i18n extract --plugin <Plugin>
 
 モデル中から抽出されたバリデーションメッセージが使用するドメインを設定できます。
 もし、モデルがすでに `$validationDomain` プロパティを持っているなら、
-与えられたバリデーションドメインは無視されます。 :
+与えられたバリデーションドメインは無視されます。
 
     bin/cake i18n extract --validation-domain validation_errors
 
-また、バリデーションメッセージの抽出を止められます。 :
+また、バリデーションメッセージの抽出を止められます。
 
     bin/cake i18n extract --ignore-model-validation
 
 ### フォルダーの除外
 
-除外したいフォルダをカンマ区切りで指定します。指定された値に含まれるパスは無視されます。 :
+除外したいフォルダをカンマ区切りで指定します。指定された値に含まれるパスは無視されます。
 
     bin/cake i18n extract --exclude Test,Vendor
 
@@ -70,7 +70,7 @@ bin/cake i18n extract --plugin <Plugin>
 :::
 
 `--overwrite` を追加することで、 POT ファイルが存在しても警告されず、
-デフォルトで上書きされます。 :
+デフォルトで上書きされます。
 
     bin/cake i18n extract --overwrite
 
@@ -92,7 +92,7 @@ bin/cake i18n extract --plugin <Plugin>
 ## TranslateBehavior で使用されるテーブルを作る
 
 i18n シェルは、 `TranslateBehavior` で使用されるデフォルトのテーブルを
-初期化することができます。 :
+初期化することができます。
 
     bin/cake i18n initdb
 

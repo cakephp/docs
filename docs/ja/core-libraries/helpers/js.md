@@ -30,7 +30,7 @@ JavaScript ライブラリの種類に応じて、実際の JavaScript に変換
 
 その時、あなたのページにそのライブラリが含まれていなければなりません。
 それを全てのページに含めるためには、 `templates/Layouts/default.ctp`
-の \<head\> セクションに以下の行を追加してください。 :
+の \<head\> セクションに以下の行を追加してください。
 
 ``` php
 echo $this->Html->script('jquery'); // Include jQuery library
@@ -41,7 +41,7 @@ echo $this->Html->script('jquery'); // Include jQuery library
 
 デフォルトでは、スクリプトはキャッシュされ、あなたは、明示的にキャッシュを
 出力しなければなりません。各ページの最後でこれを行うためには、 `</body>`
-タグで閉じる直前に以下の行を含めて下さい。 :
+タグで閉じる直前に以下の行を含めて下さい。
 
 ``` php
 echo $this->Js->writeBuffer(); // Write cached scripts
@@ -51,7 +51,7 @@ echo $this->Js->writeBuffer(); // Write cached scripts
 > あなたのページにライブラリを含めなければなりません。そして、ヘルパーを機能させる
 > ためにキャッシュを出力しなければなりません。
 
-JavaScript エンジンの選択は、あなたのコントローラのヘルパーを含める際に宣言します。 :
+JavaScript エンジンの選択は、あなたのコントローラのヘルパーを含める際に宣言します。
 
 ``` php
 public $helpers = ['Js' => ['Jquery']];
@@ -72,7 +72,7 @@ jQuery 名前空間の中に上手に格納されます。あなたは、jQuery 
 それには、一つの注意点があります。
 **デフォルトで、jQuery は "\$" を "jQuery" のショートカットとして利用する事** です。
 
-"\$" ショートカットを上書きするために、 jQueryObject 変数を使用します。 :
+"\$" ショートカットを上書きするために、 jQueryObject 変数を使用します。
 
 ``` php
 $this->Js->JqueryEngine->jQueryObject = '$j';
@@ -86,7 +86,7 @@ echo $this->Html->scriptBlock(
 ### 独自ヘルパーの中で JsHelper の利用
 
 あなたの独自ヘルパーの中の `$helpers` 配列の中で
-JsHelper を宣言してください。 :
+JsHelper を宣言してください。
 
 ``` php
 public $helpers = ['Js'];
@@ -97,7 +97,7 @@ public $helpers = ['Js'];
 > それをしても反映されません。
 
 もし、他の JavaScript エンジンを使いたい場合、以下のように
-コントローラの中でヘルパーを設定してください。 :
+コントローラの中でヘルパーを設定してください。
 
 ``` php
 public $helpers = [
@@ -140,13 +140,13 @@ JavaScript エンジンヘルパーは、いくつかの制約はありますが
 JavaScript 内の多くのメソッドが DOM のエレメントのセレクタで始める時、
 `$this->Js->get()` は \$this を返し、セレクタを使用するために
 メソッドチェーンが利用できます。メソッドチェーンは、短く記述でき、
-コードの表現力が上がります。 :
+コードの表現力が上がります。
 
 ``` php
 $this->Js->get('#foo')->event('click', $eventCode);
 ```
 
-上記がメソッドチェーンの例です。これは、下記のサンプルと同じ意味になります。 :
+上記がメソッドチェーンの例です。これは、下記のサンプルと同じ意味になります。
 
 ``` php
 $this->Js->get('#foo');
@@ -224,7 +224,7 @@ JavaScript ライブラリが変更可能な開発を簡素化する試みにお
 追加で、 JsHelper の他のメソッドでバッファリングの利用を強制できます。
 最後の引数にブーリアン型を追加することによって、他のメソッドでバッファ内に
 蓄積することを強制できます。例えば、 `each()` メソッドは、通常では
-バッファしません。 :
+バッファしません。
 
 ``` php
 $this->Js->each('alert("whoa!");', true);
@@ -232,7 +232,7 @@ $this->Js->each('alert("whoa!");', true);
 
 上記は、 `each()` メソッドにバッファを使用することを強制します。
 逆に、バッファするメソッドでバッファしたくない場合、最後の引数に `false`
-を渡すことでできます。 :
+を渡すことでできます。
 
 ``` php
 $this->Js->event('click', 'alert("whoa!");', false);
@@ -301,7 +301,7 @@ JavaScript ライブラリを含める必要があります。デフォルトで
 jQuery を使用します。あなたのレイアウト内に jQuery
 (またはあなたが使用しているライブラリ) を含めて下さい。また、
 `RequestHandlerComponent` をあなたのコンポーネントに含めて下さい。
-あなたのコントローラに以下を追加してください。 :
+あなたのコントローラに以下を追加してください。
 
 ``` php
 public $components = ['RequestHandler'];
@@ -309,7 +309,7 @@ public $helpers = ['Js'];
 ```
 
 以下は、あなたが使用したい JavaScript ライブラリ内にリンクします。
-この例では、 jQuery を使用しています。 :
+この例では、 jQuery を使用しています。
 
 ``` php
 echo $this->Html->script('jquery');
@@ -317,7 +317,7 @@ echo $this->Html->script('jquery');
 
 1.2 と同様に、 プレーンな HTML のリンクの代わりに Javascript のリンク
 したいことを `PaginatorHelper` に伝える必要があります。
-そうするには、あなたのビューの先頭で `options()` を呼びます。 :
+そうするには、あなたのビューの先頭で `options()` を呼びます。
 
 ``` php
 $this->Paginator->options([
@@ -339,7 +339,7 @@ true にセットすべきです。 `evalScripts` なしだと、これらのラ
 この時、ページ制御機能に必要な全てのリンクを作成します。
 `JsHelper` が自動的に全ての生成されたスクリプトの内容を、ソースコード中の
 `<script>` タグの数を減らすためにバッファする時、バッファを
-書き出さなければなりません。ビューファイルの底に、以下を記述してください。 :
+書き出さなければなりません。ビューファイルの底に、以下を記述してください。
 
 ``` php
 echo $this->Js->writeBuffer();
@@ -382,7 +382,7 @@ indicator.gif がページロード中に直ちに表示される場面が考え
 
 上記のレイアウトで、indicator ビジーを示すアニメーションを表示する indicator
 画像ファイルが含まれています。それは、 `JsHelper` で表示、非表示します。
-そうするためには `options()` 関数を更新する必要があります。 :
+そうするためには `options()` 関数を更新する必要があります。
 
 ``` php
 $this->Paginator->options([

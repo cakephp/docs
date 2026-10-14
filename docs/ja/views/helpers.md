@@ -15,9 +15,9 @@ Ajax 機能をスピードアップさせたりします。CakePHP のヘルパ�
 ## ヘルパーの設定と使用
 
 CakePHP でヘルパーを有効にするにはコントローラに認識させる必要があります。各コントローラは
-`~Controller::$helpers` プロパティを持っており、そのプロパティにはビューで
+`Controller::$helpers` プロパティを持っており、そのプロパティにはビューで
 利用できるヘルパーの一覧が保持されています。ビューでヘルパーを使用するにはヘルパーの名前を
-コントローラの `$helpers` 配列に追加して下さい。 :
+コントローラの `$helpers` 配列に追加して下さい。
 
 ``` php
 class BakeriesController extends AppController
@@ -39,7 +39,7 @@ class BakeriesController extends AppController
 あるアクションの間だけヘルパーを追加することができます。言い換えると、あるヘルパーの利用を
 特定のコントローラアクションに限定し、同じコントローラの他のアクションでは利用できないように
 することができます。このことはコントローラが整理された状態を維持するのに役立つだけでなく、
-さらに、ヘルパーを使わない他のアクションの処理コストを抑えることになります。 :
+さらに、ヘルパーを使わない他のアクションの処理コストを抑えることになります。
 
 ``` php
 class BakeriesController extends AppController
@@ -59,7 +59,7 @@ class BakeriesController extends AppController
 もしすべてのコントローラでヘルパーを有効にする必要がある場合ヘルパーの名前を
 `src/Controller/AppController.php` (見つからない場合は作成して下さい) の
 `$helpers` 配列に追加して下さい。デフォルトの Html ヘルパーと Form ヘルパーも
-忘れずに読み込んで下さい。 :
+忘れずに読み込んで下さい。
 
 ``` php
 class AppController extends Controller
@@ -69,7 +69,7 @@ class AppController extends Controller
 ```
 
 ヘルパーにはオプションを渡すことが出来ます。このオプションは属性の値を設定したり、
-ヘルパーの動作を変えるために使うことができます。 :
+ヘルパーの動作を変えるために使うことができます。
 
 ``` php
 class AwesomeHelper extends AppHelper
@@ -91,7 +91,7 @@ class AwesomeController extends AppController
 
 すべてのヘルパーで共通して使える設定に `className` オプションがあります。
 このオプションを設定するとビューの中に別名のヘルパーを作ることができます。この機能は
-`$this->Html` や他の共通ヘルパーの参照を独自の実装に置き換えたい時に役立ちます。 :
+`$this->Html` や他の共通ヘルパーの参照を独自の実装に置き換えたい時に役立ちます。
 
 ``` php
 // src/Controller/PostsController.php
@@ -137,7 +137,7 @@ class PostsController extends AppController
 
 コントローラの中でどのヘルパーが使いたいのかを一度設定してしまえば、各ヘルパーは
 ビューの中でパブリックプロパティのように扱えます。例えば `HtmlHelper` を
-使っているとします。その場合、次のようにヘルパーにアクセスできます。 :
+使っているとします。その場合、次のようにヘルパーにアクセスできます。
 
 ``` php
 echo $this->Html->css('styles');
@@ -146,7 +146,7 @@ echo $this->Html->css('styles');
 上記の例では HtmlHelper の `css` メソッドを呼び出しています。読み込み済みの
 ヘルパーであれば `$this->{$helperName}` の形式でアクセスすることが出来ます。
 ビューの内部から動的にヘルパーを読み込む必要に迫られる時が来るかもしません。
-その時は、 ビューの `HelperCollection` を使ってこのようにできます。 :
+その時は、 ビューの `HelperCollection` を使ってこのようにできます。
 
 ``` php
 $mediaHelper = $this->Helpers->load('Media', $mediaSettings);
@@ -198,7 +198,7 @@ class LinkHelper extends AppHelper
 
 他のヘルパーに既に存在している機能を使いたいと思うかもしれません。その場合、 `$helpers`
 配列に使いたいヘルパーを明示することで実現出来ます。フォーマットは、コントローラで
-指定する場合と同じようにして下さい。 :
+指定する場合と同じようにして下さい。
 
 ``` php
 // src/View/Helper/LinkHelper.php (他のヘルパーを使っている)
@@ -221,8 +221,8 @@ class LinkHelper extends AppHelper
 ### 自作のヘルパーを使う
 
 一旦ヘルパーを作って `src/View/Helper/` に配置すると、コントローラで
-`~Controller::$helpers` という特別な変数を使うことでそのヘルパーを
-読み込めるようになります。 :
+`Controller::$helpers` という特別な変数を使うことでそのヘルパーを
+読み込めるようになります。
 
 ``` php
 class PostsController extends AppController
@@ -233,7 +233,7 @@ class PostsController extends AppController
 
 一旦コントローラがこの新しいクラスを認識すると、ヘルパーの名前にちなんで
 名付けられたオブジェクトにアクセスすることで、ビューの中からこのヘルパーを
-使えるようになります。 :
+使えるようになります。
 
 ``` php
 <!-- 新しいヘルパーを使ってリンクを作る -->

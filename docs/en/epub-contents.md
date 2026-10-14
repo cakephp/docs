@@ -1,5 +1,3 @@
-orphan  
-
 # Contents
 
 - [Getting Started](getting-started)

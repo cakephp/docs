@@ -52,8 +52,7 @@ available.
 
 `static` Set::**apply**($path, $array, $callback, $options = [])
 
-rtype  
-mixed
+Return type: `mixed`
 
 Apply a callback to the elements of an array extracted
 by a Set::extract compatible path:
@@ -75,8 +74,7 @@ $result = Set::apply('/Movie/title', $data, 'strtoupper', ['type' => 'map']);
 
 `static` Set::**check**($data, $path = null)
 
-rtype  
-boolean/array
+Return type: `boolean/array`
 
 Checks if a particular path is set in an array. If \$path is empty,
 \$data will be returned instead of a boolean value:
@@ -109,8 +107,7 @@ $result = Set::check($set, 'My Index 1.First.Seconds.Third.Fourth');
 
 `static` Set::**classicExtract**($data, $path = null)
 
-rtype  
-mixed
+Return type: `mixed`
 
 Gets a value from an array or object that is contained in a given
 path using an array path syntax, i.e.:
@@ -281,14 +278,13 @@ $result = Set::classicExtract($a, '{dot\.test}.{n}');
 
 `static` Set::**combine**($data, $path1 = null, $path2 = null, $groupPath = null)
 
-rtype  
-array
+Return type: `array`
 
 Creates an associative array using a \$path1 as the path to build
 its keys, and optionally \$path2 as path to get the values. If
 \$path2 is not specified, all values will be initialized to null
 (useful for Set::merge). You can optionally group the values by
-what is obtained when following the path specified in \$groupPath. :
+what is obtained when following the path specified in \$groupPath.
 
 ``` php
 $result = Set::combine([], '{n}.User.id', '{n}.User.Data');
@@ -462,8 +458,7 @@ $result = Set::combine($a, ['%2$d: %1$s', '{n}.User.Data.user', '{n}.User.id'], 
 
 `static` Set::**contains**($val1, $val2 = null)
 
-rtype  
-boolean
+Return type: `boolean`
 
 Determines if one Set or array contains the exact keys and values
 of another:
@@ -490,8 +485,7 @@ $result = Set::contains($b, $a);
 
 `static` Set::**countDim **($array = null, $all = false, $count = 0)
 
-rtype  
-integer
+Return type: `integer`
 
 Counts the dimensions of an array. If \$all is set to false (which
 is the default) it will only consider the dimension of the first
@@ -548,8 +542,7 @@ $result = Set::countDim($set, true);
 
 `static` Set::**diff**($val1, $val2 = null)
 
-rtype  
-array
+Return type: `array`
 
 Computes the difference between a Set and an array, two Sets, or
 two arrays:
@@ -616,8 +609,7 @@ $result = Set::diff($a, $b);
 
 `static` Set::**enum**($select, $list = null)
 
-rtype  
-string
+Return type: `string`
 
 The enum method works well when using HTML select elements. It
 returns a value from an array list if the key exists.
@@ -644,8 +636,7 @@ $res = Set::enum('first', ['first' => 'one', 'second' => 'two']);
 
 `static` Set::**extract**($path, $data = null, $options = [])
 
-rtype  
-mixed
+Return type: `mixed`
 
 Set::extract uses basic XPath 2.0 syntax to return subsets of your
 data from a find or a find all. This function allows you to
@@ -685,8 +676,7 @@ in `tests/TestCase/Utility/SetTest.php` of the `pieceofcake2/cakephp` repository
 
 `static` Set::**filter**($var)
 
-rtype  
-array
+Return type: `array`
 
 Filters empty elements out of a route array, excluding '0':
 
@@ -709,8 +699,7 @@ $res = Set::filter(['0', false, true, 0, ['one thing', 'I can tell you', 'is you
 
 `static` Set::**flatten**($data, $separator = '.')
 
-rtype  
-array
+Return type: `array`
 
 Collapses a multi-dimensional array into a single dimension:
 
@@ -742,8 +731,7 @@ $res = Set::flatten($arr);
 
 `static` Set::**format**($data, $format, $keys)
 
-rtype  
-array
+Return type: `array`
 
 Returns a series of values extracted from an array, formatted in a
 format string:
@@ -808,10 +796,9 @@ $res = Set::format($data, '%1$s, %2$d', ['{n}.Person.first_name', '{n}.Person.so
 
 `static` Set::**insert **($list, $path, $data = null)
 
-rtype  
-array
+Return type: `array`
 
-Inserts \$data into an array as defined by \$path. :
+Inserts \$data into an array as defined by \$path.
 
 ``` php
 $a = [
@@ -868,8 +855,7 @@ $result = Set::insert($a, 'pages.1.vars', ['title' => 'page title']);
 
 `static` Set::**map**($class = 'stdClass', $tmp = 'stdClass')
 
-rtype  
-object
+Return type: `object`
 
 This method Maps the contents of the Set object to an object
 hierarchy while maintaining numeric keys as arrays of objects.
@@ -957,11 +943,10 @@ $mapped->[0]->sayHi();
 
 `static` Set::**matches**($conditions, $data = [], $i = null, $length = null)
 
-rtype  
-boolean
+Return type: `boolean`
 
 Set::matches can be used to see if a single item or a given xpath
-match certain conditions. :
+match certain conditions.
 
 ``` php
 $a = [
@@ -1003,8 +988,7 @@ $res = Set::matches([], $a);
 
 `static` Set::**merge**($arr1, $arr2 = null)
 
-rtype  
-array
+Return type: `array`
 
 This function can be thought of as a hybrid between PHP's
 array_merge and array_merge_recursive. The difference to the two
@@ -1060,8 +1044,7 @@ $res = Set::merge($arry1, $arry2, $arry3, $arry4);
 
 `static` Set::**nest**($data, $options = [])
 
-rtype  
-array
+Return type: `array`
 
 Takes in a flat array and returns a nested array:
 
@@ -1124,10 +1107,9 @@ $result = Set::nest($data, ['root' => 6]);
 
 `static` Set::**normalize**($list, $assoc = true, $sep = ',', $trim = true)
 
-rtype  
-array
+Return type: `array`
 
-Normalizes a string or array list. :
+Normalizes a string or array list.
 
 ``` php
 $a = [
@@ -1229,8 +1211,7 @@ $result = Set::normalize(Set::merge($a, $b)); // Now merge the two and normalize
 
 `static` Set::**numeric**($array=null)
 
-rtype  
-boolean
+Return type: `boolean`
 
 Checks to see if all the values in the array are numeric:
 
@@ -1288,8 +1269,7 @@ $res = Set::numeric(array_keys($data));
 
 `static` Set::**pushDiff**($array1, $array2)
 
-rtype  
-array
+Return type: `array`
 
 This function merges two arrays and pushes the differences in
 array2 to the bottom of the resultant array.
@@ -1337,8 +1317,7 @@ $res = Set::pushDiff($array1, $array2);
 
 `static` Set::**remove**($list, $path = null)
 
-rtype  
-array
+Return type: `array`
 
 Removes an element from a Set or array as defined by \$path:
 
@@ -1361,12 +1340,11 @@ $result = Set::remove($a, 'files');
 
 `static` Set::**reverse**($object)
 
-rtype  
-array
+Return type: `array`
 
 Set::reverse is basically the opposite of `Set::map`. It converts an
 object into an array. If \$object is not an object, reverse will
-simply return \$object. :
+simply return \$object.
 
 ``` php
 $result = Set::reverse(null);
@@ -1459,8 +1437,7 @@ $result = Set::reverse($a['Post']); // Just return the array
 
 `static` Set::**sort**($data, $path, $dir)
 
-rtype  
-array
+Return type: `array`
 
 Sorts an array by any value, determined by a Set-compatible path:
 

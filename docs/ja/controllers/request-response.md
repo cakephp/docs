@@ -35,7 +35,7 @@ CakePHP 2.0 では新しくリクエストとレスポンスのオブジェク�
 
 `CakeRequest` はリクエストパラメータにアクセスするためにいくつかのインターフェイスを
 提供しています。一つ目の方法は、添字付き配列です。二つ目の方法は `$this->request->params`
-を経由する方法です。三つ目はオブジェクトのプロパティとしてアクセスする方法です。 :
+を経由する方法です。三つ目はオブジェクトのプロパティとしてアクセスする方法です。
 
 ``` php
 $this->request->controller;
@@ -48,7 +48,7 @@ $this->request->params['controller'];
 すべての [Route Elements](../development/routing#route-elements) はこのインターフェイスを通してアクセスされます。
 
 [Route Elements](../development/routing#route-elements) に加えて [Passed Arguments](../development/routing#passed-arguments) や [Named Parameters](../development/routing#named-parameters)
-へのアクセスがしばしば必要になります。これらは両方ともリクエストオブジェクトと同様に利用可能です。 :
+へのアクセスがしばしば必要になります。これらは両方ともリクエストオブジェクトと同様に利用可能です。
 
 ``` php
 // 渡された引数
@@ -70,14 +70,14 @@ CakePHP の内部で使っている重要で役に立つパラメータが存在
 - `controller` 現在のリクエストを処理するコントローラです。
 - `action` 現在のリクエストを処理するアクションです。
 - `prefix` 現在のアクションのプレフィックスです。詳しくは、 [Prefix Routing](../development/routing#prefix-routing) をご覧ください。
-- `bare` リクエストが `~Controller::requestAction()` から始まり
+- `bare` リクエストが `Controller::requestAction()` から始まり
   bare オプションを含んでいたとき定義されます。生のリクエストは描画されたレイアウトを持ちません。
-- `requested` アクションが `~Controller::requestAction()` から始まったとき定義され
+- `requested` アクションが `Controller::requestAction()` から始まったとき定義され
   true が設定されます。
 
 ## クエリ文字列パラメータにアクセス
 
-クエリ文字列パラメータは `CakeRequest::$query` を使って読み出すことができます。 :
+クエリ文字列パラメータは `CakeRequest::$query` を使って読み出すことができます。
 
 ``` php
 // url は /posts/index?page=1&sort=title
@@ -88,9 +88,9 @@ $this->request->query['page'];
 $this->request['url']['page'];
 ```
 
-`~CakeRequest::$query` プロパティに直接アクセスするか、エラーが発生しない方法で
+`CakeRequest::$query` プロパティに直接アクセスするか、エラーが発生しない方法で
 URL クエリ配列を読むために `CakeRequest::query()` を使うことができます。
-キーが存在しない場合、 `null` が返ります。 :
+キーが存在しない場合、 `null` が返ります。
 
 ``` php
 $foo = $this->request->query('value_that_does_not_exist');
@@ -107,9 +107,9 @@ $foo = $this->request->query('value_that_does_not_exist');
 $this->request->data['Post']['title'];
 ```
 
-`~CakeRequest::$data` プロパティに直接アクセスするか、エラーが発生しない方法で
+`CakeRequest::$data` プロパティに直接アクセスするか、エラーが発生しない方法で
 data 配列を読むために `CakeRequest::data()` を使うことができます。
-キーが存在しない場合、 `null` が返ります。 :
+キーが存在しない場合、 `null` が返ります。
 
 ``` php
 $foo = $this->request->data('Value.that.does.not.exist');
@@ -132,7 +132,7 @@ REST サービスを構築しているとき `PUT` と `DELETE` リクエスト�
 [REST](../development/rest) を採用しているアプリケーションでは URL エンコードされていない
 post 形式でデータを交換することがしばしばあります。 `CakeRequest::input()`
 を使用すると、任意の形式の入力データを読み込むことができます。
-デコード関数が提供されることでデシリアライズされたコンテンツを受け取ることができます。 :
+デコード関数が提供されることでデシリアライズされたコンテンツを受け取ることができます。
 
 ``` php
 // PUT/POST アクションで投稿されたデータを JSON 形式にエンコードで取得する
@@ -141,7 +141,7 @@ $data = $this->request->input('json_decode');
 
 `json_decode` の 'as array' パラメータや XML を DOMDocument オブジェクトに変換したい時のように、
 デシリアライズメソッドの中には呼び出し時に追加パラメータが必要なものがあるので
-`CakeRequest::input()` は追加パラメータを渡せるようになっています。 :
+`CakeRequest::input()` は追加パラメータを渡せるようになっています。
 
 ``` php
 // PUT/POST アクションで投稿されたデータを Xml エンコードで取得する
@@ -158,7 +158,7 @@ $data = $this->request->input('Xml::build', ['return' => 'domdocument']);
 
 さまざまなリクエストの状態を検出するために以前は `RequestHandlerComponent` を
 使う必要がありました。これらのメソッドは `CakeRequest` に移動され後方互換を保ちつつ
-新しいインターフェイスが提供されています。使い方は以下の通りです。 :
+新しいインターフェイスが提供されています。使い方は以下の通りです。
 
 ``` php
 $this->request->is('post');
@@ -178,7 +178,7 @@ $this->request->isPost(); // 非推奨
 - コールバック検出器 - コールバック検出器はチェックをハンドリングするために 'callback' タイプを提供します。
   コールバックはパラメータとしてだけリクエストオブジェクトを受け取ります。
 
-いくつかの例を示します。 :
+いくつかの例を示します。
 
 ``` php
 // environment detector を追加する
@@ -329,7 +329,7 @@ CakePHP はデフォルトで `CakeResponse` を使います。
 これにより、アプリケーションのすべてのコントローラが `CakeResponse` の代わりに
 `CustomResponse` を使うようになります。またコントローラの中で `$this->response`
 を設定することでレスポンスインスタンスを置き換えることができます。
-レスポンスオブジェクトのオーバーライドは `~CakeResponse::header()`
+レスポンスオブジェクトのオーバーライドは `CakeResponse::header()`
 とやりとりするメソッドをスタブ化しやすくするので、テストで使いやすいです。
 詳しくは [Cakeresponse Testing](#cakeresponse-testing) を参照して下さい。
 
@@ -338,7 +338,7 @@ CakePHP はデフォルトで `CakeResponse` を使います。
 `CakeResponse::type()` を使うことでアプリケーションレスポンスの
 コンテンツタイプを制御することができます。もし `CakeResponse` に組み込まれていない
 コンテンツタイプを扱う必要がある場合、以下のように `CakeResponse::type()` を使って
-設定することができます。 :
+設定することができます。
 
 ``` php
 // vCard タイプを追加
@@ -348,7 +348,7 @@ $this->response->type(['vcf' => 'text/v-card']);
 $this->response->type('vcf');
 ```
 
-大抵の場合、追加のコンテンツタイプはコントローラの `~Controller::beforeFilter()`
+大抵の場合、追加のコンテンツタイプはコントローラの `Controller::beforeFilter()`
 コールバックの中で設定したいと思うので、
 `RequestHandlerComponent` が提供するビューの自動切り替え機能を活用できます。
 
@@ -359,7 +359,7 @@ $this->response->type('vcf');
 リクエストに対するレスポンスとしてファイルを送りたいときがあります。
 バージョン 2.3 より前は、 `MediaView` を使うことができました。
 2.3 以降から `MediaView` は非推奨になり `CakeResponse::file()` を使って
-ファイルを送信します。 :
+ファイルを送信します。
 
 ``` php
 public function sendFile($id)
@@ -377,7 +377,7 @@ CakePHP は、`CakeResponse::$_mimeTypes` に登録された、よく知られ�
 `CakeResponse::type()` メソッドを使って、新しいタイプを追加できます。
 
 もし、あなたが望むなら、 オプションを明記することによって、ブラウザ上に表示する代わりに
-ファイルをダウンロードさせることができます。 :
+ファイルをダウンロードさせることができます。
 
 ``` php
 $this->response->file(
@@ -388,7 +388,7 @@ $this->response->file(
 
 ## 文字列をファイルとして送信
 
-動的に生成された pdf や ics のようにディスクに存在しないファイルを返すことができます。 :
+動的に生成された pdf や ics のようにディスクに存在しないファイルを返すことができます。
 
 ``` php
 public function sendIcs()
@@ -408,7 +408,7 @@ public function sendIcs()
 ## ヘッダの設定
 
 ヘッダの設定は `CakeResponse::header()` メソッドで行われます。
-このメソッドは少し違ったパラメータ設定と一緒に呼ばれます。 :
+このメソッドは少し違ったパラメータ設定と一緒に呼ばれます。
 
 ``` php
 // ヘッダを一つ設定する
@@ -425,7 +425,7 @@ $this->response->header([
 ]);
 ```
 
-同じ `~CakeResponse::header()` を複数回設定すると、
+同じ `CakeResponse::header()` を複数回設定すると、
 普通の header 呼び出しと同じように、以前の値を上書きしていしまいます。
 `CakeResponse::header()` が呼び出されなければヘッダは送られません。
 これらのヘッダはレスポンスが実際に送られるまでバッファリングされます。
@@ -438,7 +438,7 @@ $this->response->header([
 ## ブラウザキャッシュとの対話
 
 時々、コントローラアクションの結果をキャッシュしないようにブラウザに強制する必要がでてきます。
-`CakeResponse::disableCache()` はそういった目的で使われます。 :
+`CakeResponse::disableCache()` はそういった目的で使われます。
 
 ``` php
 public function index()
@@ -453,7 +453,7 @@ public function index()
 > disableCache() を使うことをエラーにすることができます。
 
 また、`CakeResponse::cache()` を使ってクライアントにレスポンスを
-キャッシュして欲しいことを伝えられます。 :
+キャッシュして欲しいことを伝えられます。
 
 ``` php
 public function index()
@@ -493,19 +493,19 @@ HTTP は二つのモデル、expiration と validation を使います。これ�
 
 キャッシュ制御ヘッダは expiration モデルの元で使われ、複数の指示を含んでいます。
 ブラウザやプロキシがどのようにキャッシュされたコンテンツを扱うのかをその指示で変更することができます。
-Cache-Control ヘッダは以下の通りです。 :
+Cache-Control ヘッダは以下の通りです。
 
     Cache-Control: private, max-age=3600, must-revalidate
 
 `CakeResponse` のいくつかのユーティリティメソッドを用いることで、最終的に有効な
 `Cache-Control` ヘッダを生成します。 一つ目は、`CakeResponse::sharable()` メソッドです。
 このメソッドは異なるユーザやクライアントの間で共有出来ることを考慮されたレスポンスかどうかを示します。
-このメソッドは実際には、このヘッダが <span class="title-ref">public</span> または <span class="title-ref">private</span> のどちらなのかを制御しています。
+このメソッドは実際には、このヘッダが `public` または `private` のどちらなのかを制御しています。
 private としてレスポンスを設定することは、レスポンスのすべてまたはその一部が特定のユーザ用であることを示しています。
 共有キャッシュのメリットを活かすためにはコントロールディレクティブを public に設定する必要があります。
 
-このメソッドの二番目のパラメータはキャッシュの <span class="title-ref">max-age</span> を指定するために使われます。
-このパラメータはレスポンスが古いと見なされる秒数を表しています。 :
+このメソッドの二番目のパラメータはキャッシュの `max-age` を指定するために使われます。
+このパラメータはレスポンスが古いと見なされる秒数を表しています。
 
 ``` php
 public function view()
@@ -532,7 +532,7 @@ public function my_data()
 :::
 
 `Expires` ヘッダに、レスポンスが古いと見なされる日時を設定できます。
-このヘッダは `CakeResponse::expires()` メソッドを使って設定されます。 :
+このヘッダは `CakeResponse::expires()` メソッドを使って設定されます。
 
 ``` php
 public function view()
@@ -555,13 +555,13 @@ HTTP におけるキャッシュの検証はコンテンツが定期的に変化
 アプリケーションに毎回リソースが変更されたかどうかを尋ねます。
 これは画像や他のアセットといった静的なリソースに対して使われる場合が多いです。
 
-`~CakeResponse::etab()` メソッド (entity tag と呼ばれる) は要求されたリソースを
+`CakeResponse::etab()` メソッド (entity tag と呼ばれる) は要求されたリソースを
 識別するための一意な文字列です。大抵の場合はファイルのチェックサムのようなもので、
 リソースが一致するかどうかを調べるためにキャッシュはチェックサムを比較するでしょう。
 
 実際にこのヘッダを使うメリットを得るためには、手動で `CakeResponse::checkNotModified()`
 メソッドを呼び出すかコントローラに `RequestHandlerComponent`
-を読み込まなければなりません。 :
+を読み込まなければなりません。
 
 ``` php
 public function index()
@@ -585,7 +585,7 @@ HTTP キャッシュの検証モデルのもとでは、リソースが最後に
 キャッシュしているクライアントにレスポンスが変更されたのかどうかを返答する手助けとなります。
 
 実際にこのヘッダを使うメリットを得るためには、 `CakeResponse::checkNotModified()`
-メソッドを呼び出すかコントローラに `RequestHandlerComponent` を読み込まなければなりません。 :
+メソッドを呼び出すかコントローラに `RequestHandlerComponent` を読み込まなければなりません。
 
 ``` php
 public function view()
@@ -603,7 +603,7 @@ public function view()
 
 時には同じ URL で異なるコンテンツを提供したいと思うかもしれません。
 これは多国語対応ページがある場合やブラウザごとに異なる HTML を返すようなケースでしばしばおこります。
-そのような状況では `Vary` ヘッダを使えます。 :
+そのような状況では `Vary` ヘッダを使えます。
 
 ``` php
 $this->response->vary('User-Agent');
@@ -619,7 +619,7 @@ $this->response->vary('Accept-Language');
 `CakeResponse` を使っていて良かったと思うかもしれません。
 いくつものオブジェクトを横断して使われるメソッドの代わりに、コントローラとコンポーネントが
 `CakeResponse` に委譲しているのをまねる(mock)オブジェクトを準備するだけでよくなります。
-このことで'単体'テストを作りやすくなり、コントローラのテスト実施が簡単になります。 :
+このことで'単体'テストを作りやすくなり、コントローラのテスト実施が簡単になります。
 
 ``` php
 public function testSomething()

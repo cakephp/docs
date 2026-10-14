@@ -890,7 +890,7 @@ public function testInvalidKey()
 このクラスをコントローラーのテストケースの親クラスとすることで、
 コントローラーのテストケースを `testAction()` というメソッドでより簡単にすることができます。
 `ControllerTestCase` は擬似的にコンポーネントやモデルを動かすだけでなく、
-`~Controller::redirect()` のように潜在的にテストが難しいメソッドの
+`Controller::redirect()` のように潜在的にテストが難しいメソッドの
 テストも簡単にしてくれます。
 
 下記のように、「Article」モデルに対応した典型的なコントローラーがあるとします。

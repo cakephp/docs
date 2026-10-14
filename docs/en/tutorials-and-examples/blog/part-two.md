@@ -662,7 +662,7 @@ links that allow users to delete posts, however:
 </table>
 ```
 
-Using `~FormHelper::postLink()` will create a link that uses
+Using `FormHelper::postLink()` will create a link that uses
 JavaScript to do a POST request to delete our post. Allowing content to be
 deleted using GET requests is dangerous, as web crawlers could accidentally
 delete all your content.

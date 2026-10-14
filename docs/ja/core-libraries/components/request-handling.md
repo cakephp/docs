@@ -15,7 +15,7 @@ RequestHandler はリクエストの種類に応じて自動的にレイアウ�
 コントローラのヘルパーの設定をする配列に加えます。また、 XML/JSON データをコントローラへ
 POST した場合、自動的に解析され `$this->request->data` 配列に割り当てられ、
 モデルデータとして保存可能です。 RequestHandler を利用するためには \$components 配列に
-含めてください。 :
+含めてください。
 
 ``` php
 class WidgetController extends AppController
@@ -48,7 +48,7 @@ RequestHandler はクライアントやリクエストについての情報を�
 上記の全ての検出メソッドは、特定のコンテンツタイプを対象にしたフィルタ機能と同様の方法で使用できます。
 例えば、 AJAX のリクエストに応答するときには、頻繁にデバッグレベルを変更しブラウザのキャッシュを
 無効にしたいでしょう。ただし、非 AJAX リクエストのときは反対にキャッシュを許可したいと思います。
-そのようなときは次のようにします。 :
+そのようなときは次のようにします。
 
 ``` php
 if ($this->request->is('ajax')) {
@@ -95,11 +95,11 @@ CPU の処理を節約することができます。
 レスポンスオブジェクトと元のリクエストを比較します。
 
 レスポンスが変更無いと見なされる場合、ビューの描画処理は行われず、クライアントには何も返さず
-処理時間を短縮、帯域幅を節約します。レスポンスステータスコードは <span class="title-ref">304 Not Modified</span>
+処理時間を短縮、帯域幅を節約します。レスポンスステータスコードは `304 Not Modified`
 にセットされます。
 
 自動的なチェックは、 `checkHttpCache` を false にすることで行わないように
-することができます。 :
+することができます。
 
 ``` php
 public $components = [
@@ -121,7 +121,7 @@ JsonView/XmlView を利用する場合、カスタムビュークラスでデフ
 
 `method` RequestHandlerComponent::**viewClassMap**($type, $viewClass)
 
-`viewClassMap` を使って、自動的にセットすることも可能です。 :
+`viewClassMap` を使って、自動的にセットすることも可能です。
 
 ``` php
 public $components = [

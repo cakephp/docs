@@ -919,7 +919,7 @@ and Components, CakePHP offers a specialized `ControllerTestCase` class.
 Using this class as the base class for your controller test cases allows you to
 use `testAction()` for simpler test cases. `ControllerTestCase` allows you
 to easily mock out components and models, as well as potentially difficult to
-test methods like `~Controller::redirect()`.
+test methods like `Controller::redirect()`.
 
 Say you have a typical Articles controller, and its corresponding
 model. The controller code looks like:

@@ -40,7 +40,7 @@ class PostsController extends AppController
 }
 ```
 
-You can also include other `~Model::find()` options, such as
+You can also include other `Model::find()` options, such as
 `fields`:
 
 ``` php
@@ -385,12 +385,12 @@ arguments.
 
 ## Out of range page requests
 
-As of 2.3 the PaginatorComponent will throw a <span class="title-ref">NotFoundException</span> when trying to
+As of 2.3 the PaginatorComponent will throw a `NotFoundException` when trying to
 access a non-existent page, i.e. page number requested is greater than total
 page count.
 
 So you could either let the normal error page be rendered or use a try catch
-block and take appropriate action when a <span class="title-ref">NotFoundException</span> is caught:
+block and take appropriate action when a `NotFoundException` is caught:
 
 ``` php
 public function index()

@@ -91,7 +91,7 @@ including file excerpts and argument dumps for all functions in the stack.
 
 ### debug()
 
-<span class="title-ref">debug()</span> now uses `Debugger` internally. This makes it consistent
+`debug()` now uses `Debugger` internally. This makes it consistent
 with Debugger, and takes advantage of improvements made there.
 
 ### Set
@@ -243,7 +243,7 @@ The old testsuite shell and its syntax are still available.
 - The `Plugin.view` syntax is now available everywhere. You can use this
   syntax anywhere you reference the name of a view, layout or element.
 
-- The `$options['plugin']` option for `~View::element()` is
+- The `$options['plugin']` option for `View::element()` is
   deprecated. You should use `Plugin.element_name` instead.
 
 ### Content type views
@@ -312,8 +312,8 @@ This includes elements, layouts and views.
 - Web test runner now defaults to displaying app tests.
 - Fixtures can be created in different datasources other than \$test.
 - Models loaded using the ClassRegistry and using another datasource will get
-  their datasource name prepended with `test_` (e.g datasource <span class="title-ref">master</span> will
-  try to use <span class="title-ref">test_master</span> in the testsuite)
+  their datasource name prepended with `test_` (e.g datasource `master` will
+  try to use `test_master` in the testsuite)
 - Test cases are generated with class specific setup methods.
 
 ## Events

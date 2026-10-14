@@ -40,11 +40,11 @@ CakePHP のプラグインにできるでしょう。
 CakePHP コアの動作中に自分のロジックを割り込ませたい場合、コールバックを使うことができます。
 使用できるコールバックには次のものがあります。
 
-- `~Controller::afterFilter()` 、 ビューの表示 (*render*) を含むすべての
+- `Controller::afterFilter()` 、 ビューの表示 (*render*) を含むすべての
   コントローラのロジックの後に実行されます。
-- `~Controller::beforeFilter()` 、 コントローラのアクションロジックの実行前に
+- `Controller::beforeFilter()` 、 コントローラのアクションロジックの実行前に
   呼ばれます。
-- `~Controller::beforeRender()` 、 コントローラロジックの実行後、しかしビューの
+- `Controller::beforeRender()` 、 コントローラロジックの実行後、しかしビューの
   表示(*render*)前に実行されます。
 
 ## モデルの拡張 ("ビヘイビア")

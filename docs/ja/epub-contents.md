@@ -1,5 +1,3 @@
-orphan  
-
 # コンテンツ
 
 - [入門](getting-started)

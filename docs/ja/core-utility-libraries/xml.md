@@ -13,7 +13,7 @@ Xml クラスは配列から SimpleXMLElement や DOMDocument
 データをインポートするには `Xml::build()` を使います。
 `return` オプションに応じて、SimpleXMLElement (デフォルト) または DOMDocument
 オブジェクトを返します。以下のサンプルは URL から
-データをインポートする方法を示しています。 :
+データをインポートする方法を示しています。
 
 ``` php
 // SimpleXML を使う
@@ -30,7 +30,7 @@ $xml = Xml::build('https://example.com/articles.rss', ['return' => 'domdocument'
 ```
 
 `Xml::build()` を使うことで、多様なソースから XML オブジェクトを
-作成することができます。たとえば、文字列から XML オブジェクトを作成することができます。 :
+作成することができます。たとえば、文字列から XML オブジェクトを作成することができます。
 
 ``` php
 $text = '<?xml version="1.0" encoding="utf-8"?>
@@ -43,7 +43,7 @@ $xml = Xml::build($text);
 ```
 
 ローカルやリモートにあるファイルからも XML オブジェクトを作成することができます。
-リモートのファイルは `HttpSocket` を使って取得します。 :
+リモートのファイルは `HttpSocket` を使って取得します。
 
 ``` php
 // ローカルにあるファイル
@@ -62,7 +62,7 @@ $xml = Xml::build('https://example.com/articles.rss');
 > $xml = Xml::build($this->request->data['xml'], ['readFile' => false]);
 > ```
 
-配列を使っても Xml オブジェクトを作成できます。 :
+配列を使っても Xml オブジェクトを作成できます。
 
 ``` php
 $data = [
@@ -75,7 +75,7 @@ $data = [
 $xml = Xml::build($data);
 ```
 
-入力が正しくない場合、 Xml クラスは例外をスローします。 :
+入力が正しくない場合、 Xml クラスは例外をスローします。
 
 ``` php
 $xmlString = 'What is XML?';
@@ -93,7 +93,7 @@ try {
 
 ## XML 文字列から配列への変換
 
-XML から配列への変換も Xml クラスを使えば簡単です。 :
+XML から配列への変換も Xml クラスを使えば簡単です。
 
 ``` php
 $xmlString = '<?xml version="1.0"?><root><child>value</child></root>';
@@ -112,7 +112,7 @@ $xmlString = $xmlObject->asXML();
 
 引数にとる配列は、「トップレベル」に数値でないキーを持つ要素をひとつだけ
 持つものでなければなりません。この条件を満たさない場合、
-Xml クラスは例外をスローします。以下は正しくない例です。 :
+Xml クラスは例外をスローします。以下は正しくない例です。
 
 ``` text
 // 数値のキーを用いたトップレベル要素
@@ -146,7 +146,7 @@ $xmlString = $xmlObject->asXML();
 
 この例では、 `$xmlString` には:
 
-``` php
+``` xml
 <?xml version="1.0"?>
 <project id="1">Value of project<name>Name of project, as tag</name></project>
 ```
@@ -174,9 +174,9 @@ $data = [
 ];
 ```
 
-この配列は、以下のような XML になります。 :
+この配列は、以下のような XML になります。
 
-``` php
+``` xml
 <?xml version="1.0"?>
 <projects>
     <project>
@@ -203,7 +203,7 @@ $data = [
 配列で XML 名前空間を定義するには、デフォルトの名前空間のために
 `xmlns:` という名前のキーを作成するか、カスタム名前空間の前に
 `xmlns:` をつけた名前のキーを作成する必要があります。
-以下の例を見てください。 :
+以下の例を見てください。
 
 ``` php
 $xmlArray = [
@@ -228,9 +228,9 @@ $xmlArray = [
 $xml2 = Xml::fromArray($xmlArray);
 ```
 
-`$xml1` と `$xml2` の値は、それぞれ次のようになるでしょう。 :
+`$xml1` と `$xml2` の値は、それぞれ次のようになるでしょう。
 
-``` php
+``` xml
 <?xml version="1.0"?>
 <root xmlns="https://cakephp.org"><child>value</child></root>
 
@@ -243,7 +243,7 @@ $xml2 = Xml::fromArray($xmlArray);
 
 Xml クラスはコンテンツの操作をするメソッドを提供しません。
 これらの操作は SimpleXMLElement または DOMDocument を使って行います。
-以下は子要素を作成する例です。 :
+以下は子要素を作成する例です。
 
 ``` php
 // SimpleXML を使用

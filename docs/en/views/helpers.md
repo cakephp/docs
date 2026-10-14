@@ -20,7 +20,7 @@ check out the chapter for each helper:
 ## Using and Configuring Helpers
 
 You enable helpers in CakePHP by making a controller aware of them. Each
-controller has a `~Controller::$helpers` property that lists the
+controller has a `Controller::$helpers` property that lists the
 helpers to be made available in the view. To enable a helper in your view, add
 the name of the helper to the controller's `$helpers` array:
 
@@ -236,7 +236,7 @@ class LinkHelper extends AppHelper
 
 Once you've created your helper and placed it in
 `src/View/Helper/`, you'll be able to include it in your
-controllers using the special variable `~Controller::$helpers`:
+controllers using the special variable `Controller::$helpers`:
 
 ``` php
 class PostsController extends AppController

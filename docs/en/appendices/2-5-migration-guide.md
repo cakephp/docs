@@ -157,7 +157,7 @@ listeners.
 ### Validation
 
 - The third param for `Validation::inList()` and `Validation::multiple()` has been
-  modified from <span class="title-ref">\$strict</span> to <span class="title-ref">\$caseInsensitive</span>. <span class="title-ref">\$strict</span> has been dropped as it was working incorrectly
+  modified from `$strict` to `$caseInsensitive`. `$strict` has been dropped as it was working incorrectly
   and could easily backfire.
   You can now set this param to true for case insensitive comparison. The default is false and
   will compare the value and list case sensitive as before.
@@ -183,7 +183,7 @@ The ExceptionRenderer now populates the error templates with "code", "message" a
 
 - Fixture files can now be placed in sub-directories. You can use fixtures in
   subdirectories by including the directory name after the `.`. For example,
-  <span class="title-ref">app.my_dir/article</span> will load `App/Test/Fixture/my_dir/ArticleFixture`. It
+  `app.my_dir/article` will load `App/Test/Fixture/my_dir/ArticleFixture`. It
   should be noted that the fixture directory will not be inflected or modified
   in any way.
 - Fixtures can now set `$canUseMemory` to false to disable the memory storage

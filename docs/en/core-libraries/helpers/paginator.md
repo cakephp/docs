@@ -137,7 +137,7 @@ Supported options are:
 - `last` Whether you want last links generated, set to an integer to define
   the number of 'last' links to generate. Defaults to false. Follows the same
   logic as the `first` option. There is a
-  `~PaginatorHelper::last()`\` method to be used separately as well if
+  `PaginatorHelper::last()` method to be used separately as well if
   you wish.
 
 - `ellipsis` Ellipsis content, defaults to '...'
@@ -152,7 +152,7 @@ Supported options are:
   current page number wrapped in extra 'a' or 'span' tag.
 
 While this method allows a lot of customization for its output. It is
-also ok to just call the method without any params. :
+also ok to just call the method without any params.
 
 ``` php
 echo $this->Paginator->numbers();

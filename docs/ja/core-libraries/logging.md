@@ -20,7 +20,7 @@ CakePHP でデータのロギングは簡単です。 log() 関数が Object ク
 `src/Lib/Log/Engine/DatabaseLog.php` 内に配置されます。もし、データベースロガーが
 プラグインの一部だった場合、 `plugins/LoggingPack/Lib/Log/Engine/DatabaseLog.php`
 に配置されます。 `CakeLog` は `CakeLog::config()` を呼ぶことで、ログストリームを
-設定するためにロードを試みます。 DatabaseLog を設定するためには、以下のようにします。 :
+設定するためにロードを試みます。 DatabaseLog を設定するためには、以下のようにします。
 
 ``` php
 // src/Lib 用
@@ -40,7 +40,7 @@ CakeLog::config('otherFile', [
 
 ログストリームを設定する時、 `engine` パラメータは、ログハンドラを配置、
 ロードするために使用され、その他の設定プロパティの全ては、ログストリームの
-コンストラクタに配列として渡されます。 :
+コンストラクタに配列として渡されます。
 
 ``` php
 // src/Lib/Log/Engine/DatabaseLog.php
@@ -131,7 +131,7 @@ true にセットしてください。詳しくは、 [構成設定](../developm
 書かれたログメッセージの種別は、メッセージが書き込まれたファイルの名前で決まります。
 もし種別が指定されなければ、エラーログを書き込むための LOG_ERROR が使われます。
 デフォルトのログの場所は、`LOGS` 定数が指す `logs/$type.log` です。
-レガシーレイアウト (`app/`) では `app/tmp/logs/$type.log` になります。 :
+レガシーレイアウト (`app/`) では `app/tmp/logs/$type.log` になります。
 
 ``` php
 // CakePHP クラスの中でこれを実行
@@ -142,7 +142,7 @@ $this->log('何か動かないよ！');
 ```
 
 第一引数に独自のログ名を指定できます。デフォルトの組み込み FileLog クラスは、
-このログ名を書き込みたいログファイルとして扱います。 :
+このログ名を書き込みたいログファイルとして扱います。
 
 ``` php
 // 静的に呼び出し
@@ -156,7 +156,7 @@ CakeLog::write('activity', '活動記録としての特別なメッセージ');
 書き込み可能にしなければなりません。
 
 `CakeLog::config()` を使うと別の FileLog 出力先を設定できます。
-FileLog は、独自のパスを使用するために `path` を設定できます。 :
+FileLog は、独自のパスを使用するために `path` を設定できます。
 
 ``` php
 CakeLog::config('custom_path', [
@@ -178,9 +178,9 @@ CakeLog::config('custom_path', [
 前処理を記述したり、ログを完全に別のストレージを使うことができます。
 
 syslog を使うためには、デフォルトの FileLog エンジンを使うのとよく似ています。
-ロギングに使用するエンジンとして <span class="title-ref">Syslog</span> を指定する必要があります。下記の設定は、
-デフォルトのロガーを syslog に置き換えるものです。これは、 <span class="title-ref">bootstrap.php</span> ファイルで
-設定します。 :
+ロギングに使用するエンジンとして `Syslog` を指定する必要があります。下記の設定は、
+デフォルトのロガーを syslog に置き換えるものです。これは、 `bootstrap.php` ファイルで
+設定します。
 
 ``` php
 CakeLog::config('default', [
@@ -190,28 +190,28 @@ CakeLog::config('default', [
 
 Syslog ロギングエンジンのための設定配列は、以下のキーを認識します。
 
-- \`format\`: ２つのプレースホルダーを持つ sprintf テンプレート文字列。１つ目は、
+- `format`: ２つのプレースホルダーを持つ sprintf テンプレート文字列。１つ目は、
   エラー種別で、２つ目はメッセージのためのものです。このキーは、ロギングメッセージ内の
   サーバやプロセスに関する追加の情報を付加するのに便利です。例えば、
   `%s - Web Server 1 - %s` は、プレースホルダーが置き換えられると、
   `error - Web Server 1 - An error occurred in this request` のようになります。
-- \`prefix\`: 全てのログメッセージの先頭につく文字列です。
-- \`flag\`: ロガーへの接続を開くために使用される整数値のフラグです。デフォルトは、
-  <span class="title-ref">LOG_ODELAY</span> が使用されます。 詳しくは、 <span class="title-ref">openlog</span> 文書をご覧ください。
-- \`facility\`: syslog で使用するロギングスロット。デフォルトでは、 <span class="title-ref">LOG_USER</span> が
-  使用されます。詳しくは、 <span class="title-ref">syslog</span> 文書をご覧ください。
+- `prefix`: 全てのログメッセージの先頭につく文字列です。
+- `flag`: ロガーへの接続を開くために使用される整数値のフラグです。デフォルトは、
+  `LOG_ODELAY` が使用されます。 詳しくは、 `openlog` 文書をご覧ください。
+- `facility`: syslog で使用するロギングスロット。デフォルトでは、 `LOG_USER` が
+  使用されます。詳しくは、 `syslog` 文書をご覧ください。
 
 ## ログへの書込み {#writing-to-logs}
 
 ログファイルへの書き込みは、２つの方法があります。１つは、
-静的な `CakeLog::write()` メソッドを使用することです。 :
+静的な `CakeLog::write()` メソッドを使用することです。
 
 ``` php
 CakeLog::write('debug', '何か動作しなかった');
 ```
 
 ２つ目は、 `Object` を継承するクラスに用意された log() ショートカット関数を
-使用することです。 log() を呼ぶと、内部的に CakeLog::write() が呼ばれます。 :
+使用することです。 log() を呼ぶと、内部的に CakeLog::write() が呼ばれます。
 
 ``` php
 // CakePHP クラス内でこれを実行:
@@ -227,7 +227,7 @@ $this->log('何か動作しなかったよ！', 'debug');
 CakeLog は、自身では何も自動設定されません。結果として、ログファイルは、ストリームが
 用意されていなければ、自動生成されません。全ての種別やレベルのログを受け取りたい場合、
 最低限一つ、 `default` のストリームを用意してください。通常、 `logs/`
-に出力するためには、コアの `FileLog` クラスをセットするだけで可能です。 :
+に出力するためには、コアの `FileLog` クラスをセットするだけで可能です。
 
 ``` php
 CakeLog::config('default', [
@@ -284,27 +284,22 @@ CakeLog::warning('これは、 shop と payments の両ストリームに書か�
 
 `static` CakeLog::**config**($name, $config)
 
-param string \$name  
-接続されるロガーの名前。後でロガーを削除するために
-使用されます。
-
-param array \$config  
-ロガーの設定情報とコンストラクタ引数の配列。
+- `string $name`: 接続されるロガーの名前。後でロガーを削除するために
+  使用されます。
+- `array $config`: ロガーの設定情報とコンストラクタ引数の配列。
 
 CakeLog と新しいロガーに接続します。接続されたロガーの各々は、
 ログメッセージが書かれるたびに全てのログメッセージを受け取ります。
 
 `static` CakeLog::**configured**()
 
-returns  
-設定されたロガーの配列
+戻り値: 設定されたロガーの配列
 
 設定されたロガーの名前を取得します。
 
 `static` CakeLog::**drop**($name)
 
-param string \$name  
-今後メッセージを受信させたくないロガーの名前。
+- `string $name`: 今後メッセージを受信させたくないロガーの名前。
 
 `static` CakeLog::**write**($level, $message, $scope = [])
 
@@ -326,7 +321,7 @@ param string \$name
 例： `CakeLog::levels()` 。
 
 デフォルトで 'user0' と 'user1' という追加のレベルを追加するために、
-ログレベルを使用します。 :
+ログレベルを使用します。
 
 ``` php
 CakeLog::levels(['user0', 'user1']);
@@ -346,7 +341,7 @@ CakeLog::levels(['user0', 'user1'], true);
 ];
 ```
 
-既存の設定を置き換えるために、第二引数に false をセットしてください。 :
+既存の設定を置き換えるために、第二引数に false をセットしてください。
 
 ``` php
 CakeLog::levels(['user0', 'user1'], false);
@@ -363,10 +358,9 @@ CakeLog::levels(['user0', 'user1'], false);
 
 `static` CakeLog::**defaultLevels**()
 
-returns  
-デフォルトのログレベルの値配列
+戻り値: デフォルトのログレベルの値配列
 
-独自の値にログレベルをリセットします。 :
+独自の値にログレベルをリセットします。
 
 ``` text
 [
@@ -383,29 +377,25 @@ returns
 
 `static` CakeLog::**enabled**($streamName)
 
-returns  
-boolean
+戻り値: `boolean`
 
 `$streamName` が有効かどうかをチェック。
 
 `static` CakeLog::**enable**($streamName)
 
-returns  
-void
+戻り値: `void`
 
 `$streamName` ストリームを有効化。
 
 `static` CakeLog::**disable**($streamName)
 
-returns  
-void
+戻り値: `void`
 
 `$streamName` ストリームを無効化。
 
 `static` CakeLog::**stream**($streamName)
 
-returns  
-`BaseLog` のインスタンス、見つからない場合は `false`
+戻り値: `BaseLog` のインスタンス、見つからない場合は `false`
 
 `$streamName` に該当するストリームを取得します。
 

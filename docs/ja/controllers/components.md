@@ -16,7 +16,7 @@ CakePHP には、様々な共通のタスクを支援するための素晴らし
 [認証](../core-libraries/components/authentication) や
 [Cookie](../core-libraries/components/cookie) などにあります。
 これらのコンポーネントと普通のコンポーネントの設定は大抵の場合、
-`$components` 配列かコントローラの `beforeFilter()` メソッドで行われます。 :
+`$components` 配列かコントローラの `beforeFilter()` メソッドで行われます。
 
 ``` php
 class PostsController extends AppController
@@ -38,7 +38,7 @@ class PostsController extends AppController
 すべてのコアコンポーネントはこの方法で設定することができます。
 さらに、コントローラの `beforeFilter()` メソッドで設定することもできます。
 これは関数の結果をコンポーネントのプロパティに設定する時に役に立ちます。
-上記は、次のように表現することもできます。 :
+上記は、次のように表現することもできます。
 
 ``` php
 public function beforeFilter()
@@ -56,7 +56,7 @@ public function beforeFilter()
 しかし、コンポーネントのオプションをコントローラの `beforeFilter()` が
 実行される前に設定することが可能な場合もあります。
 つまり、コンポーネントの中には `$components` 配列にオプションを設定することが
-できるものがあります。 :
+できるものがあります。
 
 ``` php
 public $components = [
@@ -68,7 +68,7 @@ public $components = [
 
 共通設定の一つに `className` オプションがあります。このオプションを使うとコンポーネントに
 別名をつけられます。この機能は `$this->Auth` や他のコンポーネントの参照を独自実装に
-置き換えたい時に便利です。 :
+置き換えたい時に便利です。
 
 ``` php
 // src/Controller/PostsController.php
@@ -99,7 +99,7 @@ class MyAuthComponent extends AuthComponent
 一旦、コンポーネントをコントローラに読込んでしまえば、使うのは非常に簡単です。
 使用中の各コンポーネントはコントローラのプロパティのように見えます。
 もし、 `SessionComponent` と `CookieComponent` を
-コントローラに読込んだ場合、以下のようにアクセスすることができます。 :
+コントローラに読込んだ場合、以下のようにアクセスすることができます。
 
 ``` php
 class PostsController extends AppController
@@ -125,7 +125,7 @@ class PostsController extends AppController
 
 すべてのコントローラアクションで全コンポーネントを使えるようにする必要はないかもしれません。
 このような状況では、実行時に [コンポーネントコレクション](../core-libraries/collections) を
-使ってコンポーネントを読込むことができます。コントローラ内部から以下のようにできます。 :
+使ってコンポーネントを読込むことができます。コントローラ内部から以下のようにできます。
 
 ``` php
 $this->OneTimer = $this->Components->load('OneTimer');
@@ -172,7 +172,7 @@ class MathComponent extends Component
 一旦コンポーネントが完成してしまえば、コントローラの `$components` 配列にあるコンポーネント名
 (Component の部分を削除する) を置き換えることで使えるようになります。
 コントローラはそのコンポーネントに由来する新しいプロパティを自動的に与えられ、
-そのプロパティを通してコンポーネントのインスタンスにアクセスできます。 :
+そのプロパティを通してコンポーネントのインスタンスにアクセスできます。
 
 ``` php
 /* 標準の $this->Session と同様に新しいコンポーネントを
@@ -184,7 +184,7 @@ public $components = ['Math', 'Session'];
 マージされます。同じコンポーネントを二度宣言する必要はありません。
 
 コントローラの中でコンポーネントを読み込む時、コンポーネントのコンストラクタに渡すバラメータを
-宣言することもできます。このパラメータはコンポーネントによって処理することができます。 :
+宣言することもできます。このパラメータはコンポーネントによって処理することができます。
 
 ``` php
 public $components = [
@@ -205,7 +205,7 @@ public $components = [
 
 作成しているコンポーネントから他のコンポーネントを使いたい時がたまにあります。その場合、
 作成中のコンポーネントから他のコンポーネントを読み込むことができ、その方法はコントローラから
-`$components` 変数を使って読み込む場合と同じです。 :
+`$components` 変数を使って読み込む場合と同じです。
 
 ``` php
 // src/Controller/Component/CustomComponent.php

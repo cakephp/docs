@@ -13,7 +13,7 @@ CakePHP で posts/index の xml/rss バージョンはすぐに作成できま�
 いくつかの簡単なステップの後、 `posts/index` に拡張子 (.rss) を追加し、
 `posts/index.rss` という URL を作成します。このウェブサービスを
 公開して実行する前にいくつか行う必要があります。最初に parseExtensions を
-有効にします。これは `config/routes.php` で行います。 :
+有効にします。これは `config/routes.php` で行います。
 
 ``` php
 Router::parseExtensions('rss');
@@ -30,14 +30,14 @@ Router::parseExtensions('rss');
 ### コントローラのコード
 
 PostsController の \$components 配列に RequestHandler を加えるのは
-良いアイディアです。これで、多くのことが自動的に行われます。 :
+良いアイディアです。これで、多くのことが自動的に行われます。
 
 ``` php
 public $components = ['RequestHandler'];
 ```
 
 ビューで `TextHelper` を、フォーマットに使うために
-コントローラに追加します。 :
+コントローラに追加します。
 
 ``` php
 public $helpers = ['Text'];
@@ -49,7 +49,7 @@ posts/index の RSS バージョンが作れるようになる前に、いくつ
 その情報は、ビューの中でも処理できます。それは後になりますが、今、もし RSS
 フィードのためのデータと HTML ビューのためのデータ、それぞれ異なるロジックを
 用意しているのであれば、 `RequestHandler::isRss()` メソッドが使えます。
-それ以外、あなたのコントローラに手を加えずにすみます。 :
+それ以外、あなたのコントローラに手を加えずにすみます。
 
 ``` php
 // Posts コントローラで RSS フィードの配信を行うアクション、
@@ -83,7 +83,7 @@ public function index()
 ### レイアウト
 
 RSS レイアウトはとてもシンプルです。 `templates/Layouts/rss/default.ctp` 内に
-以下の内容を記述します。 :
+以下の内容を記述します。
 
 ``` php
 if (!isset($documentData)) {
@@ -116,7 +116,7 @@ CakePHP では、あなたのビューからレイアウトに変数を渡すこ
 レイアウトのための `$documentData` と `$channelData` 変数を設定を始めます。
 これらの変数は、RSS フィードのためのすべてのメタデータを持っています。
 これは、 `Controller::set()` メソッドと同様の `View::set()`
-メソッドを使って行われます。ここでチャンネルのメタデータを渡すとレイアウトに戻ります。 :
+メソッドを使って行われます。ここでチャンネルのメタデータを渡すとレイアウトに戻ります。
 
 ``` php
 $this->set('channelData', [

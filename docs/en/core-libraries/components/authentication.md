@@ -290,7 +290,7 @@ authentication for example uses `$_SERVER['PHP_AUTH_USER']` and
 request, these values are used to re-identify the user and ensure they are
 valid user. As with authentication object's `authenticate()` method the
 `getUser()` method should return an array of user information on success or
-`false` on failure. :
+`false` on failure.
 
 ``` php
 public function getUser($request)
@@ -313,18 +313,18 @@ and identifies a user based on a username and password.
 ### Handling unauthenticated requests
 
 When an unauthenticated user tries to access a protected page first the
-<span class="title-ref">unauthenticated()</span> method of the last authenticator in the chain is called.
+`unauthenticated()` method of the last authenticator in the chain is called.
 The authenticate object can handle sending response or redirection as
-appropriate and return <span class="title-ref">true</span> to indicate no further action is necessary. Due to
+appropriate and return `true` to indicate no further action is necessary. Due to
 this the order in which you specify the authenticate object in
-<span class="title-ref">AuthComponent::\$authenticate</span> property matters.
+`AuthComponent::$authenticate` property matters.
 
-If authenticator returns null, <span class="title-ref">AuthComponent</span> redirects user to login action.
-If it's an AJAX request and <span class="title-ref">AuthComponent::\$ajaxLogin</span> is specified that
+If authenticator returns null, `AuthComponent` redirects user to login action.
+If it's an AJAX request and `AuthComponent::$ajaxLogin` is specified that
 element is rendered else a 403 HTTP status code is returned.
 
 > [!NOTE]
-> Prior to 2.4 the authenticate objects do not provide an <span class="title-ref">unauthenticated()</span>
+> Prior to 2.4 the authenticate objects do not provide an `unauthenticated()`
 > method.
 
 ### Displaying auth related flash messages
@@ -332,7 +332,7 @@ element is rendered else a 403 HTTP status code is returned.
 In order to display the session error messages that Auth generates, you need to
 add the following code to your layout. Add the following two lines to the
 `templates/Layouts/default.ctp` file in the body section preferable before the
-content_for_layout line. :
+content_for_layout line.
 
 ``` php
 // CakePHP 2.7+
@@ -866,7 +866,7 @@ and authentication mechanics in CakePHP.
 > - `params` - The array of additional params to use, defaults to []
 >
 > A URL (defined as a string or array) to the controller action that handles
-> logins. Defaults to <span class="title-ref">/users/login</span>
+> logins. Defaults to `/users/login`
 >
 > The URL (defined as a string or array) to the controller action users
 > should be redirected to after logging in. This value will be ignored if the
@@ -931,10 +931,9 @@ and authentication mechanics in CakePHP.
 
 `static` AuthComponent::**user**($key = null)
 
-param string \$key  
-The user data key you want to fetch. If null,
-all user data will be returned. Can also be called as an instance
-method.
+- `string $key`: The user data key you want to fetch. If null,
+  all user data will be returned. Can also be called as an instance
+  method.
 
 Get data concerning the currently logged in user, you can use a
 property key to fetch specific data about the user:

@@ -120,7 +120,7 @@ Prior to 2.5, listeners on the global manager were kept in a separate list and f
 ## Dispatching Events
 
 Once you have obtained an instance of an event manager you can dispatch events
-using `~CakeEventManager::dispatch()`. This method takes an instance
+using `CakeEventManager::dispatch()`. This method takes an instance
 of the `CakeEvent` class. Let's look at dispatching an event:
 
 ``` php
@@ -150,7 +150,7 @@ Finally, the third argument is any additional event data.This can be any data
 you consider useful to pass around so listeners can act upon it. While this can
 be an argument of any type, we recommend passing an associative array.
 
-The `~CakeEventManager::dispatch()` method accepts an event object as
+The `CakeEventManager::dispatch()` method accepts an event object as
 an argument and notifies all subscribed listeners.
 
 ## Registering Listeners

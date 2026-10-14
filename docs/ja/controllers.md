@@ -55,15 +55,15 @@ class AppController extends Controller
 > [!NOTE]
 > CakePHP は、 `AppController` とアプリケーションのコントローラとで、次の変数をマージします。
 >
-> - `~Controller::$components`
-> - `~Controller::$helpers`
-> - `~Controller::$uses`
+> - `Controller::$components`
+> - `Controller::$helpers`
+> - `Controller::$uses`
 
-`AppController` で `~Controller::$helpers` 変数を定義したら、デフォルトで
+`AppController` で `Controller::$helpers` 変数を定義したら、デフォルトで
 Html ヘルパーと Form ヘルパーが追加されます。
 
 また、子コントローラのコールバック中で `AppController` のコールバックを呼び出すのは、
-このようにするのがベストです。 :
+このようにするのがベストです。
 
 ``` php
 public function beforeFilter()
@@ -145,7 +145,7 @@ class RecipesController extends AppController
 従来の `app/` レイアウトでは、ビューファイルは `templates/` ではなく `app/View/` に置きます。
 
 通常、コントローラのアクションは `View` クラスがビューを描画するために使うコンテキストを
-作るために `~Controller::set()` を使います。CakePHP の規約に従うと、手動でビューを
+作るために `Controller::set()` を使います。CakePHP の規約に従うと、手動でビューを
 描画したり生成したりする必要はありません。コントローラのアクションが完了すると、CakePHP はビューの
 描画と送信をします。
 
@@ -156,10 +156,10 @@ class RecipesController extends AppController
   その文字列がレスポンスのボディとして使われます。
 - レスポンスとして `CakeResponse` を返すことが出来ます。
 
-コントローラのメソッドが `~Controller::requestAction()` から呼ばれた時、
+コントローラのメソッドが `Controller::requestAction()` から呼ばれた時、
 文字列ではないデータを返したい場合があると思います。もし通常のウェブのリクエストからも
 requestAction からも呼ばれるコントローラのメソッドがあれば、値を返す前にリクエストタイプを
-チェックしましょう。 :
+チェックしましょう。
 
 ``` php
 class RecipesController extends AppController
@@ -175,11 +175,11 @@ class RecipesController extends AppController
 }
 ```
 
-上記のコントローラのアクションは `~Controller::requestAction()` と
+上記のコントローラのアクションは `Controller::requestAction()` と
 通常のリクエストとで、メソッドがどのように使われるかの例です。requestAction ではない
 通常のリクエストに配列のデータを戻り値として返せば、エラーの原因になるのでやめましょう。
-`~Controller::requestAction()` のより詳しい情報については
-`~Controller::requestAction()` のセクションを参照してください。
+`Controller::requestAction()` のより詳しい情報については
+`Controller::requestAction()` のセクションを参照してください。
 
 アプリケーションでコントローラを効率的に使うために、CakePHP のコントローラから提供される
 いくつかのコアな属性やメソッドを説明しましょう。
@@ -210,7 +210,7 @@ CakePHP のコントローラは、リクエストのライフサイクル周り
 ### ビューとの関係
 
 コントローラはビューとお互いに影響しあっています。最初に、コントローラは
-`~Controller::set()` を使って、ビューにデータを渡すことが出来ます。
+`Controller::set()` を使って、ビューにデータを渡すことが出来ます。
 どのビュークラスを使うか、どのビューを描画すべきか、を決めることも出来ます。
 
 `method` Controller::**set**(string $var, mixed $value)
@@ -220,9 +220,9 @@ CakePHP のコントローラは、リクエストのライフサイクル周り
 #### 指定したビューを描画する
 
 コントローラでは、規約に従ったものではなく、別のビューを描画したことがあるかもしれません。
-これは `~Controller::render()` を直接呼び出すことで出来ます。
-一度 `~Controller::render()` を呼び出すと、
-CakePHP は再度ビューを描画することはありません。 :
+これは `Controller::render()` を直接呼び出すことで出来ます。
+一度 `Controller::render()` を呼び出すと、
+CakePHP は再度ビューを描画することはありません。
 
 ``` php
 class PostsController extends AppController
@@ -295,9 +295,9 @@ class PostsController extends AppController
 コントローラの変数とその説明については、
 [CakePHP API](https://api.cakephp.org/2.x/class-Controller.html) を確認してください。
 
-> `~Controller::$name` 変数はコントローラ名がセットされます。
+> `Controller::$name` 変数はコントローラ名がセットされます。
 > 通常これは、コントローラが使うメインのモデルの複数形となります。
-> このプロパティは必須ではありません。 :
+> このプロパティは必須ではありません。
 >
 > ``` php
 > // $name 変数の使い方のサンプル
@@ -311,9 +311,9 @@ class PostsController extends AppController
 
 次に説明するコントローラの変数は、現在のコントローラの中でどのヘルパー、コンポーネント、モデルを
 使うのかを CakePHP に伝える役割をはたします。これらの変数はもっとも良く使われる変数です。
-これらを使うことで、 `~Controller::$components` や `~Controller::$uses`
+これらを使うことで、 `Controller::$components` や `Controller::$uses`
 で与えられた MVC クラスはコントローラの中でクラス変数として (例えば `$this->ModelName`)、また
-`~Controller::$helpers` で与えられたクラスはビューの中でオブジェクトへの参照として
+`Controller::$helpers` で与えられたクラスはビューの中でオブジェクトへの参照として
 (例えば `$this->{$helpername}`) 有効になります。
 
 > [!NOTE]
@@ -323,8 +323,8 @@ class PostsController extends AppController
 > コントローラはデフォルトで主要なモデルへアクセスできるようになっています。
 > RecipesController は `$this->Recipe` でアクセスできるモデルクラスを持っており、
 > ProductsController もまた `$this->Product` に Product モデルを持っています。
-> しかし、 コントローラが `~Controller::$uses` 変数に追加のモデルを指定して、
-> それらが使えるようになっている時は、 `~Controller::$uses` に現在のコントローラの
+> しかし、 コントローラが `Controller::$uses` 変数に追加のモデルを指定して、
+> それらが使えるようになっている時は、 `Controller::$uses` に現在のコントローラの
 > モデルの名前も含めなければなりません。これについては、下の方のサンプルで説明します。
 >
 > コントローラでモデルを使いたくない場合は、 `public $uses = []` とセットしてください。
@@ -333,18 +333,18 @@ class PostsController extends AppController
 > `AppController` で定義されていたとしてもモデルがロードされなくなります。
 >
 > ::: info Changed in version 2.1
-> `~Controller::$uses` は新しい値を持ちます。 それは、 `false` とは違った扱いになります。
+> `Controller::$uses` は新しい値を持ちます。 それは、 `false` とは違った扱いになります。
 > :::
 >
 > `SessionComponent` と同様に、`HtmlHelper` 、
 > `FormHelper` 、`SessionHelper` はデフォルトで有効になっています。
-> しかし、 `AppController` で `~Controller::$helpers` を独自に定義している場合、
+> しかし、 `AppController` で `Controller::$helpers` を独自に定義している場合、
 > `HtmlHelper` と `FormHelper` をコントローラで有効にしたければ、
-> それらを `~Controller::$helpers` に含むようにしてください。
+> それらを `Controller::$helpers` に含むようにしてください。
 > このマニュアルの後ろにある、それぞれのセクションを確認して、これらのクラスについて
 > よく詳しく学んでください。
 >
-> 追加で利用する MVC クラス達をどうやって CakePHP のコントローラに伝えるのかを見てみましょう。 :
+> 追加で利用する MVC クラス達をどうやって CakePHP のコントローラに伝えるのかを見てみましょう。
 >
 > ``` php
 > class RecipesController extends AppController
@@ -360,9 +360,9 @@ class PostsController extends AppController
 > 再度宣言する必要はありません。
 >
 > components 配列はコントローラで使う [コンポーネント](controllers/components) をセットします。
-> `~Controller::$helpers` や `~Controller::$uses` のように、
+> `Controller::$helpers` や `Controller::$uses` のように、
 > あなたのコントローラのコンポーネントは `AppController` のコンポーネントとマージされます。
-> `~Controller::$helpers` のように、`~Controller::$components`
+> `Controller::$helpers` のように、`Controller::$components`
 > には設定を渡すことが出来ます。より詳しくは [Configuring Components](controllers/components#configuring-components) を参照してください。
 
 ### その他の変数
@@ -376,7 +376,7 @@ class PostsController extends AppController
 >
 > paginate 変数は非推奨の互換性のあるプロパティです。
 > この変数を使って、 `PaginatorComponent` の読み込みと設定をします。
-> 次のように、コンポーネントの設定を使うように修正することが推奨されます。 :
+> 次のように、コンポーネントの設定を使うように修正することが推奨されます。
 >
 > ``` php
 > class ArticlesController extends AppController

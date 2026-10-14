@@ -627,7 +627,7 @@ public function delete($id = null)
 </table>
 ```
 
-`~FormHelper::postLink()` を使うと、投稿記事の削除を行う POST
+`FormHelper::postLink()` を使うと、投稿記事の削除を行う POST
 リクエストをするための JavaScript を使うリンクが生成されます。ウェブクローラーが
 不意にコンテンツ全てを削除できてしまうので、GETリクエストを用いたコンテンツの削除を
 許可することは危険です。

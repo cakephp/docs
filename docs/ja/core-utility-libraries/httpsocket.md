@@ -29,7 +29,7 @@ CakePHP には、リクエストを簡単に行える HttpSocket クラスがあ
 持っています。このクラスは [ArrayAccess](https://www.php.net/manual/ja/class.arrayaccess.php) と
 [\_\_toString()](https://www.php.net/manual/ja/language.oop5.magic.php#language.oop5.magic.tostring)
 を実装していますので、 `$http->response` を配列として使用でき、リクエストメソッドの戻り値を
-文字列として使用できます。 :
+文字列として使用できます。
 
 ``` php
 $http = new HttpSocket();
@@ -64,7 +64,7 @@ $code = $response->code;
 
 コアの別の場所に従って、 HttpSocket はヘッダーの文字を変更しません。 `2616` には、
 ヘッダーは大文字小文字を区別しないと書かれています。そして、 HttpSocket は
-リモートホストが送った値を保存します。 :
+リモートホストが送った値を保存します。
 
     HTTP/1.1 200 OK
     Date: Mon, 16 Apr 2007 04:14:16 GMT
@@ -73,13 +73,13 @@ $code = $response->code;
 
 `$response->headers` (もしくは `$response['header']`) は、実際に送られたキーを含みます。
 安全にヘッダーフィールドへのアクセスするために、 `getHeader()` を使用することが最良です。
-もし、ヘッダーが以下の場合、 :
+もし、ヘッダーが以下の場合:
 
     Date: Mon, 16 Apr 2007 04:14:16 GMT
     server: CakeHttp Server
     content-tyPe: text/html
 
-`getHeader()` で上記のヘッダーを取得できます。 :
+`getHeader()` で上記のヘッダーを取得できます。
 
 ``` php
 // $response は HttpResponse のインスタンス。
@@ -95,7 +95,7 @@ $response->getHeader('date');
 ### リダイレクトレスポンスの自動処理
 
 レスポンスがリダイレクトステータスコードの場合 (`HttpResponse::isRedirect` 参照)、
-受信した *Location* ヘッダーに従って、自動的に追加のリクエスを行うことができます。 :
+受信した *Location* ヘッダーに従って、自動的に追加のリクエスを行うことができます。
 
 ``` php
 $HttpSocket = new HttpSocket();
@@ -135,7 +135,7 @@ SSL のサービスへのリクエストを作成する場合、 HttpSocket は�
 詳しくは [脆弱性への対応](/ja/appendices/security-fixes) を参照してください。
 :::
 
-これらのオプションは、コンストラクタの引数として指定します。 :
+これらのオプションは、コンストラクタの引数として指定します。
 
 ``` php
 $socket = new HttpSocket([
@@ -152,7 +152,7 @@ SSL 証明書の検証は、 2.3 で追加されました。
 ### 独自レスポンスクラスの作成
 
 HttpSocket で使用する独自のレスポンスクラスを作成することができます。以下の内容で
-`src/Lib/Network/Http/YourResponse.php` というファイルを作ることができます。 :
+`src/Lib/Network/Http/YourResponse.php` というファイルを作ることができます。
 
 ``` php
 // src/Lib/Network/Http/YourResponse.php
@@ -166,7 +166,7 @@ class YourResponse extends HttpSocketResponse
 }
 ```
 
-リクエストする前に、 responseClass プロパティを変更する必要があります。 :
+リクエストする前に、 responseClass プロパティを変更する必要があります。
 
 ``` php
 $http = new HttpSocket();
@@ -183,9 +183,9 @@ HttpSocket は `App::uses()` で `Network/Http` パッケージとしてクラ�
 
 ### 結果のダウンロード
 
-HttpSocket は、 <span class="title-ref">setContentResponse()</span> と呼ばれる新しいメソッドを持ちます。
-このメソッドでリソースをセットすることによって、 <span class="title-ref">fwrite()</span> を使ってこのリソースに
-内容を書き込ませられます。 ファイルをダウンロードするためには、以下のようにします。 :
+HttpSocket は、 `setContentResponse()` と呼ばれる新しいメソッドを持ちます。
+このメソッドでリソースをセットすることによって、 `fwrite()` を使ってこのリソースに
+内容を書き込ませられます。 ファイルをダウンロードするためには、以下のようにします。
 
 ``` php
 $http = new HttpSocket();
@@ -204,7 +204,7 @@ fclose($f);
 
 HttpSocket は、 HTTP ベーシック認証とダイジェスト認証に対応しています。
 また、OAuth のようなプロトコルに対応するために独自の認証オブジェクトを作成することができます。
-任意の認証システムを利用するためには、 `HttpSocket` インスタンスを設定する必要があります。 :
+任意の認証システムを利用するためには、 `HttpSocket` インスタンスを設定する必要があります。
 
 ``` php
 $http = new HttpSocket();
@@ -218,7 +218,7 @@ $http->configAuth('Basic', 'user', 'password');
 
 HttpSocket で利用するための独自の認証方法を作成することができます。
 以下の内容で、 `src/Lib/Network/Http/YourMethodAuthentication.php`
-ファイルを作成できました。 :
+ファイルを作成できました。
 
 ``` php
 class YourMethodAuthentication
@@ -237,7 +237,7 @@ class YourMethodAuthentication
 }
 ```
 
-独自認証を HttpSocket に設定するためには、新しい `configAuth()` メソッドを使用します。 :
+独自認証を HttpSocket に設定するためには、新しい `configAuth()` メソッドを使用します。
 
 ``` php
 $http->configAuth('YourMethod', ['config1' => 'value1', 'config2' => 'value2']);
@@ -249,7 +249,7 @@ $http->get('http://secure.your-site.com');
 ### プロクシ経由で HttpSoket の利用
 
 認証設定の一部で、プロクシ認証の設定ができます。同じ認証クラスの中で、プロクシ認証のための
-独自のメソッドを作成します。 :
+独自のメソッドを作成します。
 
 ``` php
 class YourMethodAuthentication

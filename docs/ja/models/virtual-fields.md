@@ -9,7 +9,7 @@
 
 バーチャルフィールドを作るのは簡単です。各々のモデルに、フィールド =\> 式 という内容の配列を用いた
 `$virtualFields` プロパティを定義することができます。MySQL を用いたバーチャルフィールドの
-定義の例としては、以下のようになります。 :
+定義の例としては、以下のようになります。
 
 ``` php
 public $virtualFields = [
@@ -17,7 +17,7 @@ public $virtualFields = [
 ];
 ```
 
-PostgreSQLだと、以下のようになります。 :
+PostgreSQLだと、以下のようになります。
 
 ``` php
 public $virtualFields = [
@@ -42,7 +42,7 @@ public $virtualFields = [
 ### Model::hasField()
 
 Model::hasField() は、モデルが実際に持っているフィールドを一番目の引数で渡すと true を返します。
-<span class="title-ref">hasField()</span> の二番目の引数を true にすることによって、バーチャルフィールドもチェックされるように
+`hasField()` の二番目の引数を true にすることによって、バーチャルフィールドもチェックされるように
 なります。上記の例を用いれば:
 
 ``` php
@@ -55,7 +55,7 @@ $this->User->hasField('name', true);
 ### Model::isVirtualField()
 
 このメソッドは、フィールド・カラムがバーチャルフィールドか実在するフィールドかどうかを
-判定するときに用いられます。カラムがバーチャルであるときに true を返します。 :
+判定するときに用いられます。カラムがバーチャルであるときに true を返します。
 
 ``` php
 $this->User->isVirtualField('name'); //true
@@ -65,7 +65,7 @@ $this->User->isVirtualField('first_name'); //false
 ### Model::getVirtualField()
 
 このメソッドは、バーチャルフィールドを構成する SQL 表現にアクセスするために用いられます。
-引数が与えられない場合、そのモデルのすべてのバーチャルフィールドを返します。 :
+引数が与えられない場合、そのモデルのすべてのバーチャルフィールドを返します。
 
 ``` php
 // 'CONCAT(User.first_name, ' ', User.last_name)' を返します。
@@ -76,7 +76,7 @@ $this->User->getVirtualField('name');
 
 先に述べたように、 `Model::find()` はモデルの他のフィールドと同じように
 バーチャルフィールドを扱います。返り値のセットの中で、バーチャルフィールドの値は
-モデルのキーの下に置かれます。 :
+モデルのキーの下に置かれます。
 
 ``` php
 $results = $this->User->find('first');
@@ -102,7 +102,7 @@ $results = $this->User->find('first');
 自身の名前と違うエイリアスを持つモデルとバーチャルフィールドを同時に用いた場合、
 結びつけられたエイリアスが反映されないという問題にぶつかることがあります。
 別名を持つようなモデルでバーチャルフィールドを使用するには、
-モデルのコンストラクタでバーチャルフィールドを定義するのがベストでしょう。 :
+モデルのコンストラクタでバーチャルフィールドを定義するのがベストでしょう。
 
 ``` php
 public function __construct($id = false, $table = null, $ds = null)
@@ -121,14 +121,14 @@ public function __construct($id = false, $table = null, $ds = null)
 ## JOINS を使ったページ制御とバーチャルフィールドの設定
 
 次の例は、hasMany アソシエーションのカウンターを持ち、バーチャルフィールドを有効にすることができます。
-例えば、もしテンプレートの中で次のようなソートリンクがある場合、 :
+例えば、もしテンプレートの中で次のようなソートリンクがある場合:
 
 ``` php
 // バーチャルフィールドのソートリンクを作成
 $this->Paginator->sort('ProductsItems.Total', 'Items Total');
 ```
 
-コントローラの中で、次のようなページ制御の設定を行います。 :
+コントローラの中で、次のようなページ制御の設定を行います。
 
 ``` php
 $this->Products->recursive = -1;
@@ -162,7 +162,7 @@ $this->paginate = $where;
 $data = $this->Paginator->paginate();
 ```
 
-次のようなものを返すでしょう。 :
+次のようなものを返すでしょう。
 
 ``` text
 
@@ -212,7 +212,7 @@ $this->Timelog->query(
 );
 ```
 
-戻り値はこのようになります。 :
+戻り値はこのようになります。
 
 ``` text
 
@@ -235,14 +235,14 @@ $this->Timelog->query(
 指定する必要があります。
 永続的にモデルに宣言しなくても、その場で新しいバーチャルフィールドを追加することができます。
 別のクエリがバーチャルフィールドを使用しようとする場合、デフォルト値として `0` を与えます。
-それが発生した場合、 `0` が TotalHours 列に入ります。 :
+それが発生した場合、 `0` が TotalHours 列に入ります。
 
 ``` php
 $this->Timelog->virtualFields['TotalHours'] = 0;
 ```
 
 また、バーチャルフィールドを追加することに加えて、カラムを `MyModel__MyField` の形式で
-別名にする必要があります。 :
+別名にする必要があります。
 
 ``` php
 $this->Timelog->query(
@@ -257,7 +257,7 @@ $this->Timelog->query(
 );
 ```
 
-バーチャルフィールドを設定した後クエリを再度実行すると、きれいな値のグループになるはずです。 :
+バーチャルフィールドを設定した後クエリを再度実行すると、きれいな値のグループになるはずです。
 
 ``` text
 
@@ -281,13 +281,13 @@ $this->Timelog->query(
 これは関連モデルを見つけられるかもしれない深さを見積もるのが難しいということに起因します。
 
 この実装の問題に対する一般的な回避策としては、利用する必要がある時に
-`virtualFields` をあるモデルから別のモデルにコピーすることです。 :
+`virtualFields` をあるモデルから別のモデルにコピーすることです。
 
 ``` php
 $this->virtualFields['name'] = $this->Author->virtualFields['name'];
 ```
 
-もしくは以下のようにします。 :
+もしくは以下のようにします。
 
 ``` php
 $this->virtualFields += $this->Author->virtualFields;

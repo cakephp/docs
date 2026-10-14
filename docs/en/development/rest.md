@@ -178,7 +178,7 @@ natural choice to receive XML as input. Not to worry, the
 `RequestHandler` and `Router` classes make
 things much easier. If a POST or PUT request has an XML content-type,
 then the input is run through CakePHP's `Xml` class, and the
-array representation of the data is assigned to <span class="title-ref">\$this-\>request-\>data</span>.
+array representation of the data is assigned to `$this->request->data`.
 Because of this feature, handling XML and POST data in parallel
 is seamless: no changes are required to the controller or model code.
 Everything you need should end up in `$this->request->data`.
@@ -189,7 +189,7 @@ Typically REST applications not only output content in alternate data formats,
 but also accept data in different formats. In CakePHP, the
 `RequestHandlerComponent` helps facilitate this. By default,
 it will decode any incoming JSON/XML input data for POST/PUT requests
-and supply the array version of that data in <span class="title-ref">\$this-\>request-\>data</span>.
+and supply the array version of that data in `$this->request->data`.
 You can also wire in additional deserializers for alternate formats if you
 need them, using `RequestHandler::addInputType()`.
 

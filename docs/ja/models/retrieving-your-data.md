@@ -19,7 +19,7 @@ find はデータ取得のための、非常に多機能でとても良く働い
 
 `$params` はいろいろな種類の `find()` へのパラメータを渡すために使われます。
 デフォルトでは以下のキーのパラメータを渡すことができます。これらキーの指定は
-任意です。 :
+任意です。
 
 ``` text
 [
@@ -53,7 +53,7 @@ find はデータ取得のための、非常に多機能でとても良く働い
 ## find('first')
 
 `find('first', $params)` は結果を1行返します。1行だけ取得したい時に使います。
-以下の例を見てください。 :
+以下の例を見てください。
 
 ``` php
 public function some_function()
@@ -71,7 +71,7 @@ public function some_function()
 ```
 
 1行目のサンプルは、パラメータを渡していません。すなわち、検索条件の指定もソートの指定も
-されないということです。 `find('first')` の戻り値はこのような形式になっています。 :
+されないということです。 `find('first')` の戻り値はこのような形式になっています。
 
 ``` text
 
@@ -98,7 +98,7 @@ public function some_function()
 
 ## find('count')
 
-`find('count', $params)` は整数を返します。以下のサンプルを見てください。 :
+`find('count', $params)` は整数を返します。以下のサンプルを見てください。
 
 ``` php
 public function some_function()
@@ -127,7 +127,7 @@ public function some_function()
 ## find('all')
 
 `find('all', $params)` は配列で結果を返します。 `find('all')` は、他のいろいろな
-`find()` や、 `paginate` でも使われています。以下のサンプルを見てください。 :
+`find()` や、 `paginate` でも使われています。以下のサンプルを見てください。
 
 ``` php
 public function some_function()
@@ -149,7 +149,7 @@ public function some_function()
 > 上記サンプルの `$allAuthors` は、users テーブルの全ユーザーデータを受け取ります。
 > find に何もオプションパラメータを渡していないので、検索条件が適用されません。
 
-`find('all')` を呼び出すと、その戻り値は以下のような形式となります。 :
+`find('all')` を呼び出すと、その戻り値は以下のような形式となります。
 
 ``` text
 
@@ -182,7 +182,7 @@ public function some_function()
 
 `find('list', $params)` はインデックス付きの配列を返します。よくあるフォームの
 セレクトボックスを作るために、リストが欲しい場合などに使うと便利です。
-以下のサンプルを見てください。 :
+以下のサンプルを見てください。
 
 ``` php
 public function some_function()
@@ -206,7 +206,7 @@ public function some_function()
 > 上記サンプルの `$allAuthors` は、users テーブルの全ユーザーデータを受け取ります。
 > find に何もオプションパラメータを渡していないので、検索条件が適用されません。
 
-`find('list')` を呼び出すと、その戻り値は以下のような形式となります。 :
+`find('list')` を呼び出すと、その戻り値は以下のような形式となります。
 
 ``` text
 
@@ -225,7 +225,7 @@ public function some_function()
 配列の添字として使うのかを指定でき、必要に応じて結果をグループ化してくれます。
 デフォルトではモデルのプライマリーキーが検索結果の配列の添字として使われます。
 また、添字に対する値は value が使われます。(値については、モデルの属性
-[Model Displayfield](../models/model-attributes#model-displayField) で設定できます) 以下に例を示します。 :
+[Model Displayfield](../models/model-attributes#model-displayField) で設定できます) 以下に例を示します。
 
 ``` php
 public function some_function()
@@ -244,7 +244,7 @@ public function some_function()
 }
 ```
 
-上記サンプルを実行した結果、それぞれの変数の中身は次のようになっています。 :
+上記サンプルを実行した結果、それぞれの変数の中身は次のようになっています。
 
 ``` php
 $justusernames = 
@@ -290,7 +290,7 @@ $usernameGroups =
 ## find('threaded')
 
 `find('threaded', $params)` は入れ子になった配列を返します。入れ子の構造を表現するために、
-`parent_id` フィールドがある場合に使います。以下のサンプルを見てください。 :
+`parent_id` フィールドがある場合に使います。以下のサンプルを見てください。
 
 ``` php
 public function some_function()
@@ -309,7 +309,7 @@ public function some_function()
 > ビヘイビアがあります。
 
 上記サンプルでは、 `$allCategories` は全体のカテゴリ構造を表す、入れ子になった配列が
-格納されています。 `find('threaded')` を呼び出すと、戻り値は次のような形式となります。 :
+格納されています。 `find('threaded')` を呼び出すと、戻り値は次のような形式となります。
 
 ``` text
 
@@ -613,7 +613,7 @@ class AppModel extends Model
 カスタム finder の `'before'` では、`$query['operation'] = 'count'` という値がセットされて
 もう一度関数が呼び出され、関数から返された `$query` は `_findCount()` で使われます。
 必要であれば `'operation'` キーをチェックして、 関数から返された `$query` が違うかどうかを
-区別できます。 :
+区別できます。
 
 ``` php
 protected function _findAvailable($state, $query, $results = [])
@@ -664,7 +664,7 @@ protected function _findAvailable($state, $query, $results = [])
 
 2.8 では、マジックメソッドインターフェースで任意のカスタム finder メソッドを使用できます。
 例えば、モデルに `published` finder を実装した場合、これらの finder はマジック
-`findBy` メソッドと共に利用できます。 :
+`findBy` メソッドと共に利用できます。
 
 ``` php
 $results = $this->Article->findPublishedByAuthorId(5);
@@ -713,13 +713,13 @@ findBy マジックメソッドも同じようにいくつかオプションの�
 > クエリ実行のキャッシュしないようにするには、2つ目の引数に false を指定してください。
 > `query($query, $cachequeries = false)`
 
-`query()` はクエリ中のテーブル名を戻り値の配列のキーとして使います。 :
+`query()` はクエリ中のテーブル名を戻り値の配列のキーとして使います。
 
 ``` php
 $this->Picture->query('SELECT * FROM pictures LIMIT 2;');
 ```
 
-これは、以下の様な配列を返します。 :
+これは、以下の様な配列を返します。
 
 ``` text
 
@@ -745,13 +745,13 @@ $this->Picture->query('SELECT * FROM pictures LIMIT 2;');
 ```
 
 find メソッドと同じように、戻り値の配列のキーにモデル名を使うためには、
-次のようにクエリを書き換えます。 :
+次のようにクエリを書き換えます。
 
 ``` php
 $this->Picture->query('SELECT * FROM pictures AS Picture LIMIT 2;');
 ```
 
-すると以下の様な配列となります。 :
+すると以下の様な配列となります。
 
 ``` text
 
@@ -839,7 +839,7 @@ echo $this->Post->field(
 > CakePHP は、配列の値部分のみエスケープします。\*\*決して\*\* キーにユーザーデータをセット
 > しないでください。SQL インジェクションの脆弱性になります。
 
-最も良く使われるのは、次のような配列ベースのクエリです。 :
+最も良く使われるのは、次のような配列ベースのクエリです。
 
 ``` php
 $conditions = ['Post.title' => 'This is a post', 'Post.author_id' => 1];
@@ -855,7 +855,7 @@ $this->Post->find('first', ['conditions' => $conditions]);
 他テーブルとのフィールド名の衝突を避けられます。
 
 否定や比較などはどうするのでしょうか？とてもシンプルです。
-"This is a post" 以外の投稿データを取得したい場合は以下のようにします。 :
+"This is a post" 以外の投稿データを取得したい場合は以下のようにします。
 
 ``` text
 ["Post.title !=" => "This is a post"]
@@ -865,7 +865,7 @@ $this->Post->find('first', ['conditions' => $conditions]);
 演算子とフィールド名の間にスペース名をいれていれば、 `LIKE` や `BETWEEN` 、`REGEX` 、
 それに他の有効な SQL の比較演算子を CakePHP が解析してくれます。
 ただ、例外として `IN` (...) の場合は違います。
-`IN` を使って、リストから投稿タイトルを検索したい場合は以下のようにします。 :
+`IN` を使って、リストから投稿タイトルを検索したい場合は以下のようにします。
 
 ``` text
 [
@@ -873,7 +873,7 @@ $this->Post->find('first', ['conditions' => $conditions]);
 ]
 ```
 
-`NOT IN` (...) でリストに含まれない投稿タイトルを検索した場合は以下のようにします。 :
+`NOT IN` (...) でリストに含まれない投稿タイトルを検索した場合は以下のようにします。
 
 ``` text
 [
@@ -883,7 +883,7 @@ $this->Post->find('first', ['conditions' => $conditions]);
 ]
 ```
 
-検索条件に新しい条件を追加したければ、キーと値のペアを配列に追加するだけです。 :
+検索条件に新しい条件を追加したければ、キーと値のペアを配列に追加するだけです。
 
 ``` text
  [
@@ -892,7 +892,7 @@ $this->Post->find('first', ['conditions' => $conditions]);
 ]
 ```
 
-データベースの2つのフィールドを比較する条件を指定することもできます。 :
+データベースの2つのフィールドを比較する条件を指定することもできます。
 
 ``` text
 ["Post.created = Post.modified"]
@@ -902,7 +902,7 @@ $this->Post->find('first', ['conditions' => $conditions]);
 (つまりまだ編集されていない投稿)を返します。
 
 この方法で `WHERE` 句に指定できないようなものは、文字列で以下のようにして
-指定できます。 :
+指定できます。
 
 ``` text
 [
@@ -914,7 +914,7 @@ $this->Post->find('first', ['conditions' => $conditions]);
 デフォルトでは、CakePHP は `AND` で複数の条件をつなげます。
 つまりこれは、3つ上のサンプルコードでは、過去2週間の内に作られた投稿で、かつ
 指定されたリストに含まれるタイトルの投稿だけが取得されます。
-ただ、どちらかの条件にマッチする投稿を取得したいこともあるでしょう。 :
+ただ、どちらかの条件にマッチする投稿を取得したいこともあるでしょう。
 
 ``` text
 ["OR" => [
@@ -928,7 +928,7 @@ CakePHP は `AND` 、 `OR` 、 `NOT` 、 `XOR` (大文字、小文字は区別�
 これらの条件は際限なく入れ子にできます。
 さて、今ここで Posts と Authors で belongsTo アソシエーションを定義しているとしましょう。
 この時、特定のキーワード "magic" を含むか、もしくは過去2週間の間に投稿されて、かつ
-Bob が書いた投稿、に制限して取得したい場合、次のようにします。 :
+Bob が書いた投稿、に制限して取得したい場合、次のようにします。
 
 ``` text
 [
@@ -941,7 +941,7 @@ Bob が書いた投稿、に制限して取得したい場合、次のように�
 ```
 
 同じフィールドに対して複数の `LIKE` 条件を指定したい場合は、
-同じように以下のように条件を指定します。 :
+同じように以下のように条件を指定します。
 
 ``` text
 ['OR' => [
@@ -953,7 +953,7 @@ Bob が書いた投稿、に制限して取得したい場合、次のように�
 ワイルドカード演算子 `ILIKE` と `RLIKE` (`RLIKE` は 2.6 以降) も利用可能です。
 
 CakePHP は null も受け入れることができます。次のクエリは、
-投稿のタイトルが NOT NULL である投稿を返します。 :
+投稿のタイトルが NOT NULL である投稿を返します。
 
 ``` text
 ["NOT" => [
@@ -962,7 +962,7 @@ CakePHP は null も受け入れることができます。次のクエリは、
 ]
 ```
 
-`BETWEEN` は、以下のように出来ます。 :
+`BETWEEN` は、以下のように出来ます。
 
 ``` text
 ['Post.read_count BETWEEN ? AND ?' => [1,10]]
@@ -971,7 +971,7 @@ CakePHP は null も受け入れることができます。次のクエリは、
 > [!NOTE]
 > CakePHP はデータベースのフィールドの型によって、数値でもクォートで囲みます。
 
-`GROUP BY` は？ :
+`GROUP BY` は？
 
 ``` text
 [
@@ -983,7 +983,7 @@ CakePHP は null も受け入れることができます。次のクエリは、
 ]
 ```
 
-この時の戻り値の配列は、次のような形式です。 :
+この時の戻り値の配列は、次のような形式です。
 
 ``` text
 Array
@@ -1003,7 +1003,7 @@ Array
     ...
 ```
 
-以下は `DISTINCT` のサンプルです。他にも `MIN()` や `MAX()` なども同じように使えます。 :
+以下は `DISTINCT` のサンプルです。他にも `MIN()` や `MAX()` なども同じように使えます。
 
 ``` text
 [
@@ -1012,7 +1012,7 @@ Array
 ]
 ```
 
-とても複雑な検索条件も、複数の配列をネストすることで実現可能です。 :
+とても複雑な検索条件も、複数の配列をネストすることで実現可能です。
 
 ``` text
 [
@@ -1033,7 +1033,7 @@ Array
 ]
 ```
 
-上記サンプルは次のような SQL を生成します。 :
+上記サンプルは次のような SQL を生成します。
 
 ``` sql
 SELECT `Company`.`id`, `Company`.`name`,
@@ -1059,7 +1059,7 @@ AND
 
 そのためにはまず、モデルのデータソースを取得して、クエリを組み立てます。
 find メソッドを呼ぶような感じですが、これは SQL 文字列を返します。
-その後、expression を呼び出し、その戻り値を conditions 配列に追加します。 :
+その後、expression を呼び出し、その戻り値を conditions 配列に追加します。
 
 ``` php
 $conditionsSubQuery['User2.status'] = 'B';
@@ -1087,7 +1087,7 @@ $conditions[] = $subQueryExpression;
 $this->User->find('all', compact('conditions'));
 ```
 
-このサンプルは以下のような SQL を生成します。 :
+このサンプルは以下のような SQL を生成します。
 
 ``` sql
 SELECT
@@ -1114,7 +1114,7 @@ WHERE
 ### 準備済みステートメント {#prepared-statements}
 
 よりクエリをコントロールするために、準備済みステートメントを使うことができます。
-これでデータベースドライバと直接やり取りができ、好きなようにクエリを送信することができます。 :
+これでデータベースドライバと直接やり取りができ、好きなようにクエリを送信することができます。
 
 ``` php
 $db = $this->getDataSource();

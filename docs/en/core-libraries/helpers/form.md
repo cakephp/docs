@@ -481,7 +481,7 @@ HTML attributes. The following will cover the options specific to
   `['before', 'input', 'between', 'label', 'after','error']`.
 
 - `$options['inputDefaults']` If you find yourself repeating the same options
-  in multiple input() calls, you can use <span class="title-ref">inputDefaults</span>\` to keep your code dry:
+  in multiple input() calls, you can use `inputDefaults` to keep your code dry:
 
   ``` php
   echo $this->Form->create('User', [
@@ -540,7 +540,7 @@ echo $this->Form->input('User.email', ['name' => 'data[User][email]']);
 In addition to the generic `input()` method, `FormHelper` has specific
 methods for generating a number of different types of inputs. These can be used
 to generate just the input widget itself, and combined with other methods like
-`~FormHelper::label()` and `~FormHelper::error()` to
+`FormHelper::label()` and `FormHelper::error()` to
 generate fully custom form layouts.
 
 <a id="general-input-options"></a>
@@ -798,8 +798,8 @@ applied to the generated HTML input element.
   Would create 4 options in the minute select. One for each 15
   minutes.
 
-- `$options['round']` Can be set to <span class="title-ref">up</span> or <span class="title-ref">down</span> to force rounding in either direction.
-  Defaults to null which rounds half up according to <span class="title-ref">interval</span>.
+- `$options['round']` Can be set to `up` or `down` to force rounding in either direction.
+  Defaults to null which rounds half up according to `interval`.
 
   ::: info Added in version 2.4
   :::

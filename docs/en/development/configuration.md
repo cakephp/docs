@@ -571,11 +571,8 @@ Configure::read('debug');
 
 `static` Configure::**write**($key, $value)
 
-param string \$key  
-The key to write, can be a `dot notation` value.
-
-param mixed \$value  
-The value to store.
+- `string $key`: The key to write, can be a `dot notation` value.
+- `mixed $value`: The value to store.
 
 Use `write()` to store data in the application's configuration:
 
@@ -607,8 +604,7 @@ parsing problems.
 
 `static` Configure::**read**($key = null)
 
-param string \$key  
-The key to read, can be a `dot notation` value
+- `string $key`: The key to read, can be a `dot notation` value
 
 Used to read configuration data from the application. Defaults to
 CakePHP's important debug value. If a key is supplied, the data is
@@ -631,16 +627,14 @@ returned.
 
 `static` Configure::**consume**($key)
 
-param string \$key  
-The key to read, can use be a `dot notation` value
+- `string $key`: The key to read, can use be a `dot notation` value
 
 Read and delete a key from Configure. This is useful when you want to
 combine reading and deleting values in a single operation.
 
 `static` Configure::**check**($key)
 
-param string \$key  
-The key to check.
+- `string $key`: The key to check.
 
 Used to check if a key/path exists and has not-null value.
 
@@ -650,8 +644,7 @@ Used to check if a key/path exists and has not-null value.
 
 `static` Configure::**delete**($key)
 
-param string \$key  
-The key to delete, can be a `dot notation` value
+- `string $key`: The key to delete, can be a `dot notation` value
 
 Used to delete information from the application's configuration:
 
@@ -665,11 +658,8 @@ Returns the CakePHP version for the current application.
 
 `static` Configure::**config**($name, $reader)
 
-param string \$name  
-The name of the reader being attached.
-
-param ConfigReaderInterface \$reader  
-The reader instance being attached.
+- `string $name`: The name of the reader being attached.
+- `ConfigReaderInterface $reader`: The reader instance being attached.
 
 Attach a configuration reader to Configure. Attached readers can
 then be used to load configuration files. See [Loading Configuration Files](#loading-configuration-files)
@@ -677,9 +667,8 @@ for more information on how to read configuration files.
 
 `static` Configure::**configured**($name = null)
 
-param string \$name  
-The name of the reader to check, if null
-a list of all attached readers will be returned.
+- `string $name`: The name of the reader to check, if null
+  a list of all attached readers will be returned.
 
 Either check that a reader with a given name is attached, or get
 the list of attached readers.
@@ -734,15 +723,10 @@ files with that reader would fail.
 
 `static` Configure::**load**($key, $config = 'default', $merge = true)
 
-param string \$key  
-The identifier of the configuration file to load.
-
-param string \$config  
-The alias of the configured reader.
-
-param boolean \$merge  
-Whether or not the contents of the read file
-should be merged, or overwrite the existing values.
+- `string $key`: The identifier of the configuration file to load.
+- `string $config`: The alias of the configured reader.
+- `boolean $merge`: Whether or not the contents of the read file
+  should be merged, or overwrite the existing values.
 
 Once you've attached a config reader to Configure you can load configuration files:
 
@@ -760,15 +744,10 @@ will not ever overwrite the existing configuration.
 
 `static` Configure::**dump**($key, $config = 'default', $keys = [])
 
-param string \$key  
-The name of the file/stored configuration to be created.
-
-param string \$config  
-The name of the reader to store the data with.
-
-param array \$keys  
-The list of top-level keys to save. Defaults to all
-keys.
+- `string $key`: The name of the file/stored configuration to be created.
+- `string $config`: The name of the reader to store the data with.
+- `array $keys`: The list of top-level keys to save. Defaults to all
+  keys.
 
 Dumps all or some of the data in Configure into a file or storage system
 supported by a config reader. The serialization format
@@ -777,7 +756,7 @@ is decided by the config reader attached as \$config. For example, if the
 configuration file loadable by the `PhpReader`
 
 Given that the 'default' reader is an instance of PhpReader.
-Save all data in Configure to the file \`my_config.php\`:
+Save all data in Configure to the file `my_config.php`:
 
 ``` php
 Configure::dump('my_config.php', 'default');
@@ -800,16 +779,11 @@ configuration files that are readable with `Configure::load()`
 
 `static` Configure::**store**($name, $cacheConfig = 'default', $data = null)
 
-param string \$name  
-The storage key for the cache file.
-
-param string \$cacheConfig  
-The name of the cache configuration to store the
-configuration data with.
-
-param mixed \$data  
-Either the data to store, or leave null to store all data
-in Configure.
+- `string $name`: The storage key for the cache file.
+- `string $cacheConfig`: The name of the cache configuration to store the
+  configuration data with.
+- `mixed $data`: Either the data to store, or leave null to store all data
+  in Configure.
 
 You can also store runtime configuration values for use in a future request.
 Since configure only remembers values for the current request, you will
@@ -828,11 +802,8 @@ you to store Configuration information in any storage engine that `Cache` can ta
 
 `static` Configure::**restore**($name, $cacheConfig = 'default')
 
-param string \$name  
-The storage key to load.
-
-param string \$cacheConfig  
-The cache configuration to load the data from.
+- `string $name`: The storage key to load.
+- `string $cacheConfig`: The cache configuration to load the data from.
 
 Once you've stored runtime configuration, you'll probably need to restore it
 so you can access it again. `Configure::restore()` does exactly that:

@@ -59,7 +59,7 @@ SSL 暗号化しないアプリケーションにもふさわしいものです�
 
 コントローラの `beforeFilter` の中、もしくは `$components` 配列の中に、
 認証ハンドラを設定することができます。配列を使用して各認証オブジェクトに設定情報を
-渡すことができます。 :
+渡すことができます。
 
 ``` php
 // 基本的な設定法
@@ -75,7 +75,7 @@ $this->Auth->authenticate = [
 上記の２つ目のブロックでは、 `userModel` キーを２回宣言しなければならないということに
 気づいたでしょう。コードを DRY に保ちたいなら、 `all` キーを使うことができます。
 この特別なキーを使うことで、列挙したオブジェクトすべてに設定が渡されることになります。
-all キーは `AuthComponent::ALL` と記述することもできます。 :
+all キーは `AuthComponent::ALL` と記述することもできます。
 
 ``` php
 // 'all' を使って設定を記述
@@ -134,7 +134,7 @@ public $components = [
 
 Auth の他の設定キー (authError や loginAction など) を authenticate や Form の
 要素として書いてはいけません。それらは authenticate キーと同じレベルであるべきです。
-上記の例を他の Auth 設定を使って書いた場合は次のようになります。 :
+上記の例を他の Auth 設定を使って書いた場合は次のようになります。
 
 ``` php
 // $components 配列の中で設定を記述
@@ -178,7 +178,7 @@ public $components = [
 
 ユーザーを認証する際には、設定されている認証オブジェクトを設定された順にチェックしていきます。
 あるオブジェクトでユーザーが識別できたら、以降のオブジェクトはチェックされません。
-ログインフォームと連携する単純な login 関数なら次のようになります。 :
+ログインフォームと連携する単純な login 関数なら次のようになります。
 
 ``` php
 public function login()
@@ -230,7 +230,7 @@ Basic／ダイジェストオーセンティケータだけを使っているな
 認証オブジェクトはプラガブルなので、カスタム認証オブジェクトを自分のアプリケーション内にでも、
 プラグインとしてでも作成が可能です。もし例えば、OpenID 認証オブジェクトを作成したいのだとしたら、
 `src/Controller/Component/Auth/OpenidAuthenticate.php` の中で次のように記述することが
-できます。 :
+できます。
 
 ``` php
 class OpenidAuthenticate extends BaseAuthenticate
@@ -255,7 +255,7 @@ class OpenidAuthenticate extends BaseAuthenticate
 ### カスタム認証オブジェクトの利用
 
 カスタム認証オブジェクトを作成したら、AuthComponent の authenticate 配列内にそれを
-含めることで利用することができます。 :
+含めることで利用することができます。
 
 ``` php
 $this->Auth->authenticate = [
@@ -273,7 +273,7 @@ $this->Auth->authenticate = [
 `$_SERVER['PHP_AUTH_PW']` を使います。リクエストごとに、それらの値を再度ユーザーを
 識別するために使い、正規のユーザーであることを確認します。認証オブジェクトの `authenticate()`
 メソッドと同様に、`getUser()` メソッドも成功ならユーザー情報の配列を、失敗なら `false`
-を返すようにしてください。 :
+を返すようにしてください。
 
 ``` php
 public function getUser($request)
@@ -296,23 +296,23 @@ public function getUser($request)
 ### 認証されていないリクエストの扱い
 
 認証されていないユーザーが最初に保護されたページにアクセスしようとすると、
-チェーンの最後のオーセンティケータの <span class="title-ref">unauthenticated()</span> メソッドが呼び出されます。
+チェーンの最後のオーセンティケータの `unauthenticated()` メソッドが呼び出されます。
 認証オブジェクトが適切に応答またはリダイレクトを送信処理し、
-それ以上のアクションは必要ないということを示すために <span class="title-ref">true</span> を返すことができます。
-<span class="title-ref">AuthComponent::\$authenticate</span> プロパティで認証オブジェクトを指定する順序を設定できます。
+それ以上のアクションは必要ないということを示すために `true` を返すことができます。
+`AuthComponent::$authenticate` プロパティで認証オブジェクトを指定する順序を設定できます。
 
-オーセンティケータが null を返した場合、 <span class="title-ref">AuthComponent</span> は、ユーザーをログインアクションに
-リダイレクトします。Ajax リクエストでかつ <span class="title-ref">AuthComponent::\$ajaxLogin</span> が指定されていた場合、
+オーセンティケータが null を返した場合、 `AuthComponent` は、ユーザーをログインアクションに
+リダイレクトします。Ajax リクエストでかつ `AuthComponent::$ajaxLogin` が指定されていた場合、
 その要素は描画され、そうでなければ HTTP ステータスコード 403 が返されます。
 
 > [!NOTE]
-> 2.4 より前では、認証オブジェクトは <span class="title-ref">unauthenticated()</span> メソッドを提供しません。
+> 2.4 より前では、認証オブジェクトは `unauthenticated()` メソッドを提供しません。
 
 ### 認証についてのフラッシュメッセージの表示
 
 Auth が生成するセッションエラーメッセージを表示するためには、あなたのレイアウトに次のコードを
 加えなければなりません。 `templates/Layouts/default.ctp` ファイルに次の２行を
-加えてください。content_for_layout 行の前にある body 部の中がよいでしょう。 :
+加えてください。content_for_layout 行の前にある body 部の中がよいでしょう。
 
 ``` php
 // CakePHP 2.7 以上
@@ -335,7 +335,7 @@ AuthComponent の flash 設定を使うことでエラーメッセージをカ�
 フラッシュメッセージの設定だけでなく、AuthComponent が使用する他のエラーメッセージを
 カスタマイズすることもできます。コントローラの beforeFilter の中や component の設定で、
 認証が失敗した際に使われるエラーをカスタマイズするのに `authError` を
-使うことができます。 :
+使うことができます。
 
 ``` php
 $this->Auth->authError = 'このエラーは保護されたウェブサイトの一部に' .
@@ -366,7 +366,7 @@ AuthComponent がもはや自動ではパスワードをハッシュ化しなく
 クラスを指定します。この設定項目にはクラス名を文字列で指定するか、 `className` というキーに
 クラス名を指定した配列を設定します。このとき、配列の余分なキーが設定としてパスワードハッシュ化
 クラスのコンストラクタに渡されます。デフォルトのハッシュ化クラス `Simple` は sha1、sha256、
-md5 ハッシュに使用することができます。次のようにしてハッシュ化クラスを指定します。 :
+md5 ハッシュに使用することができます。次のようにしてハッシュ化クラスを指定します。
 
 ``` php
 public $components = [
@@ -384,7 +384,7 @@ public $components = [
 ```
 
 新しいユーザーレコードを作成するとき、モデルの `beforeSave` コールバック内で適切な
-パスワードハッシュ化クラスを使用してパスワードをハッシュ化できます。 :
+パスワードハッシュ化クラスを使用してパスワードをハッシュ化できます。
 
 ``` php
 class User extends AppModel
@@ -416,7 +416,7 @@ CakePHP 2.3 で `BlowfishAuthenticate` クラスが導入され、
 
 Blowfish password hasher は、任意の認証クラスで使用することができます。使用するには、
 認証オブジェクトの `passwordHasher` の設定で Blowfish password hasher を
-指定しないといけません。 :
+指定しないといけません。
 
 ``` php
 public $components = [
@@ -436,7 +436,7 @@ public $components = [
 パスワードをダイジェスト認証で使用できるよう正しくハッシュ化するために、特別な
 パスワードハッシュ化の関数 `DigestAuthenticate` を使ってください。ダイジェスト認証と
 その他の認証戦略を合わせて利用する場合には、通常のハッシュ化パスワードとは別のカラムで
-ダイジェストパスワードを保管するのをお勧めします。 :
+ダイジェストパスワードを保管するのをお勧めします。
 
 ``` php
 class User extends AppModel
@@ -468,7 +468,7 @@ class User extends AppModel
 
 カスタムパスワードハッシュ化クラスは `AbstractPasswordHasher` クラスを継承し、
 抽象メソッドの `hash()` と `check()` を実装する必要があります。
-`src/Controller/Component/Auth/CustomPasswordHasher.php` に次のように記述します。 :
+`src/Controller/Component/Auth/CustomPasswordHasher.php` に次のように記述します。
 
 ``` php
 class CustomPasswordHasher extends AbstractPasswordHasher
@@ -489,7 +489,7 @@ class CustomPasswordHasher extends AbstractPasswordHasher
 
 独自のアプリケーションを登録した直後など、時には手動によるログインが必要になる事態が
 発生することもあるでしょう。ログインさせたいユーザーデータを引数に `$this->Auth->login()`
-を呼び出すことで、これを実現することができます。 :
+を呼び出すことで、これを実現することができます。
 
 ``` php
 public function register()
@@ -521,7 +521,7 @@ public function register()
 ユーザーがログインしたあと、現状のそのユーザーについての特定の情報が必要になることもあるでしょう。
 `AuthComponent::user()` を使うことで、現在ログインしているそのユーザーにアクセスすることが
 できます。このメソッドは static で、AuthComponent がロードされたあと、global に使うことも
-できます。インスタンスメソッドとしても、static メソッドとしてもアクセス可能です。 :
+できます。インスタンスメソッドとしても、static メソッドとしてもアクセス可能です。
 
 ``` php
 // どこからでも利用できます。
@@ -535,7 +535,7 @@ $this->Auth->user('id');
 
 最終的には認証を解除し、適切な場所へとリダイレクトするためのてっとり早い方法がほしくなるでしょう。
 このメソッドはあなたのアプリケーション内のメンバーページに 'ログアウト' リンクを入れたい場合にも
-便利です。 :
+便利です。
 
 ``` php
 public function logout()
@@ -582,7 +582,7 @@ public function logout()
 
 あなたのコントローラの `beforeFilter` の中や `$components` 配列の中で
 認可ハンドラの設定を行うことができます。配列を使って、各認可オブジェクトに
-設定情報を渡すことができます。 :
+設定情報を渡すことができます。
 
 ``` php
 // 基本的な設定
@@ -597,7 +597,7 @@ $this->Auth->authorize = [
 
 `Auth->authorize` も `Auth->authenticate` とほぼ同様で、 `all` キーを使うことで
 コードを DRY に保ちやすくなります。この特別なキーを使うことで、列挙したオブジェクトすべてに
-設定が渡されることになります。all キーは `AuthComponent::ALL` と記述することもできます。 :
+設定が渡されることになります。all キーは `AuthComponent::ALL` と記述することもできます。
 
 ``` php
 // 'all' を使って設定を記述
@@ -624,7 +624,7 @@ $this->Auth->authorize = [
 認可オブジェクトはプラガブルなので、カスタム認可オブジェクトを自分の
 アプリケーション内にでも、プラグインとしてでも作成が可能です。もし例えば、LDAP 認可
 オブジェクトを作成したいのだとしたら、 `src/Controller/Component/Auth/LdapAuthorize.php`
-の中で次のように記述することができます。 :
+の中で次のように記述することができます。
 
 ``` php
 class LdapAuthorize extends BaseAuthorize
@@ -645,7 +645,7 @@ class LdapAuthorize extends BaseAuthorize
 #### カスタム認可オブジェクトの利用
 
 カスタム認可オブジェクトを作成したら、AuthComponent の authorize 配列にそれらを
-含めることで使うことができます。 :
+含めることで使うことができます。
 
 ``` php
 $this->Auth->authorize = [
@@ -668,7 +668,7 @@ $this->Auth->authorize = [
 不要であったりという場合があります。AuthComponent は悲観的であり、デフォルトでは
 アクセスを拒否します。 `AuthComponent::allow()` を使うことで、公開すべきアクションに
 印をつけることができます。アクションに公開の印をつけることで、AuthComponent は該当のユーザーが
-ログインしているかのチェックも、認可オブジェクトによるチェックも行わなくなります。 :
+ログインしているかのチェックも、認可オブジェクトによるチェックも行わなくなります。
 
 ``` php
 // すべてのアクションを許可。 CakePHP 2.0 (非推奨)。
@@ -695,7 +695,7 @@ $this->Auth->allow(['view', 'index']);
 
 デフォルトでは、全てのアクションには認可を必要とします。一方、アクションに公開の印を付けた後、
 その公開アクションを取り消したくなるかもしれません。そのために `AuthComponent::deny()`
-を使うことができます。 :
+を使うことができます。
 
 ``` php
 // アクション１つを取り除く
@@ -720,7 +720,7 @@ ControllerAuthorize では、コントローラのコールバックで認可チ
 
 コールバックでは必ず `isAuthorized()` を呼んでください。これは該当ユーザーがリクエスト内で
 リソースにアクセスすることが許可されるかを boolean で返します。
-コールバックにはアクティブなユーザーが渡されますので、チェックが可能です。 :
+コールバックにはアクティブなユーザーが渡されますので、チェックが可能です。
 
 ``` php
 class AppController extends Controller
@@ -774,7 +774,7 @@ ActionsAuthorize は AclComponent を取りまとめ、各リクエストでア�
 CrudAuthorize やアクションマッピングを使う他の認可オブジェクトを使う場合、
 追加でモデルのマッピングが必要になるかもしれません。その場合、mapAction() を使うことで、
 アクション -\> CRUD パーミッションのマッピングを行うことができます。AuthComponent の
-このメソッドを呼び出すことで、設定済みのすべての認可オブジェクトに設定が渡されます。 :
+このメソッドを呼び出すことで、設定済みのすべての認可オブジェクトに設定が渡されます。
 
 ``` php
 $this->Auth->mapActions([
@@ -819,7 +819,7 @@ AuthComponent は CakePHP に組み込み済みの認可・認証メカニズム
 > - `params` - 追加で使用するパラメータの配列。デフォルトで []。
 >
 > ログインを扱うコントローラとアクションを表す (文字列や配列で定義した) URL。
-> デフォルトは <span class="title-ref">/users/login</span> 。
+> デフォルトは `/users/login` 。
 >
 > ログイン後のリダイレクト先のコントローラとアクションを表す (文字列や配列で定義した) URL。
 > この値はユーザーが `Auth.redirect` をセッション内に持っている場合には無視されます。
@@ -884,12 +884,11 @@ AuthComponent は CakePHP に組み込み済みの認可・認証メカニズム
 
 `static` AuthComponent::**user**($key = null)
 
-param string \$key  
-フェッチしたいユーザーデータのキー。null ならユーザーの全データが
-返されます。インスタンスメソッドとしても呼び出し可能です。
+- `string $key`: フェッチしたいユーザーデータのキー。null ならユーザーの全データが
+  返されます。インスタンスメソッドとしても呼び出し可能です。
 
 ログインしている現在のユーザーのデータを取得する。プロパティのキーを使用することで、
-このユーザーについて特定のデータをフェッチすることができます。 :
+このユーザーについて特定のデータをフェッチすることができます。
 
 ``` php
 $id = $this->Auth->user('id');

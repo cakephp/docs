@@ -2,7 +2,7 @@
 
 テーマにはページの見た目を簡単に素早く切り替えられるようになるという利点があります。
 
-テーマを使うためには、コントローラの中でテーマ名を指定して下さい。 :
+テーマを使うためには、コントローラの中でテーマ名を指定して下さい。
 
 ``` php
 class ExampleController extends AppController
@@ -16,7 +16,7 @@ class ExampleController extends AppController
 :::
 
 またテーマの設定や変更はアクション、または `beforeFilter` や `beforeRender`
-などのコールバック関数の中から行えます。 :
+などのコールバック関数の中から行えます。
 
 ``` php
 $this->theme = 'AnotherExample';
@@ -62,7 +62,7 @@ templates/Themed/<themeName>/webroot<path_to_file>
 
 CakePHP のすべての組み込みヘルパーはテーマに対応しており、自動的に正しいパスが作成されます。
 ビューファイルのようにテーマフォルダにファイルが無い場合、メインの webroot フォルダが
-デフォルトととなります。 :
+デフォルトととなります。
 
 ``` php
 // 'purple_cupcake'という名前のテーマの時
