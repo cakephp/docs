@@ -444,16 +444,16 @@ public function any_action()
     // Here's all of our group info in an array we can iterate through
     $groups = [
         0 => [
-            'alias' => 'warriors'
+            'alias' => 'warriors',
         ],
         1 => [
-            'alias' => 'wizards'
+            'alias' => 'wizards',
         ],
         2 => [
-            'alias' => 'hobbits'
+            'alias' => 'hobbits',
         ],
         3 => [
-            'alias' => 'visitors'
+            'alias' => 'visitors',
         ],
     ];
 
@@ -663,7 +663,8 @@ action. Let's set up some basic permissions using the AclComponent in
 an action inside our controller:
 
 ``` php
-class SomethingsController extends AppController {
+class SomethingsController extends AppController
+{
     // You might want to place this in the AppController
     // instead, but here works great too.
     public $components = ['Acl'];
@@ -677,7 +678,7 @@ class SomethingsController extends AppController {
         // Though the King may not want to let everyone
         // have unfettered access
         $this->Acl->deny('warriors/Legolas', 'Weapons', 'delete');
-        $this->Acl->deny('warriors/Gimli',   'Weapons', 'delete');
+        $this->Acl->deny('warriors/Gimli', 'Weapons', 'delete');
 
         die(print_r('done', 1));
     }
@@ -708,14 +709,14 @@ yourself. What we have above is equivalent to this:
 // 1564 = Gimli
 
 $this->Acl->deny(
-  ['model' => 'User', 'foreign_key' => 6342],
-  'Weapons',
-  'delete'
+    ['model' => 'User', 'foreign_key' => 6342],
+    'Weapons',
+    'delete',
 );
 $this->Acl->deny(
-  ['model' => 'User', 'foreign_key' => 1564],
-  'Weapons',
-  'delete'
+    ['model' => 'User', 'foreign_key' => 1564],
+    'Weapons',
+    'delete',
 );
 ```
 

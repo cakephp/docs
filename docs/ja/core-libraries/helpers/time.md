@@ -26,10 +26,10 @@ Time ヘルパーの基本的な使い道は、ユーザーのタイムゾーン
 
 ``` php
 echo $this->Time->format(
-  'F jS, Y h:i A',
-  $post['Post']['created'],
-  null,
-  $user['User']['time_zone']
+    'F jS, Y h:i A',
+    $post['Post']['created'],
+    null,
+    $user['User']['time_zone'],
 );
 // GMT+0 での時刻が August 22nd, 2011 11:53 PMの場合、
 // タイムゾーンが GMT-8 の場合は August 22nd, 2011 03:53 PM、
@@ -39,4 +39,4 @@ echo $this->Time->format(
 Time ヘルパーのメソッドは多くが \$timezone パラメーターを持っています。このパラメーターは
 タイムゾーンを表す文字列か、 <span class="title-ref">DateTimeZone</span> クラスのインスタンスを渡すことができます。
 
-<!--@include: ../../core-utility-libraries/time.md{28,102}-->
+<!--@include: ../../core-utility-libraries/time.md{27,101}-->

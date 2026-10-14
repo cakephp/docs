@@ -199,19 +199,19 @@ Some examples would be:
 // Add an environment detector.
 $this->request->addDetector(
     'post',
-    ['env' => 'REQUEST_METHOD', 'value' => 'POST']
+    ['env' => 'REQUEST_METHOD', 'value' => 'POST'],
 );
 
 // Add a pattern value detector.
 $this->request->addDetector(
     'iphone',
-    ['env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i']
+    ['env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i'],
 );
 
 // Add an option detector.
 $this->request->addDetector('internalIp', [
     'env' => 'CLIENT_IP',
-    'options' => ['192.168.0.101', '192.168.0.100']
+    'options' => ['192.168.0.101', '192.168.0.100'],
 ]);
 
 // Add a callback detector. Can either be an anonymous function
@@ -220,7 +220,7 @@ $this->request->addDetector(
     'awesome',
     ['callback' => function ($request) {
         return isset($request->awesome);
-    }]
+    }],
 );
 ```
 
@@ -406,7 +406,7 @@ the browser by specifying the options:
 ``` php
 $this->response->file(
     $file['path'],
-    ['download' => true, 'name' => 'foo']
+    ['download' => true, 'name' => 'foo'],
 );
 ```
 
@@ -443,12 +443,12 @@ $this->response->header('Location', 'http://example.com');
 // Set multiple headers
 $this->response->header([
     'Location' => 'http://example.com',
-    'X-Extra' => 'My header'
+    'X-Extra' => 'My header',
 ]);
 
 $this->response->header([
     'WWW-Authenticate: Negotiate',
-    'Content-type: application/pdf'
+    'Content-type: application/pdf',
 ]);
 ```
 

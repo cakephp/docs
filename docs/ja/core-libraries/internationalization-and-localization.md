@@ -244,7 +244,6 @@ CakePHP は、自動的に `$validate` 配列中のすべてのモデルのバ�
 ``` php
 class User extends AppModel
 {
-
     public $validationDomain = 'validation_errors';
 }
 ```
@@ -255,7 +254,6 @@ class User extends AppModel
 ``` php
 class User extends AppModel
 {
-
     public $validationDomain = 'validation';
 
     public $validate = [

@@ -83,7 +83,7 @@ create() には多くのオプションがあります:
   ``` php
   echo $this->Form->create(false, [
       'url' => ['controller' => 'recipes', 'action' => 'add'],
-      'id' => 'RecipesAdd'
+      'id' => 'RecipesAdd',
   ]);
   ```
 
@@ -98,7 +98,7 @@ create() には多くのオプションがあります:
   ``` php
   echo $this->Form->create(false, [
       'url' => 'https://www.google.com/search',
-      'type' => 'get'
+      'type' => 'get',
   ]);
   ```
 
@@ -129,8 +129,8 @@ create() には多くのオプションがあります:
   echo $this->Form->create('User', [
       'inputDefaults' => [
           'label' => false,
-          'div' => false
-      ]
+          'div' => false,
+      ],
   ]);
   ```
 
@@ -143,7 +143,7 @@ create() には多くのオプションがあります:
   // label 要素を持つ
   echo $this->Form->input(
       'username',
-      ['label' => 'Username']
+      ['label' => 'Username'],
   );
   ```
 
@@ -209,7 +209,7 @@ FormHelper は日時項目の入力を生成する際、内部的に複数の �
 ``` php
 echo $this->Form->input('Model.year', [
     'type' => 'text',
-    'name' => 'data[Model][year]'
+    'name' => 'data[Model][year]',
 ]);
 ```
 
@@ -253,7 +253,7 @@ HTML 属性などもオプションとして設定可能です。ここでは
 
   ``` php
   echo $this->Form->input('User.name', [
-      'div' => 'class_name'
+      'div' => 'class_name',
   ]);
   ```
 
@@ -273,8 +273,8 @@ HTML 属性などもオプションとして設定可能です。ここでは
       'div' => [
           'id' => 'mainDiv',
           'title' => 'Div Title',
-          'style' => 'display:block'
-      ]
+          'style' => 'display:block',
+      ],
   ]);
   ```
 
@@ -291,7 +291,7 @@ HTML 属性などもオプションとして設定可能です。ここでは
   div の出力抑制:
 
   ``` php
-  echo $this->Form->input('User.name', ['div' => false]); ?>
+  echo $this->Form->input('User.name', ['div' => false]);
   ```
 
   出力結果:
@@ -305,7 +305,7 @@ HTML 属性などもオプションとして設定可能です。ここでは
 
   ``` php
   echo $this->Form->input('User.name', [
-      'label' => 'The User Alias'
+      'label' => 'The User Alias',
   ]);
   ```
 
@@ -340,8 +340,8 @@ HTML 属性などもオプションとして設定可能です。ここでは
   echo $this->Form->input('User.name', [
       'label' => [
           'class' => 'thingy',
-          'text' => 'The User Alias'
-      ]
+          'text' => 'The User Alias',
+      ],
   ]);
   ```
 
@@ -381,8 +381,8 @@ HTML 属性などもオプションとして設定可能です。ここでは
   ``` php
   $this->Form->input('Model.field', [
       'error' => [
-          'attributes' => ['wrap' => 'span', 'class' => 'bzzz']
-      ]
+          'attributes' => ['wrap' => 'span', 'class' => 'bzzz'],
+      ],
   ]);
   ```
 
@@ -392,8 +392,8 @@ HTML 属性などもオプションとして設定可能です。ここでは
   ``` php
   $this->Form->input('Model.field', [
       'error' => [
-          'attributes' => ['escape' => false]
-      ]
+          'attributes' => ['escape' => false],
+      ],
   ]);
   ```
 
@@ -402,7 +402,7 @@ HTML 属性などもオプションとして設定可能です。ここでは
 
   ``` php
   $this->Form->input('Model.field', [
-      'error' => ['tooShort' => __('This is not long enough')]
+      'error' => ['tooShort' => __('This is not long enough')],
   ]);
   ```
 
@@ -424,7 +424,7 @@ HTML 属性などもオプションとして設定可能です。ここでは
   echo $this->Form->input('field', [
       'before' => '--before--',
       'after' => '--after--',
-      'between' => '--between---'
+      'between' => '--between---',
   ]);
   ```
 
@@ -450,7 +450,7 @@ HTML 属性などもオプションとして設定可能です。ここでは
       'between' => '--between---',
       'separator' => '--separator--',
       'options' => ['1', '2'],
-      'type' => 'radio'
+      'type' => 'radio',
   ]);
   ```
 
@@ -487,8 +487,8 @@ HTML 属性などもオプションとして設定可能です。ここでは
   echo $this->Form->create('User', [
       'inputDefaults' => [
           'label' => false,
-          'div' => false
-      ]
+          'div' => false,
+      ],
   ]);
   ```
 
@@ -573,7 +573,7 @@ input 要素に関連するメソッドの多くは、一般的なオプショ�
   $sizes = ['s' => 'Small', 'm' => 'Medium', 'l' => 'Large'];
   echo $this->Form->input(
       'size',
-      ['options' => $sizes, 'default' => 'm']
+      ['options' => $sizes, 'default' => 'm'],
   );
   ```
 
@@ -604,7 +604,7 @@ input 要素に関連するメソッドの多くは、一般的なオプショ�
   ``` php
   echo $this->Form->input('close_time', [
       'type' => 'time',
-      'selected' => '13:30:00'
+      'selected' => '13:30:00',
   ]);
   ```
 
@@ -623,7 +623,7 @@ input 要素に関連するメソッドの多くは、一般的なオプショ�
   ``` php
   echo $this->Form->input('field', [
       'options' => [1, 2, 3, 4, 5],
-      'empty' => '(choose one)'
+      'empty' => '(choose one)',
   ]);
   ```
 
@@ -650,13 +650,16 @@ input 要素に関連するメソッドの多くは、一般的なオプショ�
   date や datetime フィールドのために、 empty にキー・バリューペアの配列を指定できます。 :
 
   ``` php
-  echo $this->Form->dateTime('Contact.date', 'DMY', '12',
+  echo $this->Form->dateTime(
+      'Contact.date',
+      'DMY',
+      '12',
       [
           'empty' => [
               'day' => 'DAY', 'month' => 'MONTH', 'year' => 'YEAR',
-              'hour' => 'HOUR', 'minute' => 'MINUTE', 'meridian' => false
-          ]
-      ]
+              'hour' => 'HOUR', 'minute' => 'MINUTE', 'meridian' => false,
+          ],
+      ],
   );
   ```
 
@@ -786,7 +789,7 @@ input 要素に関連するメソッドの多くは、一般的なオプショ�
   ``` php
   echo $this->Form->input('Model.time', [
       'type' => 'time',
-      'interval' => 15
+      'interval' => 15,
   ]);
   ```
 
@@ -833,11 +836,13 @@ input 要素に関連するメソッドの多くは、一般的なオプショ�
 public function isUploadedFile($params)
 {
     $val = array_shift($params);
-    if ((isset($val['error']) && $val['error'] == 0) ||
-        (!empty( $val['tmp_name']) && $val['tmp_name'] != 'none')
+    if (
+        (isset($val['error']) && $val['error'] == 0) ||
+        (!empty($val['tmp_name']) && $val['tmp_name'] != 'none')
     ) {
         return is_uploaded_file($val['tmp_name']);
     }
+
     return false;
 }
 ```
@@ -907,11 +912,10 @@ echo $this->Form->file('avatar');
 
 ``` php
 $this->Form->inputDefaults([
-        'label' => false,
-        'div' => false,
-        'class' => 'fancy'
-    ]
-);
+    'label' => false,
+    'div' => false,
+    'class' => 'fancy',
+]);
 ```
 
 その時点以降に生成された input 項目はすべて inputDefaults で宣言された
@@ -923,7 +927,7 @@ echo $this->Form->input('password'); // No div, no label with class 'fancy'
 // has a label element same defaults
 echo $this->Form->input(
     'username',
-    ['label' => 'Username']
+    ['label' => 'Username'],
 );
 ```
 

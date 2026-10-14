@@ -72,7 +72,7 @@ $this->Auth->authenticate = ['Form'];
 // Pass settings in
 $this->Auth->authenticate = [
     'Basic' => ['userModel' => 'Member'],
-    'Form' => ['userModel' => 'Member']
+    'Form' => ['userModel' => 'Member'],
 ];
 ```
 
@@ -86,7 +86,7 @@ key is also exposed as `AuthComponent::ALL`:
 $this->Auth->authenticate = [
     AuthComponent::ALL => ['userModel' => 'Member'],
     'Basic',
-    'Form'
+    'Form',
 ];
 ```
 
@@ -132,10 +132,10 @@ public $components = [
     'Auth' => [
         'authenticate' => [
             'Form' => [
-                'fields' => ['username' => 'email']
-            ]
-        ]
-    ]
+                'fields' => ['username' => 'email'],
+            ],
+        ],
+    ],
 ];
 ```
 
@@ -151,18 +151,18 @@ public $components = [
         'loginAction' => [
             'controller' => 'users',
             'action' => 'login',
-            'plugin' => 'users'
+            'plugin' => 'users',
         ],
         'authError' => 'Did you really think you are allowed to see that?',
         'authenticate' => [
             'Form' => [
                 'fields' => [
                   'username' => 'my_user_model_username_field', //Default is 'username' in the userModel
-                  'password' => 'my_user_model_password_field'  //Default is 'password' in the userModel
-                ]
-            ]
-        ]
-    ]
+                  'password' => 'my_user_model_password_field', //Default is 'password' in the userModel
+                ],
+            ],
+        ],
+    ],
 ];
 ```
 
@@ -202,7 +202,7 @@ public function login()
             // `return $this->redirect($this->Auth->redirect());`
         }
         $this->Flash->error(
-            __('Username or password is incorrect')
+            __('Username or password is incorrect'),
         );
         // Prior to 2.7 use
         // $this->Session->setFlash(__('Username or password is incorrect'));
@@ -301,6 +301,7 @@ public function getUser($request)
     if (empty($username) || empty($pass)) {
         return false;
     }
+
     return $this->_findUser($username, $pass);
 }
 ```
@@ -356,8 +357,8 @@ AuthComponent uses. In your controller's beforeFilter, or component settings you
 can use `authError` to customize the error used for when authorization fails:
 
 ``` php
-$this->Auth->authError = "This error shows up with the user tries to access" .
-                            "a part of the website that is protected.";
+$this->Auth->authError = 'This error shows up with the user tries to access' .
+                            'a part of the website that is protected.';
 ```
 
 ::: info Changed in version 2.4
@@ -397,11 +398,11 @@ public $components = [
             'Form' => [
                 'passwordHasher' => [
                     'className' => 'Simple',
-                    'hashType' => 'sha256'
-                ]
-            ]
-        ]
-    ]
+                    'hashType' => 'sha256',
+                ],
+            ],
+        ],
+    ],
 ];
 ```
 
@@ -416,9 +417,10 @@ class User extends AppModel
         if (!empty($this->data[$this->alias]['password'])) {
             $passwordHasher = new SimplePasswordHasher(['hashType' => 'sha256']);
             $this->data[$this->alias]['password'] = $passwordHasher->hash(
-                $this->data[$this->alias]['password']
+                $this->data[$this->alias]['password'],
             );
         }
+
         return true;
     }
 }
@@ -444,10 +446,10 @@ public $components = [
     'Auth' => [
         'authenticate' => [
             'Form' => [
-                'passwordHasher' => 'Blowfish'
-            ]
-        ]
-    ]
+                'passwordHasher' => 'Blowfish',
+            ],
+        ],
+    ],
 ];
 ```
 
@@ -469,8 +471,9 @@ class User extends AppModel
         $this->data[$this->alias]['digest_hash'] = DigestAuthenticate::password(
             $this->data[$this->alias]['username'],
             $this->data[$this->alias]['password'],
-            env('SERVER_NAME')
+            env('SERVER_NAME'),
         );
+
         return true;
     }
 }
@@ -521,10 +524,11 @@ public function register()
         $id = $this->User->id;
         $this->request->data['User'] = array_merge(
             $this->request->data['User'],
-            ['id' => $id]
+            ['id' => $id],
         );
         unset($this->request->data['User']['password']);
         $this->Auth->login($this->request->data['User']);
+
         return $this->redirect('/users/home');
     }
 }
@@ -617,7 +621,7 @@ $this->Auth->authorize = ['Controller'];
 // Pass settings in
 $this->Auth->authorize = [
     'Actions' => ['actionPath' => 'controllers/'],
-    'Controller'
+    'Controller',
 ];
 ```
 
@@ -631,7 +635,7 @@ are passed to every attached object. The all key is also exposed as
 $this->Auth->authorize = [
     AuthComponent::ALL => ['actionPath' => 'controllers/'],
     'Actions',
-    'Controller'
+    'Controller',
 ];
 ```
 
@@ -818,7 +822,7 @@ objects, so you can be sure the settings were applied every where:
 ``` php
 $this->Auth->mapActions([
     'create' => ['register'],
-    'view' => ['show', 'display']
+    'view' => ['show', 'display'],
 ]);
 ```
 

@@ -80,10 +80,10 @@ public function beforeFilter()
 {
     parent::beforeFilter();
     $this->Cookie->name = 'baker_id';
-    $this->Cookie->time = 3600;  // または '1 hour'
+    $this->Cookie->time = 3600; // または '1 hour'
     $this->Cookie->path = '/bakers/preferences/';
     $this->Cookie->domain = 'example.com';
-    $this->Cookie->secure = true;  // セキュアな HTTPS で接続している時のみ発行されます
+    $this->Cookie->secure = true; // セキュアな HTTPS で接続している時のみ発行されます
     $this->Cookie->key = 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^';
     $this->Cookie->httpOnly = true;
 }

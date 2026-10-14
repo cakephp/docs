@@ -135,7 +135,7 @@ true にセットしてください。詳しくは、 [構成設定](../developm
 
 ``` php
 // CakePHP クラスの中でこれを実行
-$this->log("何か動かないよ！");
+$this->log('何か動かないよ！');
 
 // logs/error.log に追記された結果
 // 2007-11-02 10:22:02 Error: 何か動かないよ！
@@ -161,7 +161,7 @@ FileLog は、独自のパスを使用するために `path` を設定できま�
 ``` php
 CakeLog::config('custom_path', [
     'engine' => 'File',
-    'path' => '/path/to/custom/place/'
+    'path' => '/path/to/custom/place/',
 ]);
 ```
 
@@ -184,7 +184,7 @@ syslog を使うためには、デフォルトの FileLog エンジンを使う�
 
 ``` php
 CakeLog::config('default', [
-    'engine' => 'Syslog'
+    'engine' => 'Syslog',
 ]);
 ```
 
@@ -215,7 +215,7 @@ CakeLog::write('debug', '何か動作しなかった');
 
 ``` php
 // CakePHP クラス内でこれを実行:
-$this->log("何か動作しなかったよ！", 'debug');
+$this->log('何か動作しなかったよ！', 'debug');
 ```
 
 全ての設定されたログストリームは、 `CakeLog::write()` が呼ばれるたびに
@@ -231,7 +231,7 @@ CakeLog は、自身では何も自動設定されません。結果として、
 
 ``` php
 CakeLog::config('default', [
-    'engine' => 'File'
+    'engine' => 'File',
 ]);
 ```
 
@@ -264,7 +264,7 @@ CakeLog::config('shop', [
 CakeLog::config('payments', [
     'engine' => 'SyslogLog',
     'types' => ['info', 'error', 'warning'],
-    'scopes' => ['payments']
+    'scopes' => ['payments'],
 ]);
 
 CakeLog::warning('これは、 shop のストリームにのみ書かれます', 'orders');

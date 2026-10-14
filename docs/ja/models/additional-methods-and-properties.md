@@ -14,8 +14,9 @@ class Example extends AppModel
     {
         $conditions = [
             'created BETWEEN (curdate() - interval 7 day)' .
-            ' and (curdate() - interval 0 day))'
+            ' and (curdate() - interval 0 day))',
         ];
+
         return $this->find('all', compact('conditions'));
     }
 }

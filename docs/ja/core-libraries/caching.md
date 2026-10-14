@@ -74,7 +74,7 @@ Cache::config('short', [
     'engine' => 'File',
     'duration' => '+1 hours',
     'path' => CACHE,
-    'prefix' => 'cake_short_'
+    'prefix' => 'cake_short_',
 ]);
 
 // long
@@ -154,7 +154,6 @@ CacheEngine に必要な API は、以下の通りです。
 ``` php
 class Post extends AppModel
 {
-
     public function newest()
     {
         $result = Cache::read('newest_posts', 'long');
@@ -162,6 +161,7 @@ class Post extends AppModel
             $result = $this->find('all', ['order' => 'Post.updated DESC', 'limit' => 10]);
             Cache::write('newest_posts', $result, 'long');
         }
+
         return $result;
     }
 }
@@ -178,14 +178,14 @@ class Post extends AppModel
 ``` php
 class Post extends AppModel
 {
-
     public function newest()
     {
         $model = $this;
-        return Cache::remember('newest_posts', function() use ($model){
+
+        return Cache::remember('newest_posts', function () use ($model) {
             return $model->find('all', [
                 'order' => 'Post.updated DESC',
-                'limit' => 10
+                'limit' => 10,
             ]);
         }, 'long');
     }
@@ -231,7 +231,7 @@ Cache::increment('initial_count');
 Cache::config('site_home', [
     'engine' => 'Redis',
     'duration' => '+999 days',
-    'groups' => ['comment', 'post']
+    'groups' => ['comment', 'post'],
 ]);
 ```
 
@@ -313,6 +313,7 @@ if ($cloud !== false) {
 
 // データをキャッシュに格納
 Cache::write('cloud', $cloud);
+
 return $cloud;
 ```
 
@@ -413,10 +414,11 @@ return
 ``` php
 class Articles extends AppModel
 {
-    function all()
+    public function all()
     {
         $model = $this;
-        return Cache::remember('all_articles', function() use ($model){
+
+        return Cache::remember('all_articles', function () use ($model) {
             return $model->find('all');
         });
     }

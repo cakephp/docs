@@ -240,8 +240,10 @@ $customClassMap = [
 spl_autoload_register(function ($class) use ($customClassMap) {
     if (isset($customClassMap[$class])) {
         require $customClassMap[$class];
+
         return true;
     }
+
     return false;
 }, true, true); // throw=true, prepend=true (priority over Composer)
 ```

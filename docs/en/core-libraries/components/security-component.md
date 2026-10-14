@@ -125,7 +125,6 @@ want and the Security Component will enforce them on its startup:
 ``` php
 class WidgetController extends AppController
 {
-
     public $components = ['Security'];
 
     public function beforeFilter()
@@ -141,7 +140,6 @@ triggered if it receives a POST request:
 ``` php
 class WidgetController extends AppController
 {
-
     public $components = ['Security'];
 
     public function beforeFilter()
@@ -159,7 +157,6 @@ require secure SSL requests:
 ``` php
 class WidgetController extends AppController
 {
-
     public $components = ['Security'];
 
     public function beforeFilter()
@@ -214,8 +211,8 @@ csrfExpires on the component. :
 ``` php
 public $components = [
     'Security' => [
-        'csrfExpires' => '+1 hour'
-    ]
+        'csrfExpires' => '+1 hour',
+    ],
 ];
 ```
 
@@ -252,8 +249,8 @@ the `beforeFilter` of your controller:
 ``` php
 public $components = [
     'Security' => [
-        'csrfUseOnce' => false
-    ]
+        'csrfUseOnce' => false,
+    ],
 ];
 ```
 

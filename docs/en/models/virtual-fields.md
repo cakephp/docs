@@ -15,7 +15,7 @@ would be:
 
 ``` php
 public $virtualFields = [
-    'name' => 'CONCAT(User.first_name, " ", User.last_name)'
+    'name' => 'CONCAT(User.first_name, " ", User.last_name)',
 ];
 ```
 
@@ -23,7 +23,7 @@ And with PostgreSQL:
 
 ``` php
 public $virtualFields = [
-    'name' => "User.first_name || \' \' || User.last_name"
+    'name' => "User.first_name || \' \' || User.last_name",
 ];
 ```
 
@@ -95,7 +95,7 @@ $results = $this->User->find('first');
         'last_name' => 'Story',
         'name' => 'Mark Story',
         //more fields.
-    ]
+    ],
 ];
 ```
 
@@ -117,7 +117,9 @@ public function __construct($id = false, $table = null, $ds = null)
 {
     parent::__construct($id, $table, $ds);
     $this->virtualFields['name'] = sprintf(
-        'CONCAT(%s.first_name, " ", %s.last_name)', $this->alias, $this->alias
+        'CONCAT(%s.first_name, " ", %s.last_name)',
+        $this->alias,
+        $this->alias,
     );
 }
 ```
@@ -133,7 +135,7 @@ link in your template:
 
 ``` php
 // Create a sort link for a virtual field
-$this->Paginator->sort('ProductsItems.Total','Items Total');
+$this->Paginator->sort('ProductsItems.Total', 'Items Total');
 ```
 
 You could then use the following pagination setup in your controller:
@@ -157,10 +159,10 @@ $where = [
             'type' => 'LEFT',
             'conditions' => [
                 'ProductsItems.products_id = Products.id',
-            ]
-        ]
+            ],
+        ],
     ],
-    'group' => 'ProductsItems.products_id'
+    'group' => 'ProductsItems.products_id',
 ];
 
 // Set conditions Paginator
@@ -216,7 +218,7 @@ $this->Timelog->query(
     AS
         Timelog
     GROUP BY
-        project_id;"
+        project_id;",
 );
 ```
 
@@ -261,7 +263,7 @@ $this->Timelog->query(
     AS
         Timelog
     GROUP BY
-        project_id;"
+        project_id;",
 );
 ```
 

@@ -12,7 +12,7 @@ formatting numbers.
 `NumberHelper` have been refactored into `CakeNumber` class to allow easier use outside of the `View` layer. Within a view, these methods are accessible via the `NumberHelper` class and you can call it as you would call a normal helper method: `$this->Number->method($args);`.
 :::
 
-<!--@include: ../../core-utility-libraries/number.md{29,52}-->
+<!--@include: ../../core-utility-libraries/number.md{28,51}-->
 
 > [!WARNING]
 > Since 2.4 the symbols are now UTF-8. Please see the migration guide for details if you run a

@@ -137,25 +137,24 @@ MySQL と PostgreSQL のドライバには `getVersion()` などのメソッド�
 // src/Model/Datasource/FarAwaySource.php
 class FarAwaySource extends DataSource
 {
-
-/**
- * データソースの説明（オプション）
- */
+    /**
+     * データソースの説明（オプション）
+     */
     public $description = 'A far away datasource';
 
-/**
- * デフォルトの設定オプション。これらは ``config/database.php``
- * でカスタマイズされ、 ``__construct()`` の中でマージされます。
- */
+    /**
+     * デフォルトの設定オプション。これらは ``config/database.php``
+     * でカスタマイズされ、 ``__construct()`` の中でマージされます。
+     */
     public $config = [
         'apiKey' => '',
     ];
 
-/**
- * create() や update() を行いたい（実装したい）場合、利用できる
- * 項目を指定する必要があります。たとえば固定情報やスキーマの
- * 移行など、CakeSchema でやる場合と同じ配列キーを使います。
- */
+    /**
+     * create() や update() を行いたい（実装したい）場合、利用できる
+     * 項目を指定する必要があります。たとえば固定情報やスキーマの
+     * 移行など、CakeSchema でやる場合と同じ配列キーを使います。
+     */
     protected $_schema = [
         'id' => [
             'type' => 'integer',
@@ -174,66 +173,68 @@ class FarAwaySource extends DataSource
         ],
     ];
 
-/**
- * HttpSocket を生成し、設定の調整を行う。
- */
+    /**
+     * HttpSocket を生成し、設定の調整を行う。
+     */
     public function __construct($config)
     {
         parent::__construct($config);
         $this->Http = new HttpSocket();
     }
 
-/**
- * データソースは通常データベースに接続するので、データベース
- * なしでも動くようにいくらか調整する必要があります。
- */
+    /**
+     * データソースは通常データベースに接続するので、データベース
+     * なしでも動くようにいくらか調整する必要があります。
+     */
 
-/**
- * listSources() はキャッシュ操作を行います。あなたはカスタム
- * データソースでも独自のやり方でキャッシュ機構を実装したいと思う
- * かもしれません。とりあえず、単に ``return null`` してください。
- */
+    /**
+     * listSources() はキャッシュ操作を行います。あなたはカスタム
+     * データソースでも独自のやり方でキャッシュ機構を実装したいと思う
+     * かもしれません。とりあえず、単に ``return null`` してください。
+     */
     public function listSources($data = null)
     {
         return null;
     }
 
-/**
- * describe() はモデルに対して ``Model::save()`` のための
- * スキーマを伝えます。
- *
- * モデルごとに異なったスキーマを使いたい場合もあるかもしれませんが、
- * それでも単一のデータソースを使ってください。その場合、モデルに
- * 対して ``schema`` プロパティをセットし、ここでは単に 
- * ``$model->schema`` を返すようにします。
- */
+    /**
+     * describe() はモデルに対して ``Model::save()`` のための
+     * スキーマを伝えます。
+     *
+     * モデルごとに異なったスキーマを使いたい場合もあるかもしれませんが、
+     * それでも単一のデータソースを使ってください。その場合、モデルに
+     * 対して ``schema`` プロパティをセットし、ここでは単に
+     * ``$model->schema`` を返すようにします。
+     */
     public function describe($model)
     {
         return $this->_schema;
     }
 
-/**
- * calculate() はレコード数のカウント方法を決定します。これは
- * ``update()`` と ``delete()`` の動作を決めるのに必要です。
- *
- * ここでは実際にはレコードのカウントはせず、 ``read()`` に渡されるべき
- * 文字列を返します。これが実際のカウント処理を行います。
- * 最も簡単なのは、ここでは単に 'COUNT' という文字列を返しておき、
- * ``read()`` の中で ``$data['fields'] === 'COUNT'`` かどうかを
- * 聞くようにすることです。
- */
+    /**
+     * calculate() はレコード数のカウント方法を決定します。これは
+     * ``update()`` と ``delete()`` の動作を決めるのに必要です。
+     *
+     * ここでは実際にはレコードのカウントはせず、 ``read()`` に渡されるべき
+     * 文字列を返します。これが実際のカウント処理を行います。
+     * 最も簡単なのは、ここでは単に 'COUNT' という文字列を返しておき、
+     * ``read()`` の中で ``$data['fields'] === 'COUNT'`` かどうかを
+     * 聞くようにすることです。
+     */
     public function calculate(Model $model, $func, $params = [])
     {
         return 'COUNT';
     }
 
-/**
- * CRUD のうちの R を実装します。 ``Model::find()`` への呼び出しは
- * ここに来ます。
- */
-    public function read(Model $model, $queryData = [],
-        $recursive = null)
-    {
+    /**
+     * CRUD のうちの R を実装します。 ``Model::find()`` への呼び出しは
+     * ここに来ます。
+     */
+    public function read(
+        Model $model,
+        $queryData = [],
+        $recursive = null,
+    ) {
         /**
          * ここでは、前述の calculate() メソッドで返されるカウントの
          * 実際の処理を行います。リモートソースのチェックをするか、
@@ -250,20 +251,21 @@ class FarAwaySource extends DataSource
         $queryData['conditions']['apiKey'] = $this->config['apiKey'];
         $json = $this->Http->get(
             'http://example.com/api/list.json',
-            $queryData['conditions']
+            $queryData['conditions'],
         );
         $res = json_decode($json, true);
         if (is_null($res)) {
             $error = json_last_error();
             throw new CakeException($error);
         }
+
         return [$model->alias => $res];
     }
 
-/**
- * CRUD のうちの C を実装します。 ``Model::save()`` への呼び出しのうち
- *  $model->id がセットされないケースがここに来ます。
- */
+    /**
+     * CRUD のうちの C を実装します。 ``Model::save()`` への呼び出しのうち
+     *  $model->id がセットされないケースがここに来ます。
+     */
     public function create(Model $model, $fields = null, $values = null)
     {
         $data = array_combine($fields, $values);
@@ -274,24 +276,28 @@ class FarAwaySource extends DataSource
             $error = json_last_error();
             throw new CakeException($error);
         }
+
         return true;
     }
 
-/**
- * CRUD のうちの U を実装します。 ``Model::save()`` への呼び出しのうち
- *  $model->id がセットされているケースがここに来ます。リモートソース
- *  に依存するためここでは単に ``$this->create()`` をコールできます。
- */
-    public function update(Model $model, $fields = null, $values = null,
-        $conditions = null)
-    {
+    /**
+     * CRUD のうちの U を実装します。 ``Model::save()`` への呼び出しのうち
+     *  $model->id がセットされているケースがここに来ます。リモートソース
+     *  に依存するためここでは単に ``$this->create()`` をコールできます。
+     */
+    public function update(
+        Model $model,
+        $fields = null,
+        $values = null,
+        $conditions = null,
+    ) {
         return $this->create($model, $fields, $values);
     }
 
-/**
- * CRUD のうちの D を実装します。 
- * ``Model::delete()`` への呼び出しがここに来ます。
- */
+    /**
+     * CRUD のうちの D を実装します。
+     * ``Model::delete()`` への呼び出しがここに来ます。
+     */
     public function delete(Model $model, $id = null)
     {
         $json = $this->Http->get('http://example.com/api/remove.json', [
@@ -303,6 +309,7 @@ class FarAwaySource extends DataSource
             $error = json_last_error();
             throw new CakeException($error);
         }
+
         return true;
     }
 }
@@ -314,7 +321,7 @@ class FarAwaySource extends DataSource
 ``` php
 public $faraway = [
     'datasource' => 'FarAwaySource',
-    'apiKey'     => '1234abcd',
+    'apiKey' => '1234abcd',
 ];
 ```
 
@@ -376,7 +383,7 @@ $this->MyModel->delete(42);
 ``` php
 public $faraway = [
     'datasource' => 'MyPlugin.FarAwaySource',
-    'apiKey'     => 'abcd1234',
+    'apiKey' => 'abcd1234',
 ];
 ```
 

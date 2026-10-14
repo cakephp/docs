@@ -124,16 +124,16 @@ tree to see what it looks like. With a simple controller:
 ``` php
 class CategoriesController extends AppController
 {
-
     public function index()
     {
         $data = $this->Category->generateTreeList(
-          null,
-          null,
-          null,
-          '&nbsp;&nbsp;&nbsp;'
+            null,
+            null,
+            null,
+            '&nbsp;&nbsp;&nbsp;',
         );
-        debug($data); die;
+        debug($data);
+        die;
     }
 }
 ```
@@ -258,8 +258,8 @@ following code:
 // pseudo controller code
 $this->Category->id = 5; // id of Extreme fishing
 $newParentId = $this->Category->field(
-  'id',
-  ['name' => 'Other People\'s Categories']
+    'id',
+    ['name' => 'Other People\'s Categories'],
 );
 $this->Category->save(['parent_id' => $newParentId]);
 ```
@@ -351,15 +351,15 @@ public function movedown($id = null, $delta = null)
 {
     $this->Category->id = $id;
     if (!$this->Category->exists()) {
-       throw new NotFoundException(__('Invalid category'));
+        throw new NotFoundException(__('Invalid category'));
     }
 
     if ($delta > 0) {
         $this->Category->moveDown($this->Category->id, abs($delta));
     } else {
         $this->Session->setFlash(
-          'Please provide the number of positions the field should be' .
-          'moved down.'
+            'Please provide the number of positions the field should be' .
+            'moved down.',
         );
     }
 
@@ -385,15 +385,15 @@ public function moveup($id = null, $delta = null)
 {
     $this->Category->id = $id;
     if (!$this->Category->exists()) {
-       throw new NotFoundException(__('Invalid category'));
+        throw new NotFoundException(__('Invalid category'));
     }
 
     if ($delta > 0) {
         $this->Category->moveUp($this->Category->id, abs($delta));
     } else {
         $this->Session->setFlash(
-          'Please provide a number of positions the category should' .
-          'be moved up.'
+            'Please provide a number of positions the category should' .
+            'be moved up.',
         );
     }
 

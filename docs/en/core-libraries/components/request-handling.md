@@ -24,7 +24,6 @@ RequestHandler it must be included in your \$components array:
 ``` php
 class WidgetController extends AppController
 {
-
     public $components = ['RequestHandler'];
 
     // Rest of controller
@@ -114,8 +113,9 @@ setting to false:
 ``` php
 public $components = [
     'RequestHandler' => [
-        'checkHttpCache' => false
-]];
+        'checkHttpCache' => false,
+    ],
+];
 ```
 
 ## Using custom ViewClasses
@@ -138,7 +138,8 @@ public $components = [
         'viewClassMap' => [
             'json' => 'ApiKit.MyJson',
             'xml' => 'ApiKit.MyXml',
-            'csv' => 'ApiKit.Csv'
-        ]
-]];
+            'csv' => 'ApiKit.Csv',
+        ],
+    ],
+];
 ```

@@ -19,4 +19,4 @@ TextHelper は、ビューの中でテキストを作成する際に便利で使
 
 `method` TextHelper::**autoParagraph**(string $text)
 
-<!--@include: ../../core-utility-libraries/string.md{112,130}-->
+<!--@include: ../../core-utility-libraries/string.md{111,129}-->

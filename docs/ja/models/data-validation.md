@@ -37,7 +37,7 @@ class User extends AppModel
     public $validate = [
         'login' => 'alphaNumeric',
         'email' => 'email',
-        'born'  => 'date'
+        'born' => 'date',
     ];
 }
 ```
@@ -65,23 +65,23 @@ class User extends AppModel
             'alphaNumeric' => [
                 'rule' => 'alphaNumeric',
                 'required' => true,
-                'message' => '文字と数字のみです'
+                'message' => '文字と数字のみです',
             ],
             'between' => [
                 'rule' => ['lengthBetween', 5, 15],
-                'message' => '5～15文字です'
-            ]
+                'message' => '5～15文字です',
+            ],
         ],
         'password' => [
             'rule' => ['minLength', '8'],
-            'message' => '最低8文字です'
+            'message' => '最低8文字です',
         ],
         'email' => 'email',
         'born' => [
             'rule' => 'date',
             'message' => '正しい値を入れてください',
-            'allowEmpty' => true
-        ]
+            'allowEmpty' => true,
+        ],
     ];
 }
 ```
@@ -134,13 +134,13 @@ public $validate = ['user_email' => 'email'];
 public $validate = [
     'fieldName1' => [
         // or: ['ruleName', 'param1', 'param2' ...]
-        'rule'       => 'ruleName',
-        'required'   => true,
+        'rule' => 'ruleName',
+        'required' => true,
         'allowEmpty' => false,
         // or: 'update'
-        'on'         => 'create',
-        'message'    => 'エラーメッセージ'
-    ]
+        'on' => 'create',
+        'message' => 'エラーメッセージ',
+    ],
 ];
 ```
 
@@ -167,8 +167,8 @@ rule がパラメータを必要としない場合、'rule' に次のような�
 ``` php
 public $validate = [
     'login' => [
-        'rule' => 'alphaNumeric'
-    ]
+        'rule' => 'alphaNumeric',
+    ],
 ];
 ```
 
@@ -178,8 +178,8 @@ public $validate = [
 ``` php
 public $validate = [
     'password' => [
-        'rule' => ['minLength', 8]
-    ]
+        'rule' => ['minLength', 8],
+    ],
 ];
 ```
 
@@ -197,9 +197,9 @@ public $validate = [
 ``` php
 public $validate = [
     'login' => [
-        'rule'     => 'alphaNumeric',
-        'required' => true
-    ]
+        'rule' => 'alphaNumeric',
+        'required' => true,
+    ],
 ];
 ```
 
@@ -254,8 +254,8 @@ message キーを使うと、そのルールについてのカスタムバリデ
 public $validate = [
     'password' => [
         'rule' => ['minLength', 8],
-        'message' => 'パスワードは８文字以上必要です。'
-    ]
+        'message' => 'パスワードは８文字以上必要です。',
+    ],
 ];
 ```
 
@@ -283,8 +283,8 @@ public $validate = [
         'ruleName2' => [
             'rule' => 'ruleName2',
             // ここに on や required などその他のキーを書く
-        ]
-    ]
+        ],
+    ],
 ];
 ```
 
@@ -306,9 +306,9 @@ public $validate = [
          ],
         'loginRule-2' => [
             'rule' => ['minLength', 8],
-            'message' => '最低８文字です'
-        ]
-    ]
+            'message' => '最低８文字です',
+        ],
+    ],
 ];
 ```
 
@@ -337,13 +337,13 @@ public $validate = [
         'rule1' => [
             'rule' => 'alphaNumeric',
             'message' => 'アルファベットと数字だけを使えます',
-            'last'    => false
+            'last' => false,
          ],
         'rule2' => [
             'rule' => ['minLength', 8],
-            'message' => '８文字以上です'
-        ]
-    ]
+            'message' => '８文字以上です',
+        ],
+    ],
 ];
 ```
 
@@ -356,7 +356,7 @@ public $validate = [
         'アルファベットと数字だけです' => [
             'rule' => 'alphaNumeric',
          ],
-    ]
+    ],
 ];
 ```
 
@@ -381,8 +381,8 @@ public $validate = [
 public $validate = [
     'login' => [
         'rule' => '/^[a-z0-9]{3,}$/i',
-        'message' => '文字と数字のみ、３文字以上'
-    ]
+        'message' => '文字と数字のみ、３文字以上',
+    ],
 ];
 ```
 
@@ -403,12 +403,11 @@ public $validate = [
 ``` php
 class User extends AppModel
 {
-
     public $validate = [
         'promotion_code' => [
             'rule' => ['limitDuplicates', 25],
-            'message' => '利用回数の制限を超えました。'
-        ]
+            'message' => '利用回数の制限を超えました。',
+        ],
     ];
 
     public function limitDuplicates($check, $limit)
@@ -417,8 +416,9 @@ class User extends AppModel
         // $limit には 25 が入っている
         $existingPromoCount = $this->find('count', [
             'conditions' => $check,
-            'recursive' => -1
+            'recursive' => -1,
         ]);
+
         return $existingPromoCount < $limit;
     }
 }
@@ -450,13 +450,12 @@ class User extends AppModel
 ``` php
 class Post extends AppModel
 {
-
     public $validate = [
         'slug' => [
             'rule' => 'alphaNumericDashUnderscore',
             'message' => 'これには文字、数字、ハイフン、' .
-                'アンダースコアが使えます'
-        ]
+                'アンダースコアが使えます',
+        ],
     ];
 
     public function alphaNumericDashUnderscore($check)
@@ -508,7 +507,7 @@ class Post extends AppModel
 // Inside a model class
 $this->validator()->add('password', 'required', [
     'rule' => 'notBlank',
-    'required' => 'create'
+    'required' => 'create',
 ]);
 ```
 
@@ -520,11 +519,11 @@ add に対してさらに他の add への呼び出しを、好きなだけ繋�
 $this->validator()
     ->add('password', 'required', [
         'rule' => 'notBlank',
-        'required' => 'create'
+        'required' => 'create',
     ])
     ->add('password', 'size', [
         'rule' => ['lengthBetween', 8, 20],
-        'message' => 'パスワードは最低8文字です。'
+        'message' => 'パスワードは最低8文字です。',
     ]);
 ```
 
@@ -534,12 +533,12 @@ $this->validator()
 $this->validator()->add('password', [
     'required' => [
         'rule' => 'notBlank',
-        'required' => 'create'
+        'required' => 'create',
     ],
     'size' => [
         'rule' => ['lengthBetween', 8, 20],
-        'message' => 'パスワードは最低8文字です。'
-    ]
+        'message' => 'パスワードは最低8文字です。',
+    ],
 ]);
 ```
 
@@ -551,11 +550,11 @@ $validator = $this->validator();
 $validator['username'] = [
     'unique' => [
         'rule' => 'isUnique',
-        'required' => 'create'
+        'required' => 'create',
     ],
     'alphanumeric' => [
-        'rule' => 'alphanumeric'
-    ]
+        'rule' => 'alphanumeric',
+    ],
 ];
 ```
 
@@ -573,7 +572,7 @@ validator オブジェクトを使って現在のバリデーションルール�
 // モデルクラスの中で
 $this->validator()->getField('password')->setRule('required', [
     'rule' => 'required',
-    'required' => true
+    'required' => true,
 ]);
 ```
 
@@ -584,7 +583,7 @@ $this->validator()->getField('password')->setRule('required', [
 // モデルクラスの中で
 $this->validator()->getField('password')->setRules([
     'required' => [...],
-    'otherRule' => [...]
+    'otherRule' => [...],
 ]);
 ```
 
@@ -609,7 +608,7 @@ $this->validator()->getField('password')
 $validator = $this->validator();
 $validator['username']['unique'] = [
     'rule' => 'isUnique',
-    'required' => 'create'
+    'required' => 'create',
 ];
 
 $validator['username']['unique']->last = true;
@@ -661,8 +660,8 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 public $validate = [
     'login' => [
         'rule' => 'alphaNumeric',
-        'message' => 'ユーザ名には文字と数字だけしか使えません。'
-    ]
+        'message' => 'ユーザ名には文字と数字だけしか使えません。',
+    ],
 ];
 ```
 
@@ -675,8 +674,8 @@ public $validate = [
 public $validate = [
     'password' => [
         'rule' => ['lengthBetween', 5, 15],
-        'message' => 'パスワードは5～15文字でなければなりません。'
-    ]
+        'message' => 'パスワードは5～15文字でなければなりません。',
+    ],
 ];
 ```
 
@@ -695,8 +694,8 @@ public $validate = [
 public $validate = [
     'id' => [
         'rule' => 'blank',
-        'on'   => 'create'
-    ]
+        'on' => 'create',
+    ],
 ];
 ```
 
@@ -709,8 +708,8 @@ true, false, 数字の 0 または 1、文字列の '0' または '1' です。 
 public $validate = [
     'myCheckbox' => [
         'rule' => ['boolean'],
-        'message' => 'myCheckbox の値が誤っています'
-    ]
+        'message' => 'myCheckbox の値が誤っています',
+    ],
 ];
 ```
 
@@ -753,8 +752,8 @@ public $validate = [
 public $validate = [
     'ccnumber' => [
         'rule' => ['cc', ['visa', 'maestro'], false, null],
-        'message' => 'クレジットカード番号が正しくありません。'
-    ]
+        'message' => 'クレジットカード番号が正しくありません。',
+    ],
 ];
 ```
 
@@ -768,15 +767,15 @@ comparison は数値を比較します。サポートしている機能は『よ
 public $validate = [
     'age' => [
         'rule' => ['comparison', '>=', 18],
-        'message' => '条件は１８歳以上です。'
-    ]
+        'message' => '条件は１８歳以上です。',
+    ],
 ];
 
 public $validate = [
     'age' => [
         'rule' => ['comparison', 'greater or equal', 18],
-        'message' => '条件は１８歳以上です。'
-    ]
+        'message' => '条件は１８歳以上です。',
+    ],
 ];
 ```
 
@@ -788,8 +787,8 @@ public $validate = [
 public $validate = [
     'infinite' => [
         'rule' => ['custom', '\u221E'],
-        'message' => '∞ を入力してください'
-    ]
+        'message' => '∞ を入力してください',
+    ],
 ];
 ```
 
@@ -822,10 +821,10 @@ public $validate = [
 ``` php
 public $validate = [
     'born' => [
-        'rule'       => ['date', 'ymd'],
-        'message'    => '有効な日付を YY-MM-DD フォーマットで入力してください。',
-        'allowEmpty' => true
-    ]
+        'rule' => ['date', 'ymd'],
+        'message' => '有効な日付を YY-MM-DD フォーマットで入力してください。',
+        'allowEmpty' => true,
+    ],
 ];
 ```
 
@@ -862,8 +861,8 @@ public $validate = [
 public $validate = [
     'birthday' => [
         'rule' => ['datetime', 'dmy'],
-        'message'    => '有効な日時を入力してください。',
-    ]
+        'message' => '有効な日時を入力してください。',
+    ],
 ];
 ```
 
@@ -882,8 +881,8 @@ date() と異なり、datetime() は日時を検証します。
 ``` php
 public $validate = [
     'price' => [
-        'rule' => ['decimal', 2]
-    ]
+        'rule' => ['decimal', 2],
+    ],
 ];
 ```
 
@@ -899,8 +898,8 @@ public $validate = ['email' => ['rule' => 'email']];
 public $validate = [
     'email' => [
         'rule' => ['email', true],
-        'message' => '有効なメールアドレスを入力してください。'
-    ]
+        'message' => '有効なメールアドレスを入力してください。',
+    ],
 ];
 ```
 
@@ -914,8 +913,8 @@ public $validate = [
 public $validate = [
     'food' => [
         'rule' => ['equalTo', 'cake'],
-        'message' => 'この値は文字列 cake でなければなりません。'
-    ]
+        'message' => 'この値は文字列 cake でなければなりません。',
+    ],
 ];
 ```
 
@@ -929,10 +928,10 @@ public $validate = [
     'image' => [
         'rule' => [
             'extension',
-            ['gif', 'jpeg', 'png', 'jpg']
+            ['gif', 'jpeg', 'png', 'jpg'],
         ],
-        'message' => '有効な画像ファイルを指定してください。'
-    ]
+        'message' => '有効な画像ファイルを指定してください。',
+    ],
 ];
 ```
 
@@ -949,8 +948,8 @@ public $validate = [
 public $validate = [
     'image' => [
         'rule' => ['fileSize', '<=', '1MB'],
-        'message' => '画像は 1MB 未満でなければなりません。'
-    ]
+        'message' => '画像は 1MB 未満でなければなりません。',
+    ],
 ];
 ```
 
@@ -971,9 +970,9 @@ public $validate = [
     'function' => [
          'allowedChoice' => [
              'rule' => ['inList', ['Foo', 'Bar']],
-             'message' => 'Foo または Bar を入力してください。'
-         ]
-     ]
+             'message' => 'Foo または Bar を入力してください。',
+         ],
+     ],
  ];
 ```
 
@@ -990,8 +989,8 @@ public $validate = [
 public $validate = [
     'clientip' => [
         'rule' => ['ip', 'IPv4'], // or 'IPv6' or 'both' (default)
-        'message' => '有効なIPアドレスを入力してください。'
-    ]
+        'message' => '有効なIPアドレスを入力してください。',
+    ],
 ];
 ```
 
@@ -1010,8 +1009,8 @@ luhn アルゴリズム：さまざまな一意の番号を検証するための
 public $validate = [
     'login' => [
         'rule' => ['maxLength', 15],
-        'message' => 'ユーザ名は15文字までです。'
-    ]
+        'message' => 'ユーザ名は15文字までです。',
+    ],
 ];
 ```
 
@@ -1026,8 +1025,8 @@ public $validate = [
 public $validate = [
     'data' => [
         'rule' => ['maxLengthBytes', 2 ** 24 - 1],
-        'message' => 'データは 16 MB より大きくできません。'
-    ]
+        'message' => 'データは 16 MB より大きくできません。',
+    ],
 ];
 ```
 
@@ -1050,11 +1049,11 @@ public $validate = [
 public $validate = [
     'image' => [
         'rule' => ['mimeType', ['image/gif']],
-        'message' => 'mime 型が不正です。'
+        'message' => 'mime 型が不正です。',
     ],
     'logo' => [
         'rule' => ['mimeType', '#image/.+#'],
-        'message' => 'mime 型が不正です。'
+        'message' => 'mime 型が不正です。',
     ],
 ];
 ```
@@ -1067,8 +1066,8 @@ public $validate = [
 public $validate = [
     'login' => [
         'rule' => ['minLength', 8],
-        'message' => 'ユーザー名は最低8文字以上にしてください。'
-    ]
+        'message' => 'ユーザー名は最低8文字以上にしてください。',
+    ],
 ];
 ```
 
@@ -1084,8 +1083,8 @@ public $validate = [
 public $validate = [
     'login' => [
         'rule' => ['minLengthBytes', 2 ** 16 - 1],
-        'message' => 'Data can not be smaller than 64KB.'
-    ]
+        'message' => 'Data can not be smaller than 64KB.',
+    ],
 ];
 ```
 
@@ -1101,8 +1100,8 @@ public $validate = [
 public $validate = [
     'salary' => [
         'rule' => ['money', 'left'],
-        'message' => '適切な金額を入力してください。'
-    ]
+        'message' => '適切な金額を入力してください。',
+    ],
 ];
 ```
 
@@ -1116,12 +1115,12 @@ public $validate = [
 public $validate = [
     'multiple' => [
         'rule' => ['multiple', [
-            'in'  => ['do', 're', 'mi', 'fa', 'sol', 'la', 'ti'],
+            'in' => ['do', 're', 'mi', 'fa', 'sol', 'la', 'ti'],
             'min' => 1,
-            'max' => 3
+            'max' => 3,
         ]],
-        'message' => '１個から３個までのオプションを選んでください'
-    ]
+        'message' => '１個から３個までのオプションを選んでください',
+    ],
 ];
 ```
 
@@ -1146,8 +1145,8 @@ public $validate = [
 public $validate = [
     'title' => [
         'rule' => 'notBlank',
-        'message' => 'この項目は必須入力です。'
-    ]
+        'message' => 'この項目は必須入力です。',
+    ],
 ];
 ```
 
@@ -1162,8 +1161,8 @@ public $validate = [
 public $validate = [
     'cars' => [
         'rule' => 'numeric',
-        'message' => '車の台数を入力してください。'
-    ]
+        'message' => '車の台数を入力してください。',
+    ],
 ];
 ```
 
@@ -1179,11 +1178,11 @@ public $validate = [
 public $validate = [
     'wheels' => [
         'rule' => 'naturalNumber',
-        'message' => '車輪の数を入力してください。'
+        'message' => '車輪の数を入力してください。',
     ],
     'airbags' => [
         'rule' => ['naturalNumber', true],
-        'message' => 'エアバッグ数を入力してください。'
+        'message' => 'エアバッグ数を入力してください。',
     ],
 ];
 ```
@@ -1197,8 +1196,8 @@ US の電話番号かどうかをチェックします。第二引数として�
 ``` php
 public $validate = [
     'phone' => [
-        'rule' => ['phone', null, 'us']
-    ]
+        'rule' => ['phone', null, 'us'],
+    ],
 ];
 ```
 
@@ -1211,8 +1210,8 @@ public $validate = [
 ``` php
 public $validate = [
     'zipcode' => [
-        'rule' => ['postal', null, 'us']
-    ]
+        'rule' => ['postal', null, 'us'],
+    ],
 ];
 ```
 
@@ -1227,8 +1226,8 @@ public $validate = [
 public $validate = [
     'number' => [
         'rule' => ['range', -1, 11],
-        'message' => '0 から 10 までの数字を入力してください。'
-    ]
+        'message' => '0 から 10 までの数字を入力してください。',
+    ],
 ];
 ```
 
@@ -1247,8 +1246,8 @@ public $validate = [
 ``` php
 public $validate = [
     'ssn' => [
-        'rule' => ['ssn', null, 'us']
-    ]
+        'rule' => ['ssn', null, 'us'],
+    ],
 ];
 ```
 
@@ -1269,7 +1268,7 @@ public $validate = [
 public $validate = [
     'image' => [
         'rule' => 'uploadError',
-        'message' => 'ファイルアップロードで障害が起こりました。'
+        'message' => 'ファイルアップロードで障害が起こりました。',
     ],
 ];
 ```
@@ -1282,8 +1281,8 @@ http(s), ftp(s), file, news, gopher をサポートしています。 :
 ``` php
 public $validate = [
     'website' => [
-        'rule' => 'url'
-    ]
+        'rule' => 'url',
+    ],
 ];
 ```
 
@@ -1293,8 +1292,8 @@ public $validate = [
 ``` php
 public $validate = [
     'website' => [
-        'rule' => ['url', true]
-    ]
+        'rule' => ['url', true],
+    ],
 ];
 ```
 
@@ -1319,6 +1318,7 @@ class NlValidation
     {
         // ...
     }
+
     public static function postal($check)
     {
         // ...

@@ -29,14 +29,13 @@ here that the `order` key must be defined in an array structure like below:
 ``` php
 class PostsController extends AppController
 {
-
     public $components = ['Paginator'];
 
     public $paginate = [
         'limit' => 25,
         'order' => [
-            'Post.title' => 'asc'
-        ]
+            'Post.title' => 'asc',
+        ],
     ];
 }
 ```
@@ -47,15 +46,14 @@ You can also include other `~Model::find()` options, such as
 ``` php
 class PostsController extends AppController
 {
-
     public $components = ['Paginator'];
 
     public $paginate = [
         'fields' => ['Post.id', 'Post.created'],
         'limit' => 25,
         'order' => [
-            'Post.title' => 'asc'
-        ]
+            'Post.title' => 'asc',
+        ],
     ];
 }
 ```
@@ -71,12 +69,11 @@ pagination:
 ``` php
 class RecipesController extends AppController
 {
-
     public $components = ['Paginator'];
 
     public $paginate = [
         'limit' => 25,
-        'contain' => ['Article']
+        'contain' => ['Article'],
     ];
 }
 ```
@@ -88,10 +85,9 @@ array after the model you wish to configure:
 ``` php
 class PostsController extends AppController
 {
-
     public $paginate = [
-        'Post' =>  [...],
-        'Author' =>  [...]
+        'Post' => [...],
+        'Author' => [...],
     ];
 }
 ```
@@ -126,7 +122,7 @@ parameter to the `paginate()` function:
 ``` php
 $data = $this->Paginator->paginate(
     'Recipe',
-    ['Recipe.title LIKE' => 'a%']
+    ['Recipe.title LIKE' => 'a%'],
 );
 ```
 
@@ -138,7 +134,7 @@ public function list_recipes()
 {
     $this->Paginator->settings = [
         'conditions' => ['Recipe.title LIKE' => 'a%'],
-        'limit' => 10
+        'limit' => 10,
     ];
     $data = $this->Paginator->paginate('Recipe');
     $this->set(compact('data'));
@@ -156,16 +152,28 @@ a behavior attached to your model. Behaviors implementing `paginate` and/or
 normal additional first parameter of `$model`:
 
 ``` php
-// paginate and paginateCount implemented on a behavior.
-public function paginate(Model $model, $conditions, $fields, $order, $limit,
-    $page = 1, $recursive = null, $extra = [])
-{
+/**
+ * paginate and paginateCount implemented on a behavior.
+ */
+public function paginate(
+    Model $model,
+    $conditions,
+    $fields,
+    $order,
+    $limit,
+    $page = 1,
+    $recursive = null,
+    $extra = [],
+) {
     // method content
 }
 
-public function paginateCount(Model $model, $conditions = null, $recursive = 0,
-    $extra = [])
-{
+public function paginateCount(
+    Model $model,
+    $conditions = null,
+    $recursive = 0,
+    $extra = [],
+) {
     // method body
 }
 ```
@@ -177,7 +185,7 @@ element, or the `findType` key as of 2.3:
 
 ``` php
 public $paginate = [
-    'popular'
+    'popular',
 ];
 ```
 
@@ -186,7 +194,7 @@ added:
 
 ``` php
 public $paginate = [
-    'findType' => 'popular'
+    'findType' => 'popular',
 ];
 ```
 
@@ -198,15 +206,21 @@ from:
 /**
  * Overridden paginate method - group by week, away_team_id and home_team_id
  */
-public function paginate($conditions, $fields, $order, $limit, $page = 1,
-    $recursive = null, $extra = [])
-{
-
+public function paginate(
+    $conditions,
+    $fields,
+    $order,
+    $limit,
+    $page = 1,
+    $recursive = null,
+    $extra = [],
+) {
     $recursive = -1;
     $group = $fields = ['week', 'away_team_id', 'home_team_id'];
+
     return $this->find(
         'all',
-        compact('conditions', 'fields', 'order', 'limit', 'page', 'recursive', 'group')
+        compact('conditions', 'fields', 'order', 'limit', 'page', 'recursive', 'group'),
     );
 }
 ```
@@ -220,9 +234,11 @@ accordingly depending on what database you are using:
 /**
  * Overridden paginateCount method
  */
-public function paginateCount($conditions = null, $recursive = 0,
-                                $extra = [])
-{
+public function paginateCount(
+    $conditions = null,
+    $recursive = 0,
+    $extra = [],
+) {
     $sql = "SELECT
         DISTINCT ON(
             week, home_team_id, away_team_id
@@ -232,6 +248,7 @@ public function paginateCount($conditions = null, $recursive = 0,
             games";
     $this->recursive = $recursive;
     $results = $this->query($sql);
+
     return count($results);
 }
 ```
@@ -248,8 +265,8 @@ public $paginate = [
     'MyModel' => [
         'limit' => 20,
         'order' => ['week' => 'desc'],
-        'group' => ['week', 'home_team_id', 'away_team_id']
-    ]
+        'group' => ['week', 'home_team_id', 'away_team_id'],
+    ],
 ];
 /**
  * Or on-the-fly from within the action
@@ -260,8 +277,8 @@ public function index()
         'MyModel' => [
             'limit' => 20,
             'order' => ['week' => 'desc'],
-            'group' => ['week', 'home_team_id', 'away_team_id']
-        ]
+            'group' => ['week', 'home_team_id', 'away_team_id'],
+        ],
     ];
 }
 ```
@@ -298,7 +315,7 @@ example reducing it to `10`:
 ``` php
 public $paginate = [
     // other keys here.
-    'maxLimit' => 10
+    'maxLimit' => 10,
 ];
 ```
 
@@ -319,7 +336,7 @@ parameter:
 
 ``` php
 public $paginate = [
-    'paramType' => 'querystring'
+    'paramType' => 'querystring',
 ];
 ```
 

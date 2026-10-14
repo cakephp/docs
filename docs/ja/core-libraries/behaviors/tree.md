@@ -120,16 +120,16 @@ VALUES
 ``` php
 class CategoriesController extends AppController
 {
-
     public function index()
     {
         $data = $this->Category->generateTreeList(
-          null,
-          null,
-          null,
-          '&nbsp;&nbsp;&nbsp;'
+            null,
+            null,
+            null,
+            '&nbsp;&nbsp;&nbsp;',
         );
-        debug($data); die;
+        debug($data);
+        die;
     }
 }
 ```
@@ -251,8 +251,8 @@ $this->Category->save(['name' => 'Extreme fishing']);
 // コントローラのコードの一部
 $this->Category->id = 5; // 「エクストリームフィッシング」の ID
 $newParentId = $this->Category->field(
-  'id',
-  ['name' => '別の人たちのカテゴリ']
+    'id',
+    ['name' => '別の人たちのカテゴリ'],
 );
 $this->Category->save(['parent_id' => $newParentId]);
 ```
@@ -342,14 +342,14 @@ public function movedown($id = null, $delta = null)
 {
     $this->Category->id = $id;
     if (!$this->Category->exists()) {
-       throw new NotFoundException(__('Invalid category'));
+        throw new NotFoundException(__('Invalid category'));
     }
 
     if ($delta > 0) {
         $this->Category->moveDown($this->Category->id, abs($delta));
     } else {
         $this->Session->setFlash(
-          'フィールドの位置を下げる数を入力してください。'
+            'フィールドの位置を下げる数を入力してください。',
         );
     }
 
@@ -374,14 +374,14 @@ public function moveup($id = null, $delta = null)
 {
     $this->Category->id = $id;
     if (!$this->Category->exists()) {
-       throw new NotFoundException(__('Invalid category'));
+        throw new NotFoundException(__('Invalid category'));
     }
 
     if ($delta > 0) {
         $this->Category->moveUp($this->Category->id, abs($delta));
     } else {
         $this->Session->setFlash(
-          'カテゴリの位置を上げる数を入力してください。'
+            'カテゴリの位置を上げる数を入力してください。',
         );
     }
 

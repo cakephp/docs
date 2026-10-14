@@ -64,9 +64,9 @@ echo $this->Paginator->sort('user_id', 'User account');
 
 ``` php
 echo $this->Paginator->sort(
-  'user_id',
-  '<em>User account</em>',
-  ['escape' => false]
+    'user_id',
+    '<em>User account</em>',
+    ['escape' => false],
 );
 ```
 
@@ -233,7 +233,7 @@ echo $this->Paginator->numbers(['first' => 2, 'last' => 2]);
   ``` php
   echo $this->Paginator->counter(
       '{:page} / {:pages} ページ, {:current} 件目 / 全 {:count} 件,
-       開始レコード番号 {:start}, 終了レコード番号 {:end}'
+       開始レコード番号 {:start}, 終了レコード番号 {:end}',
   );
   ```
 
@@ -241,7 +241,7 @@ echo $this->Paginator->numbers(['first' => 2, 'last' => 2]);
 
   ``` php
   echo $this->Paginator->counter([
-      'format' => 'range'
+      'format' => 'range',
   ]);
   ```
 
@@ -251,7 +251,7 @@ echo $this->Paginator->numbers(['first' => 2, 'last' => 2]);
 
   ``` php
   echo $this->Paginator->counter([
-      'separator' => ' of a total of '
+      'separator' => ' of a total of ',
   ]);
   ```
 
@@ -281,8 +281,8 @@ Paginatorヘルパーのすべてのオプションを設定します。
   $this->Paginator->options([
       'url' => [
           'sort' => 'email', 'direction' => 'desc', 'page' => 6,
-          'lang' => 'en'
-      ]
+          'lang' => 'en',
+      ],
   ]);
   ```
 
@@ -319,7 +319,7 @@ GET パラメーターを使いたいケースもあります。この機能に�
 
 ``` php
 $this->Paginator->options([
-  'convertKeys' => ['your', 'keys', 'here']
+  'convertKeys' => ['your', 'keys', 'here'],
 ]);
 ```
 
@@ -399,16 +399,16 @@ echo $this->Paginator->numbers();
 
 // 次ページと前ページのリンクを表示する
 echo $this->Paginator->prev(
-  '< Previous',
-  null,
-  null,
-  ['class' => 'disabled']
+    '< Previous',
+    null,
+    null,
+    ['class' => 'disabled'],
 );
 echo $this->Paginator->next(
-  'Next >',
-  null,
-  null,
-  ['class' => 'disabled']
+    'Next >',
+    null,
+    null,
+    ['class' => 'disabled'],
 );
 
 // 現在のページ番号 / 全ページ数 を表示する
@@ -421,7 +421,7 @@ counter() メソッドによる説明文の表示についても、
 ``` php
 echo $this->Paginator->counter([
     'format' => 'ページ {:page} / {:pages}, 全 {:count} レコード中の
-    {:current} レコードを表示中, 先頭レコード {:start}, 末尾 {:end}'
+    {:current} レコードを表示中, 先頭レコード {:start}, 末尾 {:end}',
 ]);
 ```
 

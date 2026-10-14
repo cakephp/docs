@@ -29,10 +29,10 @@ posts using the Time Helper:
 
 ``` php
 echo $this->Time->format(
-  'F jS, Y h:i A',
-  $post['Post']['created'],
-  null,
-  $user['User']['time_zone']
+    'F jS, Y h:i A',
+    $post['Post']['created'],
+    null,
+    $user['User']['time_zone'],
 );
 // Will display August 22nd, 2011 11:53 PM for a user in GMT+0
 // August 22nd, 2011 03:53 PM for a user in GMT-8
@@ -42,4 +42,4 @@ echo $this->Time->format(
 Most of the Time Helper methods have a \$timezone parameter. The \$timezone parameter
 accepts a valid timezone identifier string or an instance of <span class="title-ref">DateTimeZone</span> class.
 
-<!--@include: ../../core-utility-libraries/time.md{28,102}-->
+<!--@include: ../../core-utility-libraries/time.md{27,101}-->

@@ -71,11 +71,9 @@ public function after($event = [])
                 App::uses('ClassRegistry', 'Utility');
                 $post = ClassRegistry::init('Post');
                 $post->create();
-                $post->save(
-                    ['Post' =>
-                        ['title' => 'CakePHP Schema Files']
-                    ]
-                );
+                $post->save([
+                    'Post' => ['title' => 'CakePHP Schema Files'],
+                ]);
                 break;
         }
     }
@@ -96,6 +94,7 @@ public function before($event = [])
 {
     $db = ConnectionManager::getDataSource($this->connection);
     $db->cacheSources = false;
+
     return true;
 }
 ```
@@ -107,7 +106,7 @@ correct datasource, lest they fallback to their default datasources:
 public function before($event = [])
 {
     $articles = ClassRegistry::init('Articles', [
-        'ds' => $this->connection
+        'ds' => $this->connection,
     ]);
     // Do things with articles.
 }
@@ -136,42 +135,42 @@ Here is a full example from the acl class :
 /**
  * ACO - Access Control Object - Something that is wanted
  */
-    public $acos = [
-        'id' => [
-            'type' => 'integer',
-            'null' => false,
-            'default' => null,
-            'length' => 10,
-            'key' => 'primary'
-        ],
-        'parent_id' => [
-            'type' => 'integer',
-            'null' => true,
-            'default' => null,
-            'length' => 10
-        ],
-        'model' => ['type' => 'string', 'null' => true],
-        'foreign_key' => [
-            'type' => 'integer',
-            'null' => true,
-            'default' => null,
-            'length' => 10
-        ],
-        'alias' => ['type' => 'string', 'null' => true],
-        'lft' => [
-            'type' => 'integer',
-            'null' => true,
-            'default' => null,
-            'length' => 10
-        ],
-        'rght' => [
-            'type' => 'integer',
-            'null' => true,
-            'default' => null,
-            'length' => 10
-        ],
-        'indexes' => ['PRIMARY' => ['column' => 'id', 'unique' => 1]]
-    ];
+public $acos = [
+    'id' => [
+        'type' => 'integer',
+        'null' => false,
+        'default' => null,
+        'length' => 10,
+        'key' => 'primary',
+    ],
+    'parent_id' => [
+        'type' => 'integer',
+        'null' => true,
+        'default' => null,
+        'length' => 10,
+    ],
+    'model' => ['type' => 'string', 'null' => true],
+    'foreign_key' => [
+        'type' => 'integer',
+        'null' => true,
+        'default' => null,
+        'length' => 10,
+    ],
+    'alias' => ['type' => 'string', 'null' => true],
+    'lft' => [
+        'type' => 'integer',
+        'null' => true,
+        'default' => null,
+        'length' => 10,
+    ],
+    'rght' => [
+        'type' => 'integer',
+        'null' => true,
+        'default' => null,
+        'length' => 10,
+    ],
+    'indexes' => ['PRIMARY' => ['column' => 'id', 'unique' => 1]],
+];
 ```
 
 ### Columns
@@ -289,12 +288,12 @@ You use `tableParameters` just as you would any other key in a
 schema file. Much like `indexes`:
 
 ``` php
-var $comments => [
+public $comments = [
     'id' => [
         'type' => 'integer',
         'null' => false,
         'default' => 0,
-        'key' => 'primary'
+        'key' => 'primary',
     ],
     'post_id' => ['type' => 'integer', 'null' => false, 'default' => 0],
     'comment' => ['type' => 'text'],
@@ -305,8 +304,8 @@ var $comments => [
     'tableParameters' => [
         'engine' => 'InnoDB',
         'charset' => 'latin1',
-        'collate' => 'latin1_general_ci'
-    ]
+        'collate' => 'latin1_general_ci',
+    ],
 ];
 ```
 

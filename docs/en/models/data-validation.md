@@ -36,7 +36,7 @@ class User extends AppModel
     public $validate = [
         'login' => 'alphaNumeric',
         'email' => 'email',
-        'born' => 'date'
+        'born' => 'date',
     ];
 }
 ```
@@ -64,23 +64,23 @@ class User extends AppModel
             'alphaNumeric' => [
                 'rule' => 'alphaNumeric',
                 'required' => true,
-                'message' => 'Letters and numbers only'
+                'message' => 'Letters and numbers only',
             ],
             'between' => [
                 'rule' => ['lengthBetween', 5, 15],
-                'message' => 'Between 5 to 15 characters'
-            ]
+                'message' => 'Between 5 to 15 characters',
+            ],
         ],
         'password' => [
             'rule' => ['minLength', '8'],
-            'message' => 'Minimum 8 characters long'
+            'message' => 'Minimum 8 characters long',
         ],
         'email' => 'email',
         'born' => [
             'rule' => 'date',
             'message' => 'Enter a valid date',
-            'allowEmpty' => true
-        ]
+            'allowEmpty' => true,
+        ],
     ];
 }
 ```
@@ -138,8 +138,8 @@ public $validate = [
         'allowEmpty' => false,
         // or: 'update'
         'on' => 'create',
-        'message' => 'Your Error Message'
-    ]
+        'message' => 'Your Error Message',
+    ],
 ];
 ```
 
@@ -167,8 +167,8 @@ value e.g. :
 ``` php
 public $validate = [
     'login' => [
-        'rule' => 'alphaNumeric'
-    ]
+        'rule' => 'alphaNumeric',
+    ],
 ];
 ```
 
@@ -178,8 +178,8 @@ If the rule requires some parameters (like the max, min or range),
 ``` php
 public $validate = [
     'password' => [
-        'rule' => ['minLength', 8]
-    ]
+        'rule' => ['minLength', 8],
+    ],
 ];
 ```
 
@@ -198,8 +198,8 @@ data array. For example, if the validation rule has been defined as follows:
 public $validate = [
     'login' => [
         'rule' => 'alphaNumeric',
-        'required' => true
-    ]
+        'required' => true,
+    ],
 ];
 ```
 
@@ -254,8 +254,8 @@ message for the rule:
 public $validate = [
     'password' => [
         'rule' => ['minLength', 8],
-        'message' => 'Password must be at least 8 characters long'
-    ]
+        'message' => 'Password must be at least 8 characters long',
+    ],
 ];
 ```
 
@@ -283,8 +283,8 @@ public $validate = [
         'ruleName2' => [
             'rule' => 'ruleName2',
             // extra keys like on, required, etc. go here...
-        ]
-    ]
+        ],
+    ],
 ];
 ```
 
@@ -305,9 +305,9 @@ public $validate = [
          ],
         'loginRule-2' => [
             'rule' => ['minLength', 8],
-            'message' => 'Minimum length of 8 characters'
-        ]
-    ]
+            'message' => 'Minimum length of 8 characters',
+        ],
+    ],
 ];
 ```
 
@@ -335,13 +335,13 @@ public $validate = [
         'rule1' => [
             'rule' => 'alphaNumeric',
             'message' => 'Only alphabets and numbers allowed',
-            'last' => false
+            'last' => false,
          ],
         'rule2' => [
             'rule' => ['minLength', 8],
-            'message' => 'Minimum length of 8 characters'
-        ]
-    ]
+            'message' => 'Minimum length of 8 characters',
+        ],
+    ],
 ];
 ```
 
@@ -354,7 +354,7 @@ public $validate = [
         'Only alphabets and numbers allowed' => [
             'rule' => 'alphaNumeric',
          ],
-    ]
+    ],
 ];
 ```
 
@@ -379,8 +379,8 @@ expression as a field validation rule:
 public $validate = [
     'login' => [
         'rule' => '/^[a-z0-9]{3,}$/i',
-        'message' => 'Only letters and integers, min 3 characters'
-    ]
+        'message' => 'Only letters and integers, min 3 characters',
+    ],
 ];
 ```
 
@@ -401,12 +401,11 @@ function, as shown below:
 ``` php
 class User extends AppModel
 {
-
     public $validate = [
         'promotion_code' => [
             'rule' => ['limitDuplicates', 25],
-            'message' => 'This code has been used too many times.'
-        ]
+            'message' => 'This code has been used too many times.',
+        ],
     ];
 
     public function limitDuplicates($check, $limit)
@@ -415,8 +414,9 @@ class User extends AppModel
         // $limit will have value: 25
         $existingPromoCount = $this->find('count', [
             'conditions' => $check,
-            'recursive' => -1
+            'recursive' => -1,
         ]);
+
         return $existingPromoCount < $limit;
     }
 }
@@ -449,13 +449,12 @@ stored in \$this-\>data member variable:
 ``` php
 class Post extends AppModel
 {
-
     public $validate = [
         'slug' => [
             'rule' => 'alphaNumericDashUnderscore',
             'message' => 'Slug can only be letters,' .
-                ' numbers, dash and underscore'
-        ]
+                ' numbers, dash and underscore',
+        ],
     ];
 
     public function alphaNumericDashUnderscore($check)
@@ -504,7 +503,7 @@ set. The first one is using the `add` method:
 // Inside a model class
 $this->validator()->add('password', 'required', [
     'rule' => 'notBlank',
-    'required' => 'create'
+    'required' => 'create',
 ]);
 ```
 
@@ -516,11 +515,11 @@ chain multiple calls to add to create as many rules as you like:
 $this->validator()
     ->add('password', 'required', [
         'rule' => 'notBlank',
-        'required' => 'create'
+        'required' => 'create',
     ])
     ->add('password', 'size', [
         'rule' => ['lengthBetween', 8, 20],
-        'message' => 'Password should be at least 8 chars long'
+        'message' => 'Password should be at least 8 chars long',
     ]);
 ```
 
@@ -530,12 +529,12 @@ It is also possible to add multiple rules at once for a single field:
 $this->validator()->add('password', [
     'required' => [
         'rule' => 'notBlank',
-        'required' => 'create'
+        'required' => 'create',
     ],
     'size' => [
         'rule' => ['lengthBetween', 8, 20],
-        'message' => 'Password should be at least 8 chars long'
-    ]
+        'message' => 'Password should be at least 8 chars long',
+    ],
 ]);
 ```
 
@@ -547,11 +546,11 @@ $validator = $this->validator();
 $validator['username'] = [
     'unique' => [
         'rule' => 'isUnique',
-        'required' => 'create'
+        'required' => 'create',
     ],
     'alphanumeric' => [
-        'rule' => 'alphanumeric'
-    ]
+        'rule' => 'alphanumeric',
+    ],
 ];
 ```
 
@@ -568,7 +567,7 @@ field or completely remove a rule from a field rule set:
 // In a model class
 $this->validator()->getField('password')->setRule('required', [
     'rule' => 'required',
-    'required' => true
+    'required' => true,
 ]);
 ```
 
@@ -579,7 +578,7 @@ method:
 // In a model class
 $this->validator()->getField('password')->setRules([
     'required' => [...],
-    'otherRule' => [...]
+    'otherRule' => [...],
 ]);
 ```
 
@@ -603,7 +602,7 @@ using the array interface:
 $validator = $this->validator();
 $validator['username']['unique'] = [
     'rule' => 'isUnique',
-    'required' => 'create'
+    'required' => 'create',
 ];
 
 $validator['username']['unique']->last = true;
@@ -657,8 +656,8 @@ The data for the field must only contain letters and numbers. :
 public $validate = [
     'login' => [
         'rule' => 'alphaNumeric',
-        'message' => 'Usernames must only contain letters and numbers.'
-    ]
+        'message' => 'Usernames must only contain letters and numbers.',
+    ],
 ];
 ```
 
@@ -672,8 +671,8 @@ Uses = not. :
 public $validate = [
     'password' => [
         'rule' => ['lengthBetween', 5, 15],
-        'message' => 'Passwords must be between 5 and 15 characters long.'
-    ]
+        'message' => 'Passwords must be between 5 and 15 characters long.',
+    ],
 ];
 ```
 
@@ -691,8 +690,8 @@ characters include space, tab, carriage return, and newline. :
 public $validate = [
     'id' => [
         'rule' => 'blank',
-        'on' => 'create'
-    ]
+        'on' => 'create',
+    ],
 ];
 ```
 
@@ -705,8 +704,8 @@ true or false, integers 0 or 1 or strings '0' or '1'. :
 public $validate = [
     'myCheckbox' => [
         'rule' => ['boolean'],
-        'message' => 'Incorrect value for myCheckbox'
-    ]
+        'message' => 'Incorrect value for myCheckbox',
+    ],
 ];
 ```
 
@@ -750,8 +749,8 @@ that will be used to validate the credit card number:
 public $validate = [
     'ccnumber' => [
         'rule' => ['cc', ['visa', 'maestro'], false, null],
-        'message' => 'The credit card number you supplied was invalid.'
-    ]
+        'message' => 'The credit card number you supplied was invalid.',
+    ],
 ];
 ```
 
@@ -765,15 +764,15 @@ to", and "not equal". Some examples are shown below:
 public $validate = [
     'age' => [
         'rule' => ['comparison', '>=', 18],
-        'message' => 'Must be at least 18 years old to qualify.'
-    ]
+        'message' => 'Must be at least 18 years old to qualify.',
+    ],
 ];
 
 public $validate = [
     'age' => [
         'rule' => ['comparison', 'greater or equal', 18],
-        'message' => 'Must be at least 18 years old to qualify.'
-    ]
+        'message' => 'Must be at least 18 years old to qualify.',
+    ],
 ];
 ```
 
@@ -785,8 +784,8 @@ Used when a custom regular expression is needed:
 public $validate = [
     'infinite' => [
         'rule' => ['custom', '\u221E'],
-        'message' => 'Please enter an infinite number.'
-    ]
+        'message' => 'Please enter an infinite number.',
+    ],
 ];
 ```
 
@@ -821,8 +820,8 @@ public $validate = [
     'born' => [
         'rule' => ['date', 'ymd'],
         'message' => 'Enter a valid date in YY-MM-DD format.',
-        'allowEmpty' => true
-    ]
+        'allowEmpty' => true,
+    ],
 ];
 ```
 
@@ -862,8 +861,8 @@ If no keys are supplied, the default key that will be used is
 public $validate = [
     'birthday' => [
         'rule' => ['datetime', 'dmy'],
-        'message' => 'Please enter a valid date and time.'
-    ]
+        'message' => 'Please enter a valid date and time.',
+    ],
 ];
 ```
 
@@ -884,8 +883,8 @@ fail if no digits are found after the decimal point:
 ``` php
 public $validate = [
     'price' => [
-        'rule' => ['decimal', 2]
-    ]
+        'rule' => ['decimal', 2],
+    ],
 ];
 ```
 
@@ -901,8 +900,8 @@ public $validate = ['email' => ['rule' => 'email']];
 public $validate = [
     'email' => [
         'rule' => ['email', true],
-        'message' => 'Please supply a valid email address.'
-    ]
+        'message' => 'Please supply a valid email address.',
+    ],
 ];
 ```
 
@@ -915,8 +914,8 @@ type as the given value.
 public $validate = [
     'food' => [
         'rule' => ['equalTo', 'cake'],
-        'message' => 'This value must be the string cake'
-    ]
+        'message' => 'This value must be the string cake',
+    ],
 ];
 ```
 
@@ -930,10 +929,10 @@ public $validate = [
     'image' => [
         'rule' => [
             'extension',
-            ['gif', 'jpeg', 'png', 'jpg']
+            ['gif', 'jpeg', 'png', 'jpg'],
         ],
-        'message' => 'Please supply a valid image.'
-    ]
+        'message' => 'Please supply a valid image.',
+    ],
 ];
 ```
 
@@ -949,8 +948,8 @@ from the `tmp_name` key if `$check` is an array and contains that key:
 public $validate = [
     'image' => [
         'rule' => ['fileSize', '<=', '1MB'],
-        'message' => 'Image must be less than 1MB'
-    ]
+        'message' => 'Image must be less than 1MB',
+    ],
 ];
 ```
 
@@ -971,9 +970,9 @@ public $validate = [
     'function' => [
          'allowedChoice' => [
              'rule' => ['inList', ['Foo', 'Bar']],
-             'message' => 'Enter either Foo or Bar.'
-         ]
-     ]
+             'message' => 'Enter either Foo or Bar.',
+         ],
+     ],
  ];
 ```
 
@@ -989,8 +988,8 @@ submitted. Accepts as option 'both' (default), 'IPv4' or 'IPv6'.
 public $validate = [
     'clientip' => [
         'rule' => ['ip', 'IPv4'], // or 'IPv6' or 'both' (default)
-        'message' => 'Please supply a valid IP address.'
-    ]
+        'message' => 'Please supply a valid IP address.',
+    ],
 ];
 ```
 
@@ -1011,8 +1010,8 @@ requirement:
 public $validate = [
     'login' => [
         'rule' => ['maxLength', 15],
-        'message' => 'Usernames must be no larger than 15 characters long.'
-    ]
+        'message' => 'Usernames must be no larger than 15 characters long.',
+    ],
 ];
 ```
 
@@ -1028,8 +1027,8 @@ requirement:
 public $validate = [
     'data' => [
         'rule' => ['maxLengthBytes', 2 ** 24 - 1],
-        'message' => 'Data can not be bigger than 16 MB.'
-    ]
+        'message' => 'Data can not be bigger than 16 MB.',
+    ],
 ];
 ```
 
@@ -1051,11 +1050,11 @@ Since 2.5 `$mimeTypes` can be a regex string.
 public $validate = [
     'image' => [
         'rule' => ['mimeType', ['image/gif']],
-        'message' => 'Invalid mime type.'
+        'message' => 'Invalid mime type.',
     ],
     'logo' => [
         'rule' => ['mimeType', '#image/.+#'],
-        'message' => 'Invalid mime type.'
+        'message' => 'Invalid mime type.',
     ],
 ];
 ```
@@ -1069,8 +1068,8 @@ requirement:
 public $validate = [
     'login' => [
         'rule' => ['minLength', 8],
-        'message' => 'Usernames must be at least 8 characters long.'
-    ]
+        'message' => 'Usernames must be at least 8 characters long.',
+    ],
 ];
 ```
 
@@ -1087,8 +1086,8 @@ requirement:
 public $validate = [
     'login' => [
         'rule' => ['minLengthBytes', 2 ** 16 - 1],
-        'message' => 'Data can not be smaller than 64KB.'
-    ]
+        'message' => 'Data can not be smaller than 64KB.',
+    ],
 ];
 ```
 
@@ -1105,8 +1104,8 @@ Second parameter defines where symbol is located (left/right).
 public $validate = [
     'salary' => [
         'rule' => ['money', 'left'],
-        'message' => 'Please supply a valid monetary amount.'
-    ]
+        'message' => 'Please supply a valid monetary amount.',
+    ],
 ];
 ```
 
@@ -1119,12 +1118,12 @@ parameters "in", "max" and "min".
 public $validate = [
     'multiple' => [
         'rule' => ['multiple', [
-            'in'  => ['do', 're', 'mi', 'fa', 'sol', 'la', 'ti'],
+            'in' => ['do', 're', 'mi', 'fa', 'sol', 'la', 'ti'],
             'min' => 1,
-            'max' => 3
+            'max' => 3,
         ]],
-        'message' => 'Please select one, two or three options'
-    ]
+        'message' => 'Please select one, two or three options',
+    ],
 ];
 ```
 
@@ -1149,8 +1148,8 @@ The basic rule to ensure that a field is not empty. :
 public $validate = [
     'title' => [
         'rule' => 'notBlank',
-        'message' => 'This field cannot be left blank'
-    ]
+        'message' => 'This field cannot be left blank',
+    ],
 ];
 ```
 
@@ -1165,8 +1164,8 @@ Checks if the data passed is a valid number. :
 public $validate = [
     'cars' => [
         'rule' => 'numeric',
-        'message' => 'Please supply the number of cars.'
-    ]
+        'message' => 'Please supply the number of cars.',
+    ],
 ];
 ```
 
@@ -1182,11 +1181,11 @@ If `$allowZero` is set to true, zero is also accepted as a value.
 public $validate = [
     'wheels' => [
         'rule' => 'naturalNumber',
-        'message' => 'Please supply the number of wheels.'
+        'message' => 'Please supply the number of wheels.',
     ],
     'airbags' => [
         'rule' => ['naturalNumber', true],
-        'message' => 'Please supply the number of airbags.'
+        'message' => 'Please supply the number of airbags.',
     ],
 ];
 ```
@@ -1200,8 +1199,8 @@ parameter to cover additional number formats.
 ``` php
 public $validate = [
     'phone' => [
-        'rule' => ['phone', null, 'us']
-    ]
+        'rule' => ['phone', null, 'us'],
+    ],
 ];
 ```
 
@@ -1215,8 +1214,8 @@ second parameter.
 ``` php
 public $validate = [
     'zipcode' => [
-        'rule' => ['postal', null, 'us']
-    ]
+        'rule' => ['postal', null, 'us'],
+    ],
 ];
 ```
 
@@ -1230,8 +1229,8 @@ finite on the current platform.
 public $validate = [
     'number' => [
         'rule' => ['range', -1, 11],
-        'message' => 'Please enter a number between -1 and 11'
-    ]
+        'message' => 'Please enter a number between -1 and 11',
+    ],
 ];
 ```
 
@@ -1250,8 +1249,8 @@ formats, you may provide a regular expression.
 ``` php
 public $validate = [
     'ssn' => [
-        'rule' => ['ssn', null, 'us']
-    ]
+        'rule' => ['ssn', null, 'us'],
+    ],
 ];
 ```
 
@@ -1271,7 +1270,7 @@ This rule checks if a file upload has an error.
 public $validate = [
     'image' => [
         'rule' => 'uploadError',
-        'message' => 'Something went wrong with the upload.'
+        'message' => 'Something went wrong with the upload.',
     ],
 ];
 ```
@@ -1284,8 +1283,8 @@ file, news, and gopher protocols:
 ``` php
 public $validate = [
     'website' => [
-        'rule' => 'url'
-    ]
+        'rule' => 'url',
+    ],
 ];
 ```
 
@@ -1295,8 +1294,8 @@ like so:
 ``` php
 public $validate = [
     'website' => [
-        'rule' => ['url', true]
-    ]
+        'rule' => ['url', true],
+    ],
 ];
 ```
 
@@ -1321,6 +1320,7 @@ class NlValidation
     {
         // ...
     }
+
     public static function postal($check)
     {
         // ...

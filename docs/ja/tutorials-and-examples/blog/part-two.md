@@ -163,8 +163,10 @@ CakePHP のビューファイルは、 `templates/` の中の、コントロー�
     <tr>
         <td><?php echo $post['Post']['id']; ?></td>
         <td>
-            <?php echo $this->Html->link($post['Post']['title'],
-['controller' => 'posts', 'action' => 'view', $post['Post']['id']]); ?>
+            <?php echo $this->Html->link(
+                $post['Post']['title'],
+                ['controller' => 'posts', 'action' => 'view', $post['Post']['id']],
+            ); ?>
         </td>
         <td><?php echo $post['Post']['created']; ?></td>
     </tr>
@@ -289,6 +291,7 @@ class PostsController extends AppController
             $this->Post->create();
             if ($this->Post->save($this->request->data)) {
                 $this->Flash->success(__('Your post has been saved.'));
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Unable to add your post.'));
@@ -393,7 +396,7 @@ POST で送るフォームを構築している、と解釈されます。
 ``` php
 <?php echo $this->Html->link(
     'Add Post',
-    ['controller' => 'posts', 'action' => 'add']
+    ['controller' => 'posts', 'action' => 'add'],
 ); ?>
 ```
 
@@ -406,11 +409,11 @@ class Post extends AppModel
 {
     public $validate = [
         'title' => [
-            'rule' => 'notBlank'
+            'rule' => 'notBlank',
         ],
         'body' => [
-            'rule' => 'notBlank'
-        ]
+            'rule' => 'notBlank',
+        ],
     ];
 }
 ```
@@ -449,6 +452,7 @@ public function edit($id = null)
         $this->Post->id = $id;
         if ($this->Post->save($this->request->data)) {
             $this->Flash->success(__('Your post has been updated.'));
+
             return $this->redirect(['action' => 'index']);
         }
         $this->Flash->error(__('Unable to update your post.'));
@@ -498,7 +502,7 @@ echo $this->Form->end('Save Post');
 <!-- File: templates/Posts/index.ctp  (編集リンクを追加済み) -->
 
 <h1>Blog posts</h1>
-<p><?php echo $this->Html->link("Add Post", ['action' => 'add']); ?></p>
+<p><?php echo $this->Html->link('Add Post', ['action' => 'add']); ?></p>
 <table>
     <tr>
         <th>Id</th>
@@ -516,7 +520,7 @@ echo $this->Form->end('Save Post');
             <?php
                 echo $this->Html->link(
                     $post['Post']['title'],
-                    ['action' => 'view', $post['Post']['id']]
+                    ['action' => 'view', $post['Post']['id']],
                 );
             ?>
         </td>
@@ -524,7 +528,7 @@ echo $this->Form->end('Save Post');
             <?php
                 echo $this->Html->link(
                     'Edit',
-                    ['action' => 'edit', $post['Post']['id']]
+                    ['action' => 'edit', $post['Post']['id']],
                 );
             ?>
         </td>
@@ -551,11 +555,11 @@ public function delete($id = null)
 
     if ($this->Post->delete($id)) {
         $this->Flash->success(
-            __('The post with id: %s has been deleted.', h($id))
+            __('The post with id: %s has been deleted.', h($id)),
         );
     } else {
         $this->Flash->error(
-            __('The post with id: %s could not be deleted.', h($id))
+            __('The post with id: %s could not be deleted.', h($id)),
         );
     }
 
@@ -595,7 +599,7 @@ public function delete($id = null)
             <?php
                 echo $this->Html->link(
                     $post['Post']['title'],
-                    ['action' => 'view', $post['Post']['id']]
+                    ['action' => 'view', $post['Post']['id']],
                 );
             ?>
         </td>
@@ -604,12 +608,13 @@ public function delete($id = null)
                 echo $this->Form->postLink(
                     'Delete',
                     ['action' => 'delete', $post['Post']['id']],
-                    ['confirm' => 'Are you sure?']
+                    ['confirm' => 'Are you sure?'],
                 );
             ?>
             <?php
                 echo $this->Html->link(
-                    'Edit', ['action' => 'edit', $post['Post']['id']]
+                    'Edit',
+                    ['action' => 'edit', $post['Post']['id']],
                 );
             ?>
         </td>
@@ -651,7 +656,7 @@ CakePHP のルーティングは、 `config/routes.php` の中にあります。
 ``` php
 Router::connect(
     '/',
-    ['controller' => 'pages', 'action' => 'display', 'home']
+    ['controller' => 'pages', 'action' => 'display', 'home'],
 );
 ```
 

@@ -34,7 +34,7 @@ following example. :
 class Post extends AppModel
 {
     public $actsAs = [
-        'Translate'
+        'Translate',
     ];
 }
 ```
@@ -54,8 +54,8 @@ class Post extends AppModel
 {
     public $actsAs = [
         'Translate' => [
-            'fieldOne', 'fieldTwo', 'and_so_on'
-        ]
+            'fieldOne', 'fieldTwo', 'and_so_on',
+        ],
     ];
 }
 ```
@@ -69,8 +69,8 @@ class Post extends AppModel
 {
     public $actsAs = [
         'Translate' => [
-            'title'
-        ]
+            'title',
+        ],
     ];
 }
 ```
@@ -98,8 +98,8 @@ class Post extends AppModel
         'Translate' => [
             'title',
             'body',
-            'joinType' => 'left'
-        ]
+            'joinType' => 'left',
+        ],
     ];
 }
 ```
@@ -130,7 +130,7 @@ By setting `$Model->locale` you can read translations for a specific locale:
 // Read the spanish locale data.
 $this->Post->locale = 'es';
 $results = $this->Post->find('first', [
-    'conditions' => ['Post.id' => $id]
+    'conditions' => ['Post.id' => $id],
 ]);
 // $results will contain the spanish translation.
 ```
@@ -146,8 +146,8 @@ class Post extends AppModel
 {
     public $actsAs = [
         'Translate' => [
-            'title' => 'titleTranslation'
-        ]
+            'title' => 'titleTranslation',
+        ],
     ];
 }
 ```
@@ -273,7 +273,6 @@ your controller or you can define it directly in the model.
 ``` php
 class PostsController extends AppController
 {
-
     public function add()
     {
         if (!empty($this->request->data)) {
@@ -295,14 +294,16 @@ class Post extends AppModel
 {
     public $actsAs = [
         'Translate' => [
-            'title'
-        ]
+            'title',
+        ],
     ];
 
     // Option 1) just define the property directly
     public $locale = 'en_us';
 
-    // Option 2) create a simple method
+    /**
+     * Option 2) create a simple method
+     */
     public function setLanguage($locale)
     {
         $this->locale = $locale;
@@ -328,8 +329,8 @@ class Post extends AppModel
 {
     public $actsAs = [
         'Translate' => [
-            'title'
-        ]
+            'title',
+        ],
     ];
 
     // Use a different model (and table)
@@ -376,8 +377,8 @@ class Post extends AppModel
 {
     public $actsAs = [
         'Translate' => [
-            'title'
-        ]
+            'title',
+        ],
     ];
 
     // Use a different model

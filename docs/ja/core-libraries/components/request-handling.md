@@ -20,7 +20,6 @@ POST した場合、自動的に解析され `$this->request->data` 配列に割
 ``` php
 class WidgetController extends AppController
 {
-
     public $components = ['RequestHandler'];
 
     // 以下略
@@ -105,8 +104,9 @@ CPU の処理を節約することができます。
 ``` php
 public $components = [
     'RequestHandler' => [
-        'checkHttpCache' => false
-]];
+        'checkHttpCache' => false,
+    ],
+];
 ```
 
 ## カスタム ViewClasses の利用
@@ -129,7 +129,8 @@ public $components = [
         'viewClassMap' => [
             'json' => 'ApiKit.MyJson',
             'xml' => 'ApiKit.MyXml',
-            'csv' => 'ApiKit.Csv'
-        ]
-]];
+            'csv' => 'ApiKit.Csv',
+        ],
+    ],
+];
 ```

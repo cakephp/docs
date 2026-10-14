@@ -38,7 +38,7 @@ You will also need to add the CacheDispatcher to your dispatcher filters in your
 
 ``` php
 Configure::write('Dispatcher.filters', [
-    'CacheDispatcher'
+    'CacheDispatcher',
 ]);
 ```
 
@@ -61,7 +61,7 @@ traffic that needs to be cached:
 ``` php
 public $cacheAction = [
     'view' => 36000,
-    'index' => 48000
+    'index' => 48000,
 ];
 ```
 
@@ -70,7 +70,7 @@ making `$cacheAction` a `strtotime()` friendly value you can cache every action 
 controller:
 
 ``` php
-public $cacheAction = "1 hour";
+public $cacheAction = '1 hour';
 ```
 
 You can also enable controller/component callbacks for cached views
@@ -81,7 +81,7 @@ format for `$cacheAction` and create an array like the following:
 public $cacheAction = [
     'view' => ['callbacks' => true, 'duration' => 21600],
     'add' => ['callbacks' => true, 'duration' => 36000],
-    'index' => ['callbacks' => true, 'duration' => 48000]
+    'index' => ['callbacks' => true, 'duration' => 48000],
 ];
 ```
 

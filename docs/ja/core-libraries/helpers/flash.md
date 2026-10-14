@@ -44,7 +44,7 @@ $this->Flash->set('The user has been saved.', [
 
 // ビューの中で、 success.ctp の代わりに great_success.ctp を使用
 <?php echo $this->Flash->render('flash', [
-    'element' => 'great_success'
+    'element' => 'great_success',
 ]);
 ```
 

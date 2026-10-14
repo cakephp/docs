@@ -209,7 +209,7 @@ application contained the following exception:
 ``` php
 class MissingWidgetException extends CakeException
 {
-};
+}
 ```
 
 You could provide nice development errors, by creating
@@ -290,6 +290,7 @@ class AppExceptionHandler
         echo 'Oh noes! ' . $error->getMessage();
         // ...
     }
+
     // ...
 }
 ```

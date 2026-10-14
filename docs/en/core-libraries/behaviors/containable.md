@@ -346,7 +346,7 @@ returned, the easiest way is to find all the comments by Daniel and contain the 
 ``` php
 $this->Comment->find('all', [
     'conditions' => 'Comment.author = "Daniel"',
-    'contain' => 'Post'
+    'contain' => 'Post',
 ]);
 ```
 
@@ -355,9 +355,9 @@ Additional filtering can be performed by supplying the standard [Model Find](../
 ``` php
 $this->Post->find('all', ['contain' => [
     'Comment' => [
-        'conditions' => ['Comment.author =' => "Daniel"],
-        'order' => 'Comment.created DESC'
-    ]
+        'conditions' => ['Comment.author =' => 'Daniel'],
+        'order' => 'Comment.created DESC',
+    ],
 ]]);
 ```
 
@@ -380,22 +380,22 @@ $this->User->find('all', [
     'contain' => [
         'Profile',
         'Account' => [
-            'AccountSummary'
+            'AccountSummary',
         ],
         'Post' => [
             'PostAttachment' => [
                 'fields' => ['id', 'name'],
                 'PostAttachmentHistory' => [
                     'HistoryNotes' => [
-                        'fields' => ['id', 'note']
-                    ]
-                ]
+                        'fields' => ['id', 'note'],
+                    ],
+                ],
             ],
             'Tag' => [
-                'conditions' => ['Tag.name LIKE' => '%happy%']
-            ]
-        ]
-    ]
+                'conditions' => ['Tag.name LIKE' => '%happy%'],
+            ],
+        ],
+    ],
 ]);
 ```
 
@@ -439,9 +439,9 @@ $this->User->find('all', [
     'contain' => [
         'Profile',
         'Post' => [
-            'order' => 'Post.updated DESC'
-        ]
-    ]
+            'order' => 'Post.updated DESC',
+        ],
+    ],
 ]);
 ```
 
@@ -471,7 +471,7 @@ Here's an example of how to contain associations when paginating:
 ``` php
 $this->paginate['User'] = [
     'contain' => ['Profile', 'Account'],
-    'order' => 'User.username'
+    'order' => 'User.username',
 ];
 
 $users = $this->paginate('User');

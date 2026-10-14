@@ -47,7 +47,7 @@ $results = [
 ``` php
 $results = [
     'field_1' => 'value1',
-    'field_2' => 'value2'
+    'field_2' => 'value2',
 ];
 ```
 
@@ -64,10 +64,11 @@ public function afterFind($results, $primary = false)
     foreach ($results as $key => $val) {
         if (isset($val['Event']['begindate'])) {
             $results[$key]['Event']['begindate'] = $this->dateFormatAfterFind(
-                $val['Event']['begindate']
+                $val['Event']['begindate'],
             );
         }
     }
+
     return $results;
 }
 
@@ -115,17 +116,18 @@ beforeSaveによってどのように日付を加工するかの例を次に示�
 ``` php
 public function beforeSave($options = [])
 {
-    if (!empty($this->data['Event']['begindate']) &&
+    if (
+        !empty($this->data['Event']['begindate']) &&
         !empty($this->data['Event']['enddate'])
-) {
-
+    ) {
         $this->data['Event']['begindate'] = $this->dateFormatBeforeSave(
-            $this->data['Event']['begindate']
+            $this->data['Event']['begindate'],
         );
         $this->data['Event']['enddate'] = $this->dateFormatBeforeSave(
-            $this->data['Event']['enddate']
+            $this->data['Event']['enddate'],
         );
     }
+
     return true;
 }
 
@@ -173,8 +175,8 @@ public function dateFormatBeforeSave($dateString)
 // このモデルで$this->Productにアクセスできます。
 public function beforeDelete($cascade = true)
 {
-    $count = $this->Product->find("count", [
-        "conditions" => ["product_category_id" => $this->id]
+    $count = $this->Product->find('count', [
+        'conditions' => ['product_category_id' => $this->id],
     ]);
     if ($count == 0) {
         return true;

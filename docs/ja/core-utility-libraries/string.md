@@ -16,7 +16,6 @@ PHP 7 以降 `String` が予約語であるため削除されました。`String
 ``` php
 class UsersController extends AppController
 {
-
     public $components = ['Auth'];
 
     public function afterLogin()
@@ -83,7 +82,7 @@ $options = [
         'method' => 'text', // or html
     ],
     'before' => '',
-    'after' => ''
+    'after' => '',
 ];
 ```
 

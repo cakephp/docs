@@ -166,9 +166,9 @@ $dispatcher = new Dispatcher();
 下記に、`if` の例を示します。
 
 ``` php
-if (($expr1) || ($expr2)) {
+if ($expr1 || $expr2) {
     // 処理 1
-} elseif (!($expr3) && ($expr4)) {
+} elseif (!$expr3 && $expr4) {
     // 処理 2
 } else {
     // デフォルトの処理

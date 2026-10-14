@@ -145,7 +145,7 @@ These options are provided as constructor arguments:
 
 ``` php
 $socket = new HttpSocket([
-    'ssl_allow_self_signed' => true
+    'ssl_allow_self_signed' => true,
 ]);
 ```
 
@@ -165,7 +165,6 @@ the file `src/Lib/Network/Http/YourResponse.php` with the content:
 // src/Lib/Network/Http/YourResponse.php
 class YourResponse extends HttpSocketResponse
 {
-
     public function parseResponse($message)
     {
         parent::parseResponse($message);
@@ -233,14 +232,13 @@ content:
 ``` php
 class YourMethodAuthentication
 {
-
-/**
- * Authentication
- *
- * @param HttpSocket $http
- * @param array $authInfo
- * @return void
- */
+    /**
+     * Authentication
+     *
+     * @param HttpSocket $http
+     * @param array $authInfo
+     * @return void
+     */
     public static function authentication(HttpSocket $http, &$authInfo)
     {
         // Do something, for example set $http->request['header']['Authentication'] value
@@ -267,26 +265,25 @@ authentication. For example:
 ``` php
 class YourMethodAuthentication
 {
-
-/**
- * Authentication
- *
- * @param HttpSocket $http
- * @param array $authInfo
- * @return void
- */
+    /**
+     * Authentication
+     *
+     * @param HttpSocket $http
+     * @param array $authInfo
+     * @return void
+     */
     public static function authentication(HttpSocket $http, &$authInfo)
     {
         // Do something, for example set $http->request['header']['Authentication'] value
     }
 
-/**
- * Proxy Authentication
- *
- * @param HttpSocket $http
- * @param array $proxyInfo
- * @return void
- */
+    /**
+     * Proxy Authentication
+     *
+     * @param HttpSocket $http
+     * @param array $proxyInfo
+     * @return void
+     */
     public static function proxyAuthentication(HttpSocket $http, &$proxyInfo)
     {
         // Do something, for example set $http->request['header']['Proxy-Authentication'] value

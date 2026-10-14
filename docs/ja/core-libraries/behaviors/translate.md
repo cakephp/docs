@@ -33,7 +33,7 @@ i18n データベースを初期化するには、 `[I]` を選択してくだ�
 class Post extends AppModel
 {
     public $actsAs = [
-        'Translate'
+        'Translate',
     ];
 }
 ```
@@ -52,8 +52,8 @@ class Post extends AppModel
 {
     public $actsAs = [
         'Translate' => [
-            'fieldOne', 'fieldTwo', 'and_so_on'
-        ]
+            'fieldOne', 'fieldTwo', 'and_so_on',
+        ],
     ];
 }
 ```
@@ -67,8 +67,8 @@ class Post extends AppModel
 {
     public $actsAs = [
         'Translate' => [
-            'title'
-        ]
+            'title',
+        ],
     ];
 }
 ```
@@ -104,7 +104,7 @@ TranslateBehavior のために翻訳するフィールドを定義するとき�
 // Read the spanish locale data.
 $this->Post->locale = 'es';
 $results = $this->Post->find('first', [
-    'conditions' => ['Post.id' => $id]
+    'conditions' => ['Post.id' => $id],
 ]);
 // $results will contain the spanish translation.
 ```
@@ -120,8 +120,8 @@ class Post extends AppModel
 {
     public $actsAs = [
         'Translate' => [
-            'title' => 'titleTranslation'
-        ]
+            'title' => 'titleTranslation',
+        ],
     ];
 }
 ```
@@ -243,7 +243,6 @@ TranslateBehavior を使ったモデルが何かを保存する時に、検出�
 ``` php
 class PostsController extends AppController
 {
-
     public function add()
     {
         if (!empty($this->request->data)) {
@@ -265,14 +264,16 @@ class Post extends AppModel
 {
     public $actsAs = [
         'Translate' => [
-            'title'
-        ]
+            'title',
+        ],
     ];
 
     // オプション 1) 直接プロパティを定義する
     public $locale = 'en_us';
 
-    // オプション 2) 簡単なメソッドを作成する 
+    /**
+     * オプション 2) 簡単なメソッドを作成する
+     */
     public function setLanguage($locale)
     {
         $this->locale = $locale;
@@ -296,8 +297,8 @@ class Post extends AppModel
 {
     public $actsAs = [
         'Translate' => [
-            'title'
-        ]
+            'title',
+        ],
     ];
 
     // 別のモデル(あるいはテーブル)を使用する。
@@ -341,8 +342,8 @@ class Post extends AppModel
 {
     public $actsAs = [
         'Translate' => [
-            'title'
-        ]
+            'title',
+        ],
     ];
 
     // 別のモデルを使う

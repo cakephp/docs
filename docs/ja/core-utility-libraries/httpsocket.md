@@ -139,7 +139,7 @@ SSL のサービスへのリクエストを作成する場合、 HttpSocket は�
 
 ``` php
 $socket = new HttpSocket([
-    'ssl_allow_self_signed' => true
+    'ssl_allow_self_signed' => true,
 ]);
 ```
 
@@ -158,7 +158,6 @@ HttpSocket で使用する独自のレスポンスクラスを作成すること
 // src/Lib/Network/Http/YourResponse.php
 class YourResponse extends HttpSocketResponse
 {
-
     public function parseResponse($message)
     {
         parent::parseResponse($message);
@@ -224,14 +223,13 @@ HttpSocket で利用するための独自の認証方法を作成することが
 ``` php
 class YourMethodAuthentication
 {
-
-/**
- * 認証
- *
- * @param HttpSocket $http
- * @param array $authInfo
- * @return void
- */
+    /**
+     * 認証
+     *
+     * @param HttpSocket $http
+     * @param array $authInfo
+     * @return void
+     */
     public static function authentication(HttpSocket $http, &$authInfo)
     {
         // 何かをします。例えば、 $http->request['header']['Authentication'] の値をセット。
@@ -256,26 +254,25 @@ $http->get('http://secure.your-site.com');
 ``` php
 class YourMethodAuthentication
 {
-
-/**
- * 認証
- *
- * @param HttpSocket $http
- * @param array $authInfo
- * @return void
- */
+    /**
+     * 認証
+     *
+     * @param HttpSocket $http
+     * @param array $authInfo
+     * @return void
+     */
     public static function authentication(HttpSocket $http, &$authInfo)
     {
         // 何かします。例えば $http->request['header']['Authentication'] の値をセット。
     }
 
-/**
- * プロクシ認証
- *
- * @param HttpSocket $http
- * @param array $proxyInfo
- * @return void
- */
+    /**
+     * プロクシ認証
+     *
+     * @param HttpSocket $http
+     * @param array $proxyInfo
+     * @return void
+     */
     public static function proxyAuthentication(HttpSocket $http, &$proxyInfo)
     {
         // 何かします。例えば $http->request['header']['Proxy-Authentication'] の値をセット。

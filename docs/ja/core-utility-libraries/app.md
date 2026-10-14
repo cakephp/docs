@@ -184,7 +184,7 @@ App::build(['Model' => ['/path/to/models/']], App::RESET);
 
 //ヘルパーの複数の探索パスがセットアップされます
 App::build([
-    'View/Helper' => ['/path/to/helpers/', '/another/path/']
+    'View/Helper' => ['/path/to/helpers/', '/another/path/'],
 ]);
 ```
 
@@ -201,7 +201,7 @@ reset が true に設定されている場合、ロードされたすべての�
 
 ``` php
 App::build([
-    'Service' => ['%s' . 'Service' . DS]
+    'Service' => ['%s' . 'Service' . DS],
 ], App::REGISTER);
 ```
 
@@ -387,7 +387,7 @@ App::import('Vendor', 'SomeName', ['file' => 'some.name.php']);
 App::import(
     'Vendor',
     'WellNamed',
-    ['file' => 'services' . DS . 'well.named.php']
+    ['file' => 'services' . DS . 'well.named.php'],
 );
 ```
 
@@ -397,7 +397,7 @@ App::import(
 App::import(
     'Vendor',
     'Awesome.WellNamed',
-    ['file' => 'services' . DS . 'well.named.php']
+    ['file' => 'services' . DS . 'well.named.php'],
 );
 ```
 
@@ -407,7 +407,8 @@ App::import(
 App::import(
     'Vendor',
     'Awesome.Foo',
-    ['file' => 'Folder' . DS . 'Foo.php']);
+    ['file' => 'Folder' . DS . 'Foo.php'],
+);
 ```
 
 `src/Vendor/` にあるベンダーファイルも同様に見つけられます。
@@ -418,7 +419,7 @@ App::import(
 App::import(
     'Vendor',
     'aUniqueIdentifier',
-    ['file' => 'vendorName' . DS . 'libFile.php']
+    ['file' => 'vendorName' . DS . 'libFile.php'],
 );
 ```
 

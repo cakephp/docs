@@ -245,7 +245,6 @@ class FileGeneratorTask extends Shell
     public $uses = ['User'];
     public function execute()
     {
-
     }
 }
 ```
@@ -456,13 +455,14 @@ public function getOptionParser()
 {
     $parser = parent::getOptionParser();
     $parser->addArgument('type', [
-        'help' => 'Either a full path or type of class.'
+        'help' => 'Either a full path or type of class.',
     ])->addArgument('className', [
-        'help' => 'A CakePHP core class name (e.g: Component, HtmlHelper).'
+        'help' => 'A CakePHP core class name (e.g: Component, HtmlHelper).',
     ])->addOption('method', [
         'short' => 'm',
-        'help' => __('The specific method you want help on.')
+        'help' => __('The specific method you want help on.'),
     ])->description(__('Lookup doc block comments for classes in CakePHP.'));
+
     return $parser;
 }
 ```
@@ -549,7 +549,7 @@ to add multiple arguments at once. :
 ``` php
 $parser->addArguments([
     'node' => ['help' => 'The node to create', 'required' => true],
-    'parent' => ['help' => 'The parent node', 'required' => true]
+    'parent' => ['help' => 'The parent node', 'required' => true],
 ]);
 ```
 
@@ -567,7 +567,7 @@ be from a list of valid choices:
 $parser->addArgument('type', [
     'help' => 'The type of node to interact with.',
     'required' => true,
-    'choices' => ['aro', 'aco']
+    'choices' => ['aro', 'aco'],
 ]);
 ```
 
@@ -628,7 +628,7 @@ to add multiple options at once. :
 ``` php
 $parser->addOptions([
     'node' => ['short' => 'n', 'help' => 'The node to create'],
-    'parent' => ['short' => 'p', 'help' => 'The parent node']
+    'parent' => ['short' => 'p', 'help' => 'The parent node'],
 ]);
 ```
 
@@ -644,7 +644,7 @@ for an option. All other values will raise an `InvalidArgumentException`:
 ``` php
 $parser->addOption('accept', [
     'help' => 'What version to accept.',
-    'choices' => ['working', 'theirs', 'mine']
+    'choices' => ['working', 'theirs', 'mine'],
 ]);
 ```
 
@@ -658,7 +658,7 @@ to true, when they are absent false:
 ``` php
 $parser->addOption('verbose', [
     'help' => 'Enable verbose output.',
-    'boolean' => true
+    'boolean' => true,
 ]);
 ```
 
@@ -694,7 +694,7 @@ shell knows how to parse commands for its tasks:
 ``` php
 $parser->addSubcommand('model', [
     'help' => 'Bake a model',
-    'parser' => $this->Model->getOptionParser()
+    'parser' => $this->Model->getOptionParser(),
 ]);
 ```
 
@@ -733,16 +733,16 @@ $parser->addSubcommand('check', [
     'help' => __('Check the permissions between an ACO and ARO.'),
     'parser' => [
         'description' => [
-            __("Use this command to grant ACL permissions. Once executed, the "),
-            __("ARO specified (and its children, if any) will have ALLOW access "),
-            __("to the specified ACO action (and the ACO's children, if any).")
+            __('Use this command to grant ACL permissions. Once executed, the '),
+            __('ARO specified (and its children, if any) will have ALLOW access '),
+            __("to the specified ACO action (and the ACO's children, if any)."),
         ],
         'arguments' => [
             'aro' => ['help' => __('ARO to check.'), 'required' => true],
             'aco' => ['help' => __('ACO to check.'), 'required' => true],
-            'action' => ['help' => __('Action to check')]
-        ]
-    ]
+            'action' => ['help' => __('Action to check')],
+        ],
+    ],
 ]);
 ```
 
@@ -758,15 +758,15 @@ public function getOptionParser()
 {
     return ConsoleOptionParser::buildFromArray([
         'description' => [
-            __("Use this command to grant ACL permissions. Once executed, the "),
-            __("ARO specified (and its children, if any) will have ALLOW access "),
-            __("to the specified ACO action (and the ACO's children, if any).")
+            __('Use this command to grant ACL permissions. Once executed, the '),
+            __('ARO specified (and its children, if any) will have ALLOW access '),
+            __("to the specified ACO action (and the ACO's children, if any)."),
         ],
         'arguments' => [
             'aro' => ['help' => __('ARO to check.'), 'required' => true],
             'aco' => ['help' => __('ACO to check.'), 'required' => true],
-            'action' => ['help' => __('Action to check')]
-        ]
+            'action' => ['help' => __('Action to check')],
+        ],
     ]);
 }
 ```

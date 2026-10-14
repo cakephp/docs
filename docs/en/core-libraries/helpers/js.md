@@ -83,7 +83,7 @@ To override the "\$" shortcut, use the jQueryObject variable:
 $this->Js->JqueryEngine->jQueryObject = '$j';
 echo $this->Html->scriptBlock(
     'var $j = jQuery.noConflict();',
-    ['inline' => false]
+    ['inline' => false],
 );
 // Tell jQuery to go into noconflict mode
 ```
@@ -107,7 +107,7 @@ default, do the helper setup in your controller as follows:
 ``` php
 public $helpers = [
     'Js' => ['Prototype'],
-    'CustomHelper'
+    'CustomHelper',
 ];
 ```
 
@@ -337,7 +337,7 @@ To do so, call the `options()` at the top of your view:
 ``` php
 $this->Paginator->options([
     'update' => '#content',
-    'evalScripts' => true
+    'evalScripts' => true,
 ]);
 ```
 
@@ -384,7 +384,7 @@ indicator effects yourself:
     <?php
         echo $this->Html->image(
             'indicator.gif',
-            ['id' => 'busy-indicator']
+            ['id' => 'busy-indicator'],
         );
     ?>
     </body>
@@ -407,11 +407,11 @@ $this->Paginator->options([
     'evalScripts' => true,
     'before' => $this->Js->get('#busy-indicator')->effect(
         'fadeIn',
-        ['buffer' => false]
+        ['buffer' => false],
     ),
     'complete' => $this->Js->get('#busy-indicator')->effect(
         'fadeOut',
-        ['buffer' => false]
+        ['buffer' => false],
     ),
 ]);
 ```

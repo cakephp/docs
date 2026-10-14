@@ -82,7 +82,7 @@ http://example.com/controller/action/param1/param2/param3
 Router::connect(
     'URL',
     ['default' => 'defaultValue'],
-    ['option' => 'matchingRegex']
+    ['option' => 'matchingRegex'],
 );
 ```
 
@@ -100,7 +100,7 @@ URLが特定されたら、一致したときに同様な動作をするかを `
 ``` php
 Router::connect(
     '/pages/*',
-    ['controller' => 'pages', 'action' => 'display']
+    ['controller' => 'pages', 'action' => 'display'],
 );
 ```
 
@@ -116,7 +116,7 @@ Router::connect(
 ``` php
 Router::connect(
     '/pages/**',
-    ['controller' => 'pages', 'action' => 'show']
+    ['controller' => 'pages', 'action' => 'show'],
 );
 ```
 
@@ -133,7 +133,7 @@ Router::connect(
 ``` php
 Router::connect(
     '/government',
-    ['controller' => 'pages', 'action' => 'display', 5]
+    ['controller' => 'pages', 'action' => 'display', 5],
 );
 ```
 
@@ -153,7 +153,8 @@ Router::connect(
 
 ``` php
 Router::connect(
-    '/cooks/:action/*', ['controller' => 'users']
+    '/cooks/:action/*',
+    ['controller' => 'users'],
 );
 ```
 
@@ -190,7 +191,7 @@ URLを生成するときにもルーティングは使われます。
 Router::connect(
     '/:controller/:id',
     ['action' => 'view'],
-    ['id' => '[0-9]+']
+    ['id' => '[0-9]+'],
 );
 ```
 
@@ -223,7 +224,7 @@ Router::connect('/:action', ['controller' => 'home']);
 Router::connect(
     '/:userShortcut',
     ['controller' => 'teachers', 'action' => 'profile', 1],
-    ['userShortcut' => '(?i:principal)']
+    ['userShortcut' => '(?i:principal)'],
 );
 ```
 
@@ -236,8 +237,8 @@ Router::connect(
     [
         'year' => '[12][0-9]{3}',
         'month' => '0[1-9]|1[012]',
-        'day' => '0[1-9]|[12][0-9]|3[01]'
-    ]
+        'day' => '0[1-9]|[12][0-9]|3[01]',
+    ],
 );
 ```
 
@@ -283,8 +284,8 @@ Router::connect(
         // order matters since this will simply map ":id" to
         // $articleId in your action
         'pass' => ['id', 'slug'],
-        'id' => '[0-9]+'
-    ]
+        'id' => '[0-9]+',
+    ],
 );
 ```
 
@@ -298,7 +299,7 @@ echo $this->Html->link('CakePHP Rocks', [
     'controller' => 'blog',
     'action' => 'view',
     'id' => 3,
-    'slug' => 'CakePHP_Rocks'
+    'slug' => 'CakePHP_Rocks',
 ]);
 ```
 
@@ -316,9 +317,9 @@ Router::connect(
             'wibble',
             'fish' => ['action' => 'index'],
             'fizz' => ['controller' => ['comments', 'other']],
-            'buzz' => 'val-[\d]+'
-        ]
-    ]
+            'buzz' => 'val-[\d]+',
+        ],
+    ],
 );
 ```
 
@@ -363,7 +364,7 @@ Configure::write('Routing.prefixes', ['admin']);
 ``` php
 Router::connect(
     '/admin',
-    ['controller' => 'pages', 'action' => 'index', 'admin' => true]
+    ['controller' => 'pages', 'action' => 'index', 'admin' => true],
 );
 ```
 
@@ -380,19 +381,19 @@ CakePHP は自動的に両方のプレフィックスを使用したルーティ
 ``` php
 Router::connect(
     "/{$prefix}/:plugin/:controller",
-    ['action' => 'index', 'prefix' => $prefix, $prefix => true]
+    ['action' => 'index', 'prefix' => $prefix, $prefix => true],
 );
 Router::connect(
     "/{$prefix}/:plugin/:controller/:action/*",
-    ['prefix' => $prefix, $prefix => true]
+    ['prefix' => $prefix, $prefix => true],
 );
 Router::connect(
     "/{$prefix}/:controller",
-    ['action' => 'index', 'prefix' => $prefix, $prefix => true]
+    ['action' => 'index', 'prefix' => $prefix, $prefix => true],
 );
 Router::connect(
     "/{$prefix}/:controller/:action/*",
-    ['prefix' => $prefix, $prefix => true]
+    ['prefix' => $prefix, $prefix => true],
 );
 ```
 
@@ -408,13 +409,13 @@ admin ルーティングのように、すべてのプレフィックス付き�
 // プレフィックスルーティングする
 echo $this->Html->link(
     'Manage posts',
-    ['manager' => true, 'controller' => 'posts', 'action' => 'add']
+    ['manager' => true, 'controller' => 'posts', 'action' => 'add'],
 );
 
 // プレフィックスルーティングをやめる
 echo $this->Html->link(
     'View Post',
-    ['manager' => false, 'controller' => 'posts', 'action' => 'view', 5]
+    ['manager' => false, 'controller' => 'posts', 'action' => 'view', 5],
 );
 ```
 
@@ -432,7 +433,7 @@ plugin routing
 ``` php
 echo $this->Html->link(
     'New todo',
-    ['plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create']
+    ['plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create'],
 );
 ```
 
@@ -441,7 +442,7 @@ echo $this->Html->link(
 ``` php
 echo $this->Html->link(
     'New todo',
-    ['plugin' => null, 'controller' => 'users', 'action' => 'profile']
+    ['plugin' => null, 'controller' => 'users', 'action' => 'profile'],
 );
 ```
 
@@ -470,8 +471,8 @@ Router::connect(
     '/page/:title',
     ['controller' => 'pages', 'action' => 'view'],
     [
-        'pass' => ['title']
-    ]
+        'pass' => ['title'],
+    ],
 );
 ```
 
@@ -484,8 +485,8 @@ $this->Html->link(
         'controller' => 'pages',
         'action' => 'view',
         'title' => 'super-article',
-        'ext' => 'html'
-    ]
+        'ext' => 'html',
+    ],
 );
 ```
 
@@ -512,9 +513,9 @@ RequestHandlerComponent に詳細があります。
 
 ``` php
 Router::connect(
-    "/:controller/:id",
-    ["action" => "edit", "[method]" => "PUT"],
-    ["id" => "[0-9]+"]
+    '/:controller/:id',
+    ['action' => 'edit', '[method]' => 'PUT'],
+    ['id' => '[0-9]+'],
 );
 ```
 
@@ -677,8 +678,8 @@ $url = Router::url([
     'action' => 'index',
     'filter' => [
         'published' => 1,
-        'frontpage' => 1
-    ]
+        'frontpage' => 1,
+    ],
 ]);
 ```
 
@@ -689,7 +690,7 @@ $url = Router::url([
 ``` php
 $this->passedArgs['filter'] = [
     'published' => 1,
-    'frontpage' => 1
+    'frontpage' => 1,
 ];
 ```
 
@@ -703,17 +704,17 @@ $url = Router::url([
         'post' => [
             'order' => 'asc',
             'filter' => [
-                'published' => 1
-            ]
+                'published' => 1,
+            ],
         ],
         'comment' => [
             'order' => 'desc',
             'filter' => [
-                'spam' => 0
-            ]
+                'spam' => 0,
+            ],
         ],
     ],
-    'users' => [1, 2, 3]
+    'users' => [1, 2, 3],
 ]);
 ```
 
@@ -731,14 +732,14 @@ $this->passedArgs['models'] = [
     'post' => [
         'order' => 'asc',
         'filter' => [
-            'published' => 1
-        ]
+            'published' => 1,
+        ],
     ],
     'comment' => [
         'order' => 'desc',
         'filter' => [
-            'spam' => 0
-        ]
+            'spam' => 0,
+        ],
     ],
 ];
 ```
@@ -766,7 +767,7 @@ Router::connectNamed(false, ['default' => true]);
 ``` php
 Router::connectNamed(
     ['page' => '[\d]+'],
-    ['default' => false, 'greedy' => false]
+    ['default' => false, 'greedy' => false],
 );
 ```
 
@@ -820,7 +821,7 @@ $this->Html->link('View', '/posts/view/' . $id);
 ``` php
 $this->Html->link(
     'View',
-    ['controller' => 'posts', 'action' => 'view', $id]
+    ['controller' => 'posts', 'action' => 'view', $id],
 );
 ```
 
@@ -834,7 +835,7 @@ Router::url([
     'controller' => 'posts',
     'action' => 'index',
     '?' => ['page' => 1],
-    '#' => 'top'
+    '#' => 'top',
 ]);
 
 // こんなURLが生成されます
@@ -855,7 +856,7 @@ Router::redirect(
     ['controller' => 'posts', 'action' => 'view'],
     // もしくは$idを引数として受け取るviewアクションデフォルトルーティングのための
     //['persist'=>['id']]
-    ['persist' => true]
+    ['persist' => true],
 );
 ```
 
@@ -895,7 +896,7 @@ Router::redirect('/posts/*', 'https://google.com', ['status' => 302]);
 Router::connect(
     '/:slug',
     ['controller' => 'posts', 'action' => 'view'],
-    ['routeClass' => 'SlugRoute']
+    ['routeClass' => 'SlugRoute'],
 );
 ```
 
@@ -935,7 +936,7 @@ Router::connect('/:controller/:action/*');
 ``` php
 Router::connect(
     '/home-page',
-    ['controller' => 'pages', 'action' => 'display', 'home']
+    ['controller' => 'pages', 'action' => 'display', 'home'],
 );
 ```
 
@@ -946,7 +947,7 @@ Router::connect(
 Router::connect(
     '/:lang/:controller/:action/:id',
     [],
-    ['id' => '[0-9]+', 'lang' => '[a-z]{3}']
+    ['id' => '[0-9]+', 'lang' => '[a-z]{3}'],
 );
 ```
 

@@ -54,6 +54,7 @@ class BakeriesController extends AppController
     {
         $this->helpers[] = 'Time';
     }
+
     public function mix()
     {
         // The Time helper is not loaded here and thus not available

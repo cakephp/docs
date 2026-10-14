@@ -29,7 +29,6 @@ CakePHP の規約は長年のウェブ開発経験とベストプラクティス
 ``` php
 class NewsController extends AppController
 {
-
     public function latest()
     {
         $this->_findNewArticles();

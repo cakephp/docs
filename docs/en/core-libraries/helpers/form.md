@@ -87,7 +87,7 @@ There are a number of options for create():
   ``` php
   echo $this->Form->create(false, [
       'url' => ['controller' => 'recipes', 'action' => 'add'],
-      'id' => 'RecipesAdd'
+      'id' => 'RecipesAdd',
   ]);
   ```
 
@@ -102,7 +102,7 @@ There are a number of options for create():
   ``` php
   echo $this->Form->create(false, [
       'url' => 'https://www.google.com/search',
-      'type' => 'get'
+      'type' => 'get',
   ]);
   ```
 
@@ -133,8 +133,8 @@ There are a number of options for create():
   echo $this->Form->create('User', [
       'inputDefaults' => [
           'label' => false,
-          'div' => false
-      ]
+          'div' => false,
+      ],
   ]);
   ```
 
@@ -147,7 +147,7 @@ There are a number of options for create():
   // has a label element
   echo $this->Form->input(
       'username',
-      ['label' => 'Username']
+      ['label' => 'Username'],
   );
   ```
 
@@ -212,7 +212,7 @@ set the `name` attribute to override the default behavior:
 ``` php
 echo $this->Form->input('Model.year', [
     'type' => 'text',
-    'name' => 'data[Model][year]'
+    'name' => 'data[Model][year]',
 ]);
 ```
 
@@ -255,7 +255,7 @@ HTML attributes. The following will cover the options specific to
 
   ``` php
   echo $this->Form->input('User.name', [
-      'div' => 'class_name'
+      'div' => 'class_name',
   ]);
   ```
 
@@ -275,8 +275,8 @@ HTML attributes. The following will cover the options specific to
       'div' => [
           'id' => 'mainDiv',
           'title' => 'Div Title',
-          'style' => 'display:block'
-      ]
+          'style' => 'display:block',
+      ],
   ]);
   ```
 
@@ -293,7 +293,7 @@ HTML attributes. The following will cover the options specific to
   Disabling div output:
 
   ``` php
-  echo $this->Form->input('User.name', ['div' => false]); ?>
+  echo $this->Form->input('User.name', ['div' => false]);
   ```
 
   Output:
@@ -308,7 +308,7 @@ HTML attributes. The following will cover the options specific to
 
   ``` php
   echo $this->Form->input('User.name', [
-      'label' => 'The User Alias'
+      'label' => 'The User Alias',
   ]);
   ```
 
@@ -344,8 +344,8 @@ HTML attributes. The following will cover the options specific to
   echo $this->Form->input('User.name', [
       'label' => [
           'class' => 'thingy',
-          'text' => 'The User Alias'
-      ]
+          'text' => 'The User Alias',
+      ],
   ]);
   ```
 
@@ -382,8 +382,8 @@ HTML attributes. The following will cover the options specific to
   ``` php
   $this->Form->input('Model.field', [
       'error' => [
-          'attributes' => ['wrap' => 'span', 'class' => 'bzzz']
-      ]
+          'attributes' => ['wrap' => 'span', 'class' => 'bzzz'],
+      ],
   ]);
   ```
 
@@ -393,8 +393,8 @@ HTML attributes. The following will cover the options specific to
   ``` php
   $this->Form->input('Model.field', [
       'error' => [
-          'attributes' => ['escape' => false]
-      ]
+          'attributes' => ['escape' => false],
+      ],
   ]);
   ```
 
@@ -403,7 +403,7 @@ HTML attributes. The following will cover the options specific to
 
   ``` php
   $this->Form->input('Model.field', [
-      'error' => ['tooShort' => __('This is not long enough')]
+      'error' => ['tooShort' => __('This is not long enough')],
   ]);
   ```
 
@@ -425,7 +425,7 @@ HTML attributes. The following will cover the options specific to
   echo $this->Form->input('field', [
       'before' => '--before--',
       'after' => '--after--',
-      'between' => '--between---'
+      'between' => '--between---',
   ]);
   ```
 
@@ -451,7 +451,7 @@ HTML attributes. The following will cover the options specific to
       'between' => '--between---',
       'separator' => '--separator--',
       'options' => ['1', '2'],
-      'type' => 'radio'
+      'type' => 'radio',
   ]);
   ```
 
@@ -487,8 +487,8 @@ HTML attributes. The following will cover the options specific to
   echo $this->Form->create('User', [
       'inputDefaults' => [
           'label' => false,
-          'div' => false
-      ]
+          'div' => false,
+      ],
   ]);
   ```
 
@@ -576,7 +576,7 @@ common options shared by all input methods are as follows:
   $sizes = ['s' => 'Small', 'm' => 'Medium', 'l' => 'Large'];
   echo $this->Form->input(
       'size',
-      ['options' => $sizes, 'default' => 'm']
+      ['options' => $sizes, 'default' => 'm'],
   );
   ```
 
@@ -605,7 +605,7 @@ applied to the generated HTML input element.
   ``` php
   echo $this->Form->input('close_time', [
       'type' => 'time',
-      'selected' => '13:30:00'
+      'selected' => '13:30:00',
   ]);
   ```
 
@@ -623,7 +623,7 @@ applied to the generated HTML input element.
   ``` php
   echo $this->Form->input('field', [
       'options' => [1, 2, 3, 4, 5],
-      'empty' => '(choose one)'
+      'empty' => '(choose one)',
   ]);
   ```
 
@@ -650,13 +650,16 @@ applied to the generated HTML input element.
   A list of key-value pairs can be supplied for a date or datetime field:
 
   ``` php
-  echo $this->Form->dateTime('Contact.date', 'DMY', '12',
+  echo $this->Form->dateTime(
+      'Contact.date',
+      'DMY',
+      '12',
       [
           'empty' => [
               'day' => 'DAY', 'month' => 'MONTH', 'year' => 'YEAR',
-              'hour' => 'HOUR', 'minute' => 'MINUTE', 'meridian' => false
-          ]
-      ]
+              'hour' => 'HOUR', 'minute' => 'MINUTE', 'meridian' => false,
+          ],
+      ],
   );
   ```
 
@@ -788,7 +791,7 @@ applied to the generated HTML input element.
   ``` php
   echo $this->Form->input('Model.time', [
       'type' => 'time',
-      'interval' => 15
+      'interval' => 15,
   ]);
   ```
 
@@ -834,11 +837,13 @@ model to validate whether a file has been successfully uploaded:
 public function isUploadedFile($params)
 {
     $val = array_shift($params);
-    if ((isset($val['error']) && $val['error'] == 0) ||
-        (!empty( $val['tmp_name']) && $val['tmp_name'] != 'none')
+    if (
+        (isset($val['error']) && $val['error'] == 0) ||
+        (!empty($val['tmp_name']) && $val['tmp_name'] != 'none')
     ) {
         return is_uploaded_file($val['tmp_name']);
     }
+
     return false;
 }
 ```
@@ -907,11 +912,10 @@ you to consolidate repeated options into a single method call:
 
 ``` php
 $this->Form->inputDefaults([
-        'label' => false,
-        'div' => false,
-        'class' => 'fancy'
-    ]
-);
+    'label' => false,
+    'div' => false,
+    'class' => 'fancy',
+]);
 ```
 
 All inputs created from that point forward will inherit the options declared in
@@ -923,7 +927,7 @@ echo $this->Form->input('password'); // No div, no label with class 'fancy'
 // has a label element same defaults
 echo $this->Form->input(
     'username',
-    ['label' => 'Username']
+    ['label' => 'Username'],
 );
 ```
 

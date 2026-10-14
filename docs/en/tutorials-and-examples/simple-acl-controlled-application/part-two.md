@@ -98,7 +98,7 @@ public function initDB()
     $this->Acl->allow($group, 'controllers/Users/logout');
 
     // we add an exit to avoid an ugly "missing views" error message
-    echo "all done";
+    echo 'all done';
     exit;
 }
 ```
@@ -162,9 +162,9 @@ so already:
 <?php
 echo $this->Form->create('User', [
     'url' => [
-        'controller' => 'users', 
-        'action' => 'login'
-    ]
+        'controller' => 'users',
+        'action' => 'login',
+    ],
 ]);
 echo $this->Form->input('User.username');
 echo $this->Form->input('User.password');
@@ -179,6 +179,7 @@ public function login()
 {
     if ($this->Auth->user()) {
         $this->Flash->success(__('You are logged in!'));
+
         return $this->redirect('/');
     }
     if ($this->request->is('post')) {
@@ -203,6 +204,7 @@ following:
 
 ``` php
 $this->Flash->success(__('Good-Bye'));
+
 return $this->redirect($this->Auth->logout());
 ```
 

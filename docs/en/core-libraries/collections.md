@@ -37,7 +37,7 @@ components:
 ``` php
 $this->Auth = $this->Components->load(
     'Auth',
-    ['className' => 'MyCustomAuth']
+    ['className' => 'MyCustomAuth'],
 );
 $this->Auth->user(); // Actually using MyCustomAuth::user();
 ```
@@ -87,7 +87,7 @@ midway similar to stopping event propagation in JavaScript:
 $this->Behaviors->trigger(
     'beforeFind',
     [$this, $query],
-    ['break' => true, 'breakOn' => false]
+    ['break' => true, 'breakOn' => false],
 );
 ```
 
@@ -135,24 +135,23 @@ class SomeController
     public $components = [
         'Foo', //Foo gets default priority 10
         // Bar's callbacks are triggered before Foo's
-        'Bar' => ['priority' => 9]
+        'Bar' => ['priority' => 9],
     ];
 
     public $helpers = [
         // Cache's callbacks will be triggered last
         'Cache' => ['priority' => 12],
         'Asset',
-        'Utility' //Utility has priority 10 same as Asset and its callbacks
+        'Utility', //Utility has priority 10 same as Asset and its callbacks
                   //are triggered after Asset's
     ];
 }
-
 
 class Post
 {
     public $actsAs = [
         'DoFirst' => ['priority' => 1],
-        'Media'
+        'Media',
     ];
 }
 ```
@@ -162,7 +161,7 @@ When dynamically loading objects to a collection you can specify the priority li
 ``` php
 $this->MyComponent = $this->Components->load(
     'MyComponent',
-    ['priority' => 9]
+    ['priority' => 9],
 );
 ```
 

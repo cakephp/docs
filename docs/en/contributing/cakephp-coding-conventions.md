@@ -179,9 +179,9 @@ Control structures are for example `if`, `for`, `foreach`, `while` and
 `switch`. Below is an example with `if`:
 
 ``` php
-if (($expr1) || ($expr2)) {
+if ($expr1 || $expr2) {
     // action 1
-} elseif (!($expr3) && ($expr4)) {
+} elseif (!$expr3 && $expr4) {
     // action 2
 } else {
     // default action
