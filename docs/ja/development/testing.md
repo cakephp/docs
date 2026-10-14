@@ -1551,10 +1551,3 @@ class BlogPostTest extends CakeTestCase
 
 プラグインのテストケースは、 `bin/cake test Blog Model/BlogPost` のように
 test シェルで実行できます。
-
-<a id="integration-with-jenkins"></a>
-
-## 継続的インテグレーション
-
-GitHub Actions や Jenkins で、プッシュのたびにテストを自動で実行する方法は
-[継続的インテグレーション](/ja/development/continuous-integration) を参照してください。
