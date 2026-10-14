@@ -434,7 +434,7 @@ configure the OptionParser to match the expected inputs of your shell.
 You can also configure subcommand option parsers, which allow you to
 have different option parsers for subcommands and tasks.
 The ConsoleOptionParser implements a fluent interface and includes
-methods for easily setting multiple options/arguments at once. :
+methods for easily setting multiple options/arguments at once.
 
 ``` php
 public function getOptionParser()
@@ -544,7 +544,7 @@ handle that in your shell.
 `method` ConsoleOptionParser::**addArguments**(array $args)
 
 If you have an array with multiple arguments you can use `$parser->addArguments()`
-to add multiple arguments at once. :
+to add multiple arguments at once.
 
 ``` php
 $parser->addArguments([
@@ -583,7 +583,7 @@ Options or flags are also frequently used in command line tools.
 `ConsoleOptionParser` supports creating options
 with both verbose and short aliases, supplying defaults
 and creating boolean switches. Options are created with either
-`$parser->addOption()` or `$parser->addOptions()`. :
+`$parser->addOption()` or `$parser->addOptions()`.
 
 ``` php
 $parser->addOption('connection', [
@@ -597,7 +597,7 @@ The above would allow you to use either `bin/cake myshell --connection=other`,
 `bin/cake myshell --connection other`, or `bin/cake myshell -c other`
 when invoking the shell. You can also create boolean switches, these switches do not
 consume values, and their presence just enables them in the
-parsed parameters. :
+parsed parameters.
 
 ``` php
 $parser->addOption('no-commit', ['boolean' => true]);
@@ -623,7 +623,7 @@ define the behavior of the option:
 `method` ConsoleOptionParser::**addOptions**(array $options)
 
 If you have an array with multiple options you can use `$parser->addOptions()`
-to add multiple options at once. :
+to add multiple options at once.
 
 ``` php
 $parser->addOptions([

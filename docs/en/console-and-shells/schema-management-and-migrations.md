@@ -85,7 +85,7 @@ or dropped on the current schema.
 
 When inserting data to more than one table you'll need to flush the database
 cache after each table is created. Cache can be disable by setting
-`$db->cacheSources = false` in the before action(). :
+`$db->cacheSources = false` in the before action().
 
 ``` php
 public $connection = 'default';
@@ -129,7 +129,7 @@ engine type. Each Dbo implements the tableParameters they support.
 
 ### Example
 
-Here is a full example from the acl class :
+Here is a full example from the acl class:
 
 ``` php
 /**
@@ -234,7 +234,7 @@ The key name `indexes` is put in the table array instead of a field name.
 column  
 This is either a single column name or an array of columns.
 
-e.g. Single :
+e.g. Single:
 
 ``` text
 'indexes' => [
@@ -245,7 +245,7 @@ e.g. Single :
 ]
 ```
 
-e.g. Multiple :
+e.g. Multiple:
 
 ``` text
 'indexes' => [

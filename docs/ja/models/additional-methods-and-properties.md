@@ -30,7 +30,7 @@ $recent = $this->Example->getRecent();
 
 ## `Model::associations()`
 
-アソシエーションを取得します。 :
+アソシエーションを取得します。
 
 ``` php
 $result = $this->Example->associations();

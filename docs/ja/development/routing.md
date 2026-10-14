@@ -39,7 +39,7 @@ CakePHP はまた、開発を簡単に始めるためのいくつかのデフォ
 CakePHP がデフォルトの設定をされていることを知るべきです。
 CakePHP のデフォルトルーティングはほかのアプリに比べてとても進んでいます。
 一つのアクションに対して直接URLにアクション名を書くことでアクセスできます。
-アクションに対してURLを使って引数も渡すことができます。 :
+アクションに対してURLを使って引数も渡すことができます。
 
 ``` text
 // デフォルトルートの URL パターン:
@@ -76,7 +76,7 @@ http://example.com/controller/action/param1/param2/param3
 `connect()` メソッドは３つの引数をとります。それは、ルーティングするURL、ルーティングする対象のデフォルトの値、
 正規表現でどのURLの構成要素と何の条件が一致するかを表現します。
 
-基本のフォーマットは以下です。 :
+基本のフォーマットは以下です。
 
 ``` php
 Router::connect(
@@ -95,7 +95,7 @@ Router::connect(
 URLが特定されたら、一致したときに同様な動作をするかを `connect()` の残り二つの引数を使います。
 ２番目の引数は、連想配列です。この配列の添え字は、 URLのルーティング要素に合わせるか、
 デフォルト要素である、 `:controller`, `:action` や `:plugin` とつけられます。
-配列の値はキーのためのデフォルトの値になります。３番目の引数を使う前に基本的な例を見ましょう。 :
+配列の値はキーのためのデフォルトの値になります。３番目の引数を使う前に基本的な例を見ましょう。
 
 ``` php
 Router::connect(
@@ -111,7 +111,7 @@ Router::connect(
 
 `/*` に加えて、 `/**` という構文もあります。
 末尾に重ねて星を使うことで、 URL の残りを一つの引数として取ることができます。
-これは、 `/` を含む引数を使いたい時に便利です。 :
+これは、 `/` を含む引数を使いたい時に便利です。
 
 ``` php
 Router::connect(
@@ -128,7 +128,7 @@ Router::connect(
 :::
 
 `Router::connect()` の第二引数は、当該のルートの初期値からなる
-任意のルーティングパラメーターを与えるために使えます。 :
+任意のルーティングパラメーターを与えるために使えます。
 
 ``` php
 Router::connect(
@@ -149,7 +149,7 @@ Router::connect(
 
 ほかの一般的なルーティングの方法は、コントローラーの "エイリアス" (**ailias**)を決めることです。
 `/users/some_action/5` の代わりに、 `/cooks/some_action/5` で同じ場所にアクセスしたい場合、
-以下のように簡単にできます。 :
+以下のように簡単にできます。
 
 ``` php
 Router::connect(
@@ -212,7 +212,7 @@ Router::connect(
 アプリの中で一つのコントローラーだけがあるとき、URLにコントローラー名が含まれている必要がない。
 そのときは、すべてのURLがアクション名だけで一つのコントローラーに示すことができる。
 たとえば、 `home` コントローラーにすべてのURLでアクセスするように設定したとして、
-`/home/demo` の代わりに `/demo` というURLを使う場合以下の通りに設定します :
+`/home/demo` の代わりに `/demo` というURLを使う場合以下の通りに設定します:
 
 ``` php
 Router::connect('/:action', ['controller' => 'home']);
@@ -228,7 +228,7 @@ Router::connect(
 );
 ```
 
-もう一つ例を挙げます。これができたらプロ級 :
+もう一つ例を挙げます。これができたらプロ級:
 
 ``` php
 Router::connect(
@@ -267,7 +267,7 @@ index() へのリクエストをそれが属するコントローラーに `$thi
 
 [Route Elements](#route-elements) を使ってルーティングしている時に、ルーティング要素で
 引数を渡したい時があると思います。
-`Router::connect()` の第３引数でどのルーティング要素が引数として利用可能なのか定義できます。 :
+`Router::connect()` の第３引数でどのルーティング要素が引数として利用可能なのか定義できます。
 
 ``` php
 // src/Controller/BlogController.php
@@ -290,7 +290,7 @@ Router::connect(
 ```
 
 そして今、逆ルーティングのおかげで、下記のように url 配列を渡し、ルーティングで定義されたURLをどのように整えるのか
-Cakeは知ることができます。 :
+Cakeは知ることができます。
 
 ``` php
 // ビューテンプレート（例: templates/Blog/index.ctp）の中で
@@ -306,7 +306,7 @@ echo $this->Html->link('CakePHP Rocks', [
 ### ルーティングごとの名前付きパラメーター
 
 `Router::connectNamed()` を使ってグローバル空間で名前付きパラメーターをコントロール可能な間、
-名前付きパラメーターのルーティングレベルでの振る舞いを `Router::connect()` の第三引数を使って管理できます。 :
+名前付きパラメーターのルーティングレベルでの振る舞いを `Router::connect()` の第三引数を使って管理できます。
 
 ``` php
 Router::connect(
@@ -350,7 +350,7 @@ admin routing, prefix routing
 管理者領域を必要としている。 これはしばしば、特別な `/admin/users/edit/5` のようなURLを通してなされます。
 CakePHP ではプレフィックスルーティングをコア設定ファイルで設定可能です。
 このプレフィックスがルーターにどのように関連づけられているかは、
-`config/core.php` で設定されます。 :
+`config/core.php` で設定されます。
 
 ``` php
 Configure::write('Routing.prefixes', ['admin']);
@@ -376,7 +376,7 @@ Configure::write('Routing.prefixes', ['admin', 'manager']);
 ```
 
 CakePHP は自動的に両方のプレフィックスを使用したルーティングをします。
-それぞれの設定されたプレフィックスは以下のルーティングを生成します。 :
+それぞれの設定されたプレフィックスは以下のルーティングを生成します。
 
 ``` php
 Router::connect(
@@ -403,7 +403,7 @@ admin ルーティングのように、すべてのプレフィックス付き�
 加えて、現在のプレフィックスはコントローラーのメソッドから `$this->request->prefix` を通して利用可能です。
 
 プレフィックスルーティングを使っているときは、HTMLヘルパーをプレフィックスつけることを忘れないために使うことが大事です。
-これが、リンクをHTMLヘルパーで作る方法です。 :
+これが、リンクをHTMLヘルパーで作る方法です。
 
 ``` php
 // プレフィックスルーティングする
@@ -476,7 +476,7 @@ Router::connect(
 );
 ```
 
-そして、ルーティングに対応するリンクを生成するために、以下のようにします。 :
+そして、ルーティングに対応するリンクを生成するために、以下のようにします。
 
 ``` php
 $this->Html->link(
@@ -502,7 +502,7 @@ RequestHandlerComponent に詳細があります。
 これのよいたとえは、 [Rest](rest) ルーティングです。
 `$defaults` 引数で `Router::connect()` のための追加の条件を特定できます。
 デフォルトの CakePHP では３っつの環境条件があります。でも [Custom Route Classes](#custom-route-classes) を使ってもっと追加できます。
-あらかじめ用意されているオプションは、 :
+あらかじめ用意されているオプションは:
 
 - `[type]` 特定のコンテンツタイプにマッチするか。
 - `[method]` 特定の HTTP 動詞(**verbs**)を伴ったリクエストであるか。
@@ -533,7 +533,7 @@ passed arguments
 ## 渡された引数
 
 渡された引数は追加の引数かリクエストを生成するときに使用されるパスセグメントです。
-これらはしばしば、コントローラーメソッドにパラメーターを渡すために使われます。 :
+これらはしばしば、コントローラーメソッドにパラメーターを渡すために使われます。
 
     http://localhost/calendars/view/recent/mark
 
@@ -544,7 +544,7 @@ passed arguments
 最後は、 `$this->passedArgs` で２番目と同じ方法で呼べます。
 カスタムルーティングを使用するときに、渡された引数を呼ぶために特定のパラメーターを強制することができます。
 
-前のURLにアクセスしたい場合は、コントローラーアクションでこのようにします。 :
+前のURLにアクセスしたい場合は、コントローラーアクションでこのようにします。
 
 ``` php
 // src/Controller/CalendarsController.php
@@ -570,7 +570,7 @@ class CalendarsController extends AppController
 コントローラーとビューとヘルパーで `$this->request->params['pass']` と `$this->passedArgs`
 でいくつかのデータが利用可能です。
 
-配列には、URLの中での並び順に合わせた数字のキーとともに値が入れられます。 :
+配列には、URLの中での並び順に合わせた数字のキーとともに値が入れられます。
 
 ``` php
 debug($this->request->params['pass']);
@@ -657,7 +657,7 @@ Router::connectNamed(['chapter', 'section']);
 
 これは chapter（章） と section（項目） パラメーターを確実に正しくリバースルーティングするようにします。
 
-URLを生成するときに、 `ルーティング配列` を名前付きパラメーターを文字列キーが名前に一致する値として追加するために使います。 :
+URLを生成するときに、 `ルーティング配列` を名前付きパラメーターを文字列キーが名前に一致する値として追加するために使います。
 
 ``` text
 ['controller' => 'posts', 'action' => 'view', 'chapter' => 'association']
@@ -670,7 +670,7 @@ URLを生成するときに、 `ルーティング配列` を名前付きパラ�
 > これはルーティング要素と名前付きパラメーターの療法を再使用することを避けるもっともよい方法です。
 
 名前付きパラメーターはまたURLをパースし生成するための配列をサポートします。
-この文法は GET で使われる配列の文法ととても似た働きをします。URLを生成するときに以下の文法を使えます。 :
+この文法は GET で使われる配列の文法ととても似た働きをします。URLを生成するときに以下の文法を使えます。
 
 ``` php
 $url = Router::url([
@@ -685,7 +685,7 @@ $url = Router::url([
 
 `/posts/index/filter[published]:1/filter[frontpage]:1` というURLが上記のコードで生成されます。
 このパラメーターはコントローラーの passedArgs 変数に `Router::url` に送るために
-配列として保存されパースされます。just as you sent them to :
+配列として保存されパースされます。just as you sent them to:
 
 ``` php
 $this->passedArgs['filter'] = [
@@ -694,7 +694,7 @@ $this->passedArgs['filter'] = [
 ];
 ```
 
-配列は渡された引数と同じぐらい柔軟に深くネストできます。 :
+配列は渡された引数と同じぐらい柔軟に深くネストできます。
 
 ``` php
 $url = Router::url([
@@ -718,14 +718,14 @@ $url = Router::url([
 ]);
 ```
 
-とても長いURLも簡単に読めるようにラップして使えます。 :
+とても長いURLも簡単に読めるようにラップして使えます。
 
     posts/search
       /models[post][order]:asc/models[post][filter][published]:1
       /models[comment][order]:desc/models[comment][filter][spam]:0
       /users[]:1/users[]:2/users[]:3
 
-コントローラーに渡された配列での結果出力以下のルーターに渡された配列と一致します。 :
+コントローラーに渡された配列での結果出力以下のルーターに渡された配列と一致します。
 
 ``` php
 $this->passedArgs['models'] = [
@@ -756,7 +756,7 @@ $this->passedArgs['models'] = [
 Router::connectNamed(false);
 ```
 
-Cakeのページネーションで使うデフォルトのパラメーターだけパースする。 :
+Cakeのページネーションで使うデフォルトのパラメーターだけパースする。
 
 ``` php
 Router::connectNamed(false, ['default' => true]);
@@ -893,7 +893,7 @@ Router::redirect('/posts/*', 'https://google.com', ['status' => 302]);
 
 ルートを定義するときに `routeClass` オプションを指定すると、カスタムルーティングクラスを使えます。
 `src/` 以下のアプリケーションクラスは Composer の classmap でオートロードされるので、
-ファイルを追加したら `composer dump-autoload` を実行してください。 :
+ファイルを追加したら `composer dump-autoload` を実行してください。
 
 ``` php
 // config/routes.php
@@ -930,7 +930,7 @@ Router::connect('/:controller/:action/*');
 
 最初のパラメーターはコントローラー名として使われ、二番目はアクション名として使われます。
 '/\*' 構文 はこのルートを貪欲にして `/posts/index` のようなリクエストだけではなく `/posts/edit/1/foo/bar`
-のようなリクエストにも一致するようにします。 :
+のようなリクエストにも一致するようにします。
 
 ``` php
 Router::connect(
@@ -940,7 +940,7 @@ Router::connect(
 ```
 
 上記は、デフォルトのルーティングパラメーターの使い方を示してます。
-そして、それは静的ルーティングのためのルーティングパラメーターを提供します。 :
+そして、それは静的ルーティングのためのルーティングパラメーターを提供します。
 
 ``` php
 Router::connect(

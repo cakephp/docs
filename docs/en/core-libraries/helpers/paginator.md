@@ -152,7 +152,7 @@ Supported options are:
   current page number wrapped in extra 'a' or 'span' tag.
 
 While this method allows a lot of customization for its output. It is
-also ok to just call the method without any params. :
+also ok to just call the method without any params.
 
 ``` php
 echo $this->Paginator->numbers();

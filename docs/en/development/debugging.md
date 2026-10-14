@@ -118,7 +118,7 @@ The `depth` parameter was added.
 
 Returns the current stack trace. Each line of the trace includes
 the calling method, including which file and line the call
-originated from. :
+originated from.
 
 ``` text
 // In PostsController::index()

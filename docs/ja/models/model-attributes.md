@@ -146,7 +146,7 @@ recursive プロパティは CakePHP が `find()` 、 `read()`
 
 ## order
 
-find 操作のデフォルトのデータの順番。下記のような設定が可能です。 :
+find 操作のデフォルトのデータの順番。下記のような設定が可能です。
 
 ``` php
 $order = 'field';

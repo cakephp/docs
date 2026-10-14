@@ -162,7 +162,7 @@ default, see
 [Core Validation Rules](#core-validation-rules).
 
 If the rule does not require any parameters, 'rule' can be a single
-value e.g. :
+value e.g.
 
 ``` php
 public $validate = [
@@ -650,7 +650,7 @@ with usage examples.
 
 `static` Validation::**alphaNumeric**(mixed $check)
 
-The data for the field must only contain letters and numbers. :
+The data for the field must only contain letters and numbers.
 
 ``` php
 public $validate = [
@@ -665,7 +665,7 @@ public $validate = [
 
 The length of the data for the field must fall within the specified
 numeric range. Both minimum and maximum values must be supplied.
-Uses = not. :
+Uses = not.
 
 ``` php
 public $validate = [
@@ -684,7 +684,7 @@ you will have to write your own custom validators.
 
 This rule is used to make sure that the field is left blank or only
 white space characters are present in its value. White space
-characters include space, tab, carriage return, and newline. :
+characters include space, tab, carriage return, and newline.
 
 ``` php
 public $validate = [
@@ -698,7 +698,7 @@ public $validate = [
 `static` Validation::**boolean**(string $check)
 
 The data for the field must be a boolean value. Valid values are
-true or false, integers 0 or 1 or strings '0' or '1'. :
+true or false, integers 0 or 1 or strings '0' or '1'.
 
 ``` php
 public $validate = [
@@ -1142,7 +1142,7 @@ Use `notBlank` instead.
 ::: info Added in version 2.7
 :::
 
-The basic rule to ensure that a field is not empty. :
+The basic rule to ensure that a field is not empty.
 
 ``` php
 public $validate = [
@@ -1158,7 +1158,7 @@ error. Instead, use "multiple".
 
 `static` Validation::**numeric**(string $check)
 
-Checks if the data passed is a valid number. :
+Checks if the data passed is a valid number.
 
 ``` php
 public $validate = [

@@ -15,14 +15,14 @@
 
 単一言語のアプリケーションから、複数言語のアプリケーションに移行するためには、
 数ステップを踏むだけです。最初のステップは、 `__()` 関数をあなたのコードで
-使用することです。以下が単一言語アプリケーションのとあるコードの例です。 :
+使用することです。以下が単一言語アプリケーションのとあるコードの例です。
 
 ``` html
 <h2>Posts</h2>
 ```
 
 あなたのコードを国際化するためには、以下のように `__()`
-で文字列を囲んでください。 :
+で文字列を囲んでください。
 
 ``` html
 <h2><?php echo __('Posts'); ?></h2>
@@ -50,14 +50,14 @@ bin/cake i18n extract --paths src,templates --output resources/locales
 
 pot ファイル自身は、 CakePHP では使用しません。それらのファイルは、翻訳を含む
 [po ファイル](https://en.wikipedia.org/wiki/Gettext) を作成したり更新するための
-テンプレートです。CakePHP は、以下の場所にある po ファイルを参照します。 :
+テンプレートです。CakePHP は、以下の場所にある po ファイルを参照します。
 
 ``` text
 resources/locales/<locale>/LC_MESSAGES/<domain>.po
 ```
 
 デフォルトのドメインは 'default' です。従って、あなたのロケールフォルダは、
-以下のようになります。 :
+以下のようになります。
 
 ``` text
 resources/locales/eng/LC_MESSAGES/default.po (英語)
@@ -88,7 +88,7 @@ CakePHP はそちらを使用します。
 > 詳細は関連する移行ガイドをご覧ください。
 
 po ファイルは、短いメッセージの翻訳には便利ですが、長い文章やページ全体を翻訳したい場合、
-他の方法で実装することを検討してください。例えば、 :
+他の方法で実装することを検討してください。例えば:
 
 ``` php
 // src/Controller/AppController.php
@@ -102,7 +102,7 @@ public function beforeFilter()
 }
 ```
 
-または、 :
+または:
 
 ``` php
 // View code
@@ -117,7 +117,7 @@ LC_TIME ファイルを使用します。
 
 </div>
 
-それぞれのロケールディレクトリ直下に LC_TIME ファイルを配置します。 :
+それぞれのロケールディレクトリ直下に LC_TIME ファイルを配置します。
 
 ``` text
 resources/locales/fra/LC_TIME (フランス語)
@@ -132,7 +132,7 @@ resources/locales/por/LC_TIME (ポルトガル語)
 もし、あなたのアプリケーションに翻訳ファイルを含めたい場合、いくつかの規約に従う必要があります。
 
 `__()` や `__n()` の代わりに `__d()` や `__dn()` を使用してください。"d" はドメインを
-意味します。 'DebugKit' というプラグインを使う際、以下のように記述します。 :
+意味します。 'DebugKit' というプラグインを使う際、以下のように記述します。
 
 ``` text
 __d('debug_kit', 'My example text');
@@ -141,13 +141,13 @@ __d('debug_kit', 'My example text');
 アンダースコア構文を使用することが重要です。そうしなければ、
 CakePHP があなたの翻訳ファイルを見つけられません。
 
-上記の例のためのあなたの翻訳ファイルは、以下の様になります。 :
+上記の例のためのあなたの翻訳ファイルは、以下の様になります。
 
 ``` text
 plugins/DebugKit/Locale/<locale>/LC_MESSAGES/<domain>.po
 ```
 
-そして、他の言語の場合は、 :
+そして、他の言語の場合は:
 
 ``` text
 plugins/DebugKit/Locale/eng/LC_MESSAGES/debug_kit.po (英語)
@@ -163,7 +163,7 @@ CakePHP が翻訳ドメインと比較のためにプラグイン名を小文字
 ## 翻訳順の制御
 
 Configure の `I18n.preferApp` 値は、翻訳の順番を制御するのに使用します。
-bootstrap で true にセットすると、プラグインの翻訳よりアプリケーションの翻訳を優先します。 :
+bootstrap で true にセットすると、プラグインの翻訳よりアプリケーションの翻訳を優先します。
 
 ``` php
 Configure::write('I18n.preferApp', true);
@@ -176,7 +176,7 @@ Configure::write('I18n.preferApp', true);
 
 ## CakePHP における地域化
 
-あなたのアプリケーションの言語の変更や設定をするために必要なことは、以下の通りです。 :
+あなたのアプリケーションの言語の変更や設定をするために必要なことは、以下の通りです。
 
 ``` php
 Configure::write('Config.language', 'fra');
@@ -188,14 +188,14 @@ Configure::write('Config.language', 'fra');
 例えば、bootstrap 中でアプリケションのデフォルトの言語を設定した場合、
 コントローラの beforeFilter でリクエストやユーザーや実際に異なる言語のメッセージに
 したい時はいつでも変更できます。現在のユーザの言語をセットするために、
-以下の様に Session オブジェクトに設定を保存することができます。 :
+以下の様に Session オブジェクトに設定を保存することができます。
 
 ``` php
 $this->Session->write('Config.language', 'fra');
 ```
 
 各リクエストの始まるとき、コントローラの `beforeFilter` 内で `Configure` を
-設定してください。 :
+設定してください。
 
 ``` php
 class AppController extends Controller
@@ -239,7 +239,7 @@ CakePHP は、自動的に `$validate` 配列中のすべてのモデルのバ�
 [i18n コンソールタスク](../console-and-shells/i18n-shell) を使用することで、 CakePHP は
 自動的にバリデーションエラーを抽出します。デフォルトで、デフォルトドメインが使用されます。
 これは、モデルの中の `$validationDomain` プロパティを設定することによって
-上書きすることができます。 :
+上書きすることができます。
 
 ``` php
 class User extends AppModel
@@ -249,7 +249,7 @@ class User extends AppModel
 ```
 
 バリデーションルールの中で定義された追加のパラメータは、翻訳関数で処理されます。
-これは、動的にバリデーションメッセージを作成することができます。 :
+これは、動的にバリデーションメッセージを作成することができます。
 
 ``` php
 class User extends AppModel
@@ -267,7 +267,7 @@ class User extends AppModel
 }
 ```
 
-以下のように内部的に呼びだされます。 :
+以下のように内部的に呼びだされます。
 
 ``` text
 __d('validation', 'Username should be between %d and %d characters', [2, 10]);

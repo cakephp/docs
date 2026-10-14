@@ -63,7 +63,7 @@ class AppController extends Controller
 Html ヘルパーと Form ヘルパーが追加されます。
 
 また、子コントローラのコールバック中で `AppController` のコールバックを呼び出すのは、
-このようにするのがベストです。 :
+このようにするのがベストです。
 
 ``` php
 public function beforeFilter()
@@ -159,7 +159,7 @@ class RecipesController extends AppController
 コントローラのメソッドが `Controller::requestAction()` から呼ばれた時、
 文字列ではないデータを返したい場合があると思います。もし通常のウェブのリクエストからも
 requestAction からも呼ばれるコントローラのメソッドがあれば、値を返す前にリクエストタイプを
-チェックしましょう。 :
+チェックしましょう。
 
 ``` php
 class RecipesController extends AppController
@@ -222,7 +222,7 @@ CakePHP のコントローラは、リクエストのライフサイクル周り
 コントローラでは、規約に従ったものではなく、別のビューを描画したことがあるかもしれません。
 これは `Controller::render()` を直接呼び出すことで出来ます。
 一度 `Controller::render()` を呼び出すと、
-CakePHP は再度ビューを描画することはありません。 :
+CakePHP は再度ビューを描画することはありません。
 
 ``` php
 class PostsController extends AppController
@@ -297,7 +297,7 @@ class PostsController extends AppController
 
 > `Controller::$name` 変数はコントローラ名がセットされます。
 > 通常これは、コントローラが使うメインのモデルの複数形となります。
-> このプロパティは必須ではありません。 :
+> このプロパティは必須ではありません。
 >
 > ``` php
 > // $name 変数の使い方のサンプル
@@ -344,7 +344,7 @@ class PostsController extends AppController
 > このマニュアルの後ろにある、それぞれのセクションを確認して、これらのクラスについて
 > よく詳しく学んでください。
 >
-> 追加で利用する MVC クラス達をどうやって CakePHP のコントローラに伝えるのかを見てみましょう。 :
+> 追加で利用する MVC クラス達をどうやって CakePHP のコントローラに伝えるのかを見てみましょう。
 >
 > ``` php
 > class RecipesController extends AppController
@@ -376,7 +376,7 @@ class PostsController extends AppController
 >
 > paginate 変数は非推奨の互換性のあるプロパティです。
 > この変数を使って、 `PaginatorComponent` の読み込みと設定をします。
-> 次のように、コンポーネントの設定を使うように修正することが推奨されます。 :
+> 次のように、コンポーネントの設定を使うように修正することが推奨されます。
 >
 > ``` php
 > class ArticlesController extends AppController

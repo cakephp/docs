@@ -632,7 +632,7 @@ plugin, just use the familiar `plugin syntax`. If the view is being
 rendered for a plugin controller/action, the plugin name will automatically
 be prefixed onto all elements used, unless another plugin name is present.
 If the element doesn't exist in the plugin, it will look in the main APP
-folder. :
+folder.
 
 ``` php
 echo $this->element('Contacts.helpbox');

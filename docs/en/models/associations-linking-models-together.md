@@ -809,7 +809,7 @@ You can set the `unique` setting to `keepExisting` to circumvent losing extra da
 The way to implement our requirement is to use a **join model**,
 otherwise known as a **hasMany through** association.
 That is, the association is a model itself. So, we can create a new
-model CourseMembership. Take a look at the following models. :
+model CourseMembership. Take a look at the following models.
 
 ``` php
 // Student.php

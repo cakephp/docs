@@ -237,7 +237,7 @@ App::objects('plugin');
 App::objects('Controller');
 ```
 
-You can also search only within a plugin's objects by using the plugin dot syntax. :
+You can also search only within a plugin's objects by using the plugin dot syntax.
 
 ``` php
 // returns ['MyPluginPost', 'MyPluginComment'];

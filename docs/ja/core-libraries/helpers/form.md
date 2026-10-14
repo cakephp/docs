@@ -525,7 +525,7 @@ echo $this->Form->input('User.email');
 echo $this->Form->input('Tags.Tags', ['multiple' => true]);
 ```
 
-もし、生成された name 属性を上書きしたい場合、 `name` オプションが使えます。 :
+もし、生成された name 属性を上書きしたい場合、 `name` オプションが使えます。
 
 ``` php
 // より典型的な <input name="data[User][email]" type="text" /> になります
@@ -647,7 +647,7 @@ input 要素に関連するメソッドの多くは、一般的なオプショ�
   > パスワードフィールドのデフォルト値を空値にしたい場合は、
   > 'value' =\> '' の方を使ってください。
 
-  date や datetime フィールドのために、 empty にキー・バリューペアの配列を指定できます。 :
+  date や datetime フィールドのために、 empty にキー・バリューペアの配列を指定できます。
 
   ``` php
   echo $this->Form->dateTime(

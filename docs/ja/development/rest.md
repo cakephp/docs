@@ -18,7 +18,7 @@ Router オブジェクトは、 `mapResources()` というメソッドを提供�
 `mapResources()` は、 `config/routes.php` の最後にある
 `require CAKE . 'Config' . DS . 'routes.php';` の記述や、
 routes をオーバーライドする他の routes よりも前に呼び出す必要があります。
-例えば、レシピ (recipe) データベースにアクセスする REST は、下記のようにします :
+例えば、レシピ (recipe) データベースにアクセスする REST は、下記のようにします:
 
 ``` php
 // config/routes.php
@@ -51,7 +51,7 @@ POST リクエストの中の、 *\_method* の値を使う方法は、ブラウ
 便利です。単純に POST メソッドの中で、\_method キーの値に HTTP メソッド名を入れるだけです。
 
 ルータが REST リクエストを、コントローラのアクションにマッピングすると、
-そのアクションに移動します。基本的なコントローラのサンプルは下記のようになります :
+そのアクションに移動します。基本的なコントローラのサンプルは下記のようになります:
 
 ``` php
 // src/Controller/RecipesController.php
@@ -218,7 +218,7 @@ Router::resourceMap([
 :::
 
 `Router::mapResources()` の `$options` 配列の `connectOptions`
-キーで `Router::connect()` を使った設定ができます。 :
+キーで `Router::connect()` を使った設定ができます。
 
 ``` php
 Router::mapResources('books', [

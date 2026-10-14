@@ -53,7 +53,7 @@ class PostsController extends AppController
 }
 ```
 
-連結されたビュー変数の配列として `_serialize` を定義することも出来ます。 :
+連結されたビュー変数の配列として `_serialize` を定義することも出来ます。
 
 ``` php
 class PostsController extends AppController
@@ -80,7 +80,7 @@ class PostsController extends AppController
 最終出力を作成する前にビューのコンテンツに何らかの操作が必要なときにはビューファイルを使うべきです。
 例えば、自動生成された HTML を含んだフィールドが posts にあったとすると、
 おそらく JSON レスポンスから除外したいと思うでしょう。
-このような状況でビューファイルは役立ちます。 :
+このような状況でビューファイルは役立ちます。
 
 ``` php
 // コントローラ コード

@@ -6,20 +6,20 @@ Folder と File ユーティリティは、ファイルの読み書きやフォ�
 ## 基本的な使い方
 
 `Folder` と `File` クラスはオートロードされるため、そのままインスタンスを作成できます。
-新しいフォルダインスタンスは次のようにセットアップします。 :
+新しいフォルダインスタンスは次のようにセットアップします。
 
 ``` php
 $dir = new Folder('/path/to/folder');
 ```
 
 インスタンスを作成したフォルダ内から *.ctp* の拡張子が付いたファイルを
-正規表現検索する場合はこのようにします。 :
+正規表現検索する場合はこのようにします。
 
 ``` php
 $files = $dir->find('.*\.ctp');
 ```
 
-これでファイルの読み込みや、コンテンツの書き込み、ファイルの削除などが行えるようになります。 :
+これでファイルの読み込みや、コンテンツの書き込み、ファイルの削除などが行えるようになります。
 
 ``` php
 foreach ($files as $file) {
@@ -58,7 +58,7 @@ Windows マシンでは何も影響しません。
 
 戻り値の型: `string`
 
-\$path と \$element の間に適切なスラッシュを加えて返します。 :
+\$path と \$element の間に適切なスラッシュを加えて返します。
 
 ``` php
 $path = Folder::addPathElement('/a/path/for', 'testing');
@@ -113,7 +113,7 @@ $path = Folder::addPathElement('/a/path/for', 'testing');
 
 戻り値の型: `boolean`
 
-与えられた \$path がスラッシュで終了していれば true を返します。（つまり、 slash-terminated） :
+与えられた \$path がスラッシュで終了していれば true を返します。（つまり、 slash-terminated）:
 
 ``` php
 $result = Folder::isSlashTerm('/my/test/path');

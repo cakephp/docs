@@ -16,7 +16,7 @@ FlashComponent は、フラッシュメッセージの設定に２つの方法�
 ひとつは、 `__call` マジックメソッドで、もうひとつは `set()` メソッドです。
 
 デフォルトのフラッシュメッセージハンドラを使用するために、 `set()` メソッドが
-使用できます。 :
+使用できます。
 
 ``` php
 $this->Flash->set('This is a message');
@@ -29,7 +29,7 @@ $this->Flash->set('This is a message');
 独自の Flash エレメントを作成するためには、 FlashComponent の `__call` マジック
 メソッドで、 `templates/Elements/Flash` ディレクトリ以下に配置されたエレメントと
 メソッド名を関連づけることができます。規約により、キャメルケース形式のメソッドは、
-小文字でアンダースコア区切りのエレメント名に置き換えられます。 :
+小文字でアンダースコア区切りのエレメント名に置き換えられます。
 
 ``` php
 // templates/Elements/Flash/success.ctp を使用

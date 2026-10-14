@@ -133,7 +133,7 @@ class ContactsController extends ContactManagerAppController
 ## プラグインモデル {#plugin-models}
 
 プラグインのモデルは `plugins/ContactManager/Model` に設置されます。
-プラグインの ContactsController は既に定義してあるので、そのモデルを作成します。 :
+プラグインの ContactsController は既に定義してあるので、そのモデルを作成します。
 
 ``` php
 // plugins/ContactManager/Model/Contact.php の中で
@@ -161,7 +161,7 @@ class Contact extends ContactManagerAppModel
 }
 ```
 
-プラグインの接頭語との連携の無い配列キーを参照したいなら、代わりのシンタックスを使います。 :
+プラグインの接頭語との連携の無い配列キーを参照したいなら、代わりのシンタックスを使います。
 
 ``` php
 // plugins/ContactManager/Model/Contact.php の中で
@@ -181,7 +181,7 @@ class Contact extends ContactManagerAppModel
 ビューは通常のアプリケーション内での動作として振る舞います。
 `plugins/[PluginName]/View/` フォルダー内に設置するだけです。
 ContactManager プラグインでは、ContactsController::index()
-アクションのビューが必要になるので、 このような内容になります。 :
+アクションのビューが必要になるので、 このような内容になります。
 
 ``` html
 <!-- plugins/ContactManager/View/Contacts/index.ctp: -->
@@ -211,7 +211,7 @@ ContactManager プラグインでは、ContactsController::index()
 ## プラグインアセット
 
 プラグインのウェブアセット（php ファイルではない）は、 プラグインの
-’webroot’ ディレクトリを通して受け取られます。 :
+’webroot’ ディレクトリを通して受け取られます。
 
     plugins/ContactManager/webroot/
                                    css/
@@ -261,7 +261,7 @@ echo $this->Html->css('ContactManager.style');
 特別な命名規則もありません。
 
 プラグインの内部や外部からコンポーネントを参照する方法は、
-コンポーネント名の前にプラグイン名を付けるだけです。 例えば、 :
+コンポーネント名の前にプラグイン名を付けるだけです。 例えば:
 
 ``` php
 // 'ContactManager' プラグインのコンポーネントとして定義

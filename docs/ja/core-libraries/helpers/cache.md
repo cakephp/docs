@@ -24,7 +24,7 @@ Cache ヘルパーを使用する前に2つのステップをこなさなけれ�
 そうするとリクエストを取り扱うときビューキャッシュファイルを確認したり、生成したりするようになります。
 
 `Cache.check` のコメントを外したならば controller の `$helpers` 配列にヘルパーを
-追加しなければなりません。 :
+追加しなければなりません。
 
 ``` php
 class PostsController extends AppController
@@ -33,7 +33,7 @@ class PostsController extends AppController
 }
 ```
 
-また、 bootstrap に CacheDispatcher をディスパッチャフィルタへ追加する必要があります。 :
+また、 bootstrap に CacheDispatcher をディスパッチャフィルタへ追加する必要があります。
 
 ``` php
 Configure::write('Dispatcher.filters', [
@@ -53,7 +53,7 @@ Cache ヘルパーはいくつかの環境設定オプションを持ってい�
 配列をセットするべきです。時間は `strtotime()` フォーマットで表現する事ができます (例: "1 hour" や
 "3 minutes") 。
 
-ArticlesController の例を使用して、キャッシュする必要のある多くのトラフィックを受け取ります。 :
+ArticlesController の例を使用して、キャッシュする必要のある多くのトラフィックを受け取ります。
 
 ``` php
 public $cacheAction = [
@@ -64,7 +64,7 @@ public $cacheAction = [
 
 上のコードはビューアクションを10時間、そインデックスアクションは13時間キャッシュすることができるものです。
 コントローラーのどのアクションにでもキャッシュできます。どのコントローラーでも `$cacheAction` の
-`strtotime()` の書き方を下記のように親しみやすい記述にすることができます。 :
+`strtotime()` の書き方を下記のように親しみやすい記述にすることができます。
 
 ``` php
 public $cacheAction = '1 hour';
@@ -72,7 +72,7 @@ public $cacheAction = '1 hour';
 
 さらに、 `CacheHelper` を使って作成されたコントローラーやコンポーネントの callbacks を
 キャッシュされたビューのために使用可能です。
-ただし、追加するときは `$cacheAction` で配列を使って、以下のように記述してください。 :
+ただし、追加するときは `$cacheAction` で配列を使って、以下のように記述してください。
 
 ``` php
 public $cacheAction = [

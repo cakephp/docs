@@ -16,7 +16,7 @@
 データバリデーションへの最初のステップは、
 まずモデルの中にバリデーションルールを作成することです。
 そのためには、モデル定義の中で Model::validate 配列を使います。
-たとえば以下のようになります。 :
+たとえば以下のようになります。
 
 ``` php
 class User extends AppModel
@@ -29,7 +29,7 @@ class User extends AppModel
 その配列には（まだ）バリデーションルールが書かれていません。
 ここで、users テーブルには login, password, email, born
 という項目があるとしましょう。これらの項目に対して適用される
-いくつかのシンプルなバリデーションルールを以下の例で示します。 :
+いくつかのシンプルなバリデーションルールを以下の例で示します。
 
 ``` php
 class User extends AppModel
@@ -55,7 +55,7 @@ CakePHP には多くのバリデーションルールが用意されており、
 まずこれらについて説明します。
 
 これらビルトインされたバリデーションルールの利点を活用した、
-より複雑な例を以下に示します。 :
+より複雑な例を以下に示します。
 
 ``` php
 class User extends AppModel
@@ -107,7 +107,7 @@ CakePHP が使うエラーメッセージを自由に定義できます。
 ## 単純なルール
 
 名前の通り、これがバリデーションルールを定義する最も簡単な方法です。
-この方法で定義する場合の、一般的な書式は以下の通りです。 :
+この方法で定義する場合の、一般的な書式は以下の通りです。
 
 ``` php
 public $validate = ['fieldName' => 'ruleName'];
@@ -118,7 +118,7 @@ public $validate = ['fieldName' => 'ruleName'];
 'alphaNumeric', 'email', 'isUnique' といったものがあります。
 
 たとえば、ユーザーが入力したメールアドレスが書式に合っているか
-どうかをチェックするために、以下のようにルールを使えます。 :
+どうかをチェックするために、以下のようにルールを使えます。
 
 ``` php
 public $validate = ['user_email' => 'email'];
@@ -128,7 +128,7 @@ public $validate = ['user_email' => 'email'];
 
 この定義テクニックを使うと、バリデーションルールの動きをより良く
 コントロールできます。しかしその前に、単一項目に対してルールを追加
-する際の一般的に利用パターンを見てみましょう。 :
+する際の一般的に利用パターンを見てみましょう。
 
 ``` php
 public $validate = [
@@ -162,7 +162,7 @@ public $validate = [
 [Core Validation Rules](#core-validation-rules) を参照してください。
 
 rule がパラメータを必要としない場合、'rule' に次のような単一の
-値を指定できます。 :
+値を指定できます。
 
 ``` php
 public $validate = [
@@ -173,7 +173,7 @@ public $validate = [
 ```
 
 （max, min, range のように）rule がパラメータを取る場合、
-'rule' を配列で指定します。 :
+'rule' を配列で指定します。
 
 ``` php
 public $validate = [
@@ -192,7 +192,7 @@ public $validate = [
 `update` にすると、その項目は更新または作成処理の場合にのみ必須となります。
 'required' が真と評価されると、
 その項目はデータ配列の中に存在しなければならなくなります。
-たとえばバリデーションルールが以下のように定義されたとすると、 :
+たとえばバリデーションルールが以下のように定義されたとすると:
 
 ``` php
 public $validate = [
@@ -248,7 +248,7 @@ public $validate = [
 ### message
 
 message キーを使うと、そのルールについてのカスタムバリデーション
-エラーメッセージを定義できます。 :
+エラーメッセージを定義できます。
 
 ``` php
 public $validate = [
@@ -271,7 +271,7 @@ public $validate = [
 複数のバリデーションルールを割り当てることができます。
 
 １つの項目に対して複数のバリデーションルールを割り当てたい場合、
-その基本的な書き方は以下のようになります。 :
+その基本的な書き方は以下のようになります。
 
 ``` php
 public $validate = [
@@ -295,7 +295,7 @@ public $validate = [
 それぞれの 'ruleName' にはバリデーションパラメータの別々の
 配列を保持しています。
 
-もう少し実践的な例を見てみましょう。 :
+もう少し実践的な例を見てみましょう。
 
 ``` php
 public $validate = [
@@ -329,7 +329,7 @@ public $validate = [
 
 以下の例では "rule1" のチェックに引っかかっても "rule2" が
 引き続き実行され、さらに "rule2" にも引っかかった場合は両方の
-エラーメッセージが返されます。 :
+エラーメッセージが返されます。
 
 ``` php
 public $validate = [
@@ -348,7 +348,7 @@ public $validate = [
 ```
 
 この配列形式でバリデーションルールを指定する場合、
-`message` キーは省略できます。以下の例を見てください。 :
+`message` キーは省略できます。以下の例を見てください。
 
 ``` php
 public $validate = [
@@ -375,7 +375,7 @@ public $validate = [
 
 自分が必要とするバリデーションテクニックを正規表現マッチングを
 使って実現できるのであれば、ある項目のバリデーションルールとして
-カスタム正規表現を定義できます。 :
+カスタム正規表現を定義できます。
 
 ``` php
 public $validate = [
@@ -398,7 +398,7 @@ public $validate = [
 データをチェックするのに、正規表現パターンだけでは機能が足りない
 場合があります。たとえばプロモーションコードが使われた回数が
 25 回を超えていないことをチェックしたい場合、以下の様な独自の
-バリデーション関数を追加する必要があります。 :
+バリデーション関数を追加する必要があります。
 
 ``` php
 class User extends AppModel
@@ -445,7 +445,7 @@ class User extends AppModel
 複数項目で利用可能なバリデーションルールを作成する場合、\$check
 配列から項目の値を取り出す際には注意が必要です。\$check 配列は
 フォームの項目名をキー、項目値を値として渡されます。チェック対象の
-レコードの全体は \$this-\>data メンバ変数に入っています。 :
+レコードの全体は \$this-\>data メンバ変数に入っています。
 
 ``` php
 class Post extends AppModel
@@ -501,7 +501,7 @@ class Post extends AppModel
 :::
 
 `ModelValidator` オブジェクトが内部設定に新しい項目を追加するためには
-いくつかのやり方があります。最初は `add` メソッドを使う方法です。 :
+いくつかのやり方があります。最初は `add` メソッドを使う方法です。
 
 ``` php
 // Inside a model class
@@ -512,7 +512,7 @@ $this->validator()->add('password', 'required', [
 ```
 
 これはモデルの `password` 項目に対して単一のルールを追加します。
-add に対してさらに他の add への呼び出しを、好きなだけ繋げられます。 :
+add に対してさらに他の add への呼び出しを、好きなだけ繋げられます。
 
 ``` php
 // Inside a model class
@@ -527,7 +527,7 @@ $this->validator()
     ]);
 ```
 
-一つの項目に対して一度に複数のルールを追加することもできます。 :
+一つの項目に対して一度に複数のルールを追加することもできます。
 
 ``` php
 $this->validator()->add('password', [
@@ -543,7 +543,7 @@ $this->validator()->add('password', [
 ```
 
 また、validator オブジェクトに対して配列形式のインターフェース
-を使って直接ルールを設定することもできます。 :
+を使って直接ルールを設定することもできます。
 
 ``` php
 $validator = $this->validator();
@@ -566,7 +566,7 @@ $validator['username'] = [
 validator オブジェクトを使って現在のバリデーションルールを変更する
 こともできます。現在のルールを変更する場合、項目にメソッドを追加したり、
 またその項目からルールセットを完全に取り去ってしまうなど、
-いくつかの方法があります。 :
+いくつかの方法があります。
 
 ``` php
 // モデルクラスの中で
@@ -577,7 +577,7 @@ $this->validator()->getField('password')->setRule('required', [
 ```
 
 これと似たようなやり方で、その項目におけるルールをすべて完全に
-差し替えてしまうこともできます。 :
+差し替えてしまうこともできます。
 
 ``` php
 // モデルクラスの中で
@@ -589,7 +589,7 @@ $this->validator()->getField('password')->setRules([
 
 ルールの中の一つのプロパティだけを変更したい場合は、
 `CakeValidationRule` オブジェクトの中に入って直接プロパティを
-セットすることもできます。 :
+セットすることもできます。
 
 ``` php
 // モデルクラスの中で
@@ -602,7 +602,7 @@ $this->validator()->getField('password')
 プロパティを定義する際に使える自分自身の名前を配列キーから取得します。
 
 ルールセットに新しいルールを追加する場合、配列インターフェースを使って
-既存のルールを変更することも可能です。 :
+既存のルールを変更することも可能です。
 
 ``` php
 $validator = $this->validator();
@@ -621,7 +621,7 @@ $validator['username']['unique']->message = 'その名前はすでに使われ�
 :::
 
 ある項目のルールセットにおいて、ルールすべてを削除することも
-一つのルールを削除することも、どちらも可能です。 :
+一つのルールを削除することも、どちらも可能です。
 
 ``` php
 // ある項目からすべてのルールを完全に削除する
@@ -631,7 +631,7 @@ $this->validator()->remove('username');
 $this->validator()->remove('password', 'required');
 ```
 
-配列インターフェースを使って削除することもできます。 :
+配列インターフェースを使って削除することもできます。
 
 ``` php
 $validator = $this->validator();
@@ -654,7 +654,7 @@ CakePHP のバリデーションクラスには多くのバリデーションル
 
 `static` Validation::**alphaNumeric**(mixed $check)
 
-この項目は文字と数字だけで構成されなければなりません。 :
+この項目は文字と数字だけで構成されなければなりません。
 
 ``` php
 public $validate = [
@@ -668,7 +668,7 @@ public $validate = [
 `static` Validation::**lengthBetween**(string $check, integer $min, integer $max)
 
 この項目のデータ長は指定された数値の範囲に収まっていなければ
-なりません。最小値と最大値の両方を指定する必要があります。 :
+なりません。最小値と最大値の両方を指定する必要があります。
 
 ``` php
 public $validate = [
@@ -688,7 +688,7 @@ public $validate = [
 このルールはその項目が未入力のまま、もしくはその値がホワイトスペース
 だけで構成されていることを確認するときに使います。ホワイトスペース
 文字として有効なのは空白、タブ、復帰（キャリッジリターン）、
-改行（ニューライン）です。 :
+改行（ニューライン）です。
 
 ``` php
 public $validate = [
@@ -702,7 +702,7 @@ public $validate = [
 `static` Validation::**boolean**(string $check)
 
 その項目のデータはブール値でなければなりません。有効な値は
-true, false, 数字の 0 または 1、文字列の '0' または '1' です。 :
+true, false, 数字の 0 または 1、文字列の '0' または '1' です。
 
 ``` php
 public $validate = [
@@ -746,7 +746,7 @@ public $validate = [
 デフォルトは false です。
 
 'regex' キーにはクレジットカード番号の妥当性チェックで使うための
-独自の正規表現を指定できます。 :
+独自の正規表現を指定できます。
 
 ``` php
 public $validate = [
@@ -761,7 +761,7 @@ public $validate = [
 
 comparison は数値を比較します。サポートしている機能は『より大きい』
 『より小さい』『以上』『以下』『等しい』『等しくない』です。
-以下にいくつか例を示します。 :
+以下にいくつか例を示します。
 
 ``` php
 public $validate = [
@@ -781,7 +781,7 @@ public $validate = [
 
 `static` Validation::**custom**(mixed $check, string $regex = null)
 
-カスタム正規表現が必要な場合に使われます。 :
+カスタム正規表現が必要な場合に使われます。
 
 ``` php
 public $validate = [
@@ -816,7 +816,7 @@ public $validate = [
 - 'y' たとえば 2006 （区切り文字には空白、
   ピリオド、ハイフン、スラッシュが使えます）
 
-キーが指定されない場合、'ymd' がデフォルトのキーとして使われます。 :
+キーが指定されない場合、'ymd' がデフォルトのキーとして使われます。
 
 ``` php
 public $validate = [
@@ -855,7 +855,7 @@ public $validate = [
 - 'my' たとえば 12/2006 or 12/06 （区切り文字には空白、
   ピリオド、ハイフン、スラッシュが使えます）
 
-キーが指定されない場合、'ymd' がデフォルトのキーとして使われます。 :
+キーが指定されない場合、'ymd' がデフォルトのキーとして使われます。
 
 ``` php
 public $validate = [
@@ -876,7 +876,7 @@ date() と異なり、datetime() は日時を検証します。
 このルールは、データが有効な数値であることを保証します。パラメータ
 として小数部の桁数を指定します。パラメータが渡された場合、その
 データは浮動小数点形式として検証されるため、小数点の後ろに数字がない
-場合は正当な数値としてはみなされません。 :
+場合は正当な数値としてはみなされません。
 
 ``` php
 public $validate = [
@@ -890,7 +890,7 @@ public $validate = [
 
 データが正しいメールアドレスかどうかをチェックします。オプションの
 第二パラメータとして true を渡すと、ホスト部が有効なアドレスか
-どうかも合わせてチェックします。 :
+どうかも合わせてチェックします。
 
 ``` php
 public $validate = ['email' => ['rule' => 'email']];
@@ -942,7 +942,7 @@ public $validate = [
 `Validation::comparison()` がサポートしている演算子を
 すべてサポートしています。 `$check` が `tmp_name` キーを
 含んでいる場合、このメソッドは `$_FILES` から渡される値を
-自動的に解析し、`tmp_name` キーがあれば取り出します。 :
+自動的に解析し、`tmp_name` キーがあれば取り出します。
 
 ``` php
 public $validate = [
@@ -1003,7 +1003,7 @@ luhn アルゴリズム：さまざまな一意の番号を検証するための
 
 `static` Validation::**maxLength**(string $check, integer $max)
 
-このルールはデータが最大長に収まっているかどうかを検証します。 :
+このルールはデータが最大長に収まっているかどうかを検証します。
 
 ``` php
 public $validate = [
@@ -1019,7 +1019,7 @@ public $validate = [
 
 `static` Validation::**maxLengthBytes**(string $check, integer $max)
 
-このルールはデータが最大長に収まっているかどうかを検証します。 :
+このルールはデータが最大長に収まっているかどうかを検証します。
 
 ``` php
 public $validate = [
@@ -1060,7 +1060,7 @@ public $validate = [
 
 `static` Validation::**minLength**(string $check, integer $min)
 
-このルールはデータが最小長を満たしているかどうかを検証します。 :
+このルールはデータが最小長を満たしているかどうかを検証します。
 
 ``` php
 public $validate = [
@@ -1077,7 +1077,7 @@ public $validate = [
 
 `static` Validation::**minLengthBytes**(string $check, integer $min)
 
-このルールはデータが最小長を満たしているかどうかを検証します。 :
+このルールはデータが最小長を満たしているかどうかを検証します。
 
 ``` php
 public $validate = [
@@ -1139,7 +1139,7 @@ public $validate = [
 ::: info Added in version 2.7
 :::
 
-その項目が空でないことをチェックする、基本的なルールです。 :
+その項目が空でないことをチェックする、基本的なルールです。
 
 ``` php
 public $validate = [
@@ -1155,7 +1155,7 @@ public $validate = [
 
 `static` Validation::**numeric**(string $check)
 
-データが有効な数値かどうかをチェックします。 :
+データが有効な数値かどうかをチェックします。
 
 ``` php
 public $validate = [
@@ -1276,7 +1276,7 @@ public $validate = [
 `static` Validation::**url**(string $check, boolean $strict = false)
 
 有効な URL フォーマットかどうかをチェックします。プロトコルとして
-http(s), ftp(s), file, news, gopher をサポートしています。 :
+http(s), ftp(s), file, news, gopher をサポートしています。
 
 ``` php
 public $validate = [
@@ -1287,7 +1287,7 @@ public $validate = [
 ```
 
 プロトコルが URL に含まれるかどうかをチェックします。
-以下のように strict（厳密）モードを有効にすることもできます。 :
+以下のように strict（厳密）モードを有効にすることもできます。
 
 ``` php
 public $validate = [
@@ -1309,7 +1309,7 @@ public $validate = [
 
 バリデーションルール phone() と postal() に渡された国別プリフィックスを、
 適切な名前で別のクラスに渡す方法がわからない場合があります。たとえば
-あなたがオランダに住んでいて、以下の様なクラスを作ったとします。 :
+あなたがオランダに住んでいて、以下の様なクラスを作ったとします。
 
 ``` php
 class NlValidation
@@ -1332,7 +1332,7 @@ class NlValidation
 そうでない場合は、利用する前に `App::uses('NlValidation', 'Validation')`
 (プラグインの場合は `App::uses('NlValidation', 'PluginName.Validation')`)
 でインポートしておいてください。その後、あなたのモデルの
-バリデーションで、以下のように NlValidation を利用できます。 :
+バリデーションで、以下のように NlValidation を利用できます。
 
 ``` php
 public $validate = [

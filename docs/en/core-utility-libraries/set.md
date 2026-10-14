@@ -284,7 +284,7 @@ Creates an associative array using a \$path1 as the path to build
 its keys, and optionally \$path2 as path to get the values. If
 \$path2 is not specified, all values will be initialized to null
 (useful for Set::merge). You can optionally group the values by
-what is obtained when following the path specified in \$groupPath. :
+what is obtained when following the path specified in \$groupPath.
 
 ``` php
 $result = Set::combine([], '{n}.User.id', '{n}.User.Data');
@@ -798,7 +798,7 @@ $res = Set::format($data, '%1$s, %2$d', ['{n}.Person.first_name', '{n}.Person.so
 
 Return type: `array`
 
-Inserts \$data into an array as defined by \$path. :
+Inserts \$data into an array as defined by \$path.
 
 ``` php
 $a = [
@@ -946,7 +946,7 @@ $mapped->[0]->sayHi();
 Return type: `boolean`
 
 Set::matches can be used to see if a single item or a given xpath
-match certain conditions. :
+match certain conditions.
 
 ``` php
 $a = [
@@ -1109,7 +1109,7 @@ $result = Set::nest($data, ['root' => 6]);
 
 Return type: `array`
 
-Normalizes a string or array list. :
+Normalizes a string or array list.
 
 ``` php
 $a = [
@@ -1344,7 +1344,7 @@ Return type: `array`
 
 Set::reverse is basically the opposite of `Set::map`. It converts an
 object into an array. If \$object is not an object, reverse will
-simply return \$object. :
+simply return \$object.
 
 ``` php
 $result = Set::reverse(null);

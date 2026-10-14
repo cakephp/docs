@@ -20,7 +20,7 @@ $Email->send('My message');
 ```
 
 これを単純化にするため、すべてのセッターメソッドは、クラスのインスタンスを返します。
-上記は以下のように書き換えられます。 :
+上記は以下のように書き換えられます。
 
 ``` php
 $Email = new CakeEmail();
@@ -33,7 +33,7 @@ $Email->from(['me@example.com' => 'My Site'])
 ### 送り主の選択
 
 他の人々に代わってメールを送信するとき、Sender ヘッダーを使用して、元の送り主を定義することは
-良い考えです。 `sender()` を使用して行えます。 :
+良い考えです。 `sender()` を使用して行えます。
 
 ``` php
 $Email = new CakeEmail();
@@ -55,7 +55,7 @@ $Email->sender('app@example.com', 'MyApp emailer');
 `config/email.php.default` が、このファイルの参考になります。
 
 `CakeEmail` は、設定にアクセスするため `EmailConfig` のインスタンスを作成します。
-もし、設定中に動的にデータをセットしたい場合、コンストラクターを使用することができます。 :
+もし、設定中に動的にデータをセットしたい場合、コンストラクターを使用することができます。
 
 ``` php
 class EmailConfig
@@ -72,7 +72,7 @@ class EmailConfig
 設定の配列をロードすることができます。
 
 `EmailConfig` から設定をロードするためには、 `config()` メソッドの使用したり、
-`CakeEmail` のコンストラクタで指定することができます。 :
+`CakeEmail` のコンストラクタで指定することができます。
 
 ``` php
 $Email = new CakeEmail();
@@ -85,7 +85,7 @@ $Email = new CakeEmail('default');
 $Email = new CakeEmail();
 ```
 
-`EmailConfig` 内に設定名の文字列をセットする代わりに、設定の配列をロードすることもできます。 :
+`EmailConfig` 内に設定名の文字列をセットする代わりに、設定の配列をロードすることもできます。
 
 ``` php
 $Email = new CakeEmail();
@@ -126,7 +126,7 @@ class EmailConfig
 > ssl:// や tls:// の機能を使用するためには、 `openssl` エクステンションが必要です。
 
 `tls` オプションを使用して STARTTLS SMTP 拡張を有効にすることもできます。
-STARTTLS は通常ポート 587 で提供されています。 :
+STARTTLS は通常ポート 587 で提供されています。
 
 ``` php
 class EmailConfig
@@ -209,7 +209,7 @@ CakePHP は、 [ビューレイヤー](../views) を使用してメールを送�
 
 メールのテンプレートは、 あなたのアプリケーションの `templates` ディレクトリ内の
 `Emails` と呼ばれる特別なフォルダに置かれます。メールのビューは、
-普通のビューと同様にレイアウトとエレメントを使用します。 :
+普通のビューと同様にレイアウトとエレメントを使用します。
 
 ``` php
 $Email = new CakeEmail();
@@ -223,7 +223,7 @@ $Email->template('welcome', 'fancy')
 上記は、ビューとして `templates/Emails/html/welcome.ctp` を使用し、
 レイアウトとして `templates/Layouts/Emails/html/fancy.ctp` を使用します
 (レガシーレイアウトでは `templates/` の代わりに `app/View/` です)。
-以下のように、マルチパートのテンプレートメールを送信することもできます。 :
+以下のように、マルチパートのテンプレートメールを送信することもできます。
 
 ``` php
 $Email = new CakeEmail();
@@ -244,14 +244,14 @@ $Email->template('welcome', 'fancy')
 テンプレートメールを送信する時、 `text` 、 `html` と `both` のうちの
 どれかを送信オプションとして指定します。
 
-`CakeEmail::viewVars()` でビューの変数をセットできます。 :
+`CakeEmail::viewVars()` でビューの変数をセットできます。
 
 ``` php
 $Email = new CakeEmail('templated');
 $Email->viewVars(['value' => 12345]);
 ```
 
-以下のようにメールテンプレート内で使用します。 :
+以下のようにメールテンプレート内で使用します。
 
 ``` html
 <p>Here is your value: <b><?php echo $value; ?></b></p>
@@ -259,7 +259,7 @@ $Email->viewVars(['value' => 12345]);
 
 メールでも普通のビューファイルと同様にヘルパーを使用できます。
 デフォルトでは、 `HtmlHelper` のみがロードされます。 `helpers()`
-メソッドを使うことで追加でヘルパーをロードできます。 :
+メソッドを使うことで追加でヘルパーをロードできます。
 
 ``` php
 $Email->helpers(['Html', 'Custom', 'Text']);
@@ -269,7 +269,7 @@ $Email->helpers(['Html', 'Custom', 'Text']);
 ロードされません。
 
 もし、プラグインの中でテンプレートを使用してメール送信したい場合、おなじみの `プラグイン記法`
-を使います。 :
+を使います。
 
 ``` php
 $Email = new CakeEmail();
@@ -280,7 +280,7 @@ $Email->template('Blog.new_comment', 'Blog.auto_message');
 
 いくつかのケースで、プラグインで用意されたデフォルトのテンプレートを上書きしたい場合が
 あるかもしれません。 `CakeEmail::theme()` メソッドを使って適切なテーマを使用することを
-CakeEmail に伝えることによって行います。 :
+CakeEmail に伝えることによって行います。
 
 ``` php
 $Email = new CakeEmail();
@@ -365,7 +365,7 @@ CakePHP は、 Mail (デフォルト)、 Debug と SMTP トランスポートを
 他のメールシステムやメール配信サービスを使うために独自のトランスポートを作成することができます。
 トランスポートを作るためには、(Example という名前のトランスポートの場合）最初に
 `src/Lib/Network/Email/ExampleTransport.php` ファイルを作成してください。
-作成開始時点のファイルは以下のようになります。 :
+作成開始時点のファイルは以下のようになります。
 
 ``` php
 // src/Lib/Network/Email/ExampleTransport.php
@@ -399,7 +399,7 @@ $Email->send();
 
 もし、規約に準拠していないアドレスに送信するときにバリデーションに問題がある場合、
 メールアドレスのバリデーションに使用するパターンを緩和することができます。
-いくつかの日本の ISP に送信するときに必要になります。 :
+いくつかの日本の ISP に送信するときに必要になります。
 
 ``` php
 $email = new CakeEmail('default');
@@ -446,7 +446,7 @@ CakeEmail::deliver('you@example.com', 'Subject', 'Message', ['from' => 'me@examp
 
 シェルやタスクなどの CLI スクリプトでメールを送信するとき、CakeEmail に使用するドメイン名を
 セットしなければなりません。(ホスト名が CLI 環境にないとき) ドメイン名は、メッセージ ID
-のホスト名として使用されます。 :
+のホスト名として使用されます。
 
 ``` php
 $Email->domain('www.example.org');

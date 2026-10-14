@@ -46,7 +46,7 @@ CakePHP は、jQuery などの一般的な JavaScript フレームワークに�
 イベントを使用しているプラグインにフックする関心事を追加することができます。
 例えば、カートプラグイン中に、注文の作成を処理する Order モデルがあるとします。
 このアプリケーションで注文が作成される合間に通知したい。そんな時、 Order モデルを
-綺麗に保つためにイベントを使用できます。 :
+綺麗に保つためにイベントを使用できます。
 
 ``` php
 // plugins/Cart/Model/Order.php
@@ -76,7 +76,7 @@ class Order extends AppModel
 ## イベントマネージャーへのアクセス
 
 CakePHP の中でイベントはイベントマネージャに対して動作します。イベントマネージャーは、
-全てのモデル、ビュー、コントローラの中で `getEventManager()` を使用して取得されます。 :
+全てのモデル、ビュー、コントローラの中で `getEventManager()` を使用して取得されます。
 
 ``` php
 $events = $this->getEventManager();
@@ -93,7 +93,7 @@ $events = $this->getEventManager();
 これは、面倒で難しい具体的なインスタンスに対してリスナーをアタッチする時に便利です。
 グローバルマネージャーは、 `CakeEventManager` のシングルトンインスタンスです。
 イベントがディスパッチされた時、優先順位に従ってグローバルとインスタンスの両方のレベルのリスナーに
-ディスパッチされます。あなたは、スタティックメソッドを使用してグローバルマネージャーにアクセスできます。 :
+ディスパッチされます。あなたは、スタティックメソッドを使用してグローバルマネージャーにアクセスできます。
 
 ``` php
 // In any configuration file or piece of code that executes before the event
@@ -116,7 +116,7 @@ CakeEventManager::instance()->attach(
 
 一度、イベントマネージャのインスタンスを取得すると、 `CakeEventManager::dispatch()`
 メソッドを使ってイベントをディスパッチできます。このメソッドは `CakeEvent` クラスの
-インスタンスを受け取ります。さぁ、イベントをディスパッチしてみましょう。 :
+インスタンスを受け取ります。さぁ、イベントをディスパッチしてみましょう。
 
 ``` php
 // Create a new event and dispatch it.
@@ -159,7 +159,7 @@ $this->getEventManager()->dispatch($event);
 それでは先ほどの例につづき、ユーザーの購入履歴を計算しグローバルサイトの統計をまとめる役割を果たす
 UserStatistic クラスがあると仮定しましょう。これは、リスナークラスを使うとても良い機会です。
 一ヶ所に統計ロジックを集中することでき、イベントに対して必要な反応ができます。
-`UserStatistics` リスナーは以下のように開始します。 :
+`UserStatistics` リスナーは以下のように開始します。
 
 ``` php
 // In src/Lib/Event/UserStatistic.php
@@ -193,7 +193,7 @@ $this->Order->getEventManager()->attach($statistics);
 上記の例に見られるように、イベントリスナーは慣例的に `src/Lib/Event` に配置されます。
 この規約に従うことで、リスナークラスの設置が容易になります。`src/` 以下のクラスは Composer の
 クラスマップでオートロードされるため、リスナークラスを追加したら `composer dump-autoload` を実行してください。また、アプリケーションの
-ブートストラッププロセスの間にグローバルリスナーのアタッチを推奨します。 :
+ブートストラッププロセスの間にグローバルリスナーのアタッチを推奨します。
 
 ``` php
 // In config/bootstrap.php
@@ -202,7 +202,7 @@ $this->Order->getEventManager()->attach($statistics);
 require_once CONFIG . 'events.php';
 ```
 
-カートアプリのイベントのブートストラップファイルの例は以下の通りです。 :
+カートアプリのイベントのブートストラップファイルの例は以下の通りです。
 
 ``` php
 // In config/events.php
@@ -217,7 +217,7 @@ CakeEventManager::instance()->attach(new ProductStatistic());
 
 イベントリスナーオブジェクトがリスナーを実装するために一般的に良いやり方ですが、
 イベントリスナーとして任意の `callable` をバインドすることもできます。例えば、
-ログファイルに注文を書き込みたかったとすると、そのためには無名関数が使えました。 :
+ログファイルに注文を書き込みたかったとすると、そのためには無名関数が使えました。
 
 ``` php
 $this->Order->getEventManager()->attach(function ($event) {
@@ -228,7 +228,7 @@ $this->Order->getEventManager()->attach(function ($event) {
 }, 'Model.Order.afterPlace');
 ```
 
-無名関数に加えてその他の PHP がサポートする呼び出し可能な形式を使用することもできます。 :
+無名関数に加えてその他の PHP がサポートする呼び出し可能な形式を使用することもできます。
 
 ``` php
 $events = [

@@ -118,7 +118,7 @@ $users = Hash::insert($users, '{n}.User.new', 'value');
 
 戻り値の型: `array`
 
-\$path に合致するすべての要素を配列から削除します。 :
+\$path に合致するすべての要素を配列から削除します。
 
 ``` php
 $a = [

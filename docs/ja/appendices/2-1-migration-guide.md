@@ -123,7 +123,7 @@ CakeSession は P3P ヘッダをセットしなくなりました。このこと
 ### Test Shell
 
 新しい TestShell が追加されました。ユニットテストを実行するために必要な
-タイプ数を軽減したり、ファイルパスベースの UI を提供します。 :
+タイプ数を軽減したり、ファイルパスベースの UI を提供します。
 
     ./Console/cake test app Model/Post
     ./Console/cake test app Controller/PostsController
@@ -231,7 +231,7 @@ CakeSession は P3P ヘッダをセットしなくなりました。このこと
 - `$content_for_layout` は推奨されません。
   代わりに `$this->fetch('content');` を利用してください。
 
-- `$scripts_for_layout` は推奨されません。代わりに下記の記述を利用してください。 :
+- `$scripts_for_layout` は推奨されません。代わりに下記の記述を利用してください。
 
   ``` php
   echo $this->fetch('meta');

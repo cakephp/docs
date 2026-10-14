@@ -174,7 +174,7 @@ When those methods are combined with having the `RequestHandlerComponent`
 enabled in your controller, the component will automatically decide if the
 response is already cached in the client and will send a `304 Not Modified`
 status code before rendering the view. Skipping the view rendering process saves
-CPU cycles and memory. :
+CPU cycles and memory.
 
 ``` php
 class ArticlesController extends AppController

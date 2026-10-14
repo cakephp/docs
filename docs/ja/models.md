@@ -28,7 +28,7 @@ Model はデータモデルを表します。オブジェクト指向プログ�
 例えばブログには複数の記事があり、それぞれの記事には複数のコメントがあります。
 Blog、Post、Comment はすべてモデルの例で、それぞれが互いに関連づけられます。
 
-以下は CakePHP におけるモデル定義の簡単な例です。 :
+以下は CakePHP におけるモデル定義の簡単な例です。
 
 ``` php
 // src/Model/Ingredient.php
@@ -90,7 +90,7 @@ Composer の classmap を使っている場合は、新しいクラスファイ�
 CakePHP はそのモデルを自動的に呼び出し可能にします。
 例えば IngredientsController という名前のコントローラは
 自動で Ingredient モデルを初期化して、
-コントローラの `$this->Ingredient` に割り当てます。 :
+コントローラの `$this->Ingredient` に割り当てます。
 
 ``` php
 class IngredientsController extends AppController
@@ -105,7 +105,7 @@ class IngredientsController extends AppController
 ```
 
 関連モデルはメインのモデルを通じて利用できます。
-以下の例は、Recipe が Ingredient モデルと関連づけられている場合です。 :
+以下の例は、Recipe が Ingredient モデルと関連づけられている場合です。
 
 ``` php
 class Recipe extends AppModel

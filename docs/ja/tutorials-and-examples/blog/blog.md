@@ -31,7 +31,7 @@ CakePHP の動作に関してさらに学びたいと思っているからだと
 
 まずは、Composer で新しいアプリケーションを作成しましょう。
 [pieceofcake2/app](https://github.com/pieceofcake2/app) アプリケーションスケルトンが
-CakePHP もインストールしてくれます。 :
+CakePHP もインストールしてくれます。
 
 ``` bash
 composer create-project pieceofcake2/app blog
@@ -79,7 +79,7 @@ $ chown -R www-data tmp logs
 次に、ブログで使用する基礎的なデータベースをセットアップしましょう。データベースを
 まだ作成していないのであれば、このチュートリアル用に好きな名前で空のデータベースを
 作成しておいてください。このページでは、投稿記事を保存するためのテーブルをひとつ作成します。
-次の SQL をデータベースで実行してください。 :
+次の SQL をデータベースで実行してください。
 
 ``` text
 /* まず、posts テーブルを作成します: */
@@ -118,7 +118,7 @@ INSERT INTO posts (title,body,created)
 
 CakePHP のデータベース設定ファイルの元は、 `config/database.php.default` の中に
 あります。同一ディレクトリ上にこのファイルのコピーを作り、 `database.php`
-という名前にしてください。 :
+という名前にしてください。
 
 ``` bash
 cp config/database.php.default config/database.php
@@ -143,7 +143,7 @@ public $default = [
 
 `utf8mb4` は MySQL で UTF-8 を完全に扱える文字セットで、MySQL 8.0 のデフォルトの文字セットです。
 
-新しくできた `database.php` ファイルを保存したら、プロジェクトルートで開発用サーバを起動します。 :
+新しくできた `database.php` ファイルを保存したら、プロジェクトルートで開発用サーバを起動します。
 
 ``` bash
 bin/cake server
@@ -165,7 +165,7 @@ bin/cake server
 
 セキュリティ用の salt は、ハッシュの生成に用いられます。 `config/core.php` を
 編集し、デフォルトの `Security.salt` の値を変更してください。
-この値は、ランダムで長い文字列にします。そうすることで推測がより困難になります。 :
+この値は、ランダムで長い文字列にします。そうすることで推測がより困難になります。
 
 ``` php
 /**

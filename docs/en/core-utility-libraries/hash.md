@@ -103,7 +103,7 @@ Return type: `array`
 [Hash Path Syntax](#hash-path-syntax). You can use extract to retrieve data from arrays,
 along arbitrary paths quickly without having to loop through the data
 structures. Instead you use path expressions to qualify which elements you
-want returned :
+want returned:
 
 ``` php
 // Common Usage:
@@ -154,7 +154,7 @@ As of 2.5.0 attribute matching expressions work with insert().
 
 Return type: `array`
 
-Removes all elements from an array that match \$path. :
+Removes all elements from an array that match \$path.
 
 ``` php
 $a = [
@@ -186,7 +186,7 @@ Creates an associative array using a \$keyPath as the path to build its keys,
 and optionally \$valuePath as path to get the values. If \$valuePath is not
 specified, or doesn't match anything, values will be initialized to null.
 You can optionally group the values by what is obtained when following the
-path specified in \$groupPath. :
+path specified in \$groupPath.
 
 ``` php
 $a = [
