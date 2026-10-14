@@ -62,10 +62,9 @@ the points that changed:
   [Security Fixes](/appendices/security-fixes).
 - **Backports from CakePHP 5.** `IntegrationTestTrait` and `EmailTrait`
   (CakePHP 2.12.4) test controllers through the real dispatcher with the
-  CakePHP 5 method names, see the
-  [upgrade guide](https://github.com/pieceofcake2/cakephp/blob/2.x/UPGRADE.md#v2124)
-  of the fork. The application skeleton loads `.env` files (pieceofcake2/app
-  2.4.0), see [Environment Variables](development/configuration#environment-variables).
+  CakePHP 5 method names, see
+  [Integration Testing](development/integration-testing). The application
+  skeleton loads `.env` files (pieceofcake2/app 2.4.0), see [Environment Variables](development/configuration#environment-variables).
 - **Bake and plugins.** Bake and the upgrade shell moved out of the core into
   plugins, and the major CakePHP 2 plugins are maintained for PHP 8. See
   [Code Generation with Bake](console-and-shells/code-generation-with-bake) and

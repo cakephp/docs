@@ -16,18 +16,18 @@ is the full reference for every option and method.
 
 ## When to Use E2E Tests
 
-CakePHP applications are usually tested on three levels (see
+CakePHP applications are usually tested on several levels (see
 [Types of Tests](/development/testing#types-of-tests)):
 
-| | Unit tests | Controller tests (`testAction()`) | E2E tests |
-| --- | --- | --- | --- |
-| Runs | In the PHPUnit process | In the PHPUnit process, no HTTP | A real HTTP server and a real Chrome |
-| Speed | Milliseconds | Milliseconds per request | Seconds per test |
-| JavaScript, CSS, layout | No | No | Yes |
-| Cookies, sessions, redirects | - | Simulated | Real |
-| `SecurityComponent` tokens | - | Usually disabled or mocked | Real tokens from the real form |
-| View variables, return values | Yes | Yes | No, only what a user sees |
-| Setup | None | None | Chrome, chromedriver, a test database for the server |
+| | Unit tests | Controller tests (`testAction()`) | [Integration tests](/development/integration-testing) | E2E tests |
+| --- | --- | --- | --- | --- |
+| Runs | In the PHPUnit process | In the PHPUnit process, no HTTP | In the PHPUnit process, no HTTP | A real HTTP server and a real Chrome |
+| Speed | Milliseconds | Milliseconds per request | Milliseconds per request | Seconds per test |
+| JavaScript, CSS, layout | No | No | No | Yes |
+| Cookies, sessions, redirects | - | Simulated | Simulated through the real dispatcher | Real |
+| `SecurityComponent` tokens | - | Usually disabled or mocked | Generated from the posted data | Real tokens from the real form |
+| View variables, return values | Yes | Yes | Yes | No, only what a user sees |
+| Setup | None | None | None | Chrome, chromedriver, a test database for the server |
 
 E2E tests are the right tool for:
 
@@ -36,11 +36,12 @@ E2E tests are the right tool for:
 - anything that depends on JavaScript, the layout, responsive design or the
   browser;
 - forms protected by `SecurityComponent` and the helpers used in templates:
-  controller tests usually bypass the token validation, so mistakes there only
-  show up in a browser.
+  controller tests usually bypass the token validation, and integration tests
+  compute the tokens from the posted data instead of the real form, so
+  mistakes in the form only show up in a browser.
 
 Test the logic of models, components and controllers, status codes and edge
-cases with unit and controller tests. Keep the E2E tests few and focused on the
+cases with unit and integration tests. Keep the E2E tests few and focused on the
 main flows: each of them runs the whole application in a browser and takes a
 few seconds.
 

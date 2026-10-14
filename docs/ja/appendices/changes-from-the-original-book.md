@@ -17,6 +17,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 | UpgradeShell | コアのシェル | [pieceofcake2/upgrade](https://pieceofcake2.github.io/upgrade/) プラグイン | [アップグレードシェル](/ja/console-and-shells/upgrade-shell) |
 | キャッシュエンジン | Xcache と Wincache を含む | Xcache と Wincache を削除 | [キャッシュ](/ja/core-libraries/caching) |
 | テスト | PHPUnit 3.7 | PHPUnit 9.6 | [テスト](/ja/development/testing) |
+| コントローラーのテスト | `ControllerTestCase::testAction()` | `IntegrationTestTrait` と `EmailTrait` も使える（v2.12.4、CakePHP 5 からのバックポート） | [統合テスト](/ja/development/integration-testing) |
 | コーディング規約 | CakePHP 2 の規約（タブ、`array()`） | CakePHP 5 の codesniffer（4 スペース、`[]`） | [コーディング規約](/ja/contributing/cakephp-coding-conventions) |
 | CSRF 対策 | 署名なしのトークン。一部のメソッドは検証されない | HMAC で署名したトークン。GET・HEAD・OPTIONS 以外はすべて検証 | [脆弱性への対応](/ja/appendices/security-fixes) |
 | SSL 証明書 | 同梱の `cacert.pem`（2016年） | システムの CA バンドルまたは composer/ca-bundle | [脆弱性への対応](/ja/appendices/security-fixes) |
@@ -46,6 +47,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 - [モダン構成への移行](/ja/appendices/migrating-to-the-modern-layout)
 - [脆弱性への対応](/ja/appendices/security-fixes)
 - [PHPUnit 9.6 への移行](/ja/appendices/phpunit-9-migration-hints)
+- [統合テスト](/ja/development/integration-testing)
 - [E2E テスト](/ja/development/e2e-testing)
 - [メンテナンスされているプラグイン](/ja/plugins/maintained-plugins)
 - [静的解析](/ja/development/static-analysis)
@@ -57,6 +59,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - CakePHP 2 のアプリケーションを保守している方やモダンな PHP を知っている開発者に向けた入口のページとして書き直し: 「このフォークについて」(フォークの概要、CakePHP 2 のサポート終了、このドキュメントについて。サイドバーの「Piece of Cake 2」グループとともに削除した「Piece of Cake 2」ページの内容をここに移動)、詳しいページへのリンクを付けた「CakePHP 2.10 との違い」、「どこから始めるか」(既存のアプリケーションを先に、次に `composer create-project pieceofcake2/app` と CakePHP 5 を検討する旨の注記)、「モダンな PHP から来た方へ」(名前空間が無いこと、配列ベースの find、モデル、コンポーネント/ビヘイビア/ヘルパー、Configure、ディスパッチャー・フィルター、型宣言が少ないこと)
   - 概要の文章と、ページに取り込んでいたブログチュートリアルを削除。チュートリアルは [チュートリアル & 例](/ja/tutorials-and-examples/blog/blog) にあります
   - ページのタイトルを「入門」から「はじめに」に変更し、サイドバーの「はじめに」グループの先頭に移動。その他のページは、インストール、高度なインストール、URL リライト、フォルダ構造、規約、構造、典型的なリクエストの順に並べ替え
+  - 「CakePHP 2.10 との違い」: バックポートの項目のリンク先を、GitHub のアップグレードガイドから [統合テスト](/ja/development/integration-testing) に変更
 - [インストール](/ja/installation)
   - 動作要件: PHP 8.0〜8.5、Composer、MySQL 5.6 以上など対応 DB、mbstring/intl/openssl の説明
   - `composer create-project pieceofcake2/app` による新規作成 (モダンな構成) と database.php、salt/cipherSeed の設定
@@ -313,6 +316,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - プラグインのテストは plugins/&lt;Name>/tests/TestCase (Test/Case も可)
   - Jenkins: composer install の手順、config/database.php、vendor/bin/phpunit、jenkins.io へのリンク
   - 「テストの種類」の節を追加: フィクスチャを使うユニットテスト、testAction() によるコントローラーのテスト、ブラウザーによる E2E テスト (E2E テストのページへのリンク)。testing-controllers のアンカーを明示的に追加
+  - 「テストの種類」に `IntegrationTestTrait` による統合テストを追加 (統合テストのページへのリンク)。`ControllerTestCase` は引き続きサポートされていることを記載。「コントローラーのテスト」に統合テストのページへのリンクのヒントを追加。test-case-conventions のアンカーを明示的に追加
 - [REST](/ja/development/rest)
   - パスを config/routes.php、src/Controller、templates/Recipes/xml に更新
   - HTTP メソッド上書きの優先順位を修正（X-HTTP-Method-Override ヘッダが _method より優先）
