@@ -155,6 +155,36 @@ vendor/bin/phpstan analyse
 PHPStan は、エラーごとにファイルと行を表示します。CI のジョブでは、`--no-progress` を付けると
 ログが短くなります。
 
+<a id="ci-job-summaries"></a>
+
+### CI のジョブサマリー
+
+GitHub Actions では、`pieceofcake2/.github` の
+[ci-summary](https://github.com/pieceofcake2/.github/tree/master/actions/ci-summary#readme)
+アクションを使うと、結果を
+[ジョブサマリー](https://docs.github.com/ja/actions/reference/workflows-and-actions/workflow-commands)
+として実行結果のページに表示できます。エラーの数と、エラーごとのファイル、行、識別子、メッセージの表が
+表示されます。エラーを checkstyle 形式（または JSON 形式）で書き出し、そのファイルをアクションに渡します。
+
+```yaml
+- name: Run PHPStan
+  run: vendor/bin/phpstan analyse --no-progress --error-format=checkstyle > phpstan-report.xml
+
+- name: PHPStan summary
+  if: ${{ !cancelled() }}
+  uses: pieceofcake2/.github/actions/ci-summary@v1
+  with:
+    type: phpstan
+    file: phpstan-report.xml
+```
+
+同じアクションで、PHP_CodeSniffer のレポートと PHPUnit の JUnit レポート（必要ならカバレッジも）を
+まとめることもできます。[E2E テスト](/ja/development/e2e-testing)では、アップロードした失敗時の
+スクリーンショットへのリンクも表示します。ジョブ全体の例は
+[e2e-test のドキュメントの CI の節](https://pieceofcake2.github.io/e2e-test/#ci-with-github-actions)
+を参照してください。アクションの実行にはランナーに PHP が必要です。アクションがジョブを失敗させることは
+ありません。
+
 <a id="what-the-extension-adds"></a>
 
 ## 拡張が追加する機能
