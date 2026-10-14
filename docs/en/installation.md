@@ -107,6 +107,12 @@ Next, finish the configuration:
    `Security.cipherSeed`. The skeleton ships with well-known example values
    that must not be used in a real application.
 
+Instead of editing the files, you can set the debug level, the security salts
+and the database settings with environment variables. For development, copy
+`config/.env.example` to `config/.env` (or to `.env` in the project root) and
+edit it; the skeleton loads it at the top of `config/core.php`. See
+[Environment Variables](development/configuration#environment-variables).
+
 The skeleton's `composer.json` already contains the plugin settings described
 in [Configuring composer.json](#configuring-composer-json). Keep them when you
 edit the file.

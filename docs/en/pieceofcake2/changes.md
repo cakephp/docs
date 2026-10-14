@@ -25,6 +25,7 @@ and lists the pages of this book that were changed from the original.
 | `Xml::build()` with `'readFile' => false` | `https://` URLs still fetched (SSRF) | Neither files nor URLs are read | [Security Fixes](/appendices/security-fixes#xml-build-ssrf) |
 | CookieComponent `'type'` in `$components` | Ignored (always `'cipher'`) | Honored | [Cookie](/core-libraries/components/cookie) |
 | `cake server` default port | 80 | 8765 | [Installation](/installation#development-server) |
+| `.env` files | Not supported | Loaded by the `pieceofcake2/app` skeleton (v2.4.0) with josegonzalez/dotenv, not by the framework | [Environment Variables](/development/configuration#environment-variables) |
 
 For the complete list of breaking changes, see
 [Migrating from CakePHP 2.10](/appendices/migrating-from-cakephp-2-10) and the
@@ -43,6 +44,7 @@ modern directory layout.
 - [Security Fixes](/appendices/security-fixes)
 - [Migrating Tests to PHPUnit 9.6](/appendices/phpunit-9-migration-hints)
 - [Maintained Plugins](/plugins/maintained-plugins)
+- [Static Analysis](/development/static-analysis)
 
 ### Getting Started
 
@@ -54,6 +56,7 @@ modern directory layout.
   - Permissions now cover tmp/ and logs/; added the built-in server (`bin/cake server`) and an Apache virtual host for webroot/
   - Built-in server: default port 8765 (change note: 80 before v2.12.3)
   - Added "Configuring composer.json": minimal composer.json; config.allow-plugins for composer/installers and extra.installer-paths to plugins/{$name}/ are required for cakephp-plugin packages
+  - New application: debug level, salts and database settings can also be set with environment variables (`config/.env` or `.env` in the project root)
 - [Advanced Installation](/installation/advanced-installation)
   - Removed PEAR installation, the old Composer/bake project setup and CAKE_CORE_INCLUDE_PATH core sharing
   - Added Composer setup details: replace directive, plugin installer-paths, classmap autoloading, exclude-from-classmap
@@ -250,6 +253,7 @@ modern directory layout.
   - Cache: available engines listed (File, Apc/APCu, Memcached, Memcache, Redis); change note on removed Xcache/Wincache
   - Config readers: readers default to `CONFIG`; custom reader example moved to `src/Lib/Configure`, declares its property (PHP 8.2), no `App::uses()`; ja example renamed from `XmlReader` (clashes with PHP's XMLReader) to `MyXmlReader`; ConfigReaderInterface/ConfigureException reference fixed
   - Inflector path `src/Cake/Utility/Inflector.php` and bootstrap `config/bootstrap.php` folded into text; era-specific examples (old IE/Chrome Frame, AMF/SOAP) modernized; ja: `$merge` description corrected, `Configure::consume()` added
+  - New "Environment Variables" section: the pieceofcake2/app skeleton loads `config/.env` and the project-root `.env` with josegonzalez/dotenv at the top of `config/core.php` (backport of the `.env` support of the CakePHP 3+/5 app skeleton; change note: added in app v2.4.0), precedence (real environment > `config/.env` > root `.env`), quoting advice, adding the loader to legacy-layout and older applications, and the variables read by the skeleton (`DEBUG`, `SECURITY_SALT`, `SECURITY_CIPHER_SEED`, `DB_*`, `DB_TEST_*`)
 - [Routing](/development/routing)
   - Routes file path changed to config/routes.php (legacy app/Config/routes.php noted with link to the folder structure page)
   - Built-in routes located in vendor/pieceofcake2/cakephp/config/routes.php; disabling them means removing the require line from config/routes.php
@@ -378,4 +382,5 @@ modern directory layout.
 - [Deployment](/deployment)
   - Document root, core.php and plugin symlink paths use the modern layout
   - Added "composer install --no-dev --optimize-autoloader" and conditional loading of development-only plugins
+  - Debug level read from the `DEBUG` environment variable of the skeleton instead of a custom `CAKEPHP_DEBUG` variable; other settings link to the environment variables section
 

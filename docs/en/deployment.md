@@ -66,24 +66,33 @@ things:
 In addition to the above, many plugins and application extensions use `debug`
 to modify their behavior.
 
-You can check against an environment variable to set the debug level dynamically
-between environments. This will avoid deploying an application with debug \> 0 and
-also save yourself from having to change the debug level each time before deploying
-to a production environment.
+You can read the debug level from an environment variable, so that each
+environment sets its own level. This will avoid deploying an application with
+debug \> 0 and also save yourself from having to change the debug level each
+time before deploying to a production environment.
 
-For example, you can set an environment variable in your Apache configuration:
+Applications created from the `pieceofcake2/app` skeleton read the debug level
+from the `DEBUG` environment variable, and use debug level 2 when it is not
+set. Set it to `0` on the production server, for example in your Apache
+configuration:
 
-    SetEnv CAKEPHP_DEBUG 2
+```apache
+SetEnv DEBUG 0
+```
 
-And then you can set the debug level dynamically in `config/core.php`:
+In other applications, read the variable in `config/core.php`:
 
 ``` php
-if (getenv('CAKEPHP_DEBUG')) {
-    Configure::write('debug', 2);
-} else {
-    Configure::write('debug', 0);
-}
+// config/core.php
+Configure::write('debug', (int)env('DEBUG'));
 ```
+
+The other settings that the skeleton reads from environment variables, such as
+the security salts and the database credentials, are listed in
+[Environment Variables](development/configuration#environment-variables).
+Set them as real environment variables in production rather than in a `.env`
+file. Real environment variables always take precedence over the `.env` files
+that the skeleton loads in development.
 
 ## Improve your application's performance
 

@@ -2,7 +2,8 @@
 
 The [Piece of Cake 2](https://github.com/pieceofcake2) project maintains the
 framework fork together with related repositories and forks of popular
-CakePHP 2 plugins. All maintained plugins are compatible with PHP 8.x.
+CakePHP 2 plugins. All maintained plugins are compatible with PHP 8.x, and
+their CI checks them with [PHPStan](/development/static-analysis) at level 5.
 
 ## Core repositories
 
@@ -15,6 +16,7 @@ CakePHP 2 plugins. All maintained plugins are compatible with PHP 8.x.
 ## Development tools
 
 - [PHPStan CakePHP](https://github.com/pieceofcake2/phpstan-cakephp2) - PHPStan extension for static analysis
+  (see [Static Analysis](/development/static-analysis))
 - [E2E Test](https://github.com/pieceofcake2/e2e-test) - Browser end-to-end tests
   with PHPUnit and Symfony Panther (Chrome, PC and mobile)
   ([documentation](https://github.com/pieceofcake2/e2e-test/blob/1.x/docs/README.md))

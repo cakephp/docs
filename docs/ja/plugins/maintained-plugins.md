@@ -2,7 +2,8 @@
 
 [Piece of Cake 2](https://github.com/pieceofcake2) プロジェクトは、フレームワークのフォークに加えて、
 関連するリポジトリと、主要な CakePHP 2 プラグインのフォークをメンテナンスしています。
-メンテナンスしているプラグインはすべて PHP 8.x に対応しています。
+メンテナンスしているプラグインはすべて PHP 8.x に対応しており、CI で
+[PHPStan](/ja/development/static-analysis) のレベル 5 によるチェックを行っています。
 
 ## コアリポジトリ
 
@@ -15,6 +16,7 @@
 ## 開発ツール
 
 - [PHPStan CakePHP](https://github.com/pieceofcake2/phpstan-cakephp2) - 静的解析用の PHPStan 拡張
+  ([静的解析](/ja/development/static-analysis) を参照してください)
 - [E2E Test](https://github.com/pieceofcake2/e2e-test) - PHPUnit と Symfony Panther による
   ブラウザでの E2E テスト (Chrome、PC とスマートフォン)
   ([ドキュメント](https://github.com/pieceofcake2/e2e-test/blob/1.x/docs/README.md) (英語))

@@ -481,6 +481,10 @@
           "link": "/development/testing"
         },
         {
+          "text": "Static Analysis",
+          "link": "/development/static-analysis"
+        },
+        {
           "text": "REST",
           "link": "/development/rest"
         }

@@ -11,5 +11,6 @@ debugging, and testing will be covered.
 - [Error Handling](development/errors)
 - [Debugging](development/debugging)
 - [Testing](development/testing)
+- [Static Analysis](development/static-analysis)
 - [REST](development/rest)
 - [Dispatcher Filters](development/dispatch-filters)
