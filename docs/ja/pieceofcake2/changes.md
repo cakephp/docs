@@ -280,7 +280,6 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - debug() のシグネチャを更新し、trace/excerpt の例をフォークのパスに変更、invoke() を getInstance() に置き換え
   - ログの出力先を logs/（debug.log/error.log）に変更し、Object を CakeObject に、App::uses('CakeLog') を削除
   - DebugKit: pieceofcake2/debug_kit を Composer でインストールし、config/bootstrap.php で読み込む。フォークの DebugKit のドキュメントへのリンクを追加
-  - DebugKit: 現在のツールバー (右下の CakePHP アイコン、パネル、リクエスト履歴) の説明に更新
 - [テスト](/ja/development/testing)
   - PHPUnit 9.6 を Composer (require-dev) でインストール。PHPUnit 3.7/4.x/5.x、.phar、オートローダー回避策の手順を削除
   - テストケースは tests/TestCase、フィクスチャは tests/Fixture、設定は config/ に変更。レガシーな app/Test 構成は代替として記載
