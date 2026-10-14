@@ -23,4 +23,4 @@ Issue を作成する前に確認すること、Issue に書く内容は、コ�
 セキュリティ問題は、公開の Issue、Pull Request、Discussion では報告しないでください。
 Organization の [セキュリティポリシー](https://github.com/pieceofcake2/.github/blob/master/SECURITY.md) の説明に従い、GitHub の非公開の脆弱性報告
 (private vulnerability reporting) を使って報告してください。
-修正済みの脆弱性は [脆弱性への対応](/ja/appendices/security-fixes) にまとめています。
+修正済みの脆弱性は [脆弱性への対応](/ja/security/fixes) にまとめています。

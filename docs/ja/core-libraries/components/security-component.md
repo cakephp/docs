@@ -185,7 +185,7 @@ CSRF つまり、クロスサイトリクエストフォージェリ (Cross Site
 Piece of Cake 2 フォークでは、CSRF トークンが HMAC で署名されるようになり (CVE-2020-15400)、
 `_method` でメソッドを上書きした場合も含めて GET、HEAD、OPTIONS 以外のすべてのリクエストが
 検証されるようになりました (CVE-2015-8379)。既存のトークンはそのまま使え、コードの変更は不要です。
-詳しくは [セキュリティ](/ja/appendices/security-fixes) を参照してください。
+詳しくは [セキュリティ](/ja/security/fixes) を参照してください。
 :::
 
 ### CSRF 防御の利用

@@ -278,7 +278,7 @@ path, URL or array. The following options are available:
 ::: pieceofcake2
 Since v2.12.3, `'readFile' => false` also blocks URLs. Earlier versions (and the
 original CakePHP 2.6.6 and later) still fetched `https://` URLs; see
-[Security Fixes](/appendices/security-fixes#xml-build-ssrf).
+[Security Fixes](/security/fixes#xml-build-ssrf).
 :::
 
 When the input is an array, the options of `Xml::fromArray()` (such as

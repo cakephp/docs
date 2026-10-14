@@ -499,6 +499,32 @@
       ]
     },
     {
+      "text": "セキュリティ",
+      "collapsed": true,
+      "items": [
+        {
+          "text": "セキュリティ",
+          "link": "/ja/security/"
+        },
+        {
+          "text": "脆弱性の報告",
+          "link": "/ja/security/reporting"
+        },
+        {
+          "text": "脆弱性への対応",
+          "link": "/ja/security/fixes"
+        },
+        {
+          "text": "本家のアドバイザリ",
+          "link": "/ja/security/upstream-advisories"
+        },
+        {
+          "text": "セキュリティチェックリスト",
+          "link": "/ja/security/hardening"
+        }
+      ]
+    },
+    {
       "text": "チュートリアル & 例",
       "collapsed": true,
       "items": [
@@ -621,10 +647,6 @@
         {
           "text": "モダン構成への移行",
           "link": "/ja/appendices/migrating-to-the-modern-layout"
-        },
-        {
-          "text": "脆弱性への対応",
-          "link": "/ja/appendices/security-fixes"
         },
         {
           "text": "本家ドキュメントからの変更点",

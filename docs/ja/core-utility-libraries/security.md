@@ -40,7 +40,7 @@ $nosecret = Security::cipher($secret, 'my_key');
 > 重要で機密性の高いデータへ **使うべきではありません** 。
 > このメソッドは、後方互換性のためだけに残されています。
 > `CookieComponent` のデフォルトの暗号化タイプ `'cipher'` もこのメソッドを使っているため、
-> 代わりに `'aes'` タイプを使ってください ([脆弱性への対応](/ja/appendices/security-fixes) を参照してください)。
+> 代わりに `'aes'` タイプを使ってください ([脆弱性への対応](/ja/security/fixes) を参照してください)。
 
 `static` Security::**rijndael**($text, $key, $mode)
 

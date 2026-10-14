@@ -198,7 +198,7 @@ CSRF tokens are now signed with an HMAC
 (CVE-2020-15400), and every request other than GET, HEAD and OPTIONS is
 validated, even when the method is overridden with `_method` (CVE-2015-8379).
 Existing tokens keep working and no code changes are required; see
-[Security](/appendices/security-fixes).
+[Security](/security/fixes).
 :::
 
 ### Using CSRF protection

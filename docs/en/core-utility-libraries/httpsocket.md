@@ -138,7 +138,7 @@ configure how SSL certificates are handled:
 ::: pieceofcake2
 The bundled `cacert.pem` file, last updated
 in 2016, was removed in favor of the system CA certificates and
-`composer/ca-bundle`. See [Security Fixes](/appendices/security-fixes).
+`composer/ca-bundle`. See [Security Fixes](/security/fixes).
 :::
 
 These options are provided as constructor arguments:

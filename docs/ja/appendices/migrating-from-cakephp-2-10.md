@@ -33,7 +33,7 @@ v2.12.5 の変更のうち、すでにフォークで動いているアプリケ
 ### セキュリティ修正
 
 このリリースでは 3 件の脆弱性を修正しました。ほとんどのアプリケーションは更新するだけで対応できます。
-詳しくは [脆弱性への対応](/ja/appendices/security-fixes) を参照してください。
+詳しくは [脆弱性への対応](/ja/security/fixes) を参照してください。
 
 - **メールのヘッダー** ([GHSA-4f9q-3c4x-52cv](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-4f9q-3c4x-52cv)):
   `SmtpTransport` と `MailTransport` は、ヘッダーの名前と値から改行を取り除きます。
@@ -93,7 +93,7 @@ v2.12.3 の変更のうち、すでにフォークで動いているアプリケ
 - **セキュリティ修正 (SSRF)**: `Xml::build($input, ['readFile' => false])` は、括弧が 1 組欠けていたため
   `https://` の URL を取得していました（本家の CakePHP 2.x から引き継いだ不具合です）。
   `'readFile' => false` を指定すると、`http://` と `https://` のどちらの URL も取得せず、`XmlException` を投げます。
-  [脆弱性への対応](/ja/appendices/security-fixes#xml-build-ssrf) も参照してください。
+  [脆弱性への対応](/ja/security/fixes#xml-build-ssrf) も参照してください。
 
 **移行:**
 
@@ -518,7 +518,7 @@ CakePlugin::load('Upgrade');
 - 既存のトークンも引き続き有効です
 - 新しいトークンは強化された方式で生成されます
 
-詳しくは [セキュリティ](/ja/appendices/security-fixes) を参照してください。
+詳しくは [セキュリティ](/ja/security/fixes) を参照してください。
 
 ### strftime() の置き換え
 

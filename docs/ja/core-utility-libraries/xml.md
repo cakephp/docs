@@ -286,7 +286,7 @@ SimpleXMLElement または DOMDocument を初期化します。
 ::: pieceofcake2
 v2.12.3 から、`'readFile' => false` で URL も読み込まなくなりました。それより前のバージョン
 (および本家 CakePHP 2.6.6 以降) では、`https://` の URL は取得されていました。
-[脆弱性への対応](/ja/appendices/security-fixes#xml-build-ssrf) を参照してください。
+[脆弱性への対応](/ja/security/fixes#xml-build-ssrf) を参照してください。
 :::
 
 入力が配列の場合は、`Xml::fromArray()` のオプション (`format` や `pretty` など) も指定できます。

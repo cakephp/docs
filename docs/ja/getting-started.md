@@ -49,7 +49,7 @@ CakePHP 2.10 を知っていれば、その知識のほとんどはそのまま�
   拡張を使うと、PHPStan がモデル、コンポーネント、ビヘイビアを理解できるようになります。
   [静的解析](development/static-analysis) を参照してください。
 - **セキュリティ修正。** CakePHP 2.10.24 の既知の脆弱性を修正しています。たとえば CSRF トークンは
-  HMAC で署名されるようになりました。[脆弱性への対応](/ja/appendices/security-fixes) を参照してください。
+  HMAC で署名されるようになりました。[脆弱性への対応](/ja/security/fixes) を参照してください。
 - **CakePHP 5 からのバックポート。** `IntegrationTestTrait` と `EmailTrait` (CakePHP 2.12.4) を使うと、
   実際のディスパッチャを通してコントローラを CakePHP 5 と同じメソッド名でテストできます。
   [統合テスト](development/integration-testing) を参照してください。アプリケーションスケルトンは

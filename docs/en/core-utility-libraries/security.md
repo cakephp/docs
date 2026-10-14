@@ -43,7 +43,7 @@ $nosecret = Security::cipher($secret, 'my_key');
 > `cipher()` uses a **weak** XOR cipher and should **not** be used.
 > It is only included for backwards compatibility. It is also used by the
 > default `'cipher'` encryption type of `CookieComponent`; use the `'aes'`
-> type instead (see [Security Fixes](/appendices/security-fixes)).
+> type instead (see [Security Fixes](/security/fixes)).
 
 `static` Security::**rijndael**($text, $key, $mode)
 

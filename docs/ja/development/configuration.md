@@ -635,7 +635,7 @@ Security.salt
 `SecurityComponent` が発行する CSRF トークンは
 `Security.salt` を使った HMAC で署名されるようになりました (CVE-2020-15400)。
 ソルトを変更すると、発行済みのトークンは無効になります。
-[脆弱性への対応](/ja/appendices/security-fixes) を参照してください。
+[脆弱性への対応](/ja/security/fixes) を参照してください。
 :::
 
 Security.cipherSeed  
