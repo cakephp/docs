@@ -53,7 +53,7 @@ Pushes to the `2.x` branch are deployed to GitHub Pages by
 See [LICENSE](LICENSE).
 
 - Documentation content: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/),
-  © Cake Software Foundation, Inc., with modifications by Piece of Cake 2 contributors.
+  © Cake Software Foundation, Inc., with modifications © 2025-present Piece of Cake 2.
 - Theme: MIT, [pieceofcake2/docs-skeleton](https://github.com/pieceofcake2/docs-skeleton)
   (fork of [cakephp/docs-skeleton](https://github.com/cakephp/docs-skeleton)).
 
