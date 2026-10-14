@@ -13,7 +13,11 @@ contributions go to the repositories of the
   maintained plugins (see [Maintained Plugins](/plugins/maintained-plugins)).
 - [pieceofcake2/docs](https://github.com/pieceofcake2/docs) for this book.
 
-The following sections cover the various ways you can contribute:
+How to report issues, set up a development environment, run the tests and send
+pull requests is described in the organization's
+[contribution guide (CONTRIBUTING.md)](https://github.com/pieceofcake2/.github/blob/master/CONTRIBUTING.md), which applies to all of these
+repositories. The pages of this chapter give a short overview and link to the
+relevant sections of it:
 
 - [Documentation](contributing/documentation)
 - [Tickets](contributing/tickets)

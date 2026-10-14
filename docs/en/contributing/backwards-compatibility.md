@@ -6,8 +6,7 @@ not add new features. Its changes are limited to PHP compatibility, bug fixes,
 security fixes and support for the migration path to CakePHP 5.
 
 Keeping CakePHP 2 running on PHP 8 still required some changes that affect
-applications, so this page explains what you can expect from releases, and
-what contributors should keep in mind.
+applications, so this page explains what you can expect from releases.
 
 ## What to Expect from Releases
 
@@ -59,18 +58,6 @@ method can cause fatal errors when the framework's method has none.
 
 ## Working on CakePHP
 
-If you are contributing to the fork, keep the following guidelines in mind:
-
-- Do not remove or rename public classes, interfaces, methods or properties.
-- Do not add required arguments to existing methods. If you need a new
-  argument, add it with a default value at the end of the argument list.
-- Do not reduce the visibility of methods or properties, and do not make
-  classes or methods `final` or `abstract`.
-- Do not add native return types to methods that applications may override,
-  since overriding methods without them would then cause fatal errors.
-- Avoid removing or renaming protected methods and properties. Applications
-  extend framework classes often.
-
-If a change that affects applications cannot be avoided, for example because a
-newer PHP version or a security fix requires it, describe it in `CHANGELOG.md`
-and the migration steps in `UPGRADE.md`, as earlier releases did.
+If you are contributing to the fork, follow the guidelines in
+[Backwards Compatibility](https://github.com/pieceofcake2/.github/blob/master/CONTRIBUTING.md#backwards-compatibility)
+in the contribution guide.

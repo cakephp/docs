@@ -14,6 +14,8 @@ CakePHP の開発者は以下のコーディング規約を使います。これ
 [cakephp/cakephp-codesniffer](https://github.com/cakephp/cakephp-codesniffer)
 5.x の `CakePHP` ルールセット、そしてプロジェクトの `phpcs.xml` で自動的に行います。
 このページの説明と `phpcs` の結果が食い違う場合は `phpcs` の結果が正となります。
+`pieceofcake2/*` リポジトリへの貢献は、`vendor/bin/phpcs` でエラーも警告も出ない状態にしてください
+(コントリビューションガイドの [Coding Standard](https://github.com/pieceofcake2/.github/blob/master/CONTRIBUTING.md#coding-standard) (英語) を参照)。
 本家 CakePHP 2 の規約で書かれたコードをメンテナンスしている場合は、
 [本家 CakePHP 2 の規約との違い](#differences-from-the-original-cakephp-2-standard)
 を参照してください。
@@ -68,11 +70,11 @@ vendor/bin/phpcs src/Controller
 
 全てのコードやコメントは、英語で書かなければなりません。
 
-## 新しい機能の追加
+## テスト
 
-新しい機能は、そのテストが無い限り、追加してはいけません。
-このテストはリポジトリにコミットされる前にパスする必要があります。
-バグ修正も同様で、修正前には失敗するテストを追加してください。
+すべての変更には、マージされる前にパスするテストが必要です。バグ修正には、
+修正前には失敗するテストを追加してください。コントリビューションガイドの
+[Working on a Change](https://github.com/pieceofcake2/.github/blob/master/CONTRIBUTING.md#working-on-a-change) (英語) を参照してください。
 
 ## インデントと空白
 

@@ -5,29 +5,17 @@ fork is maintained by the community on GitHub. All discussion happens in the
 issues and pull requests of the
 [pieceofcake2](https://github.com/pieceofcake2) repositories.
 
-## Goals
-
 The fork exists to keep existing CakePHP 2 applications running on current PHP
-versions. It aims to:
+versions. It does not add new features; for new projects, use CakePHP 5. The
+goals of the fork, its single maintained branch and how releases are made are
+described in the contribution guide:
 
-- maintain compatibility with PHP 8.x,
-- fix bugs and security issues,
-- keep the tests passing on all supported PHP versions and databases,
-- support a gradual migration path to CakePHP 5, for example with the modern
-  directory layout that both CakePHP 2 and CakePHP 5 can use.
+- [Scope](https://github.com/pieceofcake2/.github/blob/master/CONTRIBUTING.md#scope)
+- [Branches and Releases](https://github.com/pieceofcake2/.github/blob/master/CONTRIBUTING.md#branches-and-releases)
 
-The fork does not add new features. For new projects, use CakePHP 5.
+## Version Numbers
 
-## Branches
-
-The framework has a single maintained branch, `2.x`. Bug fixes, security fixes
-and compatibility changes are all made on this branch, and pull requests target
-it. There are no separate maintenance, development or feature branches as in
-the original CakePHP project.
-
-## Releases
-
-Releases are tags on the `2.x` branch, published as
+Releases are published as
 [GitHub releases](https://github.com/pieceofcake2/cakephp/releases) and on
 [Packagist](https://packagist.org/packages/pieceofcake2/cakephp) as
 `pieceofcake2/cakephp`. The fork started from CakePHP 2.10.24:
@@ -39,12 +27,8 @@ Releases are tags on the `2.x` branch, published as
   autoloading, and `2.12.x` releases contain fixes on top of it.
 
 Minor releases such as 2.11.0 and 2.12.0 included changes that affect
-applications, so read the release notes before you update. Each release is described in the
-[CHANGELOG](https://github.com/pieceofcake2/cakephp/blob/2.x/CHANGELOG.md).
-Changes that require you to change your application, and how to migrate from
-the original CakePHP 2.10.24, are described in the
-[UPGRADE guide](https://github.com/pieceofcake2/cakephp/blob/2.x/UPGRADE.md)
-and in [Migrating from CakePHP 2.10](/appendices/migrating-from-cakephp-2-10).
+applications, so read the release notes before you update. See the
+[Backwards Compatibility Guide](backwards-compatibility).
 
 ## Taking Part
 
