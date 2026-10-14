@@ -21,7 +21,7 @@ for details.
 |-----|---------|----------|
 | [CVE-2015-8379](https://nvd.nist.gov/vuln/detail/CVE-2015-8379) | CSRF protection bypass via the `_method` parameter and custom HTTP methods | 2.11.0 |
 | [CVE-2020-15400](https://nvd.nist.gov/vuln/detail/CVE-2020-15400) | CSRF token fixation | 2.11.0 |
-| None ([details](#xml-build-ssrf)) | SSRF: `Xml::build()` fetched `https://` URLs even with `'readFile' => false` | 2.12.3 |
+| [GHSA-wgww-24w3-wfqp](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-wgww-24w3-wfqp) | SSRF: `Xml::build()` fetched `https://` URLs even with `'readFile' => false` | 2.12.3 |
 
 All of these vulnerabilities are present in the original CakePHP 2.10.24.
 
@@ -73,7 +73,7 @@ The bug was introduced in CakePHP 2.6.6 together with the `readFile` option
 present in every later 2.x release. It was fixed in 2.12.3
 ([PR #33](https://github.com/pieceofcake2/cakephp/pull/33)). With
 `'readFile' => false`, neither `http://` nor `https://` URLs are fetched, and
-an `XmlException` is thrown instead. No CVE has been assigned.
+an `XmlException` is thrown instead. See the security advisory [GHSA-wgww-24w3-wfqp](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-wgww-24w3-wfqp).
 
 **What you need to do:** update to 2.12.3 or later. Pass `'readFile' => false`
 whenever the input may come from users. If your code relied on fetching an

@@ -20,7 +20,7 @@ GitHub の非公開の脆弱性報告を使ってください。対象のリポ�
 |-----|------|----------------|
 | [CVE-2015-8379](https://nvd.nist.gov/vuln/detail/CVE-2015-8379) | `_method` パラメーターや独自の HTTP メソッドによる CSRF 対策の回避 | 2.11.0 |
 | [CVE-2020-15400](https://nvd.nist.gov/vuln/detail/CVE-2020-15400) | CSRF トークンの固定化 | 2.11.0 |
-| なし（[詳細](#xml-build-ssrf)） | SSRF: `'readFile' => false` でも `Xml::build()` が `https://` の URL を取得する | 2.12.3 |
+| [GHSA-wgww-24w3-wfqp](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-wgww-24w3-wfqp) | SSRF: `'readFile' => false` でも `Xml::build()` が `https://` の URL を取得する | 2.12.3 |
 
 いずれの脆弱性も、本家の CakePHP 2.10.24 に存在します。
 
@@ -65,7 +65,7 @@ CSRF トークンはセッションに保存されたランダムな値でした
 （[995d8d2](https://github.com/cakephp/cakephp/commit/995d8d22c6)）、それ以降のすべての 2.x に存在します。
 2.12.3 で修正しました（[PR #33](https://github.com/pieceofcake2/cakephp/pull/33)）。
 `'readFile' => false` を指定すると `http://` と `https://` のどちらの URL も取得せず、`XmlException` を投げます。
-CVE は採番されていません。
+セキュリティアドバイザリ [GHSA-wgww-24w3-wfqp](https://github.com/pieceofcake2/cakephp/security/advisories/GHSA-wgww-24w3-wfqp) を参照してください。
 
 **必要な対応:** 2.12.3 以降に更新してください。ユーザーの入力を渡す可能性がある場合は `'readFile' => false` を指定してください。
 `'readFile' => false` を指定したまま `https://` の URL を取得させていたコードは、オプションを削除する（既定値は `true`）か、
