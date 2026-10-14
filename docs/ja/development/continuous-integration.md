@@ -5,6 +5,7 @@
 [pieceofcake2/app](https://pieceofcake2.github.io/app/) スケルトンで作ったアプリケーションのための
 GitHub Actions のワークフローを示し、各ジョブを、そのツールを詳しく説明しているページへのリンクとともに
 紹介します。また、各ジョブの短いサマリーを実行結果のページに表示する方法も説明します。
+Jenkins でテストを実行する方法は、最後の [Jenkins](#jenkins) で説明します。
 
 <a id="what-to-run"></a>
 
@@ -338,7 +339,7 @@ PostgreSQL でテストする場合は、サービスと環境変数を次のよ
 
 従来の `app/` 構成のアプリケーションでは、ファイルは `app/` の中にあり (`app/Config/database.php`)、
 データベースの設定が環境変数を読まないこともあります。その場合は、
-[Jenkins によるインテグレーション](/ja/development/testing#integration-with-jenkins) のように、
+[Jenkins](#jenkins) のように、
 CI 用の `database.php` をステップの中で書き出してください。
 
 <a id="the-jobs"></a>
@@ -541,3 +542,80 @@ E2E のステップで JUnit のレポートを書き出し、アップロード
 使ってください。すべての入力やほかのツールのレポートについては、
 [ci-summary の README](https://github.com/pieceofcake2/.github/tree/master/actions/ci-summary#readme)
 を参照してください。
+
+<a id="jenkins"></a>
+
+## Jenkins
+
+[Jenkins](https://www.jenkins.io) は継続的インテグレーションサービスで、テストケースの自動化を
+手助けしてくれます。これにより、すべてのテストをパスし続けていることを保証し、あなたのアプリケーションを
+いつでもデプロイできる状態にしてくれます。
+
+CakePHP と Jenkins はかなり簡単にインテグレーションすることができます。ここでの解説は、すでに
+Unix ライクな環境に Jenkins がインストールされていて、管理者権限を持つことができる状態を前提とします。
+また、ジョブの作成とビルドの方法も知っているものとします。もしわからない場合は
+[Jenkins のドキュメント](https://www.jenkins.io/doc/) を参考にしてください。
+同じ手順は他の CI サービスにも当てはまります。
+
+### ジョブの作成
+
+アプリケーションのためのジョブを作成することから始めてください。次に、Jenkins があなたのコードに
+アクセスできるように、リポジトリと接続します。PHPUnit を含む依存パッケージをインストールする
+*シェルスクリプトの実行* を加えてください。
+
+``` bash
+composer install --no-interaction
+```
+
+### テスト用データベースの設定の追加
+
+Jenkins のために別のデータベースを用意するのは、初歩的な問題を回避するためには良い考えです。
+Jenkins がアクセスできる (通常は localhost の) データベースサーバーに新しくデータベースを
+作成したら、以下のような *シェルスクリプトの実行* をビルドに加えてください。
+
+``` bash
+cat > config/database.php <<'DATABASE_PHP'
+<?php
+class DATABASE_CONFIG
+{
+    public $test = [
+        'datasource' => 'Database/Mysql',
+        'host' => 'localhost',
+        'database' => 'jenkins_test',
+        'login' => 'jenkins',
+        'password' => 'cakephp_jenkins',
+        'encoding' => 'utf8mb4',
+    ];
+}
+DATABASE_PHP
+```
+
+これにより、Jenkins が要求する正しいデータベース設定が常にあることを保証してくれます。
+他の設定ファイルにも同じことをしておきましょう。ときどきビルドする前ごとに、データベースを drop し、
+再度 create するとよいでしょう。
+一度ビルドに失敗すると、立て続けに起きるであろう失敗の連鎖を断ち切ってくれるはずです。
+
+さらに以下の *シェルスクリプトの実行* をビルドに加えてください。
+
+``` bash
+mysql -u jenkins -pcakephp_jenkins -e 'DROP DATABASE IF EXISTS jenkins_test; CREATE DATABASE jenkins_test';
+```
+
+### テストの追加
+
+また別の *シェルスクリプトの実行* をビルドに加えてください。このステップではアプリケーションのテストを実行します。
+junit のログファイル作成、またはCloverのカバレッジにより、テストの結果を視覚的に確認できるようになります。
+
+``` bash
+vendor/bin/phpunit \
+    --log-junit junit.xml \
+    --coverage-clover clover.xml
+```
+
+Clover のカバレッジや JUnit の結果を使う場合は、Jenkins 側でもそれらを設定してください。
+設定しないと結果を見ることができません。
+
+### ビルドを実行する
+
+これでビルドを実行することができるようになりました。
+コンソールの出力を確認して、ビルドをパスするように必要な変更を加えましょう。
