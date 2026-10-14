@@ -463,6 +463,16 @@
           "link": "/development/debugging"
         },
         {
+          "text": "REST",
+          "link": "/development/rest"
+        }
+      ]
+    },
+    {
+      "text": "Testing",
+      "collapsed": true,
+      "items": [
+        {
           "text": "Testing",
           "link": "/development/testing"
         },
@@ -481,10 +491,6 @@
         {
           "text": "Continuous Integration",
           "link": "/development/continuous-integration"
-        },
-        {
-          "text": "REST",
-          "link": "/development/rest"
         }
       ]
     },
