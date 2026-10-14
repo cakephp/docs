@@ -477,12 +477,12 @@
           "link": "/ja/development/debugging"
         },
         {
-          "text": "E2E テスト",
-          "link": "/ja/development/e2e-testing"
-        },
-        {
           "text": "テスト",
           "link": "/ja/development/testing"
+        },
+        {
+          "text": "E2E テスト",
+          "link": "/ja/development/e2e-testing"
         },
         {
           "text": "静的解析",
