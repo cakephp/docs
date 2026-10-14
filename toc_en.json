@@ -222,7 +222,6 @@
         },
         {
           "text": "Behaviors",
-          "link": "/core-libraries/toc-behaviors",
           "collapsed": true,
           "items": [
             {
@@ -245,7 +244,6 @@
         },
         {
           "text": "Components",
-          "link": "/core-libraries/toc-components",
           "collapsed": true,
           "items": [
             {
@@ -284,7 +282,6 @@
         },
         {
           "text": "Helpers",
-          "link": "/core-libraries/toc-helpers",
           "collapsed": true,
           "items": [
             {
@@ -499,7 +496,6 @@
         },
         {
           "text": "Blog Tutorial",
-          "link": "/tutorials-and-examples/blog/blog",
           "collapsed": true,
           "items": [
             {
@@ -514,7 +510,6 @@
         },
         {
           "text": "Blog Auth Example",
-          "link": "/tutorials-and-examples/blog-auth-example/auth",
           "collapsed": true,
           "items": [
             {
@@ -525,7 +520,6 @@
         },
         {
           "text": "Simple ACL controlled Application",
-          "link": "/tutorials-and-examples/simple-acl-controlled-application/simple-acl-controlled-application",
           "collapsed": true,
           "items": [
             {
