@@ -15,6 +15,9 @@
 ## 開発ツール
 
 - [PHPStan CakePHP](https://github.com/pieceofcake2/phpstan-cakephp2) - 静的解析用の PHPStan 拡張
+- [E2E Test](https://github.com/pieceofcake2/e2e-test) - PHPUnit と Symfony Panther による
+  ブラウザでの E2E テスト (Chrome、PC とスマートフォン)
+  ([ドキュメント](https://github.com/pieceofcake2/e2e-test/blob/1.x/docs/README.md) (英語))
 
 ## メンテナンスしているプラグイン
 
