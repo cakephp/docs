@@ -4,7 +4,7 @@
 
 ### Model::saveAll(), Model::saveAssociated(), Model::validateAssociated()
 
-`Model::saveAll()` とその仲間は、複数のモデルにわたって <span class="title-ref">fieldList</span> をサポートします。例:
+`Model::saveAll()` とその仲間は、複数のモデルにわたって `fieldList` をサポートします。例:
 
 ``` php
 $this->SomeModel->saveAll($data, [
@@ -174,8 +174,8 @@ XmlView は、 全てのシリアライズされた内容を囲むために　`r
 
 それらのメソッドと、コントローラで `RequestHandlerComponent` を有効化することとを
 組み合わせることで、レスポンスがすでにクライアントにキャッシュされているなら、コンポーネントが
-自動的に判断し、ビューを描画する前に <span class="title-ref">304 Not Modified</span> ステータスコードを送信します。
-ビューの描画処理をスキップすることは、CPU サイクルやメモリを節約します。 :
+自動的に判断し、ビューを描画する前に `304 Not Modified` ステータスコードを送信します。
+ビューの描画処理をスキップすることは、CPU サイクルやメモリを節約します。
 
 ``` php
 class ArticlesController extends AppController
@@ -191,7 +191,7 @@ class ArticlesController extends AppController
 }
 ```
 
-上記の例の中で、もしクライアントが <span class="title-ref">If-Modified-Since</span> ヘッダーを送信したなら、
+上記の例の中で、もしクライアントが `If-Modified-Since` ヘッダーを送信したなら、
 ビューは表示されず、レスポンスは、304ステータスを返します。
 
 ## ヘルパー

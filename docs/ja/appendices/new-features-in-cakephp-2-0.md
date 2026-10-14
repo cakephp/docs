@@ -163,7 +163,7 @@ CakePHP 2.0は [例外(Exception)](../development/exceptions) と [エラーハ�
 
 #### Acceptヘッダーの自動解析
 
-もしクライアントが送ったAcceptが単一のMIMEタイプで、それに対応する拡張子が :php:class\`Router\` で有効となっているものと一致するならば、 `RequestHandler` はそれを拡張子と同じものとして扱うでしょう。
+もしクライアントが送ったAcceptが単一のMIMEタイプで、それに対応する拡張子が `Router` で有効となっているものと一致するならば、 `RequestHandler` はそれを拡張子と同じものとして扱うでしょう。
 これはCakePHPのRESTスタイルのエンドポイントのサポートを拡張します。
 この機能を使うには、まず `app/Config/routes.php` で拡張子を有効にしてください。
 

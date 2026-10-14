@@ -252,7 +252,7 @@ controller object.
 ### Deprecated callbacks removed
 
 All the deprecated callbacks in Component have not been transferred to
-ComponentCollection. Instead you should use the <span class="title-ref">trigger()</span> method to interact
+ComponentCollection. Instead you should use the `trigger()` method to interact
 with callbacks. If you need to trigger a callback you could do so by calling:
 
 ``` php
@@ -261,9 +261,9 @@ $this->Components->trigger('someCallback', [&$this]);
 
 ### Changes in disabling components
 
-In the past you were able to disable components via <span class="title-ref">\$this-\>Auth-\>enabled =
-false;</span> for example. In CakePHP 2.0 you should use the ComponentCollection's
-disable method, <span class="title-ref">\$this-\>Components-\>disable('Auth');</span>. Using the enabled
+In the past you were able to disable components via
+`$this->Auth->enabled = false;` for example. In CakePHP 2.0 you should use the
+ComponentCollection's disable method, `$this->Components->disable('Auth');`. Using the enabled
 property will not work.
 
 ### AclComponent
@@ -658,8 +658,8 @@ the following:
 public function __construct(View $View, $settings = [])
 ```
 
-When overriding the constructor you should always call <span class="title-ref">parent::\_\_construct</span> as
-well. <span class="title-ref">Helper::\_\_construct</span> stores the view instance at <span class="title-ref">\$this-\>\_View</span> for
+When overriding the constructor you should always call `parent::__construct` as
+well. `Helper::__construct` stores the view instance at `$this->_View` for
 later reference. The settings are not handled by the parent constructor.
 
 ### HelperCollection added
@@ -670,7 +670,7 @@ responsibility of creating helpers is not central to what View does, and was
 moved into HelperCollection. HelperCollection is responsible for loading and
 constructing helpers, as well as triggering callbacks on helpers. By default,
 View creates a HelperCollection in its constructor, and uses it for subsequent
-operations. The HelperCollection for a view can be found at <span class="title-ref">\$this-\>Helpers</span>
+operations. The HelperCollection for a view can be found at `$this->Helpers`
 
 The motivations for refactoring this functionality came from a few issues.
 
@@ -837,10 +837,10 @@ For more information on the new features offered by pagination in 2.0, see the
 ### View no longer registered in ClassRegistry
 
 The view being registered ClassRegistry invited abuse and affectively created a
-global symbol. In 2.0 each Helper receives the current <span class="title-ref">View</span> instance in its
+global symbol. In 2.0 each Helper receives the current `View` instance in its
 constructor. This allows helpers access to the view in a similar fashion as in
 the past, without creating global symbols. You can access the view instance at
-<span class="title-ref">\$this-\>\_View</span> in any helper.
+`$this->_View` in any helper.
 
 ### Deprecated properties
 

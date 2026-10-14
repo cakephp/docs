@@ -123,7 +123,7 @@ CakeSession は P3P ヘッダをセットしなくなりました。このこと
 ### Test Shell
 
 新しい TestShell が追加されました。ユニットテストを実行するために必要な
-タイプ数を軽減したり、ファイルパスベースの UI を提供します。 :
+タイプ数を軽減したり、ファイルパスベースの UI を提供します。
 
     ./Console/cake test app Model/Post
     ./Console/cake test app Controller/PostsController
@@ -213,7 +213,7 @@ CakeSession は P3P ヘッダをセットしなくなりました。このこと
 - `HtmlHelper::scriptBlock()` に `block` が追加されました。
 - `HtmlHelper::css()` に `block` が追加されました。
 - `HtmlHelper::meta()` に `block` が追加されました。
-- `HtmlHelper::getCrumbs()` の <span class="title-ref">\$startText</span>\` パラメータに配列が利用できるようになりました。
+- `HtmlHelper::getCrumbs()` の `$startText` パラメータに配列が利用できるようになりました。
   これは最初のパンくずリンクにより多くのコントロールと柔軟性を与えます。
 - `HtmlHelper::docType()` はデフォルトで　HTML5 となりました。
 - `HtmlHelper::image()` に `fullBase` オプションが追加されました。
@@ -231,7 +231,7 @@ CakeSession は P3P ヘッダをセットしなくなりました。このこと
 - `$content_for_layout` は推奨されません。
   代わりに `$this->fetch('content');` を利用してください。
 
-- `$scripts_for_layout` は推奨されません。代わりに下記の記述を利用してください。 :
+- `$scripts_for_layout` は推奨されません。代わりに下記の記述を利用してください。
 
   ``` php
   echo $this->fetch('meta');
@@ -246,7 +246,7 @@ CakeSession は P3P ヘッダをセットしなくなりました。このこと
   やレイアウト、エレメントの名前を参照したい際に、どこでもこのシンタッ
   クスを利用できます。
 
-- `~View::element()` の `$options['plugin']` オプションは推奨されません。
+- `View::element()` の `$options['plugin']` オプションは推奨されません。
   代わりに `Plugin.element_name` を利用してください。
 
 ### Content type views
@@ -317,8 +317,8 @@ CakePHP に2つのビュークラスが追加されました。新しい
 - フィクスチャが \$test ではない別のデータソースに作成することができるようになりました。
 - ClassRegistry によって読み込まれたモデルや他のデータソースから読み込
   まれたモデルは、 `test_` の接頭辞が付いたデータソース名を取得します。
-  （例えば <span class="title-ref">master</span> というデータソースであれば、テスト内では
-  <span class="title-ref">test_master</span> を利用しようとします）
+  （例えば `master` というデータソースであれば、テスト内では
+  `test_master` を利用しようとします）
 - テストケースは setup メソッドを含んだクラスとして生成されます。
 
 ## イベント

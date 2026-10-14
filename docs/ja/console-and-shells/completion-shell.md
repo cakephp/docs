@@ -57,7 +57,7 @@ Completion シェルは、開発者が補完スクリプトの作成を支援す
 
 以下の bash の例は、原著作者によるものです:
 
-``` php
+``` bash
 # bash completion for CakePHP console
 
 _cake()

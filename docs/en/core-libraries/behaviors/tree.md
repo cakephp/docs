@@ -462,7 +462,7 @@ children have been reparented and 'Sport' has been deleted.
 
 Reorders the nodes (and child nodes) of the tree according to the
 field and direction specified in the parameters. This method does
-not change the parent of any node. :
+not change the parent of any node.
 
 ``` php
 $model->reorder([

@@ -28,8 +28,7 @@ load your override file instead of the file inside CakePHP.
 
 `static` App::**uses**(string $class, string $package)
 
-rtype  
-void
+Return type: `void`
 
 Classes are lazily loaded in CakePHP. CakePHP's own classes are loaded by
 Composer's classmap autoloader, so you never need to declare them. The same
@@ -118,8 +117,7 @@ App::uses('CommentComponent', 'PluginName.Controller/Component');
 
 `static` App::**path**(string $package, string $plugin = null)
 
-rtype  
-array
+Return type: `array`
 
 Used to read information stored path:
 
@@ -138,8 +136,7 @@ App::path('Component', 'DebugKit');
 
 `static` App::**paths**( )
 
-rtype  
-array
+Return type: `array`
 
 Get all the currently loaded paths from App. Useful for inspecting or
 storing all paths App knows about. For a paths to a specific package
@@ -147,8 +144,7 @@ use `App::path()`
 
 `static` App::**core**(string $package)
 
-rtype  
-array
+Return type: `array`
 
 Used for finding the path to a package inside CakePHP:
 
@@ -159,8 +155,7 @@ App::core('Cache/Engine');
 
 `static` App::**location**(string $className)
 
-rtype  
-string
+Return type: `string`
 
 Returns the package name where a class was defined to be located at.
 
@@ -168,8 +163,7 @@ Returns the package name where a class was defined to be located at.
 
 `static` App::**build**(array $paths = [], mixed $mode = App::PREPEND)
 
-rtype  
-void
+Return type: `void`
 
 Sets up each package location on the file system. You can configure multiple
 search paths for each package, those will be used to look for files one
@@ -227,8 +221,7 @@ Registering packages was added in 2.1
 
 `static` App::**objects**(string $type, mixed $path = null, boolean $cache = true)
 
-rtype  
-mixed Returns an array of objects of the given type or false if incorrect.
+Return type: `mixed`. Returns an array of objects of the given type or false if incorrect.
 
 You can find out which objects App knows about using
 `App::objects('Controller')` for example to find which application controllers
@@ -244,7 +237,7 @@ App::objects('plugin');
 App::objects('Controller');
 ```
 
-You can also search only within a plugin's objects by using the plugin dot syntax. :
+You can also search only within a plugin's objects by using the plugin dot syntax.
 
 ``` php
 // returns ['MyPluginPost', 'MyPluginComment'];
@@ -259,8 +252,7 @@ results or invalid types, and it does not return core objects
 
 `static` App::**pluginPath**(string $plugin)
 
-rtype  
-string
+Return type: `string`
 
 Plugins can be located with App as well. Using `App::pluginPath('DebugKit');`
 for example, will give you the full path to the DebugKit plugin:
@@ -273,11 +265,10 @@ $path = App::pluginPath('DebugKit');
 
 `static` App::**themePath**(string $theme)
 
-rtype  
-string
+Return type: `string`
 
 Themes can be found `App::themePath('purple');`, would give the full path to the
-<span class="title-ref">purple</span> theme.
+`purple` theme.
 
 <a id="app-import"></a>
 
@@ -285,8 +276,7 @@ Themes can be found `App::themePath('purple');`, would give the full path to the
 
 `static` App::**import**(mixed $type = null, string $name = null, mixed $parent = true, array $search = [], string $file = null, boolean $return = false)
 
-rtype  
-boolean
+Return type: `boolean`
 
 At first glance `App::import` seems complex, however in most use
 cases only 2 arguments are required.
@@ -447,15 +437,13 @@ App::import(
 
 `static` App::**init**( )
 
-rtype  
-void
+Return type: `void`
 
 Initializes the cache for App, registers a shutdown function.
 
 `static` App::**load**(string $className)
 
-rtype  
-boolean
+Return type: `boolean`
 
 Method to handle the automatic class loading. It will look for each class'
 package defined using `App::uses()` and with this information it
@@ -465,8 +453,7 @@ is name `MyCustomClass` the file name should be `MyCustomClass.php`
 
 `static` App::**shutdown**( )
 
-rtype  
-void
+Return type: `void`
 
 Object destructor. Writes cache file if changes have been made to the
 `$_map`.

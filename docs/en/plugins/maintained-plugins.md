@@ -17,6 +17,9 @@ their CI checks them with [PHPStan](/development/static-analysis) at level 5.
 
 - [PHPStan CakePHP](https://github.com/pieceofcake2/phpstan-cakephp2) - PHPStan extension for static analysis
   (see [Static Analysis](/development/static-analysis))
+- [E2E Test](https://github.com/pieceofcake2/e2e-test) - Browser end-to-end tests
+  with PHPUnit and Symfony Panther (Chrome, PC and mobile)
+  ([documentation](https://github.com/pieceofcake2/e2e-test/blob/1.x/docs/README.md))
 
 ## Maintained plugins
 

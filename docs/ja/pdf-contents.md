@@ -1,5 +1,3 @@
-orphan  
-
 # Contents
 
 - [入門](getting-started)

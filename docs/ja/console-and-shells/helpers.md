@@ -5,7 +5,7 @@ Shell ヘルパーは、2.8.0 で追加されました。
 :::
 
 Shell ヘルパーは、複雑な出力生成コードをまとめられます。Shell ヘルパーは、
-任意のシェルやタスクからアクセスや使用ができます。 :
+任意のシェルやタスクからアクセスや使用ができます。
 
 ``` php
 // 表としてデータを出力
@@ -15,7 +15,7 @@ $this->helper('table')->output($data);
 $this->helper('Plugin.HelperName')->output($data);
 ```
 
-また、ヘルパーのインスタンス取得や、そのインスタンスのパブリックメソッドの呼び出しができます。 :
+また、ヘルパーのインスタンス取得や、そのインスタンスのパブリックメソッドの呼び出しができます。
 
 ``` php
 // Progress ヘルパーの取得と使用
@@ -30,7 +30,7 @@ CakePHP は、いくつかの Shell ヘルパーを用意していますが、�
 プラグインの中で、新たに作成することができます。例として、装飾的なヘッダーを生成するための
 単純なヘルパーを作成してみましょう。Shell ヘルパーのクラス名には `ShellHelper` という
 サフィックスを付けます。最初に **src/Console/Helper/HeadingShellHelper.php** を作成し、
-以下のように記述します。 :
+以下のように記述します。
 
 ``` php
 // src/Console/Helper/HeadingShellHelper.php
@@ -47,7 +47,7 @@ class HeadingShellHelper extends BaseShellHelper
 
 `BaseShellHelper` は Composer のオートローダーで読み込まれるので、`App::uses()` は
 必要ありません。`output()` の引数は 1 つの配列として渡します。
-以下のように、あるシェルコマンドの中でこの新しいヘルパーを使用することができます。 :
+以下のように、あるシェルコマンドの中でこの新しいヘルパーを使用することができます。
 
 ``` php
 // 両側に ### を追加
@@ -61,7 +61,7 @@ $this->helper('heading')->output(['It works!', '~', 4]);
 
 ### Table ヘルパー
 
-TableHelper は、アスキーアートの表の作成を支援します。使い方は、とてもシンプルです。 :
+TableHelper は、アスキーアートの表の作成を支援します。使い方は、とてもシンプルです。
 
 ``` php
 $data = [
@@ -84,7 +84,7 @@ $this->helper('table')->output($data);
 
 ProgressHelper は２つの異なる方法で利用されます。シンプルなモードは、
 処理が完了するまでに呼び出されるコールバックを、オプション配列の最初の要素として
-渡すことができます。 :
+渡すことができます。
 
 ``` php
 $this->helper('progress')->output([
@@ -101,7 +101,7 @@ $this->helper('progress')->output([
 - `width` プログレスバーの幅。デフォルトは 80 です。
 - `callback` プログレスバーを更新するループ中で呼ばれるコールバック。
 
-全てのオプションを使用した例です。 :
+全てのオプションを使用した例です。
 
 ``` php
 $this->helper('progress')->output([
@@ -113,7 +113,7 @@ $this->helper('progress')->output([
 ]);
 ```
 
-Progress ヘルパーは、必要であればプログレスバーの増加や再描画を手動で行うことができます。 :
+Progress ヘルパーは、必要であればプログレスバーの増加や再描画を手動で行うことができます。
 
 ``` php
 $progress = $this->helper('Progress');

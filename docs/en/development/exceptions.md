@@ -266,7 +266,7 @@ the exception handling process.
 
 In the next few sections, we will detail the various approaches and the benefits each has.
 
-## Create your own Exception handler with <span class="title-ref">Exception.handler</span>
+## Create your own Exception handler with `Exception.handler`
 
 Creating your own exception handler gives you full control over the exception
 handling process. The class you choose should be loaded in your

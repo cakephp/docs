@@ -6,7 +6,7 @@
 ## スキーマファイルの作成と使用方法
 
 作成したスキーマファイルを使うと、データベースに依存することなく簡単に別の環境へ移植できます。
-また、既存のデータベースを使用してスキーマファイルを生成することもできます。 :
+また、既存のデータベースを使用してスキーマファイルを生成することもできます。
 
 ``` bash
 $ bin/cake schema generate
@@ -18,7 +18,7 @@ $ bin/cake schema generate
 > スキーマシェルはモデルが定義されたテーブルのみを対象として処理します。
 > 強制的に全てのテーブルを対象にするためには、 `-f` オプションを加える必要があります。
 
-前もって作成した schema.php からデータベースを再構築するためには、次のコマンドを実行してください。 :
+前もって作成した schema.php からデータベースを再構築するためには、次のコマンドを実行してください。
 
 ``` bash
 $ bin/cake schema create
@@ -27,7 +27,7 @@ $ bin/cake schema create
 schema.php の中身に沿ってテーブルが再構成されるはずです。
 
 スキーマファイルは SQL ダンプファイルの作成に使用することもできます。
-`CREATE TABLE` 文を含む SQL ファイルを生成するには次のコマンドを実行してください。 :
+`CREATE TABLE` 文を含む SQL ファイルを生成するには次のコマンドを実行してください。
 
 ``` bash
 $ bin/cake schema dump --write filename.sql
@@ -45,14 +45,14 @@ filename.sql を省略すると、SQL のダンプはコンソールへ出力さ
 `after($event = [])` メソッドが生成されます。
 
 `$event` パラメータは2つのキーを持つ配列です。１つはテーブルを削除するのか
-作成するのかを示すパラメータで、もう１つはエラーに関するパラメータです。例を示します。 :
+作成するのかを示すパラメータで、もう１つはエラーに関するパラメータです。例を示します。
 
 ``` text
 ['drop' => 'posts', 'errors' => null]
 ['create' => 'posts', 'errors' => null]
 ```
 
-データを posts テーブルへ加える例は以下のようになります。 :
+データを posts テーブルへ加える例は以下のようになります。
 
 ``` php
 App::uses('Post', 'Model');
@@ -79,7 +79,7 @@ public function after($event = [])
 データを2つ以上のテーブルへ挿入する場合は、各テーブルの作成後、
 データベースのキャッシュを実際にデータベースへ反映させる必要があるでしょう。
 before アクション内で `$db->cacheSources = false` を設定することにより、
-キャッシュを無効にできます。 :
+キャッシュを無効にできます。
 
 ``` php
 public $connection = 'default';
@@ -94,7 +94,7 @@ public function before($event = [])
 ```
 
 コールバック中に正しいデータソースで初期化したモデルを使用したい場合、
-デフォルトのデータソースを使わないようにします。 :
+デフォルトのデータソースを使わないようにします。
 
 ``` php
 public function before($event = [])
@@ -123,7 +123,7 @@ CakeSchema はまた、 `tableParameters` をサポートします。
 
 ### 例
 
-以下は acl クラスの例全部です。 :
+以下は acl クラスの例全部です。
 
 ``` php
 /**
@@ -172,7 +172,7 @@ public $acos = [
 それぞれのカラムは、キーバリュー連想配列として表現されます。
 フィールド名は、フィールドのキーです。値は、いくつかの属性を持つ別の配列です。
 
-カラムの例 :
+カラムの例:
 
 ``` text
 'id' => [
@@ -220,14 +220,14 @@ type
 `smallinteger` 型と `tinyinteger` 型は 2.10.0 で追加されました。
 :::
 
-## テーブルキー <span class="title-ref">indexes</span>
+## テーブルキー `indexes`
 
-キー名 <span class="title-ref">indexes</span> は、フィールド名の代わりにテーブル配列の中に置きます。
+キー名 `indexes` は、フィールド名の代わりにテーブル配列の中に置きます。
 
 column  
 これは単一のカラム名またはカラムの配列です。
 
-単一の場合 :
+単一の場合:
 
 ``` text
 'indexes' => [
@@ -238,7 +238,7 @@ column
 ]
 ```
 
-複数の場合 :
+複数の場合:
 
 ``` text
 'indexes' => [
@@ -255,7 +255,7 @@ column
 unique  
 ユニークインデックスなら 1、そうでなければ 0。
 
-## テーブルキー <span class="title-ref">tableParameters</span>
+## テーブルキー `tableParameters`
 
 tableParameters は、 MySQL のみサポートします。
 
@@ -277,7 +277,7 @@ MySQL の dbo は、 tableParameters に加えて `fieldParameters` を実装し
 **スキーマファイルの中で tableParameters を使う**
 
 スキーマファイル中の他のキーと同じように `tableParameters` が使えます。
-例えば `indexes` のように :
+例えば `indexes` のように:
 
 ``` php
 public $comments = [
@@ -312,13 +312,13 @@ public $comments = [
 変更内容を配布できるようになります。マイグレーションはバージョン管理された
 スキーマファイルかスキーマのスナップショットのどちらかの形式で管理されます。
 スキーマシェルを使ったスキーマファイルのバージョン管理はとても簡単です。
-もし既に作成済みのスキーマファイルがあるのであれば、次のコマンドを実行してください。 :
+もし既に作成済みのスキーマファイルがあるのであれば、次のコマンドを実行してください。
 
 ``` bash
 $ bin/cake schema generate
 ```
 
-実行すると、次の選択肢が表示されるはずです。 :
+実行すると、次の選択肢が表示されるはずです。
 
 ``` text
 Generating Schema...
@@ -331,7 +331,7 @@ Would you like to do? (o/s/q)
 
 \[s\] (snapshot) を選択すると、変更分を反映した schema.php が生成されるでしょう。
 もし schema.php があれば、schema_2.php あるいは同様のファイルが生成されるはずです。
-いつでも以下のコマンドでスキーマファイルへの保存ができます。 :
+いつでも以下のコマンドでスキーマファイルへの保存ができます。
 
 ``` bash
 $ bin/cake schema update -s 2
@@ -357,7 +357,7 @@ $ bin/cake schema update -s 2
 
 2.  cake schema を実行し、データベースの内容を全てエクスポート
 
-3.  生成または更新された schema.php のコミット :
+3.  生成または更新された schema.php のコミット:
 
     ``` bash
     $ # 一度データベースを更新した後で
@@ -376,7 +376,7 @@ $ bin/cake schema update -s 2
 リポジトリの最新の変更を取り入れ、データベース構造の変更点を見つけるには
 以下のようにします。
 
-1.  cake schema を実行し、データベースを更新してください :
+1.  cake schema を実行し、データベースを更新してください:
 
     ``` bash
     $ git pull
@@ -392,14 +392,14 @@ $ bin/cake schema update -s 2
 
 より具体的には、一度生成したテーブルを自動的に削除することができないようになっています。
 
-対照的に `update` を使用した場合は、スキーマファイルとの差分からフィールドが削除されます。 :
+対照的に `update` を使用した場合は、スキーマファイルとの差分からフィールドが削除されます。
 
 ``` bash
 $ git revert HEAD
 $ bin/cake schema update
 ```
 
-上のコマンドを実行すると、以下の選択肢が表示されるはずです。 :
+上のコマンドを実行すると、以下の選択肢が表示されるはずです。
 
 ``` text
 The following statements will run.

@@ -152,7 +152,7 @@ Cache::config('custom', [
 プラグイン名を用いた「datesource」キーを設定することによって、プラグインのデータソースを使うことが
 出来ます。例えば、LastFm データソースを含む WebservicePack プラグイン
 (plugin/webservice_pack/models/datasources/last_fm.php) があるとすると、
-このようにできます。 :
+このようにできます。
 
 ``` php
 var $lastFm = array(
@@ -347,7 +347,7 @@ Inflector::rules を使い、Inflector::slug で使われる音訳マップの�
 
 Set には新しく `Set::apply()` メソッドがあります。これは `Set::extract` の結果に
 [コールバック](https://ca2.php.net/callback) を適用することができ、map や reduce
-として振舞うこともできます。 :
+として振舞うこともできます。
 
 ``` css
 Set::apply('/Movie/rating', $data, 'array_sum');

@@ -587,10 +587,10 @@ will validate all values passed and then try to perform a save for each.
 ## Saving hasMany through data
 
 Let's see how data stored in a join table for two models is saved. As shown in the [Hasmany Through](../models/associations-linking-models-together#hasMany-through)
-section, the join table is associated to each model using a <span class="title-ref">hasMany</span> type of relationship.
+section, the join table is associated to each model using a `hasMany` type of relationship.
 Our example involves the Head of Cake School asking us to write an application that allows
 him to log a student's attendance on a course with days attended and grade. Take
-a look at the following code. :
+a look at the following code.
 
 ``` php
 // src/Controller/CourseMembershipController.php
@@ -628,7 +628,7 @@ class CourseMembershipsController extends AppController
 <?php echo $this->Form->end(); ?>
 ```
 
-The data array will look like this when submitted. :
+The data array will look like this when submitted.
 
 ``` text
 
@@ -655,7 +655,7 @@ The data array will look like this when submitted. :
 
 CakePHP will happily be able to save the lot together and assign
 the foreign keys of the Student and Course into CourseMembership
-with a <span class="title-ref">saveAssociated</span> call with this data structure. If we run the index
+with a `saveAssociated` call with this data structure. If we run the index
 action of our CourseMembershipsController the data structure
 received now from a find('all') is:
 
@@ -695,7 +695,7 @@ will be cases where you want to create the Student and Course
 independently and at a later point associate the two together with
 a CourseMembership. So you might have a form that allows selection
 of existing students and courses from pick lists or ID entry and
-then the two meta-fields for the CourseMembership, e.g. :
+then the two meta-fields for the CourseMembership, e.g.
 
 ``` php
 // templates/CourseMemberships/add.ctp
@@ -751,7 +751,7 @@ And the resultant POST:
 ```
 
 Again CakePHP is good to us and pulls the Student id and Course id
-into the CourseMembership with the <span class="title-ref">saveAssociated</span>.
+into the CourseMembership with the `saveAssociated`.
 
 <a id="saving-habtm"></a>
 
@@ -970,7 +970,7 @@ be used with only 1 model, though it requires some extra attention.
 The key is in the model setup the `className`. Simply adding a
 `Project` HABTM `Project` relation causes issues saving data.
 By setting the `className` to the models name and use the alias as
-key we avoid those issues. :
+key we avoid those issues.
 
 ``` php
 class Project extends AppModel

@@ -79,7 +79,7 @@ to the constructor of `CakeEmail`:
 $Email = new CakeEmail();
 $Email->config('default');
 
-//or in constructor::
+// or in constructor:
 $Email = new CakeEmail('default');
 
 // Implicit 'default' config used as of 2.7
@@ -93,7 +93,7 @@ you can also just load an array of configs:
 $Email = new CakeEmail();
 $Email->config(['from' => 'me@example.org', 'transport' => 'MyCustom']);
 
-//or in constructor::
+// or in constructor:
 $Email = new CakeEmail(['from' => 'me@example.org', 'transport' => 'MyCustom']);
 ```
 
@@ -292,7 +292,7 @@ $Email->template('Blog.new_comment', 'Blog.auto_message');
 $Email->theme('TestTheme');
 ```
 
-This allows you to override the <span class="title-ref">new_comment</span> template in your theme without modifying
+This allows you to override the `new_comment` template in your theme without modifying
 the Blog plugin. The template file needs to be created in the following path:
 `templates/Themed/TestTheme/Blog/Emails/text/new_comment.ctp`.
 
@@ -461,8 +461,8 @@ name for the message id (since there is no host name in a CLI environment):
 
 ``` php
 $Email->domain('www.example.org');
-// Results in message ids like ``<UUID@www.example.org>`` (valid)
-// instead of `<UUID@>`` (invalid)
+// Results in message ids like `<UUID@www.example.org>` (valid)
+// instead of `<UUID@>` (invalid)
 ```
 
 A valid message id can help to prevent emails ending up in spam folders. If you

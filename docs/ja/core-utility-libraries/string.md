@@ -11,7 +11,7 @@ PHP 7 以降 `String` が予約語であるため削除されました。`String
 :::
 
 もし、 `View` 以外で `TextHelper` が必要な場合、
-`CakeText` クラスを使ってください。 :
+`CakeText` クラスを使ってください。
 
 ``` php
 class UsersController extends AppController
@@ -37,7 +37,7 @@ class UsersController extends AppController
 
 uuid メソッドは、`4122` で規定されているようなユニーク ID を生成するために利用します。
 UUID とは、485fc381-e790-47a3-9794-1337c0a8fe68 のようなフォーマットの
-128 ビットの文字列のことです。 :
+128 ビットの文字列のことです。
 
 ``` php
 CakeText::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
@@ -48,7 +48,7 @@ CakeText::uuid(); // 485fc381-e790-47a3-9794-1337c0a8fe68
 `$separator` を利用して文字列をトークン化します。この際に `$leftBound` と
 `$rightBound` の間に現れる `$separator` は無視します。
 
-このメソッドは、タグリストのような定形フォーマットのデータを分割するのに便利です。 :
+このメソッドは、タグリストのような定形フォーマットのデータを分割するのに便利です。
 
 ``` php
 $data = "cakephp 'great framework' php";
@@ -59,7 +59,7 @@ $result = CakeText::tokenize($data, ' ', "'", "'");
 
 `static` CakeText::**insert**($string, $data, $options = [])
 
-insert メソッドは、テンプレートとキー・バリューの組み合わせから文字列を作成できます。 :
+insert メソッドは、テンプレートとキー・バリューの組み合わせから文字列を作成できます。
 
 ``` php
 CakeText::insert('My name is :name and I am :age years old.', ['name' => 'Bob', 'age' => '65']);
@@ -74,7 +74,7 @@ CakeText::insert('My name is :name and I am :age years old.', ['name' => 'Bob', 
 この機能の目的は、 `CakeText::insert()` では取り除けなかったホワイトスペース、
 および、プレースホルダー周辺で必要がないマークアップを取り除くことにあります。
 
-オプションは次のように指定します。 :
+オプションは次のように指定します。
 
 ``` php
 $options = [
@@ -89,7 +89,7 @@ $options = [
 `static` CakeText::**wrap**($text, $options = [])
 
 テキストのブロックを決められた幅や折り返し、インデントにも対応します。
-単語の途中で改行されたりしないように、賢く折り返しの処理を行います。 :
+単語の途中で改行されたりしないように、賢く折り返しの処理を行います。
 
 ``` php
 $text = 'This is the song that never ends.';

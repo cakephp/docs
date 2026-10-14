@@ -27,7 +27,7 @@ CakePHP におけるページ制御機構は、
 これがページ制御機構のデフォルトとして使われます。ここで指定した条件は、あなたのページ制御機能の
 基本部分になります。それらに対して、さらに `sort` 、 `direction` 、 `limit` 、
 URL から受け取った `page` パラメータなどを追加していきます。なお `order` キーを、
-以下の要領で配列として定義しておく必要があるので注意してください。 :
+以下の要領で配列として定義しておく必要があるので注意してください。
 
 ``` php
 class PostsController extends AppController
@@ -43,8 +43,8 @@ class PostsController extends AppController
 }
 ```
 
-`fields` のような、上記以外の `~Model::find()` のオプションを
-入れることもできます。 :
+`fields` のような、上記以外の `Model::find()` のオプションを
+入れることもできます。
 
 ``` php
 class PostsController extends AppController
@@ -66,7 +66,7 @@ class PostsController extends AppController
 `fields`, `order`, `limit`, `page`, `contain`, `joins`,
 `recursive` 。前述のキーに加えて、追加したキーがそのままモデルの
 find() メソッドに渡されます。これにより、ページ制御に対してとても簡単に
-`ContainableBehavior` のようなビヘイビアを使えます。 :
+`ContainableBehavior` のようなビヘイビアを使えます。
 
 ``` php
 class RecipesController extends AppController
@@ -82,7 +82,7 @@ class RecipesController extends AppController
 
 標準的なページ制御用の値を定義する以外にも、
 コントローラの中でひとつ以上のページ制御用のデフォルト値を定義できます。
-単に設定したいモデルの後で、配列のキーに名前をつけるだけです。 :
+単に設定したいモデルの後で、配列のキーに名前をつけるだけです。
 
 ``` php
 class PostsController extends AppController
@@ -106,7 +106,7 @@ class PostsController extends AppController
 これを使って `PaginatorHelper` がリンクを生成します。
 さらに `PaginatorComponent::paginate()` は、
 あなたのコントローラの中のヘルパーのリストに `PaginatorHelper`
-がまだ入っていなければ追加します。 :
+がまだ入っていなければ追加します。
 
 ``` php
 public function list_recipes()
@@ -120,7 +120,7 @@ public function list_recipes()
 ```
 
 `paginate()` 関数の第二パラメータとして検索条件を渡すことにより、
-結果をフィルターできます。 :
+結果をフィルターできます。
 
 ``` php
 $data = $this->Paginator->paginate(
@@ -130,7 +130,7 @@ $data = $this->Paginator->paginate(
 ```
 
 あなたのアクションの中に、 `conditions`
-を始めとするページ制御用設定の配列をセットすることもできます。 :
+を始めとするページ制御用設定の配列をセットすることもできます。
 
 ``` php
 public function list_recipes()
@@ -154,7 +154,7 @@ public function list_recipes()
 あなたのモデルに接続されるビヘイビアの中でそれらをインクルードしたりできます。
 `paginate` や `paginateCount` を実装するビヘイビアは、
 後述するメソッドのシグネチャーを、
-通常の追加の先頭パラメータである `$model` を使って実装しなければなりません。 :
+通常の追加の先頭パラメータである `$model` を使って実装しなければなりません。
 
 ``` php
 /**
@@ -188,7 +188,7 @@ paginate() と paginateCount() を自前で実装しなければならないよ�
 コアのモデルのメソッドやカスタムファインダーを使うだけでは、
 どうしても目指すゴールに辿りつけないのかどうかを確認してください。
 カスタム find タイプでページ制御する場合、 `0` 番目の要素をセットするか、
-もしくは CakePHP 2.3 であれば `findType` キーを設定してください。 :
+もしくは CakePHP 2.3 であれば `findType` キーを設定してください。
 
 ``` php
 public $paginate = [
@@ -197,7 +197,7 @@ public $paginate = [
 ```
 
 0 番目のインデックスを管理するのは難しいため、2.3 では `findType`
-オプションが追加されました。 :
+オプションが追加されました。
 
 ``` php
 public $paginate = [
@@ -208,7 +208,7 @@ public $paginate = [
 `paginate()` メソッドでは、
 以下のメソッドシグネチャーを実装しなければなりません。
 データを取得したいモデルの中で、
-あなたのメソッドやロジックでこれをオーバーライドします。 :
+あなたのメソッドやロジックでこれをオーバーライドします。
 
 ``` php
 /**
@@ -237,7 +237,7 @@ public function paginate(
 さらに、コアの `paginateCount()` をオーバーライドする必要があります。
 このメソッドは `Model::find('count')` と同じ引数を期待しています。
 以下の例では PostgreSQL 固有の機能を利用していますので、
-お使いのデータベースに従って調整してください。 :
+お使いのデータベースに従って調整してください。
 
 ``` php
 /**
@@ -265,7 +265,7 @@ public function paginateCount(
 観察力の鋭い方なら気付くと思いますが、私たちが定義している paginate
 メソッドは、実際には必要なものではありませんでした。
 単にコントローラの `$paginate` クラス変数に、
-そのキーワードを追加してやるだけで OK です。 :
+そのキーワードを追加してやるだけで OK です。
 
 ``` php
 /**
@@ -304,7 +304,7 @@ CakePHP 2.0 では、グループ句を使う場合でも、もはや `paginateC
 計算コストの高い仮想フィールドでもソートキーにできるので、
 必ずしも望ましい状態ではないかもしれません。そういった場合、
 `PaginatorComponent::paginate()` の第三パラメータを使って、
-ソート可能な列を制限することができます。 :
+ソート可能な列を制限することができます。
 
 ``` php
 $this->Paginator->paginate('Post', [], ['title', 'slug']);
@@ -344,7 +344,7 @@ CakePHP の過去のバージョンでは、ページ制御用リンクの生成
 クエリ文字列と名前付きパラメータのどちらを使うかを選べます。
 入ってくるリクエストは選択されたタイプとしてのみ受け付けられ、
 `PaginatorHelper`
-が選択されたパラメータタイプでリンクを生成します。 :
+が選択されたパラメータタイプでリンクを生成します。
 
 ``` php
 public $paginate = [
@@ -353,7 +353,7 @@ public $paginate = [
 ```
 
 上記の例ではクエリ文字列によるパースとリンク生成を有効にします。
-PaginatorComponent の `$settings` プロパティで変更することもできます。 :
+PaginatorComponent の `$settings` プロパティで変更することもできます。
 
 ``` php
 $this->Paginator->settings['paramType'] = 'querystring';
@@ -363,14 +363,14 @@ $this->Paginator->settings['paramType'] = 'querystring';
 
 > [!NOTE]
 > 存在しないプロパティへの値の代入により、
-> 例外が発生するような状況になる場合があります。 :
+> 例外が発生するような状況になる場合があります。
 >
 > ``` bash
 > $this->paginate['limit'] = 10;
 > ```
 >
 > とやると、 "Notice: Indirect modification of overloaded property \$paginate has no effect."
-> という例外が発生します。プロパティに対して初期値を代入しておくことで、この問題を防げます。 :
+> という例外が発生します。プロパティに対して初期値を代入しておくことで、この問題を防げます。
 >
 > ``` bash
 > $this->paginate = [];
@@ -379,7 +379,7 @@ $this->Paginator->settings['paramType'] = 'querystring';
 > $this->paginate = ['limit' => 10];
 > ```
 >
-> もしくは、単にコントローラクラスでプロパティを宣言するのでもOKです。 :
+> もしくは、単にコントローラクラスでプロパティを宣言するのでもOKです。
 >
 > ``` php
 > class PostsController
@@ -400,11 +400,11 @@ $this->Paginator->settings['paramType'] = 'querystring';
 
 2.3 の時点では、存在しないページ、すなわちリクエストされたページ番号が
 全ページ数より大きいページにアクセスしようとすると、
-PaginatorComponent が <span class="title-ref">NotFoundException</span> を投げます。
+PaginatorComponent が `NotFoundException` を投げます。
 
 その場合、通常のエラーページを生成することもできますが、
-try ～ catch ブロックで <span class="title-ref">NotFoundException</span> を捕捉して、
-適切なアクションを起こさせることも可能です。 :
+try ～ catch ブロックで `NotFoundException` を捕捉して、
+適切なアクションを起こさせることも可能です。
 
 ``` php
 public function index()

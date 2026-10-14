@@ -143,8 +143,8 @@ class FarAwaySource extends DataSource
     public $description = 'A far away datasource';
 
     /**
-     * デフォルトの設定オプション。これらは ``config/database.php``
-     * でカスタマイズされ、 ``__construct()`` の中でマージされます。
+     * デフォルトの設定オプション。これらは `config/database.php`
+     * でカスタマイズされ、 `__construct()` の中でマージされます。
      */
     public $config = [
         'apiKey' => '',
@@ -190,7 +190,7 @@ class FarAwaySource extends DataSource
     /**
      * listSources() はキャッシュ操作を行います。あなたはカスタム
      * データソースでも独自のやり方でキャッシュ機構を実装したいと思う
-     * かもしれません。とりあえず、単に ``return null`` してください。
+     * かもしれません。とりあえず、単に `return null` してください。
      */
     public function listSources($data = null)
     {
@@ -198,13 +198,13 @@ class FarAwaySource extends DataSource
     }
 
     /**
-     * describe() はモデルに対して ``Model::save()`` のための
+     * describe() はモデルに対して `Model::save()` のための
      * スキーマを伝えます。
      *
      * モデルごとに異なったスキーマを使いたい場合もあるかもしれませんが、
      * それでも単一のデータソースを使ってください。その場合、モデルに
-     * 対して ``schema`` プロパティをセットし、ここでは単に
-     * ``$model->schema`` を返すようにします。
+     * 対して `schema` プロパティをセットし、ここでは単に
+     * `$model->schema` を返すようにします。
      */
     public function describe($model)
     {
@@ -213,12 +213,12 @@ class FarAwaySource extends DataSource
 
     /**
      * calculate() はレコード数のカウント方法を決定します。これは
-     * ``update()`` と ``delete()`` の動作を決めるのに必要です。
+     * `update()` と `delete()` の動作を決めるのに必要です。
      *
-     * ここでは実際にはレコードのカウントはせず、 ``read()`` に渡されるべき
+     * ここでは実際にはレコードのカウントはせず、 `read()` に渡されるべき
      * 文字列を返します。これが実際のカウント処理を行います。
      * 最も簡単なのは、ここでは単に 'COUNT' という文字列を返しておき、
-     * ``read()`` の中で ``$data['fields'] === 'COUNT'`` かどうかを
+     * `read()` の中で `$data['fields'] === 'COUNT'` かどうかを
      * 聞くようにすることです。
      */
     public function calculate(Model $model, $func, $params = [])
@@ -227,7 +227,7 @@ class FarAwaySource extends DataSource
     }
 
     /**
-     * CRUD のうちの R を実装します。 ``Model::find()`` への呼び出しは
+     * CRUD のうちの R を実装します。 `Model::find()` への呼び出しは
      * ここに来ます。
      */
     public function read(
@@ -239,8 +239,8 @@ class FarAwaySource extends DataSource
          * ここでは、前述の calculate() メソッドで返されるカウントの
          * 実際の処理を行います。リモートソースのチェックをするか、
          * またはそれ以外の方法でレコードカウントを取得します。
-         * ここでは単に 1 を返しているので、 ``update()`` や
-         * ``delete()`` ではレコードが存在するものとみなされます。
+         * ここでは単に 1 を返しているので、 `update()` や
+         * `delete()` ではレコードが存在するものとみなされます。
          */
         if ($queryData['fields'] === 'COUNT') {
             return [[['count' => 1]]];
@@ -263,7 +263,7 @@ class FarAwaySource extends DataSource
     }
 
     /**
-     * CRUD のうちの C を実装します。 ``Model::save()`` への呼び出しのうち
+     * CRUD のうちの C を実装します。 `Model::save()` への呼び出しのうち
      *  $model->id がセットされないケースがここに来ます。
      */
     public function create(Model $model, $fields = null, $values = null)
@@ -281,9 +281,9 @@ class FarAwaySource extends DataSource
     }
 
     /**
-     * CRUD のうちの U を実装します。 ``Model::save()`` への呼び出しのうち
+     * CRUD のうちの U を実装します。 `Model::save()` への呼び出しのうち
      *  $model->id がセットされているケースがここに来ます。リモートソース
-     *  に依存するためここでは単に ``$this->create()`` をコールできます。
+     *  に依存するためここでは単に `$this->create()` をコールできます。
      */
     public function update(
         Model $model,
@@ -296,7 +296,7 @@ class FarAwaySource extends DataSource
 
     /**
      * CRUD のうちの D を実装します。
-     * ``Model::delete()`` への呼び出しがここに来ます。
+     * `Model::delete()` への呼び出しがここに来ます。
      */
     public function delete(Model $model, $id = null)
     {

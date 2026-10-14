@@ -46,7 +46,7 @@ with virtual fields can be done through a few different methods.
 ### Model::hasField()
 
 Model::hasField() will return true if the model has a concrete field passed by
-the first parameter. By setting the second parameter of <span class="title-ref">hasField()</span> to true,
+the first parameter. By setting the second parameter of `hasField()` to true,
 virtualFields will also be checked when checking if a model has a field.
 Using the example field above:
 

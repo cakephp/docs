@@ -68,7 +68,7 @@ Cookie コンポーネントがどのように動くかは、コントローラ�
 以下のサンプルコードは、 Cookie コンポーネントをコントローラーにインクルードする方法と、
 セキュアな接続でのみ、 'example.com' というドメインの ‘/bakers/preferences/’
 というパス以下で、1時間だけ有効な 'baker_id' という名前の HTTP のみで有効な
-Cookie を AES で暗号化して発行するための初期設定の例です。 :
+Cookie を AES で暗号化して発行するための初期設定の例です。
 
 ``` php
 // src/Controller/BakersController.php
@@ -100,7 +100,7 @@ Cookie は `'cipher'` で暗号化されていました。
 `'aes'` 方式は `Security::encrypt()` を使います。`mcrypt` 拡張は PHP 7.2 以降同梱されておらず
 PECL から入れる必要があるため、`config/core.php` で OpenSSL による実装を有効にしてください。
 `pieceofcake2/app` のスケルトン (v2.3.1 以降) から作成したアプリケーションにはこの行が含まれています。
-既存のアプリケーションでは追加してください。 :
+既存のアプリケーションでは追加してください。
 
 ``` php
 Configure::write('Security.useOpenSsl', true);

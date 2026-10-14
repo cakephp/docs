@@ -175,7 +175,7 @@ introduced as well.
 #### Automatic parsing of Accept headers
 
 If a client sends a single Accept mime type that matches one of the extensions
-enabled in :php:class\`Router\`, `RequestHandler` will treat it the
+enabled in `Router`, `RequestHandler` will treat it the
 same an extension. This expands CakePHP's support for REST style endpoints. To
 use this feature start off by enabling extensions in `app/Config/routes.php`:
 

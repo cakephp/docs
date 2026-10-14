@@ -14,7 +14,7 @@ CakePHP 2.3 は、2.2 の API の完全上位互換です。
   これまで、たくさんの人々が CLI と Web の双方で正しく APC が動作させようと
   セットアップに難儀していました。
   ファイルを利用することにより、新規の開発者のセットアップが容易になります。
-- <span class="title-ref">Configure::write('Cache.viewPrefix', 'YOURPREFIX');</span> が <span class="title-ref">core.php</span> に
+- `Configure::write('Cache.viewPrefix', 'YOURPREFIX');` が `core.php` に
   追加されました。これによりセットアップごとに複数のドメインや言語が利用できます。
 
 ## コンポーネント
@@ -37,7 +37,7 @@ CakePHP 2.3 は、2.2 の API の完全上位互換です。
   0番目のインデックスを管理・設定するよりも少しだけ簡単になっています。
 - PaginatorComponent は、範囲外のページにアクセスしようとした場合（例えば、
   リクエストされたページが全ページのカウントよりも大きかった場合など）に
-  <span class="title-ref">NotFoundException</span> を投げるようになりました。
+  `NotFoundException` を投げるようになりました。
 
 ### SecurityComponent
 
@@ -70,7 +70,7 @@ CakePHP 2.3 は、2.2 の API の完全上位互換です。
 
 - ISO 639-3 で定義されている `nld` がオランダ語のデフォルトロケールになり、
   `dut` はそのエイリアスとなりました。ロケールのフォルダは、
-  <span class="title-ref">/Locale/dut/</span> から <span class="title-ref">/Locale/nld/</span> へ変更となりました。
+  `/Locale/dut/` から `/Locale/nld/` へ変更となりました。
 - アルバニア語は `sqi` 、バスク語は `eus`, 中国語は `zho` 、チベット語は `bod` 、
   チェコ語は `ces` 、ペルシア語は `fas` 、フランス語は `fra` 、アイスランド語は `isl` 、
   マケドニア語は `mkd` 、マレー語は `msa` 、ルーマニア語は `ron` 、セルビア語は `srp` 、
@@ -83,7 +83,7 @@ CakePHP 2.3 は、2.2 の API の完全上位互換です。
 - `CakePlugin::load()` に `ignoreMissing` オプションが新たに加わりました。
   これを true にセットすると、route や bootstrap でロードしようとしたプラグインが
   見つからない場合でもエラーとなるのを防いでくれます。
-  つまり、route または bootstrap で見つかる全てのプラグインを読み込むには次のような構文を使います::
+  つまり、route または bootstrap で見つかる全てのプラグインを読み込むには次のような構文を使います:
   `CakePlugin::loadAll([['routes' => true, 'bootstrap' => true, 'ignoreMissing' => true]])`
 
 ### Configure
@@ -93,7 +93,7 @@ CakePHP 2.3 は、2.2 の API の完全上位互換です。
 - `ConfigReaderInterface::dump()` が追加されました。
   コンフィグを読み込むカスタム実装を作成している場合は、 `dump()` メソッドも実装して下さい。
 - `IniReader::dump()` の `$key` パラメータは、`PhpReader::dump()`
-  と同じような <span class="title-ref">PluginName.keyname</span> 形式のキーをサポートしました。
+  と同じような `PluginName.keyname` 形式のキーをサポートしました。
 
 ## エラー
 
@@ -135,7 +135,7 @@ CakePHP 2.3 は、2.2 の API の完全上位互換です。
 ### CakeResponse
 
 - `CakeResponse::file()` が追加されました。
-- <span class="title-ref">application/javascript</span> と <span class="title-ref">application/xml</span> 、 <span class="title-ref">application/rss+xml</span> の
+- `application/javascript` と `application/xml` 、 `application/rss+xml` の
   各コンテントタイプで charset も送信するようになりました。
 
 ### CakeEmail
@@ -217,7 +217,7 @@ CakePHP 2.3 は、2.2 の API の完全上位互換です。
 ### TextHelper
 
 - テキストを終端から切り詰める `TextHelper::tail()` が追加されました。
-- `TextHelper::truncate()` の <span class="title-ref">ending</span> は非推奨となり、代わりに <span class="title-ref">ellipsis</span>
+- `TextHelper::truncate()` の `ending` は非推奨となり、代わりに `ellipsis`
   を利用してください。
 
 ### PaginatorHelper
@@ -225,7 +225,7 @@ CakePHP 2.3 は、2.2 の API の完全上位互換です。
 - `PaginatorHelper::numbers()` に `currentTag` オプションが追加されました。
 - `PaginatorHelper::prev()` と `PaginatorHelper::next()` メソッドで
   `tag` オプションにラッパーを抑制する `false` がセットできるようになりました。
-  これらの2つのメソッドに <span class="title-ref">disabledTag</span> オプションも追加されました。
+  これらの2つのメソッドに `disabledTag` オプションも追加されました。
 
 ## テスト
 
@@ -250,7 +250,7 @@ CakePHP 2.3 は、2.2 の API の完全上位互換です。
 ### String
 
 - テキストを終端から切り詰める `String::tail()` が追加されました。
-- `String::truncate()` の <span class="title-ref">ending</span> は非推奨となり、代わりに <span class="title-ref">ellipsis</span>
+- `String::truncate()` の `ending` は非推奨となり、代わりに `ellipsis`
   を利用してください。
 
 ### Debugger

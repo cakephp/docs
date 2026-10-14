@@ -237,7 +237,7 @@ public function initialize(Controller $controller)
 ### 非推奨だったコールバックの削除
 
 Componentで非推奨となったすべてのコールバックはComponentCollectionに移動されませんでした。
-コールバックと対話するには代わりに <span class="title-ref">trigger()</span> メソッドを使う必要があります。
+コールバックと対話するには代わりに `trigger()` メソッドを使う必要があります。
 コールバックを引き起こす必要があるなら、以下のように呼び出すことができます:
 
 ``` php
@@ -246,8 +246,8 @@ $this->Components->trigger('someCallback', [&$this]);
 
 ### コンポーネント無効化の変更点
 
-以前は、例えば <span class="title-ref">\$this-\>Auth-\>enabled = false;</span> によってコンポーネントを無効化することができました。
-CakePHP 2.0 では、ComponentCollectionのdisableメソッド、 <span class="title-ref">\$this-\>Components-\>disable('Auth');</span> を使用する必要があります。
+以前は、例えば `$this->Auth->enabled = false;` によってコンポーネントを無効化することができました。
+CakePHP 2.0 では、ComponentCollectionのdisableメソッド、 `$this->Components->disable('Auth');` を使用する必要があります。
 enabledプロパティを使っても正しく動作しないでしょう。
 
 ### Aclコンポーネント
@@ -616,8 +616,8 @@ ClassRegistryからViewが削除されたことに対応して、Helper::\_\_con
 public function __construct(View $View, $settings = [])
 ```
 
-コンストラクタをオーバーライドするとき、常に <span class="title-ref">parent::\_\_construct</span> を呼ぶ必要もあります。
-<span class="title-ref">Helper::\_\_construct</span> はビューのインスタンスをのちの参照のために <span class="title-ref">\$this-\>\_View</span> に格納します。
+コンストラクタをオーバーライドするとき、常に `parent::__construct` を呼ぶ必要もあります。
+`Helper::__construct` はビューのインスタンスをのちの参照のために `$this->_View` に格納します。
 settingsは親コンストラクタによって扱われることはありません。
 
 ### HelperCollectionの追加
@@ -626,7 +626,7 @@ settingsは親コンストラクタによって扱われることはありませ
 ヘルパーの生成の責任はViewの中核的なものではなく、これはHelperCollectionに移動しました。
 HelperCollectionはヘルパーの読み込みと生成、またヘルパーのコールバックの起動の責任を負います。
 デフォルトでは、ViewはコンストラクタでHelperCollectionを生成し、その後の操作でこれを使います。
-ビューのHelperCollectionは <span class="title-ref">\$this-\>Helpers</span> にあります。
+ビューのHelperCollectionは `$this->Helpers` にあります。
 
 この機能を書き直した動機は、いくつかの問題点からもたらされました。
 
@@ -776,9 +776,9 @@ $this->Form->checkbox('field', ['checked', 'value' => 'some_value']);
 ### ViewはClassRegistryに登録されなくなりました
 
 ビューがClassRegistryに登録されることは乱用を招き、事実上グローバルシンボルを作り出していました。
-2.0では各ヘルパーは現在の <span class="title-ref">View</span> インスタンスをコンストラクタで受け取ります。
+2.0では各ヘルパーは現在の `View` インスタンスをコンストラクタで受け取ります。
 これはヘルパーにグローバルシンボルを作り出すことなく、以前の様式と同様にビューにアクセスさせることができます。
-どのヘルパーでも <span class="title-ref">\$this-\>\_View</span> でビューのインスタンスにアクセスできます。
+どのヘルパーでも `$this->_View` でビューのインスタンスにアクセスできます。
 
 ### Deprecated properties
 
@@ -814,7 +814,7 @@ $this->Form->checkbox('field', ['checked', 'value' => 'some_value']);
 
 ### View-\>Helpers
 
-デフォルトではViewオブジェクトは `HelperCollection` を <span class="title-ref">\$this-\>Helpers</span>\` に保持します。
+デフォルトではViewオブジェクトは `HelperCollection` を `$this->Helpers` に保持します。
 
 ### テーマ
 

@@ -46,7 +46,7 @@ CakeLog::config('otherFile', [
 
 When configuring a log stream the `engine` parameter is used to
 locate and load the log handler. All of the other configuration
-properties are passed to the log stream's constructor as an array. :
+properties are passed to the log stream's constructor as an array.
 
 ``` php
 // src/Lib/Log/Engine/DatabaseLog.php
@@ -101,7 +101,7 @@ As of 2.4 `FileLog` engine takes a few new options:
 > [!WARNING]
 > Prior to 2.4 you had to include the suffix `Log` in your configuration
 > (`LoggingPack.DatabaseLog`). This is not necessary anymore.
-> If you have been using a Log engine like `` `DatabaseLogger `` that does not follow
+> If you have been using a Log engine like `DatabaseLogger` that does not follow
 > the convention to use a suffix `Log` for your class name, you have to adjust your
 > class name to `DatabaseLog`. You should also avoid class names like `SomeLogLog`,
 > which includes the suffix twice at the end.
@@ -194,9 +194,9 @@ logger can be configured separately to rotate files, pre-process writes or use
 a completely different storage for your logs.
 
 Using syslog is pretty much like using the default FileLog engine; you just need
-to specify <span class="title-ref">Syslog</span> as the engine to be used for logging. The following
+to specify `Syslog` as the engine to be used for logging. The following
 configuration snippet will replace the default logger with syslog. This should
-be done in the <span class="title-ref">bootstrap.php</span> file:
+be done in the `bootstrap.php` file:
 
 ``` php
 CakeLog::config('default', [
@@ -207,18 +207,18 @@ CakeLog::config('default', [
 The configuration array accepted for the Syslog logging engine understands the
 following keys:
 
-- \`format\`: A sprintf template string with two placeholders; the first one
+- `format`: A sprintf template string with two placeholders; the first one
   for the error type, and the second for the message itself. This key is
   useful to add additional information about the server or process in the
   logged message. For example: `%s - Web Server 1 - %s` will look like
   `error - Web Server 1 - An error occurred in this request` after
   replacing the placeholders.
-- \`prefix\`: An string that will be prefixed to every logged message.
-- \`flag\`: An integer flag to be used for opening the connection to the
-  logger. By default <span class="title-ref">LOG_ODELAY</span> will be used. See <span class="title-ref">openlog</span> documentation
+- `prefix`: An string that will be prefixed to every logged message.
+- `flag`: An integer flag to be used for opening the connection to the
+  logger. By default `LOG_ODELAY` will be used. See `openlog` documentation
   for more options
-- \`facility\`: The logging slot to use in syslog. By default <span class="title-ref">LOG_USER</span> is
-  used. See <span class="title-ref">syslog</span> documentation for more options
+- `facility`: The logging slot to use in syslog. By default `LOG_USER` is
+  used. See `syslog` documentation for more options
 
 <a id="writing-to-logs"></a>
 
@@ -311,29 +311,24 @@ In order for scopes to work, you **must** do a few things:
 
 `static` CakeLog::**config**($name, $config)
 
-param string \$name  
-Name for the logger being connected, used
-to drop a logger later on.
-
-param array \$config  
-Array of configuration information and
-constructor arguments for the logger.
+- `string $name`: Name for the logger being connected, used
+  to drop a logger later on.
+- `array $config`: Array of configuration information and
+  constructor arguments for the logger.
 
 Connect a new logger to CakeLog. Each connected logger
 receives all log messages each time a log message is written.
 
 `static` CakeLog::**configured**()
 
-returns  
-An array of configured loggers.
+Returns: An array of configured loggers.
 
 Get the names of the configured loggers.
 
 `static` CakeLog::**drop**($name)
 
-param string \$name  
-Name of the logger you wish to no longer receive
-messages.
+- `string $name`: Name of the logger you wish to no longer receive
+  messages.
 
 `static` CakeLog::**write**($level, $message, $scope = [])
 
@@ -393,8 +388,7 @@ Calling `CakeLog::levels()` will result in:
 
 `static` CakeLog::**defaultLevels**()
 
-returns  
-An array of the default log levels values.
+Returns: An array of the default log levels values.
 
 Resets log levels to their original values:
 
@@ -413,29 +407,25 @@ Resets log levels to their original values:
 
 `static` CakeLog::**enabled**($streamName)
 
-returns  
-boolean
+Returns: `boolean`
 
 Checks whether `$streamName` has been enabled.
 
 `static` CakeLog::**enable**($streamName)
 
-returns  
-void
+Returns: `void`
 
 Enable the stream `$streamName`.
 
 `static` CakeLog::**disable**($streamName)
 
-returns  
-void
+Returns: `void`
 
 Disable the stream `$streamName`.
 
 `static` CakeLog::**stream**($streamName)
 
-returns  
-Instance of `BaseLog` or `false` if not found.
+Returns: Instance of `BaseLog` or `false` if not found.
 
 Gets `$streamName` from the active streams.
 

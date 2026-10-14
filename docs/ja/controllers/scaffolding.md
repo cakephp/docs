@@ -29,7 +29,7 @@ CakePHP のスキャフォールディングはとても素晴らしいです。
 スキャフォールディングはデータベーステーブルを分析して、追加、削除、編集ボタンがついている標準的な一覧、
 編集のための標準的なフォーム、データベースの1レコードを見るための標準的なビューを作成します。
 
-スキャフォールディングを追加するために、コントローラの中で、 `$scaffold` 変数を追加して下さい。 :
+スキャフォールディングを追加するために、コントローラの中で、 `$scaffold` 変数を追加して下さい。
 
 ``` php
 class CategoriesController extends AppController
@@ -55,7 +55,7 @@ Category 一覧に関連している User の ID が表示されているでし�
 例えば、もし Group が複数の User を持っていて (`hasMany`) 、 User が Group に
 従属 (`belongsTo`) している場合、以下のコードを User と Group モデルに
 手動で追加しなければなりません。このコードを追加する前だと、
-User 追加フォームに Group のための select ボックスが空のまま表示されます。 :
+User 追加フォームに Group のための select ボックスが空のまま表示されます。
 
 ``` php
 // In Group.php
@@ -66,7 +66,7 @@ public $belongsTo = 'Group';
 
 もし ID 以外の別なもの (例えばユーザの名前など) を表示したい場合、 `$displayField` 変数を
 モデルで設定して下さい。それでは、スキャフォールディングの中で ID ではなく名前によってカテゴリに
-関連したユーザが示されるように User クラスに `$displayField` を設定してみましょう。 :
+関連したユーザが示されるように User クラスに `$displayField` を設定してみましょう。
 
 ``` php
 class User extends AppModel
@@ -81,13 +81,13 @@ class User extends AppModel
 `Configure::write('Routing.prefixes', ['admin']);`
 とすることで管理者インターフェイスを生成するためにスキャフォールディングを使えるようになります。
 
-一旦管理ルーティングを有効にしたら、スキャフォールディング変数に admin プレフィクスを設定して下さい。 :
+一旦管理ルーティングを有効にしたら、スキャフォールディング変数に admin プレフィクスを設定して下さい。
 
 ``` php
 public $scaffold = 'admin';
 ```
 
-以上で管理用の足場のアクションにアクセスできるようになります。 :
+以上で管理用の足場のアクションにアクセスできるようになります。
 
     http://example.com/admin/controller/index
     http://example.com/admin/controller/view
@@ -97,7 +97,7 @@ public $scaffold = 'admin';
 
 これは単純なバックエンドインターフェイスを素早く作るための簡単な方法です。ただし、
 管理用と非管理用の足場のメソッドを同時に使うことはできないことを覚えておいて下さい。
-普通のスキャフォールディングでは個別のメソッドを上書きしたり、独自実装に置き換えることができます。 :
+普通のスキャフォールディングでは個別のメソッドを上書きしたり、独自実装に置き換えることができます。
 
 ``` php
 public function admin_view($id = null)
@@ -115,13 +115,13 @@ public function admin_view($id = null)
 ここで紹介するカスタマイズは役に立つでしょう。
 
 特定のコントローラ (例えば PostsController) のために独自の足場のビューは
-次のように置き換えるべきです。 :
+次のように置き換えるべきです。
 
     templates/Posts/scaffold.index.ctp
     templates/Posts/scaffold.form.ctp
     templates/Posts/scaffold.view.ctp
 
-すべてのコントローラのために独自の足場のビューは次のように置き換えられるべきです。 :
+すべてのコントローラのために独自の足場のビューは次のように置き換えられるべきです。
 
     templates/Scaffolds/index.ctp
     templates/Scaffolds/form.ctp

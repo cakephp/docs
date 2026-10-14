@@ -10,7 +10,7 @@ Bake では、簡単にフル機能をそなえたアプリケーションを作
 
 Bake は [pieceofcake2/bake](https://github.com/pieceofcake2/bake) プラグインで提供されています。
 pieceofcake2/app スケルトンから作成したアプリケーションには、開発用の依存パッケージとして
-すでに含まれています。それ以外の場合は Composer でインストールします。 :
+すでに含まれています。それ以外の場合は Composer でインストールします。
 
 ``` bash
 composer require --dev pieceofcake2/bake
@@ -19,7 +19,7 @@ composer require --dev pieceofcake2/bake
 Composer はプラグインを `plugins/Bake/` にインストールします。これには
 [Composer でのプラグインのインストール](/ja/plugins/how-to-install-plugins#composer) で説明している
 `composer.json` の `allow-plugins` と `installer-paths` の設定が必要です。pieceofcake2/app
-スケルトンにはすでに設定されています。プラグインは `config/bootstrap.php` でロードしてください。 :
+スケルトンにはすでに設定されています。プラグインは `config/bootstrap.php` でロードしてください。
 
 ``` php
 // config/bootstrap.php
@@ -70,7 +70,7 @@ What would you like to Bake? (D/M/V/C/P/F/T/Q)
 >
 ```
 
-代わりに、次のようにコマンドラインから直接これらのコマンドを実行することが出来ます。 :
+代わりに、次のようにコマンドラインから直接これらのコマンドを実行することが出来ます。
 
 ``` bash
 $ bin/cake bake db_config
@@ -139,7 +139,7 @@ Bake は、アプリケーションの `src/Console/Templates/` と、ロード�
 
 `[themename]` は、自分で自由につけれる bake のテーマ名です。
 bake のテーマ名はユニークである必要がありますので、'default' は使わないでください。
-複数のテーマがある場合は、Bake がどれを使うか尋ねます。 `--theme` オプションで指定することもできます。 :
+複数のテーマがある場合は、Bake がどれを使うか尋ねます。 `--theme` オプションで指定することもできます。
 
 ``` bash
 bin/cake bake view Posts --theme myTheme

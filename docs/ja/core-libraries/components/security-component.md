@@ -28,8 +28,8 @@ Security コンポーネントのフォーム保護機能と、 `startup()` コ�
 > Security コンポーネントを使用している時、フォームの作成に FormHelper を
 > **使わなければなりません** 。また、フィールドの "name" 属性を
 > **上書きしてはいけません** 。Security コンポーネントは、FormHelper で作成され、
-> 管理されるインジケーターを確認します。(これらは `~FormHelper::create()`
-> と `~FormHelper::end()` の中で作成されます。) 例えば JavaScript で無効化・
+> 管理されるインジケーターを確認します。(これらは `FormHelper::create()`
+> と `FormHelper::end()` の中で作成されます。) 例えば JavaScript で無効化・
 > 削除・新規作成するなどして POST リクエスト中の投稿されたフィールドを動的に差し替えることは、
 > リクエストが破棄されるきっかけになります。 `$validatePost` や `$disabledFields`
 > 設定パラメータをご覧ください。
@@ -111,7 +111,7 @@ POST データをもとに同じ構造を構築し、ハッシュと比較しま
 
 Security コンポーネントは、一般的にコントローラの `beforeFilter()` で使用します。
 あなたが望むセキュリティ制限をここで指定すると SecurityComponent は起動時に
-それらの制限を有効にします。 :
+それらの制限を有効にします。
 
 ``` php
 class WidgetController extends AppController
@@ -126,7 +126,7 @@ class WidgetController extends AppController
 ```
 
 上記の例では、delete アクションは POST リクエストを受け取った場合にのみ
-正しく実行されます。 :
+正しく実行されます。
 
 ``` php
 class WidgetController extends AppController
@@ -142,7 +142,7 @@ class WidgetController extends AppController
 }
 ```
 
-上記の例では、 管理者用ルーティングの全てのアクションは、セキュアな SSL 通信のみを許可します。 :
+上記の例では、 管理者用ルーティングの全てのアクションは、セキュアな SSL 通信のみを許可します。
 
 ``` php
 class WidgetController extends AppController
@@ -192,7 +192,7 @@ Piece of Cake 2 フォークでは、CSRF トークンが HMAC で署名され�
 
 シンプルに components 配列に `SecurityComponent` を追加することで、
 CSRF 防御の恩恵を受けられます。デフォルトでは CSRF トークンは、30分間有効です。
-コンポーネントの csfrExpires を設定することで有効期限を指定することができます。 :
+コンポーネントの csfrExpires を設定することで有効期限を指定することができます。
 
 ``` php
 public $components = [
@@ -202,7 +202,7 @@ public $components = [
 ];
 ```
 
-コントローラの `beforeFilter` 中でこのプロパティをセットすることもできます。 :
+コントローラの `beforeFilter` 中でこのプロパティをセットすることもできます。
 
 ``` php
 public function beforeFilter()
@@ -229,7 +229,7 @@ csrfExpires プロパティは、
 トークンが二度使用された場合、リクエストは破棄されます。しばしば、シングルページアプリケーションで
 問題が発生して、この振る舞いが好ましくないことがあります。
 `csrfUseOnce` を `false` にすることで、長期間、複数回使用できるトークンに切り替える
-ことができます。この設定は、コントローラの components 配列や `beforeFilter` で行います。 :
+ことができます。この設定は、コントローラの components 配列や `beforeFilter` で行います。
 
 ``` php
 public $components = [

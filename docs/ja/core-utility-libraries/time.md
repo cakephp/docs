@@ -3,7 +3,7 @@
 `class` **CakeTime**
 
 `TimeHelper` の機能が `View` の外部で必要な場合、
-`CakeTime` クラスを使用してください。 :
+`CakeTime` クラスを使用してください。
 
 ``` php
 class UsersController extends AppController

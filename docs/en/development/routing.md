@@ -47,7 +47,7 @@ that CakePHP comes configured with a default set of routes.
 CakePHP's default routing will get you pretty far in any
 application. You can access an action directly via the URL by
 putting its name in the request. You can also pass parameters to
-your controller actions using the URL. :
+your controller actions using the URL.
 
 ``` text
 // URL pattern default routes:
@@ -605,7 +605,7 @@ passed arguments
 
 Passed arguments are additional arguments or path segments that are
 used when making a request. They are often used to pass parameters
-to your controller methods. :
+to your controller methods.
 
     http://localhost/calendars/view/recent/mark
 
@@ -898,7 +898,7 @@ connectNamed() supports a number of options:
 - `default` Set this to true to merge in the default set of named parameters.
 - `reset` Set to true to clear existing rules and start fresh.
 - `separator` Change the string used to separate the key & value in a named
-  parameter. Defaults to <span class="title-ref">:</span>
+  parameter. Defaults to `:`
 
 ## Reverse Routing
 
@@ -1026,20 +1026,15 @@ to implement custom parameter handling.
 
 `static` Router::**connect**($route, $defaults = [], $options = [])
 
-param string \$route  
-A string describing the template of the route
-
-param array \$defaults  
-An array describing the default route parameters.
-These parameters will be used by default
-and can supply routing parameters that are not dynamic.
-
-param array \$options  
-An array matching the named elements in the route
-to regular expressions which that element should match. Also contains
-additional parameters such as which routed parameters should be
-shifted into the passed arguments, supplying patterns for routing
-parameters and supplying the name of a custom routing class.
+- `string $route`: A string describing the template of the route
+- `array $defaults`: An array describing the default route parameters.
+  These parameters will be used by default
+  and can supply routing parameters that are not dynamic.
+- `array $options`: An array matching the named elements in the route
+  to regular expressions which that element should match. Also contains
+  additional parameters such as which routed parameters should be
+  shifted into the passed arguments, supplying patterns for routing
+  parameters and supplying the name of a custom routing class.
 
 Routes are a way of connecting request URLs to objects in your application.
 At their core routes are a set of regular expressions that are used to
@@ -1054,7 +1049,7 @@ Router::connect('/:controller/:action/*');
 The first parameter will be used as a controller name while the second is
 used as the action name. The '/\*' syntax makes this route greedy in that
 it will match requests like `/posts/index` as well as requests like
-`/posts/edit/1/foo/bar` . :
+`/posts/edit/1/foo/bar` .
 
 ``` php
 Router::connect(
@@ -1064,7 +1059,7 @@ Router::connect(
 ```
 
 The above shows the use of route parameter defaults. And providing routing
-parameters for a static route. :
+parameters for a static route.
 
 ``` php
 Router::connect(
@@ -1096,29 +1091,21 @@ have special meaning in the \$options array.
 
 `static` Router::**redirect**($route, $url, $options = [])
 
-param string \$route  
-A route template that dictates which URLs should
-be redirected.
-
-param mixed \$url  
-Either a `routing array` or a string url
-for the destination of the redirect.
-
-param array \$options  
-An array of options for the redirect.
+- `string $route`: A route template that dictates which URLs should
+  be redirected.
+- `mixed $url`: Either a `routing array` or a string url
+  for the destination of the redirect.
+- `array $options`: An array of options for the redirect.
 
 Connects a new redirection Route in the router.
 See [Redirect Routing](#redirect-routing) for more information.
 
 `static` Router::**connectNamed**($named, $options = [])
 
-param array \$named  
-A list of named parameters. Key value pairs are accepted where
-values are either regex strings to match, or arrays.
-
-param array \$options  
-Allows control of all settings:
-separator, greedy, reset, default
+- `array $named`: A list of named parameters. Key value pairs are accepted where
+  values are either regex strings to match, or arrays.
+- `array $options`: Allows control of all settings:
+  separator, greedy, reset, default
 
 Specifies what named parameters CakePHP should be parsing out of
 incoming URLs. By default CakePHP will parse every named parameter
@@ -1127,21 +1114,17 @@ more information.
 
 `static` Router::**promote**($which = null)
 
-param integer \$which  
-A zero-based array index representing the route to move.
-For example, if 3 routes have been added, the last route would be 2.
+- `integer $which`: A zero-based array index representing the route to move.
+  For example, if 3 routes have been added, the last route would be 2.
 
 Promote a route (by default, the last one added) to the beginning of the list.
 
 `static` Router::**url**($url = null, $full = false)
 
-param mixed \$url  
-Cake-relative URL, like "/products/edit/92" or
-"/presidents/elect/4" or a `routing array`
-
-param mixed \$full  
-If (boolean) true, the full base URL will be prepended
-to the result. If an array accepts the following keys
+- `mixed $url`: Cake-relative URL, like "/products/edit/92" or
+  "/presidents/elect/4" or a `routing array`
+- `mixed $full`: If (boolean) true, the full base URL will be prepended
+  to the result. If an array accepts the following keys
 
 - escape - used when making URLs embedded in HTML escapes query
   string '&'

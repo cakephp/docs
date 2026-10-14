@@ -15,7 +15,7 @@ TranslabeBehavior を Containable と併用するなら、クエリに 'fields'
 i18n データベーステーブルは、CakePHP コンソールを使っても生成できますし、
 手動でもできます。ただし、CakePHP の将来のバージョンでレイアウトに変更が
 あるかもしれませんので、コンソールを使うことをお勧めします。コンソールを
-ずっと使い続けていれば、レイアウトに変更が入っても問題はおきません。 :
+ずっと使い続けていれば、レイアウトに変更が入っても問題はおきません。
 
     bin/cake i18n
 
@@ -27,7 +27,7 @@ i18n データベースを初期化するには、 `[I]` を選択してくだ�
 ## モデルに Translate ビヘイビアを追加する
 
 次の例のように、 `$actAs` プロパティを使って、
-モデルに Translate ビヘイビアを追加します。 :
+モデルに Translate ビヘイビアを追加します。
 
 ``` php
 class Post extends AppModel
@@ -45,7 +45,7 @@ Translate ビヘイビアは、動作する前に一組のオプションがあ�
 ## フィールドを定義する
 
 フィールドをセットするには、配列を使って、単純に `'Translate'`
-の値を拡張するだけです。次のようになります。 :
+の値を拡張するだけです。次のようになります。
 
 ``` php
 class Post extends AppModel
@@ -60,7 +60,7 @@ class Post extends AppModel
 
 このようにすれば、基本的なセットアップは完了です。説明で使用する例では、
 対象とするフィールドを「title」とします。さて、この例にならうなら、
-モデルの例は次のようになるはずです。 :
+モデルの例は次のようになるはずです。
 
 ``` php
 class Post extends AppModel
@@ -98,7 +98,7 @@ TranslateBehavior のために翻訳するフィールドを定義するとき�
 
 ### 指定したロケールで翻訳されたフィールドを取得する
 
-`$Model->locale` の設定によって、指定したロケールの翻訳を読むことができます。 :
+`$Model->locale` の設定によって、指定したロケールの翻訳を読むことができます。
 
 ``` php
 // Read the spanish locale data.
@@ -113,7 +113,7 @@ $results = $this->Post->find('first', [
 
 現在のモデルに対する全ての翻訳レコードを取得するには、ただ単純に、次に示す通り
 ビヘイビアのセットアップにおける *フィールドの配列* を拡張します。
-名前は好きにつけてください。 :
+名前は好きにつけてください。
 
 ``` php
 class Post extends AppModel
@@ -170,7 +170,7 @@ class Post extends AppModel
 > モデルのレコードは「locale」という *バーチャル* フィールドを含みます。
 > このフィールドは、結果セットのロケールが何であるかを示します。
 
-\`find\` を直接実行しているモデルのフィールドだけが翻訳されることに注意してください。
+`find` を直接実行しているモデルのフィールドだけが翻訳されることに注意してください。
 関連するモデルに対してコールバックを動作させることは現在サポートされていないので、
 アソシエーション経由で追加されたモデルは、翻訳されません。
 
@@ -182,7 +182,7 @@ bindTranslation メソッドを使用することで、あなたが必要な時�
 `method` TranslateBehavior::**bindTranslation**($fields, $reset)
 
 `$fields` は、フィールドとアソシエーション名の連想配列です。
-キーは翻訳フィールドで、値は仮のアソシエーション名です。 :
+キーは翻訳フィールドで、値は仮のアソシエーション名です。
 
 ``` php
 $this->Post->bindTranslation(['title' => 'titleTranslation']);
@@ -190,7 +190,7 @@ $this->Post->bindTranslation(['title' => 'titleTranslation']);
 $this->Post->find('all', ['recursive' => 1]);
 ```
 
-このようにセットアップすると、find() の結果は次のようになります。 :
+このようにセットアップすると、find() の結果は次のようになります。
 
 ``` text
 
@@ -290,7 +290,7 @@ class Post extends AppModel
 **\$translateModel** と **\$translateTable** です。
 
 全ての posts の翻訳を保存するテーブルとして、「i18n」の代わりに「post_i18ns」を
-使用するとしましょう。これには、モデルを次のようにセットアップします。 :
+使用するとしましょう。これには、モデルを次のようにセットアップします。
 
 ``` php
 class Post extends AppModel
@@ -318,7 +318,7 @@ TranslateModel を動作させるには、モデルのフォルダに実際に�
 必要があります。なぜなら、このビヘイビアを使うモデルの中で、displayField
 ディレクトリをセットするプロパティがまだ存在しないからです。
 
-`$displayField` を `'field'` に変更することを忘れないでください。 :
+`$displayField` を `'field'` に変更することを忘れないでください。
 
 ``` php
 class PostI18n extends AppModel
@@ -335,7 +335,7 @@ class PostI18n extends AppModel
 ### テーブルの変更
 
 テーブルの名前を変更したい場合は、次に示すように、ただ単純にモデル中の
-\$translateTable を定義します。 :
+\$translateTable を定義します。
 
 ``` php
 class Post extends AppModel

@@ -9,16 +9,11 @@ CakePHP は IDE やエディタと直接連携するようなツールは提供�
 
 `function` **debug(mixed $var, ?bool $showHtml = null, bool $showFrom = true)**
 
-param mixed \$var  
-出力する内容。配列やオブジェクトを渡してもうまく動作します。
-
-param boolean \$showHtml  
-true をセットしたならエスケープが有効になります。
-ウェブリクエストを扱う場合にはデフォルトでエスケープが有効になります。
-コンソールで実行した場合や false を指定した場合は、プレーンテキストで出力されます。
-
-param boolean \$showFrom  
-debug() がどのファイルのどの行で呼ばれたのかを表示します。
+- `mixed $var`: 出力する内容。配列やオブジェクトを渡してもうまく動作します。
+- `boolean $showHtml`: true をセットしたならエスケープが有効になります。
+  ウェブリクエストを扱う場合にはデフォルトでエスケープが有効になります。
+  コンソールで実行した場合や false を指定した場合は、プレーンテキストで出力されます。
+- `boolean $showFrom`: debug() がどのファイルのどの行で呼ばれたのかを表示します。
 
 debug() 関数は PHP 関数の print_r() と同様に、グローバルに利用可能な関数です。
 debug() 関数により、さまざまな方法で変数の内容を出力することができます。

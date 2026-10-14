@@ -14,7 +14,7 @@
 
 このシェルはレガシーな `app/` レイアウトのアプリケーションを対象とするので、以下の例では
 `vendor/bin/cake` から実行しています。プラグインを開発用の依存パッケージとしてインストールし、
-`app/Config/bootstrap.php` でロードします。 :
+`app/Config/bootstrap.php` でロードします。
 
 ``` bash
 composer require --dev pieceofcake2/upgrade
@@ -29,21 +29,21 @@ CakePlugin::load('Upgrade');
 ```
 
 始める前に、アプリケーションのバックアップを取るか、バージョン管理システムにコミットしておいてください。
-すべてのアップグレード手順を実行するには、次のようにします。 :
+すべてのアップグレード手順を実行するには、次のようにします。
 
     vendor/bin/cake upgrade all
 
-ファイルを変更せずにシェルが何をするのか確認したい場合は、まず `--dry-run` を付けて実行してください。 :
+ファイルを変更せずにシェルが何をするのか確認したい場合は、まず `--dry-run` を付けて実行してください。
 
     vendor/bin/cake upgrade all --dry-run
 
-プラグインをアップグレードするには、次のコマンドを実行します。 :
+プラグインをアップグレードするには、次のコマンドを実行します。
 
     vendor/bin/cake upgrade all --plugin YourPluginName
 
 各アップグレード手順 (`tests`, `locations`, `i18n`, `helpers`, `basics`, `request`,
 `configure`, `constants`, `controller_redirects`, `components`, `exceptions`) は
-個別に実行することもできます。利用できる手順とオプションの一覧は、次のコマンドで確認できます。 :
+個別に実行することもできます。利用できる手順とオプションの一覧は、次のコマンドで確認できます。
 
     vendor/bin/cake upgrade --help
 

@@ -22,7 +22,7 @@ In the Piece of Cake 2 fork, Bake is not part of the core. Install the
 (`composer require --dev pieceofcake2/bake`) to use `cake bake`.
 :::
 
-- `cake bake model` now supports baking `$behaviors`. Finding <span class="title-ref">lft</span>, <span class="title-ref">rght</span> and <span class="title-ref">parent_id</span> fields
+- `cake bake model` now supports baking `$behaviors`. Finding `lft`, `rght` and `parent_id` fields
   in your table it will add the Tree behavior, for example. You can also extend the ModelTask to support your own
   behaviors to be recognized.
 - `cake bake` for views, models, controllers, tests and fixtures now supports a `-f` or `--force` parameter to
@@ -154,11 +154,11 @@ In the Piece of Cake 2 fork, Bake is not part of the core. Install the
 ### L10n
 
 - `ell` is now the default locale for Greek as specified by ISO 639-3 and `gre` its alias.
-  The locale folders have to be adjusted accordingly (from <span class="title-ref">/Locale/gre/</span> to <span class="title-ref">/Locale/ell/</span>).
+  The locale folders have to be adjusted accordingly (from `/Locale/gre/` to `/Locale/ell/`).
 - `fas` is now the default locale for Farsi as specified by ISO 639-3 and `per` its alias.
-  The locale folders have to be adjusted accordingly (from <span class="title-ref">/Locale/per/</span> to <span class="title-ref">/Locale/fas/</span>).
+  The locale folders have to be adjusted accordingly (from `/Locale/per/` to `/Locale/fas/`).
 - `sme` is now the default locale for Sami as specified by ISO 639-3 and `smi` its alias.
-  The locale folders have to be adjusted accordingly (from <span class="title-ref">/Locale/smi/</span> to <span class="title-ref">/Locale/sme/</span>).
+  The locale folders have to be adjusted accordingly (from `/Locale/smi/` to `/Locale/sme/`).
 - `mkd` replaces `mk` as default locale for Macedonian as specified by ISO 639-3.
   The corresponding locale folders have to be adjusted, as well.
 - Catalog code `in` has been dropped in favor of `id` (Indonesian),

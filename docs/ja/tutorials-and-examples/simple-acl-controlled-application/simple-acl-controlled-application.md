@@ -27,7 +27,7 @@ CakePHP のある程度の経験と、MVCの概念についての理解、
 
 ## アプリケーションの準備
 
-まず、Composer で新しいアプリケーションを作成しましょう。 :
+まず、Composer で新しいアプリケーションを作成しましょう。
 
 ``` bash
 composer create-project pieceofcake2/app acl
@@ -40,7 +40,7 @@ cd acl
 
 スケルトンには、開発用の依存パッケージとして [Bake プラグイン](../../console-and-shells/code-generation-with-bake)
 がすでに含まれていて、 `plugins/Bake/` にインストールされています (スケルトンの `composer.json` には
-そのための `installer-paths` の設定があります)。 `config/bootstrap.php` でロードしてください。 :
+そのための `installer-paths` の設定があります)。 `config/bootstrap.php` でロードしてください。
 
 ``` php
 // config/bootstrap.php
