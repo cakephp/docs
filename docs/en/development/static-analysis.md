@@ -145,6 +145,35 @@ vendor/bin/phpstan analyse
 PHPStan lists the errors with the file and the line of each. In a CI job, add
 `--no-progress` to keep the log short.
 
+### CI Job Summaries
+
+In GitHub Actions, the
+[ci-summary](https://github.com/pieceofcake2/.github/tree/master/actions/ci-summary#readme)
+action from `pieceofcake2/.github` shows the result on the run page as a
+[job summary](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands#adding-a-job-summary):
+the number of errors and a table with the file, the line, the identifier and
+the message of each. Write the errors in the checkstyle (or JSON) format and
+pass the file to the action:
+
+```yaml
+- name: Run PHPStan
+  run: vendor/bin/phpstan analyse --no-progress --error-format=checkstyle > phpstan-report.xml
+
+- name: PHPStan summary
+  if: ${{ !cancelled() }}
+  uses: pieceofcake2/.github/actions/ci-summary@v1
+  with:
+    type: phpstan
+    file: phpstan-report.xml
+```
+
+The same action summarizes PHP_CodeSniffer reports and the JUnit reports of
+PHPUnit, with the coverage if you like. For [E2E tests](/development/e2e-testing),
+it also links to the uploaded failure screenshots; see the
+[CI section of the e2e-test documentation](https://pieceofcake2.github.io/e2e-test/#ci-with-github-actions)
+for a complete job. The action needs PHP on the runner, and it never fails
+the job.
+
 ## What the Extension Adds
 
 The extension adds the following to PHPStan:
