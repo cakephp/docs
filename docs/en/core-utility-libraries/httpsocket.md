@@ -101,7 +101,7 @@ an extra request can be automatically done according to the received *Location* 
 ``` php
 <?php
 $HttpSocket = new HttpSocket();
-$response = $HttpSocket->get('http://example.com/redirecting_url', [], ['redirect' => true]);
+$response = $HttpSocket->get('https://example.com/redirecting_url', [], ['redirect' => true]);
 ```
 
 The *redirect* option can take the following values

@@ -68,7 +68,7 @@ belongs to your site, for example the virtual host file.
     used when the document root is not set to `app/webroot/`.
 
     If you are installing CakePHP into a user directory
-    (<http://example.com/~username/my_app/>), or any other URL structure
+    (<https://example.com/~username/my_app/>), or any other URL structure
     that already utilizes mod_rewrite, you'll need to add a `RewriteBase`
     statement to the `.htaccess` file in `webroot/`. This can be added to the
     same section with the RewriteEngine directive, so for example, your webroot
@@ -121,7 +121,7 @@ you will need PHP running with PHP-FPM.
 server {
     listen 80;
     server_name www.example.com;
-    return 301 http://example.com$request_uri;
+    return 301 https://example.com$request_uri;
 }
 
 server {

@@ -684,7 +684,7 @@ For more information on advanced routing techniques, see
 [Routes Configuration](/development/routing#routes-configuration).
 
 By default, CakePHP responds to a request for the root of your site
-(e.g., <http://www.example.com>) using its PagesController, rendering
+(e.g., <https://www.example.com>) using its PagesController, rendering
 a view called "home". Instead, we'll replace this with our
 PostsController by creating a routing rule.
 

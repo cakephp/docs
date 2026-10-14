@@ -261,7 +261,7 @@ v2.12.3 からデフォルトのポートは 8765 です。それより前のバ
 
 `webroot/` の `.htaccess` がすべてのリクエストを `index.php` に書き換えるので、
 mod_rewrite を有効にし、`AllowOverride` でそれを許可しておく必要があります。
-もしウェブサーバが適切に設定されていれば、 <http://www.example.com> で CakePHP アプリケーションがアクセス可能になっているはずです。
+もしウェブサーバが適切に設定されていれば、 <https://www.example.com> で CakePHP アプリケーションがアクセス可能になっているはずです。
 
 nginx、lighttpd、IIS での設定や mod_rewrite のトラブルシューティングについては
 [URLリライティング](installation/url-rewriting) を参照してください。
@@ -273,7 +273,7 @@ nginx、lighttpd、IIS での設定や mod_rewrite のトラブルシューテ�
 
 それでは、実際に CakePHP を動作させてみましょう。
 アプリケーションの URL、たとえば開発用サーバなら <http://localhost:8765/>、
-あるいは <http://www.example.com/> をブラウザで開いてみましょう。
+あるいは <https://www.example.com/> をブラウザで開いてみましょう。
 この時点では、CakePHP のデフォルトのホーム画面が表示され、`tmp/` ディレクトリに書き込めるか、
 キャッシュが動作しているか、データベースに接続できるかが確認できます。
 

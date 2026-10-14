@@ -243,7 +243,7 @@ class FarAwaySource extends DataSource
          */
         $queryData['conditions']['apiKey'] = $this->config['apiKey'];
         $json = $this->Http->get(
-            'http://example.com/api/list.json',
+            'https://example.com/api/list.json',
             $queryData['conditions'],
         );
         $res = json_decode($json, true);
@@ -263,7 +263,7 @@ class FarAwaySource extends DataSource
     {
         $data = array_combine($fields, $values);
         $data['apiKey'] = $this->config['apiKey'];
-        $json = $this->Http->post('http://example.com/api/set.json', $data);
+        $json = $this->Http->post('https://example.com/api/set.json', $data);
         $res = json_decode($json, true);
         if (is_null($res)) {
             $error = json_last_error();
@@ -292,7 +292,7 @@ class FarAwaySource extends DataSource
      */
     public function delete(Model $model, $id = null)
     {
-        $json = $this->Http->get('http://example.com/api/remove.json', [
+        $json = $this->Http->get('https://example.com/api/remove.json', [
             'id' => $id[$model->alias . '.id'],
             'apiKey' => $this->config['apiKey'],
         ]);

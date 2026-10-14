@@ -43,7 +43,7 @@ CakePHP のデフォルトルーティングはほかのアプリに比べてと
 
 ``` text
 // デフォルトルートの URL パターン:
-http://example.com/controller/action/param1/param2/param3
+https://example.com/controller/action/param1/param2/param3
 ```
 
 /posts/view は PostsController の view() アクションに接続することを示しています。

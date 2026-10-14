@@ -296,7 +296,7 @@ virtual host looks like this:
 The `.htaccess` file in `webroot/` rewrites all requests to `index.php`, so
 mod_rewrite must be enabled and `AllowOverride` must allow it. If your web
 server is configured correctly, you should now find your CakePHP application
-accessible at <http://www.example.com>.
+accessible at <https://www.example.com>.
 
 For nginx, lighttpd, IIS and for troubleshooting mod_rewrite, see
 [URL Rewriting](installation/url-rewriting). If you need to place the
@@ -309,7 +309,7 @@ Before you go live, also read [Deployment](deployment).
 
 Alright, let's see CakePHP in action. Point your browser to the URL of your
 application, for example <http://localhost:8765/> when you use the development
-server or <http://www.example.com/>. At this point, you'll be presented with
+server or <https://www.example.com/>. At this point, you'll be presented with
 CakePHP's default home, which tells you whether the `tmp/` directory is
 writable, whether caching works and whether CakePHP can connect to your
 database.

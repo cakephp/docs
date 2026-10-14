@@ -645,7 +645,7 @@ URL がどのように特定の関数の呼び出しにマップされるのか�
 
 ルーティングテクニックの応用に関する情報は、 [Routes Configuration](/ja/development/routing#routes-configuration) を見てください。
 
-今のところ、ユーザがサイト (たとえば、 <http://www.example.com>) を見に来ると、
+今のところ、ユーザがサイト (たとえば、 <https://www.example.com>) を見に来ると、
 CakePHP は PagesController に接続し、「home」というビューを表示するようになっています。
 ではこれを、ルーティングルールを作成して PostsController に行くようにしてみましょう。
 

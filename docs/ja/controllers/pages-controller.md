@@ -2,7 +2,7 @@
 
 CakePHPはデフォルトコントローラ `PagesController.php` を提供しています。これは静的なコンテンツを提供するためのシンプルで補助的なコントローラです。
 インストール直後のホームページはコントローラを使って生成されています。もし `templates/Pages/about_us.ctp`
-というビューファイルを作ると `http://example.com/pages/about_us` というURLでアクセスすることができます。
+というビューファイルを作ると `https://example.com/pages/about_us` というURLでアクセスすることができます。
 Pages Controllerは必要に応じて気軽に修正できます。
 
 Pages Controller はアプリケーションの一部で、 `src/Controller/PagesController.php` にあります。
