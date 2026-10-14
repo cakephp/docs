@@ -93,20 +93,24 @@ $ bin/cake bake all
 
 ### 生成されるファイルの場所
 
-Bake はモデルを `src/Model/` に、コントローラを `src/Controller/` に書き出します。
-現在の Bake プラグインはそれ以外のファイルについてはレガシーレイアウトの場所を使うので、
-モダンレイアウトでは生成されたファイルを次のように移動してください。
+Bake は、生成したファイルをアプリケーションのレイアウトに合わせたディレクトリに書き出します。
 
-| ファイルの種類 | Bake の出力先 | 移動先 |
+| ファイルの種類 | モダンレイアウト | レガシーレイアウト |
 |---|---|---|
-| ビューテンプレート | `src/View/<Controller>/` | `templates/<Controller>/` |
-| テストケース | `tests/Case/<Type>/` | `tests/TestCase/<Type>/` |
-| フィクスチャ | `src/Test/Fixture/` | `tests/Fixture/` |
+| モデル | `src/Model/` | `app/Model/` |
+| コントローラ | `src/Controller/` | `app/Controller/` |
+| ビューテンプレート | `templates/<Controller>/` | `app/View/<Controller>/` |
+| テストケース | `tests/TestCase/<Type>/` | `app/Test/Case/<Type>/` |
+| フィクスチャ | `tests/Fixture/` | `app/Test/Fixture/` |
 
-CakePHP は `src/View/` にあるビューテンプレートも見つけるので、bake したビューは移動する前でも
-動作します。テストケースとフィクスチャは `tests/TestCase/` と `tests/Fixture/` にないと
-見つかりません (`tests/TestCase/` が存在する場合)。レガシーレイアウトでは、すべてのファイルが
-通常の `app/` 以下のディレクトリに書き出されるので、移動する必要はありません。
+プラグインに `tests/` ディレクトリがある場合、テストケースとフィクスチャはプラグインの
+`tests/TestCase/` と `tests/Fixture/` に書き出され、無い場合は `Test/Case/` と `Test/Fixture/` に書き出されます。
+
+::: info
+これらの場所に書き出すには pieceofcake2/bake 1.0.3 以降が必要です。それより前のバージョンでは、
+モダンレイアウトでもビューテンプレートを `src/View/` に、テストケースを `tests/Case/` に、
+フィクスチャを `src/Test/Fixture/` に書き出していたため、ファイルを移動する必要がありました。
+:::
 
 `bake project` は Bake プラグインに含まれているレガシーな `app/` スケルトンをコピーします。
 モダンレイアウトで新しいアプリケーションを始める場合は、代わりに

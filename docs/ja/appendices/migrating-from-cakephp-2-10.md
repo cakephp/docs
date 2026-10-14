@@ -24,6 +24,68 @@
 4. **PHP をアップグレードする**: PHP 8.0 以降に更新します
 5. **十分にテストする**: アプリケーションのテストスイートを実行し、互換性を確認します
 
+## v2.12.3
+
+v2.12.3 の変更のうち、すでにフォークで動いているアプリケーションに影響する可能性があるものです。
+
+### `Xml::build()` の `readFile` オプションで https の URL も取得しない ([PR #33](https://github.com/pieceofcake2/cakephp/pull/33))
+
+- **セキュリティ修正 (SSRF)**: `Xml::build($input, ['readFile' => false])` は、括弧が 1 組欠けていたため
+  `https://` の URL を取得していました（本家の CakePHP 2.x から引き継いだ不具合です）。
+  `'readFile' => false` を指定すると、`http://` と `https://` のどちらの URL も取得せず、`XmlException` を投げます。
+  [脆弱性への対応](/ja/appendices/security-fixes#xml-build-ssrf) も参照してください。
+
+**移行:**
+
+- リモートからの読み込みを無効にするために `'readFile' => false` を指定している場合は、対応不要です。
+  ドキュメントどおりに動作するようになりました。
+- `'readFile' => false` を指定したまま `Xml::build()` に `https://` の URL を取得させていた場合は、
+  オプションを削除する（既定値は `true`）か、`HttpSocket` などで自分で文書を取得して XML 文字列を渡してください。
+
+### CookieComponent が `'type'` の設定を反映する ([PR #34](https://github.com/pieceofcake2/cakephp/pull/34))
+
+- `CookieComponent` は `$components` で指定した `'type'`（例: `'Cookie' => ['type' => 'aes']`）を反映するようになりました。
+  これまではこの設定が黙って無視され、Cookie は安全でないデフォルトの `'cipher'` で暗号化されていました。
+
+**移行:**
+
+- コントローラーの `$components` で `'type'` を設定している場合、Cookie はそのタイプで書き込まれるようになり、
+  `'cipher'` で書き込まれた既存の Cookie は復号できなくなります。他の暗号化タイプの変更と同じように切り替えを計画してください。
+- `'aes'` を使う場合、mcrypt 拡張がインストールされていなければ `Configure::write('Security.useOpenSsl', true);`
+  を設定してください（[OpenSSL を有効にする](#enable-openssl) を参照）。
+- 不正な `'type'` を設定すると、`CookieComponent::type()` と同じく `E_USER_WARNING` を発生させ、`'cipher'` を使います。
+
+### テストケースの一覧が `tests/TestCase` 構成に対応 ([PR #35](https://github.com/pieceofcake2/cakephp/pull/35))
+
+- `CakeTestLoader::generateTestList()` は、アプリケーションとプラグインの `tests/TestCase` からテストケースを探し、
+  無ければレガシー構成の `Test/Case` を探すようになりました。これまではモダン構成で一覧が空になり、
+  テストケース名を指定しない `bin/cake test app` / `bin/cake test <Plugin>` や Web のテストランナーに
+  テストケースが表示されませんでした。
+
+**移行:**
+
+- 対応不要です。
+
+### SQL Server ドライバーがデフォルトで `PDO::ATTR_ERRMODE` を設定 ([PR #36](https://github.com/pieceofcake2/cakephp/pull/36))
+
+- `Sqlserver::connect()` は、他のドライバーと同じく `PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION` を
+  `'flags'` の設定にマージするようになりました。演算子の優先順位の不具合により、これまでこのデフォルトは適用されていませんでした。
+
+**移行:**
+
+- 対応不要です。PHP 8 の PDO はもともと `PDO::ERRMODE_EXCEPTION` がデフォルトで、
+  `'flags'` で指定した `PDO::ATTR_ERRMODE` の値はこれまでどおり優先されます。
+
+### ServerShell のデフォルトポートを 8765 に変更 ([PR #37](https://github.com/pieceofcake2/cakephp/pull/37))
+
+- `bin/cake server` は、多くのシステムで root 権限が必要な `80` ではなく、デフォルトでポート `8765` で待ち受けるようになりました
+  （CakePHP 3 以降と同じです）。
+- `ServerShell::DEFAULT_PORT` は `8765` になりました。
+
+**移行:**
+
+- ポート 80 を使い続ける場合は、`bin/cake server -p 80` のように明示的に指定してください。
+
 ## 破壊的変更
 
 ### インストール後の作業
@@ -479,14 +541,20 @@ public $components = [
     ]
 ];
 
-// 新（推奨）: タイプは $components では設定できないため、
-// CookieComponent::type() を呼び出します
-public function beforeFilter()
-{
-    parent::beforeFilter();
-    $this->Cookie->type('aes');
-}
+// 新（推奨）
+public $components = [
+    'Cookie' => [
+        'type' => 'aes',
+    ],
+];
 ```
+
+`beforeFilter()` で `$this->Cookie->type('aes');` を呼び出して設定することもできます。
+
+::: pieceofcake2
+`$components` の `'type'` は v2.12.3 から反映されます。v2.12.2 以前では無視され、
+Cookie は `'cipher'` で暗号化されていました。
+:::
 
 PHP 8 では `'aes'` を使う場合も `Security.useOpenSsl` の設定が必要です。下記の
 [OpenSSL を有効にする](#enable-openssl) を参照してください。
@@ -505,8 +573,10 @@ PHP 8 では `'aes'` を使う場合も `Security.useOpenSsl` の設定が必要
 `mcrypt` 拡張は PHP 7.2 以降同梱されておらず、通常はインストールされていません（[PECL](https://pecl.php.net/package/mcrypt) から入れることはできます）。
 `Security::encrypt()` と `Security::decrypt()` は `Security.useOpenSsl` が有効な場合にだけ
 OpenSSL を使い、そうでなければ `mcrypt_*` 関数を呼び出して失敗します。これらのメソッドを使う
-`CookieComponent` の `'aes'` タイプも同様です。この設定はデフォルトでは有効になっていないため、
-`app/Config/core.php`（レガシー構成）または `config/core.php`（モダン構成）に追加してください。
+`CookieComponent` の `'aes'` タイプも同様です。フレームワークのデフォルトではこの設定は有効になっていません。
+[pieceofcake2/app](https://github.com/pieceofcake2/app) のスケルトン (v2.3.1 以降) から作成したアプリケーションでは
+`config/core.php` で有効になっています。既存のアプリケーションでは、`app/Config/core.php`（レガシー構成）または
+`config/core.php`（モダン構成）に追加してください。
 
 ```php
 Configure::write('Security.useOpenSsl', true);

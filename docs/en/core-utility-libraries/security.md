@@ -15,6 +15,10 @@ hashing and encrypting data.
 > Configure::write('Security.useOpenSsl', true);
 > ```
 >
+> Applications created from the [pieceofcake2/app](https://github.com/pieceofcake2/app)
+> skeleton (v2.3.1 and later) already have this line. Add it to existing
+> applications.
+>
 > The OpenSSL implementation produces the same format as the `mcrypt` one, so
 > values encrypted earlier can still be decrypted. `Security::rijndael()` has no
 > OpenSSL implementation and always requires `mcrypt`.

@@ -77,7 +77,9 @@ encrypted with AES:
 
 ``` php
 // src/Controller/BakersController.php
-public $components = ['Cookie'];
+public $components = [
+    'Cookie' => ['type' => 'aes'],
+];
 
 public function beforeFilter()
 {
@@ -89,13 +91,22 @@ public function beforeFilter()
     $this->Cookie->secure = true;  // i.e. only sent if using secure HTTPS
     $this->Cookie->key = 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^';
     $this->Cookie->httpOnly = true;
-    $this->Cookie->type('aes');
 }
 ```
 
+The encryption type is set with the `'type'` setting in `$components`. You
+can also set it in `beforeFilter()` with `$this->Cookie->type('aes');`.
+
+::: pieceofcake2
+The `'type'` setting in `$components` is honored since v2.12.3. In v2.12.2 and
+earlier it was ignored and cookies were encrypted with `'cipher'`.
+:::
+
 The `'aes'` type uses `Security::encrypt()`. The `mcrypt` extension
-is not bundled with PHP 7.2 and later, so enable the OpenSSL implementation in
-`config/core.php`:
+is not bundled with PHP 7.2 and later (it is only available from PECL), so
+enable the OpenSSL implementation in `config/core.php`. Applications created
+from the `pieceofcake2/app` skeleton (v2.3.1 and later) already have this line;
+add it to existing applications:
 
 ``` php
 Configure::write('Security.useOpenSsl', true);
@@ -125,7 +136,7 @@ Sets the encryption type used for cookie values. The available types are
 
 > [!WARNING]
 > The default type is `'cipher'` only for backwards compatibility. It is a
-> weak XOR cipher, so always call `type('aes')` in your `beforeFilter()` as
-> shown above, together with `Security.useOpenSsl`. `'rijndael'` requires the
+> weak XOR cipher, so always use `'aes'` as shown above, together with
+> `Security.useOpenSsl`. `'rijndael'` requires the
 > `mcrypt` extension, which must be installed from PECL on PHP 7.2 and later. Changing the type
 > invalidates cookies written with the previous type.

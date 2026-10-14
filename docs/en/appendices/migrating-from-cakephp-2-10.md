@@ -26,6 +26,76 @@ Before migrating to this fork, ensure:
 4. **Upgrade PHP**: Update your PHP version to 8.0 or newer
 5. **Test Thoroughly**: Run your application's test suite to ensure compatibility
 
+## v2.12.3
+
+Changes in v2.12.3 that may affect applications already running on the fork.
+
+### `Xml::build()` `readFile` option also blocks https URLs ([PR #33](https://github.com/pieceofcake2/cakephp/pull/33))
+
+- **Security fix (SSRF)**: `Xml::build($input, ['readFile' => false])` fetched
+  `https://` URLs because of a missing pair of parentheses (inherited from the
+  original CakePHP 2.x). With `'readFile' => false`, neither `http://` nor
+  `https://` URLs are fetched now; an `XmlException` is thrown instead. See
+  [Security Fixes](/appendices/security-fixes#xml-build-ssrf).
+
+**Migration:**
+
+- No action required if you pass `'readFile' => false` to disable remote
+  loading; this now works as documented.
+- If you relied on `Xml::build()` fetching an `https://` URL with
+  `'readFile' => false`, either remove the option (default is `true`) or fetch
+  the document yourself (e.g. with `HttpSocket`) and pass the XML string.
+
+### CookieComponent honors the `'type'` setting ([PR #34](https://github.com/pieceofcake2/cakephp/pull/34))
+
+- `CookieComponent` now applies the `'type'` setting given in `$components`
+  (e.g. `'Cookie' => ['type' => 'aes']`). Previously the setting was silently
+  ignored and cookies were encrypted with the insecure default `'cipher'` type.
+
+**Migration:**
+
+- If your controllers set `'type'` in `$components`, cookies will now be
+  written with that type, and cookies already written with `'cipher'` can no
+  longer be decrypted. Plan the switch like any other encryption type change.
+- When using `'aes'`, set `Configure::write('Security.useOpenSsl', true);`
+  unless the mcrypt extension is installed (see [Enable OpenSSL](#enable-openssl)).
+- An invalid `'type'` setting now triggers an `E_USER_WARNING` and falls back
+  to `'cipher'`, as `CookieComponent::type()` does.
+
+### Test case listing supports the `tests/TestCase` layout ([PR #35](https://github.com/pieceofcake2/cakephp/pull/35))
+
+- `CakeTestLoader::generateTestList()` now finds test cases in `tests/TestCase`
+  for the app and plugins, falling back to the legacy `Test/Case` layout.
+  Previously the list was empty for the modern layout, so `bin/cake test app` /
+  `bin/cake test <Plugin>` without a test case name and the web test runner
+  showed no test cases.
+
+**Migration:**
+
+- No action required.
+
+### SQL Server driver sets `PDO::ATTR_ERRMODE` by default ([PR #36](https://github.com/pieceofcake2/cakephp/pull/36))
+
+- `Sqlserver::connect()` now merges `PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION`
+  into the `'flags'` setting as the other drivers do. Because of an operator
+  precedence bug, the default was never applied.
+
+**Migration:**
+
+- No action required. PDO already uses `PDO::ERRMODE_EXCEPTION` by default on
+  PHP 8, and a `PDO::ATTR_ERRMODE` value given in `'flags'` still takes
+  precedence.
+
+### ServerShell default port changed to 8765 ([PR #37](https://github.com/pieceofcake2/cakephp/pull/37))
+
+- `bin/cake server` now listens on port `8765` by default (as in CakePHP 3 and
+  later) instead of `80`, which requires root privileges on most systems.
+- `ServerShell::DEFAULT_PORT` is now `8765`.
+
+**Migration:**
+
+- To keep using port 80, pass it explicitly: `bin/cake server -p 80`.
+
 ## Breaking Changes
 
 ### Post-Installation Steps
@@ -502,14 +572,20 @@ public $components = [
     ]
 ];
 
-// NEW (recommended): the type cannot be set in $components,
-// call CookieComponent::type() instead
-public function beforeFilter()
-{
-    parent::beforeFilter();
-    $this->Cookie->type('aes');
-}
+// NEW (recommended)
+public $components = [
+    'Cookie' => [
+        'type' => 'aes',
+    ],
+];
 ```
+
+You can also call `$this->Cookie->type('aes');` in `beforeFilter()`.
+
+::: pieceofcake2
+The `'type'` setting in `$components` is honored since v2.12.3. In v2.12.2 and
+earlier it was ignored and cookies were encrypted with `'cipher'`.
+:::
 
 On PHP 8, `'aes'` also needs `Security.useOpenSsl`; see
 [Enable OpenSSL](#enable-openssl) below.
@@ -531,8 +607,11 @@ not installed (it is available from [PECL](https://pecl.php.net/package/mcrypt))
 `Security::encrypt()` and `Security::decrypt()` use OpenSSL only when
 `Security.useOpenSsl` is enabled; otherwise they call `mcrypt_*` functions and
 fail. The same applies to `CookieComponent` with the `'aes'` type, which uses
-these methods. The setting is not enabled by default, so add it to
-`app/Config/core.php` (legacy) or `config/core.php` (modern):
+these methods. The framework does not enable the setting by default.
+Applications created from the [pieceofcake2/app](https://github.com/pieceofcake2/app)
+skeleton (v2.3.1 and later) already have it in `config/core.php`. In existing
+applications, add it to `app/Config/core.php` (legacy) or `config/core.php`
+(modern):
 
 ```php
 Configure::write('Security.useOpenSsl', true);

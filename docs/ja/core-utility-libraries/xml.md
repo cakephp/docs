@@ -55,7 +55,12 @@ $xml = Xml::build('https://example.com/articles.rss');
 
 > [!WARNING]
 > `<` を含まない文字列はファイルパスか URL として扱われ、そのファイルや URL が読み込まれます。
-> ユーザーが入力したデータは、XML の内容であることを確認してから `Xml::build()` に渡してください。
+> ユーザーが入力したデータを `Xml::build()` に渡す場合は、`'readFile' => false` を指定して
+> ファイルや URL を読み込まないようにしてください。
+>
+> ``` php
+> $xml = Xml::build($this->request->data['xml'], ['readFile' => false]);
+> ```
 
 配列を使っても Xml オブジェクトを作成できます。 :
 
@@ -273,8 +278,16 @@ SimpleXMLElement または DOMDocument を初期化します。
   DOMDocument を返す `'domdocument'` を指定します。
 - `loadEntities` `<!ENTITY` 定義を読み込むかどうかです。セキュリティ上の理由からデフォルトは `false` です。
   信頼できる XML を扱う場合にだけ有効にしてください。
-- `readFile` ローカルのファイルパスを読み込むかどうかです。デフォルトは `true` です。
+- `readFile` ローカルのファイルパスや URL を読み込むかどうかです。デフォルトは `true` です。
+  ユーザーの入力を渡す可能性がある場合は `false` にしてください。ファイルパスや URL を渡すと
+  `XmlException` が投げられます。
 - `parseHuge` `LIBXML_PARSEHUGE` を有効にします。デフォルトは `true` です。
+
+::: pieceofcake2
+v2.12.3 から、`'readFile' => false` で URL も読み込まなくなりました。それより前のバージョン
+(および本家 CakePHP 2.6.6 以降) では、`https://` の URL は取得されていました。
+[脆弱性への対応](/ja/appendices/security-fixes#xml-build-ssrf) を参照してください。
+:::
 
 入力が配列の場合は、`Xml::fromArray()` のオプション (`format` や `pretty` など) も指定できます。
 

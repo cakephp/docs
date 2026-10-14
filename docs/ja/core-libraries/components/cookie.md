@@ -72,7 +72,9 @@ Cookie を AES で暗号化して発行するための初期設定の例です�
 
 ``` php
 // src/Controller/BakersController.php
-public $components = ['Cookie'];
+public $components = [
+    'Cookie' => ['type' => 'aes'],
+];
 
 public function beforeFilter()
 {
@@ -84,12 +86,21 @@ public function beforeFilter()
     $this->Cookie->secure = true;  // セキュアな HTTPS で接続している時のみ発行されます
     $this->Cookie->key = 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^';
     $this->Cookie->httpOnly = true;
-    $this->Cookie->type('aes');
 }
 ```
 
-`'aes'` 方式は `Security::encrypt()` を使います。`mcrypt` 拡張は PHP 7.2 以降同梱されていないため、
-`config/core.php` で OpenSSL による実装を有効にしてください。 :
+暗号化方式は `$components` の `'type'` で設定します。`beforeFilter()` で
+`$this->Cookie->type('aes');` を呼び出して設定することもできます。
+
+::: pieceofcake2
+`$components` の `'type'` は v2.12.3 から反映されます。v2.12.2 以前では無視され、
+Cookie は `'cipher'` で暗号化されていました。
+:::
+
+`'aes'` 方式は `Security::encrypt()` を使います。`mcrypt` 拡張は PHP 7.2 以降同梱されておらず
+PECL から入れる必要があるため、`config/core.php` で OpenSSL による実装を有効にしてください。
+`pieceofcake2/app` のスケルトン (v2.3.1 以降) から作成したアプリケーションにはこの行が含まれています。
+既存のアプリケーションでは追加してください。 :
 
 ``` php
 Configure::write('Security.useOpenSsl', true);
@@ -117,6 +128,5 @@ Cookie の値の暗号化方式を設定します。指定できるのは `'ciph
 
 > [!WARNING]
 > デフォルトの `'cipher'` は後方互換性のためだけに残されている脆弱な XOR 暗号です。
-> 上の例のように `beforeFilter()` で `type('aes')` を呼び、`Security.useOpenSsl`
-> も有効にしてください。`'rijndael'` には `mcrypt` 拡張が必要で、PHP 7.2 以降では PECL からインストールする必要があります。
+> 上の例のように `'aes'` を使い、`Security.useOpenSsl` も有効にしてください。`'rijndael'` には `mcrypt` 拡張が必要で、PHP 7.2 以降では PECL からインストールする必要があります。
 > 暗号化方式を変更すると、変更前の方式で書き込まれた Cookie は読めなくなります。

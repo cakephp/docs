@@ -20,8 +20,9 @@ GitHub の非公開の脆弱性報告を使ってください。対象のリポ�
 |-----|------|----------------|
 | [CVE-2015-8379](https://nvd.nist.gov/vuln/detail/CVE-2015-8379) | `_method` パラメーターや独自の HTTP メソッドによる CSRF 対策の回避 | 2.11.0 |
 | [CVE-2020-15400](https://nvd.nist.gov/vuln/detail/CVE-2020-15400) | CSRF トークンの固定化 | 2.11.0 |
+| なし（[詳細](#xml-build-ssrf)） | SSRF: `'readFile' => false` でも `Xml::build()` が `https://` の URL を取得する | 2.12.3 |
 
-どちらの脆弱性も、本家の CakePHP 2.10.24 に存在します。
+いずれの脆弱性も、本家の CakePHP 2.10.24 に存在します。
 
 ### CVE-2015-8379: `_method` パラメーターによる CSRF 対策の回避
 
@@ -52,6 +53,24 @@ CSRF トークンはセッションに保存されたランダムな値でした
 署名はソルトに依存するため、各アプリケーションの `config/core.php` で、スケルトンに含まれる値ではなく
 アプリケーション固有の秘密の `Security.salt` を設定してください。
 
+### `'readFile' => false` を指定した `Xml::build()` の SSRF {#xml-build-ssrf}
+
+`Xml::build()` は、入力がファイルパスや URL の場合、ローカルファイルを読み込んだり URL から取得したりします。
+`'readFile' => false` オプションはこれを無効にし、ユーザーの入力を安全に渡せるようにするためのものです。
+しかし条件式の括弧が 1 組欠けていたため、`'readFile' => false` を指定しても `https://` の URL は取得されていました。
+入力を操作できる攻撃者は、サーバーから任意の `https://` の URL へリクエストを送らせることができました
+（サーバーサイドリクエストフォージェリ）。`http://` の URL とローカルファイルは影響を受けません。
+
+この不具合は CakePHP 2.6.6 で `readFile` オプションが追加されたときに入り込んだもので
+（[995d8d2](https://github.com/cakephp/cakephp/commit/995d8d22c6)）、それ以降のすべての 2.x に存在します。
+2.12.3 で修正しました（[PR #33](https://github.com/pieceofcake2/cakephp/pull/33)）。
+`'readFile' => false` を指定すると `http://` と `https://` のどちらの URL も取得せず、`XmlException` を投げます。
+CVE は採番されていません。
+
+**必要な対応:** 2.12.3 以降に更新してください。ユーザーの入力を渡す可能性がある場合は `'readFile' => false` を指定してください。
+`'readFile' => false` を指定したまま `https://` の URL を取得させていたコードは、オプションを削除する（既定値は `true`）か、
+`HttpSocket` などで自分で文書を取得して XML 文字列を渡すように変更してください。
+
 ## その他のセキュリティ関連の変更
 
 ### SSL/TLS 証明書の検証
@@ -79,6 +98,9 @@ mcrypt 拡張は PHP 7.2 以降同梱されておらず、[PECL](https://pecl.ph
 Configure::write('Security.useOpenSsl', true);
 ```
 
+[pieceofcake2/app](https://github.com/pieceofcake2/app) のスケルトン (v2.3.1 以降) から作成したアプリケーションには
+この行が含まれています。既存のアプリケーションでは追加してください。
+
 `Security::rijndael()` と Cookie の `'rijndael'` タイプは、常に mcrypt が必要です。
 [アップグレードガイド](/ja/appendices/migrating-from-cakephp-2-10#enable-openssl) も参照してください。
 
@@ -86,16 +108,20 @@ Configure::write('Security.useOpenSsl', true);
 
 `CookieComponent` の暗号化タイプの既定値は `'cipher'` で、XOR ベースの `Security::cipher()` を使います。
 これは安全ではなく、シード値（`Security.cipherSeed`）の扱いも float から int への未定義の変換に依存しています。
-代わりに `'aes'` を使ってください。タイプは `$components` の設定では変更できないため、
-`CookieComponent::type()` を呼び出します。
+代わりに `'aes'` を使ってください。タイプは `$components` の `'type'` で設定します。
 
 ```php
-public function beforeFilter()
-{
-    parent::beforeFilter();
-    $this->Cookie->type('aes');
-}
+public $components = [
+    'Cookie' => ['type' => 'aes'],
+];
 ```
+
+`beforeFilter()` で `$this->Cookie->type('aes');` を呼び出して設定することもできます。
+
+::: pieceofcake2
+`$components` の `'type'` は v2.12.3 から反映されます。v2.12.2 以前では無視され、
+Cookie は `'cipher'` で暗号化されていました。
+:::
 
 ::: warning
 暗号化タイプを変更すると、既存のクッキーは読み取れなくなります。移行期間中は両方のタイプを受け付けるなど、
@@ -108,4 +134,5 @@ public function beforeFilter()
 信頼できない XML を解析するときは、既定値のまま使ってください。
 
 `Xml::build()` は、入力がファイルパスや URL の場合、ローカルファイルを読み込んだり URL から取得したりします。
-ユーザーの入力を `Xml::build()` に渡す場合は、`<` で始まるかどうかなど、XML 文字列であることを確認してから渡してください。
+ユーザーの入力を `Xml::build()` に渡す場合は、`'readFile' => false` を指定するか（[上記](#xml-build-ssrf) を参照）、
+`<` で始まるかどうかなど、XML 文字列であることを確認してから渡してください。

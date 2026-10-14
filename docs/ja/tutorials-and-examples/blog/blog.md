@@ -146,7 +146,7 @@ public $default = [
 新しくできた `database.php` ファイルを保存したら、プロジェクトルートで開発用サーバを起動します。 :
 
 ``` bash
-bin/cake server -p 8765
+bin/cake server
 ```
 
 ブラウザで <http://localhost:8765/> を開いて、CakePHP の welcome ページを見てください。

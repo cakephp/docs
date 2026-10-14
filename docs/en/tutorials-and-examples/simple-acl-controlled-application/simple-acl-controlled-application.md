@@ -101,9 +101,8 @@ To use bake, call `bin/cake bake all` and this will list the 4
 tables you inserted into MySQL. Select "1. Group", and follow the
 prompts. Repeat for the other 3 tables, and this will have
 generated the 4 controllers, models and your views for you.
-Bake currently writes the view templates to `src/View/<Controller>/`. CakePHP
-finds them there, but you can move them to `templates/<Controller>/` to keep the
-application layout consistent (see
+Bake writes the view templates to `templates/<Controller>/` (this requires
+pieceofcake2/bake 1.0.3 or later; see
 [Code Generation with Bake](../../console-and-shells/code-generation-with-bake)).
 
 Avoid using Scaffold here. The generation of the ACOs will be

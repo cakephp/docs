@@ -98,20 +98,26 @@ Test files produced by `bake test` include calls to PHPUnit's `markTestIncomplet
 
 ### Where baked files are written
 
-Bake writes models to `src/Model/` and controllers to `src/Controller/`. The
-current Bake plugin still uses the legacy locations for the other file types, so
-in the modern layout move the generated files as follows:
+Bake writes the generated files to the directories of your application's
+layout:
 
-| File type | Written by Bake to | Move to |
+| File type | Modern layout | Legacy layout |
 |---|---|---|
-| View templates | `src/View/<Controller>/` | `templates/<Controller>/` |
-| Test cases | `tests/Case/<Type>/` | `tests/TestCase/<Type>/` |
-| Fixtures | `src/Test/Fixture/` | `tests/Fixture/` |
+| Models | `src/Model/` | `app/Model/` |
+| Controllers | `src/Controller/` | `app/Controller/` |
+| View templates | `templates/<Controller>/` | `app/View/<Controller>/` |
+| Test cases | `tests/TestCase/<Type>/` | `app/Test/Case/<Type>/` |
+| Fixtures | `tests/Fixture/` | `app/Test/Fixture/` |
 
-CakePHP also finds view templates in `src/View/`, so baked views work before you
-move them. Test cases and fixtures are only found in `tests/TestCase/` and
-`tests/Fixture/` (when `tests/TestCase/` exists). In the legacy layout all files
-are written to the usual `app/` directories and need not be moved.
+For a plugin with a `tests/` directory, test cases and fixtures are written to
+the plugin's `tests/TestCase/` and `tests/Fixture/`; otherwise to its
+`Test/Case/` and `Test/Fixture/`.
+
+::: info
+These locations require pieceofcake2/bake 1.0.3 or later. Earlier versions
+wrote view templates to `src/View/`, test cases to `tests/Case/` and fixtures
+to `src/Test/Fixture/` in the modern layout, so the files had to be moved.
+:::
 
 `bake project` copies the legacy `app/` skeleton contained in the Bake plugin. To
 start a new application with the modern layout, use

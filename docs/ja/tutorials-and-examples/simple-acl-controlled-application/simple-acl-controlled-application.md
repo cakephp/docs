@@ -96,10 +96,8 @@ MySQL 8.0 では `GROUPS` が予約語なので、自分で書く SQL ではテ�
 bake を使うにあたって、 `bin/cake bake all` を呼び出すと、先ほど MySQL に作成した
 4つのテーブルがリストされます。「1 (Group).」を選び、プロンプトに従って下さい。
 その他の3つのテーブルでも同じ手順を繰り返すと、合計4つのコントローラ、モデルそしてビューが
-作成されます。現在の Bake はビューテンプレートを `src/View/<Controller>/` に書き出します。
-CakePHP はそこにあるテンプレートも見つけますが、アプリケーションのレイアウトをそろえるために
-`templates/<Controller>/` に移動してもかまいません
-([Bakeでコード生成](../../console-and-shells/code-generation-with-bake) を参照)。
+作成されます。Bake はビューテンプレートを `templates/<Controller>/` に書き出します
+(pieceofcake2/bake 1.0.3 以降が必要です。[Bakeでコード生成](../../console-and-shells/code-generation-with-bake) を参照)。
 
 ここでスキャフォールド (*Scaffold*) は使わないでください。スキャフォールドの仕組みを
 用いたコントローラを bake すると、ACO の生成に深刻な影響が生じます。

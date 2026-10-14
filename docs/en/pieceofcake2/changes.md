@@ -22,6 +22,9 @@ and lists the pages of this book that were changed from the original.
 | CSRF protection | Unsigned tokens; some methods not validated | HMAC-signed tokens; all methods except GET/HEAD/OPTIONS validated | [Security Fixes](/appendices/security-fixes) |
 | SSL certificates | Bundled `cacert.pem` (2016) | System CA bundle or composer/ca-bundle | [Security Fixes](/appendices/security-fixes) |
 | `String` class | Alias of `CakeText` | Removed; use `CakeText` | [CakeText](/core-utility-libraries/string) |
+| `Xml::build()` with `'readFile' => false` | `https://` URLs still fetched (SSRF) | Neither files nor URLs are read | [Security Fixes](/appendices/security-fixes#xml-build-ssrf) |
+| CookieComponent `'type'` in `$components` | Ignored (always `'cipher'`) | Honored | [Cookie](/core-libraries/components/cookie) |
+| `cake server` default port | 80 | 8765 | [Installation](/installation#development-server) |
 
 For the complete list of breaking changes, see
 [Migrating from CakePHP 2.10](/appendices/migrating-from-cakephp-2-10) and the
@@ -49,6 +52,7 @@ modern directory layout.
   - Existing applications: replace cakephp/cakephp with pieceofcake2/cakephp and update the dispatcher files
   - Removed archive/git downloads, include_path core sharing and the subdirectory "Development" setup
   - Permissions now cover tmp/ and logs/; added the built-in server (`bin/cake server`) and an Apache virtual host for webroot/
+  - Built-in server: default port 8765 (change note: 80 before v2.12.3)
   - Added "Configuring composer.json": minimal composer.json; config.allow-plugins for composer/installers and extra.installer-paths to plugins/{$name}/ are required for cakephp-plugin packages
 - [Advanced Installation](/installation/advanced-installation)
   - Removed PEAR installation, the old Composer/bake project setup and CAKE_CORE_INCLUDE_PATH core sharing
@@ -153,6 +157,7 @@ modern directory layout.
   - Custom auth/authorize/hasher classes in src/Controller/Component/Auth; layout in templates/Layouts; App::uses removed
 - [Cookie](/core-libraries/components/cookie)
   - Example uses type('aes') with Security.useOpenSsl; warning that the default 'cipher' is insecure and 'rijndael' needs mcrypt
+  - Type set with `'Cookie' => ['type' => 'aes']` in `$components` (type() as an alternative); change note that the setting was ignored before v2.12.3; Security.useOpenSsl already enabled in the pieceofcake2/app v2.3.1 skeleton
 - [Flash](/core-libraries/components/flash)
   - Flash elements in templates/Elements/Flash
 - [Security](/core-libraries/components/security-component)
@@ -193,6 +198,7 @@ modern directory layout.
   - Sanitize is not present in CakePHP 3.0 and later (instead of "will be removed")
 - [Security](/core-utility-libraries/security)
   - Explain that mcrypt is not bundled since PHP 7.2 and Security.useOpenSsl should be enabled in config/core.php (compatible format); rijndael() needs PECL mcrypt; Cookie 'cipher' type warning
+  - Noted that the pieceofcake2/app skeleton (v2.3.1 and later) already enables Security.useOpenSsl
 - [Set](/core-utility-libraries/set)
   - Test file path updated to tests/TestCase/Utility/SetTest.php
 - [CakeText](/core-utility-libraries/string)
@@ -201,6 +207,7 @@ modern directory layout.
   - strftime() formats now explained in the text (IntlDateFormatter via php81_bc/strftime, intl needed for non-English names); fixed syntax error and removed App::uses() in the example
 - [Xml](/core-utility-libraries/xml)
   - Removed CakePHP 1.3 "old method" comparisons and App::uses(); documented Xml::build() options (return, loadEntities default false, readFile, parseHuge) and a warning about passing user input; fixed broken examples
+  - `readFile` disables both file and URL loading; user input example uses `'readFile' => false`; change note that https URLs were fetched before v2.12.3
 
 ### Console & Shells
 
@@ -211,7 +218,7 @@ modern directory layout.
   - Task loading example uses an application task instead of the removed core ProjectTask
 - [Code Generation with Bake](/console-and-shells/code-generation-with-bake)
   - Rewritten for the pieceofcake2/bake plugin: Composer install, `CakePlugin::load('Bake')`, `bin/cake bake` commands
-  - Documented where Bake writes views, tests and fixtures in the modern layout and where to move them
+  - Documented where Bake writes models, controllers, views, tests and fixtures in the modern and legacy layouts (templates/, tests/TestCase/, tests/Fixture/ with pieceofcake2/bake 1.0.3 or later)
   - Bake theme locations updated (`plugins/Bake/Console/Templates/default`, `src/Console/Templates/[theme]`); `lib/Cake/Console/Templates` removed
 - [Schema management and migrations](/console-and-shells/schema-management-and-migrations)
   - Commands use `bin/cake schema`; schema files live in `config/Schema`
@@ -239,7 +246,7 @@ modern directory layout.
   - Change note: SQL Server driver targets SQL Server 2022+, `port`/`schema`/`options` handling
   - Class loading rewritten around Composer classmap (`composer dump-autoload`, `App::uses()` only for non-autoloaded plugins); change note on the framework's move to classmap
   - Core settings: Session sub-key `name` corrected to `cookie`, added `cacheLimiter`, modern handler/schema paths and `bin/cake`; `.htaccess` removal for App.baseUrl per layout
-  - Security: `Security.salt` usage documented; change note on HMAC-signed CSRF tokens; `cipherSeed` only for weak Cookie 'cipher'; new `Security.useOpenSsl` entry (required on PHP 8 for encrypt()/Cookie 'aes')
+  - Security: `Security.salt` usage documented; change note on HMAC-signed CSRF tokens; `cipherSeed` only for weak Cookie 'cipher'; new `Security.useOpenSsl` entry (required on PHP 8 for encrypt()/Cookie 'aes'; already enabled in the pieceofcake2/app v2.3.1 skeleton)
   - Cache: available engines listed (File, Apc/APCu, Memcached, Memcache, Redis); change note on removed Xcache/Wincache
   - Config readers: readers default to `CONFIG`; custom reader example moved to `src/Lib/Configure`, declares its property (PHP 8.2), no `App::uses()`; ja example renamed from `XmlReader` (clashes with PHP's XMLReader) to `MyXmlReader`; ConfigReaderInterface/ConfigureException reference fixed
   - Inflector path `src/Cake/Utility/Inflector.php` and bootstrap `config/bootstrap.php` folded into text; era-specific examples (old IE/Chrome Frame, AMF/SOAP) modernized; ja: `$merge` description corrected, `Configure::consume()` added
@@ -279,7 +286,7 @@ modern directory layout.
   - PHPUnit 9.6 installed with Composer (require-dev); PHPUnit 3.7/4.x/5.x, .phar and autoloader workaround instructions removed
   - Test cases in tests/TestCase and fixtures in tests/Fixture; configuration in config/; legacy app/Test layout mentioned as fallback
   - Running tests: vendor/bin/phpunit with phpunit.xml.dist (bootstrap tests/bootstrap.php, CakeFixtureInjector listener, stderr) and bin/cake test; lib/Cake/Console/cake and --app examples removed
-  - Documented that test case listing (bin/cake test app without a case, web runner list) only searches Test/Case and is empty with tests/TestCase
+  - Test case listing (bin/cake test app without a case, web runner list) searches tests/TestCase, falling back to Test/Case
   - Web runner: webroot/test.php from the skeleton, run a case via ?case=; command line recommended
   - Code samples updated for PHPUnit 9: setUp()/tearDown(): void, assertStringContainsString, assertIsArray, assertMatchesRegularExpression, willReturn(), PHPUnit\Framework\TestCase
   - New section on createMock()/getMockBuilder(), deprecated CakeTestCase::getMock(), getMockForModel() signature and expectException()
@@ -301,7 +308,7 @@ modern directory layout.
   - Paths updated to `src/` and `templates/`; removed unneeded `App::uses()` calls; UsersController described as generated by the Bake plugin
   - `posts.user_id` added as `INT UNSIGNED` (integer display width is deprecated in MySQL 8)
 - [Blog Tutorial](/tutorials-and-examples/blog/blog)
-  - Setup rewritten: `composer create-project pieceofcake2/app blog`, PHP 8.0+, built-in server via `bin/cake server`; removed archive download/git clone steps
+  - Setup rewritten: `composer create-project pieceofcake2/app blog`, PHP 8.0+, built-in server via `bin/cake server` (default port 8765); removed archive download/git clone steps
   - Paths updated to `config/database.php`, `config/core.php`, `tmp/` and `logs/`; MySQL example uses `utf8mb4`
   - mod_rewrite section replaced by a short "Using Apache" section (DocumentRoot = `webroot/`)
 - [Blog Tutorial - Adding a layer](/tutorials-and-examples/blog/part-two)
@@ -315,6 +322,7 @@ modern directory layout.
   - SQL works on MySQL 8: `groups` quoted (reserved word), no integer display widths
   - Passwords hashed with BlowfishPasswordHasher (VARCHAR(255) column) instead of deprecated `AuthComponent::password()`; beforeSave no longer touches a missing password
   - AppController loads FlashComponent/FlashHelper (used by baked controllers); login uses Flash and `Form->create()` with `url`; removed CakePHP 2.0 `allow('*')`
+  - Bake writes the views to `templates/<Controller>/` (pieceofcake2/bake 1.0.3 or later); removed the instruction to move them
 
 ### Plugins
 
@@ -355,6 +363,10 @@ modern directory layout.
 
 ### Appendices
 
+- [Security Fixes](/appendices/security-fixes)
+  - Added the `Xml::build()` SSRF with `'readFile' => false` (fixed in 2.12.3); Cookie type set in `$components`; skeleton note for Security.useOpenSsl
+- [Migrating from CakePHP 2.10](/appendices/migrating-from-cakephp-2-10)
+  - Added a v2.12.3 section (Xml::build() SSRF fix, Cookie `'type'` setting, ServerShell port, test case listing, SQL Server ERRMODE); Cookie example uses `$components`
 - [Migrating from SimpleTest to PHPUnit 3.7](/appendices/phpunit-migration-hints)
   - Retitled "Migrating from SimpleTest to PHPUnit 3.7" and linked to the new PHPUnit 9.6 guide
 

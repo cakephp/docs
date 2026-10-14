@@ -53,8 +53,12 @@ $xml = Xml::build('https://example.com/articles.rss');
 
 > [!WARNING]
 > A string that does not contain `<` is treated as a file path or URL, and the
-> file or URL is read. Never pass user-supplied data to `Xml::build()` unless
-> you have checked that it is XML content.
+> file or URL is read. When you pass user-supplied data to `Xml::build()`, set
+> `'readFile' => false` so that files and URLs are never read:
+>
+> ``` php
+> $xml = Xml::build($this->request->data['xml'], ['readFile' => false]);
+> ```
 
 You can also build Xml objects using an array:
 
@@ -266,8 +270,16 @@ path, URL or array. The following options are available:
   `'domdocument'` to return a DOMDocument.
 - `loadEntities` Whether to load `<!ENTITY` definitions. Defaults to `false`
   for security reasons. Only enable it for XML from trusted sources.
-- `readFile` Whether a local file path is read. Defaults to `true`.
+- `readFile` Whether a local file path or a URL is read. Defaults to `true`.
+  Set it to `false` when the input may come from users; an `XmlException` is
+  then thrown for a file path or URL.
 - `parseHuge` Enables `LIBXML_PARSEHUGE`. Defaults to `true`.
+
+::: pieceofcake2
+Since v2.12.3, `'readFile' => false` also blocks URLs. Earlier versions (and the
+original CakePHP 2.6.6 and later) still fetched `https://` URLs; see
+[Security Fixes](/appendices/security-fixes#xml-build-ssrf).
+:::
 
 When the input is an array, the options of `Xml::fromArray()` (such as
 `format` and `pretty`) can also be passed.

@@ -477,11 +477,15 @@ for backwards compatibility. Use the `'aes'` type for cookies instead.
 Security.useOpenSsl  
 When true, `Security::encrypt()` and `Security::decrypt()` (and therefore
 the `'aes'` cookie encryption type) use OpenSSL instead of mcrypt. The mcrypt
-extension is not bundled with PHP 7.2 and later, so add this line to `config/core.php`:
+extension is not bundled with PHP 7.2 and later, so enable it in `config/core.php`:
 
 ``` php
 Configure::write('Security.useOpenSsl', true);
 ```
+
+The default is false. Applications created from the
+[pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton (v2.3.1 and
+later) already have this line; add it to existing applications.
 
 Asset.timestamp  
 Appends a timestamp which is last modified time of the particular

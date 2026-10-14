@@ -482,11 +482,14 @@ Security.cipherSeed
 Security.useOpenSsl  
 true にすると、`Security::encrypt()` と `Security::decrypt()` (つまり Cookie の暗号化タイプ
 `'aes'`) が mcrypt ではなく OpenSSL を使います。mcrypt 拡張は PHP 7.2 以降同梱されていないので、
-`config/core.php` に次の行を追加してください。
+`config/core.php` で有効にしてください。
 
 ``` php
 Configure::write('Security.useOpenSsl', true);
 ```
+
+デフォルトは false です。[pieceofcake2/app](https://github.com/pieceofcake2/app) のスケルトン (v2.3.1 以降) から
+作成したアプリケーションにはこの行が含まれています。既存のアプリケーションでは追加してください。
 
 Asset.timestamp  
 適切なヘルパーを使っている場合、静的ファイルの URL

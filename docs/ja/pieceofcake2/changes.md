@@ -21,6 +21,9 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 | CSRF 対策 | 署名なしのトークン。一部のメソッドは検証されない | HMAC で署名したトークン。GET・HEAD・OPTIONS 以外はすべて検証 | [脆弱性への対応](/ja/appendices/security-fixes) |
 | SSL 証明書 | 同梱の `cacert.pem`（2016年） | システムの CA バンドルまたは composer/ca-bundle | [脆弱性への対応](/ja/appendices/security-fixes) |
 | `String` クラス | `CakeText` の別名 | 削除。`CakeText` を使用 | [CakeText](/ja/core-utility-libraries/string) |
+| `'readFile' => false` を指定した `Xml::build()` | `https://` の URL は取得される (SSRF) | ファイルも URL も読み込まない | [脆弱性への対応](/ja/appendices/security-fixes#xml-build-ssrf) |
+| `$components` での CookieComponent の `'type'` | 無視される（常に `'cipher'`） | 反映される | [Cookie](/ja/core-libraries/components/cookie) |
+| `cake server` のデフォルトポート | 80 | 8765 | [インストール](/ja/installation#development-server) |
 
 破壊的変更の一覧は [CakePHP 2.10 からの移行](/ja/appendices/migrating-from-cakephp-2-10) と
 [CHANGELOG](https://github.com/pieceofcake2/cakephp/blob/2.x/CHANGELOG.md) を参照してください。
@@ -46,6 +49,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - 既存アプリケーション: cakephp/cakephp を pieceofcake2/cakephp に置き換え、ディスパッチャファイルを更新
   - アーカイブ/git でのダウンロード、include_path によるコア共有、サブディレクトリでの開発用設定を削除
   - パーミッションの対象を tmp/ と logs/ に変更、ビルトインサーバ (`bin/cake server`) と webroot/ 向けバーチャルホストの例を追加
+  - ビルトインサーバのデフォルトポートは 8765 (v2.12.3 より前は 80 だったことを変更点として記載)
   - 「composer.json の設定」を追加: 最小限の composer.json、cakephp-plugin パッケージのために composer/installers の allow-plugins と plugins/{$name}/ への installer-paths が必須であることを説明
 - [応用インストール](/ja/installation/advanced-installation)
   - PEAR でのインストール、旧来の Composer/bake によるプロジェクト作成、CAKE_CORE_INCLUDE_PATH によるコア共有を削除
@@ -147,6 +151,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - 独自の認証・認可・ハッシャークラスを src/Controller/Component/Auth に配置。レイアウトは templates/Layouts。App::uses を削除
 - [Cookie](/ja/core-libraries/components/cookie)
   - 例で type('aes') と Security.useOpenSsl を使用。デフォルトの 'cipher' は脆弱で 'rijndael' は mcrypt が必要という警告を追加
+  - タイプは `$components` の `'Cookie' => ['type' => 'aes']` で設定 (type() でも設定可能)。v2.12.3 より前はこの設定が無視されていたことを変更点として記載。pieceofcake2/app v2.3.1 のスケルトンでは Security.useOpenSsl が有効
 - [フラッシュ](/ja/core-libraries/components/flash)
   - フラッシュ用エレメントの場所を templates/Elements/Flash に変更
 - [セキュリティ](/ja/core-libraries/components/security-component)
@@ -187,6 +192,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - Sanitize は CakePHP 3.0 以降に存在しないと記述 (「削除予定」から変更)
 - [Security](/ja/core-utility-libraries/security)
   - mcrypt は PHP 7.2 以降同梱されないため config/core.php で Security.useOpenSsl を有効にすること (互換の形式)、rijndael() は PECL の mcrypt が必要、Cookie の 'cipher' タイプへの警告を本文で説明
+  - pieceofcake2/app のスケルトン (v2.3.1 以降) では Security.useOpenSsl が有効になっていることを追記
 - [Set](/ja/core-utility-libraries/set)
   - テストファイルのパスを tests/TestCase/Utility/SetTest.php に変更
 - [CakeText](/ja/core-utility-libraries/string)
@@ -195,6 +201,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - strftime() 形式のフォーマットを本文で説明 (php81_bc/strftime 経由の IntlDateFormatter、英語以外には intl が必要)、例の構文エラーを修正し App::uses() を削除
 - [XML](/ja/core-utility-libraries/xml)
   - CakePHP 1.3 の「今までの方法」との比較と App::uses() を削除、Xml::build() のオプション (return、デフォルト false の loadEntities、readFile、parseHuge) とユーザー入力を渡す際の警告を追記、誤った例を修正
+  - `readFile` でファイルと URL の両方の読み込みを無効にできることを記載し、ユーザー入力の例で `'readFile' => false` を使用。v2.12.3 より前は https の URL が取得されていたことを変更点として記載
 
 ### コンソール & シェル
 
@@ -205,7 +212,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - タスクの動的ロードの例を、コアから削除された ProjectTask ではなくアプリケーションのタスクに変更
 - [Bakeでコード生成](/ja/console-and-shells/code-generation-with-bake)
   - pieceofcake2/bake プラグイン向けに書き直し: Composer でのインストール、`CakePlugin::load('Bake')`、`bin/cake bake` コマンド
-  - モダンレイアウトで Bake がビュー、テスト、フィクスチャを書き出す場所と移動先を追記
+  - Bake がモデル、コントローラ、ビュー、テスト、フィクスチャを書き出す場所をモダンレイアウトとレガシーレイアウトについて記載 (pieceofcake2/bake 1.0.3 以降では templates/、tests/TestCase/、tests/Fixture/)
   - bake テーマの場所を更新 (`plugins/Bake/Console/Templates/default`、`src/Console/Templates/[theme]`)。`lib/Cake/Console/Templates` の記述を削除
 - [スキーマの管理とマイグレーション](/ja/console-and-shells/schema-management-and-migrations)
   - コマンドを `bin/cake schema` に変更。スキーマファイルの場所を `config/Schema` に変更
@@ -233,7 +240,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - 変更点: SQL Server ドライバーは SQL Server 2022 以降が対象、`port`/`schema`/`options` の扱い
   - クラスの読み込みを Composer classmap 前提で書き直し (`composer dump-autoload`、`App::uses()` はオートロード非対応プラグインのみ)。フレームワークの classmap 移行を変更点として記載
   - コア設定: Session のサブキー `name` を `cookie` に修正、`cacheLimiter` を追加、ハンドラーとスキーマのパスと `bin/cake` をモダン構成に。App.baseUrl 用の .htaccess 削除を構成別に記載
-  - セキュリティ: `Security.salt` の用途を記載し、CSRF トークンの HMAC 署名を変更点として記載。`cipherSeed` は脆弱な Cookie 'cipher' 専用。`Security.useOpenSsl` を追加 (PHP 8 で encrypt()/Cookie 'aes' に必須)
+  - セキュリティ: `Security.salt` の用途を記載し、CSRF トークンの HMAC 署名を変更点として記載。`cipherSeed` は脆弱な Cookie 'cipher' 専用。`Security.useOpenSsl` を追加 (PHP 8 で encrypt()/Cookie 'aes' に必須。pieceofcake2/app v2.3.1 のスケルトンでは有効)
   - キャッシュ: 使用可能なエンジンを列挙 (File、Apc/APCu、Memcached、Memcache、Redis)。Xcache/Wincache の削除を変更点として記載
   - 設定リーダー: デフォルトの読み込み先は `CONFIG`。独自リーダーの例を `src/Lib/Configure` に移し、プロパティを宣言 (PHP 8.2)、`App::uses()` を削除。ja の例のクラス名を PHP の XMLReader と衝突する `XmlReader` から `MyXmlReader` に変更。ConfigReaderInterface/ConfigureException の説明を修正
   - Inflector のパス `src/Cake/Utility/Inflector.php` と `config/bootstrap.php` を本文に反映。古い IE/Chrome Frame や AMF/SOAP の例を更新。ja: `$merge` の説明を修正し `Configure::consume()` を追加
@@ -273,7 +280,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - PHPUnit 9.6 を Composer (require-dev) でインストール。PHPUnit 3.7/4.x/5.x、.phar、オートローダー回避策の手順を削除
   - テストケースは tests/TestCase、フィクスチャは tests/Fixture、設定は config/ に変更。レガシーな app/Test 構成は代替として記載
   - テストの実行: phpunit.xml.dist (tests/bootstrap.php、CakeFixtureInjector リスナー、stderr) を使う vendor/bin/phpunit と bin/cake test を説明。lib/Cake/Console/cake と --app の例を削除
-  - テストケースの一覧表示 (ケース指定なしの bin/cake test app、ウェブランナーの一覧) は Test/Case しか探さず、tests/TestCase では空になることを記載
+  - テストケースの一覧表示 (ケース指定なしの bin/cake test app、ウェブランナーの一覧) は tests/TestCase を探し、無ければ Test/Case を探す
   - ウェブランナー: スケルトンの webroot/test.php、?case= でケースを指定して実行。コマンドラインでの実行を推奨
   - コード例を PHPUnit 9 向けに更新: setUp()/tearDown(): void、assertStringContainsString、assertIsArray、assertMatchesRegularExpression、willReturn()、PHPUnit\Framework\TestCase
   - createMock()/getMockBuilder()、非推奨の CakeTestCase::getMock()、getMockForModel() のシグネチャ、expectException() の節を追加
@@ -295,7 +302,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - パスを `src/` と `templates/` に更新。不要な `App::uses()` を削除。UsersController を Bake プラグインで生成したものとして説明
   - `posts.user_id` を `INT UNSIGNED` で追加するよう変更 (MySQL 8 では整数の表示幅が非推奨)
 - [ブログチュートリアル](/ja/tutorials-and-examples/blog/blog)
-  - セットアップを書き直し: `composer create-project pieceofcake2/app blog`、PHP 8.0 以上、`bin/cake server` によるビルトインサーバ。アーカイブのダウンロードと git clone の手順を削除
+  - セットアップを書き直し: `composer create-project pieceofcake2/app blog`、PHP 8.0 以上、`bin/cake server` によるビルトインサーバ (デフォルトのポートは 8765)。アーカイブのダウンロードと git clone の手順を削除
   - パスを `config/database.php`、`config/core.php`、`tmp/`、`logs/` に更新。MySQL の設定例で `utf8mb4` を使用
   - mod_rewrite の節を短い「Apache を使う場合」の節 (DocumentRoot は `webroot/`) に置き換え
 - [ブログチュートリアル - レイヤーの追加](/ja/tutorials-and-examples/blog/part-two)
@@ -309,6 +316,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - SQL を MySQL 8 で動くよう修正: 予約語の `groups` をクォートし、整数の表示幅を削除
   - 非推奨の `AuthComponent::password()` の代わりに BlowfishPasswordHasher でパスワードをハッシュ化 (カラムは VARCHAR(255))。パスワードがない場合 beforeSave で触れないよう修正
   - AppController で FlashComponent/FlashHelper をロード (bake したコントローラが使用)。ログインで Flash と `url` 指定の `Form->create()` を使用。CakePHP 2.0 用の `allow('*')` を削除
+  - Bake はビューを `templates/<Controller>/` に書き出す (pieceofcake2/bake 1.0.3 以降)。ビューを移動する手順を削除
 
 ### プラグイン
 
@@ -349,6 +357,10 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 
 ### 付録
 
+- [脆弱性への対応](/ja/appendices/security-fixes)
+  - `'readFile' => false` を指定した `Xml::build()` の SSRF (2.12.3 で修正) を追加。Cookie のタイプを `$components` で設定。Security.useOpenSsl のスケルトンについての注記
+- [CakePHP 2.10 からの移行](/ja/appendices/migrating-from-cakephp-2-10)
+  - v2.12.3 の節を追加 (Xml::build() の SSRF 修正、Cookie の `'type'` 設定、ServerShell のポート、テストケースの一覧、SQL Server の ERRMODE)。Cookie の例で `$components` を使用
 - [SimpleTest から PHPUnit 3.7 への移行](/ja/appendices/phpunit-migration-hints)
   - 題を「SimpleTest から PHPUnit 3.7 への移行」に変更し、PHPUnit 9.6 への移行ガイドへのリンクを追加
 

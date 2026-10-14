@@ -244,12 +244,17 @@ The quickest way to try your application is PHP's built-in web server, which
 you can start with the `server` shell:
 
 ```bash
-bin/cake server -p 8765
+bin/cake server
 ```
 
-Your application is then available at <http://localhost:8765/>. Use `-H` to
-change the host name and `-d` to change the document root. Without `-p`,
-the server listens on port 80, which usually requires administrator rights.
+Your application is then available at <http://localhost:8765/>. Use `-p` to
+change the port, `-H` to change the host name and `-d` to change the document
+root.
+
+::: pieceofcake2
+The default port is 8765 since v2.12.3. Earlier versions listened on port 80
+when `-p` was omitted.
+:::
 
 > [!WARNING]
 > The built-in server is meant for development only. Never use it in a

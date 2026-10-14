@@ -161,7 +161,7 @@ Once you've saved your new `database.php` file, start the development server
 from the project root:
 
 ``` bash
-bin/cake server -p 8765
+bin/cake server
 ```
 
 Then open <http://localhost:8765/> in your browser and you should see the

@@ -21,8 +21,9 @@ for details.
 |-----|---------|----------|
 | [CVE-2015-8379](https://nvd.nist.gov/vuln/detail/CVE-2015-8379) | CSRF protection bypass via the `_method` parameter and custom HTTP methods | 2.11.0 |
 | [CVE-2020-15400](https://nvd.nist.gov/vuln/detail/CVE-2020-15400) | CSRF token fixation | 2.11.0 |
+| None ([details](#xml-build-ssrf)) | SSRF: `Xml::build()` fetched `https://` URLs even with `'readFile' => false` | 2.12.3 |
 
-Both vulnerabilities are present in the original CakePHP 2.10.24.
+All of these vulnerabilities are present in the original CakePHP 2.10.24.
 
 ### CVE-2015-8379: CSRF bypass with the `_method` parameter
 
@@ -57,6 +58,29 @@ upgrade are still accepted until they expire. Make sure that each application
 uses its own secret `Security.salt` in `config/core.php`, and not the value
 shipped with the skeleton, because the signature depends on it.
 
+### SSRF in `Xml::build()` with `'readFile' => false` {#xml-build-ssrf}
+
+`Xml::build()` reads a local file or fetches a URL when its input is a file
+path or a URL. The `'readFile' => false` option disables this so that user
+input can be passed safely. Because of a missing pair of parentheses in the
+condition, however, `https://` URLs were still fetched with
+`'readFile' => false`. An attacker who controls the input could make the
+server send requests to any `https://` URL (server-side request forgery).
+`http://` URLs and local files were not affected.
+
+The bug was introduced in CakePHP 2.6.6 together with the `readFile` option
+([995d8d2](https://github.com/cakephp/cakephp/commit/995d8d22c6)) and is
+present in every later 2.x release. It was fixed in 2.12.3
+([PR #33](https://github.com/pieceofcake2/cakephp/pull/33)). With
+`'readFile' => false`, neither `http://` nor `https://` URLs are fetched, and
+an `XmlException` is thrown instead. No CVE has been assigned.
+
+**What you need to do:** update to 2.12.3 or later. Pass `'readFile' => false`
+whenever the input may come from users. If your code relied on fetching an
+`https://` URL with `'readFile' => false`, remove the option (it defaults to
+`true`) or fetch the document yourself, for example with `HttpSocket`, and
+pass the XML string.
+
 ## Other Security Changes
 
 ### SSL/TLS certificate validation
@@ -89,6 +113,10 @@ OpenSSL is enabled:
 Configure::write('Security.useOpenSsl', true);
 ```
 
+Applications created from the [pieceofcake2/app](https://github.com/pieceofcake2/app)
+skeleton (v2.3.1 and later) already have this line. Add it to existing
+applications.
+
 `Security::rijndael()` and the `'rijndael'` cookie type always require mcrypt.
 See the [Upgrade Guide](/appendices/migrating-from-cakephp-2-10#enable-openssl).
 
@@ -97,16 +125,20 @@ See the [Upgrade Guide](/appendices/migrating-from-cakephp-2-10#enable-openssl).
 The default encryption type of `CookieComponent` is `'cipher'`, which uses the
 XOR-based `Security::cipher()`. It is not secure, and its seed
 (`Security.cipherSeed`) depends on undefined float-to-int conversion. Use
-`'aes'` instead. The type cannot be set in `$components`; call
-`CookieComponent::type()`:
+`'aes'` instead, set with the `'type'` setting in `$components`:
 
 ```php
-public function beforeFilter()
-{
-    parent::beforeFilter();
-    $this->Cookie->type('aes');
-}
+public $components = [
+    'Cookie' => ['type' => 'aes'],
+];
 ```
+
+You can also call `$this->Cookie->type('aes');` in `beforeFilter()`.
+
+::: pieceofcake2
+The `'type'` setting in `$components` is honored since v2.12.3. In v2.12.2 and
+earlier it was ignored and cookies were encrypted with `'cipher'`.
+:::
 
 ::: warning
 Changing the encryption type makes existing cookies unreadable. Plan the
@@ -119,5 +151,6 @@ migration, for example by accepting both types during a transition period.
 `'loadEntities' => true`. Keep the default when you parse untrusted XML.
 
 `Xml::build()` also reads a local file or fetches a URL when the input is a
-path or URL. Do not pass user input to `Xml::build()` unless you have checked
-that it is an XML string, for example that it starts with `<`.
+path or URL. When you pass user input, set `'readFile' => false`
+(see [above](#xml-build-ssrf)) or check that it is an XML string, for example
+that it starts with `<`.

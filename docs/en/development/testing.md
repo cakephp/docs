@@ -294,10 +294,9 @@ The `test` shell was added in 2.1. The 2.0 `testsuite` shell is still available 
 :::
 
 When you run the `test` shell with only a category, such as `bin/cake test app`,
-it lists the available test cases and lets you choose which one to run. This
-listing only looks in the legacy `Test/Case` directories; with tests in
-`tests/TestCase` it reports that no test cases are available. In that case
-name the test case explicitly, or use `vendor/bin/phpunit`.
+it lists the available test cases and lets you choose which one to run. The
+test cases are listed from `tests/TestCase/` of the app or plugin, or from the
+legacy `Test/Case/` directory when `tests/TestCase/` does not exist.
 
 #### Filtering test cases
 
@@ -353,9 +352,8 @@ available when debug is 1 or higher.
 
 Once you've loaded up the test runner, you can navigate App, Core and Plugin
 test suites. Clicking an individual test case will run that test and display the
-results. The list of test cases is built from the legacy `Test/Case`
-directories only, so with tests in `tests/TestCase` the App list is empty. You
-can still run a test case by giving it in the URL, for example
+results. The test cases are listed from the same directories as in the `test`
+shell. You can also run a test case by giving it in the URL, for example
 `http://localhost/your_app/test.php?case=Model/Article`.
 
 The web runner is kept mainly for compatibility. Prefer the command line, which
