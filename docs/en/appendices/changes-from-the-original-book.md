@@ -404,7 +404,7 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
 - [Migrating from SimpleTest to PHPUnit 3.7](/appendices/phpunit-migration-hints)
   - Retitled "Migrating from SimpleTest to PHPUnit 3.7" and linked to the new PHPUnit 9.6 guide
 
-### Additional Topics
+### Deployment
 
 - [Deployment](/deployment)
   - Document root, core.php and plugin symlink paths use the modern layout

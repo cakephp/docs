@@ -691,11 +691,11 @@
       ]
     },
     {
-      "text": "追加トピック",
+      "text": "デプロイ",
       "collapsed": true,
       "items": [
         {
-          "text": "デプロイメント",
+          "text": "デプロイ",
           "link": "/ja/deployment"
         },
         {

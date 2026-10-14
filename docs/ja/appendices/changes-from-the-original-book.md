@@ -399,7 +399,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 - [SimpleTest から PHPUnit 3.7 への移行](/ja/appendices/phpunit-migration-hints)
   - 題を「SimpleTest から PHPUnit 3.7 への移行」に変更し、PHPUnit 9.6 への移行ガイドへのリンクを追加
 
-### 追加トピック
+### デプロイ
 
 - [デプロイ](/ja/deployment)
   - ドキュメントルート、core.php、プラグインのシンボリックリンクのパスをモダンな構成に変更
