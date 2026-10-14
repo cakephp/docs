@@ -275,7 +275,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 - [デバッグ](/ja/development/debugging)
   - debug() のシグネチャを更新し、trace/excerpt の例をフォークのパスに変更、invoke() を getInstance() に置き換え
   - ログの出力先を logs/（debug.log/error.log）に変更し、Object を CakeObject に、App::uses('CakeLog') を削除
-  - DebugKit: pieceofcake2/debug_kit を Composer でインストールし、config/bootstrap.php で読み込む
+  - DebugKit: pieceofcake2/debug_kit を Composer でインストールし、config/bootstrap.php で読み込む。フォークの DebugKit のドキュメントへのリンクを追加
 - [テスト](/ja/development/testing)
   - PHPUnit 9.6 を Composer (require-dev) でインストール。PHPUnit 3.7/4.x/5.x、.phar、オートローダー回避策の手順を削除
   - テストケースは tests/TestCase、フィクスチャは tests/Fixture、設定は config/ に変更。レガシーな app/Test 構成は代替として記載
@@ -337,23 +337,26 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 
 - [貢献](/ja/contributing)
   - 貢献先は GitHub の pieceofcake2/* リポジトリ (フレームワーク、アプリケーションスケルトン、プラグイン、ドキュメント)
+  - 貢献の手順は Organization の CONTRIBUTING.md で説明し、この章のページは概要とその各セクションへのリンクを記載
 - [ドキュメント](/ja/contributing/documentation)
   - ドキュメントは pieceofcake2/docs (2.x)、Markdown と VitePress、GitHub Actions でデプロイ、bin/dev-server.sh でローカル確認。メンテナンスは en/ja のみ。Jenkins、IRC、ドキュメントチームのメールを削除
-  - reStructuredText/Sphinx のフォーマットガイドを Markdown/VitePress のガイドに置き換え (見出しとアンカー、リンク、コードブロック、アラート、info/pieceofcake2 コンテナ、取り込み)
+  - reStructuredText/Sphinx のフォーマットガイドを Markdown/VitePress のガイドに置き換え (見出しとアンカー、リンク、コードブロック、アラート、info/pieceofcake2 コンテナ、取り込み)、pieceofcake2/docs の README に記載
 - [チケット](/ja/contributing/tickets)
   - Issue は pieceofcake2/* リポジトリへ。報告前に CHANGELOG と移行ガイドを確認。質問は Stack Overflow (IRC と Google グループを削除)
   - セキュリティ問題は SECURITY.md に従い GitHub の非公開の脆弱性報告 (Security タブの Report a vulnerability) で報告。security@cakephp.org を削除
+  - 報告の詳細は CONTRIBUTING.md と SECURITY.md へのリンク
 - [コード](/ja/contributing/code)
   - セットアップ: PHP 8.0 以上と Composer。PHPUnit 9.6、PHP_CodeSniffer、PHPStan は開発用依存としてインストール。PHP 5.3、mcrypt、PHPUnit 3.7 の要件を削除
   - 「テストの実行」を新設: tests/config/database.php を vendor/pieceofcake2/app/config にコピーし、DB 環境変数でデータベースを選んで vendor/bin/phpunit と vendor/bin/phpcs を実行
   - メンテナンスするブランチは 2.x のみ。upstream/2.x から作業し Pull Request も 2.x に送る。2.next/4.0 の説明と Cake Software Foundation への帰属の記述を削除
+  - セットアップ、テストの実行、Pull Request の手順は CONTRIBUTING.md へのリンク
 - [コーディング規約](/ja/contributing/cakephp-coding-conventions)
   - CakePHP 5 ベースの規約 (cakephp/cakephp-codesniffer ^5.0、PSR-12) に書き直し: 4 スペース、配列の短縮構文、末尾カンマ、クラス/メソッドの中括弧は次の行、elseif、ヨーダ記法禁止、?? と ?:、定数のアクセス権、ドキュメントブロックのルール
   - phpcs/phpcbf のインストールと実行方法、フレームワークの phpcs.xml にある CakePHP 2 用の除外、pieceofcake2/app のアプリケーション用 phpcs.xml (従来構成のパスも)、本家 CakePHP 2 の規約との違いの表を追加
 - [後方互換性ガイド](/ja/contributing/backwards-compatibility)
-  - 書き直し: フォークのリリースで変わること (キャッシュエンジン、ディレクトリ構成、オートロードなど互換性のない変更を含んだリリースもある)、移行ガイド、貢献者向けガイドライン。本家のセマンティックバージョニングの表を削除
+  - 書き直し: フォークのリリースで変わること (キャッシュエンジン、ディレクトリ構成、オートロードなど互換性のない変更を含んだリリースもある)、移行ガイド。貢献者向けガイドラインは CONTRIBUTING.md へのリンク。本家のセマンティックバージョニングの表を削除
 - [CakePHP の開発プロセス](/ja/contributing/cakephp-development-process)
-  - フォークのメンテナンス中心のプロセスに書き直し: 目的、2.x のみのブランチ、タグによるリリース (2.10.24.x、2.11.0、2.12.x)、CHANGELOG/UPGRADE。IRC と本家のブランチモデルを削除
+  - フォークのメンテナンス中心のプロセスに書き直し: バージョン番号 (2.10.24.x、2.11.0、2.12.x)。目的、ブランチ、リリースは CONTRIBUTING.md へのリンク。IRC と本家のブランチモデルを削除
 
 ### 付録
 
