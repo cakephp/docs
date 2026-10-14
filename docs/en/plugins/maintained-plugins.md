@@ -21,6 +21,7 @@ CakePHP 2 plugins. All maintained plugins are compatible with PHP 8.x.
 ### Debugging
 
 - [DebugKit Plugin](https://github.com/pieceofcake2/debug_kit) - Debug toolbar
+  ([documentation](https://github.com/pieceofcake2/debug_kit/blob/2.x/docs/README.md))
 
 ### Infrastructure
 

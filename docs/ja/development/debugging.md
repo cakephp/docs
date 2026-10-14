@@ -213,8 +213,10 @@ composer require --dev pieceofcake2/debug_kit
 CakePlugin::load('DebugKit');
 ```
 
-ツールバーを有効にする方法はプラグインの README を参照してください。そのほかのメンテナンスされている
-プラグインについては [メンテナンスされているプラグイン](/ja/plugins/maintained-plugins) を参照してください。
+ツールバーを有効にする方法、ツールバーのパネルとその設定、独自のパネルの作り方は
+[DebugKit のドキュメント](https://github.com/pieceofcake2/debug_kit/blob/2.x/docs/README.md) (英語) を参照してください。
+そのほかのメンテナンスされているプラグインについては
+[メンテナンスされているプラグイン](/ja/plugins/maintained-plugins) を参照してください。
 
 ## Xdebug
 

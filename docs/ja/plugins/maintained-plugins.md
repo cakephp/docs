@@ -21,6 +21,7 @@
 ### デバッグ
 
 - [DebugKit Plugin](https://github.com/pieceofcake2/debug_kit) - デバッグツールバー
+  ([ドキュメント](https://github.com/pieceofcake2/debug_kit/blob/2.x/docs/README.md))
 
 ### インフラ
 

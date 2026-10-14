@@ -77,7 +77,8 @@ composer create-project pieceofcake2/app my_app
 This creates a `my_app` directory, installs CakePHP (`pieceofcake2/cakephp`)
 into `vendor/`, and installs the [Bake](console-and-shells/code-generation-with-bake)
 and [DebugKit](https://github.com/pieceofcake2/debug_kit) plugins as
-development dependencies. The skeleton uses the following layout:
+development dependencies (see the
+[DebugKit documentation](https://github.com/pieceofcake2/debug_kit/blob/2.x/docs/README.md)). The skeleton uses the following layout:
 
 ```text
 my_app/
