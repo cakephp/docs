@@ -481,6 +481,10 @@
           "link": "/ja/development/testing"
         },
         {
+          "text": "静的解析",
+          "link": "/ja/development/static-analysis"
+        },
+        {
           "text": "REST",
           "link": "/ja/development/rest"
         }

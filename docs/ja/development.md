@@ -9,5 +9,6 @@
 - [エラーハンドリング](development/errors)
 - [デバッグ](development/debugging)
 - [テスト](development/testing)
+- [静的解析](development/static-analysis)
 - [REST](development/rest)
 - [ディスパッチャー・フィルター](development/dispatch-filters)
