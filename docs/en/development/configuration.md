@@ -188,98 +188,132 @@ Settings that differ between environments, such as the debug level, the
 security salts and the database credentials, can be read from environment
 variables with `env()` instead of being written into the configuration files.
 In production, set the variables in the configuration of the web server,
-container or process manager. For local development, CakePHP can load them
-from a `.env` file.
+container or process manager. For local development, the application
+skeleton can load them from a `.env` file.
 
 ### Loading .env Files
 
-`CakeDotenv` loads environment variables from `.env` files. It is a backport
-of the `.env` support of the application skeletons of later CakePHP versions,
-built into the core with no extra dependencies. Loading is opt-in: call
-`CakeDotenv::loadDefaults()` at the top of `config/core.php`
-(`app/Config/core.php` in the legacy layout), so that the variables are
-available to the rest of the configuration, the console and the tests:
+Applications created from the
+[pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton load
+environment variables from `.env` files at the top of `config/core.php`, using
+[josegonzalez/dotenv](https://github.com/josegonzalez/php-dotenv). Because
+`config/core.php` is read first, the variables are available to the rest of
+the configuration, the console and the tests.
 
-```php
-// config/core.php
-CakeDotenv::loadDefaults();
-```
+This follows the `.env` support of the CakePHP 3+/5 application skeleton,
+backported for CakePHP 2: [cakephp/app](https://github.com/cakephp/app) loads
+`config/.env` with the same library in `config/bootstrap.php`. As in CakePHP 5,
+the framework itself does not load `.env` files; the application does.
 
 ::: pieceofcake2
-`CakeDotenv` was added in v2.13.0. Applications created from the
-`pieceofcake2/app` skeleton already call it in `config/core.php`.
+`.env` loading is part of the `pieceofcake2/app` skeleton since v2.4.0. For
+other applications, see
+[Adding .env Support to an Existing Application](#adding-env-support-to-an-existing-application).
 :::
 
-`loadDefaults()` loads these files if they exist:
+The skeleton loads these files if they exist:
 
-1. `config/.env` (`app/Config/.env` in the legacy layout), the location used
-   by the CakePHP 3 to 5 application skeletons.
+1. `config/.env`, the location used by the CakePHP 3+/5 application skeleton.
 2. `.env` in the project root.
 
-Variables that are already set in the real environment (web server, shell,
-container, CI) take precedence and are never overwritten, and `config/.env`
-takes precedence over the `.env` file in the project root. Call
-`CakeDotenv::loadDefaults(true)` if the files should overwrite existing
-variables.
+The precedence is: real environment variables > `config/.env` > the `.env` in
+the project root. `config/.env` is loaded first and the root `.env` second,
+and a variable that is already set, in the real environment (web server,
+shell, container, CI) or by `config/.env`, is never overwritten.
 
-The loaded values are written to `putenv()`, `$_ENV` and `$_SERVER`, so you
-can read them with `env()`, `getenv()`, `$_ENV` or `$_SERVER`:
+The loaded values are written to `putenv()`, `$_ENV` and `$_SERVER` as
+strings, so you can read them with `env()`, `getenv()`, `$_ENV` or `$_SERVER`:
 
 ```php
 // config/core.php
-Configure::write('Security.salt', env('SECURITY_SALT'));
+Configure::write('Security.salt', env('SECURITY_SALT') ?: 'a-default-salt');
 ```
 
-Keep `.env` files out of version control (add them to `.gitignore`) and
-commit an example file, such as `config/.env.example`, instead. A `.env` file
-is meant for development; in production, set real environment variables.
+To start, copy the example file that ships with the skeleton and edit it:
 
-`CakeDotenv` also has methods for other files:
+```bash
+cp config/.env.example config/.env
+```
 
-- `CakeDotenv::load($files, $overwrite = false)` loads a file or a list of
-  files. When several files define the same variable, the first file wins.
-- `CakeDotenv::parse($contents)` and `CakeDotenv::parseFile($file)` return the
-  variables as an array without changing the environment.
+Both `config/.env` and `/.env` are listed in the skeleton's `.gitignore`. Keep
+`.env` files out of version control and commit an example file, such as
+`config/.env.example`, instead.
 
-A file that cannot be read or parsed throws a `CakeDotenvException`. The
-message contains the file name and the line number.
+A `.env` file is meant for development. In production, set real environment
+variables in the web server, container or process manager configuration; they
+always take precedence over the files.
 
 ### .env File Syntax
 
-The syntax is compatible with [vlucas/phpdotenv](https://github.com/vlucas/phpdotenv)
-v5, the most widely used `.env` format in PHP:
+A `.env` file contains one `NAME="value"` assignment per line. Lines starting
+with `#` are comments, and an `export ` prefix is allowed, so the file can
+also be read by a shell:
 
 ```bash
-# A comment
-APP_NAME=my_app
-export DEBUG=2                          # optional "export " prefix
-SECURITY_SALT='literal $value'          # single quotes: no escapes, no expansion
-DATABASE_URL="mysql://${DB_HOST}/app"   # double quotes: escapes and ${NAME} expansion
-PRIVATE_KEY="-----BEGIN KEY-----
-...
------END KEY-----"                      # double quoted values can span lines
-EMPTY_VALUE=                            # an empty string
+# config/.env
+export DEBUG="2"
+export SECURITY_SALT="a-long-random-string"
+export DB_HOST="127.0.0.1"
 ```
 
-- Values are always strings. Nothing is converted to booleans, numbers or
-  `null`: `007` stays `007`, and long digit strings are not changed.
-- Unquoted values must not contain whitespace; quote them. `#` starts a
-  comment, except inside quotes.
-- `${NAME}` is replaced with the value of a variable that is defined earlier
-  in the file or already set in the environment. Variables that are not
-  defined are left as they are. `$NAME` without braces is not expanded. In
-  double quotes, write `\$` for a literal `$`.
-- Double quoted values support the escape sequences `\"`, `\\`, `\$`, `\n`,
-  `\r`, `\t`, `\f` and `\v`. Backslashes in unquoted and single quoted values
-  are literal.
-- Files must be UTF-8.
+Always quote the values. josegonzalez/dotenv converts unquoted values to
+booleans, numbers or `null`: `007` becomes `7`, and a long digit string such
+as a cipher seed overflows to a different number. Quoted values are kept as
+they are. Inside double quotes, `${NAME}` is replaced with the value of a
+variable defined earlier in the file.
+
+### Adding .env Support to an Existing Application
+
+Applications that use the legacy `app/` layout, or that were created from an
+earlier version of the skeleton, can add the same loader. Install the library:
+
+```bash
+composer require josegonzalez/dotenv
+```
+
+Then add the following code at the top of `app/Config/core.php`
+(`config/core.php` in the modern layout): the `use` statement after the
+opening file comment, and the loop before the first `Configure::write()` call.
+In the legacy layout, `CONFIG` is `app/Config/` and `ROOT` is the directory
+that contains `app/`, so the files are `app/Config/.env` and `.env` in the
+project root.
+
+```php
+// app/Config/core.php
+
+use josegonzalez\Dotenv\Loader;
+
+foreach ([CONFIG . '.env', ROOT . DS . '.env'] as $dotenvFile) {
+    if (!is_file($dotenvFile)) {
+        continue;
+    }
+    $dotenv = new Loader([$dotenvFile]);
+    foreach ($dotenv->parse()->toArray() as $key => $value) {
+        if (getenv($key) !== false || isset($_ENV[$key]) || isset($_SERVER[$key])) {
+            continue;
+        }
+        // The parser converts some values to booleans, numbers or null; keep them as strings.
+        if (is_bool($value)) {
+            $value = $value ? 'true' : 'false';
+        }
+        $value = (string)$value;
+        putenv($key . '=' . $value);
+        $_ENV[$key] = $value;
+        $_SERVER[$key] = $value;
+    }
+    unset($dotenv, $key, $value);
+}
+unset($dotenvFile);
+```
+
+Add the `.env` files to `.gitignore`, and read the variables in your
+configuration with `env()`, as shown in the next section.
 
 ### Environment Variables of the Application Skeleton
 
 The `config/core.php` and `config/database.php.default` files of the
 `pieceofcake2/app` skeleton read the following variables. Its
-`config/.env.example` file lists them; copy it to `config/.env` to use them in
-development.
+`config/.env.example` file lists them.
 
 | Variable | Setting | When not set |
 |----------|---------|--------------|
@@ -290,19 +324,21 @@ development.
 | `DB_TEST_DATASOURCE`, `DB_TEST_HOST`, `DB_TEST_PORT`, `DB_TEST_USERNAME`, `DB_TEST_PASSWORD`, `DB_TEST_DATABASE` | the same settings of the `test` connection | the values in `config/database.php` |
 
 Empty variables are treated as not set, except `DB_PASSWORD` and
-`DB_TEST_PASSWORD`, which may be empty. If your `config/database.php` was
-created before the skeleton read these variables, copy the `__construct()`
-and `applyEnv()` methods from `config/database.php.default` into it.
+`DB_TEST_PASSWORD`, which may be empty. Without any `.env` file or environment
+variable, the application uses the values in the configuration files. If your
+`config/database.php` was created before the skeleton read these variables,
+copy the `__construct()` and `applyEnv()` methods from
+`config/database.php.default` into it.
 
 For example, a `config/.env` file for development:
 
 ```bash
 # config/.env
-DEBUG=2
-DB_HOST="127.0.0.1"
-DB_USERNAME="my_app"
-DB_PASSWORD="secret"
-DB_DATABASE="my_app"
+export DEBUG="2"
+export DB_HOST="127.0.0.1"
+export DB_USERNAME="my_app"
+export DB_PASSWORD="secret"
+export DB_DATABASE="my_app"
 ```
 
 ## Class Loading and Additional Class Paths

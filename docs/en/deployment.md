@@ -91,7 +91,8 @@ The other settings that the skeleton reads from environment variables, such as
 the security salts and the database credentials, are listed in
 [Environment Variables](development/configuration#environment-variables).
 Set them as real environment variables in production rather than in a `.env`
-file.
+file. Real environment variables always take precedence over the `.env` files
+that the skeleton loads in development.
 
 ## Improve your application's performance
 

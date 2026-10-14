@@ -98,8 +98,9 @@ my_app/
    スケルトンに入っている値は誰でも知っているサンプル値なので、実際のアプリケーションでは使わないでください。
 
 ファイルを編集する代わりに、デバッグレベル、セキュリティ用のソルト、データベースの設定を
-環境変数でセットすることもできます。開発環境では、`config/.env.example` を `config/.env` に
-コピーして編集します。[環境変数](development/configuration#environment-variables) を参照してください。
+環境変数でセットすることもできます。開発環境では、`config/.env.example` を `config/.env`
+(またはプロジェクトルートの `.env`) にコピーして編集します。スケルトンは `config/core.php` の先頭で
+このファイルを読み込みます。[環境変数](development/configuration#environment-variables) を参照してください。
 
 スケルトンの `composer.json` には、[composer.json の設定](#configuring-composer-json) で説明するプラグイン用の設定が
 すでに含まれています。ファイルを編集するときも、この設定は残しておいてください。

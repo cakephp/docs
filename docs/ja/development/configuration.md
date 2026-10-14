@@ -182,99 +182,130 @@ settings
 デバッグレベル、セキュリティ用のソルト、データベースの認証情報など、環境ごとに異なる設定は、
 設定ファイルに書く代わりに `env()` で環境変数から読み込めます。本番環境では、Web サーバー、
 コンテナ、プロセスマネージャーなどの設定で環境変数をセットします。ローカルの開発環境では、
-CakePHP が `.env` ファイルから環境変数を読み込めます。
+アプリケーションスケルトンが `.env` ファイルから環境変数を読み込めます。
 
 <a id="loading-env-files"></a>
 
 ### .env ファイルの読み込み
 
-`CakeDotenv` は `.env` ファイルから環境変数を読み込みます。これは、後の CakePHP バージョンの
-アプリケーションスケルトンにある `.env` サポートをバックポートしたもので、追加の依存パッケージ
-なしでコアに組み込まれています。読み込みはオプトインです。`config/core.php`
-(レガシー構成では `app/Config/core.php`) の先頭で `CakeDotenv::loadDefaults()` を呼び出すと、
-残りの設定、コンソール、テストで環境変数を使えるようになります。
+[pieceofcake2/app](https://github.com/pieceofcake2/app) スケルトンから作成したアプリケーションは、
+`config/core.php` の先頭で [josegonzalez/dotenv](https://github.com/josegonzalez/php-dotenv)
+を使って `.env` ファイルから環境変数を読み込みます。`config/core.php` は最初に読み込まれるので、
+残りの設定、コンソール、テストで環境変数を使えます。
 
-```php
-// config/core.php
-CakeDotenv::loadDefaults();
-```
+これは CakePHP 3〜5 のアプリケーションスケルトンにある `.env` サポートを CakePHP 2 に
+バックポートしたものです。[cakephp/app](https://github.com/cakephp/app) は、同じライブラリを使って
+`config/bootstrap.php` で `config/.env` を読み込みます。CakePHP 5 と同じく、フレームワーク自体は
+`.env` ファイルを読み込まず、アプリケーションが読み込みます。
 
 ::: pieceofcake2
-`CakeDotenv` は v2.13.0 で追加されました。`pieceofcake2/app` スケルトンから作成した
-アプリケーションでは、すでに `config/core.php` で呼び出しています。
+`.env` の読み込みは v2.4.0 から `pieceofcake2/app` スケルトンに含まれています。ほかの
+アプリケーションについては、[既存のアプリケーションに .env サポートを追加する](#adding-env-support-to-an-existing-application)
+を参照してください。
 :::
 
-`loadDefaults()` は、以下のファイルが存在すれば読み込みます。
+スケルトンは、以下のファイルが存在すれば読み込みます。
 
-1. `config/.env` (レガシー構成では `app/Config/.env`)。CakePHP 3 から 5 のアプリケーション
-   スケルトンが使う場所です。
+1. `config/.env`。CakePHP 3〜5 のアプリケーションスケルトンが使う場所です。
 2. プロジェクトルートの `.env`
 
-実際の環境 (Web サーバー、シェル、コンテナ、CI) ですでにセットされている環境変数が優先され、
-上書きされることはありません。また、`config/.env` はプロジェクトルートの `.env` より優先されます。
-ファイルの値で既存の環境変数を上書きしたい場合は、`CakeDotenv::loadDefaults(true)` を
-呼び出します。
+優先順位は、実際の環境変数 > `config/.env` > プロジェクトルートの `.env` です。
+`config/.env` を先に、ルートの `.env` を後に読み込み、実際の環境 (Web サーバー、シェル、
+コンテナ、CI) や `config/.env` ですでにセットされている環境変数が上書きされることはありません。
 
-読み込んだ値は `putenv()`、`$_ENV`、`$_SERVER` に書き込まれるので、`env()`、`getenv()`、
-`$_ENV`、`$_SERVER` のどれでも読み出せます。
+読み込んだ値は文字列として `putenv()`、`$_ENV`、`$_SERVER` に書き込まれるので、`env()`、
+`getenv()`、`$_ENV`、`$_SERVER` のどれでも読み出せます。
 
 ```php
 // config/core.php
-Configure::write('Security.salt', env('SECURITY_SALT'));
+Configure::write('Security.salt', env('SECURITY_SALT') ?: 'a-default-salt');
 ```
 
-`.env` ファイルはバージョン管理に含めず (`.gitignore` に追加します)、代わりに
-`config/.env.example` のようなサンプルファイルをコミットしてください。`.env` ファイルは
-開発用です。本番環境では実際の環境変数をセットしてください。
+まず、スケルトンに含まれるサンプルファイルをコピーして編集します。
 
-`CakeDotenv` には、ほかのファイルを扱うメソッドもあります。
+```bash
+cp config/.env.example config/.env
+```
 
-- `CakeDotenv::load($files, $overwrite = false)` は、1 つのファイルまたはファイルのリストを
-  読み込みます。複数のファイルで同じ変数が定義されている場合は、最初のファイルの値が使われます。
-- `CakeDotenv::parse($contents)` と `CakeDotenv::parseFile($file)` は、環境を変更せずに
-  変数を配列で返します。
+`config/.env` と `/.env` は、どちらもスケルトンの `.gitignore` に記載されています。`.env`
+ファイルはバージョン管理に含めず、代わりに `config/.env.example` のようなサンプルファイルを
+コミットしてください。
 
-読み込めないファイルや解析できないファイルがあると、`CakeDotenvException` がスローされます。
-メッセージにはファイル名と行番号が含まれます。
+`.env` ファイルは開発用です。本番環境では、Web サーバー、コンテナ、プロセスマネージャーなどの
+設定で実際の環境変数をセットしてください。実際の環境変数は常にファイルより優先されます。
 
 <a id="env-file-syntax"></a>
 
 ### .env ファイルの書式
 
-書式は、PHP で最も広く使われている `.env` の書式である
-[vlucas/phpdotenv](https://github.com/vlucas/phpdotenv) v5 と互換性があります。
+`.env` ファイルには、1 行に 1 つずつ `NAME="value"` の形式で値を書きます。`#` で始まる行は
+コメントです。`export ` を前に付けることもできるので、シェルからも読み込めます。
 
 ```bash
-# コメント
-APP_NAME=my_app
-export DEBUG=2                          # "export " は省略可能
-SECURITY_SALT='literal $value'          # シングルクォート: エスケープも展開もしない
-DATABASE_URL="mysql://${DB_HOST}/app"   # ダブルクォート: エスケープと ${NAME} の展開
-PRIVATE_KEY="-----BEGIN KEY-----
-...
------END KEY-----"                      # ダブルクォートの値は複数行にできる
-EMPTY_VALUE=                            # 空文字列
+# config/.env
+export DEBUG="2"
+export SECURITY_SALT="a-long-random-string"
+export DB_HOST="127.0.0.1"
 ```
 
-- 値は常に文字列です。真偽値、数値、`null` への変換は行いません。`007` は `007` のままで、
-  長い数字の列も変更されません。
-- クォートしない値には空白を含められません。空白を含む値はクォートしてください。
-  `#` はクォートの中を除いてコメントの開始になります。
-- `${NAME}` は、ファイル内でそれより前に定義された変数か、環境にすでにセットされている変数の
-  値に置き換えられます。定義されていない変数はそのまま残ります。波括弧の無い `$NAME` は
-  展開されません。ダブルクォートの中で `$` そのものを書くには `\$` とします。
-- ダブルクォートの値では、エスケープシーケンス `\"`、`\\`、`\$`、`\n`、`\r`、`\t`、
-  `\f`、`\v` を使えます。クォートしない値とシングルクォートの値では、バックスラッシュは
-  そのままの文字として扱われます。
-- ファイルは UTF-8 でなければなりません。
+値は必ずクォートしてください。josegonzalez/dotenv は、クォートしない値を真偽値、数値、`null`
+に変換します。`007` は `7` になり、暗号化シードのような長い数字の列はオーバーフローして別の数値に
+なります。クォートした値はそのまま使われます。ダブルクォートの中の `${NAME}` は、ファイル内で
+それより前に定義された変数の値に置き換えられます。
+
+<a id="adding-env-support-to-an-existing-application"></a>
+
+### 既存のアプリケーションに .env サポートを追加する
+
+レガシーの `app/` 構成のアプリケーションや、以前のバージョンのスケルトンから作成した
+アプリケーションにも、同じ読み込み処理を追加できます。まずライブラリをインストールします。
+
+```bash
+composer require josegonzalez/dotenv
+```
+
+次に、`app/Config/core.php` (モダン構成では `config/core.php`) の先頭に以下のコードを
+追加します。`use` 文はファイル冒頭のコメントの後に、ループは最初の `Configure::write()`
+の前に置きます。レガシー構成では `CONFIG` は `app/Config/`、`ROOT` は `app/` を含む
+ディレクトリなので、読み込むファイルは `app/Config/.env` とプロジェクトルートの `.env` です。
+
+```php
+// app/Config/core.php
+
+use josegonzalez\Dotenv\Loader;
+
+foreach ([CONFIG . '.env', ROOT . DS . '.env'] as $dotenvFile) {
+    if (!is_file($dotenvFile)) {
+        continue;
+    }
+    $dotenv = new Loader([$dotenvFile]);
+    foreach ($dotenv->parse()->toArray() as $key => $value) {
+        if (getenv($key) !== false || isset($_ENV[$key]) || isset($_SERVER[$key])) {
+            continue;
+        }
+        // The parser converts some values to booleans, numbers or null; keep them as strings.
+        if (is_bool($value)) {
+            $value = $value ? 'true' : 'false';
+        }
+        $value = (string)$value;
+        putenv($key . '=' . $value);
+        $_ENV[$key] = $value;
+        $_SERVER[$key] = $value;
+    }
+    unset($dotenv, $key, $value);
+}
+unset($dotenvFile);
+```
+
+`.env` ファイルを `.gitignore` に追加し、次の節のように設定の中で `env()` を使って
+環境変数を読み込んでください。
 
 <a id="environment-variables-of-the-application-skeleton"></a>
 
 ### アプリケーションスケルトンの環境変数
 
 `pieceofcake2/app` スケルトンの `config/core.php` と `config/database.php.default` は、
-以下の環境変数を読み込みます。これらは `config/.env.example` に記載されているので、
-開発環境で使うときは `config/.env` にコピーしてください。
+以下の環境変数を読み込みます。これらは `config/.env.example` に記載されています。
 
 | 環境変数 | 設定 | セットされていない場合 |
 |----------|------|------------------------|
@@ -285,7 +316,8 @@ EMPTY_VALUE=                            # 空文字列
 | `DB_TEST_DATASOURCE`、`DB_TEST_HOST`、`DB_TEST_PORT`、`DB_TEST_USERNAME`、`DB_TEST_PASSWORD`、`DB_TEST_DATABASE` | `test` 接続の同じ設定 | `config/database.php` の値 |
 
 空の環境変数はセットされていないものとして扱われます。ただし、`DB_PASSWORD` と
-`DB_TEST_PASSWORD` は空にできます。スケルトンがこれらの環境変数を読み込むようになる前に
+`DB_TEST_PASSWORD` は空にできます。`.env` ファイルも環境変数も無い場合、アプリケーションは
+設定ファイルの値を使います。スケルトンがこれらの環境変数を読み込むようになる前に
 `config/database.php` を作成した場合は、`config/database.php.default` の `__construct()` と
 `applyEnv()` メソッドをコピーしてください。
 
@@ -293,11 +325,11 @@ EMPTY_VALUE=                            # 空文字列
 
 ```bash
 # config/.env
-DEBUG=2
-DB_HOST="127.0.0.1"
-DB_USERNAME="my_app"
-DB_PASSWORD="secret"
-DB_DATABASE="my_app"
+export DEBUG="2"
+export DB_HOST="127.0.0.1"
+export DB_USERNAME="my_app"
+export DB_PASSWORD="secret"
+export DB_DATABASE="my_app"
 ```
 
 ## クラスの読み込みと追加のクラスパス
