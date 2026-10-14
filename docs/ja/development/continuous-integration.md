@@ -51,8 +51,8 @@ permissions:
 
 env:
   # Test values. The real salts are not in the repository (config/.env is ignored by git).
-  SECURITY_SALT: ci-salt-for-tests-only
-  SECURITY_CIPHER_SEED: '123456789012345678901234567890'
+  SECURITY_SALT: ci-salt-for-tests-only-0123456789abcdef
+  SECURITY_CIPHER_SEED: '1234567890'
 
 jobs:
   phpunit:
