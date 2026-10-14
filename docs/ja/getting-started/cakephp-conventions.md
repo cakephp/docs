@@ -18,8 +18,8 @@ CakePHP の規約は長年のウェブ開発経験とベストプラクティス
 コントローラに最初に書くメソッドは、おそらく `index()` メソッドでしょう。
 リクエストによってコントローラは指定されたがアクションは指定されなかったという場合、CakePHP の
 デフォルト動作では、そのコントローラの `index()` メソッドを実行することになっています。
-例えば、 <http://www.example.com/apples/> へのリクエストは `ApplesController` の
-`index()` メソッドを呼ぶようにマップされ、 <http://www.example.com/apples/view/> は、
+例えば、 <https://www.example.com/apples/> へのリクエストは `ApplesController` の
+`index()` メソッドを呼ぶようにマップされ、 <https://www.example.com/apples/view/> は、
 `ApplesController` の `view()` メソッドにマップされます。
 
 コントローラ関数名の先頭にアンダースコア（\_）を付けることで、CakePHP のコントローラメソッドを
@@ -41,8 +41,8 @@ class NewsController extends AppController
 }
 ```
 
-<http://www.example.com/news/latest/> のページにユーザーがアクセス可能であっても、
-[http://www.example.com/news/\\findNewArticles/](http://www.example.com/news/\_findNewArticles/) を取得しようとするとエラーになるでしょう。
+<https://www.example.com/news/latest/> のページにユーザーがアクセス可能であっても、
+<https://www.example.com/news/_findNewArticles/> を取得しようとするとエラーになるでしょう。
 なぜなら、メソッドの先頭にアンダースコアが付いているからです。
 メソッドが URL からアクセスできるかどうかを、PHP のアクセス権キーワードを使って指示することもできます。
 public でないメソッドはアクセスできません。
@@ -51,7 +51,7 @@ public でないメソッドはアクセスできません。
 
 前節の通り、ひとつの単語からなる名前のコントローラは、簡単に小文字の URL パスにマップできます。
 例えば、 `ApplesController` （ファイル名は 'ApplesController.php'）には、
-<http://example.com/apples> としてアクセスできます。
+<https://example.com/apples> としてアクセスできます。
 
 複数の単語からなる名前のコントローラは、コントローラ名と等価になるようなさまざまな形式が
 *考えられます* 。つまり:
@@ -164,7 +164,7 @@ CREATE TABLE posts_tags (
 
 従来の `app/` 構成では、これらのファイルは `app/Model/`、`app/Controller/`、`app/View/People/` にあります。
 
-これらの規約により、 CakePHP は <http://example.com/people/> へのリクエストを、
+これらの規約により、 CakePHP は <https://example.com/people/> へのリクエストを、
 PeopleController の index() 関数にマップします。そして、Person モデルが自動的に使える
 （データベースの 'people' テーブルに自動的に接続される）ようになり、表示されることになります。
 必要なクラスとファイルを作成しただけでこれらの関係が設定されています。

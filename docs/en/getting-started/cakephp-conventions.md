@@ -24,9 +24,9 @@ The first method you write for a controller might be the
 `index()` method. When a request specifies a controller but not
 an action, the default CakePHP behavior is to execute the
 `index()` method of that controller. For example, a request for
-<http://www.example.com/apples/> maps to a call on the `index()`
+<https://www.example.com/apples/> maps to a call on the `index()`
 method of the `ApplesController`, whereas
-<http://www.example.com/apples/view/> maps to a call on the
+<https://www.example.com/apples/view/> maps to a call on the
 `view()` method of the `ApplesController`.
 
 You can also change the visibility of controller methods in CakePHP
@@ -50,9 +50,9 @@ class NewsController extends AppController
 }
 ```
 
-While the page <http://www.example.com/news/latest/> would be
+While the page <https://www.example.com/news/latest/> would be
 accessible to the user as usual, someone trying to get to the page
-[http://www.example.com/news/\\findNewArticles/](http://www.example.com/news/\_findNewArticles/) would get an error,
+<https://www.example.com/news/_findNewArticles/> would get an error,
 because the method is preceded with an underscore. You can also use
 PHP's visibility keywords to indicate whether or not a method can be
 accessed from a URL. Non-public methods cannot be accessed.
@@ -62,7 +62,7 @@ accessed from a URL. Non-public methods cannot be accessed.
 As you've just seen, single word controllers map easily to a simple
 lower case URL path. For example, `ApplesController` (which would
 be defined in the file name 'ApplesController.php') is accessed
-from <http://example.com/apples>.
+from <https://example.com/apples>.
 
 Multiple word controllers *can* be any 'inflected' form which
 equals the controller name so:
@@ -196,7 +196,7 @@ In the legacy `app/` layout, these files are in `app/Model/`,
 `app/Controller/` and `app/View/People/`.
 
 Using these conventions, CakePHP knows that a request to
-<http://example.com/people/> maps to a call on the index() function
+<https://example.com/people/> maps to a call on the index() function
 of the PeopleController, where the Person model is automatically
 available (and automatically tied to the 'people' table in the
 database), and renders to a file. None of these relationships have

@@ -99,7 +99,7 @@ $response->getHeader('date');
 
 ``` php
 $HttpSocket = new HttpSocket();
-$response = $HttpSocket->get('http://example.com/redirecting_url', [], ['redirect' => true]);
+$response = $HttpSocket->get('https://example.com/redirecting_url', [], ['redirect' => true]);
 ```
 
 *redirect* オプションは、以下の値を指定できます。

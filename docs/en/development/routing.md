@@ -51,7 +51,7 @@ your controller actions using the URL.
 
 ``` text
 // URL pattern default routes:
-http://example.com/controller/action/param1/param2/param3
+https://example.com/controller/action/param1/param2/param3
 ```
 
 The URL /posts/view maps to the view() action of the

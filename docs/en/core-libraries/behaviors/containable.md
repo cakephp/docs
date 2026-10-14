@@ -64,7 +64,7 @@ debug($this->Post->find('all'));
                             [post_id] => 1
                             [author] => Daniel
                             [email] => dan@example.com
-                            [website] => http://example.com
+                            [website] => https://example.com
                             [comment] => First comment
                             [created] => 2008-05-18 00:00:00
                         ]
@@ -74,7 +74,7 @@ debug($this->Post->find('all'));
                             [post_id] => 1
                             [author] => Sam
                             [email] => sam@example.net
-                            [website] => http://example.net
+                            [website] => https://example.net
                             [comment] => Second comment
                             [created] => 2008-05-18 00:00:00
                         ]
@@ -265,7 +265,7 @@ by Daniel:
                             [post_id] => 1
                             [author] => Daniel
                             [email] => dan@example.com
-                            [website] => http://example.com
+                            [website] => https://example.com
                             [comment] => First comment
                             [created] => 2008-05-18 00:00:00
                         ]
@@ -296,7 +296,7 @@ just the 2 posts that Daniel had commented on. It won't return all comments howe
                             [post_id] => 1
                             [author] => Daniel
                             [email] => dan@example.com
-                            [website] => http://example.com
+                            [website] => https://example.com
                             [comment] => First comment
                             [created] => 2008-05-18 00:00:00
                         ]
@@ -332,7 +332,7 @@ just the 2 posts that Daniel had commented on. It won't return all comments howe
                             [post_id] => 3
                             [author] => Daniel
                             [email] => dan@example.com
-                            [website] => http://example.com
+                            [website] => https://example.com
                             [comment] => Another comment
                             [created] => 2008-05-18 00:00:00
                         ]

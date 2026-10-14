@@ -40,7 +40,7 @@ class CategoriesController extends AppController
 
 (`src/Model/Category.php` に) 基本的な Category モデルクラスを既に作成していたとすると、
 準備は以上となります。
-新しい足場を見るために <http://example.com/categories> へアクセスしてみて下さい。
+新しい足場を見るために <https://example.com/categories> へアクセスしてみて下さい。
 
 > [!NOTE]
 > 足場が作られたコントローラにメソッドを作成した場合、思った通りの結果にならない時があります。
@@ -89,11 +89,11 @@ public $scaffold = 'admin';
 
 以上で管理用の足場のアクションにアクセスできるようになります。
 
-    http://example.com/admin/controller/index
-    http://example.com/admin/controller/view
-    http://example.com/admin/controller/edit
-    http://example.com/admin/controller/add
-    http://example.com/admin/controller/delete
+    https://example.com/admin/controller/index
+    https://example.com/admin/controller/view
+    https://example.com/admin/controller/edit
+    https://example.com/admin/controller/add
+    https://example.com/admin/controller/delete
 
 これは単純なバックエンドインターフェイスを素早く作るための簡単な方法です。ただし、
 管理用と非管理用の足場のメソッドを同時に使うことはできないことを覚えておいて下さい。

@@ -412,11 +412,11 @@ public function sendIcs()
 
 ``` php
 // ヘッダを一つ設定する
-$this->response->header('Location', 'http://example.com');
+$this->response->header('Location', 'https://example.com');
 
 // 複数ヘッダを設定する
 $this->response->header([
-    'Location' => 'http://example.com',
+    'Location' => 'https://example.com',
     'X-Extra' => 'My header',
 ]);
 $this->response->header([

@@ -438,11 +438,11 @@ can be called with a few different parameter configurations:
 
 ``` php
 // Set a single header
-$this->response->header('Location', 'http://example.com');
+$this->response->header('Location', 'https://example.com');
 
 // Set multiple headers
 $this->response->header([
-    'Location' => 'http://example.com',
+    'Location' => 'https://example.com',
     'X-Extra' => 'My header',
 ]);
 

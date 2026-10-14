@@ -16,7 +16,7 @@ Figure: 2. Typical CakePHP Request.
 Black = required element, Gray = optional element, Blue = callback
 
 1.  Ricardo clicks the link pointing to
-    <http://www.example.com/cakes/buy>, and his browser makes a request
+    <https://www.example.com/cakes/buy>, and his browser makes a request
     to your web server.
 2.  The Router parses the URL in order to extract the parameters for
     this request: the controller, action, and any other arguments that

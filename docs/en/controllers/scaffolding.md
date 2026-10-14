@@ -49,7 +49,7 @@ class CategoriesController extends AppController
 
 Assuming you've created even the most basic Category model class
 file (in `src/Model/Category.php`), you're ready to go. Visit
-<http://example.com/categories> to see your new scaffold.
+<https://example.com/categories> to see your new scaffold.
 
 > [!NOTE]
 > Creating methods in controllers that are scaffolded can cause
@@ -104,11 +104,11 @@ public $scaffold = 'admin';
 
 You will now be able to access admin scaffolded actions:
 
-    http://example.com/admin/controller/index
-    http://example.com/admin/controller/view
-    http://example.com/admin/controller/edit
-    http://example.com/admin/controller/add
-    http://example.com/admin/controller/delete
+    https://example.com/admin/controller/index
+    https://example.com/admin/controller/view
+    https://example.com/admin/controller/edit
+    https://example.com/admin/controller/add
+    https://example.com/admin/controller/delete
 
 This is an easy way to create a simple backend interface quickly.
 Keep in mind that you cannot have both admin and non-admin methods

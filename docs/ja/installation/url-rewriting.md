@@ -60,7 +60,7 @@ Apache の設定ファイルを見てください。設定ファイルの場所�
     従来の `app/` 構成のアプリケーションには、リクエストを `app/webroot/` に転送する `.htaccess` ファイルが
     プロジェクトルートと `app/` にもあります。これらはドキュメントルートを `app/webroot/` に設定していない場合にだけ使われます。
 
-    ユーザディレクトリ (<http://example.com/~username/my_app/>) や、既に mod_rewrite を
+    ユーザディレクトリ (<https://example.com/~username/my_app/>) や、既に mod_rewrite を
     活用している URL 構成に CakePHP をインストールする場合は、`webroot/` の `.htaccess` ファイルに
     `RewriteBase` ステートメントを追加する必要があります。
     RewriteEngine ディレクティブと同じセクションに追加できるので、
@@ -111,7 +111,7 @@ nginx は Apache のように .htaccess ファイルを使わないため、
 server {
     listen 80;
     server_name www.example.com;
-    return 301 http://example.com$request_uri;
+    return 301 https://example.com$request_uri;
 }
 
 server {
