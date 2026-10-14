@@ -655,6 +655,9 @@ GitHub Actions では、データベースのサービスと、chromedriver と�
 場合は、E2E のステップの前にビルドしてください。スタイルシートがない場合は
 `assertStylesheetsLoaded()` が失敗します。
 
+CI のワークフローのほかのジョブと、アーティファクトへのリンクがあるジョブサマリーについては、
+[継続的インテグレーション](/ja/development/continuous-integration) を参照してください。
+
 <a id="tips"></a>
 
 ## ヒント

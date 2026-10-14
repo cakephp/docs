@@ -645,6 +645,9 @@ also sets up MySQL as the test database. If your build creates CSS or
 JavaScript files, build them before the E2E step:
 `assertStylesheetsLoaded()` fails when the stylesheets are missing.
 
+For the other jobs of a CI workflow and a job summary with a link to the
+artifacts, see [Continuous Integration](/development/continuous-integration).
+
 ## Tips
 
 - **Test database.** Use a separate database for the tests and pass it to the

@@ -14,5 +14,6 @@ debugging, and testing will be covered.
 - [Integration Testing](development/integration-testing)
 - [E2E Testing](development/e2e-testing)
 - [Static Analysis](development/static-analysis)
+- [Continuous Integration](development/continuous-integration)
 - [REST](development/rest)
 - [Dispatcher Filters](development/dispatch-filters)

@@ -57,6 +57,7 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
 - [E2E Testing](/development/e2e-testing)
 - [Maintained Plugins](/plugins/maintained-plugins)
 - [Static Analysis](/development/static-analysis)
+- [Continuous Integration](/development/continuous-integration) (the CI job summaries subsection moved here from Static Analysis)
 - [Deploying to AWS Lambda](/deployment/aws-lambda)
 
 ### Getting Started
@@ -323,7 +324,7 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
   - Coverage requires Xdebug or PCOV; output to tmp/coverage
   - Test suites use TESTS . 'TestCase'; note that phpunit.xml.dist makes AllTests optional
   - Plugin tests in plugins/&lt;Name>/tests/TestCase (Test/Case fallback)
-  - Jenkins: composer install step, config/database.php, vendor/bin/phpunit, jenkins.io links
+  - Jenkins: composer install step, config/database.php, vendor/bin/phpunit, jenkins.io links; link to Continuous Integration for GitHub Actions; ja: explicit test-database-setup, generating-code-coverage and integration-with-jenkins anchors
   - New "Types of Tests" section: unit tests with fixtures, controller tests with testAction() and browser E2E tests (links to E2E Testing); ja: explicit testing-controllers anchor
   - "Types of Tests" also lists integration tests with `IntegrationTestTrait` (links to Integration Testing) and notes that `ControllerTestCase` remains supported; tip linking to Integration Testing in "Testing Controllers"
 - [REST](/development/rest)

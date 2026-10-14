@@ -479,6 +479,10 @@
           "link": "/development/static-analysis"
         },
         {
+          "text": "Continuous Integration",
+          "link": "/development/continuous-integration"
+        },
+        {
           "text": "REST",
           "link": "/development/rest"
         }
