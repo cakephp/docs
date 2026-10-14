@@ -8,7 +8,7 @@ new project, use [CakePHP 5](https://book.cakephp.org/5/en/) instead.
 :::
 
 This is the CakePHP 2 Cookbook, updated for the Piece of Cake 2 fork. See
-[Changes from the Original Book](/pieceofcake2/changes) for what differs from
+[Changes from the Original Book](/appendices/changes-from-the-original-book) for what differs from
 the original CakePHP 2.x documentation.
 
 The CakePHP cookbook is an openly developed and community editable documentation

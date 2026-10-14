@@ -1,20 +1,6 @@
 {
   "/ja/": [
     {
-      "text": "Piece of Cake 2",
-      "collapsed": false,
-      "items": [
-        {
-          "text": "Piece of Cake 2",
-          "link": "/ja/pieceofcake2"
-        },
-        {
-          "text": "本家ドキュメントからの変更点",
-          "link": "/ja/pieceofcake2/changes"
-        }
-      ]
-    },
-    {
       "text": "はじめに",
       "collapsed": false,
       "items": [
@@ -625,6 +611,10 @@
         {
           "text": "脆弱性への対応",
           "link": "/ja/appendices/security-fixes"
+        },
+        {
+          "text": "本家ドキュメントからの変更点",
+          "link": "/ja/appendices/changes-from-the-original-book"
         },
         {
           "text": "PHPUnit 9.6 への移行",

@@ -63,6 +63,8 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 - [URLリライティング](/ja/installation/url-rewriting)
   - 例はドキュメントルートを webroot/ とする前提に変更、.htaccess をスケルトンの内容に更新、従来の構成の .htaccess は簡単な説明のみに
   - nginx の例を PHP-FPM ソケット向けに更新、IIS の web.config を webroot/ に配置、リンク切れ (Web Platform Installer、virtualhostx、Apache wiki) を削除
+- [入門](/ja/getting-started)
+  - ページの先頭に「このフォークについて」を追加 (フォークの概要、CakePHP 2 のサポート終了、新規プロジェクトには CakePHP 5、このドキュメントについて)。サイドバーの「Piece of Cake 2」グループとともに削除した「Piece of Cake 2」ページの内容をここに移動
 - [CakePHP の規約](/ja/getting-started/cakephp-conventions)
   - ファイルの場所を src/ と templates/ に変更、String::uuid を CakeText::uuid() に変更
 - [CakePHP のフォルダ構造](/ja/getting-started/cakephp-folder-structure)
@@ -369,6 +371,8 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 
 ### 付録
 
+- [本家ドキュメントからの変更点](/ja/appendices/changes-from-the-original-book)
+  - このページ。削除したサイドバーの「Piece of Cake 2」グループ (`/ja/pieceofcake2/changes`) から付録に移動
 - [脆弱性への対応](/ja/appendices/security-fixes)
   - `'readFile' => false` を指定した `Xml::build()` の SSRF (2.12.3 で修正) を追加。Cookie のタイプを `$components` で設定。Security.useOpenSsl のスケルトンについての注記
 - [CakePHP 2.10 からの移行](/ja/appendices/migrating-from-cakephp-2-10)

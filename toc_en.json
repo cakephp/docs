@@ -1,20 +1,6 @@
 {
   "/": [
     {
-      "text": "Piece of Cake 2",
-      "collapsed": false,
-      "items": [
-        {
-          "text": "Piece of Cake 2",
-          "link": "/pieceofcake2"
-        },
-        {
-          "text": "Changes from the Original Book",
-          "link": "/pieceofcake2/changes"
-        }
-      ]
-    },
-    {
       "text": "Getting Started",
       "collapsed": false,
       "items": [
@@ -625,6 +611,10 @@
         {
           "text": "Security Fixes",
           "link": "/appendices/security-fixes"
+        },
+        {
+          "text": "Changes from the Original Book",
+          "link": "/appendices/changes-from-the-original-book"
         },
         {
           "text": "Migrating Tests to PHPUnit 9.6",

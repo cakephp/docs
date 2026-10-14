@@ -10,7 +10,7 @@ This repository is a fork of the `2.x` branch of
 [cakephp/docs](https://github.com/cakephp/docs/tree/2.x) (the CakePHP Cookbook).
 The book describes CakePHP 2 as it works on the fork today (Composer, PHP 8,
 the modern directory layout). Differences from the original book are listed on
-[Changes from the Original Book](https://pieceofcake2.github.io/docs/pieceofcake2/changes).
+[Changes from the Original Book](https://pieceofcake2.github.io/docs/appendices/changes-from-the-original-book).
 
 The theme lives in [pieceofcake2/docs-skeleton](https://github.com/pieceofcake2/docs-skeleton)
 (a fork of cakephp/docs-skeleton) and is cloned at build time.
@@ -65,7 +65,7 @@ Japanese pages from `/ja/` (`/ja/installation`).
   that a migrating user must know, add a short change note (see
   [Change Notes for the Fork](#change-notes-for-the-fork)).
 - Update both `docs/en` and `docs/ja`, and add the change to
-  `docs/*/pieceofcake2/changes.md`.
+  `docs/*/appendices/changes-from-the-original-book.md`.
 
 ## Translations
 
