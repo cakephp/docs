@@ -47,6 +47,7 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
 - [E2E Testing](/development/e2e-testing)
 - [Maintained Plugins](/plugins/maintained-plugins)
 - [Static Analysis](/development/static-analysis)
+- [Deploying to AWS Lambda](/deployment/aws-lambda)
 
 ### Getting Started
 
@@ -394,4 +395,7 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
   - Document root, core.php and plugin symlink paths use the modern layout
   - Added "composer install --no-dev --optimize-autoloader" and conditional loading of development-only plugins
   - Debug level read from the `DEBUG` environment variable of the skeleton instead of a custom `CAKEPHP_DEBUG` variable; other settings link to the environment variables section
+  - Added a "Deploying to AWS Lambda" section linking to the new page
+- [Deploying to AWS Lambda](/deployment/aws-lambda)
+  - New page: deploying the pieceofcake2/app skeleton to AWS Lambda with Bref 3 and Docker container images (TMP/LOGS in /tmp, SCRIPT_NAME and HTTPS for Bref's FPM runtime, logs to stderr), configuration with environment variables and SSM Parameter Store (`bref-ssm:`), DynamoDB sessions and SES email with pieceofcake2/aws, cache, S3 uploads with presigned URLs, static assets with Lift (S3 + CloudFront), RDS, console commands and schedules, local testing with the Runtime Interface Emulator, and deployment from GitHub Actions with OIDC
 

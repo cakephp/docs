@@ -92,3 +92,12 @@ ln -s ../../plugins/YourPlugin/webroot/css/yourplugin.css webroot/css/yourplugin
 ```
 
 従来の構成では、プラグインは `app/Plugin/` または `plugins/` に、webroot は `app/webroot/` にあります。
+
+<a id="deploying-to-aws-lambda"></a>
+
+## AWS Lambda へのデプロイ
+
+CakePHP 2 アプリケーションは、Bref と Docker コンテナイメージを使って、サーバーを管理せずに
+AWS Lambda で動かすこともできます。アプリケーションに必要な変更、セッション、キャッシュ、メール、
+ファイルに使う AWS のサービス、GitHub Actions からのデプロイについては
+[AWS Lambda へのデプロイ](deployment/aws-lambda) を参照してください。
