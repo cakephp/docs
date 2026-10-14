@@ -485,6 +485,20 @@
       ]
     },
     {
+      "text": "デプロイ",
+      "collapsed": true,
+      "items": [
+        {
+          "text": "デプロイ",
+          "link": "/ja/deployment"
+        },
+        {
+          "text": "AWS Lambda へのデプロイ",
+          "link": "/ja/deployment/aws-lambda"
+        }
+      ]
+    },
+    {
       "text": "チュートリアル & 例",
       "collapsed": true,
       "items": [
@@ -687,20 +701,6 @@
         {
           "text": "用語集",
           "link": "/ja/appendices/glossary"
-        }
-      ]
-    },
-    {
-      "text": "デプロイ",
-      "collapsed": true,
-      "items": [
-        {
-          "text": "デプロイ",
-          "link": "/ja/deployment"
-        },
-        {
-          "text": "AWS Lambda へのデプロイ",
-          "link": "/ja/deployment/aws-lambda"
         }
       ]
     }
