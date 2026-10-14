@@ -1,6 +1,6 @@
 # CakePHP のフォルダ構造
 
-[pieceofcake2/app](https://github.com/pieceofcake2/app) スケルトンから新しいアプリケーションを作成すると
+[pieceofcake2/app](https://pieceofcake2.github.io/app/) スケルトンから新しいアプリケーションを作成すると
 ([インストール](../installation) を参照)、次のようなファイルとフォルダが含まれているはずです。
 
 - bin

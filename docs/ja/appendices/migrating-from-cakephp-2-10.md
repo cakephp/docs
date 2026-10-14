@@ -117,7 +117,7 @@ chmod +x app/Console/cake
 - `webroot/test.php`
 
 CakePHP 2.x と 5.x の両方に対応したモダンなアプリケーションスケルトンは
-[`pieceofcake2/app`](https://github.com/pieceofcake2/app) を参照してください。
+[`pieceofcake2/app`](https://pieceofcake2.github.io/app/) を参照してください。
 [インストール](/ja/installation) と
 [ディレクトリ構成](/ja/appendices/migrating-to-the-modern-layout) も参照してください。
 
@@ -176,7 +176,7 @@ CakePHP 2.x と 5.x の両方に対応したモダンなアプリケーション
 **新規プロジェクト、またはモダン構成（`src/`）の場合:**
 
 - 推奨: `composer.json` に classmap オートロードの設定を追加します
-  （[pieceofcake2/app](https://github.com/pieceofcake2/app) と同様）。
+  （[pieceofcake2/app](https://pieceofcake2.github.io/app/) と同様）。
 
   ```json
   {
@@ -263,7 +263,7 @@ Warning: Ambiguous class resolution, "AppController" was found in both "/path/to
 ### Bake プラグインの分離（[PR #17](https://github.com/pieceofcake2/cakephp/pull/17)）
 
 - **Bake の機能を別プラグインに分離しました**
-  （[pieceofcake2/bake](https://github.com/pieceofcake2/bake)）
+  （[pieceofcake2/bake](https://pieceofcake2.github.io/bake/)）
 - `BakeShell` とすべての Bake タスクをコアから削除しました（`BakeTask`、`ModelTask`、
   `ControllerTask`、`ViewTask`、`FixtureTask`、`TestTask`、`TemplateTask`、`ProjectTask`、
   `PluginTask`、`DbConfigTask`、`CommandTask`）
@@ -291,7 +291,7 @@ Warning: Ambiguous class resolution, "AppController" was found in both "/path/to
 ### 旧 Upgrade プラグインの分離（[PR #19](https://github.com/pieceofcake2/cakephp/pull/19)）
 
 - **旧来のアップグレード機能を別プラグインに分離しました**
-  （[pieceofcake2/upgrade](https://github.com/pieceofcake2/upgrade)）
+  （[pieceofcake2/upgrade](https://pieceofcake2.github.io/upgrade/)）
 - `UpgradeShell` をコアから削除しました
 - Upgrade プラグインをインストールしないと、旧来のアップグレードコマンド（1.3 → 2.0）は使えません
 
@@ -576,7 +576,7 @@ PHP 8 では `'aes'` を使う場合も `Security.useOpenSsl` の設定が必要
 `Security::encrypt()` と `Security::decrypt()` は `Security.useOpenSsl` が有効な場合にだけ
 OpenSSL を使い、そうでなければ `mcrypt_*` 関数を呼び出して失敗します。これらのメソッドを使う
 `CookieComponent` の `'aes'` タイプも同様です。フレームワークのデフォルトではこの設定は有効になっていません。
-[pieceofcake2/app](https://github.com/pieceofcake2/app) のスケルトン (v2.3.1 以降) から作成したアプリケーションでは
+[pieceofcake2/app](https://pieceofcake2.github.io/app/) のスケルトン (v2.3.1 以降) から作成したアプリケーションでは
 `config/core.php` で有効になっています。既存のアプリケーションでは、`app/Config/core.php`（レガシー構成）または
 `config/core.php`（モダン構成）に追加してください。
 

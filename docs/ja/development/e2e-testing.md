@@ -2,7 +2,7 @@
 
 E2E (エンドツーエンド) テストは、アプリケーションを本物のブラウザーで開き、ユーザーと同じように
 操作します。リンクをクリックし、フォームに入力し、ボタンを押して、画面に表示される内容を確認します。
-[pieceofcake2/e2e-test](https://github.com/pieceofcake2/e2e-test) パッケージを使うと、
+[pieceofcake2/e2e-test](https://pieceofcake2.github.io/e2e-test/) パッケージを使うと、
 CakePHP 2 アプリケーションにブラウザーによる E2E テストを追加できます。このパッケージは
 PHP のビルトイン Web サーバーでアプリケーションを起動し、
 [Symfony Panther](https://github.com/symfony/panther) でヘッドレス Chrome を操作して、
@@ -11,7 +11,7 @@ PHPUnit 9.6 でテストを実行します。テストケースは `CakeTestCase
 
 このページでは、E2E テストが役に立つ場面、セットアップの方法、テストの書き方を説明します。
 すべてのオプションとメソッドについては
-[パッケージのドキュメント](https://github.com/pieceofcake2/e2e-test/blob/1.x/docs/README.md) (英語)
+[パッケージのドキュメント](https://pieceofcake2.github.io/e2e-test/) (英語)
 を参照してください。
 
 <a id="when-to-use-e2e-tests"></a>
@@ -103,7 +103,7 @@ Chrome が自動更新されたら `bdi` をもう一度実行し、`/drivers` �
 
 ## セットアップ
 
-例では [pieceofcake2/app](https://github.com/pieceofcake2/app) スケルトンのモダンな構成を使います。
+例では [pieceofcake2/app](https://pieceofcake2.github.io/app/) スケルトンのモダンな構成を使います。
 E2E テストには専用の PHPUnit 設定ファイルとディレクトリを用意します。
 
 ```text
@@ -705,14 +705,14 @@ GitHub Actions では、データベースのサービスと、chromedriver と�
 `assertResponseContains()` を使ってください。
 
 そのほかの問題については、パッケージのドキュメントの
-[トラブルシューティング](https://github.com/pieceofcake2/e2e-test/blob/1.x/docs/README.md#troubleshooting) (英語)
+[トラブルシューティング](https://pieceofcake2.github.io/e2e-test/#troubleshooting) (英語)
 を参照してください。
 
 <a id="api-reference"></a>
 
 ## API リファレンス
 
-[パッケージのドキュメント](https://github.com/pieceofcake2/e2e-test/blob/1.x/docs/README.md) (英語) では、
+[パッケージのドキュメント](https://pieceofcake2.github.io/e2e-test/) (英語) では、
 すべての設定オプション、`E2ETestCase` と `BrowserTestTrait` のすべてのヘルパーとアサーション、
 `Environment`、`Server`、`ChromeClientFactory`、`E2EExtension` の各クラスを説明しています。
 `BrowserTestTrait` は、フィクスチャが不要なテストのために通常の PHPUnit の `TestCase` でも使えます。

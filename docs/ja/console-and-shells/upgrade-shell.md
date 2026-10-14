@@ -5,7 +5,7 @@
 アップグレードシェルは、CakePHP 1.3 から 2.0 へのアプリケーションのアップグレードで必要な
 機械的な作業のほとんどを行います。ファイルを 2.0 の配置に移動し、削除された API、
 ヘルパーの呼び出し、定数などを書き換えます。このシェルは
-[pieceofcake2/upgrade](https://github.com/pieceofcake2/upgrade) プラグインで提供されています。
+[pieceofcake2/upgrade](https://pieceofcake2.github.io/upgrade/) プラグインで提供されています。
 
 ::: pieceofcake2
 `UpgradeShell` はコアから削除され、pieceofcake2/upgrade

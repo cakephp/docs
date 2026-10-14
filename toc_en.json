@@ -551,10 +551,6 @@
         {
           "text": "Maintained Plugins",
           "link": "/plugins/maintained-plugins"
-        },
-        {
-          "text": "Captcha",
-          "link": "/plugins/captcha"
         }
       ]
     },

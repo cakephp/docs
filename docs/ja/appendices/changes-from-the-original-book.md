@@ -13,8 +13,8 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 | アプリケーションの構成 | `app/` | モダン構成（`src/`、`templates/`、`config/` など）または `app/` | [CakePHP のフォルダ構造](/ja/getting-started/cakephp-folder-structure) |
 | フレームワークの配置 | `lib/Cake/` | `vendor/pieceofcake2/cakephp/src/Cake/` | [CakePHP 2.10 からの移行](/ja/appendices/migrating-from-cakephp-2-10) |
 | クラスの読み込み | `App::uses()` | Composer の classmap。`App::uses()` は Composer が知らないクラスにのみ使用 | [コントローラ](/ja/controllers#autoloading-classes) |
-| Bake | コアのシェル | [pieceofcake2/bake](https://github.com/pieceofcake2/bake) プラグイン | [Bake でコード生成](/ja/console-and-shells/code-generation-with-bake) |
-| UpgradeShell | コアのシェル | [pieceofcake2/upgrade](https://github.com/pieceofcake2/upgrade) プラグイン | [アップグレードシェル](/ja/console-and-shells/upgrade-shell) |
+| Bake | コアのシェル | [pieceofcake2/bake](https://pieceofcake2.github.io/bake/) プラグイン | [Bake でコード生成](/ja/console-and-shells/code-generation-with-bake) |
+| UpgradeShell | コアのシェル | [pieceofcake2/upgrade](https://pieceofcake2.github.io/upgrade/) プラグイン | [アップグレードシェル](/ja/console-and-shells/upgrade-shell) |
 | キャッシュエンジン | Xcache と Wincache を含む | Xcache と Wincache を削除 | [キャッシュ](/ja/core-libraries/caching) |
 | テスト | PHPUnit 3.7 | PHPUnit 9.6 | [テスト](/ja/development/testing) |
 | コーディング規約 | CakePHP 2 の規約（タブ、`array()`） | CakePHP 5 の codesniffer（4 スペース、`[]`） | [コーディング規約](/ja/contributing/cakephp-coding-conventions) |
@@ -33,6 +33,8 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 
 以下の変更に加えて、すべてのサンプルコードは CakePHP 5 のコーディング規約（短い配列構文、
 クラスとメソッドの波括弧を次の行に置く書き方）に合わせ、パスはモダンなディレクトリ構成で記載しています。
+アプリケーションスケルトン、Bake、メンテナンスしているプラグインへのリンクは、それぞれのドキュメントサイト
+(`https://pieceofcake2.github.io/<リポジトリ>/`) を指しています。
 
 ### 新しいページ
 
@@ -41,7 +43,6 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 - [脆弱性への対応](/ja/appendices/security-fixes)
 - [PHPUnit 9.6 への移行](/ja/appendices/phpunit-9-migration-hints)
 - [E2E テスト](/ja/development/e2e-testing)
-- [Captcha](/ja/plugins/captcha)
 - [メンテナンスされているプラグイン](/ja/plugins/maintained-plugins)
 - [静的解析](/ja/development/static-analysis)
 
@@ -335,7 +336,6 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 
 - [プラグイン](/ja/plugins)
   - CakePHP 2 プラグインの PHP 8 対応状況を説明し、Piece of Cake 2 がメンテナンスするフォークへのリンクを追加
-  - 新しい Captcha のページへのリンクを追加
 - [プラグインの作成](/ja/plugins/how-to-create-plugins)
   - プラグインのパスを plugins/ に、ビューの上書きを templates/Plugin に変更し、プラグイン内部の構成とテストディレクトリを説明、プラグインのコードで App::uses() を残す理由を記載
   - Bake のコマンドを Bake プラグインの bin/cake に変更し、欠けていたアセットのプラグイン記法の例を追加、flash/ フォルダを削除

@@ -28,7 +28,7 @@ controller in a format that is ready for the audience you're
 serving to. If you'd prefer using a templating language like
 Twig, or Smarty, a subclass of View will bridge your templating
 language and CakePHP. For Twig, the
-[TwigView plugin](https://github.com/pieceofcake2/twig-view) provides such a
+[TwigView plugin](https://pieceofcake2.github.io/twig-view/) provides such a
 View class.
 
 A view file is stored in `templates/`, in a subfolder named after the

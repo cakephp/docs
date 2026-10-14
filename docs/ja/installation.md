@@ -101,7 +101,7 @@ CakePHP 2.10.24 からのその他の変更点は [アップグレードガイ�
 
 ## 新しいアプリケーションの作成 {#creating-a-new-application}
 
-アプリケーションのスケルトンは [pieceofcake2/app](https://github.com/pieceofcake2/app)
+アプリケーションのスケルトンは [pieceofcake2/app](https://pieceofcake2.github.io/app/)
 パッケージとして提供されています。Composer の `create-project` コマンドで新しいアプリケーションを作成します。
 
 ```bash
@@ -110,8 +110,7 @@ composer create-project pieceofcake2/app my_app
 
 `my_app` ディレクトリが作られ、CakePHP (`pieceofcake2/cakephp`) が `vendor/` にインストールされます。
 開発用の依存パッケージとして [Bake](console-and-shells/code-generation-with-bake) と
-[DebugKit](https://github.com/pieceofcake2/debug_kit) プラグインもインストールされます
-([DebugKit のドキュメント](https://github.com/pieceofcake2/debug_kit/blob/2.x/docs/README.md) を参照してください)。
+[DebugKit](https://pieceofcake2.github.io/debug_kit/) プラグインもインストールされます。
 スケルトンのディレクトリ構成は次のとおりです。
 
 ```text

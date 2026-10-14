@@ -113,7 +113,7 @@ class AppError
 
 このクラス／メソッドはエラーが発生するたびに「エラー発生！」と表示します。エラーハンドラは
 `config/bootstrap.php` が読み込まれたあとに登録されるので、そこで `App::uses()` を使って
-クラスを読み込んでおけば十分です。[pieceofcake2/app](https://github.com/pieceofcake2/app)
+クラスを読み込んでおけば十分です。[pieceofcake2/app](https://pieceofcake2.github.io/app/)
 のように `composer.json` で `src/` をクラスマップでオートロードしている場合は、
 `composer dump-autoload` を実行すれば Composer からもクラスが見つかるようになります。
 

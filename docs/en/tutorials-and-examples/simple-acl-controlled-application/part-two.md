@@ -8,7 +8,7 @@ repetitive things like typing in what could be hundreds of actions
 in a large application.
 
 For this purpose exists a very handy plugin called
-[AclExtras](https://github.com/pieceofcake2/acl_extras).
+[AclExtras](https://pieceofcake2.github.io/acl_extras/).
 We're going to briefly describe how to use it to generate all our ACO's.
 
 Install the plugin with Composer:

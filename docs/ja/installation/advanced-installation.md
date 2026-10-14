@@ -7,7 +7,7 @@
 
 CakePHP とプラグインは Composer でインストールします。ディスパッチャファイル
 (`webroot/index.php`、`webroot/test.php`、`bin/cake`) は、CakePHP 本体より先に Composer のオートローダーを読み込みます。
-CakePHP アプリケーションの `composer.json` は、[pieceofcake2/app](https://github.com/pieceofcake2/app)
+CakePHP アプリケーションの `composer.json` は、[pieceofcake2/app](https://pieceofcake2.github.io/app/)
 スケルトンと同じように次のようになります。
 
 ```json

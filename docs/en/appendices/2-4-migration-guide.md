@@ -18,7 +18,7 @@ the changes and improvements made in 2.4.
 
 ::: pieceofcake2
 In the Piece of Cake 2 fork, Bake is not part of the core. Install the
-[pieceofcake2/bake](https://github.com/pieceofcake2/bake) plugin
+[pieceofcake2/bake](https://pieceofcake2.github.io/bake/) plugin
 (`composer require --dev pieceofcake2/bake`) to use `cake bake`.
 :::
 

@@ -126,7 +126,7 @@ The following files need to be updated:
 - `webroot/index.php`
 - `webroot/test.php`
 
-See [`pieceofcake2/app`](https://github.com/pieceofcake2/app) for the modern
+See [`pieceofcake2/app`](https://pieceofcake2.github.io/app/) for the modern
 application skeleton compatible with both CakePHP 2.x and 5.x.
 See also [Installation](/installation) and
 [Directory Structure](/appendices/migrating-to-the-modern-layout).
@@ -196,7 +196,7 @@ tooling.
 **For new projects or modern directory structure (`src/`):**
 
 - Recommended: Update your `composer.json` to include classmap autoloading
-  (similar to [pieceofcake2/app](https://github.com/pieceofcake2/app)):
+  (similar to [pieceofcake2/app](https://pieceofcake2.github.io/app/)):
 
   ```json
   {
@@ -287,7 +287,7 @@ preventing conflicts with your application's base classes.
 ### Bake Plugin Extraction ([PR #17](https://github.com/pieceofcake2/cakephp/pull/17))
 
 - **Bake functionality has been extracted to a separate plugin**
-  ([pieceofcake2/bake](https://github.com/pieceofcake2/bake))
+  ([pieceofcake2/bake](https://pieceofcake2.github.io/bake/))
 - `BakeShell` and all Bake tasks removed from core (`BakeTask`, `ModelTask`,
   `ControllerTask`, `ViewTask`, `FixtureTask`, `TestTask`, `TemplateTask`,
   `ProjectTask`, `PluginTask`, `DbConfigTask`, `CommandTask`)
@@ -316,7 +316,7 @@ preventing conflicts with your application's base classes.
 ### Legacy Upgrade Plugin Extraction ([PR #19](https://github.com/pieceofcake2/cakephp/pull/19))
 
 - **Legacy Upgrade functionality has been extracted to a separate plugin**
-  ([pieceofcake2/upgrade](https://github.com/pieceofcake2/upgrade))
+  ([pieceofcake2/upgrade](https://pieceofcake2.github.io/upgrade/))
 - `UpgradeShell` removed from core
 - Legacy upgrade commands (1.3 → 2.0) no longer available without installing
   the Upgrade plugin
@@ -610,7 +610,7 @@ not installed (it is available from [PECL](https://pecl.php.net/package/mcrypt))
 `Security.useOpenSsl` is enabled; otherwise they call `mcrypt_*` functions and
 fail. The same applies to `CookieComponent` with the `'aes'` type, which uses
 these methods. The framework does not enable the setting by default.
-Applications created from the [pieceofcake2/app](https://github.com/pieceofcake2/app)
+Applications created from the [pieceofcake2/app](https://pieceofcake2.github.io/app/)
 skeleton (v2.3.1 and later) already have it in `config/core.php`. In existing
 applications, add it to `app/Config/core.php` (legacy) or `config/core.php`
 (modern):

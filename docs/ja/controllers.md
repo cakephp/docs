@@ -78,7 +78,7 @@ public function beforeFilter()
 
 このマニュアルのサンプルコードには `App::uses()` を書いていません。CakePHP 自身のクラスは
 Composer によってオートロードされます。また、アプリケーションスケルトン
-([pieceofcake2/app](https://github.com/pieceofcake2/app)) では、 `composer.json` の
+([pieceofcake2/app](https://pieceofcake2.github.io/app/)) では、 `composer.json` の
 classmap 設定でアプリケーションのクラスを登録しています。
 
 ``` json

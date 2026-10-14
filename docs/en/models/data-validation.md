@@ -1352,7 +1352,7 @@ ability to pass off to another validator has been added.
 
 > [!TIP]
 > The Localized Plugin already contains a lot of rules ready to use:
-> <https://github.com/pieceofcake2/localized>
+> <https://pieceofcake2.github.io/localized/>
 > Also feel free to contribute with your localized validation rules.
 
 - [Validating Data From The Controller](data-validation/validating-data-from-the-controller)

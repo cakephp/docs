@@ -196,7 +196,7 @@ HTML ページの右下に小さな CakePHP のアイコンを表示し、クリ
 現在のリクエストについての情報が表示されます。History パネルには、リダイレクトや Ajax リクエストを
 含む過去のリクエストが一覧表示され、それらの情報も確認できます。
 Piece of Cake 2 プロジェクトがメンテナンスしている、PHP 8 対応版の DebugKit 2.x
-[pieceofcake2/debug_kit](https://github.com/pieceofcake2/debug_kit) を使ってください。
+[pieceofcake2/debug_kit](https://pieceofcake2.github.io/debug_kit/) を使ってください。
 Composer で開発用の依存パッケージとしてインストールします。
 
 ``` bash
@@ -211,7 +211,7 @@ CakePlugin::load('DebugKit');
 ```
 
 ツールバーを有効にする方法、ツールバーのパネルとその設定、独自のパネルの作り方は
-[DebugKit のドキュメント](https://github.com/pieceofcake2/debug_kit/blob/2.x/docs/README.md) (英語) を参照してください。
+[DebugKit のドキュメント](https://pieceofcake2.github.io/debug_kit/) (英語) を参照してください。
 そのほかのメンテナンスされているプラグインについては
 [メンテナンスされているプラグイン](/ja/plugins/maintained-plugins) を参照してください。
 

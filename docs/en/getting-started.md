@@ -20,7 +20,7 @@ The CakePHP project ended support for CakePHP 2.x in
 
 This cookbook describes CakePHP 2 as it works on the fork: installation with
 Composer, PHP 8, and the modern directory layout used by
-[pieceofcake2/app](https://github.com/pieceofcake2/app).
+[pieceofcake2/app](https://pieceofcake2.github.io/app/).
 [Changes from the Original Book](/appendices/changes-from-the-original-book)
 lists how it differs from the original CakePHP 2.x documentation. The
 [Piece of Cake 2 website](https://pieceofcake2.github.io/) links to the
@@ -54,7 +54,7 @@ the points that changed:
   CakePHP 5 codesniffer rules (4 spaces, short array syntax). See
   [Coding Standards](contributing/cakephp-coding-conventions).
 - **Static analysis.** The
-  [pieceofcake2/phpstan-cakephp2](https://github.com/pieceofcake2/phpstan-cakephp2)
+  [pieceofcake2/phpstan-cakephp2](https://pieceofcake2.github.io/phpstan-cakephp2/)
   extension lets PHPStan understand models, components and behaviors. See
   [Static Analysis](development/static-analysis).
 - **Security fixes.** Known vulnerabilities of CakePHP 2.10.24 are fixed, for

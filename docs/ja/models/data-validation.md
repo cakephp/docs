@@ -1351,7 +1351,7 @@ public $validate = [
 
 > [!TIP]
 > ローカライズされたプラグインでも、すでに多くのルールが利用
-> できるようになっています: <https://github.com/pieceofcake2/localized>
+> できるようになっています: <https://pieceofcake2.github.io/localized/>
 > さらに、あなたがローカライズしたバリデーションルールも、
 > ぜひご提供ください。
 

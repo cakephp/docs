@@ -9,7 +9,7 @@ of your application in different locations. For a standard installation, see
 CakePHP and its plugins are installed with Composer, and the dispatcher files
 (`webroot/index.php`, `webroot/test.php` and `bin/cake`) load Composer's
 autoloader before CakePHP itself. A `composer.json` for a CakePHP application
-looks like the one in the [pieceofcake2/app](https://github.com/pieceofcake2/app)
+looks like the one in the [pieceofcake2/app](https://pieceofcake2.github.io/app/)
 skeleton:
 
 ```json

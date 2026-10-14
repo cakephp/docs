@@ -8,7 +8,7 @@ Bake では、簡単にフル機能をそなえたアプリケーションを作
 
 ## Bake のインストール
 
-Bake は [pieceofcake2/bake](https://github.com/pieceofcake2/bake) プラグインで提供されています。
+Bake は [pieceofcake2/bake](https://pieceofcake2.github.io/bake/) プラグインで提供されています。
 pieceofcake2/app スケルトンから作成したアプリケーションには、開発用の依存パッケージとして
 すでに含まれています。それ以外の場合は Composer でインストールします。
 

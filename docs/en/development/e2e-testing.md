@@ -3,7 +3,7 @@
 End-to-end (E2E) tests open your application in a real browser and use it the
 way a user does: they click links, fill in forms, press buttons and check what
 appears on the screen. The
-[pieceofcake2/e2e-test](https://github.com/pieceofcake2/e2e-test) package adds
+[pieceofcake2/e2e-test](https://pieceofcake2.github.io/e2e-test/) package adds
 browser E2E tests to CakePHP 2 applications. It starts the application with
 PHP's built-in web server, drives headless Chrome with
 [Symfony Panther](https://github.com/symfony/panther), and runs the tests with
@@ -11,7 +11,7 @@ PHPUnit 9.6. Test cases extend `CakeTestCase`, so `$fixtures` work as in your
 other tests.
 
 This page explains when E2E tests are useful, how to set them up and how to
-write them. The [package documentation](https://github.com/pieceofcake2/e2e-test/blob/1.x/docs/README.md)
+write them. The [package documentation](https://pieceofcake2.github.io/e2e-test/)
 is the full reference for every option and method.
 
 ## When to Use E2E Tests
@@ -101,7 +101,7 @@ root, set `PANTHER_NO_SANDBOX=1`.
 ## Setup
 
 The examples use the modern layout of the
-[pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton. The E2E
+[pieceofcake2/app](https://pieceofcake2.github.io/app/) skeleton. The E2E
 tests get their own PHPUnit configuration and directory:
 
 ```text
@@ -695,12 +695,12 @@ E2E tests: catching these mistakes is one of the reasons to have them.
 visible text, after CSS `text-transform`. Compare with the screenshot, or use
 `assertResponseContains()` for markup.
 
-See the [troubleshooting section](https://github.com/pieceofcake2/e2e-test/blob/1.x/docs/README.md#troubleshooting)
+See the [troubleshooting section](https://pieceofcake2.github.io/e2e-test/#troubleshooting)
 of the package documentation for more.
 
 ## API Reference
 
-The [package documentation](https://github.com/pieceofcake2/e2e-test/blob/1.x/docs/README.md)
+The [package documentation](https://pieceofcake2.github.io/e2e-test/)
 describes every configuration option, all helpers and assertions of
 `E2ETestCase` and `BrowserTestTrait`, and the `Environment`, `Server`,
 `ChromeClientFactory` and `E2EExtension` classes. `BrowserTestTrait` can also

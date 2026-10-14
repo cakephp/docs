@@ -9,8 +9,8 @@ Controller to meet your needs.
 
 The Pages Controller is part of your application, in
 `src/Controller/PagesController.php`. It is included in the
-[pieceofcake2/app](https://github.com/pieceofcake2/app) skeleton, and when you
-create a project with the [Bake plugin](https://github.com/pieceofcake2/bake) it
+[pieceofcake2/app](https://pieceofcake2.github.io/app/) skeleton, and when you
+create a project with the [Bake plugin](https://pieceofcake2.github.io/bake/) it
 is copied from the plugin's `Console/Templates/skel/Controller/` folder. In the
 legacy `app/` layout, the controller is in `app/Controller/` and the page views
 in `app/View/Pages/`.

@@ -30,7 +30,7 @@ CakePHP の動作に関してさらに学びたいと思っているからだと
 ## CakePHP の取得
 
 まずは、Composer で新しいアプリケーションを作成しましょう。
-[pieceofcake2/app](https://github.com/pieceofcake2/app) アプリケーションスケルトンが
+[pieceofcake2/app](https://pieceofcake2.github.io/app/) アプリケーションスケルトンが
 CakePHP もインストールしてくれます。
 
 ``` bash

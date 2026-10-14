@@ -7,7 +7,7 @@
 CakePHP 2 は多くのオブジェクトを動的に作成します。コントローラーではモデルを `$this->Post`、
 コンポーネントを `$this->Auth` として使え、ビヘイビアのメソッドをモデルから呼び出せます。
 PHPStan だけではこれらを認識できません。
-[pieceofcake2/phpstan-cakephp2](https://github.com/pieceofcake2/phpstan-cakephp2)
+[pieceofcake2/phpstan-cakephp2](https://pieceofcake2.github.io/phpstan-cakephp2/)
 拡張を使うと、PHPStan が CakePHP 2 の仕組みを理解できるようになります。
 
 <a id="installation"></a>
@@ -33,7 +33,7 @@ PHPStan はプロジェクトルートの `phpstan.neon` から設定を読み�
 
 ### モダン構成
 
-[pieceofcake2/app](https://github.com/pieceofcake2/app) スケルトンの設定は次のとおりです。
+[pieceofcake2/app](https://pieceofcake2.github.io/app/) スケルトンの設定は次のとおりです。
 
 ```yaml
 # phpstan.neon

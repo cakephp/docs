@@ -9,7 +9,7 @@
 
 ::: pieceofcake2
 Piece of Cake 2 フォークでは、Upgrade Shell はコアから外されました。
-[pieceofcake2/upgrade](https://github.com/pieceofcake2/upgrade) プラグインをインストールし
+[pieceofcake2/upgrade](https://pieceofcake2.github.io/upgrade/) プラグインをインストールし
 (`composer require --dev pieceofcake2/upgrade`)、`CakePlugin::load('Upgrade')` で読み込んでください。
 :::
 

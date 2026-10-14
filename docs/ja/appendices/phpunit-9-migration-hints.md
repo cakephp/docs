@@ -13,7 +13,7 @@ PHPUnit は Composer で開発用の依存パッケージとしてインスト�
 composer require --dev phpunit/phpunit:^9.6
 ```
 
-[pieceofcake2/app](https://github.com/pieceofcake2/app) スケルトンには、`tests/bootstrap.php` を読み込み、
+[pieceofcake2/app](https://pieceofcake2.github.io/app/) スケルトンには、`tests/bootstrap.php` を読み込み、
 フィクスチャを読み込む `CakeFixtureInjector` リスナーを登録した `phpunit.xml.dist` が含まれています。
 
 ```xml
