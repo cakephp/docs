@@ -485,6 +485,20 @@
       ]
     },
     {
+      "text": "Deployment",
+      "collapsed": true,
+      "items": [
+        {
+          "text": "Deployment",
+          "link": "/deployment"
+        },
+        {
+          "text": "Deploying to AWS Lambda",
+          "link": "/deployment/aws-lambda"
+        }
+      ]
+    },
+    {
       "text": "Tutorials & Examples",
       "collapsed": true,
       "items": [
@@ -687,20 +701,6 @@
         {
           "text": "Glossary",
           "link": "/appendices/glossary"
-        }
-      ]
-    },
-    {
-      "text": "Additional Topics",
-      "collapsed": true,
-      "items": [
-        {
-          "text": "Deployment",
-          "link": "/deployment"
-        },
-        {
-          "text": "Deploying to AWS Lambda",
-          "link": "/deployment/aws-lambda"
         }
       ]
     }

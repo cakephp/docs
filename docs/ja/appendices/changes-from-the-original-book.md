@@ -322,6 +322,16 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - HTTP メソッド上書きの優先順位を修正（X-HTTP-Method-Override ヘッダが _method より優先）
   - ja: custom-rest-routing アンカーを明示的に追加
 
+### デプロイ
+
+- [デプロイ](/ja/deployment)
+  - ドキュメントルート、core.php、プラグインのシンボリックリンクのパスをモダンな構成に変更
+  - `composer install --no-dev --optimize-autoloader` と開発用プラグインの条件付き読み込みを追加
+  - デバッグレベルは独自の `CAKEPHP_DEBUG` ではなく、スケルトンの環境変数 `DEBUG` から読み込む例に変更。ほかの設定は環境変数の節へのリンクを追加
+  - 新しいページへのリンクとして「AWS Lambda へのデプロイ」の節を追加
+- [AWS Lambda へのデプロイ](/ja/deployment/aws-lambda)
+  - 新しいページ: pieceofcake2/app スケルトンを Bref 3 と Docker コンテナイメージで AWS Lambda にデプロイする方法 (TMP/LOGS を /tmp に、Bref の FPM ランタイム用の SCRIPT_NAME と HTTPS、stderr へのログ出力)、環境変数と SSM パラメータストア (`bref-ssm:`) による設定、pieceofcake2/aws による DynamoDB のセッションと SES のメール、キャッシュ、署名付き URL による S3 へのアップロード、Lift (S3 + CloudFront) による静的なアセット、RDS、コンソールのコマンドとスケジュール、Runtime Interface Emulator によるローカルでのテスト、OIDC を使った GitHub Actions からのデプロイ
+
 ### チュートリアル & 例
 
 - [チュートリアル & 例](/ja/tutorials-and-examples)
@@ -398,16 +408,6 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - v2.12.5 の節を追加 (メールのヘッダー、ビュー・レイアウト・エレメントの名前、ログイン後のリダイレクトのセキュリティ修正。不正な ORDER BY のソート方向の非推奨化)
 - [SimpleTest から PHPUnit 3.7 への移行](/ja/appendices/phpunit-migration-hints)
   - 題を「SimpleTest から PHPUnit 3.7 への移行」に変更し、PHPUnit 9.6 への移行ガイドへのリンクを追加
-
-### 追加トピック
-
-- [デプロイ](/ja/deployment)
-  - ドキュメントルート、core.php、プラグインのシンボリックリンクのパスをモダンな構成に変更
-  - `composer install --no-dev --optimize-autoloader` と開発用プラグインの条件付き読み込みを追加
-  - デバッグレベルは独自の `CAKEPHP_DEBUG` ではなく、スケルトンの環境変数 `DEBUG` から読み込む例に変更。ほかの設定は環境変数の節へのリンクを追加
-  - 新しいページへのリンクとして「AWS Lambda へのデプロイ」の節を追加
-- [AWS Lambda へのデプロイ](/ja/deployment/aws-lambda)
-  - 新しいページ: pieceofcake2/app スケルトンを Bref 3 と Docker コンテナイメージで AWS Lambda にデプロイする方法 (TMP/LOGS を /tmp に、Bref の FPM ランタイム用の SCRIPT_NAME と HTTPS、stderr へのログ出力)、環境変数と SSM パラメータストア (`bref-ssm:`) による設定、pieceofcake2/aws による DynamoDB のセッションと SES のメール、キャッシュ、署名付き URL による S3 へのアップロード、Lift (S3 + CloudFront) による静的なアセット、RDS、コンソールのコマンドとスケジュール、Runtime Interface Emulator によるローカルでのテスト、OIDC を使った GitHub Actions からのデプロイ
 
 ### その他
 
