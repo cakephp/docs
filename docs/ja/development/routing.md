@@ -776,21 +776,25 @@ Router::connectNamed(
 ``` php
 Router::connectNamed(
     ['page'],
-    ['default' => false, 'greedy' => false]
+    ['default' => false, 'greedy' => false],
 );
+```
 
-'index' アクションが呼ばれた時、**page** パラメーターをパースする::
+'index' アクションが呼ばれた時、**page** パラメーターをパースする:
 
+``` php
 Router::connectNamed(
     ['page' => ['action' => 'index']],
-    ['default' => false, 'greedy' => false]
+    ['default' => false, 'greedy' => false],
 );
+```
 
-コントローラーが 'pages' で 'index' アクションが呼ばれた時、**page** パラメーターをパースする::
+コントローラーが 'pages' で 'index' アクションが呼ばれた時、**page** パラメーターをパースする:
 
+``` php
 Router::connectNamed(
     ['page' => ['action' => 'index', 'controller' => 'pages']],
-    ['default' => false, 'greedy' => false]
+    ['default' => false, 'greedy' => false],
 );
 ```
 

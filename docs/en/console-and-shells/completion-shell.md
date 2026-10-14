@@ -61,7 +61,7 @@ Returns:
 
 The following bash example comes from the original author:
 
-``` php
+``` bash
 # bash completion for CakePHP console
 
 _cake()

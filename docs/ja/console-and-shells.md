@@ -572,9 +572,9 @@ $parser->addArgument('type', [
 
 ``` php
 $parser->addOption('connection', [
-    'short' => 'c'
+    'short' => 'c',
     'help' => 'connection',
-    'default' => 'default'
+    'default' => 'default',
 ]);
 ```
 

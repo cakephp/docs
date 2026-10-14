@@ -39,18 +39,20 @@ foreach ($files as $file) {
 ``` php
 // 0755 のパーミッションで新しいフォルダを作成します
 $dir = new Folder('/path/to/folder', true, 0755);
+```
 
+`property` Folder::**$path**
 
-フォルダの現在のパス。 :php:meth:`Folder::pwd()` は同じ情報を返します。
+フォルダの現在のパス。`Folder::pwd()` も同じ情報を返します。
 
-
+`property` Folder::**$sort**
 
 ファイルリストを取得する際に、名前によるソートを実行するか否かの値。
 
+`property` Folder::**$mode**
 
-フォルダ作成時のモード。デフォルトでは ``0755`` 。
+フォルダ作成時のモード。デフォルトは `0755` です。
 Windows マシンでは何も影響しません。
-```
 
 `static` Folder::**addPathElement**(string $path, string $element)
 
@@ -165,26 +167,32 @@ string
 ``` php
 // 0644 のパーミッションで新しいファイルを作成します
 $file = new File('/path/to/file.php', true, 0644);
+```
 
+`property` File::**$Folder**
 
-ファイルが属するフォルダ・オブジェクト
+ファイルが属するフォルダ・オブジェクト。
 
+`property` File::**$name**
 
 拡張子付きのファイル名。
-拡張子なしのファイル名を返す :php:meth:`File::name()` とは異なります。
+拡張子なしのファイル名を返す `File::name()` とは異なります。
 
+`property` File::**$info**
 
-ファイル情報の配列。代わりに :php:meth:`File::info()` を使用してください。
+ファイル情報の配列。代わりに `File::info()` を使用してください。
 
+`property` File::**$handle**
 
 ファイルをオープンしている場合のファイルハンドラを保持します。
 
+`property` File::**$lock**
 
 ファイルの読み書き時のロックを有効にします。
 
+`property` File::**$path**
 
 現在のファイルの絶対パス。
-```
 
 `method` File::**append**(string $data, boolean $force = false)
 

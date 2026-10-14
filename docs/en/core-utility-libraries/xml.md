@@ -143,7 +143,7 @@ $xmlString = $xmlObject->asXML();
 
 The content of `$xmlString` will be:
 
-``` php
+``` xml
 <?xml version="1.0"?>
 <project id="1">Value of project<name>Name of project, as tag</name></project>
 ```
@@ -171,7 +171,7 @@ $data = [
 
 This will result in the XML below:
 
-``` php
+``` xml
 <?xml version="1.0"?>
 <projects>
     <project>
@@ -224,7 +224,7 @@ $xml2 = Xml::fromArray($xmlArray);
 
 The value of `$xml1` and `$xml2` will be, respectively:
 
-``` php
+``` xml
 <?xml version="1.0"?>
 <root xmlns="https://cakephp.org"><child>value</child></root>
 

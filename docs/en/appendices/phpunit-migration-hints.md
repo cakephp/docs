@@ -85,42 +85,42 @@ straightforward mock object expectations.
 
 ##### Replace expectOnce() no params
 
-``` php
+``` text
 expectOnce\(([^\)]+)\);
 expects(\$this->once())->method($1);
 ```
 
 ##### Replace expectOnce() with params
 
-``` php
+``` text
 expectOnce\(([^,]+), array\((.+)\)\);
 expects(\$this->once())->method($1)->with($2);
 ```
 
 ##### Replace expectAt()
 
-``` php
+``` text
 expectAt\((\d+), (.+), array\((.+)\)\);
 expects(\$this->at($1))->method($2)->with($3);
 ```
 
 ##### Replace expectNever
 
-``` php
+``` text
 expectNever\(([^\)]+)\);
 expects(\$this->never())->method($1);
 ```
 
 ##### Replace setReturnValue
 
-``` php
+``` text
 setReturnValue\(([^,]+), (.+)\);
 expects(\$this->once())->method($1)->will($this->returnValue($2));
 ```
 
 ##### Replace setReturnValueAt
 
-``` php
+``` text
 setReturnValueAt((\d+), ([^,]+), (.+));
 expects(\$this->at($1))->method($2)->will($this->returnValue($3));
 ```

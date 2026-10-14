@@ -79,7 +79,7 @@ to the constructor of `CakeEmail`:
 $Email = new CakeEmail();
 $Email->config('default');
 
-//or in constructor::
+// or in constructor:
 $Email = new CakeEmail('default');
 
 // Implicit 'default' config used as of 2.7
@@ -93,7 +93,7 @@ you can also just load an array of configs:
 $Email = new CakeEmail();
 $Email->config(['from' => 'me@example.org', 'transport' => 'MyCustom']);
 
-//or in constructor::
+// or in constructor:
 $Email = new CakeEmail(['from' => 'me@example.org', 'transport' => 'MyCustom']);
 ```
 

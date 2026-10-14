@@ -40,18 +40,21 @@ foreach ($files as $file) {
 ``` php
 // Create a new folder with 0755 permissions
 $dir = new Folder('/path/to/folder', true, 0755);
+```
 
+`property` Folder::**$path**
 
-Path of the current folder. :php:meth:`Folder::pwd()` will return the same
+Path of the current folder. `Folder::pwd()` will return the same
 information.
 
+`property` Folder::**$sort**
 
 Whether or not the list results should be sorted by name.
 
+`property` Folder::**$mode**
 
-Mode to be used when creating folders. Defaults to ``0755``. Does nothing on
+Mode to be used when creating folders. Defaults to `0755`. Does nothing on
 Windows machines.
-```
 
 `static` Folder::**addPathElement**(string $path, string $element)
 
@@ -174,26 +177,32 @@ Windows or other OS).
 ``` php
 // Create a new file with 0644 permissions
 $file = new File('/path/to/file.php', true, 0644);
+```
 
+`property` File::**$Folder**
 
 The Folder object of the file.
 
+`property` File::**$name**
 
 The name of the file with the extension. Differs from
-:php:meth:`File::name()` which returns the name without the extension.
+`File::name()` which returns the name without the extension.
 
+`property` File::**$info**
 
-An array of file info. use :php:meth:`File::info()` instead.
+An array of file info. Use `File::info()` instead.
 
+`property` File::**$handle**
 
 Holds the file handler resource if the file is opened.
 
+`property` File::**$lock**
 
 Enable locking for file reading and writing.
 
+`property` File::**$path**
 
 The current file's absolute path.
-```
 
 `method` File::**append**(string $data, boolean $force = false)
 

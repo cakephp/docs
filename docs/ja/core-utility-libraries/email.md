@@ -78,7 +78,7 @@ class EmailConfig
 $Email = new CakeEmail();
 $Email->config('default');
 
-//コンストラクタで指定::
+// コンストラクタで指定:
 $Email = new CakeEmail('default');
 
 // 2.7 からは、未指定の場合 'default' 設定を使用
@@ -91,7 +91,7 @@ $Email = new CakeEmail();
 $Email = new CakeEmail();
 $Email->config(['from' => 'me@example.org', 'transport' => 'MyCustom']);
 
-//または、コンストラクタ内で::
+// または、コンストラクタ内で:
 $Email = new CakeEmail(['from' => 'me@example.org', 'transport' => 'MyCustom']);
 ```
 

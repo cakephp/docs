@@ -83,7 +83,7 @@ CakePHP 2.3 は、2.2 の API の完全上位互換です。
 - `CakePlugin::load()` に `ignoreMissing` オプションが新たに加わりました。
   これを true にセットすると、route や bootstrap でロードしようとしたプラグインが
   見つからない場合でもエラーとなるのを防いでくれます。
-  つまり、route または bootstrap で見つかる全てのプラグインを読み込むには次のような構文を使います::
+  つまり、route または bootstrap で見つかる全てのプラグインを読み込むには次のような構文を使います:
   `CakePlugin::loadAll([['routes' => true, 'bootstrap' => true, 'ignoreMissing' => true]])`
 
 ### Configure

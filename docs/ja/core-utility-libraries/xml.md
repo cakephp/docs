@@ -146,7 +146,7 @@ $xmlString = $xmlObject->asXML();
 
 この例では、 `$xmlString` には:
 
-``` php
+``` xml
 <?xml version="1.0"?>
 <project id="1">Value of project<name>Name of project, as tag</name></project>
 ```
@@ -176,7 +176,7 @@ $data = [
 
 この配列は、以下のような XML になります。 :
 
-``` php
+``` xml
 <?xml version="1.0"?>
 <projects>
     <project>
@@ -230,7 +230,7 @@ $xml2 = Xml::fromArray($xmlArray);
 
 `$xml1` と `$xml2` の値は、それぞれ次のようになるでしょう。 :
 
-``` php
+``` xml
 <?xml version="1.0"?>
 <root xmlns="https://cakephp.org"><child>value</child></root>
 

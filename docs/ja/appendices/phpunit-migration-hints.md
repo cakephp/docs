@@ -79,42 +79,42 @@ WEBテストランナーは基本的な正規表現を指定することが出�
 
 ##### 引数のないexpectOnce()の置換
 
-``` php
+``` text
 expectOnce\(([^\)]+)\);
 expects(\$this->once())->method($1);
 ```
 
 ##### 引数つきのexpectOnce()の置換
 
-``` php
+``` text
 expectOnce\(([^,]+), array\((.+)\)\);
 expects(\$this->once())->method($1)->with($2);
 ```
 
 ##### expectAt()の置換
 
-``` php
+``` text
 expectAt\((\d+), (.+), array\((.+)\)\);
 expects(\$this->at($1))->method($2)->with($3);
 ```
 
 ##### expectNeverの置換
 
-``` php
+``` text
 expectNever\(([^\)]+)\);
 expects(\$this->never())->method($1);
 ```
 
 ##### setReturnValueの置換
 
-``` php
+``` text
 setReturnValue\(([^,]+), (.+)\);
 expects(\$this->once())->method($1)->will($this->returnValue($2));
 ```
 
 ##### setReturnValueAtの置換
 
-``` php
+``` text
 setReturnValueAt((\d+), ([^,]+), (.+));
 expects(\$this->at($1))->method($2)->will($this->returnValue($3));
 ```
