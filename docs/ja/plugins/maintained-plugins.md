@@ -2,7 +2,8 @@
 
 [Piece of Cake 2](https://github.com/pieceofcake2) プロジェクトは、フレームワークのフォークに加えて、
 関連するリポジトリと、主要な CakePHP 2 プラグインのフォークをメンテナンスしています。
-メンテナンスしているプラグインはすべて PHP 8.x に対応しています。
+メンテナンスしているプラグインはすべて PHP 8.x に対応しており、CI で
+[PHPStan](/ja/development/static-analysis) のレベル 5 によるチェックを行っています。
 
 ## コアリポジトリ
 
@@ -15,6 +16,7 @@
 ## 開発ツール
 
 - [PHPStan CakePHP](https://github.com/pieceofcake2/phpstan-cakephp2) - 静的解析用の PHPStan 拡張
+  ([静的解析](/ja/development/static-analysis) を参照してください)
 
 ## メンテナンスしているプラグイン
 
@@ -49,6 +51,9 @@
 
 - [Xform Plugin](https://github.com/pieceofcake2/xform) - 拡張フォームヘルパー
 - [Cakeplus Plugin](https://github.com/pieceofcake2/cakeplus) - フォーム関連のユーティリティと機能拡張
+- [Captcha Plugin](https://github.com/pieceofcake2/captcha) - CAPTCHA ウィジェットの表示とサーバー側での検証。
+  Cloudflare Turnstile (デフォルト)、Google reCAPTCHA v2/v3、hCaptcha に対応
+  ([ドキュメント](https://github.com/pieceofcake2/captcha/blob/1.x/docs/README.md) (英語))
 
 ### データベース
 
