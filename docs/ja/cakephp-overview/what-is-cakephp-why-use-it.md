@@ -16,7 +16,7 @@ CakePHP は、ウェブ開発から単調な作業を取り除きます。
 CakePHP にはアクティブな
 [開発チーム](https://github.com/cakephp/cakephp/contributors) とコミュニティが存在し、プロジェクトに貢献しています。
 CakePHP を使用する、ということは、車輪の再開発を避けるだけでなく、あなたが開発するアプリケーションのコア部分がよくテストされ、常に改良されている、ということになります。
-CakePHP 2 は CakePHP プロジェクトでは開発が終了していますが、[Piece of Cake 2](/ja/pieceofcake2) フォークが
+CakePHP 2 は CakePHP プロジェクトでは開発が終了していますが、[Piece of Cake 2](/ja/getting-started#about-this-fork) フォークが
 テストを続け、現在の PHP のバージョンで動作するように保守しています。
 
 CakePHP の使用で益を受ける幾つかの点をざっと挙げると次のようなものがあります。

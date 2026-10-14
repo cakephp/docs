@@ -66,6 +66,8 @@ modern directory layout.
 - [URL Rewriting](/installation/url-rewriting)
   - Examples assume the document root is webroot/; .htaccess updated to the skeleton version; legacy root/app .htaccess explained briefly
   - nginx example updated for PHP-FPM sockets; IIS web.config placed in webroot/; removed dead links (Web Platform Installer, virtualhostx, Apache wiki)
+- [Getting Started](/getting-started)
+  - Added "About This Fork" at the top of the page (what the fork is, CakePHP 2 end of life, CakePHP 5 for new projects, about this book); it replaces the separate "Piece of Cake 2" page, which was removed together with its sidebar group
 - [CakePHP Conventions](/getting-started/cakephp-conventions)
   - File locations use src/ and templates/; String::uuid replaced by CakeText::uuid()
 - [CakePHP Folder Structure](/getting-started/cakephp-folder-structure)
@@ -375,6 +377,8 @@ modern directory layout.
 
 ### Appendices
 
+- [Changes from the Original Book](/appendices/changes-from-the-original-book)
+  - This page; moved from `/pieceofcake2/changes` in the removed "Piece of Cake 2" sidebar group to the Appendices
 - [Security Fixes](/appendices/security-fixes)
   - Added the `Xml::build()` SSRF with `'readFile' => false` (fixed in 2.12.3); Cookie type set in `$components`; skeleton note for Security.useOpenSsl
 - [Migrating from CakePHP 2.10](/appendices/migrating-from-cakephp-2-10)

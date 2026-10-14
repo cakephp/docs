@@ -23,7 +23,7 @@ and community, bringing great value to the project. In addition to
 keeping you from wheel-reinventing, using CakePHP means your
 application's core is well tested and is being constantly
 improved. CakePHP 2 is no longer developed by the CakePHP project; the
-[Piece of Cake 2](/pieceofcake2) fork keeps it tested and running on current
+[Piece of Cake 2](/getting-started#about-this-fork) fork keeps it tested and running on current
 PHP versions.
 
 Here's a quick list of features you'll enjoy when using CakePHP:

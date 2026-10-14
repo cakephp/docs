@@ -64,3 +64,4 @@ CakePHP 2.10.24 から Piece of Cake 2 フォークへ移行する方法は [ア
 ## 一般的な情報
 
 - [用語集](appendices/glossary)
+- [本家ドキュメントからの変更点](appendices/changes-from-the-original-book)

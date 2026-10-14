@@ -8,7 +8,7 @@ Piece of Cake 2 フォーク、**pieceofcake2/cakephp** を対象としていま
 :::
 
 これは Piece of Cake 2 フォーク向けに更新した CakePHP 2 のクックブックです。
-本家の CakePHP 2.x のドキュメントからの変更点は [本家ドキュメントからの変更点](/ja/pieceofcake2/changes) を参照してください。
+本家の CakePHP 2.x のドキュメントからの変更点は [本家ドキュメントからの変更点](/ja/appendices/changes-from-the-original-book) を参照してください。
 
 CakePHP クックブックは、オープンに開発されている、コミュニティで編集可能なドキュメントのプロジェクトです。
 ドキュメンテーションの品質、正当性、正確性の高さを維持することを期待しています。

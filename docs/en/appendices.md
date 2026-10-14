@@ -65,3 +65,4 @@ application from CakePHP 2.10.24 to the Piece of Cake 2 fork, see the
 ## General Information
 
 - [Glossary](appendices/glossary)
+- [Changes from the Original Book](appendices/changes-from-the-original-book)

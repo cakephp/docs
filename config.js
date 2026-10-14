@@ -27,7 +27,7 @@ export default ({ bookNav }) => ({
     nav: bookNav(),
     versionBanner: {
       message: 'This is the documentation for pieceofcake2/cakephp, a community-maintained fork of CakePHP 2.x for PHP 8.',
-      link: '/docs/pieceofcake2',
+      link: '/docs/getting-started#about-this-fork',
       linkText: 'About this fork.'
     }
   },
@@ -49,7 +49,7 @@ export default ({ bookNav }) => ({
         sidebar: toc_ja,
         versionBanner: {
           message: 'このドキュメントは、CakePHP 2.x の PHP 8 対応フォーク pieceofcake2/cakephp のものです。',
-          link: '/docs/ja/pieceofcake2',
+          link: '/docs/ja/getting-started#about-this-fork',
           linkText: 'フォークについて'
         },
       },
