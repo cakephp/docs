@@ -101,7 +101,7 @@ As of 2.4 `FileLog` engine takes a few new options:
 > [!WARNING]
 > Prior to 2.4 you had to include the suffix `Log` in your configuration
 > (`LoggingPack.DatabaseLog`). This is not necessary anymore.
-> If you have been using a Log engine like `` `DatabaseLogger `` that does not follow
+> If you have been using a Log engine like `DatabaseLogger` that does not follow
 > the convention to use a suffix `Log` for your class name, you have to adjust your
 > class name to `DatabaseLog`. You should also avoid class names like `SomeLogLog`,
 > which includes the suffix twice at the end.

@@ -450,8 +450,8 @@ CakeEmail::deliver('you@example.com', 'Subject', 'Message', ['from' => 'me@examp
 
 ``` php
 $Email->domain('www.example.org');
-// メッセージ ID は ``<UUID@>`` (無効) の代わりに、
-// ``<UUID@www.example.org>`` (有効) を返します。
+// メッセージ ID は `<UUID@>` (無効) の代わりに、
+// `<UUID@www.example.org>` (有効) を返します。
 ```
 
 正しいメッセージ ID は、迷惑メールフォルダーへ振り分けられることを防ぐのに役立ちます。

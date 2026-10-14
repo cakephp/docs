@@ -461,8 +461,8 @@ name for the message id (since there is no host name in a CLI environment):
 
 ``` php
 $Email->domain('www.example.org');
-// Results in message ids like ``<UUID@www.example.org>`` (valid)
-// instead of `<UUID@>`` (invalid)
+// Results in message ids like `<UUID@www.example.org>` (valid)
+// instead of `<UUID@>` (invalid)
 ```
 
 A valid message id can help to prevent emails ending up in spam folders. If you
