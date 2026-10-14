@@ -2,8 +2,7 @@
 
 ## このフォークについて {#about-this-fork}
 
-このドキュメントは、コミュニティプロジェクト [Piece of Cake 2](https://github.com/pieceofcake2) が
-メンテナンスしている CakePHP 2.x のフォーク [pieceofcake2/cakephp](https://github.com/pieceofcake2/cakephp)
+このドキュメントは、CakePHP 2.x のコミュニティによるフォーク [pieceofcake2/cakephp](https://github.com/pieceofcake2/cakephp)
 について説明しています。このフォークは CakePHP 2.10.24 をベースにしており、PHP 8.0 以降で動作します。
 保守のみを目的としたフォークで、PHP への対応、バグ修正、セキュリティ修正を行います。新しい機能は追加しません。
 

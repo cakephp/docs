@@ -3,8 +3,7 @@
 ## About This Fork {#about-this-fork}
 
 This book documents [pieceofcake2/cakephp](https://github.com/pieceofcake2/cakephp),
-a fork of CakePHP 2.x maintained by the community project
-[Piece of Cake 2](https://github.com/pieceofcake2). The fork is based on
+a community-maintained fork of CakePHP 2.x. The fork is based on
 CakePHP 2.10.24 and runs on PHP 8.0 and newer. It is maintenance-only: it
 focuses on PHP compatibility, bug fixes and security fixes, and does not add new
 features.
