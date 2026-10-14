@@ -44,6 +44,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 - [Captcha](/ja/plugins/captcha)
 - [メンテナンスされているプラグイン](/ja/plugins/maintained-plugins)
 - [静的解析](/ja/development/static-analysis)
+- [AWS Lambda へのデプロイ](/ja/deployment/aws-lambda)
 
 ### はじめに
 
@@ -389,6 +390,9 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - ドキュメントルート、core.php、プラグインのシンボリックリンクのパスをモダンな構成に変更
   - `composer install --no-dev --optimize-autoloader` と開発用プラグインの条件付き読み込みを追加
   - デバッグレベルは独自の `CAKEPHP_DEBUG` ではなく、スケルトンの環境変数 `DEBUG` から読み込む例に変更。ほかの設定は環境変数の節へのリンクを追加
+  - 新しいページへのリンクとして「AWS Lambda へのデプロイ」の節を追加
+- [AWS Lambda へのデプロイ](/ja/deployment/aws-lambda)
+  - 新しいページ: pieceofcake2/app スケルトンを Bref 3 と Docker コンテナイメージで AWS Lambda にデプロイする方法 (TMP/LOGS を /tmp に、Bref の FPM ランタイム用の SCRIPT_NAME と HTTPS、stderr へのログ出力)、環境変数と SSM パラメータストア (`bref-ssm:`) による設定、pieceofcake2/aws による DynamoDB のセッションと SES のメール、キャッシュ、署名付き URL による S3 へのアップロード、Lift (S3 + CloudFront) による静的なアセット、RDS、コンソールのコマンドとスケジュール、Runtime Interface Emulator によるローカルでのテスト、OIDC を使った GitHub Actions からのデプロイ
 
 ### その他
 

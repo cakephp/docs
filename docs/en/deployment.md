@@ -106,3 +106,11 @@ ln -s ../../plugins/YourPlugin/webroot/css/yourplugin.css webroot/css/yourplugin
 
 In the legacy layout, plugins are in `app/Plugin/` or `plugins/` and the
 webroot is `app/webroot/`.
+
+## Deploying to AWS Lambda
+
+A CakePHP 2 application can also run on AWS Lambda without servers to manage,
+with Bref and Docker container images. See
+[Deploying to AWS Lambda](deployment/aws-lambda) for the changes to the
+application, the AWS services to use for sessions, cache, email and files, and
+deployment from GitHub Actions.

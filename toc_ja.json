@@ -697,6 +697,10 @@
         {
           "text": "デプロイメント",
           "link": "/ja/deployment"
+        },
+        {
+          "text": "AWS Lambda へのデプロイ",
+          "link": "/ja/deployment/aws-lambda"
         }
       ]
     }

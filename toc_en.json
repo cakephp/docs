@@ -697,6 +697,10 @@
         {
           "text": "Deployment",
           "link": "/deployment"
+        },
+        {
+          "text": "Deploying to AWS Lambda",
+          "link": "/deployment/aws-lambda"
         }
       ]
     }
