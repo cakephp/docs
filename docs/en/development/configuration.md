@@ -72,6 +72,10 @@ setting `public $useDbConfig = 'legacy';` in the appropriate models.
 Fill out the key/value pairs in the configuration array to best
 suit your needs.
 
+The `config/database.php.default` file of the application skeleton can also
+read the connection settings from environment variables. See
+[Environment Variables](#environment-variables).
+
 datasource  
 The name of the datasource this configuration array is for.
 The built-in database drivers are Database/Mysql, Database/Postgres,
@@ -177,6 +181,129 @@ BigBox, your controller BigBoxesController, everything just works
 together automatically. By convention, use underscores, lower case,
 and plural forms for your database table names - for example:
 bakers, pastry_stores, and savory_cakes.
+
+## Environment Variables
+
+Settings that differ between environments, such as the debug level, the
+security salts and the database credentials, can be read from environment
+variables with `env()` instead of being written into the configuration files.
+In production, set the variables in the configuration of the web server,
+container or process manager. For local development, CakePHP can load them
+from a `.env` file.
+
+### Loading .env Files
+
+`CakeDotenv` loads environment variables from `.env` files. It is a backport
+of the `.env` support of the application skeletons of later CakePHP versions,
+built into the core with no extra dependencies. Loading is opt-in: call
+`CakeDotenv::loadDefaults()` at the top of `config/core.php`
+(`app/Config/core.php` in the legacy layout), so that the variables are
+available to the rest of the configuration, the console and the tests:
+
+```php
+// config/core.php
+CakeDotenv::loadDefaults();
+```
+
+::: pieceofcake2
+`CakeDotenv` was added in v2.13.0. Applications created from the
+`pieceofcake2/app` skeleton already call it in `config/core.php`.
+:::
+
+`loadDefaults()` loads these files if they exist:
+
+1. `config/.env` (`app/Config/.env` in the legacy layout), the location used
+   by the CakePHP 3 to 5 application skeletons.
+2. `.env` in the project root.
+
+Variables that are already set in the real environment (web server, shell,
+container, CI) take precedence and are never overwritten, and `config/.env`
+takes precedence over the `.env` file in the project root. Call
+`CakeDotenv::loadDefaults(true)` if the files should overwrite existing
+variables.
+
+The loaded values are written to `putenv()`, `$_ENV` and `$_SERVER`, so you
+can read them with `env()`, `getenv()`, `$_ENV` or `$_SERVER`:
+
+```php
+// config/core.php
+Configure::write('Security.salt', env('SECURITY_SALT'));
+```
+
+Keep `.env` files out of version control (add them to `.gitignore`) and
+commit an example file, such as `config/.env.example`, instead. A `.env` file
+is meant for development; in production, set real environment variables.
+
+`CakeDotenv` also has methods for other files:
+
+- `CakeDotenv::load($files, $overwrite = false)` loads a file or a list of
+  files. When several files define the same variable, the first file wins.
+- `CakeDotenv::parse($contents)` and `CakeDotenv::parseFile($file)` return the
+  variables as an array without changing the environment.
+
+A file that cannot be read or parsed throws a `CakeDotenvException`. The
+message contains the file name and the line number.
+
+### .env File Syntax
+
+The syntax is compatible with [vlucas/phpdotenv](https://github.com/vlucas/phpdotenv)
+v5, the most widely used `.env` format in PHP:
+
+```bash
+# A comment
+APP_NAME=my_app
+export DEBUG=2                          # optional "export " prefix
+SECURITY_SALT='literal $value'          # single quotes: no escapes, no expansion
+DATABASE_URL="mysql://${DB_HOST}/app"   # double quotes: escapes and ${NAME} expansion
+PRIVATE_KEY="-----BEGIN KEY-----
+...
+-----END KEY-----"                      # double quoted values can span lines
+EMPTY_VALUE=                            # an empty string
+```
+
+- Values are always strings. Nothing is converted to booleans, numbers or
+  `null`: `007` stays `007`, and long digit strings are not changed.
+- Unquoted values must not contain whitespace; quote them. `#` starts a
+  comment, except inside quotes.
+- `${NAME}` is replaced with the value of a variable that is defined earlier
+  in the file or already set in the environment. Variables that are not
+  defined are left as they are. `$NAME` without braces is not expanded. In
+  double quotes, write `\$` for a literal `$`.
+- Double quoted values support the escape sequences `\"`, `\\`, `\$`, `\n`,
+  `\r`, `\t`, `\f` and `\v`. Backslashes in unquoted and single quoted values
+  are literal.
+- Files must be UTF-8.
+
+### Environment Variables of the Application Skeleton
+
+The `config/core.php` and `config/database.php.default` files of the
+`pieceofcake2/app` skeleton read the following variables. Its
+`config/.env.example` file lists them; copy it to `config/.env` to use them in
+development.
+
+| Variable | Setting | When not set |
+|----------|---------|--------------|
+| `DEBUG` | `debug`: `0`, `1` or `2` (`true` is 2, `false` is 0) | `2` |
+| `SECURITY_SALT` | `Security.salt` | the value in `config/core.php` |
+| `SECURITY_CIPHER_SEED` | `Security.cipherSeed` (digits only) | the value in `config/core.php` |
+| `DB_DATASOURCE`, `DB_HOST`, `DB_PORT`, `DB_USERNAME`, `DB_PASSWORD`, `DB_DATABASE` | `datasource`, `host`, `port`, `login`, `password` and `database` of the `default` connection | the values in `config/database.php` |
+| `DB_TEST_DATASOURCE`, `DB_TEST_HOST`, `DB_TEST_PORT`, `DB_TEST_USERNAME`, `DB_TEST_PASSWORD`, `DB_TEST_DATABASE` | the same settings of the `test` connection | the values in `config/database.php` |
+
+Empty variables are treated as not set, except `DB_PASSWORD` and
+`DB_TEST_PASSWORD`, which may be empty. If your `config/database.php` was
+created before the skeleton read these variables, copy the `__construct()`
+and `applyEnv()` methods from `config/database.php.default` into it.
+
+For example, a `config/.env` file for development:
+
+```bash
+# config/.env
+DEBUG=2
+DB_HOST="127.0.0.1"
+DB_USERNAME="my_app"
+DB_PASSWORD="secret"
+DB_DATABASE="my_app"
+```
 
 ## Class Loading and Additional Class Paths
 
@@ -329,6 +456,9 @@ Changes CakePHP debugging output.
 - 2 = Show errors, warnings, and SQL. \[SQL log is only shown when you
   add \$this-\>element('sql_dump') to your view or layout.\]
 
+The application skeleton reads the debug level from the `DEBUG` environment
+variable. See [Environment Variables](#environment-variables).
+
 Error  
 Configure the Error handler used to handle errors for your application.
 By default `ErrorHandler::handleError()` is used. It will display
@@ -461,6 +591,8 @@ A random string used in security hashing. It is also used to sign CSRF
 tokens and form tampering tokens, and as the default key for
 `CookieComponent`. Change it to a secret value unique to your application;
 CakePHP shows a notice while the default value from the skeleton is in use.
+The skeleton reads it from the `SECURITY_SALT` environment variable when it
+is set.
 
 ::: pieceofcake2
 CSRF tokens issued by `SecurityComponent`
@@ -473,6 +605,8 @@ A random numeric string (digits only) used to encrypt/decrypt
 strings with `Security::cipher()`. That method is used only by the
 `'cipher'` encryption type of `CookieComponent`, which is weak and kept
 for backwards compatibility. Use the `'aes'` type for cookies instead.
+The skeleton reads it from the `SECURITY_CIPHER_SEED` environment variable
+when it is set.
 
 Security.useOpenSsl  
 When true, `Security::encrypt()` and `Security::decrypt()` (and therefore

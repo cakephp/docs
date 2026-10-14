@@ -70,6 +70,9 @@ class DATABASE_CONFIG
 設定配列の中のキー／値のペアを、
 あなたの要求に合うように適切に設定してください。
 
+アプリケーションスケルトンの `config/database.php.default` は、接続設定を環境変数から
+読み込むこともできます。[環境変数](#environment-variables) を参照してください。
+
 datasource  
 この設定配列が使うデータソースの名前。
 組み込みのデータベースドライバーは Database/Mysql、Database/Postgres、
@@ -171,6 +174,131 @@ settings
 とすることで、すべての機能が自動的に有効になります。慣習として、
 データベーステーブル名はアンダースコア、小文字、複数形にします。
 たとえば bakers, pastry_stores, savory_cakes のようにします。
+
+<a id="environment-variables"></a>
+
+## 環境変数
+
+デバッグレベル、セキュリティ用のソルト、データベースの認証情報など、環境ごとに異なる設定は、
+設定ファイルに書く代わりに `env()` で環境変数から読み込めます。本番環境では、Web サーバー、
+コンテナ、プロセスマネージャーなどの設定で環境変数をセットします。ローカルの開発環境では、
+CakePHP が `.env` ファイルから環境変数を読み込めます。
+
+<a id="loading-env-files"></a>
+
+### .env ファイルの読み込み
+
+`CakeDotenv` は `.env` ファイルから環境変数を読み込みます。これは、後の CakePHP バージョンの
+アプリケーションスケルトンにある `.env` サポートをバックポートしたもので、追加の依存パッケージ
+なしでコアに組み込まれています。読み込みはオプトインです。`config/core.php`
+(レガシー構成では `app/Config/core.php`) の先頭で `CakeDotenv::loadDefaults()` を呼び出すと、
+残りの設定、コンソール、テストで環境変数を使えるようになります。
+
+```php
+// config/core.php
+CakeDotenv::loadDefaults();
+```
+
+::: pieceofcake2
+`CakeDotenv` は v2.13.0 で追加されました。`pieceofcake2/app` スケルトンから作成した
+アプリケーションでは、すでに `config/core.php` で呼び出しています。
+:::
+
+`loadDefaults()` は、以下のファイルが存在すれば読み込みます。
+
+1. `config/.env` (レガシー構成では `app/Config/.env`)。CakePHP 3 から 5 のアプリケーション
+   スケルトンが使う場所です。
+2. プロジェクトルートの `.env`
+
+実際の環境 (Web サーバー、シェル、コンテナ、CI) ですでにセットされている環境変数が優先され、
+上書きされることはありません。また、`config/.env` はプロジェクトルートの `.env` より優先されます。
+ファイルの値で既存の環境変数を上書きしたい場合は、`CakeDotenv::loadDefaults(true)` を
+呼び出します。
+
+読み込んだ値は `putenv()`、`$_ENV`、`$_SERVER` に書き込まれるので、`env()`、`getenv()`、
+`$_ENV`、`$_SERVER` のどれでも読み出せます。
+
+```php
+// config/core.php
+Configure::write('Security.salt', env('SECURITY_SALT'));
+```
+
+`.env` ファイルはバージョン管理に含めず (`.gitignore` に追加します)、代わりに
+`config/.env.example` のようなサンプルファイルをコミットしてください。`.env` ファイルは
+開発用です。本番環境では実際の環境変数をセットしてください。
+
+`CakeDotenv` には、ほかのファイルを扱うメソッドもあります。
+
+- `CakeDotenv::load($files, $overwrite = false)` は、1 つのファイルまたはファイルのリストを
+  読み込みます。複数のファイルで同じ変数が定義されている場合は、最初のファイルの値が使われます。
+- `CakeDotenv::parse($contents)` と `CakeDotenv::parseFile($file)` は、環境を変更せずに
+  変数を配列で返します。
+
+読み込めないファイルや解析できないファイルがあると、`CakeDotenvException` がスローされます。
+メッセージにはファイル名と行番号が含まれます。
+
+<a id="env-file-syntax"></a>
+
+### .env ファイルの書式
+
+書式は、PHP で最も広く使われている `.env` の書式である
+[vlucas/phpdotenv](https://github.com/vlucas/phpdotenv) v5 と互換性があります。
+
+```bash
+# コメント
+APP_NAME=my_app
+export DEBUG=2                          # "export " は省略可能
+SECURITY_SALT='literal $value'          # シングルクォート: エスケープも展開もしない
+DATABASE_URL="mysql://${DB_HOST}/app"   # ダブルクォート: エスケープと ${NAME} の展開
+PRIVATE_KEY="-----BEGIN KEY-----
+...
+-----END KEY-----"                      # ダブルクォートの値は複数行にできる
+EMPTY_VALUE=                            # 空文字列
+```
+
+- 値は常に文字列です。真偽値、数値、`null` への変換は行いません。`007` は `007` のままで、
+  長い数字の列も変更されません。
+- クォートしない値には空白を含められません。空白を含む値はクォートしてください。
+  `#` はクォートの中を除いてコメントの開始になります。
+- `${NAME}` は、ファイル内でそれより前に定義された変数か、環境にすでにセットされている変数の
+  値に置き換えられます。定義されていない変数はそのまま残ります。波括弧の無い `$NAME` は
+  展開されません。ダブルクォートの中で `$` そのものを書くには `\$` とします。
+- ダブルクォートの値では、エスケープシーケンス `\"`、`\\`、`\$`、`\n`、`\r`、`\t`、
+  `\f`、`\v` を使えます。クォートしない値とシングルクォートの値では、バックスラッシュは
+  そのままの文字として扱われます。
+- ファイルは UTF-8 でなければなりません。
+
+<a id="environment-variables-of-the-application-skeleton"></a>
+
+### アプリケーションスケルトンの環境変数
+
+`pieceofcake2/app` スケルトンの `config/core.php` と `config/database.php.default` は、
+以下の環境変数を読み込みます。これらは `config/.env.example` に記載されているので、
+開発環境で使うときは `config/.env` にコピーしてください。
+
+| 環境変数 | 設定 | セットされていない場合 |
+|----------|------|------------------------|
+| `DEBUG` | `debug`: `0`、`1`、`2` (`true` は 2、`false` は 0) | `2` |
+| `SECURITY_SALT` | `Security.salt` | `config/core.php` の値 |
+| `SECURITY_CIPHER_SEED` | `Security.cipherSeed` (数字のみ) | `config/core.php` の値 |
+| `DB_DATASOURCE`、`DB_HOST`、`DB_PORT`、`DB_USERNAME`、`DB_PASSWORD`、`DB_DATABASE` | `default` 接続の `datasource`、`host`、`port`、`login`、`password`、`database` | `config/database.php` の値 |
+| `DB_TEST_DATASOURCE`、`DB_TEST_HOST`、`DB_TEST_PORT`、`DB_TEST_USERNAME`、`DB_TEST_PASSWORD`、`DB_TEST_DATABASE` | `test` 接続の同じ設定 | `config/database.php` の値 |
+
+空の環境変数はセットされていないものとして扱われます。ただし、`DB_PASSWORD` と
+`DB_TEST_PASSWORD` は空にできます。スケルトンがこれらの環境変数を読み込むようになる前に
+`config/database.php` を作成した場合は、`config/database.php.default` の `__construct()` と
+`applyEnv()` メソッドをコピーしてください。
+
+たとえば、開発用の `config/.env` は次のようになります。
+
+```bash
+# config/.env
+DEBUG=2
+DB_HOST="127.0.0.1"
+DB_USERNAME="my_app"
+DB_PASSWORD="secret"
+DB_DATABASE="my_app"
+```
 
 ## クラスの読み込みと追加のクラスパス
 
@@ -321,6 +449,9 @@ CakePHP のデバッグ出力を制御します。
 \[ SQL のログは、ビューやレイアウト内で
 \$this-\>element('sql_dump') をしている場合にのみ表示されます。 \]
 
+アプリケーションスケルトンは、デバッグレベルを環境変数 `DEBUG` から読み込みます。
+[環境変数](#environment-variables) を参照してください。
+
 Error  
 あなたのアプリケーションのエラーを処理するためのエラーハンドラー
 を設定します。デフォルトでは `ErrorHandler::handleError()`
@@ -466,6 +597,7 @@ Security.salt
 トークンの署名、`CookieComponent` のデフォルトの暗号化キーにも使われます。
 アプリケーションごとに一意な値に変更し、秘密にしておいてください。
 スケルトンのデフォルト値のままだと、CakePHP が警告を表示します。
+スケルトンは、環境変数 `SECURITY_SALT` が設定されていればその値を使います。
 
 ::: pieceofcake2
 `SecurityComponent` が発行する CSRF トークンは
@@ -478,6 +610,7 @@ Security.cipherSeed
 `Security::cipher()` で文字列を暗号化／復号化するのに使われるランダムな文字列（数字のみ）。
 このメソッドを使うのは `CookieComponent` の暗号化タイプ `'cipher'` だけです。
 このタイプは脆弱で、後方互換性のためだけに残されています。Cookie には `'aes'` タイプを使ってください。
+スケルトンは、環境変数 `SECURITY_CIPHER_SEED` が設定されていればその値を使います。
 
 Security.useOpenSsl  
 true にすると、`Security::encrypt()` と `Security::decrypt()` (つまり Cookie の暗号化タイプ
