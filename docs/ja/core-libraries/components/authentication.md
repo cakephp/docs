@@ -68,7 +68,7 @@ $this->Auth->authenticate = ['Form'];
 // 設定を中に記述
 $this->Auth->authenticate = [
     'Basic' => ['userModel' => 'Member'],
-    'Form' => ['userModel' => 'Member']
+    'Form' => ['userModel' => 'Member'],
 ];
 ```
 
@@ -82,7 +82,7 @@ all キーは `AuthComponent::ALL` と記述することもできます。 :
 $this->Auth->authenticate = [
     AuthComponent::ALL => ['userModel' => 'Member'],
     'Basic',
-    'Form'
+    'Form',
 ];
 ```
 
@@ -125,10 +125,10 @@ public $components = [
     'Auth' => [
         'authenticate' => [
             'Form' => [
-                'fields' => ['username' => 'email']
-            ]
-        ]
-    ]
+                'fields' => ['username' => 'email'],
+            ],
+        ],
+    ],
 ];
 ```
 
@@ -143,18 +143,18 @@ public $components = [
         'loginAction' => [
             'controller' => 'users',
             'action' => 'login',
-            'plugin' => 'users'
+            'plugin' => 'users',
         ],
         'authError' => 'Did you really think you are allowed to see that?',
         'authenticate' => [
             'Form' => [
                 'fields' => [
                   'username' => 'my_user_model_username_field', // デフォルトは userModel の 'username'
-                  'password' => 'my_user_model_password_field'  // デフォルトは userModel の 'password'
-                ]
-            ]
-        ]
-    ]
+                  'password' => 'my_user_model_password_field', // デフォルトは userModel の 'password'
+                ],
+            ],
+        ],
+    ],
 ];
 ```
 
@@ -191,7 +191,7 @@ public function login()
             // `return $this->redirect($this->Auth->redirect());`
         }
         $this->Flash->error(
-            __('Username or password is incorrect')
+            __('Username or password is incorrect'),
         );
         // 2.7 より前なら
         // $this->Session->setFlash(__('Username or password is incorrect'));
@@ -284,6 +284,7 @@ public function getUser($request)
     if (empty($username) || empty($pass)) {
         return false;
     }
+
     return $this->_findUser($username, $pass);
 }
 ```
@@ -337,8 +338,8 @@ AuthComponent の flash 設定を使うことでエラーメッセージをカ�
 使うことができます。 :
 
 ``` php
-$this->Auth->authError = "このエラーは保護されたウェブサイトの一部に" .
-                           "ユーザーがアクセスしようとした際に表示されます。";
+$this->Auth->authError = 'このエラーは保護されたウェブサイトの一部に' .
+                           'ユーザーがアクセスしようとした際に表示されます。';
 ```
 
 ::: info Changed in version 2.4
@@ -374,11 +375,11 @@ public $components = [
             'Form' => [
                 'passwordHasher' => [
                     'className' => 'Simple',
-                    'hashType' => 'sha256'
-                ]
-            ]
-        ]
-    ]
+                    'hashType' => 'sha256',
+                ],
+            ],
+        ],
+    ],
 ];
 ```
 
@@ -393,9 +394,10 @@ class User extends AppModel
         if (!empty($this->data[$this->alias]['password'])) {
             $passwordHasher = new SimplePasswordHasher(['hashType' => 'sha256']);
             $this->data[$this->alias]['password'] = $passwordHasher->hash(
-                $this->data[$this->alias]['password']
+                $this->data[$this->alias]['password'],
             );
         }
+
         return true;
     }
 }
@@ -421,10 +423,10 @@ public $components = [
     'Auth' => [
         'authenticate' => [
             'Form' => [
-                'passwordHasher' => 'Blowfish'
-            ]
-        ]
-    ]
+                'passwordHasher' => 'Blowfish',
+            ],
+        ],
+    ],
 ];
 ```
 
@@ -445,8 +447,9 @@ class User extends AppModel
         $this->data[$this->alias]['digest_hash'] = DigestAuthenticate::password(
             $this->data[$this->alias]['username'],
             $this->data[$this->alias]['password'],
-            env('SERVER_NAME')
+            env('SERVER_NAME'),
         );
+
         return true;
     }
 }
@@ -495,10 +498,11 @@ public function register()
         $id = $this->User->id;
         $this->request->data['User'] = array_merge(
             $this->request->data['User'],
-            ['id' => $id]
+            ['id' => $id],
         );
         unset($this->request->data['User']['password']);
         $this->Auth->login($this->request->data['User']);
+
         return $this->redirect('/users/home');
     }
 }
@@ -587,7 +591,7 @@ $this->Auth->authorize = ['Controller'];
 // 設定を記述
 $this->Auth->authorize = [
     'Actions' => ['actionPath' => 'controllers/'],
-    'Controller'
+    'Controller',
 ];
 ```
 
@@ -600,7 +604,7 @@ $this->Auth->authorize = [
 $this->Auth->authorize = [
     AuthComponent::ALL => ['actionPath' => 'controllers/'],
     'Actions',
-    'Controller'
+    'Controller',
 ];
 ```
 
@@ -775,7 +779,7 @@ CrudAuthorize やアクションマッピングを使う他の認可オブジェ
 ``` php
 $this->Auth->mapActions([
     'create' => ['register'],
-    'view' => ['show', 'display']
+    'view' => ['show', 'display'],
 ]);
 ```
 

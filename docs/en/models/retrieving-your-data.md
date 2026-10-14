@@ -61,10 +61,10 @@ public function some_function()
     // ...
     $semiRandomArticle = $this->Article->find('first');
     $lastCreated = $this->Article->find('first', [
-        'order' => ['Article.created' => 'desc']
+        'order' => ['Article.created' => 'desc'],
     ]);
     $specificallyThisOne = $this->Article->find('first', [
-        'conditions' => ['Article.id' => 1]
+        'conditions' => ['Article.id' => 1],
     ]);
     // ...
 }
@@ -108,12 +108,12 @@ public function some_function()
     // ...
     $total = $this->Article->find('count');
     $pending = $this->Article->find('count', [
-        'conditions' => ['Article.status' => 'pending']
+        'conditions' => ['Article.status' => 'pending'],
     ]);
     $authors = $this->Article->User->find('count');
     $publishedAuthors = $this->Article->find('count', [
        'fields' => 'DISTINCT Article.user_id',
-       'conditions' => ['Article.status !=' => 'pending']
+       'conditions' => ['Article.status !=' => 'pending'],
     ]);
     // ...
 }
@@ -139,11 +139,11 @@ public function some_function()
     // ...
     $allArticles = $this->Article->find('all');
     $pending = $this->Article->find('all', [
-        'conditions' => ['Article.status' => 'pending']
+        'conditions' => ['Article.status' => 'pending'],
     ]);
     $allAuthors = $this->Article->User->find('all');
     $allPublishedAuthors = $this->Article->User->find('all', [
-        'conditions' => ['Article.status !=' => 'pending']
+        'conditions' => ['Article.status !=' => 'pending'],
     ]);
     // ...
 }
@@ -196,13 +196,13 @@ public function some_function()
     // ...
     $allArticles = $this->Article->find('list');
     $pending = $this->Article->find('list', [
-        'conditions' => ['Article.status' => 'pending']
+        'conditions' => ['Article.status' => 'pending'],
     ]);
     $allAuthors = $this->Article->User->find('list');
     $allPublishedAuthors = $this->Article->find('list', [
         'fields' => ['User.id', 'User.name'],
         'conditions' => ['Article.status !=' => 'pending'],
-        'recursive' => 0
+        'recursive' => 0,
     ]);
     // ...
 }
@@ -242,13 +242,13 @@ public function some_function()
 {
     // ...
     $justusernames = $this->Article->User->find('list', [
-        'fields' => ['User.username']
+        'fields' => ['User.username'],
     ]);
     $usernameMap = $this->Article->User->find('list', [
-        'fields' => ['User.username', 'User.first_name']
+        'fields' => ['User.username', 'User.first_name'],
     ]);
     $usernameGroups = $this->Article->User->find('list', [
-        'fields' => ['User.username', 'User.first_name', 'User.group']
+        'fields' => ['User.username', 'User.first_name', 'User.group'],
     ]);
     // ...
 }
@@ -311,7 +311,7 @@ public function some_function()
     // ...
     $allCategories = $this->Category->find('threaded');
     $comments = $this->Comment->find('threaded', [
-        'conditions' => ['article_id' => 50]
+        'conditions' => ['article_id' => 50],
     ]);
     // ...
 }
@@ -393,7 +393,7 @@ returned first.
 > public function some_function()
 > {
 >     $categories = $this->Category->find('threaded', [
->         'fields' => ['id', 'name', 'parent_id']
+>         'fields' => ['id', 'name', 'parent_id'],
 >     ]);
 > }
 > ```
@@ -413,7 +413,7 @@ public function some_function()
 {
     $neighbors = $this->Article->find(
         'neighbors',
-        ['field' => 'id', 'value' => 3]
+        ['field' => 'id', 'value' => 3],
     );
 }
 ```
@@ -500,7 +500,7 @@ change you need to do is add your type to the `Model::$findMethods` variable in 
 ``` php
 class Article extends AppModel
 {
-    public $findMethods = ['available' =>  true];
+    public $findMethods = ['available' => true];
 }
 ```
 
@@ -512,14 +512,16 @@ the method to implement would be named `_findMyFancySearch`.
 ``` php
 class Article extends AppModel
 {
-    public $findMethods = ['available' =>  true];
+    public $findMethods = ['available' => true];
 
     protected function _findAvailable($state, $query, $results = [])
     {
         if ($state === 'before') {
             $query['conditions']['Article.published'] = true;
+
             return $query;
         }
+
         return $results;
     }
 }
@@ -530,12 +532,13 @@ This all comes together in the following example (controller code):
 ``` php
 class ArticlesController extends AppController
 {
-
-    // Will find all published articles and order them by the created column
+    /**
+     * Will find all published articles and order them by the created column
+     */
     public function index()
     {
         $articles = $this->Article->find('available', [
-            'order' => ['created' => 'desc']
+            'order' => ['created' => 'desc'],
         ]);
     }
 }
@@ -563,8 +566,9 @@ It is also possible to paginate via a custom find type using the 'findType' opti
 ``` php
 class ArticlesController extends AppController
 {
-
-    // Will paginate all published articles
+    /**
+     * Will paginate all published articles
+     */
     public function index()
     {
         $this->paginate = ['findType' => 'available'];
@@ -583,12 +587,13 @@ find type in an array for the second argument.
 ``` php
 class ArticlesController extends AppController
 {
-
-    // Will find the count of all published articles (using the available find defined above)
+    /**
+     * Will find the count of all published articles (using the available find defined above)
+     */
     public function index()
     {
         $count = $this->Article->find('count', [
-            'type' => 'available'
+            'type' => 'available',
         ]);
     }
 }
@@ -600,23 +605,24 @@ your `AppModel`, which should fix the pagination count:
 ``` php
 class AppModel extends Model
 {
-
-/**
- * Removes 'fields' key from count query on custom finds when it is an array,
- * as it will completely break the Model::_findCount() call
- *
- * @param string $state Either "before" or "after"
- * @param array $query
- * @param array $results
- * @return int The number of records found, or false
- * @access protected
- * @see Model::find()
- */
+    /**
+     * Removes 'fields' key from count query on custom finds when it is an array,
+     * as it will completely break the Model::_findCount() call
+     *
+     * @param string $state Either "before" or "after"
+     * @param array $query
+     * @param array $results
+     * @return int The number of records found, or false
+     * @access protected
+     * @see Model::find()
+     */
     protected function _findCount($state, $query, $results = [])
     {
         if ($state === 'before') {
-            if (isset($query['type']) &&
-                isset($this->findMethods[$query['type']])) {
+            if (
+                isset($query['type']) &&
+                isset($this->findMethods[$query['type']])
+            ) {
                 $query = $this->{
                     '_find' . ucfirst($query['type'])
                 }('before', $query);
@@ -627,10 +633,10 @@ class AppModel extends Model
                 }
             }
         }
+
         return parent::_findCount($state, $query, $results);
     }
 }
-?>
 ```
 
 ::: info Changed in version 2.2
@@ -653,8 +659,10 @@ protected function _findAvailable($state, $query, $results = [])
         $query['joins'] = [
             //array of required joins
         ];
+
         return $query;
     }
+
     return $results;
 }
 ```
@@ -696,7 +704,7 @@ $results = $this->Article->findPublishedByAuthorId(5);
 
 // Is equivalent to
 $this->Article->find('published', [
-    'conditions' => ['Article.author_id' => 5]
+    'conditions' => ['Article.author_id' => 5],
 ]);
 ```
 
@@ -745,7 +753,7 @@ will create SQL injection vulnerabilities.
 the returned data, rather than the model name. For example:
 
 ``` php
-$this->Picture->query("SELECT * FROM pictures LIMIT 2;");
+$this->Picture->query('SELECT * FROM pictures LIMIT 2;');
 ```
 
 might return:
@@ -778,7 +786,7 @@ with that returned by the Find methods, the query can be
 rewritten:
 
 ``` php
-$this->Picture->query("SELECT * FROM pictures AS Picture LIMIT 2;");
+$this->Picture->query('SELECT * FROM pictures AS Picture LIMIT 2;');
 ```
 
 which returns:
@@ -829,7 +837,7 @@ echo $this->Post->field('name'); // echo the name for row id 22
 echo $this->Post->field(
     'name',
     ['created <' => date('Y-m-d H:i:s')],
-    'created DESC'
+    'created DESC',
 );
 ```
 
@@ -883,7 +891,7 @@ also enables CakePHP to secure your queries against any SQL injection attack.
 At its most basic, an array-based query looks like this:
 
 ``` php
-$conditions = ["Post.title" => "This is a post", "Post.author_id" => 1];
+$conditions = ['Post.title' => 'This is a post', 'Post.author_id' => 1];
 // Example usage with a model:
 $this->Post->find('first', ['conditions' => $conditions]);
 ```
@@ -1122,17 +1130,17 @@ $conditionsSubQuery['User2.status'] = 'B';
 $db = $this->User->getDataSource();
 $subQuery = $db->buildStatement(
     [
-        'fields'     => ['User2.id'],
-        'table'      => $db->fullTableName($this->User),
-        'alias'      => 'User2',
-        'limit'      => null,
-        'offset'     => null,
-        'joins'      => [],
+        'fields' => ['User2.id'],
+        'table' => $db->fullTableName($this->User),
+        'alias' => 'User2',
+        'limit' => null,
+        'offset' => null,
+        'joins' => [],
         'conditions' => $conditionsSubQuery,
-        'order'      => null,
-        'group'      => null
+        'order' => null,
+        'group' => null,
     ],
-    $this->User
+    $this->User,
 );
 $subQuery = 'User.id NOT IN (' . $subQuery . ') ';
 $subQueryExpression = $db->expression($subQuery);
@@ -1178,10 +1186,10 @@ custom query you like:
 $db = $this->getDataSource();
 $db->fetchAll(
     'SELECT * from users where username = ? AND password = ?',
-    ['jhon', '12345']
+    ['jhon', '12345'],
 );
 $db->fetchAll(
     'SELECT * from users where username = :username AND password = :password',
-    ['username' => 'jhon','password' => '12345']
+    ['username' => 'jhon','password' => '12345'],
 );
 ```

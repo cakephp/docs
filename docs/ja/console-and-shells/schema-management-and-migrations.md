@@ -64,11 +64,9 @@ public function after($event = [])
                 App::uses('ClassRegistry', 'Utility');
                 $post = ClassRegistry::init('Post');
                 $post->create();
-                $post->save(
-                    ['Post' =>
-                        ['title' => 'CakePHP Schema Files']
-                    ]
-                );
+                $post->save([
+                    'Post' => ['title' => 'CakePHP Schema Files'],
+                ]);
                 break;
         }
     }
@@ -90,6 +88,7 @@ public function before($event = [])
 {
     $db = ConnectionManager::getDataSource($this->connection);
     $db->cacheSources = false;
+
     return true;
 }
 ```
@@ -101,7 +100,7 @@ public function before($event = [])
 public function before($event = [])
 {
     $articles = ClassRegistry::init('Articles', [
-        'ds' => $this->connection
+        'ds' => $this->connection,
     ]);
     // Do things with articles.
 }
@@ -130,42 +129,42 @@ CakeSchema はまた、 `tableParameters` をサポートします。
 /**
  * ACO - Access Control Object - Something that is wanted
  */
-    public $acos = [
-        'id' => [
-            'type' => 'integer',
-            'null' => false,
-            'default' => null,
-            'length' => 10,
-            'key' => 'primary'
-        ],
-        'parent_id' => [
-            'type' => 'integer',
-            'null' => true,
-            'default' => null,
-            'length' => 10
-        ],
-        'model' => ['type' => 'string', 'null' => true],
-        'foreign_key' => [
-            'type' => 'integer',
-            'null' => true,
-            'default' => null,
-            'length' => 10
-        ],
-        'alias' => ['type' => 'string', 'null' => true],
-        'lft' => [
-            'type' => 'integer',
-            'null' => true,
-            'default' => null,
-            'length' => 10
-        ],
-        'rght' => [
-            'type' => 'integer',
-            'null' => true,
-            'default' => null,
-            'length' => 10
-        ],
-        'indexes' => ['PRIMARY' => ['column' => 'id', 'unique' => 1]]
-    ];
+public $acos = [
+    'id' => [
+        'type' => 'integer',
+        'null' => false,
+        'default' => null,
+        'length' => 10,
+        'key' => 'primary',
+    ],
+    'parent_id' => [
+        'type' => 'integer',
+        'null' => true,
+        'default' => null,
+        'length' => 10,
+    ],
+    'model' => ['type' => 'string', 'null' => true],
+    'foreign_key' => [
+        'type' => 'integer',
+        'null' => true,
+        'default' => null,
+        'length' => 10,
+    ],
+    'alias' => ['type' => 'string', 'null' => true],
+    'lft' => [
+        'type' => 'integer',
+        'null' => true,
+        'default' => null,
+        'length' => 10,
+    ],
+    'rght' => [
+        'type' => 'integer',
+        'null' => true,
+        'default' => null,
+        'length' => 10,
+    ],
+    'indexes' => ['PRIMARY' => ['column' => 'id', 'unique' => 1]],
+];
 ```
 
 ### カラム
@@ -281,12 +280,12 @@ MySQL の dbo は、 tableParameters に加えて `fieldParameters` を実装し
 例えば `indexes` のように :
 
 ``` php
-var $comments => [
+public $comments = [
     'id' => [
         'type' => 'integer',
         'null' => false,
         'default' => 0,
-        'key' => 'primary'
+        'key' => 'primary',
     ],
     'post_id' => ['type' => 'integer', 'null' => false, 'default' => 0],
     'comment' => ['type' => 'text'],
@@ -297,8 +296,8 @@ var $comments => [
     'tableParameters' => [
         'engine' => 'InnoDB',
         'charset' => 'latin1',
-        'collate' => 'latin1_general_ci'
-    ]
+        'collate' => 'latin1_general_ci',
+    ],
 ];
 ```
 

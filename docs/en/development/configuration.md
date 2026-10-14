@@ -616,9 +616,8 @@ returned. Using our examples from write() above, we can read that
 data back:
 
 ``` php
-Configure::read('Company.name');    // yields: 'Pizza, Inc.'
-Configure::read('Company.slogan');  // yields: 'Pizza for your body
-                                    // and soul'
+Configure::read('Company.name'); // yields: 'Pizza, Inc.'
+Configure::read('Company.slogan'); // yields: 'Pizza for your body and soul'
 
 Configure::read('Company');
 
@@ -877,7 +876,9 @@ class MyXmlReader implements ConfigReaderInterface
         return Xml::toArray($xml);
     }
 
-    // As of 2.3 a dump() method is also required
+    /**
+     * As of 2.3 a dump() method is also required
+     */
     public function dump($key, $data)
     {
         // code to dump data to file

@@ -268,7 +268,6 @@ This can be overwritten by setting the `$validationDomain` property in your mode
 ``` php
 class User extends AppModel
 {
-
     public $validationDomain = 'validation_errors';
 }
 ```
@@ -279,7 +278,6 @@ function. This allows you to create dynamic validation messages:
 ``` php
 class User extends AppModel
 {
-
     public $validationDomain = 'validation';
 
     public $validate = [

@@ -85,6 +85,7 @@ public function parentNode()
     if (!$data['User']['group_id']) {
         return null;
     }
+
     return ['Group' => ['id' => $data['User']['group_id']]];
 }
 ```
@@ -106,7 +107,7 @@ $this->User->id = 1;
 $node = $this->User->node();
 
 $user = ['User' => [
-    'id' => 1
+    'id' => 1,
 ]];
 $node = $this->User->node($user);
 ```
@@ -121,7 +122,7 @@ $this->User->id = 1;
 $node = $this->User->node(null, 'Aro');
 
 $user = ['User' => [
-    'id' => 1
+    'id' => 1,
 ]];
 $node = $this->User->node($user, 'Aro');
 ```

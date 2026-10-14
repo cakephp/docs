@@ -4,29 +4,17 @@
 フォークは GitHub 上でコミュニティによってメンテナンスされています。議論はすべて
 [pieceofcake2](https://github.com/pieceofcake2) の各リポジトリの Issue と Pull Request で行います。
 
-## 目的
-
 フォークは、既存の CakePHP 2 アプリケーションを現在の PHP で動かし続けるために存在します。
-目指しているのは次のことです。
+新機能は追加しません。新しいプロジェクトには CakePHP 5 を使ってください。
+フォークの目的、メンテナンスしている唯一のブランチ、リリースの方法は
+コントリビューションガイド (英語) で説明しています。
 
-- PHP 8.x への対応を維持すること
-- バグとセキュリティ問題を修正すること
-- サポートしているすべての PHP バージョンとデータベースでテストが通る状態を保つこと
-- CakePHP 5 への段階的な移行を支援すること (例えば、CakePHP 2 と CakePHP 5 の両方で
-  使えるモダンなディレクトリ構成)
+- [Scope](https://github.com/pieceofcake2/.github/blob/master/CONTRIBUTING.md#scope)
+- [Branches and Releases](https://github.com/pieceofcake2/.github/blob/master/CONTRIBUTING.md#branches-and-releases)
 
-フォークは新機能を追加しません。新しいプロジェクトには CakePHP 5 を使ってください。
+## バージョン番号
 
-## ブランチ
-
-フレームワークでメンテナンスしているブランチは `2.x` だけです。バグ修正、セキュリティ修正、
-互換性のための変更はすべてこのブランチで行い、Pull Request もこのブランチに対して作成します。
-本家 CakePHP のような保守ブランチ、開発ブランチ、機能ブランチの区別はありません。
-
-## リリース
-
-リリースは `2.x` ブランチのタグで、
-[GitHub のリリース](https://github.com/pieceofcake2/cakephp/releases) と
+リリースは [GitHub のリリース](https://github.com/pieceofcake2/cakephp/releases) と
 [Packagist](https://packagist.org/packages/pieceofcake2/cakephp) に
 `pieceofcake2/cakephp` として公開されます。フォークは CakePHP 2.10.24 から始まりました。
 
@@ -36,11 +24,7 @@
   `2.12.x` のリリースにはその上での修正が含まれます。
 
 2.11.0 や 2.12.0 のようなマイナーリリースにはアプリケーションに影響する変更が含まれていたので、
-更新する前にリリースノートを読んでください。各リリースの内容は
-[CHANGELOG](https://github.com/pieceofcake2/cakephp/blob/2.x/CHANGELOG.md) に書かれています。
-アプリケーションの変更が必要になる変更点と、本家 CakePHP 2.10.24 からの移行方法は
-[UPGRADE ガイド](https://github.com/pieceofcake2/cakephp/blob/2.x/UPGRADE.md)
-と、このドキュメントの [CakePHP 2.10 からの移行](/ja/appendices/migrating-from-cakephp-2-10) で説明しています。
+更新する前にリリースノートを読んでください。[後方互換性ガイド](backwards-compatibility) を参照してください。
 
 ## 参加するには
 

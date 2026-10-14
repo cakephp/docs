@@ -57,11 +57,12 @@ posts/index の RSS バージョンが作れるようになる前に、いくつ
 
 public function index()
 {
-    if ($this->RequestHandler->isRss() ) {
+    if ($this->RequestHandler->isRss()) {
         $posts = $this->Post->find(
             'all',
-            ['limit' => 20, 'order' => 'Post.created DESC']
+            ['limit' => 20, 'order' => 'Post.created DESC'],
         );
+
         return $this->set(compact('posts'));
     }
 
@@ -69,7 +70,7 @@ public function index()
     // ウェブサイトインターフェースで使用されるデータを配信します。
     $this->paginate['Post'] = [
         'order' => 'Post.created DESC',
-        'limit' => 10
+        'limit' => 10,
     ];
 
     $posts = $this->paginate();
@@ -119,10 +120,10 @@ CakePHP では、あなたのビューからレイアウトに変数を渡すこ
 
 ``` php
 $this->set('channelData', [
-    'title' => __("Most Recent Posts"),
+    'title' => __('Most Recent Posts'),
     'link' => $this->Html->url('/', true),
-    'description' => __("Most recent posts."),
-    'language' => 'en-us'
+    'description' => __('Most recent posts.'),
+    'language' => 'en-us',
 ]);
 ```
 
@@ -150,23 +151,23 @@ foreach ($posts as $post) {
         'year' => date('Y', $postTime),
         'month' => date('m', $postTime),
         'day' => date('d', $postTime),
-        $post['Post']['slug']
+        $post['Post']['slug'],
     ];
 
     // フィードの本文が正しくなるよう HTML の削除とエスケープ
     $bodyText = h(strip_tags($post['Post']['body']));
     $bodyText = $this->Text->truncate($bodyText, 400, [
         'ending' => '...',
-        'exact'  => true,
-        'html'   => true,
+        'exact' => true,
+        'html' => true,
     ]);
 
-    echo  $this->Rss->item([], [
+    echo $this->Rss->item([], [
         'title' => $post['Post']['title'],
         'link' => $postLink,
         'guid' => ['url' => $postLink, 'isPermaLink' => 'true'],
         'description' => $bodyText,
-        'pubDate' => $post['Post']['created']
+        'pubDate' => $post['Post']['created'],
     ]);
 }
 ```

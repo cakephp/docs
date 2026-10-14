@@ -197,7 +197,7 @@ application exceptions
 ``` php
 class MissingWidgetException extends CakeException
 {
-};
+}
 ```
 
 `templates/Errors/missing_widget.ctp` を作成することにより、素晴らしい開発用エラーを
@@ -272,6 +272,7 @@ class AppExceptionHandler
         echo 'Oh noes! ' . $error->getMessage();
         // ...
     }
+
     // ...
 }
 ```

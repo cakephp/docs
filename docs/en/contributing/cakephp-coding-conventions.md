@@ -15,7 +15,10 @@ The standard is checked automatically by
 `CakePHP` ruleset of
 [cakephp/cakephp-codesniffer](https://github.com/cakephp/cakephp-codesniffer)
 5.x and a project `phpcs.xml` file. Where this page and the result of `phpcs`
-disagree, `phpcs` is authoritative. If you maintain code written for the
+disagree, `phpcs` is authoritative. Contributions to the `pieceofcake2/*`
+repositories must pass `vendor/bin/phpcs` with no errors and no warnings (see
+[Coding Standard](https://github.com/pieceofcake2/.github/blob/master/CONTRIBUTING.md#coding-standard)
+in the contribution guide). If you maintain code written for the
 original CakePHP 2 standard, see
 [Differences from the Original CakePHP 2 Standard](#differences-from-the-original-cakephp-2-standard).
 
@@ -73,11 +76,12 @@ have to be fixed by hand.
 
 All code and comments should be written in English.
 
-## Adding New Features
+## Tests
 
-No new features should be added without their own tests, which should pass
-before the change is committed to the repository. The same applies to bug
-fixes: add a test that fails without the fix.
+Every change needs tests that pass before it is merged; a bug fix needs a test
+that fails without the fix. See
+[Working on a Change](https://github.com/pieceofcake2/.github/blob/master/CONTRIBUTING.md#working-on-a-change)
+in the contribution guide.
 
 ## Indentation and Whitespace
 
@@ -175,9 +179,9 @@ Control structures are for example `if`, `for`, `foreach`, `while` and
 `switch`. Below is an example with `if`:
 
 ``` php
-if (($expr1) || ($expr2)) {
+if ($expr1 || $expr2) {
     // action 1
-} elseif (!($expr3) && ($expr4)) {
+} elseif (!$expr3 && $expr4) {
     // action 2
 } else {
     // default action

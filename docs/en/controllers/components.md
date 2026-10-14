@@ -67,7 +67,7 @@ configuration options be set in the `$components` array:
 
 ``` php
 public $components = [
-    'DebugKit.Toolbar' => ['panels' => ['history', 'session']]
+    'DebugKit.Toolbar' => ['panels' => ['history', 'session']],
 ];
 ```
 
@@ -85,8 +85,8 @@ class PostsController extends AppController
 {
     public $components = [
         'Auth' => [
-            'className' => 'MyAuth'
-        ]
+            'className' => 'MyAuth',
+        ],
     ];
 }
 
@@ -121,6 +121,7 @@ class PostsController extends AppController
     {
         if ($this->Post->delete($this->request->data('Post.id'))) {
             $this->Session->setFlash('Post deleted.');
+
             return $this->redirect(['action' => 'index']);
         }
     }

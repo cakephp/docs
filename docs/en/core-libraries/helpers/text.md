@@ -20,4 +20,4 @@ Several `TextHelper` methods have been moved into the `CakeText` class (called `
 
 `method` TextHelper::**autoParagraph**(string $text)
 
-<!--@include: ../../core-utility-libraries/string.md{117,135}-->
+<!--@include: ../../core-utility-libraries/string.md{116,134}-->

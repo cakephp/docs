@@ -109,7 +109,7 @@ $this->helper('progress')->output([
     'width' => 20,
     'callback' => function ($progress) {
         $progress->increment(2);
-    }
+    },
 ]);
 ```
 

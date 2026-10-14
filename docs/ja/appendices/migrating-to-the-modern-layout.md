@@ -90,7 +90,7 @@ your-project/
 
 ```php
 define('ROOT', dirname(__DIR__));
-define('APP_DIR', 'src');          // 'app' の代わり
+define('APP_DIR', 'src'); // 'app' の代わり
 define('WEBROOT_DIR', 'webroot');
 define('WWW_ROOT', ROOT . DS . WEBROOT_DIR . DS);
 define('VENDORS', ROOT . DS . 'vendor' . DS);

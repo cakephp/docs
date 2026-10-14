@@ -184,19 +184,19 @@ $this->request->isPost(); // 非推奨
 // environment detector を追加する
 $this->request->addDetector(
     'post',
-    ['env' => 'REQUEST_METHOD', 'value' => 'POST']
+    ['env' => 'REQUEST_METHOD', 'value' => 'POST'],
 );
 
 // pattern value detector を追加する
 $this->request->addDetector(
     'iphone',
-    ['env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i']
+    ['env' => 'HTTP_USER_AGENT', 'pattern' => '/iPhone/i'],
 );
 
 // option detector を追加する
 $this->request->addDetector('internalIp', [
     'env' => 'CLIENT_IP',
-    'options' => ['192.168.0.101', '192.168.0.100']
+    'options' => ['192.168.0.101', '192.168.0.100'],
 ]);
 
 // callback detector を追加する。匿名関数か通常のコールバックが指定可能。
@@ -204,7 +204,7 @@ $this->request->addDetector(
     'awesome',
     ['callback' => function ($request) {
         return isset($request->awesome);
-    }]
+    }],
 );
 ```
 
@@ -382,7 +382,7 @@ CakePHP は、`CakeResponse::$_mimeTypes` に登録された、よく知られ�
 ``` php
 $this->response->file(
     $file['path'],
-    ['download' => true, 'name' => 'foo']
+    ['download' => true, 'name' => 'foo'],
 );
 ```
 
@@ -417,11 +417,11 @@ $this->response->header('Location', 'http://example.com');
 // 複数ヘッダを設定する
 $this->response->header([
     'Location' => 'http://example.com',
-    'X-Extra' => 'My header'
+    'X-Extra' => 'My header',
 ]);
 $this->response->header([
     'WWW-Authenticate: Negotiate',
-    'Content-type: application/pdf'
+    'Content-type: application/pdf',
 ]);
 ```
 

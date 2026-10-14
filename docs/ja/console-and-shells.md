@@ -241,7 +241,6 @@ class FileGeneratorTask extends Shell
     public $uses = ['User'];
     public function execute()
     {
-
     }
 }
 ```
@@ -448,13 +447,14 @@ public function getOptionParser()
 {
     $parser = parent::getOptionParser();
     $parser->addArgument('type', [
-        'help' => 'フルパスもしくはクラスの型のいずれか。'
+        'help' => 'フルパスもしくはクラスの型のいずれか。',
     ])->addArgument('className', [
-        'help' => 'CakePHP コアのクラス名（Component, HtmlHelper 等)。'
+        'help' => 'CakePHP コアのクラス名（Component, HtmlHelper 等)。',
     ])->addOption('method', [
         'short' => 'm',
-        'help' => __('The specific method you want help on.')
+        'help' => __('The specific method you want help on.'),
     ])->description(__('Lookup doc block comments for classes in CakePHP.'));
+
     return $parser;
 }
 ```
@@ -534,7 +534,7 @@ $parser->addArgument('model', ['help' => 'bake するモデル']);
 ``` php
 $parser->addArguments([
     'node', ['help' => '生成するノード', 'required' => true],
-    'parent' => ['help' => '親ノード', 'required' => true]
+    'parent' => ['help' => '親ノード', 'required' => true],
 ]);
 ```
 
@@ -552,7 +552,7 @@ ConsoleOptionParser 上のすべてのビルダーメソッドと同様に、add
 $parser->addArgument('type', [
     'help' => 'これとやり取りするノードの型',
     'required' => true,
-    'choices' => ['aro', 'aco']
+    'choices' => ['aro', 'aco'],
 ]);
 ```
 
@@ -610,7 +610,7 @@ $parser->addOption('no-commit', ['boolean' => true]);
 ``` php
 $parser->addOptions([
     'node' => ['short' => 'n', 'help' => '生成するノード'],
-    'parent' => ['short' => 'p', 'help' => '親ノード']
+    'parent' => ['short' => 'p', 'help' => '親ノード'],
 ]);
 ```
 
@@ -626,7 +626,7 @@ choices が指定されている場合、それらがそのオプションで取
 ``` php
 $parser->addOption('accept', [
     'help' => 'What version to accept.',
-    'choices' => ['working', 'theirs', 'mine']
+    'choices' => ['working', 'theirs', 'mine'],
 ]);
 ```
 
@@ -640,7 +640,7 @@ $parser->addOption('accept', [
 ``` php
 $parser->addOption('verbose', [
     'help' => '冗長出力を有効にする.',
-    'boolean' => true
+    'boolean' => true,
 ]);
 ```
 
@@ -677,7 +677,7 @@ if ($this->param('verbose')) {
 ``` php
 $parser->addSubcommand('model', [
     'help' => 'Bake a model',
-    'parser' => $this->Model->getOptionParser()
+    'parser' => $this->Model->getOptionParser(),
 ]);
 ```
 
@@ -715,16 +715,16 @@ $parser->addSubcommand('check', [
     'help' => __('Check the permissions between an ACO and ARO.'),
     'parser' => [
         'description' => [
-            __("Use this command to grant ACL permissions. Once executed, the ARO "),
-            __("specified (and its children, if any) will have ALLOW access to the"),
-            __("specified ACO action (and the ACO's children, if any).")
+            __('Use this command to grant ACL permissions. Once executed, the ARO '),
+            __('specified (and its children, if any) will have ALLOW access to the'),
+            __("specified ACO action (and the ACO's children, if any)."),
         ],
         'arguments' => [
             'aro' => ['help' => __('ARO to check.'), 'required' => true],
             'aco' => ['help' => __('ACO to check.'), 'required' => true],
-            'action' => ['help' => __('Action to check')]
-        ]
-    ]
+            'action' => ['help' => __('Action to check')],
+        ],
+    ],
 ]);
 ```
 
@@ -740,15 +740,15 @@ public function getOptionParser()
 {
     return ConsoleOptionParser::buildFromArray([
         'description' => [
-            __("Use this command to grant ACL permissions. Once executed, the "),
-            __("ARO specified (and its children, if any) will have ALLOW access "),
-            __("to the specified ACO action (and the ACO's children, if any).")
+            __('Use this command to grant ACL permissions. Once executed, the '),
+            __('ARO specified (and its children, if any) will have ALLOW access '),
+            __("to the specified ACO action (and the ACO's children, if any)."),
         ],
         'arguments' => [
             'aro' => ['help' => __('ARO to check.'), 'required' => true],
             'aco' => ['help' => __('ACO to check.'), 'required' => true],
-            'action' => ['help' => __('Action to check')]
-        ]
+            'action' => ['help' => __('Action to check')],
+        ],
     ]);
 }
 ```

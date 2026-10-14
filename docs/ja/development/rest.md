@@ -64,7 +64,7 @@ class RecipesController extends AppController
         $recipes = $this->Recipe->find('all');
         $this->set([
             'recipes' => $recipes,
-            '_serialize' => ['recipes']
+            '_serialize' => ['recipes'],
         ]);
     }
 
@@ -73,7 +73,7 @@ class RecipesController extends AppController
         $recipe = $this->Recipe->findById($id);
         $this->set([
             'recipe' => $recipe,
-            '_serialize' => ['recipe']
+            '_serialize' => ['recipe'],
         ]);
     }
 
@@ -87,7 +87,7 @@ class RecipesController extends AppController
         }
         $this->set([
             'message' => $message,
-            '_serialize' => ['message']
+            '_serialize' => ['message'],
         ]);
     }
 
@@ -101,7 +101,7 @@ class RecipesController extends AppController
         }
         $this->set([
             'message' => $message,
-            '_serialize' => ['message']
+            '_serialize' => ['message'],
         ]);
     }
 
@@ -114,7 +114,7 @@ class RecipesController extends AppController
         }
         $this->set([
             'message' => $message,
-            '_serialize' => ['message']
+            '_serialize' => ['message'],
         ]);
     }
 }
@@ -198,7 +198,7 @@ Router::resourceMap([
     ['action' => 'add', 'method' => 'POST', 'id' => false],
     ['action' => 'edit', 'method' => 'PUT', 'id' => true],
     ['action' => 'delete', 'method' => 'DELETE', 'id' => true],
-    ['action' => 'update', 'method' => 'POST', 'id' => true]
+    ['action' => 'update', 'method' => 'POST', 'id' => true],
 ]);
 ```
 
@@ -224,6 +224,6 @@ Router::resourceMap([
 Router::mapResources('books', [
     'connectOptions' => [
         'routeClass' => 'ApiRoute',
-    ]
+    ],
 ]);
 ```

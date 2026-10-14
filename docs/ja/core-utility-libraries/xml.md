@@ -137,8 +137,8 @@ $xmlArray = [
     'project' => [
         '@id' => 1,
         'name' => 'Name of project, as tag',
-        '@' => 'Value of project'
-    ]
+        '@' => 'Value of project',
+    ],
 ];
 $xmlObject = Xml::fromArray($xmlArray);
 $xmlString = $xmlObject->asXML();
@@ -163,14 +163,14 @@ $data = [
         'project' => [
             [
                 'id' => 1, 'title' => 'Project 1',
-                'industry' => ['id' => 1, 'name' => 'Industry 1']
+                'industry' => ['id' => 1, 'name' => 'Industry 1'],
             ],
             [
                 'id' => 2, 'title' => 'Project 2',
-                'industry' => ['id' => 2, 'name' => 'Industry 2']
-            ]
-        ]
-    ]
+                'industry' => ['id' => 2, 'name' => 'Industry 2'],
+            ],
+        ],
+    ],
 ];
 ```
 
@@ -209,8 +209,8 @@ $data = [
 $xmlArray = [
     'root' => [
         'xmlns:' => 'https://cakephp.org',
-        'child' => 'value'
-    ]
+        'child' => 'value',
+    ],
 ];
 $xml1 = Xml::fromArray($xmlArray);
 
@@ -220,10 +220,10 @@ $xmlArray = [
             'xmlns:pref' => 'https://cakephp.org',
             'pref:item' => [
                 'item 1',
-                'item 2'
-            ]
-        ]
-    ]
+                'item 2',
+            ],
+        ],
+    ],
 ];
 $xml2 = Xml::fromArray($xmlArray);
 ```
@@ -323,14 +323,14 @@ $value = [
         'tag' => [
             [
                 'id' => '1',
-                'name' => 'defect'
+                'name' => 'defect',
             ],
             [
                 'id' => '2',
-                'name' => 'enhancement'
-        ]
-        ]
-    ]
+                'name' => 'enhancement',
+            ],
+        ],
+    ],
 ];
 $xml = Xml::build($value);
 ```

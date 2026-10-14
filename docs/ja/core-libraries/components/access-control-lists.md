@@ -458,16 +458,16 @@ public function any_action()
     // すべてのグループ情報を配列の中で列挙しています
     $groups = [
         0 => [
-            'alias' => '戦士たち'
+            'alias' => '戦士たち',
         ],
         1 => [
-            'alias' => '魔法使い'
+            'alias' => '魔法使い',
         ],
         2 => [
-            'alias' => 'ホビット族'
+            'alias' => 'ホビット族',
         ],
         3 => [
-            'alias' => '訪問者'
+            'alias' => '訪問者',
         ],
     ];
 
@@ -682,7 +682,8 @@ CakePHP のコア Acl コンポーネントによって行われます。
 いくつかの基本的なパーミッションを設定してみましょう。 :
 
 ``` php
-class SomethingsController extends AppController {
+class SomethingsController extends AppController
+{
     // これを AppController に置きたいと思うかもしれませんが、
     // これでもちゃんと動作します。
     public $components = ['Acl'];
@@ -696,7 +697,7 @@ class SomethingsController extends AppController {
         // しかしながら、王は全員に自由なアクセス権をもたせるのを
         // よしとしません。
         $this->Acl->deny('戦士たち/Legolas', '武器', 'delete');
-        $this->Acl->deny('戦士たち/Gimli',   '武器', 'delete');
+        $this->Acl->deny('戦士たち/Gimli', '武器', 'delete');
 
         die(print_r('done', 1));
     }
@@ -727,14 +728,14 @@ ARO を特定しています。
 // 1564 = Gimli
 
 $this->Acl->deny(
-  ['model' => 'User', 'foreign_key' => 6342],
-  '武器',
-  'delete'
+    ['model' => 'User', 'foreign_key' => 6342],
+    '武器',
+    'delete',
 );
 $this->Acl->deny(
-  ['model' => 'User', 'foreign_key' => 1564],
-  '武器',
-  'delete'
+    ['model' => 'User', 'foreign_key' => 1564],
+    '武器',
+    'delete',
 );
 ```
 

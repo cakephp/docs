@@ -54,17 +54,18 @@ created. To keep your Order model clean you could use events:
 // plugins/Cart/Model/Order.php
 class Order extends AppModel
 {
-
     public function place($order)
     {
         if ($this->save($order)) {
             $this->Cart->remove($order);
             $event = new CakeEvent('Model.Order.afterPlace', $this, [
-                'order' => $order
+                'order' => $order,
             ]);
             $this->getEventManager()->dispatch($event);
+
             return true;
         }
+
         return false;
     }
 }
@@ -102,7 +103,7 @@ listeners in priority order. You can access the global manager using a static me
 // In any configuration file or piece of code that executes before the event
 CakeEventManager::instance()->attach(
     $aCallback,
-    'Model.Order.afterPlace'
+    'Model.Order.afterPlace',
 );
 ```
 
@@ -125,7 +126,7 @@ of the `CakeEvent` class. Let's look at dispatching an event:
 ``` php
 // Create a new event and dispatch it.
 $event = new CakeEvent('Model.Order.afterPlace', $this, [
-    'order' => $order
+    'order' => $order,
 ]);
 $this->getEventManager()->dispatch($event);
 ```
@@ -170,7 +171,6 @@ necessary. Our `UserStatistics` listener might start out like:
 // In src/Lib/Event/UserStatistic.php
 class UserStatistic implements CakeEventListener
 {
-
     public function implementedEvents()
     {
         return [
@@ -228,10 +228,10 @@ wanted to put any orders into the log files, we could use a simple anonymous
 function to do so:
 
 ``` php
-$this->Order->getEventManager()->attach(function($event) {
+$this->Order->getEventManager()->attach(function ($event) {
     CakeLog::write(
         'info',
-        'A new order was placed with id: ' . $event->subject()->id
+        'A new order was placed with id: ' . $event->subject()->id,
     );
 }, 'Model.Order.afterPlace');
 ```
@@ -278,7 +278,7 @@ $callback = [$this, 'doSomething'];
 $this->getEventManager()->attach(
     $callback,
     'Model.Order.afterPlace',
-    ['priority' => 2]
+    ['priority' => 2],
 );
 
 // Setting priority for a listener
@@ -289,7 +289,7 @@ class UserStatistic implements CakeEventListener
         return [
             'Model.Order.afterPlace' => [
                 'callable' => 'updateBuyStatistic',
-                'priority' => 100
+                'priority' => 100,
             ],
         ];
     }
@@ -318,7 +318,7 @@ $callback = [$this, 'doSomething'];
 $this->getEventManager()->attach(
     $callback,
     'Model.Order.afterPlace',
-    ['passParams' => true]
+    ['passParams' => true],
 );
 
 // Enabling passed parameters mode for a listener
@@ -329,7 +329,7 @@ class UserStatistic implements CakeEventListener
         return [
             'Model.Order.afterPlace' => [
                 'callable' => 'updateBuyStatistic',
-                'passParams' => true
+                'passParams' => true,
             ],
         ];
     }
@@ -347,7 +347,7 @@ previous example we trigger the `Model.Order.afterPlace` event with some data:
 
 ``` php
 $event = new CakeEvent('Model.Order.afterPlace', $this, [
-    'order' => $order
+    'order' => $order,
 ]);
 $this->getEventManager()->dispatch($event);
 ```
@@ -394,7 +394,8 @@ public function place($order)
 {
     $event = new CakeEvent(
         'Model.Order.beforePlace',
-        $this, ['order' => $order]
+        $this,
+        ['order' => $order],
     );
     $this->getEventManager()->dispatch($event);
     if ($event->isStopped()) {
@@ -421,27 +422,35 @@ Event results can be altered either using the event object result property
 directly or returning the value in the callback itself:
 
 ``` php
-// A listener callback
+/**
+ * A listener callback
+ */
 public function doSomething($event)
 {
     // ...
     $alteredData = $event->data['order'] + $moreData;
+
     return $alteredData;
 }
 
-// Another listener callback
+/**
+ * Another listener callback
+ */
 public function doSomethingElse($event)
 {
     // ...
     $event->result['order'] = $alteredData;
 }
 
-// Using the event result
+/**
+ * Using the event result
+ */
 public function place($order)
 {
     $event = new CakeEvent(
         'Model.Order.beforePlace',
-        $this, ['order' => $order]
+        $this,
+        ['order' => $order],
     );
     $this->getEventManager()->dispatch($event);
     if (!empty($event->result['order'])) {
@@ -473,7 +482,9 @@ $this->getEventManager()->attach([$this, 'doSomething'], 'My.event');
 $this->getEventManager()->detach([$this, 'doSomething'], 'My.event');
 
 // Attaching an anonymous function
-$myFunction = function($event) { ... };
+$myFunction = function ($event) {
+    // ...
+};
 $this->getEventManager()->attach($myFunction, 'My.event');
 
 // Detaching the anonymous function

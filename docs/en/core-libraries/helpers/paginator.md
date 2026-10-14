@@ -62,9 +62,9 @@ If you are using HTML like images in your links remember to set escaping off:
 
 ``` php
 echo $this->Paginator->sort(
-  'user_id',
-  '<em>User account</em>',
-  ['escape' => false]
+    'user_id',
+    '<em>User account</em>',
+    ['escape' => false],
 );
 ```
 
@@ -231,7 +231,7 @@ There are a number of options for `counter()`. The supported ones are:
   ``` php
   echo $this->Paginator->counter(
       'Page {:page} of {:pages}, showing {:current} records out of
-       {:count} total, starting on record {:start}, ending on {:end}'
+       {:count} total, starting on record {:start}, ending on {:end}',
   );
   ```
 
@@ -239,7 +239,7 @@ There are a number of options for `counter()`. The supported ones are:
 
   ``` php
   echo $this->Paginator->counter([
-      'format' => 'range'
+      'format' => 'range',
   ]);
   ```
 
@@ -249,7 +249,7 @@ There are a number of options for `counter()`. The supported ones are:
 
   ``` php
   echo $this->Paginator->counter([
-      'separator' => ' of a total of '
+      'separator' => ' of a total of ',
   ]);
   ```
 
@@ -277,8 +277,8 @@ Sets all the options for the Paginator Helper. Supported options are:
   $this->Paginator->options([
       'url' => [
           'sort' => 'email', 'direction' => 'desc', 'page' => 6,
-          'lang' => 'en'
-      ]
+          'lang' => 'en',
+      ],
   ]);
   ```
 
@@ -314,7 +314,7 @@ named parameters to be converted:
 
 ``` php
 $this->Paginator->options([
-  'convertKeys' => ['your', 'keys', 'here']
+  'convertKeys' => ['your', 'keys', 'here'],
 ]);
 ```
 
@@ -394,16 +394,16 @@ echo $this->Paginator->numbers();
 
 // Shows the next and previous links
 echo $this->Paginator->prev(
-  '« Previous',
-  null,
-  null,
-  ['class' => 'disabled']
+    '« Previous',
+    null,
+    null,
+    ['class' => 'disabled'],
 );
 echo $this->Paginator->next(
-  'Next »',
-  null,
-  null,
-  ['class' => 'disabled']
+    'Next »',
+    null,
+    null,
+    ['class' => 'disabled'],
 );
 
 // prints X of Y, where X is current page and Y is number of pages
@@ -416,7 +416,7 @@ using special markers:
 ``` php
 echo $this->Paginator->counter([
     'format' => 'Page {:page} of {:pages}, showing {:current} records out of
-             {:count} total, starting on record {:start}, ending on {:end}'
+             {:count} total, starting on record {:start}, ending on {:end}',
 ]);
 ```
 

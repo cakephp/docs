@@ -320,7 +320,7 @@ visit the [CakePHP API](https://api.cakephp.org/2.x/class-Controller.html).
 > // $name controller attribute usage example
 > class RecipesController extends AppController
 > {
->    public $name = 'Recipes';
+>     public $name = 'Recipes';
 > }
 > ```
 
@@ -408,9 +408,9 @@ own sections in the manual.
 >     public $components = [
 >         'Paginator' => [
 >             'Article' => [
->                 'conditions' => ['published' => 1]
->             ]
->         ]
+>                 'conditions' => ['published' => 1],
+>             ],
+>         ],
 >     ];
 > }
 > ```

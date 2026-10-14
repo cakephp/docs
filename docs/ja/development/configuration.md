@@ -621,9 +621,8 @@ CakePHP で重要な debug 値です。何らかのキーが指定されたら�
 みましょう。
 
 ``` php
-Configure::read('Company.name');    // 'Pizza, Inc.' が返されます
-Configure::read('Company.slogan');  // 'Pizza for your body and soul'
-                                    // が返されます
+Configure::read('Company.name'); // 'Pizza, Inc.' が返されます
+Configure::read('Company.slogan'); // 'Pizza for your body and soul' が返されます
 
 Configure::read('Company');
 
@@ -886,7 +885,9 @@ class MyXmlReader implements ConfigReaderInterface
         return Xml::toArray($xml);
     }
 
-    // 2.3 以降は dump() メソッドも必須です
+    /**
+     * 2.3 以降は dump() メソッドも必須です
+     */
     public function dump($key, $data)
     {
         // データをファイルに書き出すコード

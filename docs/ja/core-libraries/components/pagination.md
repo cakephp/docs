@@ -32,14 +32,13 @@ URL から受け取った `page` パラメータなどを追加していきま�
 ``` php
 class PostsController extends AppController
 {
-
     public $components = ['Paginator'];
 
     public $paginate = [
         'limit' => 25,
         'order' => [
-            'Post.title' => 'asc'
-        ]
+            'Post.title' => 'asc',
+        ],
     ];
 }
 ```
@@ -50,15 +49,14 @@ class PostsController extends AppController
 ``` php
 class PostsController extends AppController
 {
-
     public $components = ['Paginator'];
 
     public $paginate = [
         'fields' => ['Post.id', 'Post.created'],
         'limit' => 25,
         'order' => [
-            'Post.title' => 'asc'
-        ]
+            'Post.title' => 'asc',
+        ],
     ];
 }
 ```
@@ -73,12 +71,11 @@ find() メソッドに渡されます。これにより、ページ制御に対�
 ``` php
 class RecipesController extends AppController
 {
-
     public $components = ['Paginator'];
 
     public $paginate = [
         'limit' => 25,
-        'contain' => ['Article']
+        'contain' => ['Article'],
     ];
 }
 ```
@@ -90,10 +87,9 @@ class RecipesController extends AppController
 ``` php
 class PostsController extends AppController
 {
-
     public $paginate = [
-        'Post' =>  [...],
-        'Author' =>  [...]
+        'Post' => [...],
+        'Author' => [...],
     ];
 }
 ```
@@ -129,7 +125,7 @@ public function list_recipes()
 ``` php
 $data = $this->Paginator->paginate(
     'Recipe',
-    ['Recipe.title LIKE' => 'a%']
+    ['Recipe.title LIKE' => 'a%'],
 );
 ```
 
@@ -141,7 +137,7 @@ public function list_recipes()
 {
     $this->Paginator->settings = [
         'conditions' => ['Recipe.title LIKE' => 'a%'],
-        'limit' => 10
+        'limit' => 10,
     ];
     $data = $this->Paginator->paginate('Recipe');
     $this->set(compact('data'));
@@ -161,16 +157,28 @@ public function list_recipes()
 通常の追加の先頭パラメータである `$model` を使って実装しなければなりません。 :
 
 ``` php
-// ビヘイビア上に実装された paginate と paginateCount
-public function paginate(Model $model, $conditions, $fields, $order, $limit,
-    $page = 1, $recursive = null, $extra = [])
-{
+/**
+ * ビヘイビア上に実装された paginate と paginateCount
+ */
+public function paginate(
+    Model $model,
+    $conditions,
+    $fields,
+    $order,
+    $limit,
+    $page = 1,
+    $recursive = null,
+    $extra = [],
+) {
     // メソッドの中身
 }
 
-public function paginateCount(Model $model, $conditions = null, $recursive = 0,
-    $extra = [])
-{
+public function paginateCount(
+    Model $model,
+    $conditions = null,
+    $recursive = 0,
+    $extra = [],
+) {
     // メソッドの中身
 }
 ```
@@ -184,7 +192,7 @@ paginate() と paginateCount() を自前で実装しなければならないよ�
 
 ``` php
 public $paginate = [
-    'popular'
+    'popular',
 ];
 ```
 
@@ -193,7 +201,7 @@ public $paginate = [
 
 ``` php
 public $paginate = [
-    'findType' => 'popular'
+    'findType' => 'popular',
 ];
 ```
 
@@ -207,15 +215,21 @@ public $paginate = [
  * オーバーライドされた paginate メソッド
  *  - week, away_team_id, home_team_id でグルーピングしている
  */
-public function paginate($conditions, $fields, $order, $limit, $page = 1,
-    $recursive = null, $extra = [])
-{
-
+public function paginate(
+    $conditions,
+    $fields,
+    $order,
+    $limit,
+    $page = 1,
+    $recursive = null,
+    $extra = [],
+) {
     $recursive = -1;
     $group = $fields = ['week', 'away_team_id', 'home_team_id'];
+
     return $this->find(
         'all',
-        compact('conditions', 'fields', 'order', 'limit', 'page', 'recursive', 'group')
+        compact('conditions', 'fields', 'order', 'limit', 'page', 'recursive', 'group'),
     );
 }
 ```
@@ -229,9 +243,11 @@ public function paginate($conditions, $fields, $order, $limit, $page = 1,
 /**
  * オーバーライドされた paginateCount メソッド
  */
-public function paginateCount($conditions = null, $recursive = 0,
-                                $extra = [])
-{
+public function paginateCount(
+    $conditions = null,
+    $recursive = 0,
+    $extra = [],
+) {
     $sql = "SELECT
         DISTINCT ON(
             week, home_team_id, away_team_id
@@ -241,6 +257,7 @@ public function paginateCount($conditions = null, $recursive = 0,
             games";
     $this->recursive = $recursive;
     $results = $this->query($sql);
+
     return count($results);
 }
 ```
@@ -258,8 +275,8 @@ public $paginate = [
     'MyModel' => [
         'limit' => 20,
         'order' => ['week' => 'desc'],
-        'group' => ['week', 'home_team_id', 'away_team_id']
-    ]
+        'group' => ['week', 'home_team_id', 'away_team_id'],
+    ],
 ];
 /**
  * もしくは、アクションの中でその場で実行できます
@@ -270,8 +287,8 @@ public function index()
         'MyModel' => [
             'limit' => 20,
             'order' => ['week' => 'desc'],
-            'group' => ['week', 'home_team_id', 'away_team_id']
-        ]
+            'group' => ['week', 'home_team_id', 'away_team_id'],
+        ],
     ];
 }
 ```
@@ -310,7 +327,7 @@ CakePHP のデフォルトでは、一度に取り出せる行数を 100 に制�
 ``` php
 public $paginate = [
     // ここに他のキーもあります。
-    'maxLimit' => 10
+    'maxLimit' => 10,
 ];
 ```
 
@@ -331,7 +348,7 @@ CakePHP の過去のバージョンでは、ページ制御用リンクの生成
 
 ``` php
 public $paginate = [
-    'paramType' => 'querystring'
+    'paramType' => 'querystring',
 ];
 ```
 

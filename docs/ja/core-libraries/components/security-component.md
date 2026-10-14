@@ -116,7 +116,6 @@ Security コンポーネントは、一般的にコントローラの `beforeFil
 ``` php
 class WidgetController extends AppController
 {
-
     public $components = ['Security'];
 
     public function beforeFilter()
@@ -132,7 +131,6 @@ class WidgetController extends AppController
 ``` php
 class WidgetController extends AppController
 {
-
     public $components = ['Security'];
 
     public function beforeFilter()
@@ -149,7 +147,6 @@ class WidgetController extends AppController
 ``` php
 class WidgetController extends AppController
 {
-
     public $components = ['Security'];
 
     public function beforeFilter()
@@ -200,8 +197,8 @@ CSRF 防御の恩恵を受けられます。デフォルトでは CSRF トーク
 ``` php
 public $components = [
     'Security' => [
-        'csrfExpires' => '+1 hour'
-    ]
+        'csrfExpires' => '+1 hour',
+    ],
 ];
 ```
 
@@ -237,8 +234,8 @@ csrfExpires プロパティは、
 ``` php
 public $components = [
     'Security' => [
-        'csrfUseOnce' => false
-    ]
+        'csrfUseOnce' => false,
+    ],
 ];
 ```
 

@@ -48,6 +48,7 @@ class BakeriesController extends AppController
     {
         $this->helpers[] = 'Time';
     }
+
     public function mix()
     {
         // ここに Time ヘルパーは読み込まれないので利用出来ません

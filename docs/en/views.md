@@ -115,7 +115,7 @@ $this->start('sidebar');
 <?php
 echo $this->Html->link('edit', [
     'action' => 'edit',
-    $post['Post']['id']
+    $post['Post']['id'],
 ]); ?>
 </li>
 <?php $this->end(); ?>
@@ -170,7 +170,6 @@ $this->start('sidebar');
 echo $this->element('sidebar/recent_topics');
 echo $this->element('sidebar/recent_comments');
 $this->end();
-
 
 // Append into the sidebar later on.
 $this->append('sidebar');
@@ -486,7 +485,7 @@ argument:
 
 ``` php
 echo $this->element('helpbox', [
-    "helptext" => "Oh, this text is very helpful."
+    'helptext' => 'Oh, this text is very helpful.',
 ]);
 ```
 
@@ -505,16 +504,18 @@ The `View::element()` method also supports options for the element.
 The options supported are 'cache' and 'callbacks'. An example:
 
 ``` php
-echo $this->element('helpbox', [
-        "helptext" => "This is passed to the element as $helptext",
-        "foobar" => "This is passed to the element as $foobar",
+echo $this->element(
+    'helpbox',
+    [
+        'helptext' => "This is passed to the element as $helptext",
+        'foobar' => "This is passed to the element as $foobar",
     ],
     [
         // Uses the "long_view" cache configuration
-        "cache" => "long_view",
+        'cache' => 'long_view',
         // Set to true to have before/afterRender called for the element
-        "callbacks" => true
-    ]
+        'callbacks' => true,
+    ],
 );
 ```
 
@@ -526,9 +527,8 @@ application, provide a unique cache key value using the following format:
 
 ``` php
 $this->element('helpbox', [], [
-        "cache" => ['config' => 'short', 'key' => 'unique value']
-    ]
-);
+    'cache' => ['config' => 'short', 'key' => 'unique value'],
+]);
 ```
 
 You can take full advantage of elements by using
@@ -566,7 +566,7 @@ like the following:
 <h2>Latest Posts</h2>
 <?php
 $posts = $this->requestAction(
-    'posts/index/sort:created/direction:asc/limit:5'
+    'posts/index/sort:created/direction:asc/limit:5',
 );
 ?>
 <ol>
@@ -598,13 +598,13 @@ overwriting the previous element() call's cached result. For example:
 echo $this->element(
     'helpbox',
     ['var' => $var],
-    ['cache' => ['key' => 'first_use', 'config' => 'view_long']]
+    ['cache' => ['key' => 'first_use', 'config' => 'view_long']],
 );
 
 echo $this->element(
     'helpbox',
     ['var' => $differentVar],
-    ['cache' => ['key' => 'second_use', 'config' => 'view_long']]
+    ['cache' => ['key' => 'second_use', 'config' => 'view_long']],
 );
 ```
 

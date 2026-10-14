@@ -11,7 +11,10 @@ Issue や Pull Request を受け付けていません。そのため、貢献は
   ([メンテナンスされているプラグイン](/ja/plugins/maintained-plugins) を参照)
 - このドキュメントは [pieceofcake2/docs](https://github.com/pieceofcake2/docs)
 
-以下のセクションでは、貢献のための種々の方法を説明しています。
+Issue の報告、開発環境の準備、テストの実行、Pull Request の送り方は、これらすべての
+リポジトリに適用される Organization の
+[コントリビューションガイド (CONTRIBUTING.md、英語)](https://github.com/pieceofcake2/.github/blob/master/CONTRIBUTING.md) で説明しています。
+この章のページでは概要を説明し、その該当するセクションにリンクしています。
 
 - [ドキュメント](contributing/documentation)
 - [チケット](contributing/tickets)

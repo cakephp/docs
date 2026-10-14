@@ -69,7 +69,8 @@ composer create-project pieceofcake2/app my_app
 
 `my_app` ディレクトリが作られ、CakePHP (`pieceofcake2/cakephp`) が `vendor/` にインストールされます。
 開発用の依存パッケージとして [Bake](console-and-shells/code-generation-with-bake) と
-[DebugKit](https://github.com/pieceofcake2/debug_kit) プラグインもインストールされます。
+[DebugKit](https://github.com/pieceofcake2/debug_kit) プラグインもインストールされます
+([DebugKit のドキュメント](https://github.com/pieceofcake2/debug_kit/blob/2.x/docs/README.md) を参照してください)。
 スケルトンのディレクトリ構成は次のとおりです。
 
 ```text

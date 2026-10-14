@@ -112,7 +112,7 @@ class EmailConfig
         'port' => 465,
         'username' => 'my@gmail.com',
         'password' => 'secret',
-        'transport' => 'Smtp'
+        'transport' => 'Smtp',
     ];
 }
 ```
@@ -139,7 +139,7 @@ class EmailConfig
         'username' => 'my@gmail.com',
         'password' => 'secret',
         'transport' => 'Smtp',
-        'tls' => true
+        'tls' => true,
     ];
 }
 ```
@@ -322,8 +322,8 @@ you want the filenames to appear in the recipient's mail client:
         'photo.png' => [
             'file' => '/full/some_hash.png',
             'mimetype' => 'image/png',
-            'contentId' => 'my-unique-id'
-        ]
+            'contentId' => 'my-unique-id',
+        ],
     ]);
     ```
 
@@ -376,7 +376,6 @@ transport). To start off your file should look like:
 // src/Lib/Network/Email/ExampleTransport.php
 class ExampleTransport extends AbstractTransport
 {
-
     public function send(CakeEmail $Email)
     {
         // magic inside!

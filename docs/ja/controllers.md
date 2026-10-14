@@ -303,7 +303,7 @@ class PostsController extends AppController
 > // $name 変数の使い方のサンプル
 > class RecipesController extends AppController
 > {
->    public $name = 'Recipes';
+>     public $name = 'Recipes';
 > }
 > ```
 
@@ -384,9 +384,9 @@ class PostsController extends AppController
 >     public $components = [
 >         'Paginator' => [
 >             'Article' => [
->                 'conditions' => ['published' => 1]
->             ]
->         ]
+>                 'conditions' => ['published' => 1],
+>             ],
+>         ],
 >     ];
 > }
 > ```

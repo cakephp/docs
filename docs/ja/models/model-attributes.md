@@ -149,12 +149,12 @@ recursive プロパティは CakePHP が `find()` 、 `read()`
 find 操作のデフォルトのデータの順番。下記のような設定が可能です。 :
 
 ``` php
-$order = "field"
-$order = "Model.field";
-$order = "Model.field asc";
-$order = "Model.field ASC";
-$order = "Model.field DESC";
-$order = ["Model.field" => "asc", "Model.field2" => "DESC"];
+$order = 'field';
+$order = 'Model.field';
+$order = 'Model.field asc';
+$order = 'Model.field ASC';
+$order = 'Model.field DESC';
+$order = ['Model.field' => 'asc', 'Model.field2' => 'DESC'];
 ```
 
 ## data
@@ -231,17 +231,17 @@ time
 protected $_schema = [
     'first_name' => [
         'type' => 'string',
-        'length' => 30
+        'length' => 30,
     ],
     'last_name' => [
         'type' => 'string',
-        'length' => 30
+        'length' => 30,
     ],
     'email' => [
         'type' => 'string',
-        'length' => 30
+        'length' => 30,
     ],
-    'message' => ['type' => 'text']
+    'message' => ['type' => 'text'],
 ];
 ```
 
@@ -272,7 +272,7 @@ MySQL での使用例:
 
 ``` php
 public $virtualFields = [
-    'name' => "CONCAT(User.first_name, ' ', User.last_name)"
+    'name' => "CONCAT(User.first_name, ' ', User.last_name)",
 ];
 ```
 

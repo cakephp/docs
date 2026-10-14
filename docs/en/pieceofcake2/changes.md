@@ -281,7 +281,7 @@ modern directory layout.
 - [Debugging](/development/debugging)
   - debug() signature updated; trace/excerpt examples use fork paths (APP/CORE/ROOT); invoke() replaced with getInstance()
   - Logs written to logs/ (debug.log/error.log); Object replaced with CakeObject; App::uses('CakeLog') removed
-  - DebugKit: install pieceofcake2/debug_kit with Composer and load it in config/bootstrap.php
+  - DebugKit: install pieceofcake2/debug_kit with Composer and load it in config/bootstrap.php; links to the DebugKit documentation of the fork
 - [Testing](/development/testing)
   - PHPUnit 9.6 installed with Composer (require-dev); PHPUnit 3.7/4.x/5.x, .phar and autoloader workaround instructions removed
   - Test cases in tests/TestCase and fixtures in tests/Fixture; configuration in config/; legacy app/Test layout mentioned as fallback
@@ -343,23 +343,26 @@ modern directory layout.
 
 - [Contributing](/contributing)
   - Contributions go to the pieceofcake2/* repositories on GitHub (framework, app skeleton, plugins, docs)
+  - The contribution process is described in the organization's CONTRIBUTING.md; the pages of this chapter give an overview and link to its sections
 - [Documentation](/contributing/documentation)
   - Docs hosted at pieceofcake2/docs (2.x), Markdown + VitePress, deployed by GitHub Actions, local preview with bin/dev-server.sh; only en/ja maintained; Jenkins, IRC and docs mailing list removed
-  - reStructuredText/Sphinx formatting guide replaced by a Markdown/VitePress guide (headings and anchors, links, code blocks, alerts, info/pieceofcake2 containers, includes)
+  - reStructuredText/Sphinx formatting guide replaced by a Markdown/VitePress guide (headings and anchors, links, code blocks, alerts, info/pieceofcake2 containers, includes), kept in the README of pieceofcake2/docs
 - [Tickets](/contributing/tickets)
   - Issues go to pieceofcake2/* repositories; check CHANGELOG/upgrade guide before reporting; Stack Overflow for questions (IRC and Google Group removed)
   - Security issues reported via GitHub private vulnerability reporting (Security tab, Report a vulnerability) per SECURITY.md; security@cakephp.org removed
+  - Reporting details link to CONTRIBUTING.md and SECURITY.md
 - [Code](/contributing/code)
   - Setup: PHP 8.0+, Composer; PHPUnit 9.6, PHP_CodeSniffer and PHPStan installed as dev dependencies; removed PHP 5.3, mcrypt and PHPUnit 3.7 requirements
   - New "Running the Tests" section: copy tests/config/database.php into vendor/pieceofcake2/app/config, select the database with DB, run vendor/bin/phpunit and vendor/bin/phpcs
   - Single maintained branch 2.x; branch from and target upstream/2.x; removed 2.next/4.0 targets and Cake Software Foundation ownership note
+  - Setup, running the tests and the pull request steps link to CONTRIBUTING.md
 - [Coding Standards](/contributing/cakephp-coding-conventions)
   - Rewritten as the CakePHP 5 based standard (cakephp/cakephp-codesniffer ^5.0, PSR-12): 4 spaces, short arrays, trailing commas, braces on own line for classes/methods, elseif, no Yoda, ?? and ?:, visibility on constants, DocBlock rules
   - Added how to install and run phpcs/phpcbf, the CakePHP 2 exclusions of the framework phpcs.xml, the application phpcs.xml from pieceofcake2/app (with legacy layout paths), and a table of differences from the original CakePHP 2 standard
 - [Backwards Compatibility Guide](/contributing/backwards-compatibility)
-  - Rewritten: what to expect from fork releases (some included breaking changes, e.g. cache engines, directory layout, autoloading), migration guides, guidelines for contributors; upstream semver tables removed
+  - Rewritten: what to expect from fork releases (some included breaking changes, e.g. cache engines, directory layout, autoloading), migration guides; the guidelines for contributors link to CONTRIBUTING.md; upstream semver tables removed
 - [CakePHP Development Process](/contributing/cakephp-development-process)
-  - Rewritten for the fork's maintenance-only process: goals, single 2.x branch, releases as tags (2.10.24.x, 2.11.0, 2.12.x), CHANGELOG/UPGRADE; IRC and upstream branch model removed
+  - Rewritten for the fork's maintenance-only process: version numbers (2.10.24.x, 2.11.0, 2.12.x); goals, branches and releases link to CONTRIBUTING.md; IRC and upstream branch model removed
 
 ### Appendices
 

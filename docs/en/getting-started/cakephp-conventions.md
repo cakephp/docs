@@ -38,7 +38,6 @@ internal use. For example:
 ``` php
 class NewsController extends AppController
 {
-
     public function latest()
     {
         $this->_findNewArticles();

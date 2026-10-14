@@ -18,7 +18,6 @@ use the `CakeText` class:
 ``` php
 class UsersController extends AppController
 {
-
     public $components = ['Auth'];
 
     public function afterLogin()
@@ -88,7 +87,7 @@ $options = [
         'method' => 'text', // or html
     ],
     'before' => '',
-    'after' => ''
+    'after' => '',
 ];
 ```
 

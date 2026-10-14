@@ -97,7 +97,7 @@ The basic format for a route definition is:
 Router::connect(
     'URL',
     ['default' => 'defaultValue'],
-    ['option' => 'matchingRegex']
+    ['option' => 'matchingRegex'],
 );
 ```
 
@@ -120,7 +120,7 @@ parameter of connect():
 ``` php
 Router::connect(
     '/pages/*',
-    ['controller' => 'pages', 'action' => 'display']
+    ['controller' => 'pages', 'action' => 'display'],
 );
 ```
 
@@ -138,7 +138,7 @@ included a `/` in it:
 ``` php
 Router::connect(
     '/pages/**',
-    ['controller' => 'pages', 'action' => 'show']
+    ['controller' => 'pages', 'action' => 'show'],
 );
 ```
 
@@ -156,7 +156,7 @@ of the route:
 ``` php
 Router::connect(
     '/government',
-    ['controller' => 'pages', 'action' => 'display', 5]
+    ['controller' => 'pages', 'action' => 'display', 5],
 );
 ```
 
@@ -180,7 +180,8 @@ that:
 
 ``` php
 Router::connect(
-    '/cooks/:action/*', ['controller' => 'users']
+    '/cooks/:action/*',
+    ['controller' => 'users'],
 );
 ```
 
@@ -224,7 +225,7 @@ treated as part of the parameter:
 Router::connect(
     '/:controller/:id',
     ['action' => 'view'],
-    ['id' => '[0-9]+']
+    ['id' => '[0-9]+'],
 );
 ```
 
@@ -263,7 +264,7 @@ expression inline modifiers:
 Router::connect(
     '/:userShortcut',
     ['controller' => 'teachers', 'action' => 'profile', 1],
-    ['userShortcut' => '(?i:principal)']
+    ['userShortcut' => '(?i:principal)'],
 );
 ```
 
@@ -276,8 +277,8 @@ Router::connect(
     [
         'year' => '[12][0-9]{3}',
         'month' => '0[1-9]|1[012]',
-        'day' => '0[1-9]|[12][0-9]|3[01]'
-    ]
+        'day' => '0[1-9]|[12][0-9]|3[01]',
+    ],
 );
 ```
 
@@ -330,8 +331,8 @@ Router::connect(
         // order matters since this will simply map ":id" to
         // $articleId in your action
         'pass' => ['id', 'slug'],
-        'id' => '[0-9]+'
-    ]
+        'id' => '[0-9]+',
+    ],
 );
 ```
 
@@ -346,7 +347,7 @@ echo $this->Html->link('CakePHP Rocks', [
     'controller' => 'blog',
     'action' => 'view',
     'id' => 3,
-    'slug' => 'CakePHP_Rocks'
+    'slug' => 'CakePHP_Rocks',
 ]);
 ```
 
@@ -365,9 +366,9 @@ Router::connect(
             'wibble',
             'fish' => ['action' => 'index'],
             'fizz' => ['controller' => ['comments', 'other']],
-            'buzz' => 'val-[\d]+'
-        ]
-    ]
+            'buzz' => 'val-[\d]+',
+        ],
+    ],
 );
 ```
 
@@ -423,7 +424,7 @@ controller using following route:
 ``` php
 Router::connect(
     '/admin',
-    ['controller' => 'pages', 'action' => 'index', 'admin' => true]
+    ['controller' => 'pages', 'action' => 'index', 'admin' => true],
 );
 ```
 
@@ -441,19 +442,19 @@ routes generated for it:
 ``` php
 Router::connect(
     "/{$prefix}/:plugin/:controller",
-    ['action' => 'index', 'prefix' => $prefix, $prefix => true]
+    ['action' => 'index', 'prefix' => $prefix, $prefix => true],
 );
 Router::connect(
     "/{$prefix}/:plugin/:controller/:action/*",
-    ['prefix' => $prefix, $prefix => true]
+    ['prefix' => $prefix, $prefix => true],
 );
 Router::connect(
     "/{$prefix}/:controller",
-    ['action' => 'index', 'prefix' => $prefix, $prefix => true]
+    ['action' => 'index', 'prefix' => $prefix, $prefix => true],
 );
 Router::connect(
     "/{$prefix}/:controller/:action/*",
-    ['prefix' => $prefix, $prefix => true]
+    ['prefix' => $prefix, $prefix => true],
 );
 ```
 
@@ -471,13 +472,13 @@ Here's how to build this link using the HTML helper:
 // Go into a prefixed route.
 echo $this->Html->link(
     'Manage posts',
-    ['manager' => true, 'controller' => 'posts', 'action' => 'add']
+    ['manager' => true, 'controller' => 'posts', 'action' => 'add'],
 );
 
 // leave a prefix
 echo $this->Html->link(
     'View Post',
-    ['manager' => false, 'controller' => 'posts', 'action' => 'view', 5]
+    ['manager' => false, 'controller' => 'posts', 'action' => 'view', 5],
 );
 ```
 
@@ -495,7 +496,7 @@ point to a plugin, but adding the plugin key to your URL array:
 ``` php
 echo $this->Html->link(
     'New todo',
-    ['plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create']
+    ['plugin' => 'todo', 'controller' => 'todo_items', 'action' => 'create'],
 );
 ```
 
@@ -505,7 +506,7 @@ to create a link that has no plugin you can do the following:
 ``` php
 echo $this->Html->link(
     'New todo',
-    ['plugin' => null, 'controller' => 'users', 'action' => 'profile']
+    ['plugin' => null, 'controller' => 'users', 'action' => 'profile'],
 );
 ```
 
@@ -540,8 +541,8 @@ Router::connect(
     '/page/:title',
     ['controller' => 'pages', 'action' => 'view'],
     [
-        'pass' => ['title']
-    ]
+        'pass' => ['title'],
+    ],
 );
 ```
 
@@ -554,8 +555,8 @@ $this->Html->link(
         'controller' => 'pages',
         'action' => 'view',
         'title' => 'super-article',
-        'ext' => 'html'
-    ]
+        'ext' => 'html',
+    ],
 );
 ```
 
@@ -583,9 +584,9 @@ option to create a custom RESTful route:
 
 ``` php
 Router::connect(
-    "/:controller/:id",
-    ["action" => "edit", "[method]" => "PUT"],
-    ["id" => "[0-9]+"]
+    '/:controller/:id',
+    ['action' => 'edit', '[method]' => 'PUT'],
+    ['id' => '[0-9]+'],
 );
 ```
 
@@ -765,8 +766,8 @@ $url = Router::url([
     'action' => 'index',
     'filter' => [
         'published' => 1,
-        'frontpage' => 1
-    ]
+        'frontpage' => 1,
+    ],
 ]);
 ```
 
@@ -777,7 +778,7 @@ as an array, just as you sent them to `Router::url`:
 ``` php
 $this->passedArgs['filter'] = [
     'published' => 1,
-    'frontpage' => 1
+    'frontpage' => 1,
 ];
 ```
 
@@ -792,17 +793,17 @@ $url = Router::url([
         'post' => [
             'order' => 'asc',
             'filter' => [
-                'published' => 1
-            ]
+                'published' => 1,
+            ],
         ],
         'comment' => [
             'order' => 'desc',
             'filter' => [
-                'spam' => 0
-            ]
+                'spam' => 0,
+            ],
         ],
     ],
-    'users' => [1, 2, 3]
+    'users' => [1, 2, 3],
 ]);
 ```
 
@@ -821,14 +822,14 @@ $this->passedArgs['models'] = [
     'post' => [
         'order' => 'asc',
         'filter' => [
-            'published' => 1
-        ]
+            'published' => 1,
+        ],
     ],
     'comment' => [
         'order' => 'desc',
         'filter' => [
-            'spam' => 0
-        ]
+            'spam' => 0,
+        ],
     ],
 ];
 ```
@@ -859,7 +860,7 @@ Parse only the page parameter if its value is a number:
 ``` php
 Router::connectNamed(
     ['page' => '[\d]+'],
-    ['default' => false, 'greedy' => false]
+    ['default' => false, 'greedy' => false],
 );
 ```
 
@@ -868,7 +869,7 @@ Parse only the page parameter no matter what:
 ``` php
 Router::connectNamed(
     ['page'],
-    ['default' => false, 'greedy' => false]
+    ['default' => false, 'greedy' => false],
 );
 ```
 
@@ -877,7 +878,7 @@ Parse only the page parameter if the current action is 'index':
 ``` php
 Router::connectNamed(
     ['page' => ['action' => 'index']],
-    ['default' => false, 'greedy' => false]
+    ['default' => false, 'greedy' => false],
 );
 ```
 
@@ -886,7 +887,7 @@ Parse only the page parameter if the current action is 'index' and the controlle
 ``` php
 Router::connectNamed(
     ['page' => ['action' => 'index', 'controller' => 'pages']],
-    ['default' => false, 'greedy' => false]
+    ['default' => false, 'greedy' => false],
 );
 ```
 
@@ -919,7 +920,7 @@ application renaming URLs. However, if you defined your link like:
 ``` php
 $this->Html->link(
     'View',
-    ['controller' => 'posts', 'action' => 'view', $id]
+    ['controller' => 'posts', 'action' => 'view', $id],
 );
 ```
 
@@ -935,7 +936,7 @@ Router::url([
     'controller' => 'posts',
     'action' => 'index',
     '?' => ['page' => 1],
-    '#' => 'top'
+    '#' => 'top',
 ]);
 
 // will generate a URL like.
@@ -961,7 +962,7 @@ Router::redirect(
     ['controller' => 'posts', 'action' => 'view'],
     // or ['persist'=>['id']] for default routing where the
     // view action expects $id as an argument
-    ['persist' => true]
+    ['persist' => true],
 );
 ```
 
@@ -1012,7 +1013,7 @@ Composer's classmap, so run `composer dump-autoload` after adding the file:
 Router::connect(
     '/:slug',
     ['controller' => 'posts', 'action' => 'view'],
-    ['routeClass' => 'SlugRoute']
+    ['routeClass' => 'SlugRoute'],
 );
 ```
 
@@ -1058,7 +1059,7 @@ it will match requests like `/posts/index` as well as requests like
 ``` php
 Router::connect(
     '/home-page',
-    ['controller' => 'pages', 'action' => 'display', 'home']
+    ['controller' => 'pages', 'action' => 'display', 'home'],
 );
 ```
 
@@ -1069,7 +1070,7 @@ parameters for a static route. :
 Router::connect(
     '/:lang/:controller/:action/:id',
     [],
-    ['id' => '[0-9]+', 'lang' => '[a-z]{3}']
+    ['id' => '[0-9]+', 'lang' => '[a-z]{3}'],
 );
 ```
 

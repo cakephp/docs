@@ -50,8 +50,8 @@ class User extends AppModel
         'Recipe' => [
             'className' => 'Recipe',
             'conditions' => ['Recipe.approved' => '1'],
-            'order' => 'Recipe.created DESC'
-        ]
+            'order' => 'Recipe.created DESC',
+        ],
     ];
 }
 ```
@@ -69,12 +69,12 @@ class User extends AppModel
     public $hasMany = [
         'MyRecipe' => [
             'className' => 'Recipe',
-        ]
+        ],
     ];
     public $hasAndBelongsToMany = [
         'MemberOf' => [
             'className' => 'Group',
-        ]
+        ],
     ];
 }
 
@@ -83,12 +83,12 @@ class Group extends AppModel
     public $hasMany = [
         'MyRecipe' => [
             'className' => 'Recipe',
-        ]
+        ],
     ];
     public $hasAndBelongsToMany = [
         'Member' => [
             'className' => 'User',
-        ]
+        ],
     ];
 }
 ```
@@ -101,12 +101,12 @@ class User extends AppModel
     public $hasMany = [
         'MyRecipe' => [
             'className' => 'Recipe',
-        ]
+        ],
     ];
     public $hasAndBelongsToMany = [
         'Member' => [
             'className' => 'Group',
-        ]
+        ],
     ];
 }
 
@@ -115,12 +115,12 @@ class Group extends AppModel
     public $hasMany = [
         'MyRecipe' => [
             'className' => 'Recipe',
-        ]
+        ],
     ];
     public $hasAndBelongsToMany = [
         'Member' => [
             'className' => 'User',
-        ]
+        ],
     ];
 }
 ```
@@ -202,8 +202,8 @@ class User extends AppModel
         'Profile' => [
             'className' => 'Profile',
             'conditions' => ['Profile.published' => '1'],
-            'dependent' => true
-        ]
+            'dependent' => true,
+        ],
     ];
 }
 ```
@@ -300,8 +300,8 @@ class Profile extends AppModel
     public $belongsTo = [
         'User' => [
             'className' => 'User',
-            'foreignKey' => 'user_id'
-        ]
+            'foreignKey' => 'user_id',
+        ],
     ];
 }
 ```
@@ -395,7 +395,7 @@ class ImageComment extends AppModel
     public $belongsTo = [
         'Image' => [
             'counterCache' => true,
-        ]
+        ],
     ];
 }
 ```
@@ -420,9 +420,9 @@ class ImageComment extends AppModel
             'counterCache' => 'active_comment_count', //custom field name
             // only count if "ImageComment" is active = 1
             'counterScope' => [
-              'ImageComment.active' => 1
-            ]
-        ]
+              'ImageComment.active' => 1,
+            ],
+        ],
     ];
 }
 ```
@@ -451,9 +451,9 @@ class Message extends AppModel
         'User' => [
             'counterCache' => [
                 'messages_read' => ['Message.is_read' => 1],
-                'messages_unread' => ['Message.is_read' => 0]
-            ]
-        ]
+                'messages_unread' => ['Message.is_read' => 0],
+            ],
+        ],
     ];
 }
 ```
@@ -498,8 +498,8 @@ class User extends AppModel
             'conditions' => ['Comment.status' => '1'],
             'order' => 'Comment.created DESC',
             'limit' => '5',
-            'dependent' => true
-        ]
+            'dependent' => true,
+        ],
     ];
 }
 ```
@@ -652,8 +652,8 @@ class Recipe extends AppModel
                 'limit' => '',
                 'offset' => '',
                 'finderQuery' => '',
-                'with' => ''
-            ]
+                'with' => '',
+            ],
     ];
 }
 ```
@@ -816,7 +816,7 @@ model CourseMembership. Take a look at the following models. :
 class Student extends AppModel
 {
     public $hasMany = [
-        'CourseMembership'
+        'CourseMembership',
     ];
 }
 
@@ -825,7 +825,7 @@ class Student extends AppModel
 class Course extends AppModel
 {
     public $hasMany = [
-        'CourseMembership'
+        'CourseMembership',
     ];
 }
 
@@ -834,7 +834,7 @@ class Course extends AppModel
 class CourseMembership extends AppModel
 {
     public $belongsTo = [
-        'Student', 'Course'
+        'Student', 'Course',
     ];
 }
 ```
@@ -872,8 +872,8 @@ class Leader extends AppModel
     public $hasMany = [
         'Follower' => [
             'className' => 'Follower',
-            'order' => 'Follower.rank'
-        ]
+            'order' => 'Follower.rank',
+        ],
     ];
 }
 
@@ -898,7 +898,7 @@ public function some_action()
 
     // Let's remove the hasMany...
     $this->Leader->unbindModel(
-        ['hasMany' => ['Follower']]
+        ['hasMany' => ['Follower']],
     );
 
     // Now using a find function will return
@@ -927,7 +927,7 @@ Here's the basic usage pattern for unbindModel():
 
 ``` php
 $this->Model->unbindModel(
-    ['associationType' => ['associatedModelClassName']]
+    ['associationType' => ['associatedModelClassName']],
 );
 ```
 
@@ -952,10 +952,10 @@ public function another_action()
     $this->Leader->bindModel(
         ['hasMany' => [
                 'Principle' => [
-                    'className' => 'Principle'
-                ]
-            ]
-        ]
+                    'className' => 'Principle',
+                ],
+            ],
+        ],
     );
 
     // If we need keep this association after model reset
@@ -963,11 +963,11 @@ public function another_action()
     $this->Leader->bindModel(
         ['hasMany' => [
                 'Principle' => [
-                    'className' => 'Principle'
-                ]
-            ]
+                    'className' => 'Principle',
+                ],
+            ],
         ],
-        false
+        false,
     );
 
     // Now that we're associated correctly,
@@ -987,9 +987,9 @@ $this->Model->bindModel(
     ['associationName' => [
             'associatedModelClassName' => [
                 // normal association keys go here...
-            ]
-        ]
-    ]
+            ],
+        ],
+    ],
 );
 ```
 
@@ -1012,12 +1012,12 @@ class Message extends AppModel
     public $belongsTo = [
         'Sender' => [
             'className' => 'User',
-            'foreignKey' => 'user_id'
+            'foreignKey' => 'user_id',
         ],
         'Recipient' => [
             'className' => 'User',
-            'foreignKey' => 'recipient_id'
-        ]
+            'foreignKey' => 'recipient_id',
+        ],
     ];
 }
 ```
@@ -1031,12 +1031,12 @@ class User extends AppModel
     public $hasMany = [
         'MessageSent' => [
             'className' => 'Message',
-            'foreignKey' => 'user_id'
+            'foreignKey' => 'user_id',
         ],
         'MessageReceived' => [
             'className' => 'Message',
-            'foreignKey' => 'recipient_id'
-        ]
+            'foreignKey' => 'recipient_id',
+        ],
     ];
 }
 ```
@@ -1046,19 +1046,18 @@ It is also possible to create self associations as shown below:
 ``` php
 class Post extends AppModel
 {
-
     public $belongsTo = [
         'Parent' => [
             'className' => 'Post',
-            'foreignKey' => 'parent_id'
-        ]
+            'foreignKey' => 'parent_id',
+        ],
     ];
 
     public $hasMany = [
         'Children' => [
             'className' => 'Post',
-            'foreignKey' => 'parent_id'
-        ]
+            'foreignKey' => 'parent_id',
+        ],
     ];
 }
 ```
@@ -1101,8 +1100,8 @@ $options['joins'] = [
         'type' => 'LEFT',
         'conditions' => [
             'Channel.id = Item.channel_id',
-        ]
-    ]
+        ],
+    ],
 ];
 
 $Item->find('all', $options);
@@ -1133,12 +1132,12 @@ $options['joins'] = [
         'type' => 'LEFT',
         'conditions' => [
             'Channel.id = Item.channel_id',
-        ]
-    ]
+        ],
+    ],
 ];
 
 $options['conditions'] = [
-    'Channel.private' => 1
+    'Channel.private' => 1,
 ];
 
 $privateItems = $Item->find('all', $options);
@@ -1157,20 +1156,20 @@ $options['joins'] = [
         'alias' => 'BooksTag',
         'type' => 'inner',
         'conditions' => [
-            'Book.id = BooksTag.book_id'
-        ]
+            'Book.id = BooksTag.book_id',
+        ],
     ],
     ['table' => 'tags',
         'alias' => 'Tag',
         'type' => 'inner',
         'conditions' => [
-            'BooksTag.tag_id = Tag.id'
-        ]
-    ]
+            'BooksTag.tag_id = Tag.id',
+        ],
+    ],
 ];
 
 $options['conditions'] = [
-    'Tag.tag' => 'Novel'
+    'Tag.tag' => 'Novel',
 ];
 
 $books = $Book->find('all', $options);

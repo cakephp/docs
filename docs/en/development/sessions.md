@@ -49,8 +49,8 @@ disable this:
 Configure::write('Session', [
     'defaults' => 'php',
     'ini' => [
-        'session.cookie_secure' => false
-    ]
+        'session.cookie_secure' => false,
+    ],
 ]);
 ```
 
@@ -62,8 +62,8 @@ application is served from the document root). To change this you can use the
 Configure::write('Session', [
     'defaults' => 'php',
     'ini' => [
-        'session.cookie_path' => '/app/dir'
-    ]
+        'session.cookie_path' => '/app/dir',
+    ],
 ]);
 ```
 
@@ -77,8 +77,8 @@ Configure::write('Session', [
     'defaults' => 'php',
     'timeout' => 2160, // 36 hours
     'ini' => [
-        'session.gc_maxlifetime' => 129600 // 36 hours
-    ]
+        'session.gc_maxlifetime' => 129600, // 36 hours
+    ],
 ]);
 ```
 
@@ -92,7 +92,7 @@ it in your Session config:
 
 ``` php
 Configure::write('Session', [
-    'defaults' => 'php'
+    'defaults' => 'php',
 ]);
 ```
 
@@ -103,7 +103,7 @@ part or all of it by doing the following:
 Configure::write('Session', [
     'defaults' => 'php',
     'cookie' => 'my_app',
-    'timeout' => 4320 //3 days
+    'timeout' => 4320, //3 days
 ]);
 ```
 
@@ -195,8 +195,8 @@ configuration as well as choose the database defaults:
 Configure::write('Session', [
     'defaults' => 'database',
     'handler' => [
-        'model' => 'CustomSession'
-    ]
+        'model' => 'CustomSession',
+    ],
 ]);
 ```
 
@@ -209,7 +209,7 @@ database-backed session storage, you can simplify the above code to:
 
 ``` php
 Configure::write('Session', [
-    'defaults' => 'database'
+    'defaults' => 'database',
 ]);
 ```
 
@@ -245,8 +245,8 @@ To use Cache based sessions you can configure you Session config like:
 Configure::write('Session', [
     'defaults' => 'cache',
     'handler' => [
-        'config' => 'session'
-    ]
+        'config' => 'session',
+    ],
 ]);
 ```
 
@@ -268,8 +268,8 @@ Configure::write('Session', [
     'defaults' => 'php',
     'ini' => [
         'session.gc_divisor' => 1000,
-        'session.cookie_httponly' => true
-    ]
+        'session.cookie_httponly' => true,
+    ],
 ]);
 ```
 
@@ -296,34 +296,46 @@ class ComboSession extends DatabaseSession implements CakeSessionHandlerInterfac
         parent::__construct();
     }
 
-    // read data from the session.
+    /**
+     * read data from the session.
+     */
     public function read($id)
     {
         $result = Cache::read($id, $this->cacheKey);
         if ($result) {
             return $result;
         }
+
         return parent::read($id);
     }
 
-    // write data into the session.
+    /**
+     * write data into the session.
+     */
     public function write($id, $data)
     {
         Cache::write($id, $data, $this->cacheKey);
+
         return parent::write($id, $data);
     }
 
-    // destroy a session.
+    /**
+     * destroy a session.
+     */
     public function destroy($id)
     {
         Cache::delete($id, $this->cacheKey);
+
         return parent::destroy($id);
     }
 
-    // removes expired sessions.
+    /**
+     * removes expired sessions.
+     */
     public function gc($expires = null)
     {
         Cache::gc($this->cacheKey);
+
         return parent::gc($expires);
     }
 }

@@ -110,10 +110,10 @@ class IngredientsController extends AppController
 ``` php
 class Recipe extends AppModel
 {
-
     public function steakRecipes()
     {
         $ingredient = $this->Ingredient->findByName('Steak');
+
         return $this->findAllByMainIngredient($ingredient['Ingredient']['id']);
     }
 }

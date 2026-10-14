@@ -170,6 +170,7 @@ class HelloWorldFilter extends DispatcherFilter
         if ($request->url === 'hello-world') {
             $response->body('Hello World');
             $event->stopPropagation();
+
             return $response;
         }
     }
@@ -255,6 +256,7 @@ $postsList = function ($event) {
     $postModel = ClassRegistry::init('Post');
     $event->data['response']->body(json_encode($postModel->find('recent')));
     $event->stopPropagation();
+
     return $event->data['response'];
 };
 

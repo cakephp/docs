@@ -1402,7 +1402,9 @@ class CurrencyRendererHelperTest extends CakeTestCase
 {
     public $CurrencyRenderer = null;
 
-    // Here we instantiate our helper
+    /**
+     * Here we instantiate our helper
+     */
     public function setUp(): void
     {
         parent::setUp();
@@ -1411,7 +1413,9 @@ class CurrencyRendererHelperTest extends CakeTestCase
         $this->CurrencyRenderer = new CurrencyRendererHelper($View);
     }
 
-    // Testing the usd() function
+    /**
+     * Testing the usd() function
+     */
     public function testUsd()
     {
         $this->assertEquals('USD 5.30', $this->CurrencyRenderer->usd(5.30));

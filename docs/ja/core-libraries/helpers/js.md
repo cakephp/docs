@@ -78,7 +78,7 @@ jQuery 名前空間の中に上手に格納されます。あなたは、jQuery 
 $this->Js->JqueryEngine->jQueryObject = '$j';
 echo $this->Html->scriptBlock(
     'var $j = jQuery.noConflict();',
-    ['inline' => false]
+    ['inline' => false],
 );
 // noconflict モードで実行する事を jQuery に伝えます。
 ```
@@ -102,7 +102,7 @@ public $helpers = ['Js'];
 ``` php
 public $helpers = [
     'Js' => ['Prototype'],
-    'CustomHelper'
+    'CustomHelper',
 ];
 ```
 
@@ -322,7 +322,7 @@ echo $this->Html->script('jquery');
 ``` php
 $this->Paginator->options([
     'update' => '#content',
-    'evalScripts' => true
+    'evalScripts' => true,
 ]);
 ```
 
@@ -368,7 +368,7 @@ echo $this->Js->writeBuffer();
     <?php
         echo $this->Html->image(
             'indicator.gif',
-            ['id' => 'busy-indicator']
+            ['id' => 'busy-indicator'],
         );
     ?>
     </body>
@@ -390,11 +390,11 @@ $this->Paginator->options([
     'evalScripts' => true,
     'before' => $this->Js->get('#busy-indicator')->effect(
         'fadeIn',
-        ['buffer' => false]
+        ['buffer' => false],
     ),
     'complete' => $this->Js->get('#busy-indicator')->effect(
         'fadeOut',
-        ['buffer' => false]
+        ['buffer' => false],
     ),
 ]);
 ```

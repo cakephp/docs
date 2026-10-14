@@ -13,7 +13,7 @@
 
 ``` php
 public $virtualFields = [
-    'name' => 'CONCAT(User.first_name, " ", User.last_name)'
+    'name' => 'CONCAT(User.first_name, " ", User.last_name)',
 ];
 ```
 
@@ -21,7 +21,7 @@ PostgreSQLだと、以下のようになります。 :
 
 ``` php
 public $virtualFields = [
-    'name' => 'User.first_name || \' \' || User.last_name'
+    'name' => 'User.first_name || \' \' || User.last_name',
 ];
 ```
 
@@ -88,7 +88,7 @@ $results = $this->User->find('first');
         'last_name' => 'Story',
         'name' => 'Mark Story',
         //more fields.
-    ]
+    ],
 ];
 ```
 
@@ -109,7 +109,9 @@ public function __construct($id = false, $table = null, $ds = null)
 {
     parent::__construct($id, $table, $ds);
     $this->virtualFields['name'] = sprintf(
-        'CONCAT(%s.first_name, " ", %s.last_name)', $this->alias, $this->alias
+        'CONCAT(%s.first_name, " ", %s.last_name)',
+        $this->alias,
+        $this->alias,
     );
 }
 ```
@@ -123,7 +125,7 @@ public function __construct($id = false, $table = null, $ds = null)
 
 ``` php
 // バーチャルフィールドのソートリンクを作成
-$this->Paginator->sort('ProductsItems.Total','Items Total');
+$this->Paginator->sort('ProductsItems.Total', 'Items Total');
 ```
 
 コントローラの中で、次のようなページ制御の設定を行います。 :
@@ -147,10 +149,10 @@ $where = [
             'type' => 'LEFT',
             'conditions' => [
                 'ProductsItems.products_id = Products.id',
-            ]
-        ]
+            ],
+        ],
     ],
-    'group' => 'ProductsItems.products_id'
+    'group' => 'ProductsItems.products_id',
 ];
 
 // Paginator に条件を設定
@@ -206,7 +208,7 @@ $this->Timelog->query(
     AS
         Timelog
     GROUP BY
-        project_id;"
+        project_id;",
 );
 ```
 
@@ -251,7 +253,7 @@ $this->Timelog->query(
     AS
         Timelog
     GROUP BY
-        project_id;"
+        project_id;",
 );
 ```
 

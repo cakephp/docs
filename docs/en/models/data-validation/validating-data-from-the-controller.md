@@ -66,9 +66,12 @@ To validate multiple models, the following approach should be
 used:
 
 ``` php
-if ($this->ModelName->saveAll(
-    $this->request->data, ['validate' => 'only']
-)) {
+if (
+    $this->ModelName->saveAll(
+        $this->request->data,
+        ['validate' => 'only'],
+    )
+) {
   // validates
 } else {
   // does not validate
@@ -79,9 +82,12 @@ If you have validated data before save, you can turn off validation
 to avoid second check:
 
 ``` php
-if ($this->ModelName->saveAll(
-    $this->request->data, ['validate' => false]
-)) {
+if (
+    $this->ModelName->saveAll(
+        $this->request->data,
+        ['validate' => false],
+    )
+) {
     // saving without validation
 }
 ```

@@ -8,7 +8,6 @@ use the `CakeNumber` class:
 ``` php
 class UsersController extends AppController
 {
-
     public $components = ['Auth'];
 
     public function afterLogin()

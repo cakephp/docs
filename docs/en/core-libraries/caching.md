@@ -78,7 +78,7 @@ Cache::config('short', [
     'engine' => 'File',
     'duration' => '+1 hours',
     'path' => CACHE,
-    'prefix' => 'cake_short_'
+    'prefix' => 'cake_short_',
 ]);
 
 // Cache configuration for data that can be cached for a long time.
@@ -162,7 +162,6 @@ A method that uses Cache to store results could look like:
 ``` php
 class Post extends AppModel
 {
-
     public function newest()
     {
         $result = Cache::read('newest_posts', 'long');
@@ -170,6 +169,7 @@ class Post extends AppModel
             $result = $this->find('all', ['order' => 'Post.updated DESC', 'limit' => 10]);
             Cache::write('newest_posts', $result, 'long');
         }
+
         return $result;
     }
 }
@@ -185,14 +185,14 @@ As of 2.5 you can accomplish the above much more simple by using
 ``` php
 class Post extends AppModel
 {
-
     public function newest()
     {
         $model = $this;
-        return Cache::remember('newest_posts', function () use ($model){
+
+        return Cache::remember('newest_posts', function () use ($model) {
             return $model->find('all', [
                 'order' => 'Post.updated DESC',
-                'limit' => 10
+                'limit' => 10,
             ]);
         }, 'long');
     }
@@ -239,7 +239,7 @@ group. This is possible by declaring the groups in cache configuration:
 Cache::config('site_home', [
     'engine' => 'Redis',
     'duration' => '+999 days',
-    'groups' => ['comment', 'post']
+    'groups' => ['comment', 'post'],
 ]);
 ```
 
@@ -326,6 +326,7 @@ if ($cloud !== false) {
 
 // store data in cache
 Cache::write('cloud', $cloud);
+
 return $cloud;
 ```
 
@@ -430,10 +431,11 @@ For example, you often want to cache query results. You could use
 ``` php
 class Articles extends AppModel
 {
-    function all()
+    public function all()
     {
         $model = $this;
-        return Cache::remember('all_articles', function () use ($model){
+
+        return Cache::remember('all_articles', function () use ($model) {
             return $model->find('all');
         });
     }

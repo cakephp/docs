@@ -176,7 +176,7 @@ custom paths to be used:
 ``` php
 CakeLog::config('custom_path', [
     'engine' => 'File',
-    'path' => '/path/to/custom/place/'
+    'path' => '/path/to/custom/place/',
 ]);
 ```
 
@@ -200,7 +200,7 @@ be done in the <span class="title-ref">bootstrap.php</span> file:
 
 ``` php
 CakeLog::config('default', [
-    'engine' => 'Syslog'
+    'engine' => 'Syslog',
 ]);
 ```
 
@@ -237,7 +237,7 @@ CakeLog::write():
 
 ``` php
 // Executing this inside a CakePHP class:
-$this->log("Something did not work!", 'debug');
+$this->log('Something did not work!', 'debug');
 ```
 
 All configured log streams are sequentially written to each time
@@ -254,7 +254,7 @@ to output into `logs/`:
 
 ``` php
 CakeLog::config('default', [
-    'engine' => 'File'
+    'engine' => 'File',
 ]);
 ```
 
@@ -291,7 +291,7 @@ CakeLog::config('shop', [
 CakeLog::config('payments', [
     'engine' => 'SyslogLog',
     'types' => ['info', 'error', 'warning'],
-    'scopes' => ['payments']
+    'scopes' => ['payments'],
 ]);
 
 CakeLog::warning('This gets written only to shops stream', 'orders');

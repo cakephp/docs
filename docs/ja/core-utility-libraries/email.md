@@ -111,7 +111,7 @@ class EmailConfig
         'port' => 465,
         'username' => 'my@gmail.com',
         'password' => 'secret',
-        'transport' => 'Smtp'
+        'transport' => 'Smtp',
     ];
 }
 ```
@@ -137,7 +137,7 @@ class EmailConfig
         'username' => 'my@gmail.com',
         'password' => 'secret',
         'transport' => 'Smtp',
-        'tls' => true
+        'tls' => true,
     ];
 }
 ```
@@ -318,8 +318,8 @@ $Email->theme('TestTheme');
         'photo.png' => [
             'file' => '/full/some_hash.png',
             'mimetype' => 'image/png',
-            'contentId' => 'my-unique-id'
-        ]
+            'contentId' => 'my-unique-id',
+        ],
     ]);
     ```
 
@@ -371,7 +371,6 @@ CakePHP は、 Mail (デフォルト)、 Debug と SMTP トランスポートを
 // src/Lib/Network/Email/ExampleTransport.php
 class ExampleTransport extends AbstractTransport
 {
-
     public function send(CakeEmail $Email)
     {
         // magic inside!

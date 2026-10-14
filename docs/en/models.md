@@ -106,10 +106,10 @@ example, Recipe has an association with the Ingredient model:
 ``` php
 class Recipe extends AppModel
 {
-
     public function steakRecipes()
     {
         $ingredient = $this->Ingredient->findByName('Steak');
+
         return $this->findAllByMainIngredient($ingredient['Ingredient']['id']);
     }
 }

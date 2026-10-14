@@ -191,7 +191,7 @@ App::build(['Model' => ['/path/to/models/']], App::RESET);
 
 //will setup multiple search paths for helpers
 App::build([
-    'View/Helper' => ['/path/to/helpers/', '/another/path/']
+    'View/Helper' => ['/path/to/helpers/', '/another/path/'],
 ]);
 ```
 
@@ -210,7 +210,7 @@ application:
 
 ``` php
 App::build([
-    'Service' => ['%s' . 'Service' . DS]
+    'Service' => ['%s' . 'Service' . DS],
 ], App::REGISTER);
 ```
 
@@ -407,7 +407,7 @@ To load **vendors/services/well.named.php**:
 App::import(
     'Vendor',
     'WellNamed',
-    ['file' => 'services' . DS . 'well.named.php']
+    ['file' => 'services' . DS . 'well.named.php'],
 );
 ```
 
@@ -417,7 +417,7 @@ To load **plugins/Awesome/Vendor/services/well.named.php**:
 App::import(
     'Vendor',
     'Awesome.WellNamed',
-    ['file' => 'services' . DS . 'well.named.php']
+    ['file' => 'services' . DS . 'well.named.php'],
 );
 ```
 
@@ -427,7 +427,8 @@ To load **plugins/Awesome/Vendor/Folder/Foo.php**:
 App::import(
     'Vendor',
     'Awesome.Foo',
-    ['file' => 'Folder' . DS . 'Foo.php']);
+    ['file' => 'Folder' . DS . 'Foo.php'],
+);
 ```
 
 Vendor files in `src/Vendor/` are found as well.
@@ -438,7 +439,7 @@ To load **vendors/vendorName/libFile.php**:
 App::import(
     'Vendor',
     'aUniqueIdentifier',
-    ['file' => 'vendorName' . DS . 'libFile.php']
+    ['file' => 'vendorName' . DS . 'libFile.php'],
 );
 ```
 

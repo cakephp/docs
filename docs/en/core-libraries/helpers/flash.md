@@ -45,7 +45,7 @@ $this->Flash->set('The user has been saved.', [
 
 // In your View: Will use great_success.ctp instead of success.ctp
 <?php echo $this->Flash->render('flash', [
-    'element' => 'great_success'
+    'element' => 'great_success',
 ]);
 ```
 

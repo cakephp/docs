@@ -103,7 +103,7 @@ $this->start('sidebar');
 <?php
 echo $this->Html->link('edit', [
     'action' => 'edit',
-    $post['Post']['id']
+    $post['Post']['id'],
 ]); ?>
 </li>
 <?php $this->end(); ?>
@@ -152,7 +152,6 @@ $this->start('sidebar');
 echo $this->element('sidebar/recent_topics');
 echo $this->element('sidebar/recent_comments');
 $this->end();
-
 
 // sidebar の末尾に追加する
 $this->append('sidebar');
@@ -448,7 +447,7 @@ element メソッドの第二引数を通してエレメントにデータを渡
 
 ``` php
 echo $this->element('helpbox', [
-    "helptext" => "Oh, this text is very helpful."
+    'helptext' => 'Oh, this text is very helpful.',
 ]);
 ```
 
@@ -465,16 +464,18 @@ echo $helptext; //"Oh, this text is very helpful." と出力されます
 サポートされるオプションは、'cache' と 'callbacks' です。例えば:
 
 ``` php
-echo $this->element('helpbox', [
-        "helptext" => "This is passed to the element as $helptext",
-        "foobar" => "This is passed to the element as $foobar",
+echo $this->element(
+    'helpbox',
+    [
+        'helptext' => "This is passed to the element as $helptext",
+        'foobar' => "This is passed to the element as $foobar",
     ],
     [
         // "long_view" のキャッシュ設定を使います
-        "cache" => "long_view",
+        'cache' => 'long_view',
         // エレメントから before/afterRender が呼び出されるには true に設定して下さい
-        "callbacks" => true
-    ]
+        'callbacks' => true,
+    ],
 );
 ```
 
@@ -486,9 +487,8 @@ echo $this->element('helpbox', [
 
 ``` php
 $this->element('helpbox', [], [
-        "cache" => ['config' => 'short', 'key' => 'unique value']
-    ]
-);
+    'cache' => ['config' => 'short', 'key' => 'unique value'],
+]);
 ```
 
 `requestAction()` を使うことでエレメントの利点を最大限引き出すことができます。
@@ -522,7 +522,7 @@ class PostsController extends AppController
 <h2>Latest Posts</h2>
 <?php
 $posts = $this->requestAction(
-    'posts/index/sort:created/direction:asc/limit:5'
+    'posts/index/sort:created/direction:asc/limit:5',
 );
 ?>
 <ol>
@@ -552,13 +552,13 @@ echo $this->element('helpbox', [], ['cache' => true]);
 echo $this->element(
     'helpbox',
     ['var' => $var],
-    ['cache' => ['key' => 'first_use', 'config' => 'view_long']]
+    ['cache' => ['key' => 'first_use', 'config' => 'view_long']],
 );
 
 echo $this->element(
     'helpbox',
     ['var' => $differentVar],
-    ['cache' => ['key' => 'second_use', 'config' => 'view_long']]
+    ['cache' => ['key' => 'second_use', 'config' => 'view_long']],
 );
 ```
 

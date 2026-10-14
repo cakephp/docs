@@ -157,12 +157,12 @@ The default ordering of data for any find operation. Possible
 values include:
 
 ``` php
-$order = "field"
-$order = "Model.field";
-$order = "Model.field asc";
-$order = "Model.field ASC";
-$order = "Model.field DESC";
-$order = ["Model.field" => "asc", "Model.field2" => "DESC"];
+$order = 'field';
+$order = 'Model.field';
+$order = 'Model.field asc';
+$order = 'Model.field ASC';
+$order = 'Model.field DESC';
+$order = ['Model.field' => 'asc', 'Model.field2' => 'DESC'];
 ```
 
 ## data
@@ -241,17 +241,17 @@ Example Usage:
 protected $_schema = [
     'first_name' => [
         'type' => 'string',
-        'length' => 30
+        'length' => 30,
     ],
     'last_name' => [
         'type' => 'string',
-        'length' => 30
+        'length' => 30,
     ],
     'email' => [
         'type' => 'string',
-        'length' => 30
+        'length' => 30,
     ],
-    'message' => ['type' => 'text']
+    'message' => ['type' => 'text'],
 ];
 ```
 
@@ -282,7 +282,7 @@ Example usage for MySQL:
 
 ``` php
 public $virtualFields = [
-    'name' => "CONCAT(User.first_name, ' ', User.last_name)"
+    'name' => "CONCAT(User.first_name, ' ', User.last_name)",
 ];
 ```
 

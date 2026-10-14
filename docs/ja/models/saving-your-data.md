@@ -31,6 +31,7 @@ public function edit($id)
         if ($this->Recipe->save($this->request->data)) {
             // メッセージをセットしてリダイレクトする
             $this->Session->setFlash('Recipe Saved!');
+
             return $this->redirect('/recipes');
         }
     }
@@ -74,7 +75,7 @@ $this->Post->save();
 $this->Post->read(null, 1);
 $this->Post->set([
     'title' => 'New title',
-    'published' => false
+    'published' => false,
 ]);
 $this->Post->save();
 ```
@@ -226,7 +227,7 @@ $thisYear = date('Y-m-d H:i:s', strtotime('-1 year'));
 
 $this->Baker->updateAll(
     ['Baker.approved' => true],
-    ['Baker.created <=' => $thisYear]
+    ['Baker.created <=' => $thisYear],
 );
 ```
 
@@ -239,7 +240,7 @@ $db = $this->getDataSource();
 $value = $db->value($value, 'string');
 $this->updateAll(
     ['Baker.status' => $value],
-    ['Baker.status' => 'old']
+    ['Baker.status' => 'old'],
 );
 ```
 
@@ -253,7 +254,7 @@ $this->updateAll(
 ``` php
 $this->Ticket->updateAll(
     ['Ticket.status' => "'closed'"],
-    ['Ticket.customer_id' => 453]
+    ['Ticket.customer_id' => 453],
 );
 ```
 
@@ -313,7 +314,7 @@ $data = [
 $data = [
     [
         'Article' => ['title' => 'title 1'],
-        'Assoc' => ['field' => 'value']
+        'Assoc' => ['field' => 'value'],
     ],
     ['Article' => ['title' => 'title 2']],
 ];
@@ -395,10 +396,10 @@ $data = [
                     'cart_product_id' => 5,
                     'quantity' => 1,
                     'cost' => 150,
-                ]
-            ]
-        ]
-    ]
+                ],
+            ],
+        ],
+    ],
 ];
 ```
 
@@ -416,7 +417,7 @@ $data = [
         ['body' => 'Comment 1', 'user_id' => 1],
         [
             'body' => 'Save a new user as well',
-            'User' => ['first' => 'mad', 'last' => 'coder']
+            'User' => ['first' => 'mad', 'last' => 'coder'],
         ],
     ],
 ];
@@ -438,8 +439,8 @@ $Article->saveAssociated($data, ['deep' => true]);
 $this->SomeModel->saveAll($data, [
     'fieldList' => [
         'SomeModel' => ['field_1'],
-        'AssociatedModel' => ['field_2', 'field_3']
-    ]
+        'AssociatedModel' => ['field_2', 'field_3'],
+    ],
 ]);
 ```
 
@@ -598,7 +599,7 @@ class CourseMembershipsController extends AppController
     <?php echo $this->Form->input('CourseMembership.days_attended'); ?>
     <?php echo $this->Form->input('CourseMembership.grade'); ?>
     <button type="submit">Save</button>
-<?php echo  $this->Form->end(); ?>
+<?php echo $this->Form->end(); ?>
 ```
 
 このコードで、データをサブミットした時、以下のような配列が渡ってきます。 :
@@ -679,8 +680,8 @@ Student と Course をそれぞれ別々に作りたい場合もあるでしょ�
             [
                 'type' => 'text',
                 'label' => 'Student ID',
-                'default' => 1
-            ]
+                'default' => 1,
+            ],
         );
     ?>
     <?php
@@ -689,8 +690,8 @@ Student と Course をそれぞれ別々に作りたい場合もあるでしょ�
             [
                 'type' => 'text',
                 'label' => 'Course ID',
-                'default' => 1
-            ]
+                'default' => 1,
+            ],
         );
     ?>
     <?php echo $this->Form->input('CourseMembership.days_attended'); ?>
@@ -873,7 +874,7 @@ Tag を新しく作って、いくつかのレシピに関連付けるための
 <?php echo $this->Form->create('Tag'); ?>
     <?php echo $this->Form->input(
         'Recipe.id',
-        ['type' => 'hidden', 'value' => $recipe_id]
+        ['type' => 'hidden', 'value' => $recipe_id],
     ); ?>
     <?php echo $this->Form->input('Tag.name'); ?>
 <?php echo $this->Form->end('Add Tag'); ?>
@@ -942,9 +943,9 @@ class Project extends AppModel
 {
     public $hasAndBelongsToMany = [
         'RelatedProject' => [
-            'className'              => 'Project',
-            'foreignKey'             => 'projects_a_id',
-            'associationForeignKey'  => 'projects_b_id',
+            'className' => 'Project',
+            'foreignKey' => 'projects_a_id',
+            'associationForeignKey' => 'projects_b_id',
         ],
     ];
 }
@@ -1034,7 +1035,6 @@ Model::save() を呼び出す前に、 `created` や `modified` のキーが \$t
 ``` php
 class AppModel extends Model
 {
-
     public function save($data = null, $validate = true, $fieldList = [])
     {
         // 保存前に modified フィールドをクリアする
@@ -1042,6 +1042,7 @@ class AppModel extends Model
         if (isset($this->data[$this->alias]['modified'])) {
             unset($this->data[$this->alias]['modified']);
         }
+
         return parent::save($this->data, $validate, $fieldList);
     }
 }

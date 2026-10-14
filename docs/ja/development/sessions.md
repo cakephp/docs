@@ -44,8 +44,8 @@ SSL と SSL 以外のドメイン両方でセッションにアクセスする�
 Configure::write('Session', [
     'defaults' => 'php',
     'ini' => [
-        'session.cookie_secure' => false
-    ]
+        'session.cookie_secure' => false,
+    ],
 ]);
 ```
 
@@ -58,8 +58,8 @@ Configure::write('Session', [
 Configure::write('Session', [
     'defaults' => 'php',
     'ini' => [
-        'session.cookie_path' => '/app/dir'
-    ]
+        'session.cookie_path' => '/app/dir',
+    ],
 ]);
 ```
 
@@ -72,8 +72,8 @@ Configure::write('Session', [
     'defaults' => 'php',
     'timeout' => 2160, // 36 hours
     'ini' => [
-        'session.gc_maxlifetime' => 129600 // 36 hours
-    ]
+        'session.gc_maxlifetime' => 129600, // 36 hours
+    ],
 ]);
 ```
 
@@ -87,7 +87,7 @@ config で宣言をすればサブセッティングだけを上書きするこ�
 
 ``` php
 Configure::write('Session', [
-    'defaults' => 'php'
+    'defaults' => 'php',
 ]);
 ```
 
@@ -98,7 +98,7 @@ Configure::write('Session', [
 Configure::write('Session', [
     'defaults' => 'php',
     'cookie' => 'my_app',
-    'timeout' => 4320 //3 days
+    'timeout' => 4320, //3 days
 ]);
 ```
 
@@ -188,8 +188,8 @@ CakePHP はハンドラーを `SessionHandlerAdapter` を介して PHP に登録
 Configure::write('Session', [
     'defaults' => 'database',
     'handler' => [
-        'model' => 'CustomSession'
-    ]
+        'model' => 'CustomSession',
+    ],
 ]);
 ```
 
@@ -201,7 +201,7 @@ Configure::write('Session', [
 
 ``` php
 Configure::write('Session', [
-    'defaults' => 'database'
+    'defaults' => 'database',
 ]);
 ```
 
@@ -236,8 +236,8 @@ Redis のようなキャッシュにセッションを格納できます。キ�
 Configure::write('Session', [
     'defaults' => 'cache',
     'handler' => [
-        'config' => 'session'
-    ]
+        'config' => 'session',
+    ],
 ]);
 ```
 
@@ -259,8 +259,8 @@ Configure::write('Session', [
     'defaults' => 'php',
     'ini' => [
         'session.gc_divisor' => 1000,
-        'session.cookie_httponly' => true
-    ]
+        'session.cookie_httponly' => true,
+    ],
 ]);
 ```
 
@@ -286,34 +286,46 @@ class ComboSession extends DatabaseSession implements CakeSessionHandlerInterfac
         parent::__construct();
     }
 
-    // セッションからデータ読み込み
+    /**
+     * セッションからデータ読み込み
+     */
     public function read($id)
     {
         $result = Cache::read($id, $this->cacheKey);
         if ($result) {
             return $result;
         }
+
         return parent::read($id);
     }
 
-    // セッションへデータ書き込み
+    /**
+     * セッションへデータ書き込み
+     */
     public function write($id, $data)
     {
         Cache::write($id, $data, $this->cacheKey);
+
         return parent::write($id, $data);
     }
 
-    // セッションの破棄
+    /**
+     * セッションの破棄
+     */
     public function destroy($id)
     {
         Cache::delete($id, $this->cacheKey);
+
         return parent::destroy($id);
     }
 
-    // 期限切れセッションの削除
+    /**
+     * 期限切れセッションの削除
+     */
     public function gc($expires = null)
     {
         Cache::gc($this->cacheKey);
+
         return parent::gc($expires);
     }
 }

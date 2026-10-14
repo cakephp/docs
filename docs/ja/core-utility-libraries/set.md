@@ -22,7 +22,7 @@ Set クラスは `Hash` クラスにその役割を譲り2.2で非推奨とな�
 $a = [
     0 => ['Person' => ['name' => 'Jeff'], 'Friend' => [['name' => 'Nate']]],
     1 => ['Person' => ['name' => 'Tracy'],'Friend' => [['name' => 'Lindsay']]],
-    2 => ['Person' => ['name' => 'Adam'],'Friend' => [['name' => 'Bob']]]
+    2 => ['Person' => ['name' => 'Adam'],'Friend' => [['name' => 'Bob']]],
 ];
 $result = Set::sort($a, '{n}.Person.name', 'asc');
 /* 現在のresultは次のようになります
@@ -78,7 +78,7 @@ boolean/array
 
 ``` php
 $set = [
-    'My Index 1' => ['First' => 'The first item']
+    'My Index 1' => ['First' => 'The first item'],
 ];
 $result = Set::check($set, 'My Index 1.First');
 // $result == True
@@ -90,7 +90,7 @@ $set = [
     'My Index 1' => ['First' =>
         ['Second' =>
             ['Third' =>
-                ['Fourth' => 'Heavy. Nesting.']]]]
+                ['Fourth' => 'Heavy. Nesting.']]]],
 ];
 $result = Set::check($set, 'My Index 1.First.Second');
 // $result == True
@@ -120,7 +120,7 @@ array
 $a = [
     ['Article' => ['id' => 1, 'title' => 'Article 1']],
     ['Article' => ['id' => 2, 'title' => 'Article 2']],
-    ['Article' => ['id' => 3, 'title' => 'Article 3']]
+    ['Article' => ['id' => 3, 'title' => 'Article 3']],
 ];
 $result = Set::classicExtract($a, '{n}.Article.id');
 /* $result は現段階で次のようになります。:
@@ -153,7 +153,7 @@ $a = [
     0 => ['pages' => ['name' => 'page']],
     1 => ['fruites' => ['name' => 'fruit']],
     'test' => [['name' => 'jippi']],
-    'dot.test' => [['name' => 'jippi']]
+    'dot.test' => [['name' => 'jippi']],
 ];
 
 $result = Set::classicExtract($a, '{n}.{s}.name');
@@ -178,7 +178,7 @@ $result = Set::classicExtract($a, '{s}.{n}.name');
             ]
     ]
 */
-$result = Set::classicExtract($a,'{\w+}.{\w+}.name');
+$result = Set::classicExtract($a, '{\w+}.{\w+}.name');
 /* $result は現段階で次のようになります。:
     [
         [0] => [
@@ -195,7 +195,7 @@ $result = Set::classicExtract($a,'{\w+}.{\w+}.name');
             ]
     ]
 */
-$result = Set::classicExtract($a,'{\d+}.{\w+}.name');
+$result = Set::classicExtract($a, '{\d+}.{\w+}.name');
 /* $result は現段階で次のようになります。:
     [
         [0] => [
@@ -206,7 +206,7 @@ $result = Set::classicExtract($a,'{\d+}.{\w+}.name');
             ]
     ]
 */
-$result = Set::classicExtract($a,'{n}.{\w+}.name');
+$result = Set::classicExtract($a, '{n}.{\w+}.name');
 /* $result は現段階で次のようになります。:
     [
         [0] => [
@@ -217,7 +217,7 @@ $result = Set::classicExtract($a,'{n}.{\w+}.name');
             ]
     ]
 */
-$result = Set::classicExtract($a,'{s}.{\d+}.name');
+$result = Set::classicExtract($a, '{s}.{\d+}.name');
 /* $result は現段階で次のようになります。:
     [
         [0] => [
@@ -228,7 +228,7 @@ $result = Set::classicExtract($a,'{s}.{\d+}.name');
             ]
     ]
 */
-$result = Set::classicExtract($a,'{s}');
+$result = Set::classicExtract($a, '{s}');
 /* $result は現段階で次のようになります。:
     [
 
@@ -244,7 +244,7 @@ $result = Set::classicExtract($a,'{s}');
             ]
     ]
 */
-$result = Set::classicExtract($a,'{[a-z]}');
+$result = Set::classicExtract($a, '{[a-z]}');
 /* $result は現段階で次のようになります。:
     [
         [test] => [
@@ -295,9 +295,9 @@ $a = [
             'group_id' => 1,
             'Data' => [
                 'user' => 'mariano.iglesias',
-                'name' => 'Mariano Iglesias'
-            ]
-        ]
+                'name' => 'Mariano Iglesias',
+            ],
+        ],
     ],
     [
         'User' => [
@@ -305,9 +305,9 @@ $a = [
             'group_id' => 2,
             'Data' => [
                 'user' => 'phpnut',
-                'name' => 'Larry E. Masters'
-            ]
-        ]
+                'name' => 'Larry E. Masters',
+            ],
+        ],
     ],
     [
         'User' => [
@@ -315,10 +315,10 @@ $a = [
             'group_id' => 1,
             'Data' => [
                 'user' => 'gwoo',
-                'name' => 'The Gwoo'
-            ]
-        ]
-    ]
+                'name' => 'The Gwoo',
+            ],
+        ],
+    ],
 ];
 $result = Set::combine($a, '{n}.User.id');
 /* $result は現段階で次のようになります。:
@@ -461,13 +461,13 @@ boolean
 ``` php
 $a = [
     0 => ['name' => 'main'],
-    1 => ['name' => 'about']
+    1 => ['name' => 'about'],
 ];
 $b = [
     0 => ['name' => 'main'],
     1 => ['name' => 'about'],
     2 => ['name' => 'contact'],
-    'a' => 'b'
+    'a' => 'b',
 ];
 
 $result = Set::contains($a, $a);
@@ -545,12 +545,12 @@ array
 ``` php
 $a = [
     0 => ['name' => 'main'],
-    1 => ['name' => 'about']
+    1 => ['name' => 'about'],
 ];
 $b = [
     0 => ['name' => 'main'],
     1 => ['name' => 'about'],
-    2 => ['name' => 'contact']
+    2 => ['name' => 'contact'],
 ];
 
 $result = Set::diff($a, $b);
@@ -589,7 +589,7 @@ $result = Set::diff([], $b);
 
 $b = [
     0 => ['name' => 'me'],
-    1 => ['name' => 'about']
+    1 => ['name' => 'about'],
 ];
 
 $result = Set::diff($a, $b);
@@ -642,7 +642,7 @@ Set::extract は、 find あるいは findAll で得られたデータのサブ�
 
 ``` php
 // 一般的な使い方:
-$users = $this->User->find("all");
+$users = $this->User->find('all');
 $results = Set::extract('/User/id', $users);
 // $results はこのようになります:
 // [1,2,3,4,5,...];
@@ -735,7 +735,7 @@ array
 $data = [
     ['Person' => ['first_name' => 'Nate', 'last_name' => 'Abele', 'city' => 'Boston', 'state' => 'MA', 'something' => '42']],
     ['Person' => ['first_name' => 'Larry', 'last_name' => 'Masters', 'city' => 'Boondock', 'state' => 'TN', 'something' => '{0}']],
-    ['Person' => ['first_name' => 'Garrett', 'last_name' => 'Woodworth', 'city' => 'Venice Beach', 'state' => 'CA', 'something' => '{1}']]
+    ['Person' => ['first_name' => 'Garrett', 'last_name' => 'Woodworth', 'city' => 'Venice Beach', 'state' => 'CA', 'something' => '{1}']],
 ];
 
 $res = Set::format($data, '{1}, {0}', ['{n}.Person.first_name', '{n}.Person.last_name']);
@@ -798,7 +798,7 @@ array
 
 ``` php
 $a = [
-    'pages' => ['name' => 'page']
+    'pages' => ['name' => 'page'],
 ];
 $result = Set::insert($a, 'files', ['name' => 'files']);
 /* $result は現段階で次のようになります。:
@@ -813,7 +813,7 @@ $result = Set::insert($a, 'files', ['name' => 'files']);
 */
 
 $a = [
-    'pages' => ['name' => 'page']
+    'pages' => ['name' => 'page'],
 ];
 $result = Set::insert($a, 'pages.name', []);
 /* $result は現段階で次のようになります。:
@@ -828,8 +828,8 @@ $result = Set::insert($a, 'pages.name', []);
 $a = [
     'pages' => [
         0 => ['name' => 'main'],
-        1 => ['name' => 'about']
-    ]
+        1 => ['name' => 'about'],
+    ],
 ];
 $result = Set::insert($a, 'pages.1.vars', ['title' => 'page title']);
 /* $result は現段階で次のようになります。:
@@ -863,27 +863,27 @@ object
 ``` php
 $data = [
     [
-        "IndexedPage" => [
-            "id" => 1,
-            "url" => 'http://blah.com/',
+        'IndexedPage' => [
+            'id' => 1,
+            'url' => 'http://blah.com/',
             'hash' => '68a9f053b19526d08e36c6a9ad150737933816a5',
             'get_vars' => '',
             'redirect' => '',
-            'created' => "1195055503",
-            'updated' => "1195055503",
-        ]
+            'created' => '1195055503',
+            'updated' => '1195055503',
+        ],
     ],
     [
-        "IndexedPage" => [
-            "id" => 2,
-            "url" => 'http://blah.com/',
+        'IndexedPage' => [
+            'id' => 2,
+            'url' => 'http://blah.com/',
             'hash' => '68a9f053b19526d08e36c6a9ad150737933816a5',
             'get_vars' => '',
             'redirect' => '',
-            'created' => "1195055503",
-            'updated' => "1195055503",
+            'created' => '1195055503',
+            'updated' => '1195055503',
         ],
-    ]
+    ],
 ];
 $mapped = Set::map($data);
 
@@ -947,7 +947,7 @@ Set::matches は単一のアイテムあるいは与えられた XPath が、あ
 $a = [
     ['Article' => ['id' => 1, 'title' => 'Article 1']],
     ['Article' => ['id' => 2, 'title' => 'Article 2']],
-    ['Article' => ['id' => 3, 'title' => 'Article 3']]
+    ['Article' => ['id' => 3, 'title' => 'Article 3']],
 ];
 $res = Set::matches(['id>2'], $a[1]['Article']);
 // returns false
@@ -999,13 +999,13 @@ $arry1 = [
     [
         'id' => '48c2570e-dfa8-4c32-a35e-0d71cbdd56cb',
         'name' => 'mysql raleigh-workshop-08 < 2008-09-05.sql ',
-        'description' => 'Importing an sql dump'
+        'description' => 'Importing an sql dump',
     ],
     [
         'id' => '48c257a8-cf7c-4af2-ac2f-114ecbdd56cb',
         'name' => 'pbpaste | grep -i Unpaid | pbcopy',
         'description' => 'Remove all lines that say "Unpaid".',
-    ]
+    ],
 ];
 $arry2 = 4;
 $arry3 = [0 => 'test array', 'cats' => 'dogs', 'people' => 1267];
@@ -1053,7 +1053,7 @@ $data = [
     ['ModelName' => ['id' => 7, 'parent_id' => 6]],
     ['ModelName' => ['id' => 8, 'parent_id' => 6]],
     ['ModelName' => ['id' => 9, 'parent_id' => 6]],
-    ['ModelName' => ['id' => 10, 'parent_id' => 6]]
+    ['ModelName' => ['id' => 10, 'parent_id' => 6]],
 ];
 
 $result = Set::nest($data, ['root' => 6]);
@@ -1112,15 +1112,15 @@ $a = [
     'CounterCache',
     'Upload' => [
         'folder' => 'products',
-        'fields' => ['image_1_id', 'image_2_id', 'image_3_id', 'image_4_id', 'image_5_id']
-    ]
+        'fields' => ['image_1_id', 'image_2_id', 'image_3_id', 'image_4_id', 'image_5_id'],
+    ],
 ];
 $b = [
     'Cacheable' => ['enabled' => false],
     'Limit',
     'Bindable',
     'Validator',
-    'Transactional'
+    'Transactional',
 ];
 $result = Set::normalize($a);
 /* $result は現段階で次のようになります。:
@@ -1294,8 +1294,8 @@ $res = Set::pushDiff($array1, $array2);
 :
 
 ``` php
-$array1 = ["a" => "b", 1 => 20938, "c" => "string"];
-$array2 = ["b" => "b", 3 => 238, "c" => "string", ["extra_field"]];
+$array1 = ['a' => 'b', 1 => 20938, 'c' => 'string'];
+$array2 = ['b' => 'b', 3 => 238, 'c' => 'string', ['extra_field']];
 $res = Set::pushDiff($array1, $array2);
 /* $res は現段階で次のようになります。:
     [
@@ -1321,7 +1321,7 @@ array
 ``` php
 $a = [
     'pages' => ['name' => 'page'],
-    'files' => ['name' => 'files']
+    'files' => ['name' => 'files'],
 ];
 
 $result = Set::remove($a, 'files');
@@ -1353,11 +1353,11 @@ $a = [
     'Post' => ['id' => 1, 'title' => 'First Post'],
     'Comment' => [
         ['id' => 1, 'title' => 'First Comment'],
-        ['id' => 2, 'title' => 'Second Comment']
+        ['id' => 2, 'title' => 'Second Comment'],
     ],
     'Tag' => [
         ['id' => 1, 'title' => 'First Tag'],
-        ['id' => 2, 'title' => 'Second Tag']
+        ['id' => 2, 'title' => 'Second Tag'],
     ],
 ];
 $map = Set::map($a); // $a をクラスオブジェクトに変換する
@@ -1444,7 +1444,7 @@ Set 互換のパスで確定したあらゆる値で配列をソートします�
 $a = [
     0 => ['Person' => ['name' => 'Jeff'], 'Friend' => [['name' => 'Nate']]],
     1 => ['Person' => ['name' => 'Tracy'],'Friend' => [['name' => 'Lindsay']]],
-    2 => ['Person' => ['name' => 'Adam'],'Friend' => [['name' => 'Bob']]]
+    2 => ['Person' => ['name' => 'Adam'],'Friend' => [['name' => 'Bob']]],
 ];
 $result = Set::sort($a, '{n}.Person.name', 'asc');
 /* $result は現段階で次のようになります。:

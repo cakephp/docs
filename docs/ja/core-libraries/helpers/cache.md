@@ -37,7 +37,7 @@ class PostsController extends AppController
 
 ``` php
 Configure::write('Dispatcher.filters', [
-    'CacheDispatcher'
+    'CacheDispatcher',
 ]);
 ```
 
@@ -58,7 +58,7 @@ ArticlesController の例を使用して、キャッシュする必要のある�
 ``` php
 public $cacheAction = [
     'view' => 36000,
-    'index' => 48000
+    'index' => 48000,
 ];
 ```
 
@@ -67,7 +67,7 @@ public $cacheAction = [
 `strtotime()` の書き方を下記のように親しみやすい記述にすることができます。 :
 
 ``` php
-public $cacheAction = "1 hour";
+public $cacheAction = '1 hour';
 ```
 
 さらに、 `CacheHelper` を使って作成されたコントローラーやコンポーネントの callbacks を
@@ -78,7 +78,7 @@ public $cacheAction = "1 hour";
 public $cacheAction = [
     'view' => ['callbacks' => true, 'duration' => 21600],
     'add' => ['callbacks' => true, 'duration' => 36000],
-    'index' => ['callbacks' => true, 'duration' => 48000]
+    'index' => ['callbacks' => true, 'duration' => 48000],
 ];
 ```
 

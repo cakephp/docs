@@ -230,8 +230,11 @@ Then load the plugin in `config/bootstrap.php`:
 CakePlugin::load('DebugKit');
 ```
 
-See the plugin's README for how to enable the toolbar, and
-[Maintained Plugins](/plugins/maintained-plugins) for the other maintained plugins.
+See the
+[DebugKit documentation](https://github.com/pieceofcake2/debug_kit/blob/2.x/docs/README.md)
+for how to enable the toolbar, the toolbar panels and their configuration, and
+how to write your own panels. See [Maintained Plugins](/plugins/maintained-plugins)
+for the other maintained plugins.
 
 ## Xdebug
 

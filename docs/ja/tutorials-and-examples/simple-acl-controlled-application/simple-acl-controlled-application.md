@@ -148,7 +148,7 @@ echo $this->Form->create('User', ['url' => ['action' => 'login']]);
 echo $this->Form->inputs([
     'legend' => __('Login'),
     'username',
-    'password'
+    'password',
 ]);
 echo $this->Form->end('Login');
 ?>
@@ -170,9 +170,10 @@ class User extends AppModel
         if (!empty($this->data['User']['password'])) {
             $passwordHasher = new BlowfishPasswordHasher();
             $this->data['User']['password'] = $passwordHasher->hash(
-                $this->data['User']['password']
+                $this->data['User']['password'],
             );
         }
+
         return true;
     }
 }
@@ -208,15 +209,15 @@ class AppController extends Controller
         // AuthComponent の設定
         $this->Auth->loginAction = [
           'controller' => 'users',
-          'action' => 'login'
+          'action' => 'login',
         ];
         $this->Auth->logoutRedirect = [
           'controller' => 'users',
-          'action' => 'login'
+          'action' => 'login',
         ];
         $this->Auth->loginRedirect = [
           'controller' => 'posts',
-          'action' => 'add'
+          'action' => 'add',
         ];
     }
 }

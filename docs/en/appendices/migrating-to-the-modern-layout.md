@@ -95,7 +95,7 @@ The modern skeleton's `config/define.php` sets, among others:
 
 ```php
 define('ROOT', dirname(__DIR__));
-define('APP_DIR', 'src');          // instead of 'app'
+define('APP_DIR', 'src'); // instead of 'app'
 define('WEBROOT_DIR', 'webroot');
 define('WWW_ROOT', ROOT . DS . WEBROOT_DIR . DS);
 define('VENDORS', ROOT . DS . 'vendor' . DS);

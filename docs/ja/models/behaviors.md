@@ -61,8 +61,8 @@ $kids = $this->Category->children();
 class Category extends AppModel
 {
     public $actsAs = ['Tree' => [
-        'left'  => 'left_node',
-        'right' => 'right_node'
+        'left' => 'left_node',
+        'right' => 'right_node',
     ]];
 }
 ```
@@ -75,10 +75,10 @@ class Category extends AppModel
 {
     public $actsAs = [
         'Tree' => [
-          'left'  => 'left_node',
-          'right' => 'right_node'
+          'left' => 'left_node',
+          'right' => 'right_node',
         ],
-        'Translate'
+        'Translate',
     ];
 }
 ```
@@ -182,8 +182,8 @@ class Post extends AppModel
 {
     public $actsAs = [
         'YourBehavior' => [
-            'option1_key' => 'option1_value'
-        ]
+            'option1_key' => 'option1_value',
+        ],
     ];
 }
 ```
@@ -203,7 +203,9 @@ public function setup(Model $Model, $settings = [])
         ];
     }
     $this->settings[$Model->alias] = array_merge(
-        $this->settings[$Model->alias], (array)$settings);
+        $this->settings[$Model->alias],
+        (array)$settings,
+    );
 }
 ```
 

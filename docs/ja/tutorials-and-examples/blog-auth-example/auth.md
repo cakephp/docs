@@ -35,22 +35,22 @@ class User extends AppModel
         'username' => [
             'required' => [
                 'rule' => 'notBlank',
-                'message' => 'A username is required'
-            ]
+                'message' => 'A username is required',
+            ],
         ],
         'password' => [
             'required' => [
                 'rule' => 'notBlank',
-                'message' => 'A password is required'
-            ]
+                'message' => 'A password is required',
+            ],
         ],
         'role' => [
             'valid' => [
                 'rule' => ['inList', ['admin', 'author']],
                 'message' => 'Please enter a valid role',
-                'allowEmpty' => false
-            ]
-        ]
+                'allowEmpty' => false,
+            ],
+        ],
     ];
 }
 ```
@@ -62,7 +62,6 @@ UsersController もまた作成しましょう。以下のコードは
 // src/Controller/UsersController.php
 class UsersController extends AppController
 {
-
     public function beforeFilter()
     {
         parent::beforeFilter();
@@ -90,10 +89,11 @@ class UsersController extends AppController
             $this->User->create();
             if ($this->User->save($this->request->data)) {
                 $this->Flash->success(__('The user has been saved'));
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(
-                __('The user could not be saved. Please, try again.')
+                __('The user could not be saved. Please, try again.'),
             );
         }
     }
@@ -107,10 +107,11 @@ class UsersController extends AppController
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->User->save($this->request->data)) {
                 $this->Flash->success(__('The user has been saved'));
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(
-                __('The user could not be saved. Please, try again.')
+                __('The user could not be saved. Please, try again.'),
             );
         } else {
             $this->request->data = $this->User->findById($id);
@@ -131,9 +132,11 @@ class UsersController extends AppController
         }
         if ($this->User->delete()) {
             $this->Flash->success(__('User deleted'));
+
             return $this->redirect(['action' => 'index']);
         }
         $this->Flash->error(__('User was not deleted'));
+
         return $this->redirect(['action' => 'index']);
     }
 }
@@ -155,7 +158,7 @@ class UsersController extends AppController
         <?php echo $this->Form->input('username');
         echo $this->Form->input('password');
         echo $this->Form->input('role', [
-            'options' => ['admin' => 'Admin', 'author' => 'Author']
+            'options' => ['admin' => 'Admin', 'author' => 'Author'],
         ]);
     ?>
     </fieldset>
@@ -184,25 +187,26 @@ class AppController extends Controller
         'Auth' => [
             'loginRedirect' => [
                 'controller' => 'posts',
-                'action' => 'index'
+                'action' => 'index',
             ],
             'logoutRedirect' => [
                 'controller' => 'pages',
                 'action' => 'display',
-                'home'
+                'home',
             ],
             'authenticate' => [
                 'Form' => [
-                    'passwordHasher' => 'Blowfish'
-                ]
-            ]
-        ]
+                    'passwordHasher' => 'Blowfish',
+                ],
+            ],
+        ],
     ];
 
     public function beforeFilter()
     {
         $this->Auth->allow('index', 'view');
     }
+
     //...
 }
 ```
@@ -253,22 +257,24 @@ public function logout()
 ``` php
 // src/Model/User.php
 
-class User extends AppModel {
-
-// ...
-
-public function beforeSave($options = [])
+class User extends AppModel
 {
-    if (isset($this->data[$this->alias]['password'])) {
-        $passwordHasher = new BlowfishPasswordHasher();
-        $this->data[$this->alias]['password'] = $passwordHasher->hash(
-            $this->data[$this->alias]['password']
-        );
-    }
-    return true;
-}
+    // ...
 
-// ...
+    public function beforeSave($options = [])
+    {
+        if (isset($this->data[$this->alias]['password'])) {
+            $passwordHasher = new BlowfishPasswordHasher();
+            $this->data[$this->alias]['password'] = $passwordHasher->hash(
+                $this->data[$this->alias]['password'],
+            );
+        }
+
+        return true;
+    }
+
+    // ...
+}
 ```
 
 > [!NOTE]
@@ -339,6 +345,7 @@ public function add()
         $this->request->data['Post']['user_id'] = $this->Auth->user('id');
         if ($this->Post->save($this->request->data)) {
             $this->Flash->success(__('Your post has been saved.'));
+
             return $this->redirect(['action' => 'index']);
         }
     }
@@ -363,15 +370,15 @@ public $components = [
         'logoutRedirect' => [
             'controller' => 'pages',
             'action' => 'display',
-            'home'
+            'home',
         ],
         'authenticate' => [
             'Form' => [
-                'passwordHasher' => 'Blowfish'
-            ]
+                'passwordHasher' => 'Blowfish',
+            ],
         ],
-        'authorize' => ['Controller'] // この行を追加しました
-    ]
+        'authorize' => ['Controller'], // この行を追加しました
+    ],
 ];
 
 public function isAuthorized($user)
@@ -409,7 +416,7 @@ public function isAuthorized($user)
 
     // 投稿のオーナーは編集や削除ができる
     if (in_array($this->action, ['edit', 'delete'])) {
-        $postId = (int) $this->request->params['pass'][0];
+        $postId = (int)$this->request->params['pass'][0];
         if ($this->Post->isOwnedBy($postId, $user['id'])) {
             return true;
         }

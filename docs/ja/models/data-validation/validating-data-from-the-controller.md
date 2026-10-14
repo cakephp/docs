@@ -66,9 +66,12 @@ $errors = $this->ModelName->invalidFields(); // validationErrors 配列を返す
 複数のモデルのバリデーションを行うには次のアプローチを使います:
 
 ``` php
-if ($this->ModelName->saveAll(
-    $this->request->data, ['validate' => 'only']
-)) {
+if (
+    $this->ModelName->saveAll(
+        $this->request->data,
+        ['validate' => 'only'],
+    )
+) {
   // データは有効
 } else {
   // データは無効
@@ -79,9 +82,12 @@ if ($this->ModelName->saveAll(
 省略することができます:
 
 ``` php
-if ($this->ModelName->saveAll(
-    $this->request->data, ['validate' => false]
-)) {
+if (
+    $this->ModelName->saveAll(
+        $this->request->data,
+        ['validate' => false],
+    )
+) {
     // チェックを省略して保存する
 }
 ```
