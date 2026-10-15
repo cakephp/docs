@@ -97,8 +97,9 @@ third-party libraries with `composer require` and they are autoloaded
 through `vendor/autoload.php`. Don't edit or add files here by hand.
 
 webroot  
-In a production setup, this folder should serve as the document
-root for your application. Folders here also serve as holding
+This folder, and only this folder, should serve as the document
+root for your application, in development as well as in production.
+Folders here also serve as holding
 places for CSS stylesheets, images, and JavaScript files.
 
 ## The Legacy `app/` Layout

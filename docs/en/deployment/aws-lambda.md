@@ -226,6 +226,12 @@ the message and the message as JSON. Errors that PHP itself reports are also
 written to CloudWatch. To report errors to Sentry as well, see the
 [Sentry plugin](https://pieceofcake2.github.io/sentry/).
 
+Everyone who can read the log group can read the logs, so do not log secrets:
+do not dump `$_SERVER`, `getenv()` or the configuration, which contain the
+values resolved from `bref-ssm:`, and do not log request data that contains
+passwords, tokens or the `Authorization` header. Keep `DEBUG` at `0`, so that
+error messages do not include the configuration or SQL queries.
+
 ### Configuration Files
 
 The skeleton's `.gitignore` excludes `config/database.php`, `config/email.php`
@@ -356,7 +362,7 @@ provider:
                     Resource: !Join ['', [!GetAtt UploadsBucket.Arn, '/*']]
                 -   Effect: Allow
                     Action: ses:SendEmail
-                    Resource: '*'
+                    Resource: arn:aws:ses:${aws:region}:${aws:accountId}:identity/example.com
 
 plugins:
     - ./vendor/bref/bref
@@ -410,6 +416,12 @@ resources:
                     Enabled: true
         UploadsBucket:
             Type: AWS::S3::Bucket
+            Properties:
+                PublicAccessBlockConfiguration:
+                    BlockPublicAcls: true
+                    BlockPublicPolicy: true
+                    IgnorePublicAcls: true
+                    RestrictPublicBuckets: true
 ```
 
 Notes:
@@ -612,7 +624,11 @@ class EmailConfig
 
 The sender address or its domain must be a verified identity in SES, and a new
 SES account can only send to verified addresses until you request production
-access. The function needs the `ses:SendEmail` permission. See
+access. The function needs the `ses:SendEmail` permission on the identity of
+the sender, as in the `iam` section of the `serverless.yml` example. While the
+account is in the sandbox, SES may also check the permission against the
+verified recipient addresses; add their identity ARNs if sending is denied.
+See
 [Amazon SES Email Transport](https://pieceofcake2.github.io/aws/#amazon-ses-email-transport)
 and [Email](/core-utility-libraries/email).
 
@@ -686,6 +702,7 @@ public function download($id)
     if (!$document) {
         throw new NotFoundException();
     }
+    // Check here that the current user may download this document.
     $s3 = $this->Aws->S3;
     $command = $s3->getCommand('GetObject', [
         'Bucket' => env('UPLOADS_BUCKET'),
@@ -719,7 +736,11 @@ in the `serverless.yml` example creates an S3 bucket and a CloudFront
 distribution. CloudFront sends the paths listed under `assets` to the bucket,
 and all other requests to API Gateway. Lift uploads the listed files on every
 deployment. Add every file or directory of `webroot/` that the application
-references.
+references, but not `index.php`, `test.php` or `.htaccess`. Lift keeps the
+bucket private and lets only CloudFront read it. If you set up S3 and
+CloudFront yourself, do the same: block public access to the bucket and give
+CloudFront access with Origin Access Control (OAC) instead of making the
+bucket or its website endpoint public.
 
 Plugin and theme assets are served by CakePHP's `AssetDispatcher` filter from
 the Lambda function, which works but costs an invocation per file. To serve
@@ -744,7 +765,7 @@ plan for:
   endpoints for these services. Remember that `bref-ssm:` variables are
   resolved when an instance starts, so a missing route makes every cold start
   fail. A publicly accessible database avoids the VPC, at the cost of exposing
-  it to the internet; see
+  it to the internet; do not do this for production data. See
   [Using a database](https://bref.sh/docs/environment/database) in the Bref
   documentation.
 - **Connections.** Each Lambda instance handles one request at a time and opens
@@ -883,13 +904,22 @@ of an IAM role.
    }
    ```
 
+   Keep `StringEquals` and the exact `sub` value. A wildcard such as
+   `repo:my-org/*` or `repo:my-org/my-cake-app:*` with `StringLike` would
+   let other repositories, or every branch and pull request of the
+   repository, deploy to production. Without an `environment` in the job, the
+   `sub` value names the branch instead, for example
+   `repo:my-org/my-cake-app:ref:refs/heads/main`.
+
 3. Give the role the permissions needed to deploy: CloudFormation, Lambda, IAM
    roles of the functions, ECR, the S3 bucket of the deployment, API Gateway,
    CloudWatch Logs, and the resources of your stack (DynamoDB, S3, CloudFront).
    Bref documents a
    [minimal policy](https://bref.sh/docs/setup/minimal-aws-policy) as a
    starting point. If `serverless.yml` uses `${ssm:...}`, the role also needs
-   `ssm:GetParameter` on those parameters.
+   `ssm:GetParameter` on those parameters. Do not attach `AdministratorAccess`,
+   and limit `Resource` to the stack, functions, repository and buckets of the
+   service where the service supports it.
 4. In the GitHub repository, create the `production` environment and the
    `AWS_DEPLOY_ROLE_ARN` variable with the ARN of the role.
 

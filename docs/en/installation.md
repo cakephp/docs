@@ -287,19 +287,28 @@ virtual host looks like this:
     DocumentRoot /var/www/my_app/webroot
 
     <Directory /var/www/my_app/webroot>
+        Options -Indexes -MultiViews +FollowSymLinks
         AllowOverride All
         Require all granted
     </Directory>
 </VirtualHost>
 ```
 
+`Options -Indexes` turns off directory listings, which some distributions
+enable by default for `/var/www`. The example uses the access control syntax
+of Apache 2.4; for the legacy Apache 2.2 syntax, see
+[Apache 2.2 (legacy)](installation/url-rewriting#apache-2-2). Never point the
+document root to the project directory: `.env`, `config/`, `logs/`, `tmp/`,
+`vendor/` and `.git/` could then be downloaded.
+
 The `.htaccess` file in `webroot/` rewrites all requests to `index.php`, so
 mod_rewrite must be enabled and `AllowOverride` must allow it. If your web
 server is configured correctly, you should now find your CakePHP application
 accessible at <https://www.example.com>.
 
-For nginx, lighttpd, IIS and for troubleshooting mod_rewrite, see
-[URL Rewriting](installation/url-rewriting). If you need to place the
+For HTTPS, hidden files, upload directories, nginx, lighttpd, IIS and for
+troubleshooting mod_rewrite, see
+[Web Server Configuration](installation/url-rewriting). If you need to place the
 directories of your application in other locations, see
 [Advanced Installation](installation/advanced-installation).
 

@@ -145,7 +145,7 @@ how these pieces work together.
 
 - [Installation](installation),
   [Advanced Installation](installation/advanced-installation) and
-  [URL Rewriting](installation/url-rewriting)
+  [Web Server Configuration](installation/url-rewriting)
 - [CakePHP Folder Structure](getting-started/cakephp-folder-structure)
 - [CakePHP Conventions](getting-started/cakephp-conventions)
 - [CakePHP Structure](getting-started/cakephp-structure)

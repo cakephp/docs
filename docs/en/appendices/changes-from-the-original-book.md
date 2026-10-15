@@ -66,7 +66,7 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
 - [Getting Started](/getting-started)
   - Rewritten as the entry page for readers who maintain a CakePHP 2 application or know modern PHP: "About This Fork" (what the fork is, CakePHP 2 end of life, about this book; it replaces the separate "Piece of Cake 2" page, which was removed together with its sidebar group), "What's Different from CakePHP 2.10" with links to the detailed pages, "Where to Start" (existing application first, then `composer create-project pieceofcake2/app` with a note to consider CakePHP 5) and "Coming from Modern PHP" (no namespaces, array-based finders, models, components/behaviors/helpers, Configure, dispatcher filters, few native types)
   - Removed the introduction and the blog tutorial that was included in the page; the tutorial is under [Tutorials & Examples](/tutorials-and-examples/blog/blog)
-  - Moved to the top of the "Getting Started" sidebar group; the other pages follow in the order Installation, Advanced Installation, URL Rewriting, Folder Structure, Conventions, Structure, A Typical CakePHP Request
+  - Moved to the top of the "Getting Started" sidebar group; the other pages follow in the order Installation, Advanced Installation, Web Server Configuration, Folder Structure, Conventions, Structure, A Typical CakePHP Request
   - "What's Different from CakePHP 2.10": the backports item links to [Integration Testing](/development/integration-testing) instead of the upgrade guide on GitHub
 - [Installation](/installation)
   - Requirements: PHP 8.0-8.5, Composer, MySQL 5.6+/PostgreSQL 9.4+/SQLite 3/SQL Server 2022+, mbstring/intl/openssl notes
@@ -78,16 +78,26 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
   - Added "Configuring composer.json": minimal composer.json; config.allow-plugins for composer/installers and extra.installer-paths to plugins/{$name}/ are required for cakephp-plugin packages
   - New application: debug level, salts and database settings can also be set with environment variables (`config/.env` or `.env` in the project root)
   - "Adding CakePHP to an Existing Application" comes before "Creating a New Application"; the closing link points to the blog tutorial instead of Getting Started
+  - Apache virtual host: `Options -Indexes -MultiViews +FollowSymLinks`, a warning against a project-root document root and a link to the Apache 2.2 syntax
 - [Advanced Installation](/installation/advanced-installation)
   - Removed PEAR installation, the old Composer/bake project setup and CAKE_CORE_INCLUDE_PATH core sharing
   - Added Composer setup details: replace directive, plugin installer-paths, classmap autoloading, exclude-from-classmap
   - Custom paths are now configured in config/define.php (ROOT, APP_DIR, WEBROOT_DIR, WWW_ROOT, VENDORS) with a moved-webroot example
-- [URL Rewriting](/installation/url-rewriting)
+- [Web Server Configuration](/installation/url-rewriting)
   - Examples assume the document root is webroot/; .htaccess updated to the skeleton version; legacy root/app .htaccess explained briefly
   - nginx example updated for PHP-FPM sockets; IIS web.config placed in webroot/; removed dead links (Web Platform Installer, virtualhostx, Apache wiki)
+  - Renamed from "URL Rewriting" to "Web Server Configuration" (the URL is unchanged), with a new "Document Root" section that warns against exposing the project directory
+  - Apache: HTTPS virtual host with an HTTP redirect, `Options -Indexes -MultiViews +FollowSymLinks`, notes on `AllowOverride` (default `None` since 2.3.9), `SymLinksIfOwnerMatch` and mixed `+`/`-` options, hidden files denied except .well-known, step 5 to deny PHP in upload directories, and an HTTPS redirect for .htaccess
+  - .htaccess updated to the current skeleton: Authorization header passed only when present (or `CGIPassAuth On`), no `!-d` condition, so that directories are never listed
+  - New "The Legacy Root .htaccess Files" section listing the files that become reachable when mod_rewrite is off
+  - Apache 2.2 syntax (`Order`/`Allow`/`Deny`) in a separate legacy/EOL section, with a combined `<IfModule mod_authz_core.c>` example
+  - nginx: HTTPS server with HTTP redirect, only index.php passed to PHP-FPM (with PATH_INFO), hidden files denied except .well-known
+  - IIS and lighttpd sections kept for reference with a warning box (not tested by this project); lighttpd example rewritten without the `url=` query parameter, passing only index.php to PHP
+  - Removed the Hiawatha section
 - [CakePHP Folder Structure](/getting-started/cakephp-folder-structure)
   - Describes the modern layout (bin, config, logs, plugins, resources/locales, src, templates, tests, tmp, vendor, webroot) with a legacy app/ mapping table
   - Added steps for moving a legacy app/ application to the modern layout
+  - webroot/ is the only document root, in development and production
 - [CakePHP Conventions](/getting-started/cakephp-conventions)
   - File locations use src/ and templates/; String::uuid replaced by CakeText::uuid()
 - [CakePHP Structure](/getting-started/cakephp-structure)
@@ -281,6 +291,7 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
   - Config readers: readers default to `CONFIG`; custom reader example moved to `src/Lib/Configure`, declares its property (PHP 8.2), no `App::uses()`; ja example renamed from `XmlReader` (clashes with PHP's XMLReader) to `MyXmlReader`; ConfigReaderInterface/ConfigureException reference fixed
   - Inflector path `src/Cake/Utility/Inflector.php` and bootstrap `config/bootstrap.php` folded into text; era-specific examples (old IE/Chrome Frame, AMF/SOAP) modernized; ja: `$merge` description corrected, `Configure::consume()` added
   - New "Environment Variables" section: the pieceofcake2/app skeleton loads `config/.env` and the project-root `.env` with josegonzalez/dotenv at the top of `config/core.php` (backport of the `.env` support of the CakePHP 3+/5 app skeleton; change note: added in app v2.4.0), precedence (real environment > `config/.env` > root `.env`), quoting advice, adding the loader to legacy-layout and older applications, and the variables read by the skeleton (`DEBUG`, `SECURITY_SALT`, `SECURITY_CIPHER_SEED`, `DB_*`, `DB_TEST_*`)
+  - App.baseUrl: keep the document root at webroot/ when the .htaccess files are removed
 - [Routing](/development/routing)
   - Routes file path changed to config/routes.php (legacy app/Config/routes.php noted with link to the folder structure page)
   - Built-in routes located in vendor/pieceofcake2/cakephp/config/routes.php; disabling them means removing the require line from config/routes.php
@@ -341,9 +352,13 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
   - Added "composer install --no-dev --optimize-autoloader" and conditional loading of development-only plugins
   - Debug level read from the `DEBUG` environment variable of the skeleton instead of a custom `CAKEPHP_DEBUG` variable; other settings link to the environment variables section
   - Added a "Deploying to AWS Lambda" section linking to the new page
+  - "Check your security" rewritten as a short checklist linking to the Security section (debug, salts and cookie cipher, document root, HTTPS, SecurityComponent, validation, escaping and sanitizing HTML, dependencies, permissions, secrets); removed the Data Sanitization link
+  - Warnings about a project-root document root and the skeleton's default debug level 2; setting `DEBUG` with nginx and PHP-FPM; secrets from environment variables or a secret store, not in the repository or logs
+  - New sections on deployed files, file permissions (no 777), uploaded files, HTTPS (secure session cookie behind a proxy, supported PHP versions) and clearing the cache (and OPcache)
 - [Deploying to AWS Lambda](/deployment/aws-lambda)
   - New page: deploying the pieceofcake2/app skeleton to AWS Lambda with Bref 3 and Docker container images (TMP/LOGS in /tmp, SCRIPT_NAME and HTTPS for Bref's FPM runtime, logs to stderr), configuration with environment variables and SSM Parameter Store (`bref-ssm:`), DynamoDB sessions and SES email with pieceofcake2/aws, cache, S3 uploads with presigned URLs, static assets with Lift (S3 + CloudFront), RDS, console commands and schedules, local testing with the Runtime Interface Emulator, and deployment from GitHub Actions with OIDC
   - Tip: pieceofcake2/async-aws offers the same session handler, SES transport, cache engine and S3 stream wrapper with smaller dependencies (AsyncAws); the cache section points to its `AsyncAws.DynamoDb` engine, and the S3 section mentions its stream wrapper
+  - SES permission limited to the sender identity, uploads bucket with S3 Block Public Access, authorization check noted in the download example, public database discouraged for production, no secrets in logs, private assets bucket with CloudFront OAC, exact OIDC `sub` condition (no wildcards) and no `AdministratorAccess` for the deploy role
 
 ### Security
 

@@ -525,6 +525,10 @@ Configure::write('App.baseUrl', env('SCRIPT_NAME'));
     /app/.htaccess
     /app/webroot/.htaccess
 
+ドキュメントルートは `webroot/` (`app/webroot/`) に設定したままにしてください。
+`.htaccess` ファイルがない状態でドキュメントルートがプロジェクトのディレクトリを指していると、
+設定やログ、ソースコードが公開されてしまいます。[デプロイ](../deployment#set-document-root) を参照してください。
+
 これであなたの URL は、たとえば
 www.example.com/controllername/actionname/param
 ではなく
@@ -533,7 +537,7 @@ www.example.com/index.php/controllername/actionname/param
 
 もし CakePHP を Apache 以外の環境にインストールしようとしている
 場合、それぞれのサーバで URL 書き換えを行なう方法について、
-[URLリライティング](../installation/url-rewriting) に記載があります。
+[Web サーバーの設定](../installation/url-rewriting) に記載があります。
 
 App.fullBaseUrl  
 アプリケーションのルートへの完全修飾ドメイン名 (プロトコルを含む)。
