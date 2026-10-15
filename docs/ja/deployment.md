@@ -8,7 +8,7 @@ CakePHP アプリケーションをデプロイする際には、いくつかや
 ## セキュリティの確認
 
 デプロイする前に、少なくとも次の点を確認してください。詳しくは [セキュリティ](/ja/security/) の章と
-[ハードニングチェックリスト](/ja/security/hardening) で説明しています。
+[セキュリティチェックリスト](/ja/security/hardening) で説明しています。
 
 - 本番環境で `debug` が `0` になっていること。[core.php の更新](#update-core-php) を参照してください。
 - `Security.salt` と `Security.cipherSeed` がアプリケーション固有の秘密の値になっていて、
@@ -20,7 +20,7 @@ CakePHP アプリケーションをデプロイする際には、いくつかや
 - アプリケーションを HTTPS だけで提供していること。[HTTPS の使用](#use-https) を参照してください。
 - [セキュリティコンポーネント](core-libraries/components/security-component) で、フォームの改ざんと CSRF を防いでいること。
 - 入力を [データバリデーション](models/data-validation) で検証していること。
-- 出力を `h()` でエスケープし、ユーザが書いた HTML は保守されているライブラリでサニタイズしていること。
+- 出力を `h()` でエスケープし、ユーザーが書いた HTML はメンテナンスされている無害化ライブラリに通していること。
   [出力時のエスケープと HTML の無害化](/ja/security/escaping-and-sanitizing-html) を参照してください。
 - 依存パッケージが最新で、開発用のパッケージを除いてインストールしていること。
   [本番用の依存パッケージのインストール](#install-dependencies-for-production) を参照してください。
