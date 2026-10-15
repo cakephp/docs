@@ -32,7 +32,7 @@ repository where the package has no documentation site.
 ### Infrastructure
 
 - [Aws Plugin](https://pieceofcake2.github.io/aws/) - AWS SDK integration
-- [AsyncAws Plugin](https://pieceofcake2.github.io/async-aws/) - AsyncAws integration
+- [AsyncAws Plugin](https://pieceofcake2.github.io/async-aws/) - AsyncAws integration, a lighter alternative to the Aws plugin
 - [Bref Plugin](https://github.com/pieceofcake2/bref) - AWS Lambda deployment with Bref
 
 ### Logging & Monitoring

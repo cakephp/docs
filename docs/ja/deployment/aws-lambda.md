@@ -506,6 +506,15 @@ Configure::write('Aws', [
 関数の IAM ロールには、`serverless.yml` の例の `iam` の節のように、アプリケーションが使う
 サービスごとに権限が必要です。
 
+::: tip
+[pieceofcake2/async-aws](https://pieceofcake2.github.io/async-aws/) は、同じ DynamoDB のセッションハンドラー、
+SES のメールトランスポート、DynamoDB のキャッシュエンジン、S3 ストリームラッパーを、
+より小さな依存関係で提供します。AWS SDK 全体ではなく、使う AWS のサービスだけをインストールする
+[AsyncAws](https://async-aws.com) を使うので、Lambda のパッケージを小さくできます。
+[Migrating from pieceofcake2/aws](https://pieceofcake2.github.io/async-aws/#migrating-from-pieceofcake2aws)
+を参照してください。
+:::
+
 <a id="sessions"></a>
 
 ### セッション
@@ -578,8 +587,9 @@ ElastiCache は VPC の中で動くので、関数も同じ VPC で実行する�
 かかります。`RedisEngine` には TLS のオプションがないので、プライベートな VPC の中で転送中の
 暗号化を使わないクラスターを使うか、PHP の Redis クライアントが `server` の `tls://`
 プレフィックスを受け付けることを確認してから使ってください。VPC なしでリクエストごとの料金に
-したい場合は DynamoDB にキャッシュするデータを保存できますが、CakePHP 2 には DynamoDB の
-キャッシュエンジンはありません。キャッシュエンジンについては [キャッシュ](/ja/core-libraries/caching)
+したい場合は、[pieceofcake2/async-aws](https://pieceofcake2.github.io/async-aws/#dynamodb-cache-engine)
+の `AsyncAws.DynamoDb` エンジンで、キャッシュするデータを DynamoDB に保存できます。
+キャッシュエンジンについては [キャッシュ](/ja/core-libraries/caching)
 を参照してください。
 
 <a id="email"></a>
@@ -694,6 +704,7 @@ public function download($id)
 なることを確認してください。AWS プラグインは
 [S3 ストリームラッパー](https://pieceofcake2.github.io/aws/#s3-stream-wrapper) を登録することも
 でき、PHP のファイル関数で `s3://bucket/key` のパスを使えるようになります。
+pieceofcake2/async-aws にも[同じラッパー](https://pieceofcake2.github.io/async-aws/#s3-stream-wrapper)があります。
 
 <a id="static-assets"></a>
 
