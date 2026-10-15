@@ -531,6 +531,10 @@
         {
           "text": "Hardening Checklist",
           "link": "/security/hardening"
+        },
+        {
+          "text": "Output Escaping and HTML Sanitization",
+          "link": "/security/escaping-and-sanitizing-html"
         }
       ]
     },

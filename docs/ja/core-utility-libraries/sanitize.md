@@ -14,9 +14,10 @@ Sanitize クラスの破壊的な入力フィルタリング機能を使う代�
 
 ## HTML データを受信
 
-しばしば入力フィルタリングは、ユーザーが送信した HTML を受信する時に使われます。
-これらの場合、 [HTML Purifier](https://htmlpurifier.org/) のような専門の
-ライブラリを使用するのがベストです。
+しばしば入力フィルタリングは、ユーザーが送信した HTML を受信する時に使われます。代わりに、
+出力は `h()` でエスケープし、ユーザーが送信した HTML は Symfony HtmlSanitizer や HTML Purifier
+のような、メンテナンスされている無害化ライブラリに通してください。
+[出力時のエスケープと HTML の無害化](/ja/security/escaping-and-sanitizing-html) を参照してください。
 
 ## SQL のエスケープ
 

@@ -52,6 +52,7 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
 - [Security Fixes](/security/fixes) (moved from the Appendices)
 - [Upstream Advisories](/security/upstream-advisories)
 - [Hardening Checklist](/security/hardening)
+- [Output Escaping and HTML Sanitization](/security/escaping-and-sanitizing-html)
 - [Migrating Tests to PHPUnit 9.6](/appendices/phpunit-9-migration-hints)
 - [Integration Testing](/development/integration-testing)
 - [E2E Testing](/development/e2e-testing)
@@ -224,6 +225,7 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
   - Removed unneeded App::uses() from the example
 - [Data Sanitization](/core-utility-libraries/sanitize)
   - Sanitize is not present in CakePHP 3.0 and later (instead of "will be removed")
+  - Accepting user submitted HTML: points to the new Output Escaping and HTML Sanitization page instead of recommending HTML Purifier only
 - [Security](/core-utility-libraries/security)
   - Explain that mcrypt is not bundled since PHP 7.2 and Security.useOpenSsl should be enabled in config/core.php (compatible format); rijndael() needs PECL mcrypt; Cookie 'cipher' type warning
   - Noted that the pieceofcake2/app skeleton (v2.3.1 and later) already enables Security.useOpenSsl
@@ -357,6 +359,8 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
   - New page: status of the upstream CakePHP advisories that concern CakePHP 2.x (fixed in the fork, or not applicable), from the fork's CHANGELOG, UPGRADE.md and advisories
 - [Hardening Checklist](/security/hardening)
   - New page: debug 0, unique salt and cipher seed, Composer updates, SecurityComponent/CSRF, cookie and session flags, file permissions, HTTPS, supported PHP versions; links to the pages that describe each setting
+- [Output Escaping and HTML Sanitization](/security/escaping-and-sanitizing-html)
+  - New page: escaping at output time by context with `h()` and the helpers, URLs and JavaScript (`json_encode()` with `JSON_HEX_*`), sanitizing user HTML with Symfony HtmlSanitizer or HTML Purifier, Markdown, the deprecated Sanitize class, and a strict nonce-based Content Security Policy
 
 ### Tutorials & Examples
 

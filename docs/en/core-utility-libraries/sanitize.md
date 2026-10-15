@@ -15,8 +15,10 @@ modify user input.
 
 ## Accepting user submitted HTML
 
-Often input filtering is used when accepting user-submitted HTML. In these
-situations it is best to use a dedicated library like [HTML Purifier](https://htmlpurifier.org/).
+Often input filtering is used when accepting user-submitted HTML. Instead,
+escape output with `h()` and pass user-submitted HTML through a maintained HTML
+sanitizer, such as Symfony HtmlSanitizer or HTML Purifier. See
+[Output Escaping and HTML Sanitization](/security/escaping-and-sanitizing-html).
 
 ## SQL Escaping
 
