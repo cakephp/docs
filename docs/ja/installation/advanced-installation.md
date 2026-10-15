@@ -168,4 +168,4 @@ require_once $defineFile;
 
 ## Apache と mod_rewrite (と .htaccess)
 
-この章は [URLリライティング](../installation/url-rewriting) に移動しました。
+この章は [Web サーバーの設定](../installation/url-rewriting) に移動しました。

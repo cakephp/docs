@@ -64,7 +64,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 - [はじめに](/ja/getting-started)
   - CakePHP 2 のアプリケーションを保守している方やモダンな PHP を知っている開発者に向けた入口のページとして書き直し: 「このフォークについて」(フォークの概要、CakePHP 2 のサポート終了、このドキュメントについて。サイドバーの「Piece of Cake 2」グループとともに削除した「Piece of Cake 2」ページの内容をここに移動)、詳しいページへのリンクを付けた「CakePHP 2.10 との違い」、「どこから始めるか」(既存のアプリケーションを先に、次に `composer create-project pieceofcake2/app` と CakePHP 5 を検討する旨の注記)、「モダンな PHP から来た方へ」(名前空間が無いこと、配列ベースの find、モデル、コンポーネント/ビヘイビア/ヘルパー、Configure、ディスパッチャー・フィルター、型宣言が少ないこと)
   - 概要の文章と、ページに取り込んでいたブログチュートリアルを削除。チュートリアルは [チュートリアル & 例](/ja/tutorials-and-examples/blog/blog) にあります
-  - ページのタイトルを「入門」から「はじめに」に変更し、サイドバーの「はじめに」グループの先頭に移動。その他のページは、インストール、高度なインストール、URL リライト、フォルダ構造、規約、構造、典型的なリクエストの順に並べ替え
+  - ページのタイトルを「入門」から「はじめに」に変更し、サイドバーの「はじめに」グループの先頭に移動。その他のページは、インストール、高度なインストール、Web サーバーの設定、フォルダ構造、規約、構造、典型的なリクエストの順に並べ替え
   - 「CakePHP 2.10 との違い」: バックポートの項目のリンク先を、GitHub のアップグレードガイドから [統合テスト](/ja/development/integration-testing) に変更
 - [インストール](/ja/installation)
   - 動作要件: PHP 8.0〜8.5、Composer、MySQL 5.6 以上など対応 DB、mbstring/intl/openssl の説明
@@ -76,16 +76,26 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - 「composer.json の設定」を追加: 最小限の composer.json、cakephp-plugin パッケージのために composer/installers の allow-plugins と plugins/{$name}/ への installer-paths が必須であることを説明
   - 新規アプリケーション: デバッグレベル、ソルト、データベースの設定を環境変数 (`config/.env` またはプロジェクトルートの `.env`) でもセットできることを記載
   - 「既存のアプリケーションへの導入」を「新しいアプリケーションの作成」の前に移動。最後のリンクは「入門」ではなくブログチュートリアルを指すように変更
+  - Apache のバーチャルホスト: `Options -Indexes -MultiViews +FollowSymLinks` を追加し、ドキュメントルートをプロジェクトのディレクトリにしないよう警告、Apache 2.2 の書き方へのリンクを追加
 - [応用インストール](/ja/installation/advanced-installation)
   - PEAR でのインストール、旧来の Composer/bake によるプロジェクト作成、CAKE_CORE_INCLUDE_PATH によるコア共有を削除
   - Composer 設定の詳細を追加: replace、プラグインの installer-paths、classmap オートロード、exclude-from-classmap
   - パスの変更は config/define.php (ROOT、APP_DIR、WEBROOT_DIR、WWW_ROOT、VENDORS) で行う方法に書き換え、webroot を移動する例を追加
-- [URLリライティング](/ja/installation/url-rewriting)
+- [Web サーバーの設定](/ja/installation/url-rewriting)
   - 例はドキュメントルートを webroot/ とする前提に変更、.htaccess をスケルトンの内容に更新、従来の構成の .htaccess は簡単な説明のみに
   - nginx の例を PHP-FPM ソケット向けに更新、IIS の web.config を webroot/ に配置、リンク切れ (Web Platform Installer、virtualhostx、Apache wiki) を削除
+  - タイトルを「URLリライティング」から「Web サーバーの設定」に変更 (URL は変更なし)。プロジェクトのディレクトリを公開しないよう警告する「ドキュメントルート」の節を追加
+  - Apache: HTTP からリダイレクトする HTTPS のバーチャルホスト、`Options -Indexes -MultiViews +FollowSymLinks`、`AllowOverride` (2.3.9 以降のデフォルトは `None`)、`SymLinksIfOwnerMatch`、`+`/`-` を混在させた Options の注意、.well-known 以外の隠しファイルの拒否、アップロード用ディレクトリで PHP を拒否する手順 5、.htaccess での HTTPS へのリダイレクトを追加
+  - .htaccess を現在のスケルトンの内容に更新: Authorization ヘッダーはある場合だけ渡す (または `CGIPassAuth On`)、`!-d` の条件を削除してディレクトリの一覧を表示しないように
+  - mod_rewrite が無効なときに公開されるファイルを挙げた「従来のルートの .htaccess ファイル」の節を追加
+  - Apache 2.2 の書き方 (`Order`/`Allow`/`Deny`) をレガシー/EOL の節に分離し、`<IfModule mod_authz_core.c>` で両対応する例を追加
+  - nginx: HTTP からリダイレクトする HTTPS のサーバ、PHP-FPM に渡すのは index.php だけ (PATH_INFO 付き)、.well-known 以外の隠しファイルを拒否
+  - IIS と lighttpd の節は参考として残し、警告ボックスを追加 (このプロジェクトではテストしていない)。lighttpd の例は `url=` のクエリパラメータを使わず、PHP には index.php だけを渡す形に書き換え
+  - Hiawatha の節を削除
 - [CakePHP のフォルダ構造](/ja/getting-started/cakephp-folder-structure)
   - モダンな構成 (bin、config、logs、plugins、resources/locales、src、templates、tests、tmp、vendor、webroot) の説明に書き換え、従来の app/ との対応表を追加
   - 従来の app/ 構成からモダンな構成へ移行する手順を追加
+  - 開発時も運用時も webroot/ だけをドキュメントルートにすることを明記
 - [CakePHP の規約](/ja/getting-started/cakephp-conventions)
   - ファイルの場所を src/ と templates/ に変更、String::uuid を CakeText::uuid() に変更
 - [CakePHP の構造](/ja/getting-started/cakephp-structure)
@@ -276,6 +286,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - 設定リーダー: デフォルトの読み込み先は `CONFIG`。独自リーダーの例を `src/Lib/Configure` に移し、プロパティを宣言 (PHP 8.2)、`App::uses()` を削除。ja の例のクラス名を PHP の XMLReader と衝突する `XmlReader` から `MyXmlReader` に変更。ConfigReaderInterface/ConfigureException の説明を修正
   - Inflector のパス `src/Cake/Utility/Inflector.php` と `config/bootstrap.php` を本文に反映。古い IE/Chrome Frame や AMF/SOAP の例を更新。ja: `$merge` の説明を修正し `Configure::consume()` を追加
   - 「環境変数」の節を追加: pieceofcake2/app スケルトンが `config/core.php` の先頭で josegonzalez/dotenv により `config/.env` とプロジェクトルートの `.env` を読み込むこと (CakePHP 3〜5 のアプリケーションスケルトンの `.env` サポートのバックポート。変更点: app v2.4.0 で追加)、優先順位 (実際の環境変数 > `config/.env` > ルートの `.env`)、値のクォート、レガシー構成や以前のアプリケーションへの読み込み処理の追加方法、スケルトンが読み込む環境変数 (`DEBUG`、`SECURITY_SALT`、`SECURITY_CIPHER_SEED`、`DB_*`、`DB_TEST_*`)
+  - App.baseUrl: .htaccess ファイルを削除してもドキュメントルートは webroot/ のままにすることを追記
 - [ルーティング](/ja/development/routing)
   - ルート設定ファイルのパスを config/routes.php に変更（従来の app/Config/routes.php はフォルダ構造ページへのリンク付きで併記）
   - 組み込みルートの場所を vendor/pieceofcake2/cakephp/config/routes.php に修正し、無効化は config/routes.php の require 行を削除すると説明
@@ -336,9 +347,13 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - `composer install --no-dev --optimize-autoloader` と開発用プラグインの条件付き読み込みを追加
   - デバッグレベルは独自の `CAKEPHP_DEBUG` ではなく、スケルトンの環境変数 `DEBUG` から読み込む例に変更。ほかの設定は環境変数の節へのリンクを追加
   - 新しいページへのリンクとして「AWS Lambda へのデプロイ」の節を追加
+  - 「セキュリティの確認」を、セキュリティの章へのリンクを付けた短いチェックリストに書き直し (debug、ソルトとクッキーの暗号化方式、ドキュメントルート、HTTPS、SecurityComponent、バリデーション、HTML のエスケープとサニタイズ、依存パッケージ、パーミッション、秘密の情報)。「データのサニタイズが XSS 攻撃からデータベースを保護する」という誤った記述を削除
+  - ドキュメントルートをプロジェクトのディレクトリにすることと、スケルトンのデフォルトのデバッグレベル 2 についての警告、nginx と PHP-FPM での `DEBUG` の設定、秘密の情報は環境変数かシークレットストアから読み込み、リポジトリやログに残さないことを追加
+  - デプロイするファイル、ファイルのパーミッション (777 を使わない)、アップロードされたファイル、HTTPS (プロキシの背後でのセッションクッキーの secure、サポートされている PHP のバージョン)、キャッシュ (と OPcache) のクリアの節を追加
 - [AWS Lambda へのデプロイ](/ja/deployment/aws-lambda)
   - 新しいページ: pieceofcake2/app スケルトンを Bref 3 と Docker コンテナイメージで AWS Lambda にデプロイする方法 (TMP/LOGS を /tmp に、Bref の FPM ランタイム用の SCRIPT_NAME と HTTPS、stderr へのログ出力)、環境変数と SSM パラメータストア (`bref-ssm:`) による設定、pieceofcake2/aws による DynamoDB のセッションと SES のメール、キャッシュ、署名付き URL による S3 へのアップロード、Lift (S3 + CloudFront) による静的なアセット、RDS、コンソールのコマンドとスケジュール、Runtime Interface Emulator によるローカルでのテスト、OIDC を使った GitHub Actions からのデプロイ
   - ヒント: pieceofcake2/async-aws が同じセッションハンドラー、SES トランスポート、キャッシュエンジン、S3 ストリームラッパーをより小さな依存関係 (AsyncAws) で提供することを追加。キャッシュの節で `AsyncAws.DynamoDb` エンジンを、S3 の節でそのストリームラッパーを紹介
+  - SES の権限を送信元の ID に限定、アップロード用バケットに S3 のパブリックアクセスブロックを設定、ダウンロードの例に権限の確認を明記、本番のデータベースを公開しないよう注意、ログに秘密の情報を出力しない、アセット用バケットを非公開にして CloudFront の OAC を使う、OIDC の `sub` の条件は正確な値にする (ワイルドカードを使わない)、デプロイ用のロールに `AdministratorAccess` を付けないことを追加
 
 ### セキュリティ
 

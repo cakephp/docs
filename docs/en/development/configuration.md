@@ -536,13 +536,18 @@ these .htaccess files:
     /app/.htaccess
     /app/webroot/.htaccess
 
+Keep the document root set to `webroot/` (`app/webroot/`). Without the
+`.htaccess` files, a document root that points to the project directory
+exposes the configuration, logs and source code; see
+[Deployment](../deployment#set-document-root).
+
 This will make your URLs look like
 www.example.com/index.php/controllername/actionname/param rather
 than www.example.com/controllername/actionname/param.
 
 If you are installing CakePHP on a webserver besides Apache, you
 can find instructions for getting URL rewriting working for other
-servers under the [URL Rewriting](../installation/url-rewriting) section.
+servers under the [Web Server Configuration](../installation/url-rewriting) section.
 
 App.fullBaseUrl  
 The fully qualified domain name (including protocol) to your application’s root.

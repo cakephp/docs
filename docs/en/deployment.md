@@ -5,13 +5,32 @@ There are a few things you should do when deploying a CakePHP application.
 
 ## Check your security
 
-If you're throwing your application out into the wild, it's a good idea to make
-sure it doesn't have any leaks. Check the [Security](core-libraries/components/security-component) to guard against
-CSRF attacks, form field tampering, and others. Doing [Data Validation](models/data-validation), and/or
-[Data Sanitization](core-utility-libraries/sanitize) is also a great idea, for protecting your
-database and also against XSS attacks. Check that only your `webroot` directory
-is publicly visible, and that your secrets (such as your app salt and
-any security keys) are private and unique as well!
+Before you deploy, check at least these points. The
+[Security](/security/) section and its
+[Hardening Checklist](/security/hardening) describe them in more detail.
+
+- `debug` is `0` in production; see [Update core.php](#update-core-php).
+- `Security.salt` and `Security.cipherSeed` are secret values unique to your
+  application, and `CookieComponent` uses the `'aes'` cipher type; see
+  [Core Configuration](development/configuration#cakephp-core-configuration)
+  and [CookieComponent cipher type](security/fixes#cookiecomponent-cipher-type).
+- The document root is the `webroot/` directory only; see
+  [Set document root](#set-document-root) and
+  [Web Server Configuration](installation/url-rewriting).
+- The application is served over HTTPS only; see [Use HTTPS](#use-https).
+- Forms are protected against tampering and CSRF with the
+  [Security component](core-libraries/components/security-component).
+- Input is checked with [Data Validation](models/data-validation).
+- Output is escaped with `h()`, and HTML written by users is sanitized with a
+  maintained library; see
+  [Output Escaping and HTML Sanitization](/security/escaping-and-sanitizing-html).
+- The dependencies are up to date and installed without development
+  packages; see
+  [Install dependencies for production](#install-dependencies-for-production).
+- The web server can write only to `tmp/` and `logs/`; see
+  [Set file permissions](#set-file-permissions).
+- Secrets come from environment variables, not from files in the
+  repository; see [Environment Variables](development/configuration#environment-variables).
 
 ## Set document root
 
@@ -21,12 +40,21 @@ should have the document root set to the application's `webroot/` directory
 (`app/webroot/` in the legacy layout). This makes the application and
 configuration files, as well as the Composer packages in `vendor/`,
 inaccessible through a URL. Setting the document root is different for
-different webservers. See the [URL Rewriting](installation/url-rewriting)
+different webservers. See the [Web Server Configuration](installation/url-rewriting)
 documentation for webserver specific information.
 
 In all cases you will want to set the virtual host/domain's document root to be
 `webroot/`. This removes the possibility of files outside of the webroot
 directory being executed.
+
+> [!WARNING]
+> Never set the document root to the project directory, not even on a
+> development or shared server. Files such as `.env`, `.git/config`,
+> `composer.json`, `config/*.default`, `logs/error.log`, the templates and
+> the files in `tmp/` and `vendor/` could then be downloaded. In the legacy
+> layout, the root `.htaccess` file only protects them while mod_rewrite is
+> active; see
+> [The Legacy Root .htaccess Files](installation/url-rewriting#legacy-root-htaccess).
 
 ## Install dependencies for production
 
@@ -80,9 +108,28 @@ configuration:
 SetEnv DEBUG 0
 ```
 
+With nginx and PHP-FPM, set it in the `location` block that passes
+`index.php` to PHP-FPM, or in the PHP-FPM pool configuration. PHP-FPM does
+not pass the environment of the server to PHP unless `clear_env` is `no`:
+
+```nginx
+fastcgi_param DEBUG 0;
+```
+
+```ini
+; PHP-FPM pool, for example /etc/php/8.3/fpm/pool.d/www.conf
+env[DEBUG] = 0
+```
+
+> [!WARNING]
+> If `DEBUG` is not set, the skeleton runs with debug level 2, which shows
+> stack traces, SQL queries and configuration details, and enables the web
+> test runner `webroot/test.php`. Check that `DEBUG` is `0` on every
+> production server.
+
 In other applications, read the variable in `config/core.php`:
 
-``` php
+```php
 // config/core.php
 Configure::write('debug', (int)env('DEBUG'));
 ```
@@ -91,8 +138,68 @@ The other settings that the skeleton reads from environment variables, such as
 the security salts and the database credentials, are listed in
 [Environment Variables](development/configuration#environment-variables).
 Set them as real environment variables in production rather than in a `.env`
-file. Real environment variables always take precedence over the `.env` files
-that the skeleton loads in development.
+file, or load them from a secret store such as AWS Systems Manager Parameter
+Store (see [Configuration and Secrets](deployment/aws-lambda#configuration-and-secrets)).
+Real environment variables always take precedence over the `.env` files
+that the skeleton loads in development. Do not commit secrets to the
+repository, and do not write them to logs.
+
+## Deploy only what you need
+
+Deploy the application without the `.git/` directory, `.env` files, `tests/`
+and other development files, and delete `webroot/test.php`, which is only
+needed to run tests in the browser. Even outside the document root, these
+files are not needed on the server, and `.git/` and `.env` can contain
+secrets.
+
+## Set file permissions
+
+The web server user only needs to write to `tmp/` and `logs/`, as described in
+[Permissions](installation#permissions). All other files, including
+`config/` and `webroot/`, should be owned by the deploy user and only be
+readable by the web server. Give write access to `tmp/` and `logs/` to the web
+server user only (and to the user that runs console commands), for example
+with the `setfacl` commands on that page or with a shared group and mode
+`770`. Never use `chmod 777`: it lets every user on the server change your
+files.
+
+## Protect uploaded files
+
+Store uploaded files outside of `webroot/` when possible, and send them with a
+controller after checking that the user may see them. If uploads must be in
+`webroot/`, configure the web server so that it never runs PHP files there;
+see [Apache](installation/url-rewriting#apache-and-mod-rewrite-and-htaccess)
+(step 5) and [nginx](installation/url-rewriting#pretty-urls-on-nginx).
+
+## Use HTTPS
+
+Serve the application only over HTTPS, and redirect HTTP requests to HTTPS.
+CakePHP marks the session cookie as `secure` when the `HTTPS` server variable
+is set. Behind a load balancer or proxy that terminates TLS, this variable is
+usually not set, so set the cookie option yourself:
+
+```php
+// config/core.php
+Configure::write('Session', [
+    'defaults' => 'php',
+    'ini' => [
+        'session.cookie_secure' => true,
+    ],
+]);
+```
+
+Use a PHP version that still receives security fixes; see
+[Supported Versions](https://www.php.net/supported-versions.php).
+
+## Clear the cache after deploying
+
+With debug level 0, CakePHP caches model schemas and other core data for a
+long time. After deploying a new version, in particular one that changes the
+database schema, delete the cached files in `tmp/cache/models/`,
+`tmp/cache/persistent/` and `tmp/cache/views/`, or clear the cache
+configurations that your application uses. If OPcache is configured with
+`opcache.validate_timestamps=0`, also reload PHP-FPM so that it loads the new
+code.
 
 ## Improve your application's performance
 

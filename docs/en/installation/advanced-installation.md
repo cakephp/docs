@@ -187,4 +187,4 @@ the wrong delimiter, and it makes your code more portable.
 
 ## Apache and mod_rewrite (and .htaccess)
 
-This section was moved to [URL rewriting](../installation/url-rewriting).
+This section was moved to [Web Server Configuration](../installation/url-rewriting).

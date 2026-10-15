@@ -201,6 +201,8 @@ CakePHP は `src/Plugin/` または `app/Plugin/` と、プロジェクト直下
 クラスを `App::uses()` で読み込むアプリケーションでは省略できます。
 詳しくは [応用インストール](installation/advanced-installation) を参照してください。
 
+<a id="permissions"></a>
+
 ## パーミッション
 
 CakePHP は、幾つかの操作のために `tmp/` ディレクトリを使用します。
@@ -238,6 +240,8 @@ v2.12.3 からデフォルトのポートは 8765 です。それより前のバ
 > [!WARNING]
 > ビルトインサーバは開発専用です。運用環境では決して使わないでください。
 
+<a id="configuring-the-web-server"></a>
+
 ## ウェブサーバの設定
 
 運用環境では (開発時でも Apache などのウェブサーバを使う場合は)、ウェブサーバのドキュメントルートを
@@ -253,18 +257,25 @@ v2.12.3 からデフォルトのポートは 8765 です。それより前のバ
     DocumentRoot /var/www/my_app/webroot
 
     <Directory /var/www/my_app/webroot>
+        Options -Indexes -MultiViews +FollowSymLinks
         AllowOverride All
         Require all granted
     </Directory>
 </VirtualHost>
 ```
 
+`Options -Indexes` は、ディストリビューションによっては `/var/www` でデフォルトで有効になっている
+ディレクトリの一覧表示を無効にします。この例は Apache 2.4 のアクセス制御の書き方を使っています。
+レガシーな Apache 2.2 の書き方については [Apache 2.2 (レガシー)](installation/url-rewriting#apache-2-2) を参照してください。
+ドキュメントルートをプロジェクトのディレクトリに設定しないでください。`.env`、`config/`、`logs/`、`tmp/`、
+`vendor/`、`.git/` がダウンロードできてしまいます。
+
 `webroot/` の `.htaccess` がすべてのリクエストを `index.php` に書き換えるので、
 mod_rewrite を有効にし、`AllowOverride` でそれを許可しておく必要があります。
 もしウェブサーバが適切に設定されていれば、 <https://www.example.com> で CakePHP アプリケーションがアクセス可能になっているはずです。
 
-nginx、lighttpd、IIS での設定や mod_rewrite のトラブルシューティングについては
-[URLリライティング](installation/url-rewriting) を参照してください。
+HTTPS、隠しファイル、アップロード用のディレクトリ、nginx、lighttpd、IIS での設定や
+mod_rewrite のトラブルシューティングについては [Web サーバーの設定](installation/url-rewriting) を参照してください。
 アプリケーションのディレクトリを別の場所に配置したい場合は [応用インストール](installation/advanced-installation) を参照してください。
 
 公開する前には [デプロイ](deployment) も読んでおいてください。

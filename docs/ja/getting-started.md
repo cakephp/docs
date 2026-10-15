@@ -125,7 +125,7 @@ CakePHP 2 は PHP 5.2 と 5.3 の時代に設計されました。CakePHP 5、La
 ## このセクションのページ {#in-this-section}
 
 - [インストール](installation)、[応用インストール](installation/advanced-installation)、
-  [URL リライト](installation/url-rewriting)
+  [Web サーバーの設定](installation/url-rewriting)
 - [CakePHP のフォルダ構造](getting-started/cakephp-folder-structure)
 - [CakePHP の規約](getting-started/cakephp-conventions)
 - [CakePHP の構造](getting-started/cakephp-structure)

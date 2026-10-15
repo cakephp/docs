@@ -192,7 +192,7 @@ Configure::write('Security.cipherSeed', '7485712659625147843639846751');
 有効になっていることを確認してください。リライトルールは `webroot/.htaccess` にあります。
 CakePHP の welcome ページが少しおかしい (画像が表示されない、CSS が効いていない) 場合は、
 おそらくシステム上の mod_rewrite が機能していません。詳細や他のウェブサーバについては
-[URLリライティング](/ja/installation/url-rewriting) を参照してください。
+[Web サーバーの設定](/ja/installation/url-rewriting) を参照してください。
 
 はじめての CakePHP アプリケーションを構築しはじめるには、続けて
 [ブログチュートリアル - レイヤーの追加](/ja/tutorials-and-examples/blog/part-two)

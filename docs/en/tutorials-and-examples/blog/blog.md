@@ -209,7 +209,7 @@ with Apache, point the virtual host's `DocumentRoot` at the `webroot/`
 directory and make sure `mod_rewrite` is enabled; `webroot/.htaccess`
 contains the rewrite rules. If the CakePHP welcome page looks a little funny
 (no images or CSS styles), it probably means mod_rewrite is not functioning on
-your system. See [URL Rewriting](/installation/url-rewriting) for
+your system. See [Web Server Configuration](/installation/url-rewriting) for
 details and for other web servers.
 
 Now continue to [Blog Tutorial - Adding a layer](/tutorials-and-examples/blog/part-two) to start building your first CakePHP application.
