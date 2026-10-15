@@ -10,8 +10,9 @@
 - **無害化** (サニタイズ) は HTML を残したまま、許可リストにないものをすべて取り除き、
   HTML として出力できるようにします。ユーザーに HTML の入力を許可している箇所だけで使います。
 
+IPA の [安全なウェブサイトの作り方](https://www.ipa.go.jp/security/vuln/websecurity/about.html) や
 [OWASP XSS Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)
-など近年のガイドラインは、次の 3 つにまとめられます。
+など近年のガイドラインは、次の 3 つにまとめられます ([参考資料](#references))。
 
 1. **出力する時に、出力先に合わせてエスケープする。** データは入力されたまま保存し、出力する時に、
    出力先 (HTML の本文、属性、URL、JavaScript) に合ったエンコードでエスケープします。
@@ -126,3 +127,18 @@ CakePHP 2 の `Sanitize` クラスは非推奨です。`html()` メソッドは�
   タグに付けます。最初は `Content-Security-Policy-Report-Only` で、nonce が必要なスクリプトを洗い出してください。
 - スクリプトから読めないよう、クッキーに `httpOnly` を付けてください。
   [セキュリティチェックリスト](/ja/security/hardening#cookies-and-sessions) を参照してください。
+
+<a id="references"></a>
+
+## 参考資料
+
+- [安全なウェブサイトの作り方](https://www.ipa.go.jp/security/vuln/websecurity/about.html)
+  (IPA 独立行政法人情報処理推進機構): クロスサイト・スクリプティングの章
+- [OWASP Cross Site Scripting Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html):
+  出力先ごとのエンコードと HTML の無害化
+- [OWASP Content Security Policy Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html)
+- [OWASP Application Security Verification Standard (ASVS)](https://owasp.org/www-project-application-security-verification-standard/):
+  エンコード、無害化、セキュリティヘッダーの検証要件
+- [Mitigate cross-site scripting (XSS) with a strict Content Security Policy](https://web.dev/articles/strict-csp)
+  (web.dev)
+- [Content Security Policy](https://developer.mozilla.org/ja/docs/Web/HTTP/Guides/CSP) (MDN)

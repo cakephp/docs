@@ -13,7 +13,7 @@ output. This page explains the two tools for that:
 
 Current guidance, such as the
 [OWASP XSS Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html),
-comes down to three rules:
+comes down to three rules (see [References](#references)):
 
 1. **Escape at output time, for the context.** Store the data as it was
    entered and escape it when you output it, with the encoding for the place
@@ -127,3 +127,17 @@ reason about. Use `h()` and the libraries above instead; see
   scripts that still need a nonce.
 - Mark cookies `httpOnly` so that scripts cannot read them. See the
   [Hardening Checklist](/security/hardening#cookies-and-sessions).
+
+## References {#references}
+
+- [OWASP Cross Site Scripting Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html):
+  output encoding for each context and HTML sanitization
+- [OWASP Content Security Policy Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html)
+- [OWASP Application Security Verification Standard (ASVS)](https://owasp.org/www-project-application-security-verification-standard/):
+  verification requirements for encoding, sanitization and security headers
+- [Mitigate cross-site scripting (XSS) with a strict Content Security Policy](https://web.dev/articles/strict-csp)
+  (web.dev)
+- [安全なウェブサイトの作り方 (How to Secure Your Website)](https://www.ipa.go.jp/security/vuln/websecurity/about.html)
+  (IPA, Information-technology Promotion Agency, Japan; in Japanese, the
+  English edition dates from 2011): the cross-site scripting section
+- [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP) (MDN)
