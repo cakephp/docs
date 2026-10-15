@@ -14,6 +14,8 @@ have been fixed, and how to run a CakePHP 2 application safely.
   CakePHP advisories that concern CakePHP 2.x.
 - [Hardening Checklist](/security/hardening): settings to check before you
   run an application in production.
+- [Output Escaping and HTML Sanitization](/security/escaping-and-sanitizing-html):
+  how to output user data safely and accept HTML from users.
 
 ## Supported Versions {#supported-versions}
 

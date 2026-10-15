@@ -50,6 +50,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 - [脆弱性への対応](/ja/security/fixes) (付録から移動)
 - [本家のアドバイザリ](/ja/security/upstream-advisories)
 - [セキュリティチェックリスト](/ja/security/hardening)
+- [出力時のエスケープと HTML の無害化](/ja/security/escaping-and-sanitizing-html)
 - [PHPUnit 9.6 への移行](/ja/appendices/phpunit-9-migration-hints)
 - [統合テスト](/ja/development/integration-testing)
 - [E2E テスト](/ja/development/e2e-testing)
@@ -219,6 +220,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - 例から不要な App::uses() を削除
 - [データのサニタイズ](/ja/core-utility-libraries/sanitize)
   - Sanitize は CakePHP 3.0 以降に存在しないと記述 (「削除予定」から変更)
+  - HTML データを受信: HTML Purifier だけを勧めるのではなく、新しい「出力時のエスケープと HTML の無害化」のページを案内
 - [Security](/ja/core-utility-libraries/security)
   - mcrypt は PHP 7.2 以降同梱されないため config/core.php で Security.useOpenSsl を有効にすること (互換の形式)、rijndael() は PECL の mcrypt が必要、Cookie の 'cipher' タイプへの警告を本文で説明
   - pieceofcake2/app のスケルトン (v2.3.1 以降) では Security.useOpenSsl が有効になっていることを追記
@@ -352,6 +354,8 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - 新しいページ: CakePHP 2.x に関係する本家 CakePHP のアドバイザリの対応状況 (フォークで修正済み、または対象外)。フォークの CHANGELOG、UPGRADE.md、アドバイザリに基づく
 - [セキュリティチェックリスト](/ja/security/hardening)
   - 新しいページ: debug 0、固有のソルトとシード値、Composer での更新、SecurityComponent/CSRF、クッキーとセッションのフラグ、ファイルのパーミッション、HTTPS、サポートされている PHP。各設定を説明しているページへのリンク
+- [出力時のエスケープと HTML の無害化](/ja/security/escaping-and-sanitizing-html)
+  - 新しいページ: `h()` とヘルパーによる、出力時の出力先に合わせたエスケープ、URL と JavaScript (`JSON_HEX_*` を付けた `json_encode()`)、Symfony HtmlSanitizer や HTML Purifier によるユーザーの HTML の無害化、Markdown、非推奨の Sanitize クラス、nonce を使った厳格な Content Security Policy
 
 ### チュートリアル & 例
 

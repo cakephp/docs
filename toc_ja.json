@@ -531,6 +531,10 @@
         {
           "text": "セキュリティチェックリスト",
           "link": "/ja/security/hardening"
+        },
+        {
+          "text": "出力時のエスケープと HTML の無害化",
+          "link": "/ja/security/escaping-and-sanitizing-html"
         }
       ]
     },
