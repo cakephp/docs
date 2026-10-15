@@ -430,8 +430,7 @@ E2E のジョブは、[pieceofcake2/e2e-test](https://pieceofcake2.github.io/e2e
 ## ジョブサマリー
 
 失敗したジョブのエラーは、ほかのステップの出力にはさまれてログに表示されます。
-`pieceofcake2/.github` の
-[ci-summary](https://github.com/pieceofcake2/.github/tree/master/actions/ci-summary#readme)
+[pieceofcake2/ci-summary](https://github.com/pieceofcake2/ci-summary)
 アクションを使うと、ジョブのレポートを
 [ジョブサマリー](https://docs.github.com/ja/actions/reference/workflows-and-actions/workflow-commands)
 に変換して、実行結果のページに表示できます。
@@ -457,7 +456,7 @@ E2E のジョブは、[pieceofcake2/e2e-test](https://pieceofcake2.github.io/e2e
 ```yaml
 - name: PHPUnit summary
   if: ${{ !cancelled() }}
-  uses: pieceofcake2/.github/actions/ci-summary@v1
+  uses: pieceofcake2/ci-summary@v1
   with:
     type: junit
     title: PHPUnit — PHP ${{ matrix.php-version }}
@@ -474,7 +473,7 @@ E2E のジョブは、[pieceofcake2/e2e-test](https://pieceofcake2.github.io/e2e
 ```yaml
 - name: PHPCS summary
   if: ${{ !cancelled() }}
-  uses: pieceofcake2/.github/actions/ci-summary@v1
+  uses: pieceofcake2/ci-summary@v1
   with:
     type: checkstyle
     title: PHPCS
@@ -489,7 +488,7 @@ E2E のジョブは、[pieceofcake2/e2e-test](https://pieceofcake2.github.io/e2e
 ```yaml
 - name: PHPStan summary
   if: ${{ !cancelled() }}
-  uses: pieceofcake2/.github/actions/ci-summary@v1
+  uses: pieceofcake2/ci-summary@v1
   with:
     type: phpstan
     title: PHPStan
@@ -518,7 +517,7 @@ E2E のステップで JUnit のレポートを書き出し、アップロード
 
 - name: E2E summary
   if: ${{ !cancelled() }}
-  uses: pieceofcake2/.github/actions/ci-summary@v1
+  uses: pieceofcake2/ci-summary@v1
   with:
     type: junit
     title: E2E
@@ -540,7 +539,7 @@ E2E のステップで JUnit のレポートを書き出し、アップロード
 `@v1` はアクションの最新の `v1.x.y` リリースを指します。修正や新しい任意の入力は追加されますが、
 互換性を壊す変更はありません。特定のリリースに固定するには、`@v1.0.0` またはコミットの SHA を
 使ってください。すべての入力やほかのツールのレポートについては、
-[ci-summary の README](https://github.com/pieceofcake2/.github/tree/master/actions/ci-summary#readme)
+[ci-summary の README](https://github.com/pieceofcake2/ci-summary#readme)
 を参照してください。
 
 <a id="jenkins"></a>

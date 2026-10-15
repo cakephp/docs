@@ -431,8 +431,8 @@ See [E2E Testing](/development/e2e-testing#continuous-integration) and the
 
 A failed job shows its errors in the log, between the output of the other
 steps. The
-[ci-summary](https://github.com/pieceofcake2/.github/tree/master/actions/ci-summary#readme)
-action from `pieceofcake2/.github` turns the report of a job into a
+[pieceofcake2/ci-summary](https://github.com/pieceofcake2/ci-summary)
+action turns the report of a job into a
 [job summary](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands#adding-a-job-summary),
 which is shown on the run page:
 
@@ -460,7 +460,7 @@ be told apart on the run page:
 ```yaml
 - name: PHPUnit summary
   if: ${{ !cancelled() }}
-  uses: pieceofcake2/.github/actions/ci-summary@v1
+  uses: pieceofcake2/ci-summary@v1
   with:
     type: junit
     title: PHPUnit — PHP ${{ matrix.php-version }}
@@ -475,7 +475,7 @@ Leave out `coverage` if the job does not write a Clover report.
 ```yaml
 - name: PHPCS summary
   if: ${{ !cancelled() }}
-  uses: pieceofcake2/.github/actions/ci-summary@v1
+  uses: pieceofcake2/ci-summary@v1
   with:
     type: checkstyle
     title: PHPCS
@@ -490,7 +490,7 @@ it adds the annotations to the pull request, and the summary shows the list.
 ```yaml
 - name: PHPStan summary
   if: ${{ !cancelled() }}
-  uses: pieceofcake2/.github/actions/ci-summary@v1
+  uses: pieceofcake2/ci-summary@v1
   with:
     type: phpstan
     title: PHPStan
@@ -517,7 +517,7 @@ links to the artifacts of the run, where the screenshots and logs are:
 
 - name: E2E summary
   if: ${{ !cancelled() }}
-  uses: pieceofcake2/.github/actions/ci-summary@v1
+  uses: pieceofcake2/ci-summary@v1
   with:
     type: junit
     title: E2E
@@ -537,7 +537,7 @@ give each job its own artifact name, for example
 `@v1` follows the latest `v1.x.y` release of the action, which gets fixes and
 new optional inputs but no breaking changes. To pin an exact release, use
 `@v1.0.0` or a commit SHA. See the
-[ci-summary README](https://github.com/pieceofcake2/.github/tree/master/actions/ci-summary#readme)
+[ci-summary README](https://github.com/pieceofcake2/ci-summary#readme)
 for all inputs and for reports of other tools.
 
 ## Jenkins {#jenkins}
