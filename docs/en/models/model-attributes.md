@@ -166,7 +166,8 @@ $order = ['Model.field' => 'asc', 'Model.field2' => 'DESC'];
 ```
 
 The direction must be `ASC` or `DESC`, optionally followed by `NULLS FIRST` or
-`NULLS LAST`. See [Sort Order](/models/retrieving-your-data#sort-order).
+`NULLS LAST` (not supported by MySQL, MariaDB and SQL Server). See
+[Sort Order](/models/retrieving-your-data#sort-order).
 
 ## data
 

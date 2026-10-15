@@ -80,6 +80,22 @@ The direction must be `ASC` or `DESC`, optionally followed by `NULLS FIRST` or
 `NULLS LAST`. It is case-insensitive and extra whitespace is ignored, so
 `'asc'`, `' Desc '` and `'desc  nulls  last'` are all valid.
 
+::: warning NULLS FIRST / NULLS LAST support
+CakePHP passes `NULLS FIRST` / `NULLS LAST` to the database as written; not
+every database supports it:
+
+| Database | `NULLS FIRST` / `NULLS LAST` | NULLs with `ASC` by default |
+|----------|------------------------------|-----------------------------|
+| PostgreSQL | Supported | Last |
+| SQLite | Supported since 3.30.0 | First |
+| MySQL / MariaDB | Not supported (SQL syntax error) | First |
+| SQL Server | Not supported (SQL syntax error) | First |
+
+On MySQL, MariaDB and SQL Server, sort on an expression first instead, for
+example `['Post.published IS NULL' => 'ASC', 'Post.published' => 'ASC']` to put
+NULLs last.
+:::
+
 ::: pieceofcake2
 The sort direction is validated since v2.12.5. An invalid direction triggers
 an `E_USER_DEPRECATED` error and the SQL is generated as before; a future

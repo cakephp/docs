@@ -82,6 +82,21 @@ $this->Article->find('all', [
 続けることもできます。大文字と小文字は区別せず、余分な空白は無視されるので、
 `'asc'`、`' Desc '`、`'desc  nulls  last'` はいずれも有効です。
 
+::: warning NULLS FIRST / NULLS LAST の対応状況
+CakePHP は `NULLS FIRST` / `NULLS LAST` をそのままデータベースに渡しますが、
+すべてのデータベースが対応しているわけではありません。
+
+| データベース | `NULLS FIRST` / `NULLS LAST` | `ASC` での NULL の既定の位置 |
+|--------------|------------------------------|------------------------------|
+| PostgreSQL | 対応 | 最後 |
+| SQLite | 3.30.0 以降で対応 | 最初 |
+| MySQL / MariaDB | 非対応 (SQL の構文エラー) | 最初 |
+| SQL Server | 非対応 (SQL の構文エラー) | 最初 |
+
+MySQL、MariaDB、SQL Server では、代わりに式で先に並べ替えます。たとえば NULL を最後にするには
+`['Post.published IS NULL' => 'ASC', 'Post.published' => 'ASC']` のように指定します。
+:::
+
 ::: pieceofcake2
 v2.12.5 からソート方向を検証します。不正なソート方向を指定すると
 `E_USER_DEPRECATED` エラーが発生し、SQL はこれまでどおり生成されます。

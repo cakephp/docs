@@ -58,7 +58,9 @@ update. See [Security Fixes](/security/fixes) for details.
   `DESC`, optionally followed by `NULLS FIRST` or `NULLS LAST`. It is matched
   case-insensitively and surrounding / repeated whitespace is allowed, so
   `'asc'`, `'Desc'`, `' DESC '`, `'ASC NULLS FIRST'` and `'desc  nulls  last'`
-  are all valid.
+  are all valid. `NULLS FIRST` / `NULLS LAST` are passed to the database as
+  written and are not supported by MySQL, MariaDB and SQL Server; see
+  [Sort Order](/models/retrieving-your-data#sort-order).
 - Any other direction now triggers an `E_USER_DEPRECATED` error
   (`Invalid ORDER BY direction "..."`). This covers array values
   (`['Post.title' => $direction]`), the `$direction` argument of
