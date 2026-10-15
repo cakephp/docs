@@ -158,7 +158,8 @@ $order = ['Model.field' => 'asc', 'Model.field2' => 'DESC'];
 ```
 
 ソート方向は `ASC` または `DESC` で、その後に `NULLS FIRST` または `NULLS LAST` を
-続けることもできます。[並び順](/ja/models/retrieving-your-data#sort-order) を参照してください。
+続けることもできます (MySQL、MariaDB、SQL Server は非対応です)。
+[並び順](/ja/models/retrieving-your-data#sort-order) を参照してください。
 
 ## data
 

@@ -53,7 +53,8 @@ v2.12.5 の変更のうち、すでにフォークで動いているアプリケ
 - `order`（find のオプション、`Model::$order`、アソシエーションの `'order'` 設定、`DboSource::order()`）に指定する
   ソート方向は、`ASC` または `DESC` で、その後に `NULLS FIRST` か `NULLS LAST` を続けることもできます。
   大文字と小文字は区別せず、前後や途中の空白が多くてもかまいません。`'asc'`、`'Desc'`、`' DESC '`、
-  `'ASC NULLS FIRST'`、`'desc  nulls  last'` はいずれも有効です。
+  `'ASC NULLS FIRST'`、`'desc  nulls  last'` はいずれも有効です。`NULLS FIRST` / `NULLS LAST` はそのまま
+  データベースに渡され、MySQL、MariaDB、SQL Server では使えません。[並び順](/ja/models/retrieving-your-data#sort-order) を参照してください。
 - それ以外のソート方向を指定すると `E_USER_DEPRECATED` エラー（`Invalid ORDER BY direction "..."`）が発生します。
   対象は配列の値（`['Post.title' => $direction]`）、`DboSource::order()` の `$direction` 引数、文字列のキーで
   `ASC` / `DESC` の後に続くテキスト（`'Post.title DESC LIMIT 1'`。括弧の中やクォートしたリテラルの中の
