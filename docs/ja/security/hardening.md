@@ -53,9 +53,28 @@ CA 証明書を提供します。[脆弱性への対応](/ja/security/fixes) と
 GET・HEAD・OPTIONS 以外のすべてのリクエストでトークンを検証します。コントローラー全体でチェックを
 無効にせず、必要なアクションやフィールドだけを対象外にしてください。
 
-入力は [データバリデーション](/ja/models/data-validation) で検証してください。また、ビュー・レイアウト・
-エレメントの名前や `Xml::build()` への入力を、確認せずにユーザーの入力から組み立てないでください
-([脆弱性への対応](/ja/security/fixes) を参照してください)。
+ビュー・レイアウト・エレメントの名前や `Xml::build()` への入力を、確認せずにユーザーの入力から
+組み立てないでください ([脆弱性への対応](/ja/security/fixes) を参照してください)。
+
+<a id="validate-input"></a>
+
+## 入力を検証する
+
+リクエストから受け取るすべての項目を、モデルの検証ルールでサーバー側で検証し、ユーザーのデータは
+検証を有効にしたまま保存してください。許可リストと長さの上限を使い、`fieldList` で保存する項目を限定し、
+v2.12.6 からは `utf8` ルールで不正な UTF-8 を拒否してください。
+[入力の検証](/ja/security/escaping-and-sanitizing-html#validate-input) と
+[データバリデーション](/ja/models/data-validation) を参照してください。
+
+<a id="escape-output"></a>
+
+## 出力をエスケープし、HTML を無害化する
+
+出力するすべての値を `h()` でエスケープし (テンプレートは自動ではエスケープしません)、URL や
+JavaScript に入れる値はそれに合わせてエンコードし、ユーザーからの HTML は Symfony HtmlSanitizer や
+HTML Purifier のような、メンテナンスされている無害化ライブラリに通してください。二重の守りとして
+Content Security Policy も使ってください。
+[出力時のエスケープと HTML の無害化](/ja/security/escaping-and-sanitizing-html) を参照してください。
 
 <a id="cookies-and-sessions"></a>
 
