@@ -1303,6 +1303,42 @@ public $validate = [
 
 Runs an user-defined validation.
 
+`static` Validation::**utf8**(mixed $check, array $options = [])
+
+::: pieceofcake2
+Added in v2.12.6, as a backport of `Validation::utf8()` from CakePHP 5.
+:::
+
+This rule checks that the value is a valid UTF-8 string. By default it also
+rejects characters outside the Basic Multilingual Plane (4-byte characters such
+as emoji), which MySQL's `utf8` (`utf8mb3`) character set cannot store:
+
+``` php
+public $validate = [
+    'title' => [
+        'rule' => 'utf8',
+        'message' => 'Please enter text without emoji or other 4-byte characters',
+    ],
+];
+```
+
+Set the `extended` option to `true` to allow 4-byte characters, e.g. for
+`utf8mb4` columns:
+
+``` php
+public $validate = [
+    'body' => [
+        'rule' => ['utf8', ['extended' => true]],
+    ],
+];
+```
+
+The rule also rejects invalid UTF-8 byte sequences in both modes, such as
+truncated sequences, overlong encodings and encoded surrogates
+(`"\xED\xA0\x80"`). Non-string values (arrays, integers, `null`) are rejected
+as well. An empty string is valid; combine the rule with `notBlank` to require
+a value.
+
 `static` Validation::**uuid**(string $check)
 
 Checks that a value is a valid UUID: <https://tools.ietf.org/html/rfc4122>

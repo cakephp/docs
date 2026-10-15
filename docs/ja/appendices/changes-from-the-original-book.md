@@ -149,6 +149,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 - [データを保存する](/ja/models/saving-your-data)
   - 例のファイルコメントを src/Controller/ と templates/ に変更
 - [データバリデーション](/ja/models/data-validation)
+  - `utf8` ルールを追加 (v2.12.6、CakePHP 5 からのバックポート)
   - ローカライズしたバリデーションクラスは src/Validation (classmap または App::uses() で読み込み)、Localized プラグインのリンクを pieceofcake2/localized に変更、Windows/mod_php の注記を削除
 - [コールバックメソッド](/ja/models/callback-methods)
   - 例のパスを src/Model/ に変更
