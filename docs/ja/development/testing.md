@@ -24,10 +24,11 @@ CakePHP アプリケーションのテストは、通常次のレベルで行い
   セッション、Cookie、フラッシュメッセージ、送信されたメールを確認します。こちらも HTTP サーバーを
   使わずに PHPUnit のプロセス内で実行します。[統合テスト](/ja/development/integration-testing) を
   参照してください。
-- **ブラウザーによるエンドツーエンド (E2E) テスト** は、Web サーバーでアプリケーションを起動し、
+- **ブラウザーによる End-to-End (E2E) テスト** は、Web サーバーでアプリケーションを起動し、
   本物のブラウザーで操作します。JavaScript、Cookie、セッション、`SecurityComponent` の
   トークンも含めて確認できます。実行に時間がかかるため、主要な操作の流れに絞って使います。
-  [エンドツーエンドテスト](/ja/development/e2e-testing) を参照してください。
+  `tests/TestCase/EndToEnd/` に置き、`EndToEnd` テストスイートとして実行します。
+  [End-to-End テスト](/ja/development/e2e-testing) を参照してください。
 
 `ControllerTestCase` と `testAction()` は引き続きサポートされています。新しくコントローラーのテストを
 書くときは、通常は統合テストのほうが適しています。モックが少なくて済み、`SecurityComponent` の
@@ -247,14 +248,24 @@ CakePHP 用に PHPUnit を設定する `phpunit.xml.dist` があります。
 ``` xml
 <phpunit bootstrap="./tests/bootstrap.php"
          backupGlobals="true"
+         defaultTestSuite="App"
          stderr="true"
          colors="true">
+    <php>
+        <!-- End-to-End テストの設定 -->
+        <env name="E2E_SERVER_DATASOURCE" value="test"/>
+        <env name="E2E_SERVER_ENV_DEBUG" value="0"/>
+    </php>
     <listeners>
         <listener class="CakeFixtureInjector" file="./vendor/pieceofcake2/cakephp/src/Cake/TestSuite/Fixture/CakeFixtureInjector.php"/>
     </listeners>
     <testsuites>
-        <testsuite name="All Tests">
+        <testsuite name="App">
             <directory>./tests/TestCase/</directory>
+            <exclude>./tests/TestCase/EndToEnd/</exclude>
+        </testsuite>
+        <testsuite name="EndToEnd">
+            <directory>./tests/TestCase/EndToEnd/</directory>
         </testsuite>
     </testsuites>
 </phpunit>
@@ -267,15 +278,30 @@ CakePHP を読み込みます。`CakeFixtureInjector` リスナーはテスト�
 ([セッションを利用するテストの実行](#running-tests-that-use-sessions) を参照してください)。
 プロジェクトにこのファイルがまだ無ければ、スケルトンからコピーしてください。
 
+このファイルには 2 つのテストスイートがあります。`App` は `tests/TestCase/` のテスト、`EndToEnd` は
+`tests/TestCase/EndToEnd/` のブラウザーテストです ([End-to-End テスト](/ja/development/e2e-testing)
+を参照してください)。`defaultTestSuite="App"` により、`vendor/bin/phpunit` は `App` スイートだけを
+実行するので、速いままでブラウザーも不要です。スイートは `--testsuite` で選びます。
+
+``` bash
+vendor/bin/phpunit --testsuite EndToEnd
+vendor/bin/phpunit --testsuite App,EndToEnd
+```
+
+`defaultTestSuite` 属性を削除すると、`vendor/bin/phpunit` はすべてのスイートを実行します。
+Symfony のアプリケーションと同じ動作です。`<env>` は End-to-End テストの設定で、ほかのテストには
+影響しません。
+
 <a id="run-tests-from-command-line"></a>
 
 ### コマンドラインからのテスト実行
 
-プロジェクトのルートで PHPUnit を実行します。引数を付けなければ `tests/TestCase/` の
-すべてのテストを実行します。ディレクトリやファイルを指定することもできます。
+プロジェクトのルートで PHPUnit を実行します。引数を付けなければデフォルトのテストスイート `App`、
+つまり End-to-End テスト以外の `tests/TestCase/` のテストを実行します。ディレクトリやファイルを
+指定することもできます。
 
 ``` bash
-# すべてのテストを実行する
+# App スイートのテストを実行する
 vendor/bin/phpunit
 
 # ディレクトリ内のテストを実行する

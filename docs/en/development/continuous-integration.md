@@ -15,16 +15,17 @@ A CakePHP 2 application usually runs these jobs:
 
 | Job | Tool | What it checks | Details |
 | --- | --- | --- | --- |
-| PHPUnit | `vendor/bin/phpunit` | Unit tests and integration tests, on each supported PHP version | [Testing](/development/testing), [Integration Testing](/development/integration-testing) |
+| PHPUnit | `vendor/bin/phpunit` | Unit tests and integration tests (the `App` suite), on each supported PHP version | [Testing](/development/testing), [Integration Testing](/development/integration-testing) |
 | Coding standard | `vendor/bin/phpcs` | The CakePHP coding standard | [Coding Standards](/contributing/cakephp-coding-conventions) |
 | PHPStan | `vendor/bin/phpstan` | Bugs found without running the code | [Static Analysis](/development/static-analysis) |
-| E2E | `vendor/bin/phpunit -c phpunit.e2e.xml.dist` | Pages in a real browser | [End-to-End Testing](/development/e2e-testing) |
+| End-to-End | `vendor/bin/phpunit --testsuite EndToEnd` | Pages in a real browser | [End-to-End Testing](/development/e2e-testing) |
 
 The `pieceofcake2/app` skeleton already includes the configuration for the
 first three: `phpunit.xml.dist`, `phpcs.xml` and `phpstan.neon`, with PHPUnit,
 the CakePHP codesniffer, PHPStan and
 [pieceofcake2/phpstan-cakephp2](https://pieceofcake2.github.io/phpstan-cakephp2/)
-as development dependencies. End-to-end (E2E) tests need
+as development dependencies. Its `phpunit.xml.dist` also has an `EndToEnd` test
+suite next to the default `App` suite. End-to-End (E2E) tests need
 [pieceofcake2/e2e-test](https://pieceofcake2.github.io/e2e-test/) and a little
 setup; add that job when you have E2E tests.
 
@@ -203,8 +204,8 @@ jobs:
         if: ${{ always() && steps.phpstan.outcome == 'failure' }}
         run: cs2pr phpstan-report.xml
 
-  e2e:
-    name: E2E
+  end-to-end:
+    name: End-to-End
     runs-on: ubuntu-latest
 
     services:
@@ -267,20 +268,20 @@ jobs:
           chrome-version: stable
           install-chromedriver: true
 
-      - name: Run E2E tests
+      - name: Run End-to-End tests
         env:
           PANTHER_CHROME_BINARY: ${{ steps.setup-chrome.outputs.chrome-path }}
           PANTHER_CHROME_DRIVER_BINARY: ${{ steps.setup-chrome.outputs.chromedriver-path }}
           PANTHER_NO_SANDBOX: 1
-        run: vendor/bin/phpunit -c phpunit.e2e.xml.dist
+        run: vendor/bin/phpunit --testsuite EndToEnd
 
       # Screenshots, HTML and server logs of the failed tests
-      - name: Upload E2E artifacts
+      - name: Upload End-to-End artifacts
         if: ${{ failure() }}
         uses: actions/upload-artifact@v7
         with:
           name: e2e-artifacts
-          path: tests/E2E/artifacts/
+          path: tmp/e2e-artifacts/
           retention-days: 7
           if-no-files-found: ignore
 ```
@@ -412,17 +413,21 @@ configuration, the rule level and the baseline.
 
 ### End-to-End Tests {#e2e-tests}
 
-The E2E job runs the browser tests of
-[pieceofcake2/e2e-test](https://pieceofcake2.github.io/e2e-test/) with their
-own `phpunit.e2e.xml.dist`. It needs the database, like the PHPUnit job, and
-a Chrome that matches its chromedriver, which
-[setup-chrome](https://github.com/browser-actions/setup-chrome) installs.
-Run it on one PHP version: it is slower than the other jobs.
+The `end-to-end` job runs the browser tests of
+[pieceofcake2/e2e-test](https://pieceofcake2.github.io/e2e-test/), the
+`EndToEnd` suite of the same `phpunit.xml.dist`. It is a separate job, so the
+PHPUnit job keeps running only the `App` suite (`defaultTestSuite="App"`) and
+needs no browser. If you removed `defaultTestSuite`, run the PHPUnit job with
+`--testsuite App`. The `end-to-end` job needs the database, like the PHPUnit
+job: `E2E_SERVER_DATASOURCE=test` in `phpunit.xml.dist` passes the `DB_TEST_*`
+values to the application server. It also needs a Chrome that matches its
+chromedriver, which [setup-chrome](https://github.com/browser-actions/setup-chrome)
+installs. Run it on one PHP version: it is slower than the other jobs.
 
 When a test fails, the tests save a screenshot, the page HTML and the server
-logs; the upload step keeps them as an artifact of the run for 7 days. Make
-its `path` match the `artifactsDir` of your E2E bootstrap file. If your build
-creates CSS or JavaScript files, build them before the E2E tests.
+logs to `tmp/e2e-artifacts/`; the upload step keeps them as an artifact of the
+run for 7 days. If you set `E2E_ARTIFACTS_DIR`, make the `path` match. If your
+build creates CSS or JavaScript files, build them before the End-to-End tests.
 
 See [End-to-End Testing](/development/e2e-testing#continuous-integration) and the
 [CI section of the e2e-test documentation](https://pieceofcake2.github.io/e2e-test/#ci-with-github-actions).
@@ -501,26 +506,26 @@ The action also reads PHPStan's JSON output (`--error-format=json`).
 
 ### End-to-End Tests {#e2e-tests-1}
 
-Write a JUnit report in the E2E step, and pass the name of the uploaded
+Write a JUnit report in the End-to-End step, and pass the name of the uploaded
 artifact as `artifact-name`. When tests failed, the summary adds a line that
 links to the artifacts of the run, where the screenshots and logs are:
 
 ```yaml
-- name: Run E2E tests
+- name: Run End-to-End tests
   env:
     PANTHER_CHROME_BINARY: ${{ steps.setup-chrome.outputs.chrome-path }}
     PANTHER_CHROME_DRIVER_BINARY: ${{ steps.setup-chrome.outputs.chromedriver-path }}
     PANTHER_NO_SANDBOX: 1
-  run: vendor/bin/phpunit -c phpunit.e2e.xml.dist --log-junit e2e-junit.xml
+  run: vendor/bin/phpunit --testsuite EndToEnd --log-junit e2e-junit.xml
 
 # ... the upload step
 
-- name: E2E summary
+- name: End-to-End summary
   if: ${{ !cancelled() }}
   uses: pieceofcake2/ci-summary@v1
   with:
     type: junit
-    title: E2E
+    title: End-to-End
     file: e2e-junit.xml
     artifact-name: e2e-artifacts
     artifact-note: Screenshots, page HTML and server logs of the failed tests are in the {artifact} artifact.
@@ -528,7 +533,7 @@ links to the artifacts of the run, where the screenshots and logs are:
 
 ![Job summary of failed E2E tests with a link to the artifact](/ci-summary-e2e-failure.png)
 
-Use the same name as in the upload step. If the E2E job runs in a matrix,
+Use the same name as in the upload step. If the `end-to-end` job runs in a matrix,
 give each job its own artifact name, for example
 <code v-pre>e2e-artifacts-php${{ matrix.php-version }}</code>, in both steps.
 

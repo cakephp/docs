@@ -15,15 +15,16 @@ CakePHP 2 のアプリケーションでは、通常、次のジョブを実行�
 
 | ジョブ | ツール | チェックする内容 | 詳細 |
 | --- | --- | --- | --- |
-| PHPUnit | `vendor/bin/phpunit` | ユニットテストと統合テスト (サポートする PHP のバージョンごと) | [テスト](/ja/development/testing)、[統合テスト](/ja/development/integration-testing) |
+| PHPUnit | `vendor/bin/phpunit` | ユニットテストと統合テスト (`App` スイート、サポートする PHP のバージョンごと) | [テスト](/ja/development/testing)、[統合テスト](/ja/development/integration-testing) |
 | コーディング規約 | `vendor/bin/phpcs` | CakePHP のコーディング規約 | [コーディング規約](/ja/contributing/cakephp-coding-conventions) |
 | PHPStan | `vendor/bin/phpstan` | コードを実行せずに見つかるバグ | [静的解析](/ja/development/static-analysis) |
-| E2E | `vendor/bin/phpunit -c phpunit.e2e.xml.dist` | 本物のブラウザーでのページの動作 | [エンドツーエンドテスト](/ja/development/e2e-testing) |
+| End-to-End | `vendor/bin/phpunit --testsuite EndToEnd` | 本物のブラウザーでのページの動作 | [End-to-End テスト](/ja/development/e2e-testing) |
 
 `pieceofcake2/app` スケルトンには、最初の 3 つの設定ファイル `phpunit.xml.dist`、`phpcs.xml`、
 `phpstan.neon` が含まれており、PHPUnit、CakePHP のコードスニファー、PHPStan、
 [pieceofcake2/phpstan-cakephp2](https://pieceofcake2.github.io/phpstan-cakephp2/) が開発用の
-依存パッケージになっています。エンドツーエンド (E2E) テストには
+依存パッケージになっています。`phpunit.xml.dist` には、デフォルトの `App` スイートのほかに
+`EndToEnd` テストスイートもあります。End-to-End (E2E) テストには
 [pieceofcake2/e2e-test](https://pieceofcake2.github.io/e2e-test/) と少しのセットアップが必要です。
 E2E テストを書いたら、このジョブを追加してください。
 
@@ -203,8 +204,8 @@ jobs:
         if: ${{ always() && steps.phpstan.outcome == 'failure' }}
         run: cs2pr phpstan-report.xml
 
-  e2e:
-    name: E2E
+  end-to-end:
+    name: End-to-End
     runs-on: ubuntu-latest
 
     services:
@@ -267,20 +268,20 @@ jobs:
           chrome-version: stable
           install-chromedriver: true
 
-      - name: Run E2E tests
+      - name: Run End-to-End tests
         env:
           PANTHER_CHROME_BINARY: ${{ steps.setup-chrome.outputs.chrome-path }}
           PANTHER_CHROME_DRIVER_BINARY: ${{ steps.setup-chrome.outputs.chromedriver-path }}
           PANTHER_NO_SANDBOX: 1
-        run: vendor/bin/phpunit -c phpunit.e2e.xml.dist
+        run: vendor/bin/phpunit --testsuite EndToEnd
 
       # Screenshots, HTML and server logs of the failed tests
-      - name: Upload E2E artifacts
+      - name: Upload End-to-End artifacts
         if: ${{ failure() }}
         uses: actions/upload-artifact@v7
         with:
           name: e2e-artifacts
-          path: tests/E2E/artifacts/
+          path: tmp/e2e-artifacts/
           retention-days: 7
           if-no-files-found: ignore
 ```
@@ -408,20 +409,24 @@ PHPStan のジョブは、
 
 <a id="e2e-tests"></a>
 
-### エンドツーエンドテスト {#e2e-テスト}
+### End-to-End テスト {#e2e-テスト}
 
-E2E のジョブは、[pieceofcake2/e2e-test](https://pieceofcake2.github.io/e2e-test/) のブラウザー
-テストを専用の `phpunit.e2e.xml.dist` で実行します。PHPUnit のジョブと同じくデータベースが必要で、
-さらに chromedriver とバージョンの合った Chrome が必要です。これは
+`end-to-end` ジョブは、[pieceofcake2/e2e-test](https://pieceofcake2.github.io/e2e-test/) の
+ブラウザーテスト、つまり同じ `phpunit.xml.dist` の `EndToEnd` スイートを実行します。別のジョブに
+するので、PHPUnit のジョブは引き続き `App` スイートだけを実行し (`defaultTestSuite="App"`)、
+ブラウザーは不要です。`defaultTestSuite` を削除した場合は、PHPUnit のジョブを `--testsuite App` で
+実行してください。`end-to-end` ジョブには PHPUnit のジョブと同じくデータベースが必要です。
+`phpunit.xml.dist` の `E2E_SERVER_DATASOURCE=test` が `DB_TEST_*` の値をアプリケーションの
+サーバーに渡します。さらに chromedriver とバージョンの合った Chrome が必要です。これは
 [setup-chrome](https://github.com/browser-actions/setup-chrome) がインストールします。
 ほかのジョブより時間がかかるので、1 つの PHP のバージョンで実行してください。
 
-テストが失敗すると、スクリーンショット、ページの HTML、サーバーのログが保存されます。アップロードの
-ステップは、それらを実行結果のアーティファクトとして 7 日間保存します。`path` は E2E の
-ブートストラップファイルの `artifactsDir` に合わせてください。ビルドで CSS や JavaScript の
-ファイルを生成する場合は、E2E テストの前にビルドしてください。
+テストが失敗すると、スクリーンショット、ページの HTML、サーバーのログが `tmp/e2e-artifacts/` に
+保存されます。アップロードのステップは、それらを実行結果のアーティファクトとして 7 日間保存します。
+`E2E_ARTIFACTS_DIR` を設定した場合は、`path` をそれに合わせてください。ビルドで CSS や JavaScript の
+ファイルを生成する場合は、End-to-End テストの前にビルドしてください。
 
-[エンドツーエンドテスト](/ja/development/e2e-testing#continuous-integration) と
+[End-to-End テスト](/ja/development/e2e-testing#continuous-integration) と
 [e2e-test のドキュメントの CI の節](https://pieceofcake2.github.io/e2e-test/#ci-with-github-actions)
 を参照してください。
 
@@ -499,28 +504,28 @@ E2E のジョブは、[pieceofcake2/e2e-test](https://pieceofcake2.github.io/e2e
 
 <a id="e2e-tests-1"></a>
 
-### エンドツーエンドテスト {#e2e-テスト-1}
+### End-to-End テスト {#e2e-テスト-1}
 
-E2E のステップで JUnit のレポートを書き出し、アップロードするアーティファクトの名前を
+End-to-End のステップで JUnit のレポートを書き出し、アップロードするアーティファクトの名前を
 `artifact-name` に渡します。テストが失敗した場合、サマリーには、スクリーンショットやログがある
 実行結果のアーティファクトへのリンクの行が追加されます。
 
 ```yaml
-- name: Run E2E tests
+- name: Run End-to-End tests
   env:
     PANTHER_CHROME_BINARY: ${{ steps.setup-chrome.outputs.chrome-path }}
     PANTHER_CHROME_DRIVER_BINARY: ${{ steps.setup-chrome.outputs.chromedriver-path }}
     PANTHER_NO_SANDBOX: 1
-  run: vendor/bin/phpunit -c phpunit.e2e.xml.dist --log-junit e2e-junit.xml
+  run: vendor/bin/phpunit --testsuite EndToEnd --log-junit e2e-junit.xml
 
 # ... the upload step
 
-- name: E2E summary
+- name: End-to-End summary
   if: ${{ !cancelled() }}
   uses: pieceofcake2/ci-summary@v1
   with:
     type: junit
-    title: E2E
+    title: End-to-End
     file: e2e-junit.xml
     artifact-name: e2e-artifacts
     artifact-note: Screenshots, page HTML and server logs of the failed tests are in the {artifact} artifact.
@@ -528,7 +533,7 @@ E2E のステップで JUnit のレポートを書き出し、アップロード
 
 ![アーティファクトへのリンクがある、失敗した E2E テストのジョブサマリー](/ci-summary-e2e-failure.png)
 
-名前はアップロードのステップと同じにしてください。E2E のジョブをマトリックスで実行する場合は、
+名前はアップロードのステップと同じにしてください。`end-to-end` ジョブをマトリックスで実行する場合は、
 両方のステップで、たとえば <code v-pre>e2e-artifacts-php${{ matrix.php-version }}</code> のように、ジョブごとに
 別のアーティファクト名を付けてください。
 

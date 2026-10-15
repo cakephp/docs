@@ -1,6 +1,6 @@
-# エンドツーエンドテスト {#e2e-テスト}
+# End-to-End テスト {#e2e-テスト}
 
-エンドツーエンド (E2E) テストは、アプリケーションを本物のブラウザーで開き、ユーザーと同じように
+End-to-End (E2E) テストは、アプリケーションを本物のブラウザーで開き、ユーザーと同じように
 操作します。リンクをクリックし、フォームに入力し、ボタンを押して、画面に表示される内容を確認します。
 [pieceofcake2/e2e-test](https://pieceofcake2.github.io/e2e-test/) パッケージを使うと、
 CakePHP 2 アプリケーションにブラウザーによる E2E テストを追加できます。このパッケージは
@@ -16,7 +16,7 @@ PHPUnit 9.6 でテストを実行します。テストケースは `CakeTestCase
 
 <a id="when-to-use-e2e-tests"></a>
 
-## エンドツーエンドテストを使う場面 {#e2e-テストを使う場面}
+## End-to-End テストを使う場面 {#e2e-テストを使う場面}
 
 CakePHP アプリケーションのテストは、通常いくつかのレベルで行います
 ([テストの種類](/ja/development/testing#types-of-tests) を参照してください)。
@@ -54,8 +54,9 @@ E2E テストが適しているのは次のような場合です。
   ログ、セッション用に専用の一時ディレクトリを使います。
 - `Environment`: テストの実行中、サーバーと *デバイス* (デフォルトは `pc` と `mobile`) ごとの
   ヘッドレス Chrome を保持します。
-- `E2EExtension`: 最初のテストの前にサーバーを起動し、最後のテストの後にサーバーとブラウザーを
-  停止する PHPUnit の拡張です。
+- `E2EExtension`: 最後のテストの後にサーバーとブラウザーを停止する PHPUnit の拡張です。
+  サーバーとブラウザーは、それを必要とする最初の E2E テストで起動するので、ユニットテストだけを
+  実行したときは何も起動しません。
 - `E2ETestCase`: `visit()`、`fillField()`、`pressButton()`、`assertSeeText()` などの
   ブラウザー用ヘルパーとアサーションを備えた `CakeTestCase` です。
 
@@ -105,41 +106,49 @@ Chrome が自動更新されたら `bdi` をもう一度実行し、`/drivers` �
 ## セットアップ
 
 例では [pieceofcake2/app](https://pieceofcake2.github.io/app/) スケルトンのモダンな構成を使います。
-E2E テストには専用の PHPUnit 設定ファイルとディレクトリを用意します。
+[Symfony Panther](https://github.com/symfony/panther) と同じく、E2E テストはほかのテストと並べて置き、
+同じ `phpunit.xml.dist` で実行し、環境変数で設定します。
 
 ```text
 your-app/
-├── phpunit.xml.dist          # unit and controller tests (unchanged)
-├── phpunit.e2e.xml.dist      # E2E tests
+├── phpunit.xml.dist          # test suites App and EndToEnd, <env> configuration
 └── tests/
     ├── bootstrap.php         # your test bootstrap (unchanged)
-    └── E2E/
-        ├── bootstrap.php     # loads tests/bootstrap.php and configures the server
-        └── ContactFormTest.php
+    ├── Fixture/
+    └── TestCase/
+        ├── Controller/ ...   # the App suite
+        └── EndToEnd/         # the EndToEnd suite
+            └── ContactFormTest.php
 ```
+
+従来の構成では、E2E テストは `app/Test/Case/EndToEnd/` に置きます。
 
 <a id="phpunit-configuration"></a>
 
 ### PHPUnit の設定
 
-E2E テストは別の設定ファイルに分けます。こうすると `vendor/bin/phpunit` は速いままで、
-Chrome も不要です。
+`phpunit.xml.dist` に `EndToEnd` テストスイートを追加し、そのディレクトリを通常のスイートから除外して、
+拡張を登録します。pieceofcake2/app にはスイートと 2 つの `<env>` がすでにあるので、拡張のコメントを
+外してください。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- phpunit.e2e.xml.dist -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
-         bootstrap="tests/E2E/bootstrap.php"
-         backupGlobals="false"
+         bootstrap="./tests/bootstrap.php"
+         backupGlobals="true"
+         defaultTestSuite="App"
          stderr="true"
          colors="true">
     <php>
         <ini name="memory_limit" value="-1"/>
-        <env name="DEBUG" value="0"/>
+        <!-- アプリケーションのサーバーは、フィクスチャのある test データソースを使う -->
+        <env name="E2E_SERVER_DATASOURCE" value="test"/>
+        <!-- アプリケーションのサーバーでは DEBUG=0 -->
+        <env name="E2E_SERVER_ENV_DEBUG" value="0"/>
     </php>
 
-    <!-- アプリケーションのサーバーを起動し、最後にサーバーとブラウザーを停止する -->
+    <!-- 最後のテストの後にアプリケーションのサーバーとブラウザーを停止する -->
     <extensions>
         <extension class="Pieceofcake2\E2ETest\PHPUnit\E2EExtension"/>
     </extensions>
@@ -150,59 +159,85 @@ Chrome も不要です。
     </listeners>
 
     <testsuites>
-        <testsuite name="E2E">
-            <directory>tests/E2E/</directory>
+        <testsuite name="App">
+            <directory>./tests/TestCase/</directory>
+            <exclude>./tests/TestCase/EndToEnd/</exclude>
+        </testsuite>
+        <testsuite name="EndToEnd">
+            <directory>./tests/TestCase/EndToEnd/</directory>
         </testsuite>
     </testsuites>
 </phpunit>
 ```
 
-サーバーとブラウザーは static プロパティに保持されるため、`backupGlobals="false"` が必要です。
+- `defaultTestSuite="App"` により、`vendor/bin/phpunit` は `App` スイートだけを実行するので、
+  速いままで Chrome も不要です。**この属性を 1 つ削除すると、`vendor/bin/phpunit` は
+  End-to-End テストを含むすべてのテストを実行します。** Symfony のアプリケーションと同じ動作です。
+- サーバーとブラウザーは、最初のテストの前ではなく最初の E2E テストで起動します。そのため、
+  `App` スイートだけを実行したときは何も起動しません。拡張は最後のテストの後にそれらを停止します。
+- スイートは `@group` ではなくディレクトリで分けてください。PHPUnit 9 には `--exclude-testsuite` がなく、
+  クラスに付けた `@group` はサブクラスに継承されません。
+- `<server>` ではなく `<env>` を使ってください。アプリケーションのサーバーはテストのプロセスの
+  環境変数を引き継ぎます。本物の環境変数は `<env>` より優先されます。
 
-<a id="the-bootstrap-file"></a>
+<a id="configuration-with-environment-variables"></a>
 
-### ブートストラップファイル
+### 環境変数による設定
 
-`tests/E2E/bootstrap.php` は通常のテスト用ブートストラップを読み込み、
-`Environment::configure()` でアプリケーションのサーバーを設定します。
+パッケージのすべてのオプションは環境変数で設定できます。プロジェクトのデフォルトは
+`phpunit.xml.dist` に書き、マシンごとの値 (chromedriver のパス、ウィンドウを表示するかどうか) は、
+シェル、`config/.env` (`phpunit.xml.dist` で宣言していない変数の場合)、または `phpunit.xml.dist` を
+コピーした `phpunit.xml` に書いてください。`phpunit.xml` があると PHPUnit はそちらを読みます
+(2 つのファイルはマージされません)。優先順位は次のとおりです (上ほど優先)。
 
-```php
-<?php
-// tests/E2E/bootstrap.php
+1. 本物の環境変数 (シェル、CI)
+2. `phpunit.xml` または `phpunit.xml.dist` の `<env>`
+3. `config/.env`、次にルートの `.env`
+4. `Environment::configure()` (低レベルの PHP API)
+5. デフォルト値
 
-use Pieceofcake2\E2ETest\Environment;
+アプリケーションのサーバーはテストのプロセスの環境変数を引き継ぎます。`E2E_SERVER_ENV_<NAME>` は
+サーバーにだけ `<NAME>` を設定し、`E2E_SERVER_UNSET` は引き継いだ変数を削除します (カンマ区切り)。
+pieceofcake2/app では本物の環境変数が `config/.env` より優先されるので、この方法で設定ファイルを
+変更せずにサーバー専用の設定を渡せます。
 
-require dirname(__DIR__) . '/bootstrap.php';
-
-// サーバーはデータベースの設定を DB_* から読む (pieceofcake2/app の config/database.php)。
-// CakeTestCase がフィクスチャを読み込むテスト用データベースを指定する。
-$database = [];
-foreach (['DATASOURCE', 'HOST', 'PORT', 'USERNAME', 'PASSWORD', 'DATABASE'] as $name) {
-    $value = getenv('DB_TEST_' . $name);
-    $database['DB_' . $name] = $value === false ? null : $value;
-}
-
-Environment::configure([
-    'server' => [
-        'env' => $database + [
-            'DEBUG' => getenv('E2E_DEBUG') ?: '0',
-            // テストから本物のメールを送らない
-            'EMAIL_TRANSPORT' => 'Debug',
-        ],
-    ],
-    'browser' => [
-        'lang' => 'en-US',
-    ],
-    'artifactsDir' => dirname(__DIR__) . DS . 'E2E' . DS . 'artifacts',
-]);
+```xml
+<env name="E2E_SERVER_ENV_EMAIL_TRANSPORT" value="Debug"/>
+<env name="E2E_SERVER_ENV_SECURITY_SALT" value="e2e-salt-0123456789abcdef"/>
+<env name="E2E_SERVER_ENV_APP_FULL_BASE_URL" value="{baseUrl}"/>
+<env name="E2E_SERVER_UNSET" value="SENTRY_DSN"/>
 ```
 
-サーバーのプロセスはテストのプロセスの環境変数を引き継ぎ、そのうえで `server.env` を適用します。
-`null` は引き継いだ変数を削除し、`''` は空文字列を設定します。pieceofcake2/app では本物の環境変数が
-`config/.env` より優先されるので、この方法で設定ファイルを変更せずにサーバー専用の設定を渡せます。
-よく使うのは、サーバーのデータベース、`DEBUG=0`、暗号化された Cookie を読めるようにするための
-固定のソルト (`SECURITY_SALT`、`SECURITY_CIPHER_SEED`)、メールのトランスポート、外部サービスを
+`{baseUrl}`、`{host}`、`{port}` は、サーバーの起動時にその値に置き換えられます (サーバーは
+デフォルトで空いているポートを選びます)。よく使うのは、サーバーのデータベース、`DEBUG=0`、
+暗号化された Cookie を読めるようにするための固定のソルト、メールのトランスポート、外部サービスを
 無効にする空の設定です。
+
+よく使う環境変数:
+
+| 環境変数 | デフォルト | 説明 |
+| --- | --- | --- |
+| `E2E_SERVER_DATASOURCE` | | `test` でサーバーが test データソースを使う。[テスト用データベース](#the-test-database) を参照 |
+| `E2E_SERVER_ENV_<NAME>` | | サーバーに `<NAME>` を設定する |
+| `E2E_SERVER_INI` | `xdebug.mode=off` | サーバーの `php.ini` の設定。`key=value` を `;` で区切る |
+| `E2E_PORT` | 空いているポート | アプリケーションのサーバーのポート |
+| `E2E_KEEP_TMP` | オフ | `1` で実行後もサーバーの一時ディレクトリ (ログ、セッション) を残す |
+| `E2E_DOCROOT`、`E2E_ROUTER` | 自動検出、同梱のもの | ドキュメントルートとルータースクリプト。相対パスはプロジェクトのルートを基準にする |
+| `E2E_LANG` | Chrome のもの | ブラウザーの言語 (例: `ja-JP`) |
+| `E2E_ALLOWED_HOSTS` | | アプリケーション以外にブラウザーが読み込んでよいホスト (カンマ区切り) |
+| `E2E_DEVICE_<NAME>_SIZE` | `PC` は 1280x1024、`MOBILE` は 390x844 | デバイスの表示領域 (例: `E2E_DEVICE_TABLET_SIZE=820x1180`)。`off` で削除する |
+| `E2E_ARTIFACTS_DIR` | `tmp/e2e-artifacts` | 失敗時のスクリーンショット、HTML、ログの保存先 |
+| `E2E_WAIT_TIMEOUT` | `10` | ヘルパーがページや要素を待つ秒数 |
+| `E2E_SKIP_WITHOUT_BROWSER` | オフ | `1` で、Chrome や chromedriver がないときに E2E テストを失敗させずにスキップする |
+| `PANTHER_CHROME_DRIVER_BINARY`、`PANTHER_CHROME_BINARY` | Panther による検索 | chromedriver と Chrome のパス |
+| `PANTHER_NO_HEADLESS` | ヘッドレス | `1` でブラウザーのウィンドウを表示する |
+| `PANTHER_NO_SANDBOX` | オフ | `1` で `--no-sandbox` を追加する (root で動くコンテナー) |
+
+すべての環境変数はパッケージのドキュメントの
+[Environment variables](https://pieceofcake2.github.io/e2e-test/#environment-variables) (英語)
+にあります。サーバーでは Xdebug を無効にしているので、テストのプロセスでコードカバレッジを
+取ってもページの表示は遅くなりません。サーバーをデバッグするには
+`E2E_SERVER_INI="xdebug.mode=debug;xdebug.start_with_request=yes"` を設定してください。
 
 <a id="the-router-script"></a>
 
@@ -217,28 +252,19 @@ CakePHP がベースパスを正しく検出できるように `SCRIPT_NAME` を
 
 独自のルーターが必要なのは、ほかの定数を定義するなど、アプリケーションの起動前に処理を追加したい
 場合だけです。[ルーターの例](https://github.com/pieceofcake2/e2e-test/blob/1.x/docs/examples/router.php)
-をコピーし、`server.router` オプションにそのパスを設定してください。
+をコピーし、`E2E_ROUTER` にそのパスを設定してください。
 
 <a id="legacy-layout"></a>
 
 ### 従来の構成
 
 ドキュメントルートは自動的に検出されます。モダンな構成では `webroot/`、従来の `app/` 構成では
-`app/webroot/` です。従来の構成では、E2E 用のブートストラップファイルとテストは通常
-`app/Test/E2E/` に置き、PHPUnit の設定ファイルもそこを指定します。失敗時のファイルは
-デフォルトで `app/tmp/e2e-artifacts/` に保存されます。パスを明示的に設定することもできます。
+`app/webroot/` です。従来の構成では、テストスイートは `app/Test/Case/` と
+`app/Test/Case/EndToEnd/` を指定し、失敗時のファイルはデフォルトで `app/tmp/e2e-artifacts/` に
+保存されます。ドキュメントルートを明示的に設定することもできます。
 
-```php
-<?php
-
-use Pieceofcake2\E2ETest\Environment;
-
-Environment::configure([
-    'server' => [
-        'workingDir' => ROOT,
-        'docroot' => ROOT . DS . 'app' . DS . 'webroot',
-    ],
-]);
+```xml
+<env name="E2E_DOCROOT" value="app/webroot"/>
 ```
 
 `app/webroot/index.php` では、ルーターより先に `TMP` や `LOGS` を定義しないでください。
@@ -250,7 +276,24 @@ Environment::configure([
 
 ブラウザーに見えるのはサーバーが読めるデータだけです。そのため、サーバーは `CakeTestCase` が
 フィクスチャを読み込むデータベース、つまり `test` データソースを使う必要があります。
-上のブートストラップファイルでは、`DB_TEST_*` の値を `DB_*` としてサーバーに渡しています。
+`CakeFixtureManager` はフィクスチャのレコードをコミットするので、サーバーもほかのクライアントと
+同じようにそれを読めます。
+
+`E2E_SERVER_DATASOURCE=test` を設定すると、サーバーに `E2E_DATASOURCE=test` が渡され、サーバーの
+`DB_DATASOURCE`、`DB_HOST`、`DB_PORT`、`DB_USERNAME`、`DB_PASSWORD`、`DB_DATABASE` には
+テストのプロセスの `DB_TEST_*` の値が設定されます。そのうえで、サーバーでは `config/database.php` が
+`test` データソースを `default` として使うようにします。pieceofcake2/app の
+`config/database.php.default` では、コンストラクターで環境変数を適用した後に次の行があります。
+`config/database.php` が古い場合は、この行をコピーしてください。
+
+```php
+if (env('E2E_DATASOURCE') === 'test') {
+    $this->default = $this->test;
+}
+```
+
+この切り替えは、`prefix` のように `DB_*` にない設定や、`config/.env` が `DB_*` を開発用の
+データベースに向けている場合にも対応します。
 
 - テストに開発用のデータベースを使わないでください。
 - 開くページで使うテーブルをすべて `$fixtures` に指定してください。テーブルがないとサーバーで
@@ -267,7 +310,8 @@ Environment::configure([
 
 アプリケーションのサーバーは別のプロセスなので、サーバーが送ったメールをテストのプロセスで
 受け取ることはできません。テストから本物のメールを送らないように、環境変数でトランスポートを選べる
-ようにして `Debug` を使ってください。`DebugTransport` はメールを送信せずに内容を返します。
+ようにして `Debug` を使ってください (`E2E_SERVER_ENV_EMAIL_TRANSPORT=Debug`)。`DebugTransport` は
+メールを送信せずに内容を返します。
 
 ```php
 // config/email.php
@@ -295,6 +339,27 @@ class EmailConfig
 $log = (string)file_get_contents(Environment::server()->logsDir() . 'debug.log');
 $this->assertStringContainsString('To: jane@example.com', $log);
 ```
+
+<a id="e2e-separate-configuration"></a>
+
+### 別の設定ファイルからの移行
+
+e2e-test 1.2 より前は、E2E テストに専用の `phpunit.e2e.xml.dist` と、`Environment::configure()` を
+呼ぶブートストラップファイル (`tests/E2E/bootstrap.php`) を使っていました。この構成は変更なしで
+そのまま動きます。1 つの `phpunit.xml.dist` に移行するには、次のようにします。
+
+1. テストを `tests/E2E/` から `tests/TestCase/EndToEnd/` に移動します。
+2. `phpunit.xml.dist` に `App` と `EndToEnd` のスイートと `defaultTestSuite="App"` を追加し、
+   `E2EExtension` を引数なしで登録します。
+3. `Environment::configure()` のオプションを `<env>` に置き換えます。`DB_TEST_*` の受け渡しは
+   `E2E_SERVER_DATASOURCE=test` に、`server.env` の値は `E2E_SERVER_ENV_<NAME>` に、
+   `browser.lang` は `E2E_LANG` に、という具合です。
+4. `config/database.php` に `E2E_DATASOURCE` の切り替えを追加します。
+5. `phpunit.e2e.xml.dist` とブートストラップファイルを削除し、CI では `--testsuite EndToEnd` で
+   テストを実行します。
+
+すべてのオプションの対応表は、パッケージのドキュメントの
+[移行手順](https://pieceofcake2.github.io/e2e-test/#migration) (英語) にあります。
 
 <a id="writing-tests"></a>
 
@@ -327,7 +392,7 @@ $this->assertStringContainsString('To: jane@example.com', $log);
 
 ```php
 <?php
-// tests/E2E/ContactFormTest.php
+// tests/TestCase/EndToEnd/ContactFormTest.php
 
 use Pieceofcake2\E2ETest\TestSuite\E2ETestCase;
 
@@ -515,7 +580,7 @@ $this->assertCookieNotSet('remember_me');
 
 ```php
 <?php
-// tests/E2E/AppE2ETestCase.php
+// tests/TestCase/EndToEnd/AppE2ETestCase.php
 
 use Pieceofcake2\E2ETest\TestSuite\E2ETestCase;
 use Symfony\Component\Panther\Client;
@@ -554,13 +619,14 @@ abstract class AppE2ETestCase extends E2ETestCase
 ```
 
 PHPUnit が読み込むのは名前が `Test.php` で終わるファイルだけなので、基底クラスは
-`tests/E2E/bootstrap.php` で require するか、`composer.json` の `autoload-dev` の
-classmap に `tests/E2E/` を追加してください。
+`composer.json` の `autoload-dev` の classmap に追加する
+(`"classmap": ["tests/TestCase/EndToEnd/AppE2ETestCase.php"]`) か、各テストファイルの先頭で
+require してください。
 
 各テストの前に、起動済みのブラウザーはそれぞれ余分なウィンドウを閉じ、Cookie、`localStorage`、
 `sessionStorage` を削除します。そのため、どのテストもログアウトした状態で始まります。Cookie を
 削除するために、ブラウザーは最初にアプリケーションの `/favicon.ico` を開きます。アプリケーションに
-`favicon.ico` がない場合は、`resetPath` オプションにほかの静的ファイルを指定してください。
+`favicon.ico` がない場合は、`E2E_RESET_PATH` にほかの静的ファイルを指定してください。
 
 <a id="failure-screenshots-and-html"></a>
 
@@ -575,9 +641,9 @@ classmap に `tests/E2E/` を追加してください。
 | `<Class>-<test>-mobile.png` / `.html` | スマートフォンのブラウザーを起動していた場合は、その同じファイル |
 | `<Class>-<test>-logs.txt` | サーバーの各ログの末尾: リクエストと PHP のエラー、`error.log`、`debug.log` |
 
-保存先は `artifactsDir` のディレクトリです。デフォルトは `tmp/e2e-artifacts/`、上の
-ブートストラップの例では `tests/E2E/artifacts/` で、環境変数 `E2E_ARTIFACTS_DIR` でも
-指定できます。元の失敗は必ず報告されます。
+保存先はデフォルトで `tmp/e2e-artifacts/` で、環境変数 `E2E_ARTIFACTS_DIR` でも指定できます。
+`/tmp/e2e-artifacts/` を `.gitignore` に追加してください (pieceofcake2/app には追加済みです)。
+元の失敗は必ず報告されます。
 
 ![お問い合わせフォームのテストが失敗したときに保存されたスクリーンショット](/e2e-failure-screenshot.png)
 
@@ -590,39 +656,54 @@ classmap に `tests/E2E/` を追加してください。
 ## テストの実行
 
 ```bash
+# App スイートだけ (defaultTestSuite)。サーバーもブラウザーも起動しない
+vendor/bin/phpunit
+
 # すべての E2E テスト
-vendor/bin/phpunit -c phpunit.e2e.xml.dist
+vendor/bin/phpunit --testsuite EndToEnd
+
+# すべてのテスト
+vendor/bin/phpunit --testsuite App,EndToEnd
 
 # 1 つのテストケース
-vendor/bin/phpunit -c phpunit.e2e.xml.dist --filter ContactFormTest
+vendor/bin/phpunit --testsuite EndToEnd --filter ContactFormTest
+vendor/bin/phpunit tests/TestCase/EndToEnd/ContactFormTest.php
 
 # ブラウザーの動きを見る
-PANTHER_NO_HEADLESS=1 vendor/bin/phpunit -c phpunit.e2e.xml.dist --filter testSend
+PANTHER_NO_HEADLESS=1 vendor/bin/phpunit --testsuite EndToEnd --filter testSend
 ```
 
-ブラウザーはデフォルトでヘッドレスで動きます。`PANTHER_NO_HEADLESS=1` を指定するとウィンドウが
-表示されるので、テストを書くときやデバッグするときに便利です。環境変数は設定より優先されるので、
-開発者や CI はファイルを編集せずにポートやバイナリを変更できます。
+`--filter` が探すのは選択したスイートの中だけです。`--testsuite EndToEnd` を付けないと `App` スイートを
+探すので、E2E テストは見つかりません。パスを引数に指定すると、`defaultTestSuite` に関係なく
+そのファイルやディレクトリのテストを実行します。
 
-| 環境変数 | 説明 |
-| --- | --- |
-| `E2E_PORT` | アプリケーションのサーバーのポート (デフォルト: 空いているポート) |
-| `E2E_KEEP_TMP` | `1` で実行後もサーバーの一時ディレクトリ (ログ、セッション) を残す |
-| `E2E_ARTIFACTS_DIR` | 失敗時のスクリーンショット、HTML、ログの保存先 |
-| `E2E_WAIT_TIMEOUT` | ヘルパーがページや要素を待つ秒数 (デフォルト `10`) |
-| `PANTHER_CHROME_DRIVER_BINARY`、`PANTHER_CHROME_BINARY` | chromedriver と Chrome のパス |
-| `PANTHER_NO_HEADLESS` | `1` でブラウザーのウィンドウを表示する |
-| `PANTHER_NO_SANDBOX` | `1` で `--no-sandbox` を追加する (root で動くコンテナー) |
+ブラウザーはデフォルトでヘッドレスで動きます。`PANTHER_NO_HEADLESS=1` を指定するとウィンドウが
+表示されるので、テストを書くときやデバッグするときに便利です。Chrome や chromedriver がない場合、
+E2E テストは `BrowserNotAvailableException` で失敗し、そのメッセージにインストールの方法が
+表示されます。Chrome のないマシンで E2E テストをスキップするには `E2E_SKIP_WITHOUT_BROWSER=1` を
+設定してください。
 
 <a id="continuous-integration"></a>
 
 ## 継続的インテグレーション
 
-GitHub Actions では、データベースのサービスと、chromedriver とバージョンの合った Chrome を用意した
-専用のジョブで E2E テストを実行し、ジョブが失敗したら失敗時のファイルをアップロードします。
-主なステップは次のとおりです。
+GitHub Actions では、E2E テストを別の `end-to-end` ジョブで実行します。ユニットテストのジョブは
+引き続き `vendor/bin/phpunit` (`App` スイート) を Chrome なしで実行し、`end-to-end` ジョブは
+データベースのサービスと、chromedriver とバージョンの合った Chrome を用意して `--testsuite EndToEnd`
+を実行し、失敗したら失敗時のファイルをアップロードします。主なステップは次のとおりです。
 
 ```yaml
+  end-to-end:
+    runs-on: ubuntu-latest
+
+    # The test datasource; E2E_SERVER_DATASOURCE=test passes it to the server
+    env:
+      DB_TEST_DATASOURCE: Database/Mysql
+      DB_TEST_HOST: 127.0.0.1
+      DB_TEST_USERNAME: root
+      DB_TEST_PASSWORD: root
+      DB_TEST_DATABASE: cakephp_test
+
     steps:
       # ... checkout, setup-php, composer install
 
@@ -633,19 +714,19 @@ GitHub Actions では、データベースのサービスと、chromedriver と�
           chrome-version: stable
           install-chromedriver: true
 
-      - name: Run E2E tests
+      - name: Run End-to-End tests
         env:
           PANTHER_CHROME_BINARY: ${{ steps.setup-chrome.outputs.chrome-path }}
           PANTHER_CHROME_DRIVER_BINARY: ${{ steps.setup-chrome.outputs.chromedriver-path }}
           PANTHER_NO_SANDBOX: 1
-        run: vendor/bin/phpunit -c phpunit.e2e.xml.dist
+        run: vendor/bin/phpunit --testsuite EndToEnd --log-junit e2e-junit.xml
 
-      - name: Upload E2E artifacts
+      - name: Upload End-to-End artifacts
         if: ${{ failure() }}
         uses: actions/upload-artifact@v7
         with:
           name: e2e-artifacts
-          path: tests/E2E/artifacts/
+          path: tmp/e2e-artifacts/
           retention-days: 7
           if-no-files-found: ignore
 ```
@@ -653,7 +734,8 @@ GitHub Actions では、データベースのサービスと、chromedriver と�
 [ワークフローの全体](https://github.com/pieceofcake2/e2e-test/blob/1.x/docs/examples/e2e.yml) では、
 テスト用データベースとして MySQL も用意しています。ビルドで CSS や JavaScript のファイルを生成する
 場合は、E2E のステップの前にビルドしてください。スタイルシートがない場合は
-`assertStylesheetsLoaded()` が失敗します。
+`assertStylesheetsLoaded()` が失敗します。`phpunit.xml.dist` から `defaultTestSuite` を削除した場合は、
+ユニットテストのジョブを `--testsuite App` で実行してください。
 
 CI のワークフローのほかのジョブと、アーティファクトへのリンクがあるジョブサマリーについては、
 [継続的インテグレーション](/ja/development/continuous-integration) を参照してください。
@@ -672,10 +754,10 @@ CI のワークフローのほかのジョブと、アーティファクトへ�
   遅い CI マシンでは、待機を追加するのではなく `E2E_WAIT_TIMEOUT` を増やしてください。
 - **外部ホスト**: Chrome はアプリケーションのホストしか名前解決しないので、アクセス解析、広告、
   Web フォント、CDN は読み込まれず、テストが遅くなったり失敗したりしません。ページに必要なホストは
-  `browser.allowedHosts` オプションに追加するか、テストではファイルをローカルから配信してください。
-- **デバッグ出力**: サーバーにデバッグ用のフラグ (ブートストラップの例では `E2E_DEBUG=1`) を渡すと、
-  `SecurityComponent` がリクエストをブラックホールに送った理由など、CakePHP のエラーページを
-  確認できます。
+  `E2E_ALLOWED_HOSTS` に追加するか、テストではファイルをローカルから配信してください。
+- **デバッグ出力**: サーバーでデバッグを有効にすると
+  (`E2E_SERVER_ENV_DEBUG=2 vendor/bin/phpunit --testsuite EndToEnd ...`)、`SecurityComponent` が
+  リクエストをブラックホールに送った理由など、CakePHP のエラーページを確認できます。
 - **アップロード**: ブラウザーからアップロードしたファイルはサーバーが保存します。テストでは
   アップロード先を一時ディレクトリにするか、`tearDown()` でファイルを削除してください。
 
@@ -690,8 +772,17 @@ CI のワークフローのほかのジョブと、アーティファクトへ�
 **Docker や CI で Chrome が起動時にクラッシュする** (`session not created`、
 `DevToolsActivePort file doesn't exist`): `PANTHER_NO_SANDBOX=1` を設定してください。
 
+**`BrowserNotAvailableException`**: chromedriver か Chrome がないか、起動しません。プロジェクトの
+ルートで `vendor/bin/bdi detect drivers` を実行するか、`PANTHER_CHROME_DRIVER_BINARY` を設定して
+ください。Chrome のないマシンで E2E テストをスキップするには `E2E_SKIP_WITHOUT_BROWSER=1` を
+設定します。
+
+**`--filter` でテストが見つからない**: `--testsuite EndToEnd` を付けてください。
+`defaultTestSuite="App"` の場合、`--filter` は `App` スイートの中だけを探します。
+
 **すべてのページがエラーになる、または "Missing database table"**: サーバーがテスト用データベースを
-使っていないか、`$fixtures` にテーブルが足りません。`server.env` を確認し、失敗時のファイルの
+使っていないか、`$fixtures` にテーブルが足りません。`E2E_SERVER_DATASOURCE=test` と
+`config/database.php` の `E2E_DATASOURCE` の切り替えを確認し、失敗時のファイルの
 保存先にある `<test>-logs.txt` を読んでください。
 
 **リクエストのたびにログアウトする**: サーバーは HTTP で動くため、ブラウザーは secure 属性付きの
@@ -718,7 +809,8 @@ CI のワークフローのほかのジョブと、アーティファクトへ�
 
 [パッケージのドキュメント](https://pieceofcake2.github.io/e2e-test/) (英語) では、
 すべての設定オプション、`E2ETestCase` と `BrowserTestTrait` のすべてのヘルパーとアサーション、
-`Environment`、`Server`、`ChromeClientFactory`、`E2EExtension` の各クラスを説明しています。
+すべての環境変数、`Environment`、`Server`、`ChromeClientFactory`、`E2EExtension` の各クラスを
+説明しています。
 `BrowserTestTrait` は、フィクスチャが不要なテストのために通常の PHPUnit の `TestCase` でも使えます。
 ブラウザーのオブジェクトは Panther のクライアントなので、Panther と php-webdriver の機能も
 すべて使えます。

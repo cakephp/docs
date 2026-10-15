@@ -23,10 +23,11 @@ A CakePHP application is usually tested on these levels:
   components, and check the response, the session, cookies, flash messages and
   the emails sent. They also run in the PHPUnit process without an HTTP server.
   See [Integration Testing](/development/integration-testing).
-- **Browser end-to-end (E2E) tests** start the application with a web server
+- **Browser End-to-End (E2E) tests** start the application with a web server
   and use it through a real browser, including JavaScript, cookies, sessions
   and `SecurityComponent` tokens. They are slower, so keep them for the main
-  user flows. See [End-to-End Testing](/development/e2e-testing).
+  user flows. They live in `tests/TestCase/EndToEnd/` and run as the
+  `EndToEnd` test suite. See [End-to-End Testing](/development/e2e-testing).
 
 `ControllerTestCase` and `testAction()` remain supported. For new controller
 tests, integration tests are usually the better choice: they need fewer mocks
@@ -253,14 +254,24 @@ The recommended way to run tests is from the command line. The
 ``` xml
 <phpunit bootstrap="./tests/bootstrap.php"
          backupGlobals="true"
+         defaultTestSuite="App"
          stderr="true"
          colors="true">
+    <php>
+        <!-- Configuration of the End-to-End tests -->
+        <env name="E2E_SERVER_DATASOURCE" value="test"/>
+        <env name="E2E_SERVER_ENV_DEBUG" value="0"/>
+    </php>
     <listeners>
         <listener class="CakeFixtureInjector" file="./vendor/pieceofcake2/cakephp/src/Cake/TestSuite/Fixture/CakeFixtureInjector.php"/>
     </listeners>
     <testsuites>
-        <testsuite name="All Tests">
+        <testsuite name="App">
             <directory>./tests/TestCase/</directory>
+            <exclude>./tests/TestCase/EndToEnd/</exclude>
+        </testsuite>
+        <testsuite name="EndToEnd">
+            <directory>./tests/TestCase/EndToEnd/</directory>
         </testsuite>
     </testsuites>
 </phpunit>
@@ -273,15 +284,31 @@ is registered. `stderr="true"` makes tests that use sessions work (see
 [Running tests that use sessions](#running-tests-that-use-sessions)). If your
 project doesn't have this file yet, copy it from the skeleton.
 
+The file has two test suites. `App` contains your tests in `tests/TestCase/`,
+and `EndToEnd` contains the browser tests in `tests/TestCase/EndToEnd/` (see
+[End-to-End Testing](/development/e2e-testing)). `defaultTestSuite="App"` makes
+`vendor/bin/phpunit` run only the `App` suite, so it stays fast and needs no
+browser. Select the suites with `--testsuite`:
+
+``` bash
+vendor/bin/phpunit --testsuite EndToEnd
+vendor/bin/phpunit --testsuite App,EndToEnd
+```
+
+Delete the `defaultTestSuite` attribute to make `vendor/bin/phpunit` run every
+suite, as a Symfony application does. The `<env>` entries configure the
+End-to-End tests and have no effect on the other tests.
+
 <a id="run-tests-from-command-line"></a>
 
 ### Running tests from command line
 
-Run PHPUnit from the root of your project. Without arguments, it runs every
-test in `tests/TestCase/`. You can also pass a directory or a single file:
+Run PHPUnit from the root of your project. Without arguments, it runs the
+default test suite, `App`: every test in `tests/TestCase/` except the
+End-to-End tests. You can also pass a directory or a single file:
 
 ``` bash
-# Run all tests
+# Run the tests of the App suite
 vendor/bin/phpunit
 
 # Run the tests in a directory
