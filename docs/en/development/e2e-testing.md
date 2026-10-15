@@ -1,4 +1,4 @@
-# E2E Testing
+# End-to-End Testing {#e2e-testing}
 
 End-to-end (E2E) tests open your application in a real browser and use it the
 way a user does: they click links, fill in forms, press buttons and check what
@@ -14,7 +14,7 @@ This page explains when E2E tests are useful, how to set them up and how to
 write them. The [package documentation](https://pieceofcake2.github.io/e2e-test/)
 is the full reference for every option and method.
 
-## When to Use E2E Tests
+## When to Use End-to-End Tests {#when-to-use-e2e-tests}
 
 CakePHP applications are usually tested on several levels (see
 [Types of Tests](/development/testing#types-of-tests)):

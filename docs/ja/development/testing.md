@@ -24,10 +24,10 @@ CakePHP アプリケーションのテストは、通常次のレベルで行い
   セッション、Cookie、フラッシュメッセージ、送信されたメールを確認します。こちらも HTTP サーバーを
   使わずに PHPUnit のプロセス内で実行します。[統合テスト](/ja/development/integration-testing) を
   参照してください。
-- **ブラウザーによる E2E (エンドツーエンド) テスト** は、Web サーバーでアプリケーションを起動し、
+- **ブラウザーによるエンドツーエンド (E2E) テスト** は、Web サーバーでアプリケーションを起動し、
   本物のブラウザーで操作します。JavaScript、Cookie、セッション、`SecurityComponent` の
   トークンも含めて確認できます。実行に時間がかかるため、主要な操作の流れに絞って使います。
-  [E2E テスト](/ja/development/e2e-testing) を参照してください。
+  [エンドツーエンドテスト](/ja/development/e2e-testing) を参照してください。
 
 `ControllerTestCase` と `testAction()` は引き続きサポートされています。新しくコントローラーのテストを
 書くときは、通常は統合テストのほうが適しています。モックが少なくて済み、`SecurityComponent` の

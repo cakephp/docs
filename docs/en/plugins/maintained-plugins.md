@@ -21,7 +21,7 @@ repository where the package has no documentation site.
   (see [Static Analysis](/development/static-analysis))
 - [E2E Test](https://pieceofcake2.github.io/e2e-test/) - Browser end-to-end tests
   with PHPUnit and Symfony Panther (Chrome, PC and mobile)
-  (see [E2E Testing](/development/e2e-testing))
+  (see [End-to-End Testing](/development/e2e-testing))
 
 ## Maintained plugins
 

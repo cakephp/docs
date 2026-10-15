@@ -42,7 +42,7 @@ CakePHP アプリケーションのテストは、通常いくつかのレベル
 使えます。テストを 1 つずつ移行しても、新しいテストだけを `IntegrationTestTrait` で書いてもかまいません。
 
 統合テストは JavaScript を実行せず、ブラウザーで描画もしません。複数のページにまたがる操作の流れを
-本物のブラウザーでテストするには [E2E テスト](/ja/development/e2e-testing) を使ってください。
+本物のブラウザーでテストするには [エンドツーエンド (E2E) テスト](/ja/development/e2e-testing) を使ってください。
 モデル、ビヘイビア、ライブラリのロジックはユニットテストで確認します。
 
 <a id="migrating-from-testaction"></a>

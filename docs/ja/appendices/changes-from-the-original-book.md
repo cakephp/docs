@@ -53,7 +53,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
 - [出力時のエスケープと HTML の無害化](/ja/security/escaping-and-sanitizing-html)
 - [PHPUnit 9.6 への移行](/ja/appendices/phpunit-9-migration-hints)
 - [統合テスト](/ja/development/integration-testing)
-- [E2E テスト](/ja/development/e2e-testing)
+- [エンドツーエンドテスト](/ja/development/e2e-testing)
 - [メンテナンスされているプラグイン](/ja/plugins/maintained-plugins)
 - [静的解析](/ja/development/static-analysis)
 - [継続的インテグレーション](/ja/development/continuous-integration) (静的解析のページにあった CI のジョブサマリーの節をここに移動)
@@ -333,7 +333,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - テストスイートは TESTS . 'TestCase' を使用。phpunit.xml.dist を使う場合 AllTests は不要と記載
   - プラグインのテストは plugins/&lt;Name>/tests/TestCase (Test/Case も可)
   - Jenkins: 新しい継続的インテグレーションのページの最後 (GitHub Actions のワークフローの後) に移動。composer install の手順、config/database.php、vendor/bin/phpunit、jenkins.io へのリンク。test-database-setup と generating-code-coverage のアンカーを明示的に追加
-  - 「テストの種類」の節を追加: フィクスチャを使うユニットテスト、testAction() によるコントローラーのテスト、ブラウザーによる E2E テスト (E2E テストのページへのリンク)。testing-controllers のアンカーを明示的に追加
+  - 「テストの種類」の節を追加: フィクスチャを使うユニットテスト、testAction() によるコントローラーのテスト、ブラウザーによるエンドツーエンド (E2E) テスト (エンドツーエンドテストのページへのリンク)。testing-controllers のアンカーを明示的に追加
   - 「テストの種類」に `IntegrationTestTrait` による統合テストを追加 (統合テストのページへのリンク)。`ControllerTestCase` は引き続きサポートされていることを記載。「コントローラーのテスト」に統合テストのページへのリンクのヒントを追加。test-case-conventions のアンカーを明示的に追加
 - [REST](/ja/development/rest)
   - パスを config/routes.php、src/Controller、templates/Recipes/xml に更新

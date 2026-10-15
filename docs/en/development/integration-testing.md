@@ -43,7 +43,7 @@ write only the new tests with `IntegrationTestTrait`.
 
 Integration tests do not run JavaScript and do not render anything in a
 browser. To test a user flow across several pages in a real browser, use
-[E2E tests](/development/e2e-testing). Test the logic of models, behaviors and
+[end-to-end (E2E) tests](/development/e2e-testing). Test the logic of models, behaviors and
 libraries with unit tests.
 
 ### Migrating from testAction()
