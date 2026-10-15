@@ -13,16 +13,46 @@ output. This page explains the two tools for that:
 
 Current guidance, such as the
 [OWASP XSS Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html),
-comes down to three rules (see [References](#references)):
+comes down to four rules (see [References](#references)):
 
-1. **Escape at output time, for the context.** Store the data as it was
-   entered and escape it when you output it, with the encoding for the place
-   where it goes (HTML text, attribute, URL, JavaScript). Escaping on input
-   breaks the data and still misses contexts.
-2. **Never output untrusted data unescaped,** except HTML that went through an
+1. **Validate input.** Check every value on the server against what the field
+   allows (type, length, format, allowed values, valid UTF-8) and reject the
+   request when it doesn't match. See [Validate Input](#validate-input).
+2. **Escape at output time, for the context.** Save validated data as it was
+   entered, without HTML-escaping it, and escape it when you output it, with
+   the encoding for the place where it goes (HTML text, attribute, URL,
+   JavaScript). Escaping on input breaks the data and still misses contexts.
+3. **Never output untrusted data unescaped,** except HTML that went through an
    HTML sanitizer.
-3. **Add a second layer** with a Content Security Policy, so that a mistake
+4. **Add a second layer** with a Content Security Policy, so that a mistake
    does not become an exploitable XSS.
+
+Validation and escaping do different jobs: validation keeps invalid data out,
+escaping keeps valid data from being run as code. A comment field may
+legitimately contain `<script>`, so validation alone never prevents XSS, and
+escaping alone does not stop invalid data from being saved. Use both.
+
+## Validate Input {#validate-input}
+
+Validate all data from the request (form data, query strings, cookies, headers
+and uploaded files) before you save it or use it:
+
+- Define rules for every field in the model's `$validate`, and save with
+  validation enabled (`save()` validates by default; do not pass
+  `'validate' => false` for user data). See [Data Validation](/models/data-validation).
+- Prefer allow lists: `inList` for fixed choices, `naturalNumber`, `date`,
+  `email`, `url`, `maxLength` and `custom` patterns for formats. Limit the
+  length of every text field.
+- Reject invalid input instead of repairing it. Do not strip or rewrite values
+  silently; show the validation errors to the user.
+- Check the character encoding. From v2.12.6, the `utf8` rule rejects invalid
+  UTF-8 byte sequences (and, by default, characters outside the Basic
+  Multilingual Plane for MySQL's 3-byte `utf8`; use `'extended' => true` for
+  `utf8mb4`).
+- Validate on the server. Checks in the browser (HTML5 attributes,
+  JavaScript) are only a convenience for the user.
+- Limit which fields can be saved with the `fieldList` option of `save()`, so
+  that a request cannot set fields such as `role` or `user_id`.
 
 ## Escape by Default {#escape-by-default}
 
@@ -135,9 +165,3 @@ reason about. Use `h()` and the libraries above instead; see
 - [OWASP Content Security Policy Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html)
 - [OWASP Application Security Verification Standard (ASVS)](https://owasp.org/www-project-application-security-verification-standard/):
   verification requirements for encoding, sanitization and security headers
-- [Mitigate cross-site scripting (XSS) with a strict Content Security Policy](https://web.dev/articles/strict-csp)
-  (web.dev)
-- [安全なウェブサイトの作り方 (How to Secure Your Website)](https://www.ipa.go.jp/security/vuln/websecurity/about.html)
-  (IPA, Information-technology Promotion Agency, Japan; in Japanese, the
-  English edition dates from 2011): the cross-site scripting section
-- [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP) (MDN)

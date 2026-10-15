@@ -50,9 +50,25 @@ protection (`$csrfCheck`, enabled by default) validates a token on every
 request except GET, HEAD and OPTIONS. Do not disable the checks for whole
 controllers; unlock only the actions or fields that need it.
 
-Also validate input with [Data Validation](/models/data-validation), and do
-not build view, layout or element names or `Xml::build()` input from user
+Do not build view, layout or element names or `Xml::build()` input from user
 input without checking it (see [Security Fixes](/security/fixes)).
+
+## Validate Input {#validate-input}
+
+Validate every field from the request on the server with model validation
+rules, and save user data with validation enabled. Use allow lists and length
+limits, limit the saved fields with `fieldList`, and from v2.12.6 reject
+invalid UTF-8 with the `utf8` rule. See
+[Validate Input](/security/escaping-and-sanitizing-html#validate-input) and
+[Data Validation](/models/data-validation).
+
+## Escape Output and Sanitize HTML {#escape-output}
+
+Escape every value you output with `h()` (templates do not escape
+automatically), encode values for URLs and JavaScript, and pass HTML from users
+through a maintained sanitizer such as Symfony HtmlSanitizer or HTML Purifier.
+Add a Content Security Policy as a second layer. See
+[Output Escaping and HTML Sanitization](/security/escaping-and-sanitizing-html).
 
 ## Secure Cookies and Sessions {#cookies-and-sessions}
 

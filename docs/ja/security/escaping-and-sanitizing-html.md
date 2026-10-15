@@ -10,15 +10,42 @@
 - **無害化** (サニタイズ) は HTML を残したまま、許可リストにないものをすべて取り除き、
   HTML として出力できるようにします。ユーザーに HTML の入力を許可している箇所だけで使います。
 
-IPA の [安全なウェブサイトの作り方](https://www.ipa.go.jp/security/vuln/websecurity/about.html) や
 [OWASP XSS Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)
-など近年のガイドラインは、次の 3 つにまとめられます ([参考資料](#references))。
+など近年のガイドラインは、次の 4 つにまとめられます ([参考資料](#references))。
 
-1. **出力する時に、出力先に合わせてエスケープする。** データは入力されたまま保存し、出力する時に、
-   出力先 (HTML の本文、属性、URL、JavaScript) に合ったエンコードでエスケープします。
-   入力時のエスケープはデータを壊すうえ、出力先の違いに対応できません。
-2. **信頼できないデータをエスケープせずに出力しない。** 例外は、無害化ライブラリを通した HTML だけです。
-3. **Content Security Policy で二重に守る。** 漏れがあっても、悪用できる XSS にならないようにします。
+1. **入力を検証する。** すべての値をサーバー側で、その項目に許される内容 (型、長さ、形式、
+   許可する値、正しい UTF-8) と照らし合わせ、合わなければリクエストを拒否します。
+   [入力の検証](#validate-input) を参照してください。
+2. **出力する時に、出力先に合わせてエスケープする。** 検証したデータは HTML のエスケープをせずに
+   入力されたまま保存し、出力する時に、出力先 (HTML の本文、属性、URL、JavaScript) に合った
+   エンコードでエスケープします。入力時のエスケープはデータを壊すうえ、出力先の違いに対応できません。
+3. **信頼できないデータをエスケープせずに出力しない。** 例外は、無害化ライブラリを通した HTML だけです。
+4. **Content Security Policy で二重に守る。** 漏れがあっても、悪用できる XSS にならないようにします。
+
+検証とエスケープは役割が違います。検証は不正なデータを入れないため、エスケープは正しいデータが
+コードとして実行されないためのものです。コメント欄に `<script>` と書くのは正当な入力でありうるため、
+検証だけでは XSS を防げません。エスケープだけでは不正なデータの保存を防げません。両方を使ってください。
+
+<a id="validate-input"></a>
+
+## 入力の検証
+
+リクエストから受け取るすべてのデータ (フォームのデータ、クエリ文字列、クッキー、ヘッダー、
+アップロードされたファイル) は、保存したり使ったりする前に検証します。
+
+- すべての項目のルールをモデルの `$validate` に定義し、検証を有効にしたまま保存します
+  (`save()` は既定で検証します。ユーザーのデータに `'validate' => false` を指定しないでください)。
+  [データバリデーション](/ja/models/data-validation) を参照してください。
+- 許可リストを優先します。決まった選択肢には `inList`、形式には `naturalNumber`、`date`、
+  `email`、`url`、`maxLength`、`custom` のパターンを使います。テキストの項目には必ず長さの上限を設けます。
+- 不正な入力は直さずに拒否します。値を黙って削ったり書き換えたりせず、検証エラーをユーザーに表示します。
+- 文字コードを確認します。v2.12.6 からは、`utf8` ルールで不正な UTF-8 のバイト列を拒否できます
+  (既定では、MySQL の 3 バイトの `utf8` 向けに基本多言語面より外の文字も拒否します。
+  `utf8mb4` では `'extended' => true` を指定してください)。
+- 検証はサーバー側で行います。ブラウザーでのチェック (HTML5 の属性や JavaScript) は、
+  ユーザーの利便のためのものにすぎません。
+- `save()` の `fieldList` オプションで保存できる項目を限定し、リクエストから `role` や `user_id`
+  のような項目を書き換えられないようにします。
 
 <a id="escape-by-default"></a>
 
@@ -132,13 +159,8 @@ CakePHP 2 の `Sanitize` クラスは非推奨です。`html()` メソッドは�
 
 ## 参考資料
 
-- [安全なウェブサイトの作り方](https://www.ipa.go.jp/security/vuln/websecurity/about.html)
-  (IPA 独立行政法人情報処理推進機構): クロスサイト・スクリプティングの章
 - [OWASP Cross Site Scripting Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html):
   出力先ごとのエンコードと HTML の無害化
 - [OWASP Content Security Policy Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html)
 - [OWASP Application Security Verification Standard (ASVS)](https://owasp.org/www-project-application-security-verification-standard/):
   エンコード、無害化、セキュリティヘッダーの検証要件
-- [Mitigate cross-site scripting (XSS) with a strict Content Security Policy](https://web.dev/articles/strict-csp)
-  (web.dev)
-- [Content Security Policy](https://developer.mozilla.org/ja/docs/Web/HTTP/Guides/CSP) (MDN)
