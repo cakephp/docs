@@ -341,6 +341,7 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
   - Added a "Deploying to AWS Lambda" section linking to the new page
 - [Deploying to AWS Lambda](/deployment/aws-lambda)
   - New page: deploying the pieceofcake2/app skeleton to AWS Lambda with Bref 3 and Docker container images (TMP/LOGS in /tmp, SCRIPT_NAME and HTTPS for Bref's FPM runtime, logs to stderr), configuration with environment variables and SSM Parameter Store (`bref-ssm:`), DynamoDB sessions and SES email with pieceofcake2/aws, cache, S3 uploads with presigned URLs, static assets with Lift (S3 + CloudFront), RDS, console commands and schedules, local testing with the Runtime Interface Emulator, and deployment from GitHub Actions with OIDC
+  - Tip: pieceofcake2/async-aws offers the same session handler, SES transport, cache engine and S3 stream wrapper with smaller dependencies (AsyncAws); the cache section points to its `AsyncAws.DynamoDb` engine, and the S3 section mentions its stream wrapper
 
 ### Security
 
@@ -395,6 +396,8 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
   - composer.json installer-paths and allow-plugins (composer/installers, Composer 2.2+) documented as required so plugins land in plugins/&lt;Name>/
 - [How To Use Plugins](/plugins/how-to-use-plugins)
   - Plugin loading shown in config/bootstrap.php with plugin Config/ file locations; schema command uses bin/cake
+- [Maintained Plugins](/plugins/maintained-plugins)
+  - The AsyncAws plugin is described as a lighter alternative to the Aws plugin
 
 ### Contributing
 

@@ -508,6 +508,15 @@ Configure::write('Aws', [
 The IAM role of the functions needs a permission for each service that the
 application uses, as in the `iam` section of the `serverless.yml` example.
 
+::: tip
+[pieceofcake2/async-aws](https://pieceofcake2.github.io/async-aws/) offers the
+same DynamoDB session handler, SES email transport, DynamoDB cache engine and
+S3 stream wrapper with smaller dependencies: it uses
+[AsyncAws](https://async-aws.com), which installs only the AWS services that
+you use instead of the whole AWS SDK. This keeps the Lambda package small. See
+[Migrating from pieceofcake2/aws](https://pieceofcake2.github.io/async-aws/#migrating-from-pieceofcake2aws).
+:::
+
 ### Sessions
 
 The default `php` session handler stores sessions in files in `/tmp`, which are
@@ -578,8 +587,9 @@ ElastiCache runs in a VPC, so the functions must run in the same VPC (see
 `RedisEngine` has no TLS option, so use a cluster without in-transit
 encryption inside a private VPC, or check that your PHP Redis client accepts
 the `tls://` prefix in `server` before you rely on it. For a pay-per-request
-alternative without a VPC, DynamoDB can store cached data, but CakePHP 2 has no
-DynamoDB cache engine. See [Caching](/core-libraries/caching) for the cache
+alternative without a VPC, store cached data in DynamoDB with the
+`AsyncAws.DynamoDb` engine of
+[pieceofcake2/async-aws](https://pieceofcake2.github.io/async-aws/#dynamodb-cache-engine). See [Caching](/core-libraries/caching) for the cache
 engines.
 
 ### Email
@@ -692,7 +702,8 @@ local filesystem. To use it on Lambda, its `handleUploadedFileCallback` option
 can name a model method that stores the file elsewhere; check that the paths
 the plugin creates are under `/tmp`. The AWS plugin can also register the
 [S3 stream wrapper](https://pieceofcake2.github.io/aws/#s3-stream-wrapper), so
-that PHP file functions accept `s3://bucket/key` paths.
+that PHP file functions accept `s3://bucket/key` paths; pieceofcake2/async-aws
+has the [same wrapper](https://pieceofcake2.github.io/async-aws/#s3-stream-wrapper).
 
 ### Static Assets
 

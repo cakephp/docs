@@ -336,6 +336,7 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - 新しいページへのリンクとして「AWS Lambda へのデプロイ」の節を追加
 - [AWS Lambda へのデプロイ](/ja/deployment/aws-lambda)
   - 新しいページ: pieceofcake2/app スケルトンを Bref 3 と Docker コンテナイメージで AWS Lambda にデプロイする方法 (TMP/LOGS を /tmp に、Bref の FPM ランタイム用の SCRIPT_NAME と HTTPS、stderr へのログ出力)、環境変数と SSM パラメータストア (`bref-ssm:`) による設定、pieceofcake2/aws による DynamoDB のセッションと SES のメール、キャッシュ、署名付き URL による S3 へのアップロード、Lift (S3 + CloudFront) による静的なアセット、RDS、コンソールのコマンドとスケジュール、Runtime Interface Emulator によるローカルでのテスト、OIDC を使った GitHub Actions からのデプロイ
+  - ヒント: pieceofcake2/async-aws が同じセッションハンドラー、SES トランスポート、キャッシュエンジン、S3 ストリームラッパーをより小さな依存関係 (AsyncAws) で提供することを追加。キャッシュの節で `AsyncAws.DynamoDb` エンジンを、S3 の節でそのストリームラッパーを紹介
 
 ### セキュリティ
 
@@ -390,6 +391,8 @@ CakePHP 2 と本家の CakePHP 2.10.24 との違いをまとめ、本家のド�
   - プラグインを plugins/&lt;Name>/ にインストールするために composer.json の installer-paths と allow-plugins (composer/installers、Composer 2.2 以降) の設定が必須であることを明記
 - [プラグインの使い方](/ja/plugins/how-to-use-plugins)
   - プラグインのロードを config/bootstrap.php で行うことと、プラグインの Config/ 内のファイルの場所を記載し、schema コマンドを bin/cake に変更
+- [メンテナンスされているプラグイン](/ja/plugins/maintained-plugins)
+  - AsyncAws プラグインを Aws プラグインより軽量な代替として紹介
 
 ### 貢献
 
