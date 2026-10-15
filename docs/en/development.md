@@ -12,7 +12,7 @@ debugging, and testing will be covered.
 - [Debugging](development/debugging)
 - [Testing](development/testing)
 - [Integration Testing](development/integration-testing)
-- [E2E Testing](development/e2e-testing)
+- [End-to-End Testing](development/e2e-testing)
 - [Static Analysis](development/static-analysis)
 - [Continuous Integration](development/continuous-integration)
 - [REST](development/rest)

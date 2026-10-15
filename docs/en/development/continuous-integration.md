@@ -18,13 +18,13 @@ A CakePHP 2 application usually runs these jobs:
 | PHPUnit | `vendor/bin/phpunit` | Unit tests and integration tests, on each supported PHP version | [Testing](/development/testing), [Integration Testing](/development/integration-testing) |
 | Coding standard | `vendor/bin/phpcs` | The CakePHP coding standard | [Coding Standards](/contributing/cakephp-coding-conventions) |
 | PHPStan | `vendor/bin/phpstan` | Bugs found without running the code | [Static Analysis](/development/static-analysis) |
-| E2E | `vendor/bin/phpunit -c phpunit.e2e.xml.dist` | Pages in a real browser | [E2E Testing](/development/e2e-testing) |
+| E2E | `vendor/bin/phpunit -c phpunit.e2e.xml.dist` | Pages in a real browser | [End-to-End Testing](/development/e2e-testing) |
 
 The `pieceofcake2/app` skeleton already includes the configuration for the
 first three: `phpunit.xml.dist`, `phpcs.xml` and `phpstan.neon`, with PHPUnit,
 the CakePHP codesniffer, PHPStan and
 [pieceofcake2/phpstan-cakephp2](https://pieceofcake2.github.io/phpstan-cakephp2/)
-as development dependencies. E2E tests need
+as development dependencies. End-to-end (E2E) tests need
 [pieceofcake2/e2e-test](https://pieceofcake2.github.io/e2e-test/) and a little
 setup; add that job when you have E2E tests.
 
@@ -410,7 +410,7 @@ cs2pr reads, and `--no-progress` keeps the log short. The job needs no
 database. See [Static Analysis](/development/static-analysis) for the
 configuration, the rule level and the baseline.
 
-### E2E Tests
+### End-to-End Tests {#e2e-tests}
 
 The E2E job runs the browser tests of
 [pieceofcake2/e2e-test](https://pieceofcake2.github.io/e2e-test/) with their
@@ -424,7 +424,7 @@ logs; the upload step keeps them as an artifact of the run for 7 days. Make
 its `path` match the `artifactsDir` of your E2E bootstrap file. If your build
 creates CSS or JavaScript files, build them before the E2E tests.
 
-See [E2E Testing](/development/e2e-testing#continuous-integration) and the
+See [End-to-End Testing](/development/e2e-testing#continuous-integration) and the
 [CI section of the e2e-test documentation](https://pieceofcake2.github.io/e2e-test/#ci-with-github-actions).
 
 ## Job Summaries
@@ -499,7 +499,7 @@ it adds the annotations to the pull request, and the summary shows the list.
 
 The action also reads PHPStan's JSON output (`--error-format=json`).
 
-### E2E Tests
+### End-to-End Tests {#e2e-tests-1}
 
 Write a JUnit report in the E2E step, and pass the name of the uploaded
 artifact as `artifact-name`. When tests failed, the summary adds a line that

@@ -26,7 +26,7 @@ A CakePHP application is usually tested on these levels:
 - **Browser end-to-end (E2E) tests** start the application with a web server
   and use it through a real browser, including JavaScript, cookies, sessions
   and `SecurityComponent` tokens. They are slower, so keep them for the main
-  user flows. See [E2E Testing](/development/e2e-testing).
+  user flows. See [End-to-End Testing](/development/e2e-testing).
 
 `ControllerTestCase` and `testAction()` remain supported. For new controller
 tests, integration tests are usually the better choice: they need fewer mocks

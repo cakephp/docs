@@ -18,12 +18,12 @@ CakePHP 2 のアプリケーションでは、通常、次のジョブを実行�
 | PHPUnit | `vendor/bin/phpunit` | ユニットテストと統合テスト (サポートする PHP のバージョンごと) | [テスト](/ja/development/testing)、[統合テスト](/ja/development/integration-testing) |
 | コーディング規約 | `vendor/bin/phpcs` | CakePHP のコーディング規約 | [コーディング規約](/ja/contributing/cakephp-coding-conventions) |
 | PHPStan | `vendor/bin/phpstan` | コードを実行せずに見つかるバグ | [静的解析](/ja/development/static-analysis) |
-| E2E | `vendor/bin/phpunit -c phpunit.e2e.xml.dist` | 本物のブラウザーでのページの動作 | [E2E テスト](/ja/development/e2e-testing) |
+| E2E | `vendor/bin/phpunit -c phpunit.e2e.xml.dist` | 本物のブラウザーでのページの動作 | [エンドツーエンドテスト](/ja/development/e2e-testing) |
 
 `pieceofcake2/app` スケルトンには、最初の 3 つの設定ファイル `phpunit.xml.dist`、`phpcs.xml`、
 `phpstan.neon` が含まれており、PHPUnit、CakePHP のコードスニファー、PHPStan、
 [pieceofcake2/phpstan-cakephp2](https://pieceofcake2.github.io/phpstan-cakephp2/) が開発用の
-依存パッケージになっています。E2E テストには
+依存パッケージになっています。エンドツーエンド (E2E) テストには
 [pieceofcake2/e2e-test](https://pieceofcake2.github.io/e2e-test/) と少しのセットアップが必要です。
 E2E テストを書いたら、このジョブを追加してください。
 
@@ -408,7 +408,7 @@ PHPStan のジョブは、
 
 <a id="e2e-tests"></a>
 
-### E2E テスト
+### エンドツーエンドテスト {#e2e-テスト}
 
 E2E のジョブは、[pieceofcake2/e2e-test](https://pieceofcake2.github.io/e2e-test/) のブラウザー
 テストを専用の `phpunit.e2e.xml.dist` で実行します。PHPUnit のジョブと同じくデータベースが必要で、
@@ -421,7 +421,7 @@ E2E のジョブは、[pieceofcake2/e2e-test](https://pieceofcake2.github.io/e2e
 ブートストラップファイルの `artifactsDir` に合わせてください。ビルドで CSS や JavaScript の
 ファイルを生成する場合は、E2E テストの前にビルドしてください。
 
-[E2E テスト](/ja/development/e2e-testing#continuous-integration) と
+[エンドツーエンドテスト](/ja/development/e2e-testing#continuous-integration) と
 [e2e-test のドキュメントの CI の節](https://pieceofcake2.github.io/e2e-test/#ci-with-github-actions)
 を参照してください。
 
@@ -499,7 +499,7 @@ E2E のジョブは、[pieceofcake2/e2e-test](https://pieceofcake2.github.io/e2e
 
 <a id="e2e-tests-1"></a>
 
-### E2E テスト
+### エンドツーエンドテスト {#e2e-テスト-1}
 
 E2E のステップで JUnit のレポートを書き出し、アップロードするアーティファクトの名前を
 `artifact-name` に渡します。テストが失敗した場合、サマリーには、スクリーンショットやログがある
