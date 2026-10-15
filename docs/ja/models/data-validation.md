@@ -1301,6 +1301,41 @@ public $validate = [
 
 ユーザ定義のバリデーションを行います。
 
+`static` Validation::**utf8**(mixed $check, array $options = [])
+
+::: pieceofcake2
+v2.12.6 で追加されました。CakePHP 5 の `Validation::utf8()` のバックポートです。
+:::
+
+このルールは値が正しい UTF-8 文字列かどうかを検査します。デフォルトでは、
+基本多言語面 (BMP) より上の文字 (絵文字などの 4 バイト文字) も拒否します。
+これらは MySQL の `utf8` (`utf8mb3`) 文字セットには保存できません。
+
+``` php
+public $validate = [
+    'title' => [
+        'rule' => 'utf8',
+        'message' => '絵文字などの 4 バイト文字は使用できません。',
+    ],
+];
+```
+
+`extended` オプションを `true` にすると 4 バイト文字も許可します。
+`utf8mb4` のカラムなどで使います。
+
+``` php
+public $validate = [
+    'body' => [
+        'rule' => ['utf8', ['extended' => true]],
+    ],
+];
+```
+
+どちらのモードでも、不正な UTF-8 のバイト列 (途中で切れたバイト列、冗長な (overlong)
+エンコード、UTF-8 にエンコードされたサロゲート `"\xED\xA0\x80"` など) は拒否します。
+文字列以外の値 (配列、整数、`null`) も拒否します。空文字列は有効なので、値を必須にするには
+`notBlank` と組み合わせてください。
+
 `static` Validation::**uuid**(string $check)
 
 正当な UUID <https://tools.ietf.org/html/rfc4122> かどうかを検査します。

@@ -151,6 +151,7 @@ plugins point to their documentation sites (`https://pieceofcake2.github.io/<rep
 - [Saving Your Data](/models/saving-your-data)
   - Example file comments use src/Controller/ and templates/
 - [Data Validation](/models/data-validation)
+  - Added the `utf8` rule (v2.12.6, backport from CakePHP 5)
   - Localized validation classes in src/Validation (autoloaded via classmap or App::uses()); Localized plugin link points to pieceofcake2/localized; removed Windows/mod_php note
 - [Callback Methods](/models/callback-methods)
   - Example path uses src/Model/
