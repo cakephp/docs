@@ -96,28 +96,7 @@ class CreateArticles extends BaseMigration
 
 :::
 
-::: warning Composite Primary Key Adjustment
-The `articles_tags` migration will need manual adjustment. The generated migration sets both columns to auto-increment:
-
-```php
-$table->addColumn('article_id', 'integer', [
-    'autoIncrement' => true, // [!code --]
-    'default' => null,
-    'limit' => 11,
-    'null' => false,
-]);
-$table->addColumn('tag_id', 'integer', [
-    'autoIncrement' => true, // [!code --]
-    'default' => null,
-    'limit' => 11,
-    'null' => false,
-]);
-```
-
-Remove the `autoIncrement` lines before running the migration to prevent foreign key problems.
-:::
-
-Once the `articles_tags` migration is corrected, run the migrations to create the tables:
+Run the migrations to create the tables:
 
 ```bash
 bin/cake migrations migrate
