@@ -26,6 +26,11 @@ Coming soon
 
 ## New Features
 
+### Database
+
+- `Cake\Database\Expression\JsonPathExpression` was added. This expression
+  object provides a fluent interface for defining JSON path expressions.
+
 ### TestSuite
 
 - `Cake\TestSuite\Fixture\DeleteStrategy` was added. This fixture strategy
