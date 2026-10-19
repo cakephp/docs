@@ -20,6 +20,19 @@ bin/cake upgrade rector --rules cakephp55 <path/to/app/src>
 
 - `Postgres` driver does not replace `FunctionsBuilder::concat()` expressions with `||` operations.
 
+### ORM
+
+- Joined association fields and contained association conditions now use the
+  association name when registering column types. When the association name
+  differs from the target table alias, such as when using `targetTable` or
+  calling `Table::setAlias()`, fields such as datetime columns are now correctly
+  converted to their PHP types instead of remaining strings.
+- `Cake\ORM\Query\CommonQueryTrait::addDefaultTypes()` now accepts an optional
+  second parameter, `?string $alias = null`, to register column types under a
+  specific alias. It defaults to the table alias. Query subclasses overriding
+  this method must add the optional parameter to their signature and pass it
+  through when calling `parent::addDefaultTypes()`.
+
 ## Deprecations
 
 Coming soon
