@@ -120,6 +120,10 @@ Some properties have also been renamed to better reflect their purpose. These ar
   `binary` columns to `varbinary`. The `fixed` option is no longer used;
   `TableSchemaInterface::TYPE_VARBINARY` is available for the new type.
 
+### Error
+
+- `Debugger::outputMask()`, `setOutputMask()` have been removed.
+
 ### Http
 
 - Using `$request->getParam('?')` to get the query params is no longer possible.
