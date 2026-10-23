@@ -71,7 +71,6 @@ following:
     'long' => [
         'className' => 'Cake\Cache\Engine\FileEngine',
         'duration' => '+1 week',
-        'probability' => 100,
         'path' => CACHE . 'long' . DS,
     ]
 ]
@@ -105,7 +104,6 @@ Cache::setConfig('short', [
 Cache::setConfig('long', [
     'className' => 'Cake\Cache\Engine\FileEngine',
     'duration' => '+1 week',
-    'probability' => 100,
     'path' => CACHE . 'long' . DS,
 ]);
 
@@ -147,8 +145,6 @@ Each engine accepts the following options:
   config. Useful when you need to delete a subset of data from a cache.
 - `prefix` Prepended to all entries. Good for when you need to share
   a keyspace with either another cache config or another application.
-- `probability` Probability of hitting a cache gc cleanup. Setting to 0 will disable
-  `Cache::gc()` from ever being called automatically.
 
 ### FileEngine Options
 
