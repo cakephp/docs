@@ -74,6 +74,29 @@ That's it. The `#[Scope]` attribute sets a path prefix for all routes in
 the controller. The `#[Get]` attribute maps each action to a URL path and HTTP
 method.
 
+The path argument can be omitted. Under `#[Scope('/articles')]`, `#[Get]`
+matches `/articles`; without a scope it matches `/`. Named options can still
+be supplied, for example `#[Post(name: 'create')]`.
+
+### Applications Without a Routes File
+
+For attribute-only routing, connect attributes in your application's `routes()`
+hook instead of **config/routes.php**:
+
+```php
+// In src/Application.php
+use Cake\Routing\RouteBuilder;
+
+public function routes(RouteBuilder $routes): void
+{
+    $routes->connectAttributes();
+}
+```
+
+When all routes are registered this way, **config/routes.php** can be omitted.
+If you also need file-based routes, call `parent::routes($routes)` before
+connecting attributes so the file is loaded first.
+
 ## Choosing Your Approach
 
 You have three options for defining routes in CakePHP:
