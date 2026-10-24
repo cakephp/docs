@@ -144,6 +144,14 @@ Some properties have also been renamed to better reflect their purpose. These ar
   and returns `null` when none exists. Use `getOrCreateTranslation()` if the
   previous create-on-access behavior is needed.
 
+- Joined association fields and contained association conditions now register
+  column types under the association name, including when it differs from the
+  target table alias. Datetime and other typed fields are converted correctly
+  instead of remaining strings.
+- `CommonQueryTrait::addDefaultTypes()` accepts an optional second parameter,
+  `?string $alias = null`. Query subclasses overriding this method must add
+  that parameter and forward it to `parent::addDefaultTypes()`.
+
 ### Router
 
 - `RouteBuilder` has adjusted the signature of `scope()`, `prefix()` and `resources()`
