@@ -19,12 +19,12 @@ are:
 
 To be defined
 
-## Upgrade to PHP 8.4
+## Upgrade to PHP 8.5
 
-If you are not running on **PHP 8.4 or higher**, you will need to upgrade PHP before updating CakePHP.
+If you are not running on **PHP 8.5 or higher**, you will need to upgrade PHP before updating CakePHP.
 
 > [!NOTE]
-> CakePHP 6.0 requires **a minimum of PHP 8.4**.
+> CakePHP 6.0 requires **a minimum of PHP 8.5**.
 
 <a id="upgrade-tool-use"></a>
 
