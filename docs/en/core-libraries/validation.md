@@ -675,6 +675,25 @@ Core rules that take additional parameters should have an array for the
 `rule` key that contains the rule as the first element, and the additional
 parameters as the remaining parameters.
 
+### Image Dimensions
+
+`imageSize()`, `imageWidth()` and `imageHeight()` validate image dimensions in
+pixels. For example, require an uploaded image to be at least 640 pixels wide:
+
+```php
+use Cake\Validation\Validation;
+
+$validator->add('photo', 'width', [
+    'rule' => ['imageWidth', Validation::COMPARE_GREATER_OR_EQUAL, 640],
+]);
+```
+
+PHP 8.5 can read SVG dimensions. Unitless dimensions and dimensions expressed
+in `px` are treated as pixels. A checked dimension in another unit, such as
+`cm`, `pt`, `%` or `em`, fails validation instead of being compared as pixels.
+Each axis is checked independently: a width-only rule does not reject an image
+solely because its height uses a non-pixel unit.
+
 ### IP and Range Validation
 
 You can validate that a value is a valid IP address or an IP range (subnet)
