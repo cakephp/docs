@@ -308,8 +308,15 @@ If your scoped client only needs information from the URL you can use
 $http = Client::createFromUrl('https://api.example.com/v1/test');
 ```
 
-The above would create a client instance with the `protocol`, `host`, and
-`basePath` options set.
+The above creates a client with `scheme`, `host`, `port` and `basePath`
+options derived from the URL. Query strings and fragments are not used to
+configure the scoped client.
+
+`createFromUrl()` uses PHP's WHATWG URL parser. Supply an absolute URL with
+a scheme and host. Malformed or relative URLs can throw
+`Uri\WhatWg\InvalidUrlException`; a parsed URL with no host raises
+`InvalidArgumentException`. The parser normalizes URLs, including removing
+default ports such as `:80` from HTTP URLs.
 
 The following information can be used when creating a scoped client:
 
