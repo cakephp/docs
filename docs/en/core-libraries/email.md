@@ -131,6 +131,9 @@ following configuration keys are used:
   variables to be used in the view. See `Mailer::setViewVars()`.
 - `attachments`: List of files to attach. See `Mailer::setAttachments()`.
 - `emailFormat`: Format of email (html, text or both). See `Mailer::setEmailFormat()`.
+- `transferEncoding`: Content transfer encoding for the message body. Accepts
+  `7bit`, `8bit`, `binary`, `base64`, `quoted-printable`, or `null` to choose
+  automatically from the charset. See `Mailer::setTransferEncoding()`.
 - `transport`: Transport configuration name. See [Email Transport](#email-transport).
 - `log`: Log level to log the email headers and message. `true` will use
   LOG_DEBUG. See [Logging Levels](../core-libraries/logging#logging-levels). Note that logs will be emitted under the scope named `email`.
@@ -143,6 +146,34 @@ following configuration keys are used:
 > as first parameter of corresponding methods. The equivalent for:
 > `$mailer->setFrom('my@example.com', 'My Site')`
 > would be defined as `'from' => ['my@example.com' => 'My Site']` in your config
+
+### Content Transfer Encoding
+
+Set `transferEncoding` in an `Email` profile to select the encoding used when
+the message body is rendered for delivery:
+
+```php
+// In config/app.php
+'Email' => [
+    'default' => [
+        'transport' => 'default',
+        'from' => 'notifications@example.com',
+        'transferEncoding' => 'quoted-printable',
+    ],
+],
+```
+
+You can also set it on a mailer:
+
+```php
+$mailer->setTransferEncoding('base64');
+```
+
+Pass unencoded text and HTML to the mailer. CakePHP applies `base64` or
+`quoted-printable` encoding when rendering the message, including CRLF line
+endings. Remove any workaround that manually encodes the body, as it would now
+be encoded twice. `7bit`, `8bit` and `binary` do not transform the body.
+With `null`, the default for UTF-8 is `8bit`.
 
 ## Setting Headers
 
