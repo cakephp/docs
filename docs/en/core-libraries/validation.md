@@ -675,6 +675,21 @@ Core rules that take additional parameters should have an array for the
 `rule` key that contains the rule as the first element, and the additional
 parameters as the remaining parameters.
 
+### File Extensions
+
+`Validation::extension()` accepts `gif`, `jpeg`, `png`, `jpg`, `jxl`, `webp`,
+`avif` and `avifs` by default. Supply an explicit list to restrict extensions
+for a particular upload:
+
+```php
+$validator->add('photo', 'extension', [
+    'rule' => ['extension', ['jpg', 'jpeg', 'png']],
+]);
+```
+
+The rule checks the filename extension, not the file's contents. Use a MIME
+type rule as well when you need to check the uploaded content.
+
 ### IP and Range Validation
 
 You can validate that a value is a valid IP address or an IP range (subnet)

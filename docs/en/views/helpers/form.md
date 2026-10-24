@@ -2020,7 +2020,8 @@ You could then use JavaScript to set the `onvalid` and `oninvalid` events as you
 
 Creates an `input` element of `submit` type, with `$caption` as value.
 If the supplied `$caption` is a URL pointing to an image (i.e. if the string
-contains '://' or contains any of the extensions '.jpg, .jpe, .jpeg, .gif'),
+contains '://' or ends in `.jpg`, `.jpe`, `.jpeg`, `.jxl`, `.gif`, `.png`,
+`.webp`, `.ico`, `.avif` or `.avifs`),
 an image submit button will be generated, using the specified image if it
 exists. If the first character is '/' then the image path is relative to
 *webroot*, else if the first character is not '/' then the image path is
