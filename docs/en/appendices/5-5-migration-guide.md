@@ -33,6 +33,13 @@ bin/cake upgrade rector --rules cakephp55 <path/to/app/src>
   this method must add the optional parameter to their signature and pass it
   through when calling `parent::addDefaultTypes()`.
 
+### Http
+
+- HTTP method overrides from `_method` or `X-Http-Method-Override` are normalized
+  to uppercase. Invalid syntax and non-string values now raise
+  `BadRequestException` (HTTP 400). See
+  [HTTP Method Overrides](../controllers/request-response#http-method-overrides).
+
 ## Deprecations
 
 Coming soon
