@@ -597,9 +597,9 @@ public function services(ContainerInterface $container): void
 > [!NOTE]
 > CakePHP's dependency injection container uses [PSR-11](https://www.php-fig.org/psr/psr-11/) for compatibility with other frameworks and libraries.
 
-In order to have services created by the container, you need to tell it which
-classes it can create and how to build those classes. The
-simplest definition is via a class name:
+The container can auto-wire concrete classes. Define services explicitly to
+configure their construction, map interfaces to implementations, or control
+sharing. The simplest definition is via a class name:
 
 ```php
 // Add a class by its name.
@@ -614,7 +614,7 @@ Your application and plugins define the services they have in the
 namespace App;
 
 use App\Service\BillingService;
-use Cake\Core\ContainerInterface;
+use Cake\Container\ContainerInterface;
 use Cake\Http\BaseApplication;
 
 class Application extends BaseApplication
@@ -649,8 +649,9 @@ $container->add(AuditLogServiceInterface::class, function (...$args) {
 Factory functions will receive all the resolved dependencies for the class
 as arguments.
 
-Once you've defined a class, you also need to define the dependencies it
-requires. Those dependencies can be either objects or primitive values:
+Class-typed constructor dependencies can be auto-wired. Define arguments
+explicitly for primitive values or dependencies that cannot be resolved from
+their type:
 
 ```php
 // Add a primitive value like a string, array or number.
@@ -772,8 +773,8 @@ An example ServiceProvider would look like:
 ```php
 namespace App\ServiceProvider;
 
-use Cake\Core\ContainerInterface;
-use Cake\Core\ServiceProvider;
+use Cake\Container\ContainerInterface;
+use Cake\Container\ServiceProvider;
 // Other imports here.
 
 class BillingServiceProvider extends ServiceProvider
@@ -817,7 +818,8 @@ example of a bootable service would be:
 ```php
 namespace App\ServiceProvider;
 
-use Cake\Core\ServiceProvider;
+use Cake\Container\ContainerInterface;
+use Cake\Container\ServiceProvider;
 // Other imports here.
 
 class BillingServiceProvider extends ServiceProvider
@@ -1327,70 +1329,15 @@ class ArticlesController extends AppController
 > - **Clarity**: Controller focuses on HTTP concerns, service handles business logic
 > - **Maintainability**: Complex workflows are organized into focused classes
 
-## Auto-wiring with league/container
+<a id="auto-wiring-with-leaguecontainer"></a>
+<a id="built-in-container"></a>
 
-> [!WARNING]
-> Auto-wiring is convenient but can impact performance. Enable caching in production environments.
+## Auto-wiring
 
-When using the default `league/container` implementation, auto-wiring is turned
-off by default. To enable it:
-
-```php
-// In src/Application.php
-use League\Container\ReflectionContainer;
-
-public function services(ContainerInterface $container): void
-{
-    $container->delegate(
-        new ReflectionContainer(),
-    );
-}
-```
-
-While your dependencies will now be resolved automatically, this approach will
-not cache resolutions which can be detrimental to performance. To enable
-caching:
-
-```php
-use League\Container\ReflectionContainer;
-
-$container->delegate(
-     // or consider using the value of Configure::read('debug')
-    new ReflectionContainer(true),
-);
-```
-
-Read more about auto wiring in the [PHP League Container documentation](https://container.thephpleague.com/4.x/auto-wiring/).
-
-## Built-in Container
-
-::: info Added in version 5.4.0
-:::
-
-CakePHP includes its own PSR-11-compatible dependency injection container in
-the `Cake\Container` namespace. The `league/container` implementation remains
-the default so that existing applications continue to work unchanged. To use
-the built-in container, set `App.container` to `cake` in `config/app.php`:
-
-```php
-return [
-    'App' => [
-        'container' => 'cake',
-    ],
-];
-```
-
-CakePHP exposes the built-in container through a compatibility bridge. Continue
-to type-hint `Cake\Core\ContainerInterface` in your application's `services()`
-method; service definitions using `add()`, `addShared()`, `extend()`, tags, and
-delegates work with either implementation.
-
-### Auto-wiring
-
-Unlike the default `league/container` implementation, the built-in container
-enables auto-wiring and caches auto-wired resolutions by default. It can create
-concrete classes and resolve their class-typed constructor dependencies without
-an explicit service definition:
+CakePHP uses its built-in PSR-11 container, `Cake\Container\Container`, by
+default. Auto-wiring and caching of auto-wired resolutions are enabled. The
+container can create concrete classes and resolve their class-typed constructor
+dependencies without an explicit definition:
 
 ```php
 class OrderService
@@ -1402,14 +1349,36 @@ class OrderService
 
 // Only the interface needs an explicit mapping. OrderService is auto-wired.
 $container->add(PaymentGateway::class, StripePaymentGateway::class);
+$service = $container->get(OrderService::class);
 ```
 
 Define services explicitly when a constructor needs an interface, a scalar or
 array value, or another value that cannot be determined from its type. Explicit
-definitions also let you configure constructor arguments and control whether a
-service is shared.
+definitions also let you configure arguments and control whether a service is
+shared. Auto-wiring caches resolved instances; this differs from explicit
+definitions, which are not shared unless registered with `addShared()`.
 
-When using the built-in container, do not add
-`League\Container\ReflectionContainer`; auto-wiring is already enabled. The
-following [auto-wiring instructions](#auto-wiring-with-leaguecontainer) apply
-only when using the default `league/container` implementation.
+Use `hasDefinition()` to check for an explicit registration. `has()` also checks
+delegates, including the auto-wiring resolver, so it can return true for an
+unregistered concrete class.
+
+To disable auto-wiring, call `disableAutoWiring()` before adding any custom
+delegates, as that method clears all delegates. To enable auto-wiring without
+caching resolved instances:
+
+```php
+$container->disableAutoWiring()->enableAutoWiring(false);
+```
+
+### Controller Actions and Commands
+
+Class-typed controller action arguments are resolved from explicit definitions
+first, then matching passed arguments, then default parameter values. If none
+applies, an instantiable concrete class can be auto-wired. Optional arguments
+with a default of `null` keep that default unless a definition or passed value
+is available.
+
+Command constructor dependencies can also be auto-wired. Interfaces and scalar
+arguments still need explicit definitions. Controller construction itself uses
+explicit definitions; it does not automatically resolve arbitrary controllers
+through auto-wiring.

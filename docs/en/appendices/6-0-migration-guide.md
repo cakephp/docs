@@ -106,6 +106,21 @@ Some properties have also been renamed to better reflect their purpose. These ar
   argument will need to be updated to pass it as the 3rd argument instead or
   use named parameters.
 
+### Dependency Injection
+
+- CakePHP now uses `Cake\Container\Container` by default and no longer requires
+  `league/container`. Remove the old `App.container = 'cake'` opt-in. To use a
+  custom container, set `App.container` to a class name implementing
+  `Cake\Container\ContainerInterface`.
+- Replace `Cake\Core\Container`, `Cake\Core\ContainerInterface` and
+  `Cake\Core\ServiceProvider` with their `Cake\Container` equivalents.
+- Auto-wiring and its resolution cache are enabled by default. Remove delegation
+  to `League\Container\ReflectionContainer`; use `disableAutoWiring()` and
+  `enableAutoWiring()` to configure the built-in resolver. See
+  [Auto-wiring](../development/dependency-injection#auto-wiring) for details.
+- `Container::defaultToShared()`, `enableAutoWiring()` and `disableAutoWiring()`
+  return `static`. Update the return types of overrides accordingly.
+
 ### Datasource
 
 - `Datasource/Paging/PaginatedInterface` now extends `IteratorAggregate`
