@@ -63,7 +63,8 @@ The middleware accepts the following configuration options:
 - **headers** - Whether to include rate limit headers in responses (default: true)
 - **includeRetryAfter** - Whether to include Retry-After header in 429 responses (default: true)
 - **message** - Custom error message for rate limit exceeded (default: 'Rate limit exceeded. Please try again later.')
-- **ipHeader** - Header name(s) to check for client IP when behind a proxy (default: 'x-forwarded-for')
+- **ipHeader** - Header name(s) to check for client IP, or `remote_addr` to
+  use the connecting IP address (default: `remote_addr`).
 - **tokenHeaders** - Array of headers to check for API tokens (default: `['Authorization', 'X-API-Key']`)
 - **skipCheck** - Callback to determine if a request should skip rate limiting
 - **costCallback** - Callback to determine the cost of a request
@@ -89,8 +90,9 @@ new RateLimitMiddleware([
 ])
 ```
 
-The middleware automatically handles proxy headers. You can configure
-which headers to check using the `ipHeader` option:
+By default, the middleware uses `REMOTE_ADDR` and ignores forwarded headers.
+When a proxy you control overwrites client-supplied forwarding headers, you can
+opt in to those headers with the `ipHeader` option:
 
 ```php
 new RateLimitMiddleware([
@@ -98,6 +100,15 @@ new RateLimitMiddleware([
     'ipHeader' => ['CF-Connecting-IP', 'X-Forwarded-For'],
 ])
 ```
+
+For a comma-separated header such as `X-Forwarded-For`, the leftmost address
+is used. Header names in an array are checked in order; if none has a value,
+the middleware falls back to `REMOTE_ADDR`.
+
+> [!WARNING]
+> Only enable forwarded headers when a trusted proxy overwrites them and clients
+> cannot bypass that proxy. Otherwise, clients can spoof their IP address and
+> bypass rate limits.
 
 ### User-based
 
