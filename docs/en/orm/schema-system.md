@@ -76,6 +76,28 @@ $c = $schema->column('title');
 $cols = $schema->columns();
 ```
 
+### MySQL Column Character Sets
+
+::: info Added in version 5.5.0
+:::
+
+On MySQL, `string`, `char`, `text` and `uuid` columns accept a `charset` option
+in addition to `collate`. This allows a column to use a different character set
+from the table default:
+
+```php
+$schema->addColumn('external_id', [
+    'type' => 'string',
+    'length' => 64,
+    'charset' => 'ascii',
+    'collate' => 'ascii_bin',
+]);
+```
+
+The generated column definition includes `CHARACTER SET ascii COLLATE ascii_bin`.
+Choose a collation belonging to the selected character set. Schema reflection
+reports the column's collation but does not infer its `charset` value.
+
 ### Indexes and Constraints
 
 Indexes are added using the `addIndex()`. Constraints are added using
