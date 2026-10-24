@@ -165,6 +165,17 @@ Some properties have also been renamed to better reflect their purpose. These ar
   `'item'`/`itemWithoutLink` breadcrumb templates.
 - `multicheckboxTitle` template of FormHelper is now `multicheckboxLabel`.
 
+- `FormHelper` now defaults `nestedCheckboxAndRadio` to `false`, placing
+  checkbox and radio inputs before their labels. Set it to `true` to retain
+  nesting, or use `nestedInput` on individual controls. Review CSS selectors
+  that depend on the old markup.
+- The default `radioWrapper` template is now
+  `<div class="radio">{{input}}{{label}}</div>`. Custom wrappers must include
+  `{{input}}` as well as `{{label}}` when inputs are not nested.
+- Multicheckbox option labels cannot be disabled. Use an array for label
+  attributes when calling `multiCheckbox()`; direct `MultiCheckboxWidget`
+  callers must also pass an array for `label`.
+
 ## New Features
 
 ### Event

@@ -691,20 +691,15 @@ as well as HTML attributes. This subsection will cover the options specific to
   ]);
   ```
 
-- `$options['nestedInput']` - Used with checkboxes and radio buttons.
-  Controls whether the input element is generated
-  inside or outside the `label` element. When `control()` generates a
-  checkbox or a radio button, you can set this to `false` to force the
-  generation of the HTML `input` element outside of the `label` element.
+- `$options['nestedInput']` - Controls whether the input is generated inside
+  the `label` element. Checkbox and radio inputs are outside their labels by
+  default. Set this to `true` to nest an input inside its label for a single
+  control, or set the `nestedCheckboxAndRadio` FormHelper configuration option
+  to `true` to enable nesting for all checkbox and radio controls.
 
-  On the other hand you can set this to `true` for any control type to force the
-  generated input element inside the label. If you change this for radio buttons
-  then you might want to also modify the default [radioWrapper](#create-radio-button)
-  template to add a wrapping `div`. Depending on the generated control type it
-  defaults to `true` or `false`.
-
-  If you want to disable the nesting of checkbox and radio inputs globally you can
-  set `nestedCheckboxAndRadio` option of `FormHelper` to `false`.
+  Each radio option is wrapped in `<div class="radio">` by the default
+  `radioWrapper` template. If you customize that template, include both
+  `{{input}}` and `{{label}}` so non-nested inputs are rendered.
 
 - `$options['templates']` - The templates you want to use for this input. Any
   specified templates will be merged on top of the already loaded templates.
@@ -1052,35 +1047,23 @@ methods are described in each method's own section.)
   ```html
   <h2>Primary Colors</h2>
   <input type="hidden" name="color" value="0">
-  <label for="color-red">
-      <input type="checkbox" name="color[]" value="5" id="color-red">
-      Red
-  </label>
+  <input type="checkbox" name="color[]" value="5" id="color-red">
+  <label for="color-red">Red</label>
 
-  <label for="color-blue">
-      <input type="checkbox" name="color[]" value="5" id="color-blue">
-      Blue
-  </label>
+  <input type="checkbox" name="color[]" value="5" id="color-blue">
+  <label for="color-blue">Blue</label>
 
-  <label for="color-yellow">
-      <input type="checkbox" name="color[]" value="5" id="color-yellow">
-      Yellow
-  </label>
+  <input type="checkbox" name="color[]" value="5" id="color-yellow">
+  <label for="color-yellow">Yellow</label>
 
   <h2>Tertiary Colors</h2>
   <input type="hidden" name="color" value="0">
-  <label for="color-green">
-      <input type="checkbox" name="color[]" value="5" id="color-green">
-      Green
-  </label>
-  <label for="color-purple">
-      <input type="checkbox" name="color[]" value="5" id="color-purple">
-      Purple
-  </label>
-  <label for="color-orange">
-      <input type="checkbox" name="color[]" value="5" id="color-orange">
-      Orange
-  </label>
+  <input type="checkbox" name="color[]" value="5" id="color-green">
+  <label for="color-green">Green</label>
+  <input type="checkbox" name="color[]" value="5" id="color-purple">
+  <label for="color-purple">Purple</label>
+  <input type="checkbox" name="color[]" value="5" id="color-orange">
+  <label for="color-orange">Orange</label>
   ```
 
   Disabling `'hiddenField'` on the second control group would
@@ -1210,7 +1193,7 @@ Creates a set of radio button inputs. The default widget templates used are:
 
 ```html
 'radio' => '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>'
-'radioWrapper' => '{{label}}'
+'radioWrapper' => '<div class="radio">{{input}}{{label}}</div>'
 ```
 
 **Attributes for Radio Buttons**
@@ -1238,18 +1221,18 @@ Will output:
 
 ```html
 <input name="gender" value="" type="hidden">
-<label for="gender-0">
+<div class="radio">
     <input name="gender" value="0" id="gender-0" type="radio">
-    Masculine
-</label>
-<label for="gender-1">
+    <label for="gender-0">Masculine</label>
+</div>
+<div class="radio">
     <input name="gender" value="1" id="gender-1" type="radio">
-    Feminine
-</label>
-<label for="gender-2">
+    <label for="gender-1">Feminine</label>
+</div>
+<div class="radio">
     <input name="gender" value="2" id="gender-2" type="radio">
-    Neuter
-</label>
+    <label for="gender-2">Neuter</label>
+</div>
 ```
 
 Generally `$options` contains simple `key => value` pairs. However, if you
@@ -1273,18 +1256,18 @@ Will output:
 
 ```html
 <input type="hidden" name="favorite_color" value="">
-<label for="favorite-color-r">
+<div class="radio">
     <input type="radio" name="favorite_color" value="r" style="color:red;" id="favorite-color-r">
-    Red
-</label>
-<label for="favorite-color-u">
+    <label for="favorite-color-r">Red</label>
+</div>
+<div class="radio">
     <input type="radio" name="favorite_color" value="u" style="color:blue;" id="favorite-color-u">
-    Blue
-</label>
-<label for="favorite-color-g">
+    <label for="favorite-color-u">Blue</label>
+</div>
+<div class="radio">
     <input type="radio" name="favorite_color" value="g" style="color:green;" id="favorite-color-g">
-    Green
-</label>
+    <label for="favorite-color-g">Green</label>
+</div>
 ```
 
 You can define additional attributes for an individual option's label as well:
@@ -1303,14 +1286,14 @@ Will output:
 
 ```html
 <input type="hidden" name="favorite_color" value="">
-<label for="favorite-color-r" class="red">
-    <input type="radio" name="favorite_color" value="r" style="color:red;" id="favorite-color-r">
-    Red
-</label>
-<label for="favorite-color-u" class="blue">
-    <input type="radio" name="favorite_color" value="u" style="color:blue;" id="favorite-color-u">
-    Blue
-</label>
+<div class="radio">
+    <input type="radio" name="favorite_color" value="r" id="favorite-color-r">
+    <label for="favorite-color-r" class="red">Red</label>
+</div>
+<div class="radio">
+    <input type="radio" name="favorite_color" value="u" id="favorite-color-u">
+    <label for="favorite-color-u" class="blue">Blue</label>
+</div>
 ```
 
 If the `label` key is used on an option, the attributes in
@@ -1546,16 +1529,12 @@ certain behaviors of the `select()` method.
   ```html
   <input name="field" value="" type="hidden">
   <div class="checkbox">
-      <label for="field-1">
-          <input name="field[]" value="Value 1" id="field-1" type="checkbox">
-          Label 1
-      </label>
+      <input name="field[]" value="Value 1" id="field-1" type="checkbox">
+      <label for="field-1">Label 1</label>
   </div>
   <div class="checkbox">
-      <label for="field-2">
-          <input name="field[]" value="Value 2" id="field-2" type="checkbox">
-          Label 2
-      </label>
+      <input name="field[]" value="Value 2" id="field-2" type="checkbox">
+      <label for="field-2">Label 2</label>
   </div>
   ```
 
@@ -1605,18 +1584,21 @@ certain behaviors of the `select()` method.
   ```html
   <input name="field" value="" type="hidden">
   <div class="checkbox">
-      <label for="field-1">
-          <input name="field[]" disabled="disabled" value="Value 1" type="checkbox">
-          Label 1
-      </label>
+      <input name="field[]" disabled="disabled" value="Value 1" type="checkbox">
+      <label for="field-1">Label 1</label>
   </div>
   <div class="checkbox">
-      <label for="field-2">
-          <input name="field[]" value="Value 2" id="field-2" type="checkbox">
-          Label 2
-      </label>
+      <input name="field[]" value="Value 2" id="field-2" type="checkbox">
+      <label for="field-2">Label 2</label>
   </div>
   ```
+
+When using `multiCheckbox()` or `select()` with `'multiple' => 'checkbox'`,
+each option keeps its label. The `label` option accepts an array of label
+attributes; passing `false` does not remove those option labels. The underlying
+`MultiCheckboxWidget` requires an array and rejects other values. This differs
+from `control(..., ['label' => false])`, which suppresses the group's label or
+legend rather than the individual option labels.
 
 ### Creating File Inputs
 
