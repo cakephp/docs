@@ -1536,6 +1536,10 @@ $query = $cities->find()
 # WHERE name COLLATE LIKE Latin1_general_CI_AI "%São José%"
 ```
 
+Collation names must be simple ASCII names; whitespace and hyphens are
+rejected with `InvalidArgumentException`. Choose collations from a fixed list
+in application code instead of accepting arbitrary user input.
+
 ### Automatically Creating IN Clauses
 
 When building queries using the ORM, you will generally not have to indicate the
@@ -2380,6 +2384,26 @@ by `AggregateExpresion`, but make sure you follow your database documentation on
 - `range($start, $end)` Define a range of row values that precede and/or follow
   the current row that should be included in the aggregate function. This
   evaluates values based on the `orderBy()` field.
+
+String arguments for window partitioning, ordering and frame boundaries must
+be simple names or values. SQL fragments containing spaces or operators are
+rejected with `InvalidArgumentException`. Use an expression object for a
+trusted SQL fragment, for example an interval boundary:
+
+```php
+use Cake\Database\Expression\QueryExpression;
+use Cake\Database\Expression\WindowExpression;
+
+$window = (new WindowExpression())->range(
+    new QueryExpression("'1 day'"),
+    new QueryExpression("'10 days'"),
+);
+```
+
+Expression objects contain raw SQL. Construct these fragments from trusted
+application code, never directly from request data. The same restriction on
+simple names applies to function names passed to `FunctionExpression` and
+`AggregateExpression`.
 
 If you need to re-use the same window expression multiple times you can create
 named windows using the `window()` method:
