@@ -41,6 +41,9 @@ Coming soon
 
 ### Database
 
+- MySQL `string`, `char`, `text` and `uuid` columns now support a `charset`
+  option. See [MySQL Column Character Sets](../orm/schema-system#mysql-column-character-sets).
+
 - `Cake\Database\Expression\JsonPathExpression` was added. This expression
   object provides a fluent interface for defining JSON path expressions.
 
