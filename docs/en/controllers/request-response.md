@@ -560,35 +560,29 @@ Returns the current visitor's IP address.
 
 ### Trusting Proxy Headers
 
-If your application is behind a load balancer or running on a cloud service, you
-will often get the load balancer host, port and scheme in your requests. Often
-load balancers will also send `HTTP-X-Forwarded-*` headers with the original
-values. The forwarded headers will not be used by CakePHP out of the box. To
-have the request object use these headers set the `trustProxy` property to
-`true`:
-
-```php
-$this->request->trustProxy = true;
-
-// These methods will now use the proxied headers.
-$port = $this->request->port();
-$host = $this->request->host();
-$scheme = $this->request->scheme();
-$clientIp = $this->request->clientIp();
-```
-
-Once proxies are trusted the `clientIp()` method will use the *last* IP
-address in the `X-Forwarded-For` header. If your application is behind
-multiple proxies, you can use `setTrustedProxies()` to define the IP addresses
-of proxies in your control:
+If your application is behind a load balancer or reverse proxy, forwarded
+headers can contain the original host, port, scheme and client IP. CakePHP
+ignores these headers by default. Define the IP addresses of proxies you
+control with `setTrustedProxies()`:
 
 ```php
 $request->setTrustedProxies(['127.1.1.1', '127.8.1.3']);
 ```
 
-After proxies are trusted `clientIp()` will use the first IP address in the
-`X-Forwarded-For` header providing it is the only value that isn't from a trusted
-proxy.
+This enables `trustProxy` when the connecting address in `REMOTE_ADDR` matches
+one of those proxies. On a request where `trustProxy` is false and the connecting
+address is not listed, calling `setTrustedProxies()` does not enable it.
+
+When proxy headers are trusted, `port()`, `host()` and `scheme()` use the
+forwarded headers. For `clientIp()`, CakePHP removes the configured trusted
+proxies from the `X-Forwarded-For` chain and uses the rightmost remaining
+address. If no trusted proxy list is configured and `trustProxy` is enabled
+manually, it uses the last address in that header.
+
+> [!WARNING]
+> Setting `$request->trustProxy = true` directly skips the connecting-address
+> check. Only do this when your deployment ensures that requests come through
+> a trusted proxy which overwrites client-supplied forwarding headers.
 
 ### Checking Accept Headers
 
