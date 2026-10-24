@@ -282,8 +282,10 @@ been replaced with the [Map Reduce](../orm/retrieving-data-and-resultsets#map-re
 
 `method` Cake\\ORM\\Table::**buildValidator**(EventInterface $event, Validator $validator, $name): void
 
-The `Model.buildValidator` event is fired when `$name` validator is created.
-Behaviors, can use this hook to add in validation methods.
+The `Model.buildValidator` event is fired when the `$name` validator is created,
+before the table's `validationDefault()` or other named validation method runs.
+Behaviors and other listeners can register providers here so that their rules
+are available when the validation method calls `Validator::add()`.
 
 ### buildRules
 
