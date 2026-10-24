@@ -390,6 +390,49 @@ Add the time unit to the date expression.
 `dayOfWeek()`
 Returns a FunctionExpression representing a call to SQL WEEKDAY function.
 
+#### JSON Path Expressions
+
+::: info Added in version 5.5.0
+`JsonPathExpression` was added.
+:::
+
+Use `jsonValue()` to extract a value from a JSON column:
+
+```php
+$query = $articles->find();
+$query->select([
+    'category' => $query->func()->jsonValue('Articles.metadata', '$.category'),
+]);
+```
+
+Pass a `JsonPathExpression` when you need SQL/JSON clauses such as `RETURNING`,
+`PASSING`, `ON EMPTY` or `ON ERROR`. For example, on PostgreSQL 17 or newer:
+
+```php
+use Cake\Database\Expression\JsonPathExpression;
+
+$path = (new JsonPathExpression('$.price'))
+    ->returning('numeric')
+    ->onEmpty(JsonPathExpression::BEHAVIOR_DEFAULT, 0)
+    ->onError(JsonPathExpression::BEHAVIOR_NULL);
+
+$query = $articles->find();
+$query->select([
+    'price' => $query->func()->jsonValue('Articles.metadata', $path),
+]);
+```
+
+`passing()` accepts a map of variable names to values and an optional map of
+binding types. JSON paths and passing values are bound as parameters; SQL
+returning types and variable names are not sanitized, so define those in
+application code rather than taking them from request data.
+
+Clause support varies by database and version. PostgreSQL 17+ uses native
+`JSON_VALUE()`. Earlier PostgreSQL versions retain the `JSONB_PATH_QUERY()`
+translation, which is not equivalent to native scalar `JSON_VALUE()` and does
+not support all of these clauses. Check your database's support before using
+the extended path options.
+
 #### Window-Only Functions
 
 These window-only functions contain a window expression by default:
