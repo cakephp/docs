@@ -35,8 +35,9 @@ When building an entity with validation enabled the following occurs:
 
 1. The validator object is created.
 2. The `table` and `default` validation provider are attached.
-3. The named validation method is invoked. For example `validationDefault`.
-4. The `Model.buildValidator` event will be triggered.
+3. The `Model.buildValidator` event is triggered, allowing behaviors and other
+   listeners to register validation providers.
+4. The named validation method is invoked. For example `validationDefault`.
 5. Request data will be validated.
 6. Request data will be type-cast into types that match the column types.
 7. Errors will be set into the entity.

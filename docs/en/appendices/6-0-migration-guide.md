@@ -18,6 +18,10 @@ deprecation warnings.
 - `Cake\Event\Event::getSubject()` can now return `null` if the event has no
   subject instead of throwing an exception.
 
+- `Model.buildValidator` is now dispatched before the named validation method,
+  allowing listeners to register providers used by `Validator::add()`. Listeners
+  that inspect rules added by `validationDefault()` must account for this order.
+
 ## Breaking Changes
 
 ### Renamed Methods
