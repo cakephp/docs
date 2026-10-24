@@ -135,6 +135,13 @@ Some properties have also been renamed to better reflect their purpose. These ar
 - The methods `_getCookies()`, `_getJson()`, `_getXml()`, `_getHeaders()`
   and `_getBody()` have been removed. Use/Overwrite their non-prefixed public alternative instead.
 
+- URL parsing now uses PHP 8.5's `Uri\WhatWg\Url` and `Uri\Rfc3986\Uri`
+  parsers. Review malformed or relative URL inputs and exception handling. In
+  particular, `Client::createFromUrl()` can now throw
+  `Uri\WhatWg\InvalidUrlException` for inputs previously rejected with
+  `InvalidArgumentException`. See
+  [Creating Scoped Clients](../core-libraries/httpclient#http_client_scoped_client).
+
 ### ORM
 
 - The `_accessible` property inside Entities has been renamed to `patchable`
