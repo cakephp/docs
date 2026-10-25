@@ -109,7 +109,7 @@ Some properties have also been renamed to better reflect their purpose. These ar
 ### Dependency Injection
 
 - CakePHP now uses `Cake\Container\Container` by default and no longer requires
-  `league/container`. Remove the old `App.container = 'cake'` opt-in. To use a
+  `league/container`. Remove the old `App.container = 'cake'` config option. To use a
   custom container, set `App.container` to a class name implementing
   `Cake\Container\ContainerInterface`.
 - Replace `Cake\Core\Container`, `Cake\Core\ContainerInterface` and
