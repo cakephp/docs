@@ -514,6 +514,27 @@ Returns the HTTP method the request was made with:
 echo $request->getMethod();
 ```
 
+### HTTP Method Overrides
+
+`ServerRequestFactory::fromGlobals()` supports a `_method` request-body field
+or an `X-Http-Method-Override` header to override the request method. The
+header takes precedence over the body field. `_method` is removed from the
+parsed body. Use
+`$request->getEnv('ORIGINAL_REQUEST_METHOD')` to read the original method.
+
+Override values are converted to uppercase and must contain letters A-Z,
+optionally separated by single hyphens or underscores. For example, `patch`,
+`VERSION-CONTROL` and `CUSTOM_METHOD` are accepted; digits, whitespace, repeated
+separators and array values are rejected.
+
+Invalid values throw `BadRequestException` with the message
+`Invalid HTTP method override.` and result in HTTP 400. This happens while
+building the request, before the middleware queue runs.
+
+::: info Added in version 5.5.0
+Validation and normalization of HTTP method overrides were added.
+:::
+
 ### Restricting HTTP Methods per Action
 
 `method` Cake\\Http\\ServerRequest::**allowMethod**(array|string $methods): bool
