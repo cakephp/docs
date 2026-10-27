@@ -22,6 +22,11 @@ deprecation warnings.
   allowing listeners to register providers used by `Validator::add()`. Listeners
   that inspect rules added by `validationDefault()` must account for this order.
 
+- Calling behavior methods directly on the table instance is now opt-in.
+  Behaviors no longer expose their public methods as mixin methods on the
+  table unless they are attached with the `implementedMethods` configuration
+  set to `true`, a map of `alias => method` pairs, or a list of method names.
+
 ## Breaking Changes
 
 ### Renamed Methods

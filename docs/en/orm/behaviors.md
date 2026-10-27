@@ -96,53 +96,52 @@ Public methods on behaviors can be called as normal methods:
 $articles->getBehavior('Sluggable')->slug($value);
 ```
 
-Public methods defined on behaviors are also added as 'mixin' methods on the
-table object they are attached to. If you attach two behaviors that provide the
-same methods an exception will be raised. If a behavior provides the same method
-as a table class, the behavior method will not be callable from the table.
-Behavior mixin methods will receive the exact same arguments that are provided
-to the table. For example, if our SluggableBehavior defined the following
-method:
+Public methods defined on behaviors can also be exposed as 'mixin' methods on
+the table object they are attached to, so they can be called directly on the
+table. For example, if our SluggableBehavior defined the following method:
 
 ```php
 public function slug(string $value): string
 {
-    return Text::slug($value, $this->_config['replacement']);
+    return Text::slug($value, $this->getConfig('replacement'));
 }
 ```
 
-It could be invoked using:
+::: info Changed in version 6.0
+Exposing behavior methods on the table instance is opt-in. In 5.x all public
+behavior methods were proxied by default. In 6.0 nothing is proxied until you
+set the `implementedMethods` configuration key when attaching the behavior.
+:::
+
+To proxy all of a behavior's public methods, set `implementedMethods` to
+`true` when adding the behavior:
+
+```php
+// In a table's initialize() method.
+$this->addBehavior('Sluggable', [
+    'implementedMethods' => true,
+]);
+```
+
+The method could then be invoked using:
 
 ```php
 $slug = $articles->slug('My article');
 ```
 
-::: info Deprecated in version 5.3.0
-Calling behavior methods as mixin methods is deprecated
-:::
+If you attach two behaviors that provide the same method an
+exception will be raised. If a behavior provides the same method as a table
+class, the behavior method will not be callable from the table.
 
 #### Limiting or Renaming Exposed Mixin Methods
 
-When creating behaviors, there may be situations where you don't want to expose
-public methods as mixin methods. In these cases you can use the
-`implementedMethods` configuration key to rename or exclude mixin methods. For
-example if we wanted to prefix our slug() method we could do the following:
-
-```php
-protected array $_defaultConfig = [
-    'implementedMethods' => [
-        'superSlug' => 'slug',
-    ]
-];
-```
-
-Applying this configuration will make `slug()` not callable, however it will
-add a `superSlug()` mixin method to the table. Notably if our behavior
-implemented other public methods they would **not** be available as mixin
-methods with the above configuration.
-
-Since the exposed methods are decided by configuration you can also
-rename/remove mixin methods when adding a behavior to a table. For example:
+When creating behaviors, there may be situations where you don't want to
+expose all public methods as mixin methods. Instead of setting
+`implementedMethods` to `true`, you can provide an array that maps the mixin
+method name to the behavior method it proxies. Providing an array both
+enables proxying and decides which methods are exposed. For example if we
+wanted to prefix our slug() method we could do the following when adding the
+behavior to a table:
 
 ```php
 // In a table's initialize() method.
@@ -152,6 +151,19 @@ $this->addBehavior('Sluggable', [
     ]
 ]);
 ```
+
+Applying this configuration will make `slug()` not callable, however it will
+add a `superSlug()` mixin method to the table. Notably if our behavior
+implemented other public methods they would **not** be available as mixin
+methods with the above configuration.
+
+The array can also be a numerically indexed list of method names, in which
+case each method is proxied under its own name, so
+`'implementedMethods' => ['slug']` is equivalent to
+`'implementedMethods' => ['slug' => 'slug']`.
+
+Method names are matched case-insensitively, and setting
+`implementedMethods` to an empty array disables mixin methods entirely.
 
 ### Defining Event Listeners
 
@@ -173,7 +185,7 @@ use Cake\Utility\Text;
 
 class SluggableBehavior extends Behavior
 {
-    protected array $_defaultConfig = [
+    protected array $defaultConfig = [
         'field' => 'title',
         'slug' => 'slug',
         'replacement' => '-',
@@ -247,7 +259,7 @@ or exclude finder methods. For example if we wanted to rename our `find(slug)`
 method we could do the following:
 
 ```php
-protected array $_defaultConfig = [
+protected array $defaultConfig = [
     'implementedFinders' => [
         'slugged' => 'findSlug',
     ]
@@ -317,6 +329,10 @@ $table->behaviors()->has('CounterCache');
 // Get a loaded behavior
 // Remember to omit plugin prefixes
 $table->behaviors()->get('CounterCache');
+
+// Check if any loaded behavior exposes a mixin method.
+// Only methods enabled through the `implementedMethods` config match.
+$table->behaviors()->hasMethod('slug');
 ```
 
 ### Re-configuring Loaded Behaviors

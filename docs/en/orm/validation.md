@@ -201,8 +201,10 @@ contain the validation rules declared in the `default` set.
 Validation rules can use functions defined on any known providers. By default
 CakePHP sets up a few providers:
 
-1. Methods on the table class or its behaviors are available on the `table`
-    provider.
+1. Methods on the table class are available on the `table` provider. Methods
+    provided by behaviors are available on this provider as well, but only
+    when the behavior is attached with the `implementedMethods` configuration
+    enabled, see [Calling behavior methods](../orm/behaviors#calling-behavior-methods).
 2. The core `Cake\Validation\Validation` class is setup as the
     `default` provider.
 
