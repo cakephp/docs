@@ -66,8 +66,14 @@ already holding some rows:
 ```php
 // In a controller
 $categories = $this->getTableLocator()->get('Categories');
-$categories->recover();
+$categories->getBehavior('Tree')->recover();
 ```
+
+> [!NOTE]
+> `recover()` is a method provided by the `TreeBehavior`. Behavior methods are
+> only callable on the table instance when the behavior has been attached with
+> the `implementedMethods` configuration enabled, see
+> [Calling behavior methods](../../orm/behaviors#calling-behavior-methods).
 
 You can verify it works by getting any row from the table and asking for the
 count of descendants it has:
