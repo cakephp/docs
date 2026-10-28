@@ -428,7 +428,9 @@ binary
 date
 : Maps to a native `DATE` column type. The return value of this column
   type is `Cake\I18n\Date` which emulates the date related
-  methods of PHP's `DateTime` class.
+  methods of PHP's `DateTime` class.  Supports `CURRENT_DATE` as a default
+  value that is translated to the driver's dialect. `CURRENT_DATE` will also be
+  used in relected schema metadata.
 
 datetime
 : See [Datetime Type](#datetime-type).
@@ -443,7 +445,9 @@ timestampfractional
 : Maps to the `TIMESTAMP(N)` type.
 
 time
-: Maps to a `TIME` type in all databases.
+: Maps to a `TIME` type in all databases. Supports `CURRENT_TIME` as a default
+  value that is translated to the driver's dialect. `CURRENT_TIME` will also be
+  used in relected schema metadata.
 
 year
 : Maps to the `YEAR` type. Only supported in MySQL.
@@ -539,6 +543,10 @@ use Cake\Database\Type\DateTimeTimezoneType;
 // Overwrite the default datetime type with a more precise one.
 TypeFactory::map('datetime', DateTimeTimezoneType::class);
 ```
+
+Datetime types support a schema default of `CURRENT_TIMESTAMP` to represent the
+current timestamp. This value can be used in migrations, and will be present in
+reflected schema metadata.
 
 ### Enum Type
 
