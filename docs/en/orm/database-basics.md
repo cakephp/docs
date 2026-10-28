@@ -432,7 +432,6 @@ date
   value that is translated to the driver's dialect. `CURRENT_DATE` will also be
   used in relected schema metadata.
 
-
 datetime
 : See [Datetime Type](#datetime-type).
 
