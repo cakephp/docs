@@ -396,30 +396,37 @@ Returns a FunctionExpression representing a call to SQL WEEKDAY function.
 `JsonPathExpression` was added.
 :::
 
-Use `jsonValue()` to extract a value from a JSON column:
-
-```php
-$query = $articles->find();
-$query->select([
-    'category' => $query->func()->jsonValue('Articles.metadata', '$.category'),
-]);
-```
-
-Pass a `JsonPathExpression` when you need SQL/JSON clauses such as `RETURNING`,
-`PASSING`, `ON EMPTY` or `ON ERROR`. For example, on PostgreSQL 17 or newer:
+`JsonPathExpression` describes a path into a JSON document. `$` refers to the
+root, `.price` selects a property, and `[0]` selects the first array element:
 
 ```php
 use Cake\Database\Expression\JsonPathExpression;
 
-$path = (new JsonPathExpression('$.price'))
+$pricePath = new JsonPathExpression('$.price');
+$firstPricePath = new JsonPathExpression('$.prices[0]');
+```
+
+The expression can also define SQL/JSON clauses. `returning()` sets the SQL
+return type, `passing()` supplies named path variables, and `onEmpty()` and
+`onError()` choose how missing values and errors are handled. Support depends
+on the database function using the path:
+
+| Database | Optional clauses supported by `JSON_VALUE()` |
+|---|---|
+| [PostgreSQL 17+](https://www.postgresql.org/docs/17/functions-json.html#SQLJSON-QUERY-FUNCTIONS) | `PASSING`, `RETURNING`, `ON EMPTY`, `ON ERROR` |
+| [MySQL 8.0.21+](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-value) | `RETURNING`, `ON EMPTY`, `ON ERROR` |
+| [SQL Server 2025+](https://learn.microsoft.com/en-us/sql/t-sql/functions/json-value-transact-sql) | `RETURNING`, when the input uses the native `json` type |
+| MariaDB, SQL Server 2022 and earlier, SQLite | None of these optional clauses |
+
+For example, PostgreSQL 17+ supports a variable selecting an array element,
+with a numeric return type and fallback behavior:
+
+```php
+$path = (new JsonPathExpression('$.prices[$idx]'))
+    ->passing(['idx' => 0])
     ->returning('numeric')
     ->onEmpty(JsonPathExpression::BEHAVIOR_DEFAULT, 0)
     ->onError(JsonPathExpression::BEHAVIOR_NULL);
-
-$query = $articles->find();
-$query->select([
-    'price' => $query->func()->jsonValue('Articles.metadata', $path),
-]);
 ```
 
 `passing()` accepts a map of variable names to values and an optional map of
@@ -430,8 +437,21 @@ application code rather than taking them from request data.
 Clause support varies by database and version. PostgreSQL 17+ uses native
 `JSON_VALUE()`. Earlier PostgreSQL versions retain the `JSONB_PATH_QUERY()`
 translation, which is not equivalent to native scalar `JSON_VALUE()` and does
-not support all of these clauses. Check your database's support before using
-the extended path options.
+not support these optional clauses. SQLite translates it to `JSON_EXTRACT()`.
+
+#### JSON Functions
+
+`jsonValue()`
+Extract a scalar value from a JSON column. Accepts a JSON path string or a
+`JsonPathExpression`. For example, using the PostgreSQL path configured above:
+
+```php
+$query = $articles->find();
+$query->select([
+    'category' => $query->func()->jsonValue('Articles.metadata', '$.category'),
+    'price' => $query->func()->jsonValue('Articles.metadata', $path),
+]);
+```
 
 #### Window-Only Functions
 
