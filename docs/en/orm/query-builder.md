@@ -453,6 +453,16 @@ $query->select([
 ]);
 ```
 
+`jsonExists()`
+Check if a JSON path expression exists in a column/json value.
+
+```php
+$query = $articles->find();
+$query->select([
+    'has_category' => $query->func()->jsonExists('Articles.metadata', '$.category'),
+]);
+```
+
 #### Window-Only Functions
 
 These window-only functions contain a window expression by default:
