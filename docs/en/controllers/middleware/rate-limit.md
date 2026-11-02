@@ -179,14 +179,21 @@ new RateLimitMiddleware([
 
 ### Sliding Window
 
-The default strategy that provides smooth rate limiting by continuously
-adjusting the window based on request timing:
+The default strategy. It counts requests per fixed window and estimates the
+sliding window by adding the previous window's count, weighted by how much of
+that window still overlaps:
 
 ```php
 new RateLimitMiddleware([
     'strategy' => RateLimitMiddleware::STRATEGY_SLIDING_WINDOW,
 ])
 ```
+
+The estimate assumes the previous window's requests were spread evenly. A burst
+at the end of the previous window is undercounted and a burst at its start is
+overcounted, so a client can still get up to twice the limit through in one
+window length, as with a fixed window. With long windows such as an hour this
+can arrive as a single burst.
 
 ### Fixed Window
 
