@@ -759,6 +759,78 @@ The `ServiceConfig` class provides a read-only view of all the data available
 in `Configure` so you don't have to worry about accidentally changing
 configuration.
 
+### Contextual Attributes
+
+Sometimes the value to inject depends on the parameter itself: its name,
+its type, or its default value. The plain `AttributeInterface::resolve()`
+method takes no arguments, so it cannot see the parameter being resolved.
+For these cases, implement `Cake\Container\Attribute\ContextualAttributeInterface`
+instead. Its `resolve()` method receives both the reflection parameter and
+the container:
+
+```php
+use Attribute;
+use Cake\Container\Attribute\ContextualAttributeInterface;
+use Cake\Core\Configure;
+use Psr\Container\ContainerInterface;
+use ReflectionParameter;
+
+// In src/Attribute/ConfigValue.php
+class ConfigValue implements ContextualAttributeInterface
+{
+    public function __construct(private string $key) {}
+
+    public function resolve(ReflectionParameter $parameter, ContainerInterface $container): mixed
+    {
+        return Configure::read($this->key)
+            ?? ($parameter->isDefaultValueAvailable() ? $parameter->getDefaultValue() : null);
+    }
+}
+
+// In src/Service/ApiClientService.php
+class ApiClientService
+{
+    public function __construct(
+        #[ConfigValue('Api.key')] private string $apiKey = 'dev-key',
+    ) {
+    }
+}
+```
+
+If the `Api.key` configuration value exists, it is injected. Otherwise the
+parameter default (`'dev-key'`) is used, without duplicating the default in
+the attribute arguments. Constructing the class directly with `new` keeps
+working on the default as well.
+
+A contextual attribute can also resolve dependencies from the container
+based on the parameter type, so a single attribute class serves parameters
+of any type:
+
+```php
+// In src/Attribute/Shared.php
+class Shared implements ContextualAttributeInterface
+{
+    public function resolve(ReflectionParameter $parameter, ContainerInterface $container): mixed
+    {
+        return $container->get($parameter->getType()->getName());
+    }
+}
+
+// In src/Service/ReportBuilder.php
+class ReportBuilder
+{
+    public function __construct(
+        #[Shared] private PathGuard $guard,
+    ) {
+    }
+}
+```
+
+Contextual attributes are checked before plain attributes. Explicitly passed
+arguments, such as those given to `Container::make()` or `call()`, still take
+precedence over attributes. The container is always passed as an argument, so
+contextual attributes also work with a standalone `ReflectionContainer`.
+
 ## Service Providers
 
 Service providers allow you to group related services together helping you
@@ -1369,6 +1441,20 @@ caching resolved instances:
 ```php
 $container->disableAutoWiring()->enableAutoWiring(false);
 ```
+
+### Resolving with Custom Arguments
+
+Use `make()` to create a fresh instance while overriding specific
+constructor arguments. Arguments are matched by parameter name and take
+precedence over attribute resolution and auto-wiring:
+
+```php
+$service = $container->make(ReportBuilder::class, ['format' => 'pdf']);
+```
+
+Unlike `get()`, `make()` always builds a new instance and never returns a
+shared one. Use `getNew()` when you need a fresh instance without overriding
+arguments.
 
 ### Controller Actions and Commands
 
