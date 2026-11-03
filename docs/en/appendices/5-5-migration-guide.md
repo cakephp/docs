@@ -42,12 +42,17 @@ bin/cake upgrade rector --rules cakephp55 <path/to/app/src>
 
 ## Deprecations
 
-Coming soon
+### Database
+
+- `Cake\Database\Driver\Mysql::isMariaDb()` is deprecated. You should upgrade to
+  the dedicated MariaDb driver instead.
 
 ## New Features
 
 ### Database
 
+- MariaDb now has a dedicated driver class. To upgrade your application change
+  `mysql://` to `mariadb://` in your database connection configuration.
 - MySQL `string`, `char`, `text` and `uuid` columns now support a `charset`
   option. See [MySQL Column Character Sets](../orm/schema-system#mysql-column-character-sets).
 - `Cake\Database\Expression\JsonPathExpression` was added. This expression

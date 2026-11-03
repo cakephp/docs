@@ -195,7 +195,7 @@ as follows:
 - `driver`: The class name of the driver used to implement all specificities for
   a database engine. This can either be a short classname using `plugin syntax`,
   a fully namespaced name, or a constructed driver instance.
-  Examples of short classnames are Mysql, Sqlite, Postgres, and Sqlserver.
+  Examples of short classnames are Mysql, Mariadb, Sqlite, Postgres, and Sqlserver.
 
 - `persistent`: Whether or not to use a persistent connection to the database. This option
   is not supported by SqlServer. An exception is thrown if you attempt to set
@@ -227,11 +227,12 @@ as follows:
 - `unix_socket`: Used by drivers that support it to connect via Unix socket files. If you are
   using PostgreSQL and want to use Unix sockets, leave the host key blank.
 
-- `ssl_key`: The file path to the SSL key file. (Only supported by MySQL).
+- `ssl_key`: The file path to the SSL key file. (Supported by MySQL & MariaDb).
 
-- `ssl_cert`: The file path to the SSL certificate file. (Only supported by MySQL).
+- `ssl_cert`: The file path to the SSL certificate file. (Supported by MySQL and
+  MariaDb).
 
-- `ssl_ca`: The file path to the SSL certificate authority. (Only supported by MySQL).
+- `ssl_ca`: The file path to the SSL certificate authority. (Supported by MySQL and MariaDb).
 
 - `init`: A list of queries that should be sent to the database server as
   when the connection is created.
@@ -385,7 +386,7 @@ binaryuuid
   string UUID format (with dashes) and binary format.
 
 nativeuuid
-: Maps to the UUID type in MySQL with MariaDb. In all other databases,
+: Maps to the UUID type in with MariaDb. In all other databases,
   `nativeuuid` is an alias for `uuid`.
 
 integer
@@ -396,7 +397,7 @@ smallinteger
 : Maps to the `SMALLINT` type provided by the database.
 
 tinyinteger
-: Maps to the `TINYINT` or `SMALLINT` type provided by the database. In MySQL
+: Maps to the `TINYINT` or `SMALLINT` type provided by the database. In MySQL and MariaDb
   `TINYINT(1)` is treated as a boolean.
 
 biginteger
@@ -419,7 +420,7 @@ decimal
   schema.
 
 boolean
-: Maps to `BOOLEAN` except in MySQL, where `TINYINT(1)` is used to represent
+: Maps to `BOOLEAN` except in MySQL and MariaDb, where `TINYINT(1)` is used to represent
   booleans. `BIT(1)` is not yet supported at this moment.
 
 binary
@@ -450,7 +451,7 @@ time
   used in relected schema metadata.
 
 year
-: Maps to the `YEAR` type. Only supported in MySQL.
+: Maps to the `YEAR` type. Supported in MySQL and MariaDb.
 
 json
 : Maps to a `JSON` type if it's available, otherwise it maps to `TEXT`.
@@ -519,7 +520,7 @@ vice versa.
 `class` Cake\\Database\\**DateTimeFractionalType**
 
 Can be used to map datetime columns that contain microseconds such as
-`DATETIME(6)` in MySQL. To use this type you need to add it as a mapped type:
+`DATETIME(6)` in MySQL and MariaDb. To use this type you need to add it as a mapped type:
 
 ```php
 // in config/bootstrap.php
