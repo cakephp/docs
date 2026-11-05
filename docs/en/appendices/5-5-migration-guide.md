@@ -59,6 +59,12 @@ bin/cake upgrade rector --rules cakephp55 <path/to/app/src>
   object provides a fluent interface for defining JSON path expressions.
 - ``FunctionsBuilder::jsonExists()`` was added.
 
+### ORM
+
+- `Table::list()` was added. It runs the `list` finder and returns the
+  key/value array directly. See
+  [Getting The List As An Array](../orm/retrieving-data-and-resultsets#getting-the-list-as-an-array).
+
 ### TestSuite
 
 - `Cake\TestSuite\Fixture\DeleteStrategy` was added. This fixture strategy
