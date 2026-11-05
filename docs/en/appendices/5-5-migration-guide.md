@@ -18,7 +18,10 @@ bin/cake upgrade rector --rules cakephp55 <path/to/app/src>
 
 ### Database
 
-- `Postgres` driver does not replace `FunctionsBuilder::concat()` expressions with `||` operations.
+- `Postgres` driver does not transform `CONCAT()` function expressions into `||` operations.
+- `Postgres` driver does not transform `JSON_VALUE()` function expression into `JSONB_PATH_QUERY()`
+  for versions 17 and newer.
+- `BoolType` converts `t` to true to support how PostgreSQL returns boolean values from `JSON_VALUE()`.
 
 ### ORM
 
@@ -57,7 +60,10 @@ bin/cake upgrade rector --rules cakephp55 <path/to/app/src>
   option. See [MySQL Column Character Sets](../orm/schema-system#mysql-column-character-sets).
 - `Cake\Database\Expression\JsonPathExpression` was added. This expression
   object provides a fluent interface for defining JSON path expressions.
-- ``FunctionsBuilder::jsonExists()`` was added.
+- `FunctionsBuilder::jsonValue()` accepts a `returnType` parameter to allow
+  setting the return type without `JosnPathExpression`. The return type from
+  the path expression is used if not set.
+- `FunctionsBuilder::jsonExists()` was added.
 
 ### TestSuite
 
