@@ -1021,6 +1021,37 @@ schema, making it easier to evolve your API without changing your data model.
 The `projectAs()` method and `#[CollectionOf]` attribute were added.
 :::
 
+#### Typed DTO Results From The Table
+
+`SelectQuery::projectAs()` changes what the query returns at runtime, but the
+query is still typed as a collection of entities, so static analysis sees an
+entity where the code gets a DTO. `Table::projectAs()` and
+`Table::projectOne()` run the projection and are typed as the DTO class:
+
+```php
+// list<ArticleDto>
+$articles = $articlesTable->projectAs(ArticleDto::class);
+
+// ArticleDto|null
+$article = $articlesTable->projectOne(
+    ArticleDto::class,
+    $articlesTable->find()->where(['Articles.id' => $id]),
+);
+```
+
+Both methods take an optional query as the second argument, so you can add
+conditions, contain associations or stack finders before projecting. Without a
+query they start from `find()`. `projectOne()` limits an unexecuted query to
+one row, like `first()`.
+
+If a row does not end up as an instance of the requested class, for example
+because a `createFromArray()` factory returns another type, both methods throw
+a `CakeException`.
+
+::: info Added in version 5.5.0
+`Table::projectAs()` and `Table::projectOne()` were added.
+:::
+
 <a id="format-results"></a>
 
 ### Adding Calculated Fields

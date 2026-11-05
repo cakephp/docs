@@ -59,6 +59,12 @@ bin/cake upgrade rector --rules cakephp55 <path/to/app/src>
   object provides a fluent interface for defining JSON path expressions.
 - ``FunctionsBuilder::jsonExists()`` was added.
 
+### ORM
+
+- `Table::projectAs()` and `Table::projectOne()` were added. They project
+  query results into DTOs and are typed as the DTO class. See
+  [Typed DTO Results From The Table](../orm/query-builder#typed-dto-results-from-the-table).
+
 ### TestSuite
 
 - `Cake\TestSuite\Fixture\DeleteStrategy` was added. This fixture strategy
