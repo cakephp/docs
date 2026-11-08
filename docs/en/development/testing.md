@@ -1390,7 +1390,7 @@ Simulating file uploads is straightforward when you use the default
 create instances that implement
 [\Psr\Http\Message\UploadedFileInterface](https://www.php-fig.org/psr/psr-7/#16-uploaded-files)
 (the default implementation currently used by CakePHP is
-`\Laminas\Diactoros\UploadedFile`), and pass them in your test request data.
+`\Cake\Http\UploadedFile`), and pass them in your test request data.
 In the CLI environment such objects will by default pass validation checks that
 test whether the file was uploaded via HTTP. The same is not true for array style
 data as found in `$_FILES`, it would fail that check.
@@ -1423,7 +1423,7 @@ The test that would simulate the corresponding request could look like this:
 ```php
 public function testAddWithUploads(): void
 {
-    $teaserImage = new \Laminas\Diactoros\UploadedFile(
+    $teaserImage = new \Cake\Http\UploadedFile(
         '/path/to/test/file.jpg', // stream or path to file representing the temp file
         12345,                    // the filesize in bytes
         \UPLOAD_ERR_OK,           // the upload/error status
@@ -1431,7 +1431,7 @@ public function testAddWithUploads(): void
         'image/jpeg',              // the mimetype as sent by the client
     );
 
-    $textAttachment = new \Laminas\Diactoros\UploadedFile(
+    $textAttachment = new \Cake\Http\UploadedFile(
         '/path/to/test/file.txt',
         12345,
         \UPLOAD_ERR_OK,
@@ -1439,7 +1439,7 @@ public function testAddWithUploads(): void
         'text/plain',
     );
 
-    $pdfAttachment = new \Laminas\Diactoros\UploadedFile(
+    $pdfAttachment = new \Cake\Http\UploadedFile(
         '/path/to/test/file.pdf',
         12345,
         \UPLOAD_ERR_OK,
@@ -1498,7 +1498,7 @@ or otherwise invalid files that do not pass validation:
 ```php
 public function testAddWithInvalidUploads(): void
 {
-    $missingTeaserImageUpload = new \Laminas\Diactoros\UploadedFile(
+    $missingTeaserImageUpload = new \Cake\Http\UploadedFile(
         '',
         0,
         \UPLOAD_ERR_NO_FILE,
@@ -1506,7 +1506,7 @@ public function testAddWithInvalidUploads(): void
         '',
     );
 
-    $uploadFailureAttachment = new \Laminas\Diactoros\UploadedFile(
+    $uploadFailureAttachment = new \Cake\Http\UploadedFile(
         '/path/to/test/file.txt',
         1234567890,
         \UPLOAD_ERR_INI_SIZE,
@@ -1514,7 +1514,7 @@ public function testAddWithInvalidUploads(): void
         'text/plain',
     );
 
-    $invalidTypeAttachment = new \Laminas\Diactoros\UploadedFile(
+    $invalidTypeAttachment = new \Cake\Http\UploadedFile(
         '/path/to/test/file.exe',
         12345,
         \UPLOAD_ERR_OK,

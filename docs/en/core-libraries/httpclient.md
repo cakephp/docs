@@ -163,6 +163,10 @@ addition request information. The following keys can be used in `$options`:
 - `ssl_verify_host` - defaults to `true`. Validate the SSL certificate against the host name.
 - `ssl_cafile` - defaults to built in cafile. Overwrite to use custom CA bundles.
 - `timeout` - Duration to wait before timing out in seconds.
+- `stream` - Return a live response body after receiving headers instead of
+  buffering the entire body. Defaults to `false`. Requires the Stream adapter.
+- `readTimeout` - Timeout in seconds for each live response body read. Defaults
+  to `timeout`; `0` disables the read timeout. Must be finite and non-negative.
 - `type` - Send a request body in a custom content type. Requires `$data` to
   either be a string, or the `_content` option to be set when doing GET
   requests.
@@ -173,6 +177,21 @@ addition request information. The following keys can be used in `$options`:
 The options parameter is always the 3rd parameter in each of the HTTP methods.
 They can also be used when constructing `Client` to create
 [scoped clients](#http_client_scoped_client).
+
+## Following Redirects
+
+Set the `redirect` option to the maximum number of redirects to follow:
+
+```php
+$response = $http->get('https://example.com/old-path', [], ['redirect' => 3]);
+```
+
+Relative `Location` values are resolved against the current request URL.
+Redirect targets must use HTTP or HTTPS and have a host. When following a `303`
+response, non-`HEAD` requests become `GET` requests with no body or body headers.
+When the scheme, host, or port changes, the original `Authorization` and `Cookie`
+headers are removed. Cookies matching the destination are added from the client's
+cookie jar.
 
 ## Authentication
 
@@ -259,11 +278,45 @@ $http = new Client([
 $response = $http->get('https://example.com/api/profile/1');
 ```
 
+### Custom Authentication Strategies
+
+Custom strategies must implement
+`Cake\Http\Client\Auth\AuthenticationInterface`. The `authentication()` method
+receives a request and the authentication options, and must return the request
+with any authentication changes applied:
+
+```php
+namespace App\Http\Client\Auth;
+
+use Cake\Http\Client\Auth\AuthenticationInterface;
+use Cake\Http\Client\Request;
+
+class ApiKey implements AuthenticationInterface
+{
+    public function authentication(Request $request, array $credentials): Request
+    {
+        return $request->withHeader('X-Api-Key', $credentials['key']);
+    }
+}
+```
+
+Select the strategy with the `auth.type` option:
+
+```php
+$response = $http->get('https://example.com/profile', [], [
+    'auth' => ['type' => \App\Http\Client\Auth\ApiKey::class, 'key' => $apiKey],
+]);
+```
+
 ### Proxy Authentication
 
 Some proxies require authentication to use them. Generally this authentication
-is Basic, but it can be implemented by any authentication adapter. By default
-Http\Client will assume Basic authentication, unless the type key is set:
+is Basic. A custom proxy strategy must implement both
+`Cake\Http\Client\Auth\AuthenticationInterface` and
+`Cake\Http\Client\Auth\ProxyAuthenticationInterface`, providing a
+`proxyAuthentication(Request $request, array $credentials): Request` method.
+Using a strategy without proxy support throws `Cake\Core\Exception\CakeException`.
+By default, Http\Client uses Basic authentication unless the `type` key is set:
 
 ```php
 $http = new Client();
@@ -427,13 +480,62 @@ while (!$stream->eof()) {
 }
 ```
 
+### Streaming Responses
+
+By default the HTTP client buffers the response body before returning. To process
+an ongoing response, such as server-sent events (SSE), select the Stream adapter
+and enable the `stream` option:
+
+```php
+use Cake\Http\Client;
+use Cake\Http\Client\Adapter\Stream;
+
+$http = new Client(['adapter' => Stream::class]);
+$response = $http->get('https://example.com/events', [], [
+    'stream' => true,
+    'readTimeout' => 60,
+    'headers' => ['Accept' => 'text/event-stream'],
+]);
+
+$body = $response->getBody();
+try {
+    while (!$body->eof()) {
+        $chunk = $body->read(8192);
+        // Process bytes incrementally; a chunk may contain only part of an event.
+    }
+} finally {
+    $body->close();
+}
+```
+
+Streaming requires PHP's `allow_url_fopen` setting. The Curl adapter rejects
+`stream => true`; explicitly select the Stream adapter even when the curl
+extension is installed.
+
+The client returns after the response headers arrive. The body is non-seekable,
+has no known size, and cannot be replayed. `readTimeout` controls individual body
+reads, defaults to `timeout`, and accepts `0` to disable the read timeout. Read
+failures and timeouts throw `Cake\Http\Client\Exception\NetworkException` while
+consuming the body, so handle them around the read loop as well as the request.
+
+`getStringBody()`, `getJson()`, `getJsonArray()`, `getJsonAs()` and `getXml()`
+consume a non-seekable body from its current position and wait for EOF. Avoid
+these methods for ongoing responses. `HttpClient.afterSend` runs before a live
+body has been consumed; logging and monitoring listeners should inspect headers
+and status without reading the body.
+
+To forward a live body from a controller action, attach it to the server response
+and return that response. See
+[Relaying a Live HTTP Response](../controllers/request-response#relaying-a-live-http-response).
+
 <a id="http-client-xml-json"></a>
 
 ### Reading JSON and XML Response Bodies
 
 Since JSON and XML responses are commonly used, response objects provide a way
-to use accessors to read decoded data. JSON data is decoded into an array, while
-XML data is decoded into a `SimpleXMLElement` tree:
+to use accessors to read decoded data. JSON objects and arrays are decoded into
+PHP arrays; other JSON values retain their corresponding PHP types. XML data is
+decoded into a `SimpleXMLElement` tree:
 
 ```php
 // Get some XML
@@ -448,7 +550,34 @@ $json = $response->getJson();
 ```
 
 The decoded response data is stored in the response object, so accessing it
-multiple times has no additional cost.
+multiple times has no additional cost. Calling `withBody()` clears the cached
+JSON and XML values for the new response.
+
+`getJson()` returns `null` for both invalid JSON and the JSON value `null`. Use
+`getJsonArray()` when you require an array or `null` and want decoding failures
+to raise exceptions:
+
+```php
+$data = $response->getJsonArray();
+```
+
+JSON objects and arrays are returned as PHP arrays, and JSON `null` is returned
+as `null`. Invalid JSON throws `JsonException`. Valid scalar values, such as
+`true`, `42`, or `"text"`, throw `UnexpectedValueException`.
+
+Use `getJsonAs()` to validate the decoded array and convert it into an
+application-specific value. The decoder receives the result of `getJsonArray()`
+and is responsible for validating its shape:
+
+```php
+$name = $response->getJsonAs(function (?array $data): string {
+    if (!isset($data['name']) || !is_string($data['name'])) {
+        throw new \UnexpectedValueException('Expected a string name.');
+    }
+
+    return $data['name'];
+});
+```
 
 ### Accessing Response Headers
 

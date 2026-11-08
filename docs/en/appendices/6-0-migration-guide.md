@@ -150,6 +150,59 @@ Some properties have also been renamed to better reflect their purpose. These ar
 
 ### Http
 
+CakePHP now provides its own PSR-7 HTTP message implementations and no longer
+requires `laminas/laminas-diactoros`. Replace direct uses of the following
+Diactoros classes with their CakePHP equivalents, including in test fixtures:
+
+| Previous class                                | Replacement                           |
+|-----------------------------------------------|---------------------------------------|
+| `Laminas\Diactoros\Uri`                       | `Cake\Http\Uri`                       |
+| `Laminas\Diactoros\Stream`                    | `Cake\Http\Stream`                    |
+| `Laminas\Diactoros\UploadedFile`              | `Cake\Http\UploadedFile`              |
+| `Laminas\Diactoros\Response\RedirectResponse` | `Cake\Http\Response\RedirectResponse` |
+| `Laminas\Diactoros\MessageTrait`              | `Cake\Http\MessageTrait`              |
+
+CakePHP's PSR-17 factories now create CakePHP objects. Type against the PSR
+interfaces when your code accepts multiple implementations. If your application
+still uses other Diactoros classes or functions, declare
+`laminas/laminas-diactoros` as a direct dependency. CakePHP also no longer requires
+`laminas/laminas-httphandlerrunner`; declare it directly if your application uses it.
+
+- `RequestFactory::createRequest()` now declares `Cake\Http\Client\Request`
+  as its return type. `ResponseFactory::createResponse()` now declares
+  `Cake\Http\Response`. The stream, URI, and uploaded-file factories return their
+  corresponding CakePHP classes. Update overridden methods to use compatible
+  return types.
+- Custom HTTP client authentication strategies must implement
+  `Cake\Http\Client\Auth\AuthenticationInterface`. Strategies used with the
+  `proxy` option must also implement
+  `Cake\Http\Client\Auth\ProxyAuthenticationInterface`. Update overrides of
+  `Client::createAuth()` to return `AuthenticationInterface`. See
+  [Custom Authentication Strategies](../core-libraries/httpclient#custom-authentication-strategies).
+- `Client::createRequest()` now accepts `array|string|null` for its `$data`
+  argument. Update the signatures of overrides accordingly.
+- When following a `303` redirect, the HTTP client now changes non-`HEAD`
+  requests to `GET` and removes the request body and its associated headers.
+  Redirects to a different scheme, host, or port remove the original
+  `Authorization` and `Cookie` headers; matching cookies from the client's cookie
+  jar are then applied. Relative redirect locations are resolved against the
+  current request URL. Redirect targets must use HTTP or HTTPS and have a host.
+- `Client\Response` now defaults to status `200` when constructed without a
+  status line. Its body constructor argument accepts a string or
+  `Psr\Http\Message\StreamInterface`; a supplied stream is used as-is.
+- HTTP message header mutations validate header names and values. Invalid names,
+  control characters in values, and empty value arrays throw
+  `InvalidArgumentException`. Use `withoutHeader()` to remove a header.
+- When the HTTP client decodes a gzip response body, it removes the
+  `Content-Encoding` and `Content-Length` headers so they describe the decoded
+  body. Invalid gzip data raises `Cake\Core\Exception\CakeException`.
+- `CallbackStream` no longer extends the Diactoros implementation. Its callback
+  runs once when the contents are read, and subsequent reads return an empty
+  string. It cannot be rewound or read in chunks using `read()`.
+- `JsonStreamResponse` validates its options when constructed and when calling
+  `withStreamOptions()`. Invalid option types or values, such as an unsupported
+  `format` or a non-positive `flushEvery`, throw `InvalidArgumentException`.
+
 - Using `$request->getParam('?')` to get the query params is no longer possible.
   Use `$request->getQueryParams()` instead.
 - The methods `_getCookies()`, `_getJson()`, `_getXml()`, `_getHeaders()`
@@ -208,6 +261,15 @@ Some properties have also been renamed to better reflect their purpose. These ar
   callers must also pass an array for `label`.
 
 ## New Features
+
+### Http
+
+- The HTTP client supports live response bodies through the Stream adapter with
+  the `stream` and `readTimeout` options. See
+  [Streaming Responses](../core-libraries/httpclient#streaming-responses).
+- `Client\Response::getJsonArray()` provides strict JSON array decoding, and
+  `getJsonAs()` passes decoded data to an application-defined validating decoder.
+  See [Reading JSON and XML Response Bodies](../core-libraries/httpclient#http-client-xml-json).
 
 ### Event
 

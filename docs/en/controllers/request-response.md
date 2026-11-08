@@ -10,6 +10,11 @@ responses. The request object in CakePHP allows you to introspect an incoming
 request, while the response object allows you to effortlessly create HTTP
 responses from your controllers.
 
+CakePHP provides its own PSR-7 URI, stream, and uploaded-file implementations in
+`Cake\Http`. The PSR-17 factories, such as `UriFactory`, `StreamFactory`, and
+`UploadedFileFactory`, create these CakePHP objects. You can also use other
+implementations of the corresponding PSR interfaces.
+
 <a id="cake-request"></a>
 
 ## Request
@@ -188,7 +193,7 @@ $attachment = $this->request->getData('attachment');
 By default, file uploads are represented in the request data as objects that implement
 [\Psr\Http\Message\UploadedFileInterface](https://www.php-fig.org/psr/psr-7/#16-uploaded-files). In the current
 implementation, the `$attachment` variable in the above example would by default hold an instance of
-`\Laminas\Diactoros\UploadedFile`.
+`\Cake\Http\UploadedFile`.
 
 Accessing the uploaded file details is fairly simple, here's how you can obtain the same data as provided by the old
 style file upload array:
@@ -235,7 +240,7 @@ Returns all uploaded files in a normalized array structure. For the above exampl
 
 ```php
 [
-        'attachment' => object(Laminas\Diactoros\UploadedFile) {
+        'attachment' => object(Cake\Http\UploadedFile) {
             // ...
         }
 ]
@@ -250,14 +255,14 @@ replace all possibly existing uploaded files:
 ```php
 $files = [
     'MyModel' => [
-        'attachment' => new \Laminas\Diactoros\UploadedFile(
+        'attachment' => new \Cake\Http\UploadedFile(
             $streamOrFile,
             $size,
             $errorStatus,
             $clientFilename,
             $clientMediaType,
         ),
-        'anotherAttachment' => new \Laminas\Diactoros\UploadedFile(
+        'anotherAttachment' => new \Cake\Http\UploadedFile(
             '/tmp/hfz6dbn.tmp',
             123,
             \UPLOAD_ERR_OK,
@@ -668,7 +673,8 @@ $files[0]->moveTo($targetPath);
 ### Working with the Request URI
 
 Requests contain a URI object, which contains methods for interacting with the
-requested URI:
+requested URI. By default this is a `Cake\Http\Uri` implementing
+`Psr\Http\Message\UriInterface`:
 
 ```php
 // Get the URI
@@ -679,6 +685,19 @@ $path = $uri->getPath();
 $query = $uri->getQuery();
 $host = $uri->getHost();
 ```
+
+You can construct a `Cake\Http\Uri` from a string, a native
+`Uri\Rfc3986\Uri`, or a native `Uri\WhatWg\Url`:
+
+```php
+use Cake\Http\Uri;
+
+$uri = new Uri('https://example.com/articles?page=2');
+$request = $request->withUri($uri);
+```
+
+`Cake\Http\Uri` adapts PHP's native URI parsing to PSR-7. Use it when an API
+requires `UriInterface`; the native PHP objects do not implement that interface.
 
 ## Response
 
@@ -1051,7 +1070,7 @@ public function export()
 `method` Cake\\Http\\Response::**withBody**(StreamInterface $body): static
 
 To set the response body, use the `withBody()` method, which is provided by the
-`Laminas\Diactoros\MessageTrait`:
+`Cake\Http\MessageTrait`:
 
 ```php
 $response = $response->withBody($stream);
@@ -1060,11 +1079,11 @@ $response = $response->withBody($stream);
 Be sure that `$stream` is a `Psr\Http\Message\StreamInterface` object.
 See below on how to create a new stream.
 
-You can also stream responses from files using `Laminas\Diactoros\Stream` streams:
+You can also stream responses from files using `Cake\Http\Stream` streams:
 
 ```php
 // To stream from a file
-use Laminas\Diactoros\Stream;
+use Cake\Http\Stream;
 
 $stream = new Stream('/path/to/file', 'rb');
 $response = $response->withBody($stream);
@@ -1087,6 +1106,65 @@ $stream = new CallbackStream(function () use ($img) {
 });
 $response = $response->withBody($stream);
 ```
+
+The callback runs once when the contents are read. The stream cannot be rewound
+or read in chunks using `read()`. Use a readable stream for incremental reads.
+
+### Relaying a Live HTTP Response
+
+You can attach a live [HTTP client response body](../core-libraries/httpclient#streaming-responses)
+to a server response to forward bytes as they arrive. For example, a controller
+action can relay server-sent events:
+
+```php
+public function events(): \Cake\Http\Response
+{
+    $http = new \Cake\Http\Client([
+        'adapter' => \Cake\Http\Client\Adapter\Stream::class,
+    ]);
+    $upstream = $http->get('https://example.com/events', [], [
+        'stream' => true,
+        'readTimeout' => 60,
+        'headers' => ['Accept' => 'text/event-stream'],
+    ]);
+
+    return $this->response
+        ->withStatus($upstream->getStatusCode())
+        ->withHeader('Content-Type', $upstream->getHeaderLine('Content-Type'))
+        ->withHeader('Cache-Control', 'no-cache')
+        ->withHeader('X-Accel-Buffering', 'no')
+        ->withBody($upstream->getBody());
+}
+```
+
+`ResponseEmitter` reads readable, non-seekable bodies incrementally, flushes each
+chunk when PHP output buffering allows it, and closes the body after emission,
+including when reading fails. Return the response without consuming or closing
+its body first. Custom live bodies must support blocking reads; a read that
+returns an empty string before EOF causes the emitter to throw `RuntimeException`.
+
+Configure your web server and proxy to allow streaming. Nested PHP output
+buffers can also delay delivery. When using a custom emitter, enable
+`new \Cake\Http\ResponseEmitter(flushOutputBuffers: true)` to remove inner output
+buffers before emitting a live body. Empty inner compression buffers are
+discarded; drain nonempty custom output handlers before calling the emitter.
+
+### Redirect Responses
+
+Use `Cake\Http\Response\RedirectResponse` to create a redirect in middleware or
+other code that creates responses directly:
+
+```php
+use Cake\Http\Response\RedirectResponse;
+
+return new RedirectResponse('/articles', 301, ['X-Reason' => 'moved']);
+```
+
+The constructor accepts a URI string or `Psr\Http\Message\UriInterface`, a status
+code (default `302`), and additional headers. The response has an empty body and
+no default `Content-Type` header. Its `Location` header is set from the URI
+argument. In controllers you can continue to use
+[`Controller::redirect()`](../controllers#redirecting-to-other-pages).
 
 ### Setting the Character Set
 
