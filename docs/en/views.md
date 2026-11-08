@@ -157,6 +157,105 @@ the `h()` function:
 <?= h($user->bio); ?>
 ```
 
+### Rendering Trusted HTML
+
+When a value can contain either plain text or HTML intended to render directly,
+use `Cake\View\HtmlString` to distinguish trusted markup from text that needs
+escaping. `HtmlString` is an immutable value object:
+
+```php
+use Cake\View\HtmlString;
+use function Cake\View\html;
+
+$content = new HtmlString('<strong>Featured article</strong>');
+
+// The html() convenience function creates the same value object.
+$content = html('<strong>Featured article</strong>');
+
+echo $content;
+// <strong>Featured article</strong>
+```
+
+`HtmlString` marks markup as trusted; it does not sanitize it. Only wrap HTML
+you control, and escape any untrusted values before including them:
+
+```php
+$content = html('<strong>' . h($article->title) . '</strong>');
+```
+
+Use `HtmlString::render()` in templates or custom renderers that accept either
+a string or an `HtmlStringable` value. It escapes ordinary strings with `h()`
+and renders trusted HTML unchanged:
+
+```php
+echo HtmlString::render('News & updates');
+// News &amp; updates
+
+echo HtmlString::render(html('<strong>News</strong>'));
+// <strong>News</strong>
+```
+
+An explicit call to `h()` still escapes trusted markup:
+
+```php
+echo h(html('<strong>News</strong>'));
+// &lt;strong&gt;News&lt;/strong&gt;
+```
+
+Casting an `HtmlString` to a string returns its original markup. It also
+implements `JsonSerializable`, so `json_encode()` serializes it as a JSON string.
+
+#### Using Trusted HTML with Helpers
+
+The [HtmlHelper](views/helpers/html#creating-links) and
+[FormHelper](views/helpers/form#rendering-trusted-html) accept trusted HTML in
+supported content arguments without requiring `'escape' => false`:
+
+```php
+echo $this->Html->link(html('<strong>Read more</strong>'), '/articles');
+// <a href="/articles"><strong>Read more</strong></a>
+
+echo $this->Form->button(html('<em>Save</em>'));
+// <button type="submit"><em>Save</em></button>
+```
+
+Helper methods still return strings. To pass their output as trusted content
+to another helper, wrap it with `html()`. Attribute values continue to be
+escaped according to the helper's attribute escaping options.
+
+#### Implementing HtmlStringable
+
+Custom components and plugins can implement `Cake\View\HtmlStringable`
+instead of returning an `HtmlString`. The interface extends `Stringable` and
+requires a `__toString(): string` method that returns trusted HTML:
+
+```php
+use Cake\View\HtmlStringable;
+
+final class Badge implements HtmlStringable
+{
+    public function __construct(private string $label)
+    {
+    }
+
+    public function __toString(): string
+    {
+        return '<span class="badge">' . h($this->label) . '</span>';
+    }
+}
+
+echo HtmlString::render(new Badge('News & updates'));
+// <span class="badge">News &amp; updates</span>
+```
+
+Implementations are responsible for escaping any untrusted values in their
+markup. The contract applies to HTML content, and does not bypass attribute
+escaping or explicit calls to `h()`.
+
+::: info Added in version 6.0.0
+`HtmlString`, `HtmlStringable`, and `Cake\View\html()` were added.
+:::
+
 ### Setting View Variables
 
 `method` Cake\\View\\View::**set**(array|string $name, mixed $value = null): static
