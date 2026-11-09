@@ -487,6 +487,8 @@ the source using the `RequestToDtoSource` enum:
 use Cake\Controller\Attribute\RequestToDto;
 use Cake\Controller\Attribute\Enum\RequestToDtoSource;
 
+use function Cake\Database\Expression\like;
+
 class ArticlesController extends AppController
 {
     // Use query string parameters
@@ -494,7 +496,7 @@ class ArticlesController extends AppController
         #[RequestToDto(source: RequestToDtoSource::Query)] SearchCriteriaDto $criteria
     ): void {
         $articles = $this->Articles->find()
-            ->where(['title LIKE' => "%{$criteria->query}%"])
+            ->where(['title' => like("%{$criteria->query}%")])
             ->limit($criteria->limit);
     }
 

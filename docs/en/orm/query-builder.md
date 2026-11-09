@@ -14,6 +14,11 @@ queries using unions and subqueries with ease.
 Underneath the covers, the query builder uses PDO prepared statements which
 protect against SQL injection attacks.
 
+For comparisons in condition arrays, import the predicate functions from
+`Cake\Database\Expression` with `use function`. The array key supplies the field,
+and the predicate supplies the operator and values. See
+[Predicate Functions](#predicate-functions) for the available functions.
+
 ## The SelectQuery Object
 
 The easiest way to create a `SelectQuery` object is to use `find()` from a
@@ -68,10 +73,12 @@ $query->orderBy(['title' => 'DESC']); // Still same object, no SQL executed
 You can of course chain the methods you call on SelectQuery objects:
 
 ```php
+use function Cake\Database\Expression\notEquals;
+
 $query = $articles
     ->find()
     ->select(['id', 'name'])
-    ->where(['id !=' => 1])
+    ->where(['id' => notEquals(1)])
     ->orderBy(['created' => 'DESC']);
 
 foreach ($query->all() as $article) {
@@ -95,9 +102,11 @@ You can execute a query directly without having to use `foreach` on it.
 The easiest way is to either call the `all()` or `toList()` methods:
 
 ```php
+use function Cake\Database\Expression\greaterThan;
+
 $resultsIteratorObject = $articles
     ->find()
-    ->where(['id >' => 1])
+    ->where(['id' => greaterThan(1)])
     ->all();
 
 foreach ($resultsIteratorObject as $article) {
@@ -106,7 +115,7 @@ foreach ($resultsIteratorObject as $article) {
 
 $resultsArray = $articles
     ->find()
-    ->where(['id >' => 1])
+    ->where(['id' => greaterThan(1)])
     ->all()
     ->toList();
 
@@ -171,13 +180,15 @@ improve your skills in efficiently traversing the results. The ResultSet (return
 by calling the `SelectQuery`'s `all()` method) implements the collection interface:
 
 ```php
+use function Cake\Database\Expression\greaterThan;
+
 // Use the combine() method from the collections library
 // This is equivalent to find('list')
 $keyValueList = $articles->find()->all()->combine('id', 'title');
 
 // An advanced example
 $results = $articles->find()
-    ->where(['id >' => 1])
+    ->where(['id' => greaterThan(1)])
     ->orderBy(['title' => 'DESC'])
     ->all()
     ->map(function ($row) {
@@ -572,13 +583,15 @@ When using aggregate functions like `count` and `sum` you may want to use
 `group by` and `having` clauses:
 
 ```php
+use function Cake\Database\Expression\greaterThan;
+
 $query = $articles->find();
 $query->select([
     'count' => $query->func()->count('view_count'),
     'published_date' => 'DATE(created)',
 ])
 ->groupBy('published_date')
-->having(['count >' => 3]);
+->having(['count' => greaterThan(3)]);
 ```
 
 ### Case Statements
@@ -622,13 +635,15 @@ cities into SMALL, MEDIUM, or LARGE based on population size, we could do the
 following:
 
 ```php
+use function Cake\Database\Expression\{greaterThanOrEquals, lessThan};
+
 $query = $cities->find();
 $sizing = $query->expr()->case()
-    ->when(['population <' => 100000])
+    ->when(['population' => lessThan(100000)])
     ->then('SMALL')
     ->when($query->expr()->between('population', 100000, 999000))
     ->then('MEDIUM')
-    ->when(['population >=' => 999001])
+    ->when(['population' => greaterThanOrEquals(999001)])
     ->then('LARGE');
 $query = $query->select(['size' => $sizing]);
 # SELECT CASE
@@ -1051,6 +1066,133 @@ The above would generate SQL like
 SELECT * FROM articles WHERE author_id = 3 AND (view_count = 2 OR view_count = 3)
 ```
 
+### Predicate Functions
+
+Use the functions in `Cake\Database\Expression` to build comparisons in condition
+arrays. Plain values still create equality conditions:
+
+```php
+use function Cake\Database\Expression\{between, greaterThan, lessThan, like};
+
+$query = $articles->find()->where([
+    'published' => true,
+    'id' => between(1, 100),
+    'view_count' => greaterThan(1000),
+    'price' => lessThan(50),
+    'title' => like('%cake%'),
+]);
+```
+
+This generates conditions equivalent to:
+
+```sql
+WHERE published = true
+    AND id BETWEEN 1 AND 100
+    AND view_count > 1000
+    AND price < 50
+    AND title LIKE '%cake%'
+```
+
+The values are bound as parameters. Condition keys must contain only the field
+or a trusted SQL expression. CakePHP 6 no longer accepts operators in array keys
+such as `'view_count >'` or `'title LIKE'`; these raise an
+`InvalidArgumentException`.
+
+The following predicate functions are available:
+
+| Function | Comparison |
+| --- | --- |
+| `equals($value)` | `=`, or `IS NULL` when the value is `null` |
+| `notEquals($value)` | `!=`, or `IS NOT NULL` when the value is `null` |
+| `greaterThan($value)` | `>` |
+| `greaterThanOrEquals($value)` | `>=` |
+| `lessThan($value)` | `<` |
+| `lessThanOrEquals($value)` | `<=` |
+| `like($value)` | `LIKE` |
+| `notLike($value)` | `NOT LIKE` |
+| `in($values)` | `IN`, accepting a list of values or a subquery |
+| `notIn($values)` | `NOT IN`, accepting a list of values or a subquery |
+| `inOrNull($values)` | `IN (...) OR field IS NULL` |
+| `notInOrNull($values)` | `NOT IN (...) OR field IS NULL` |
+| `between($from, $to)` | Inclusive `BETWEEN` |
+| `notBetween($from, $to)` | `NOT BETWEEN` |
+| `isNull()` | `IS NULL` |
+| `isNotNull()` | `IS NOT NULL` |
+| `isDistinctFrom($value)` | Null-safe inequality |
+| `isNotDistinctFrom($value)` | Null-safe equality |
+| `comparison($operator, $value)` | A custom, trusted SQL operator |
+
+Predicates work wherever the query builder accepts condition arrays, including
+`where()`, `having()`, join conditions, and `case()->when()`. They must be assigned
+to field keys, rather than passed as numeric array entries or directly as the
+value of `AND`, `OR`, or `NOT`.
+
+Use nested arrays to combine predicates with boolean operators. If you need more
+than one condition on the same field, put each condition in its own array to
+avoid PHP overwriting duplicate keys:
+
+```php
+use function Cake\Database\Expression\{greaterThan, isNull, lessThan, like};
+
+$query = $articles->find()->where([
+    'OR' => [
+        ['title' => like('%cake%')],
+        ['published_at' => isNull()],
+    ],
+    'AND' => [
+        ['view_count' => greaterThan(100)],
+        ['view_count' => lessThan(1000)],
+    ],
+    'NOT' => ['archived' => true],
+]);
+```
+
+Predicates infer binding types from the surrounding query's type map, including
+column types from the ORM schema. Every function except `isNull()` and
+`isNotNull()` accepts an optional `type` argument to override the inferred type:
+
+```php
+use function Cake\Database\Expression\{between, equals, in, notEquals};
+
+$query = $articles->find()->where([
+    'created' => between($start, $end, type: 'datetime'),
+    'author_id' => in([1, 2, 3], type: 'integer'),
+    'id' => equals($ids, type: 'integer[]'),
+    'category_id' => notEquals($excludedIds, type: 'integer[]'),
+]);
+```
+
+With array types such as `integer[]`, `equals()` produces `IN` and
+`notEquals()` produces `NOT IN`. For `in()` and `notIn()`, specify the element
+type, such as `integer`.
+
+Each function returns an immutable `Cake\Database\Expression\Predicate`. Its
+field and binding type are resolved independently each time it is used, so you
+can reuse a predicate across fields and queries:
+
+```php
+use function Cake\Database\Expression\greaterThan;
+
+$recent = greaterThan($cutoff, type: 'datetime');
+$articlesQuery = $articles->find()->where(['created' => $recent]);
+$commentsQuery = $comments->find()->where(['created' => $recent]);
+```
+
+For a database-specific operator without a dedicated function, use
+`comparison()`:
+
+```php
+use function Cake\Database\Expression\comparison;
+
+// PostgreSQL case-insensitive pattern matching.
+$query = $articles->find()->where(['title' => comparison('ILIKE', '%cake%')]);
+```
+
+Only values are parameterized. Field expressions and the operator passed to
+`comparison()` are SQL structure and must never come from untrusted input.
+
+### Building Conditions with Expressions
+
 If you'd prefer to avoid deeply nested arrays, you can use the callback form of
 `where()` to build your queries. The callback accepts a QueryExpression which allows
 you to use the expression builder interface to build more complex conditions without arrays.
@@ -1394,12 +1536,14 @@ conditions:
 - `exists()` Create a condition using `EXISTS`:
 
   ```php
+  use function Cake\Database\Expression\greaterThan;
+
   $subquery = $cities->find()
       ->select(['id'])
       ->where(function (QueryExpression $exp, SelectQuery $q) {
           return $exp->equalFields('countries.id', 'cities.country_id');
       })
-      ->andWhere(['population >' => 5000000]);
+      ->andWhere(['population' => greaterThan(5000000)]);
 
   $query = $countries->find()
       ->where(function (QueryExpression $exp, SelectQuery $q) use ($subquery) {
@@ -1411,12 +1555,14 @@ conditions:
 - `notExists()` Create a negated condition using `EXISTS`:
 
   ```php
+  use function Cake\Database\Expression\greaterThan;
+
   $subquery = $cities->find()
       ->select(['id'])
       ->where(function (QueryExpression $exp, SelectQuery $q) {
           return $exp->equalFields('countries.id', 'cities.country_id');
       })
-      ->andWhere(['population >' => 5000000]);
+      ->andWhere(['population' => greaterThan(5000000)]);
 
   $query = $countries->find()
       ->where(function (QueryExpression $exp, SelectQuery $q) use ($subquery) {
@@ -1508,11 +1654,13 @@ $query->select([
 You can use `identifier()` in comparisons to aggregations too:
 
 ```php
+use function Cake\Database\Expression\greaterThanOrEquals;
+
 $query = $this->Orders->find();
 $query->select(['Customers.customer_name', 'total_orders' => $query->func()->count('Orders.order_id')])
     ->contain('Customers')
     ->groupBy(['Customers.customer_name'])
-    ->having(['total_orders >=' => $query->identifier('Customers.minimum_order_count')]);
+    ->having(['total_orders' => greaterThanOrEquals($query->identifier('Customers.minimum_order_count'))]);
 ```
 
 > [!WARNING]
@@ -1547,10 +1695,6 @@ the column data type:
 ```php
 $query = $articles->find()
     ->where(['id' => $ids], ['id' => 'integer[]']);
-
-// Or include IN to automatically cast to an array.
-$query = $articles->find()
-    ->where(['id IN' => $ids]);
 ```
 
 The above will automatically create `id IN (...)` instead of `id = ?`. This
@@ -1567,31 +1711,48 @@ $query = $articles->find()
     ->where(['post_date' => $dates], ['post_date' => 'date[]']);
 ```
 
-### Automatic IS NULL Creation
-
-When a condition value is expected to be `null` or any other value, you can
-use the `IS` operator to automatically create the correct expression:
+When you already have a list of values or a subquery, use the `in()` or
+`notIn()` predicates directly:
 
 ```php
-$query = $categories->find()
-    ->where(['parent_id IS' => $parentId]);
+use function Cake\Database\Expression\in;
+
+$query = $articles->find()
+    ->where(['id' => in($ids)]);
 ```
 
-The above will generate`parent_id = :c1` or `parent_id IS NULL` depending on
-the type of `$parentId`
+### Automatic IS NULL Creation
+
+When a condition value can be `null` or a non-null value, use `equals()` to
+automatically create the correct expression:
+
+```php
+use function Cake\Database\Expression\equals;
+
+$query = $categories->find()
+    ->where(['parent_id' => equals($parentId)]);
+```
+
+The above will generate `parent_id = :c1` or `parent_id IS NULL` depending on
+whether `$parentId` is `null`. Use `isNull()` for an unconditional null check.
+A plain condition such as `['parent_id' => null]` raises an
+`InvalidArgumentException`; a null-aware predicate is required.
 
 ### Automatic IS NOT NULL Creation
 
-When a condition value is expected not to be `null` or any other value, you
-can use the `IS NOT` operator to automatically create the correct expression:
+Use `notEquals()` to compare against a value that can be `null`:
 
 ```php
+use function Cake\Database\Expression\notEquals;
+
 $query = $categories->find()
-    ->where(['parent_id IS NOT' => $parentId]);
+    ->where(['parent_id' => notEquals($parentId)]);
 ```
 
-The above will generate`parent_id != :c1` or `parent_id IS NOT NULL`
-depending on the type of `$parentId`
+The above will generate `parent_id != :c1` or `parent_id IS NOT NULL`
+depending on whether `$parentId` is `null`. Use `isNotNull()` for an
+unconditional non-null check. Ordering and pattern predicates such as
+`greaterThan()` and `like()` reject `null` values.
 
 ### Raw Expressions
 
@@ -1668,11 +1829,13 @@ Tuple comparison involves comparing two rows of data (tuples) element by element
 typically using comparison operators like `<, >, =`:
 
 ```php
+use function Cake\Database\Expression\{lessThan, lessThanOrEquals};
+
 $products->find()
     ->where([
         'OR' => [
-            ['unit_price <' => 20],
-            ['unit_price' => 20, 'tax_percentage <=' => 5],
+            ['unit_price' => lessThan(20)],
+            ['unit_price' => 20, 'tax_percentage' => lessThanOrEquals(5)],
         ]
     ]);
 
@@ -1949,13 +2112,15 @@ As seen above, when adding joins the alias can be the outer array key. Join
 conditions can also be expressed as an array of conditions:
 
 ```php
+use function Cake\Database\Expression\greaterThan;
+
 $query = $articles->find()
     ->join([
         'c' => [
             'table' => 'comments',
             'type' => 'LEFT',
             'conditions' => [
-                'c.created >' => new DateTime('-5 days'),
+                'c.created' => greaterThan(new DateTime('-5 days')),
                 'c.moderated' => true,
                 'c.article_id = articles.id',
             ]
@@ -2276,14 +2441,16 @@ Subqueries enable you to compose queries together and build conditions and
 results based on the results of other queries:
 
 ```php
+use function Cake\Database\Expression\{in, like};
+
 $matchingComment = $articles->getAssociation('Comments')->find()
     ->select(['article_id'])
     ->distinct()
-    ->where(['comment LIKE' => '%CakePHP%']);
+    ->where(['comment' => like('%CakePHP%')]);
 
 // Use a subquery to create conditions
 $query = $articles->find()
-    ->where(['id IN' => $matchingComment]);
+    ->where(['id' => in($matchingComment)]);
 
 // Join the results of a subquery into another query.
 // Giving the subquery an alias provides a way to reference
@@ -2304,15 +2471,17 @@ referencing results in the outer query more complex. As of 4.2.0 you can use
 generate aliases:
 
 ```php
+use function Cake\Database\Expression\{in, like};
+
 $comments = $articles->getAssociation('Comments')->getTarget();
 
 $matchingComment = $comments->subquery()
     ->select(['article_id'])
     ->distinct()
-    ->where(['comment LIKE' => '%CakePHP%']);
+    ->where(['comment' => like('%CakePHP%')]);
 
 $query = $articles->find()
-    ->where(['id IN' => $matchingComment]);
+    ->where(['id' => in($matchingComment)]);
 ```
 
 ### Adding Locking Statements

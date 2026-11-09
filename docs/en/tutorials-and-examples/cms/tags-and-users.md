@@ -250,6 +250,8 @@ method has not been implemented yet, so let's do that. In
 // the Query class
 use Cake\ORM\Query\SelectQuery;
 
+use function Cake\Database\Expression\{in, isNull};
+
 // The $query argument is a query builder instance.
 // The $options array will contain the 'tags' option we passed
 // to find('tagged') in our controller action.
@@ -268,11 +270,11 @@ public function findTagged(SelectQuery $query, array $tags = []): SelectQuery
     if (!$tags) {
         // If there are no tags provided, find articles that have no tags.
         $query->leftJoinWith('Tags')
-            ->where(['Tags.title IS' => null]);
+            ->where(['Tags.title' => isNull()]);
     } else {
         // Find articles that have one or more of the provided tags.
         $query->innerJoinWith('Tags')
-            ->where(['Tags.title IN' => $tags]);
+            ->where(['Tags.title' => in($tags)]);
     }
 
     return $query->groupBy(['Articles.id']);
@@ -444,7 +446,7 @@ protected function _buildTags(string $tagString): array
 
     $out = [];
     $tags = $this->Tags->find()
-        ->where(['Tags.title IN' => $newTags])
+        ->where(['Tags.title' => in($newTags)])
         ->all();
 
     // Remove existing tags from the list of new tags.

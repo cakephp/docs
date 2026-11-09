@@ -138,6 +138,40 @@ Some properties have also been renamed to better reflect their purpose. These ar
 
 ### Database
 
+- Operators in condition-array keys, such as `['views >' => 1000]` or
+  `['id IN' => $ids]`, are no longer supported and raise an
+  `InvalidArgumentException`. Use the predicate functions in
+  `Cake\Database\Expression` instead. Plain equality conditions, nested boolean
+  arrays, and the fluent `QueryExpression` API remain supported.
+
+  ```php
+  use function Cake\Database\Expression\{equals, greaterThan, in, notEquals};
+
+  // Before (CakePHP 5.x)
+  $query->where([
+      'views >' => 1000,
+      'id IN' => $ids,
+      'parent_id IS' => $parentId,
+      'deleted IS NOT' => null,
+  ]);
+
+  // After (CakePHP 6.x)
+  $query->where([
+      'views' => greaterThan(1000),
+      'id' => in($ids),
+      'parent_id' => equals($parentId),
+      'deleted' => notEquals(null),
+  ]);
+  ```
+
+  `equals()` and `notEquals()` generate `IS NULL` and `IS NOT NULL` when their
+  value is `null`. Use `isNull()` and `isNotNull()` for explicit null checks.
+  Predicates infer binding types from the query; pass `type:` to override them.
+  The [upgrade tool](6-0-upgrade-guide#upgrade-tool-use) includes this conversion
+  in its `cakephp60` rules. See
+  [Predicate Functions](../orm/query-builder#predicate-functions) for the full
+  function reference and examples.
+
 - Binary columns now use `binary` for fixed-length data and `varbinary` for
   variable-length data. In migration `addColumn()` calls, remove
   `'fixed' => true` from fixed-length `binary` columns, and change variable-length
@@ -261,6 +295,13 @@ still uses other Diactoros classes or functions, declare
   callers must also pass an array for `label`.
 
 ## New Features
+
+### Database
+
+- Namespaced predicate functions build field-keyed conditions with bound values.
+  They support comparisons, ranges, membership, null checks, and custom SQL
+  operators. The returned immutable predicates can be reused across queries.
+  See [Predicate Functions](../orm/query-builder#predicate-functions).
 
 ### Http
 

@@ -98,9 +98,11 @@ foreach ($descendants as $category) {
 If you need to pass conditions you do so as per normal:
 
 ```php
+use function Cake\Database\Expression\like;
+
 $descendants = $categories
     ->find('children', for: 1)
-    ->where(['name LIKE' => '%Foo%'])
+    ->where(['name' => like('%Foo%')])
     ->all();
 
 foreach ($descendants as $category) {

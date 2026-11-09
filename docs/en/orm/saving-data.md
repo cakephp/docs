@@ -111,10 +111,12 @@ $articlesTable->Tags->link($article, [$tag1, $tag2]);
 Unlinking many to many records is done via the `unlink()` method:
 
 ```php
+use function Cake\Database\Expression\in;
+
 $tags = $articlesTable
     ->Tags
     ->find()
-    ->where(['name IN' => ['cakephp', 'awesome']])
+    ->where(['name' => in(['cakephp', 'awesome'])])
     ->toList();
 
 $articlesTable->Tags->unlink($article, $tags);
@@ -629,11 +631,13 @@ delete for those not in the list:
 // In a controller.
 use Cake\Collection\Collection;
 
+use function Cake\Database\Expression\notIn;
+
 $comments = $this->fetchTable('Comments');
 $present = (new Collection($entity->comments))->extract('id')->filter()->toList();
 $comments->deleteAll([
     'article_id' => $article->id,
-    'id NOT IN' => $present,
+    'id' => notIn($present),
 ]);
 ```
 
