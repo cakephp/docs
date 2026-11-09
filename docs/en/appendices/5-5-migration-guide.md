@@ -62,8 +62,8 @@ bin/cake upgrade rector --rules cakephp55 <path/to/app/src>
 ### ORM
 
 - `Table::list()` was added. It runs the `list` finder and returns the
-  key/value array directly. See
-  [Getting The List As An Array](../orm/retrieving-data-and-resultsets#getting-the-list-as-an-array).
+  executed key/value result set. See
+  [Getting The List Directly](../orm/retrieving-data-and-resultsets#getting-the-list-directly).
 
 ### TestSuite
 
