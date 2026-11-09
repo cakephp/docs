@@ -138,6 +138,25 @@ Some properties have also been renamed to better reflect their purpose. These ar
 
 ### Database
 
+- The comparison methods on `Cake\Database\Expression\QueryExpression` have
+  been renamed to match the predicate functions. The old names have been removed:
+
+  | Previous method | New method |
+  | --- | --- |
+  | `eq()` | `equals()` |
+  | `notEq()` | `notEquals()` |
+  | `gt()` | `greaterThan()` |
+  | `gte()` | `greaterThanOrEquals()` |
+  | `lt()` | `lessThan()` |
+  | `lte()` | `lessThanOrEquals()` |
+
+  Update method calls and overrides in subclasses. Arguments, binding types,
+  and fluent chaining keep their existing behavior. The
+  [upgrade tool](6-0-upgrade-guide#upgrade-tool-use) includes these renames in its
+  `cakephp60` rules. See
+  [Building Conditions with Expressions](../orm/query-builder#building-conditions-with-expressions)
+  for updated examples.
+
 - Operators in condition-array keys, such as `['views >' => 1000]` or
   `['id IN' => $ids]`, are no longer supported and raise an
   `InvalidArgumentException`. Use the predicate functions in
