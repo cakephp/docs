@@ -277,7 +277,7 @@ anonymous function will receive an instance of
 ```php
 $query = $articles->find();
 $query->where(function (QueryExpression $exp, SelectQuery $q) {
-    return $exp->eq('published', true);
+    return $exp->equals('published', true);
 });
 ```
 
@@ -722,9 +722,9 @@ $query = $cities->find()
     ->where(function (QueryExpression $exp, SelectQuery $q) {
         return $exp->addCase(
             [
-                $q->expr()->lt('population', 100000),
+                $q->expr()->lessThan('population', 100000),
                 $q->expr()->between('population', 100000, 999000),
-                $q->expr()->gte('population', 999001),
+                $q->expr()->greaterThanOrEquals('population', 999001),
             ],
             ['SMALL',  'MEDIUM', 'LARGE'], # values matching conditions
             ['string', 'string', 'string'], # type of each value
@@ -745,7 +745,7 @@ $query = $cities->find()
     ->where(function (QueryExpression $exp, SelectQuery $q) {
         return $exp->addCase(
             [
-                $q->expr()->eq('population', 0),
+                $q->expr()->equals('population', 0),
             ],
             ['DESERTED', 'INHABITED'], # values matching conditions
             ['string', 'string'], # type of each value
@@ -1246,10 +1246,10 @@ The `QueryExpression` passed to the callback function defaults to `and()`:
 $query = $articles->find()
     ->where(function (QueryExpression $exp) {
         return $exp
-            ->eq('author_id', 2)
-            ->eq('published', true)
-            ->notEq('spam', true)
-            ->gt('view_count', 10);
+            ->equals('author_id', 2)
+            ->equals('published', true)
+            ->notEquals('spam', true)
+            ->greaterThan('view_count', 10);
     });
 ```
 
@@ -1274,12 +1274,12 @@ following:
 $query = $articles->find()
     ->where(function (QueryExpression $exp) {
         $orConditions = $exp->or(['author_id' => 2])
-            ->eq('author_id', 5);
+            ->equals('author_id', 5);
 
         return $exp
             ->add($orConditions)
-            ->eq('published', true)
-            ->gte('view_count', 10);
+            ->equals('published', true)
+            ->greaterThanOrEquals('view_count', 10);
     });
 ```
 
@@ -1303,13 +1303,13 @@ the method chaining:
 $query = $articles->find()
     ->where(function (QueryExpression $exp) {
         $orConditions = $exp->or(function (QueryExpression $or) {
-            return $or->eq('author_id', 2)
-                ->eq('author_id', 5);
+            return $or->equals('author_id', 2)
+                ->equals('author_id', 5);
         });
 
         return $exp
             ->not($orConditions)
-            ->lte('view_count', 10);
+            ->lessThanOrEquals('view_count', 10);
     });
 ```
 
@@ -1319,11 +1319,11 @@ You can negate sub-expressions using `not()`:
 $query = $articles->find()
     ->where(function (QueryExpression $exp) {
         $orConditions = $exp->or(['author_id' => 2])
-            ->eq('author_id', 5);
+            ->equals('author_id', 5);
 
         return $exp
             ->not($orConditions)
-            ->lte('view_count', 10);
+            ->lessThanOrEquals('view_count', 10);
     });
 ```
 
@@ -1348,8 +1348,8 @@ $query = $articles->find()
         ]);
 
         return $exp
-            ->gte($year, 2014)
-            ->eq('published', true);
+            ->greaterThanOrEquals($year, 2014)
+            ->equals('published', true);
     });
 ```
 
@@ -1364,25 +1364,29 @@ WHERE (
 )
 ```
 
+The comparison methods on `QueryExpression` use the same names as the
+[predicate functions](#predicate-functions). Pass the field as the first
+argument, followed by the value and an optional binding type.
+
 When using the expression objects you can use the following methods to create
 conditions:
 
-- `eq()` Creates an equality condition:
+- `equals()` Creates an equality condition:
 
   ```php
   $query = $cities->find()
       ->where(function (QueryExpression $exp, SelectQuery $q) {
-          return $exp->eq('population', '10000');
+          return $exp->equals('population', '10000');
       });
   # WHERE population = 10000
   ```
 
-- `notEq()` Creates an inequality condition:
+- `notEquals()` Creates an inequality condition:
 
   ```php
   $query = $cities->find()
       ->where(function (QueryExpression $exp, SelectQuery $q) {
-          return $exp->notEq('population', '10000');
+          return $exp->notEquals('population', '10000');
       });
   # WHERE population != 10000
   ```
@@ -1450,42 +1454,42 @@ conditions:
   # WHERE (country_id NOT IN ('AFG', 'USA', 'EST') OR country_id IS NULL)
   ```
 
-- `gt()` Create a `>` condition:
+- `greaterThan()` Create a `>` condition:
 
   ```php
   $query = $cities->find()
       ->where(function (QueryExpression $exp, SelectQuery $q) {
-          return $exp->gt('population', '10000');
+          return $exp->greaterThan('population', '10000');
       });
   # WHERE population > 10000
   ```
 
-- `gte()` Create a `>=` condition:
+- `greaterThanOrEquals()` Create a `>=` condition:
 
   ```php
   $query = $cities->find()
       ->where(function (QueryExpression $exp, SelectQuery $q) {
-          return $exp->gte('population', '10000');
+          return $exp->greaterThanOrEquals('population', '10000');
       });
   # WHERE population >= 10000
   ```
 
-- `lt()` Create a `<` condition:
+- `lessThan()` Create a `<` condition:
 
   ```php
   $query = $cities->find()
       ->where(function (QueryExpression $exp, SelectQuery $q) {
-          return $exp->lt('population', '10000');
+          return $exp->lessThan('population', '10000');
       });
   # WHERE population < 10000
   ```
 
-- `lte()` Create a `<=` condition:
+- `lessThanOrEquals()` Create a `<=` condition:
 
   ```php
   $query = $cities->find()
       ->where(function (QueryExpression $exp, SelectQuery $q) {
-          return $exp->lte('population', '10000');
+          return $exp->lessThanOrEquals('population', '10000');
       });
   # WHERE population <= 10000
   ```
@@ -1647,7 +1651,7 @@ $query->select([
         'year' => $query->func()->year([$query->identifier('created')]),
     ])
     ->where(function ($exp, $query) {
-        return $exp->gt('population', 100000);
+        return $exp->greaterThan('population', 100000);
     });
 ```
 
