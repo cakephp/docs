@@ -183,6 +183,10 @@ distribute the code), since it's a full emulation wrapper.
 
 Convenience wrapper for `htmlspecialchars()`.
 
+This function also escapes `Cake\View\HtmlStringable` values. To escape
+ordinary strings while preserving trusted HTML, use
+[`HtmlString::render()`](../views#rendering-trusted-html).
+
 ### pluginSplit()
 
 `function` **pluginSplit(string $name, boolean $dotAppend = false, string $plugin = null)**
@@ -199,6 +203,29 @@ Commonly used like `list($plugin, $name) = pluginSplit('Users.User');`
 Split the namespace from the classname.
 
 Commonly used like `list($namespace, $className) = namespaceSplit('Cake\Core\App');`
+
+## View Functions
+
+### html()
+
+`function` Cake\\View\\**html(string $html): HtmlString**
+
+Wraps trusted markup in an immutable `Cake\View\HtmlString` value. Import
+the namespaced function before using it:
+
+```php
+use function Cake\View\html;
+
+echo $this->Html->link(html('<strong>Read more</strong>'), '/articles');
+```
+
+This function marks markup as trusted and does not sanitize it. See
+[Rendering Trusted HTML](../views#rendering-trusted-html) for escaping rules,
+helper support, and custom implementations.
+
+::: info Added in version 6.0.0
+The `Cake\View\html()` function was added.
+:::
 
 ## Core Definition Constants
 

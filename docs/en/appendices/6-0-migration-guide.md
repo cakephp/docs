@@ -336,3 +336,12 @@ still uses other Diactoros classes or functions, declare
   classes and actions using PHP attributes such as `#[Get]`, `#[Post]`, `#[Scope]`,
   `#[Resource]`, and more. See [Attribute Routing](../development/attribute-routing)
   for full documentation.
+
+### View
+
+- `HtmlString` and the `Cake\View\html()` function wrap trusted markup, while
+  `HtmlString::render()` escapes ordinary strings and preserves values
+  implementing the new `HtmlStringable` contract. Supported HtmlHelper and
+  FormHelper content arguments accept these values without disabling escaping.
+  See [Rendering Trusted HTML](../views#rendering-trusted-html) for usage and
+  escaping rules.
