@@ -127,9 +127,11 @@ $data = $query->toArray();
 > limits, or include associations using the fluent interface.
 
 ```php
+use function Cake\Database\Expression\greaterThan;
+
 // In a controller or table method.
 $query = $articles->find('all')
-    ->where(['Articles.created >' => new DateTime('-10 days')])
+    ->where(['Articles.created' => greaterThan(new DateTime('-10 days'))])
     ->contain(['Comments', 'Authors'])
     ->limit(10);
 ```
@@ -137,9 +139,11 @@ $query = $articles->find('all')
 You can also provide many commonly used options to `find()`:
 
 ```php
+use function Cake\Database\Expression\greaterThan;
+
 // In a controller or table method.
 $query = $articles->find('all',
-    conditions: ['Articles.created >' => new DateTime('-10 days')],
+    conditions: ['Articles.created' => greaterThan(new DateTime('-10 days'))],
     contain: ['Authors', 'Comments'],
     limit: 10,
 );
@@ -149,8 +153,10 @@ If your finder options are in an array, you can use the [splat operator](https:/
 to pass them into `find()`:
 
 ```php
+use function Cake\Database\Expression\greaterThan;
+
 $options = [
-    'conditions' => ['Articles.created >' => new DateTime('-10 days')],
+    'conditions' => ['Articles.created' => greaterThan(new DateTime('-10 days'))],
     'contain' => ['Authors', 'Comments'],
     'limit' => 10,
 ]
@@ -245,8 +251,10 @@ Once you have created a query object, you can use the `count()` method to get
 a result count of that query:
 
 ```php
+use function Cake\Database\Expression\like;
+
 // In a controller or table method.
-$query = $articles->find('all', conditions: ['Articles.title LIKE' => '%Ovens%']);
+$query = $articles->find('all', conditions: ['Articles.title' => like('%Ovens%')]);
 $number = $query->count();
 ```
 
@@ -766,9 +774,11 @@ You can apply this strategy to HasMany associations as well. For example if
 published articles using the following:
 
 ```php
+use function Cake\Database\Expression\greaterThanOrEquals;
+
 $query = $authors->find();
 $query->matching('Articles', function ($q) {
-    return $q->where(['Articles.created >=' => new DateTime('-10 days')]);
+    return $q->where(['Articles.created' => greaterThanOrEquals(new DateTime('-10 days'))]);
 });
 ```
 
@@ -881,10 +891,12 @@ for example, find all the authors with no published articles in the last 10
 days:
 
 ```php
+use function Cake\Database\Expression\greaterThanOrEquals;
+
 $query = $authorsTable
     ->find()
     ->notMatching('Articles', function ($q) {
-        return $q->where(['Articles.created >=' => new \DateTime('-10 days')]);
+        return $q->where(['Articles.created' => greaterThanOrEquals(new \DateTime('-10 days'))]);
     });
 ```
 
@@ -1274,9 +1286,11 @@ $reducer = function ($occurrences, $word, $mapReduce) {
 Finally, we put everything together:
 
 ```php
+use function Cake\Database\Expression\greaterThanOrEquals;
+
 $wordCount = $articles->unhydratedFind()
     ->where(['published' => true])
-    ->andWhere(['published_date >=' => new DateTime('2014-01-01')])
+    ->andWhere(['published_date' => greaterThanOrEquals(new DateTime('2014-01-01'))])
     ->mapReduce($mapper, $reducer)
     ->all()
     ->toArray();
@@ -1373,18 +1387,22 @@ This allows you to keep chaining additional methods and filters to the query
 even after adding a map-reduce routine:
 
 ```php
+use function Cake\Database\Expression\greaterThanOrEquals;
+
 $query = $articles->find()
     ->where(['published' => true])
     ->mapReduce($mapper, $reducer);
 
 // At a later point in your app:
-$query->where(['created >=' => new DateTime('1 day ago')]);
+$query->where(['created' => greaterThanOrEquals(new DateTime('1 day ago'))]);
 ```
 
 This is particularly useful for building custom finder methods as described in the
 [Custom Find Methods](#custom-find-methods) section:
 
 ```php
+use function Cake\Database\Expression\greaterThanOrEquals;
+
 public function findPublished(SelectQuery $query): SelectQuery
 {
     return $query->where(['published' => true]);
@@ -1392,7 +1410,7 @@ public function findPublished(SelectQuery $query): SelectQuery
 
 public function findRecent(SelectQuery $query): SelectQuery
 {
-    return $query->where(['created >=' => new DateTime('1 day ago')]);
+    return $query->where(['created' => greaterThanOrEquals(new DateTime('1 day ago'))]);
 }
 
 public function findCommonWords(SelectQuery $query): SelectQuery

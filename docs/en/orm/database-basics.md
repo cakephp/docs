@@ -73,10 +73,12 @@ $results = $connection
 Instead of writing the SQL manually, you can use the query builder:
 
 ```php
+use function Cake\Database\Expression\greaterThan;
+
 // Prior to 4.5 use $connection->query() instead.
 $results = $connection
     ->selectQuery('*', 'articles')
-    ->where(['created >' => new DateTime('1 day ago')], ['created' => 'datetime'])
+    ->where(['created' => greaterThan(new DateTime('1 day ago'))], ['created' => 'datetime'])
     ->orderBy(['title' => 'DESC'])
     ->execute()
     ->fetchAll('assoc');
