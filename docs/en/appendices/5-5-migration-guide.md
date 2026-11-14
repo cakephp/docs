@@ -50,6 +50,12 @@ bin/cake upgrade rector --rules cakephp55 <path/to/app/src>
 - `Cake\Database\Driver\Mysql::isMariaDb()` is deprecated. You should upgrade to
   the dedicated MariaDb driver instead.
 
+### ORM
+
+- `SelectQuery::projectAs()`, `SelectQuery::getDtoClass()` and
+  `SelectQuery::isDtoProjectionEnabled()` are deprecated. Use
+  `Table::projectAs()` or `Table::projectOne()` instead.
+
 ## New Features
 
 ### Database
@@ -64,6 +70,12 @@ bin/cake upgrade rector --rules cakephp55 <path/to/app/src>
   setting the return type without `JosnPathExpression`. The return type from
   the path expression is used if not set.
 - `FunctionsBuilder::jsonExists()` was added.
+
+### ORM
+
+- `Table::projectAs()` and `Table::projectOne()` were added. They project
+  query results into DTOs and are typed as the DTO class. See
+  [Projecting Results Into DTOs](../orm/query-builder#dto-projection).
 
 ### TestSuite
 

@@ -854,8 +854,8 @@ advantages:
 - **Read-only data** - Using `readonly` classes ensures data integrity and
   makes your intent clear.
 
-The `projectAs()` method allows you to specify a DTO class that results will
-be hydrated into:
+`Table::projectAs()` takes a DTO class and returns a result set of DTO
+instances. `Table::projectOne()` returns a single DTO or `null`:
 
 ```php
 // Define a DTO class
@@ -869,12 +869,37 @@ readonly class ArticleDto
     }
 }
 
-// Use projectAs() to hydrate results into DTOs
-$articles = $articlesTable->find()
-    ->select(['id', 'title', 'body'])
-    ->projectAs(ArticleDto::class)
-    ->toArray();
+// ResultSetInterface<array-key, ArticleDto>
+$articles = $articlesTable->projectAs(ArticleDto::class);
+
+// ArticleDto|null
+$article = $articlesTable->projectOne(
+    ArticleDto::class,
+    $articlesTable->find()->where(['Articles.id' => $id]),
+);
 ```
+
+Both methods take an optional query as the second argument, so you can select
+fields, add conditions, contain associations or stack finders before
+projecting. Without a query they start from `find()`. The query you pass is
+not modified, and `projectOne()` limits it to one row, like `first()`.
+
+```php
+$articles = $articlesTable->projectAs(
+    ArticleDto::class,
+    $articlesTable->find()->select(['id', 'title', 'body']),
+);
+```
+
+The query fetches array rows and the table maps them, so both methods are
+typed as the DTO class. If a row does not end up as an instance of the
+requested class, for example because a `createFromArray()` factory returns
+another type, both methods throw a `CakeException`.
+
+> [!NOTE]
+> Collection methods that take a property path, such as `extract()` or
+> `indexBy()`, read rows through array access. Pass a callback instead unless
+> your DTO class implements `ArrayAccess`.
 
 #### DTO Creation Methods
 
@@ -959,10 +984,10 @@ readonly class CommentDto
 }
 
 // Fetch articles with associations projected into DTOs
-$articles = $articlesTable->find()
-    ->contain(['Authors', 'Comments'])
-    ->projectAs(ArticleDto::class)
-    ->toArray();
+$articles = $articlesTable->projectAs(
+    ArticleDto::class,
+    $articlesTable->find()->contain(['Authors', 'Comments']),
+);
 ```
 
 #### Using DTOs for API Responses
@@ -999,10 +1024,10 @@ readonly class ArticleApiResponse
 }
 
 // In your controller
-$articles = $this->Articles->find()
-    ->contain(['Authors'])
-    ->projectAs(ArticleApiResponse::class)
-    ->toArray();
+$articles = $this->Articles->projectAs(
+    ArticleApiResponse::class,
+    $this->Articles->find()->contain(['Authors']),
+)->toList();
 
 return $this->response->withType('application/json')
     ->withStringBody(json_encode(['articles' => $articles]));
@@ -1012,13 +1037,23 @@ This approach keeps your API response format decoupled from your database
 schema, making it easier to evolve your API without changing your data model.
 
 > [!NOTE]
-> DTO projection is applied as the final formatting step, after all other
-> formatters and behaviors have processed the results. This ensures
-> compatibility with existing behavior formatters while still providing the
-> benefits of DTOs.
+> DTO projection is applied as the final step, after all result formatters
+> and behaviors have processed the rows, so existing behavior formatters keep
+> working.
 
 ::: info Added in version 5.3.0
-The `projectAs()` method and `#[CollectionOf]` attribute were added.
+The `#[CollectionOf]` attribute and `SelectQuery::projectAs()` were added.
+:::
+
+::: info Added in version 5.5.0
+`Table::projectAs()` and `Table::projectOne()` were added.
+:::
+
+::: info Deprecated in version 5.5.0
+`SelectQuery::projectAs()`, `SelectQuery::getDtoClass()` and
+`SelectQuery::isDtoProjectionEnabled()` are deprecated. The query method
+returns DTOs while the query stays typed as entities. Use
+`Table::projectAs()` or `Table::projectOne()` instead.
 :::
 
 <a id="format-results"></a>
