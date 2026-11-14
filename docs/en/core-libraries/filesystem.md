@@ -92,6 +92,19 @@ $finder = (new Finder())
     ->files();
 ```
 
+You can follow symlinks by using `followLinks()`
+
+```php
+$finder = (new Finder())
+    ->in('src')
+    ->followLinks()
+    ->files();
+```
+
+::: Added in 5.5.0
+:::
+
+
 ### Filtering Examples
 
 #### By Filename Pattern

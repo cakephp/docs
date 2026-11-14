@@ -71,3 +71,8 @@ bin/cake upgrade rector --rules cakephp55 <path/to/app/src>
   cleans fixtures with `DELETE` instead of `TRUNCATE` which can be more
   performant on MySQL, with the trade off of auto increment values not being
   reset between tests.
+
+### Utility
+
+- ``Finder::followLinks()`` was added. This allows directory scanning to follow
+  and descend into symlinks.
