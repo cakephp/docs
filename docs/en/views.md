@@ -249,7 +249,7 @@ echo HtmlString::render(new Badge('News & updates'));
 ```
 
 Implementations are responsible for escaping any untrusted values in their
-markup. The contract applies to HTML content, and does not bypass attribute
+markup. The interface applies to HTML content, and does not bypass attribute
 escaping or explicit calls to `h()`.
 
 ::: info Added in version 6.0.0

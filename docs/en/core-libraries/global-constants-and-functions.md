@@ -219,7 +219,7 @@ use function Cake\View\html;
 echo $this->Html->link(html('<strong>Read more</strong>'), '/articles');
 ```
 
-This function marks markup as trusted and does not sanitize it. See
+This function marks a string as trusted content and does not sanitize it. See
 [Rendering Trusted HTML](../views#rendering-trusted-html) for escaping rules,
 helper support, and custom implementations.
 

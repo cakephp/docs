@@ -300,7 +300,7 @@ still uses other Diactoros classes or functions, declare
 
 - `HtmlString` and the `Cake\View\html()` function wrap trusted markup, while
   `HtmlString::render()` escapes ordinary strings and preserves values
-  implementing the new `HtmlStringable` contract. Supported HtmlHelper and
+  implementing the new `HtmlStringable` interface. Supported HtmlHelper and
   FormHelper content arguments accept these values without disabling escaping.
   See [Rendering Trusted HTML](../views#rendering-trusted-html) for usage and
   escaping rules.
