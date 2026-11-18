@@ -104,7 +104,6 @@ $finder = (new Finder())
 ::: Added in 5.5.0
 :::
 
-
 ### Filtering Examples
 
 #### By Filename Pattern
