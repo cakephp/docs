@@ -13,6 +13,54 @@ re-population and layout. The FormHelper is also flexible - it will do almost
 everything for you using conventions, or you can use specific methods to get
 only what you need.
 
+## Rendering Trusted HTML
+
+FormHelper accepts [HtmlString](../../views#rendering-trusted-html) and other
+`Cake\View\HtmlStringable` values in the following content positions:
+
+- Captions for `button()` and `postButton()`, and content for `postLink()` and
+  `deleteLink()`.
+- Label text for `label()`, the `label` option of `control()`, and the `text`
+  key of a label options array.
+- Option labels for `radio()` and `multiCheckbox()`.
+- Explicit error messages passed to `error()` or the `error` option of
+  `control()`, including individual messages in an array of overrides.
+
+These values render without escaping their markup, while ordinary strings
+continue to follow the existing escaping options:
+
+```php
+use function Cake\View\html;
+
+echo $this->Form->button(html('<strong>Save</strong>'));
+
+echo $this->Form->control('name', [
+    'label' => html('<strong>Your name</strong>'),
+]);
+
+echo $this->Form->radio('priority', [
+    ['value' => 'high', 'text' => html('<strong>High</strong>')],
+    ['value' => 'normal', 'text' => 'Normal'],
+]);
+
+// Override one message while retaining other validation messages.
+echo $this->Form->error('name', [
+    '_empty' => html('<strong>Please enter your name.</strong>'),
+]);
+```
+
+Only explicit error overrides are treated as trusted HTML. Messages obtained
+from the form context, including fallback messages without an override, remain
+escaped by default even if they implement `HtmlStringable`.
+
+Wrapping a value does not bypass escaping in attributes, input values,
+textarea contents, or select option text. Only wrap markup you control;
+`HtmlString` does not sanitize HTML.
+
+::: info Added in version 6.0.0
+Support for `HtmlStringable` content was added.
+:::
+
 ## Starting a Form
 
 `method` Cake\\View\\Helper\\FormHelper::**create**(mixed $context = null, array $options = []): string
@@ -1833,10 +1881,10 @@ If it was 2009, you would get the following:
 
 ## Creating Labels
 
-`method` Cake\\View\\Helper\\FormHelper::**label**(string $fieldName, string $text, array $options): string
+`method` Cake\\View\\Helper\\FormHelper::**label**(string $fieldName, HtmlStringable|string|null $text = null, array $options = []): string
 
 - `$fieldName` - A field name in the form `'Modelname.fieldname'`.
-- `$text` - An optional string providing the label caption text.
+- `$text` - An optional string or `HtmlStringable` value providing the label caption.
 - `$options` - Optional. Array containing any of the
   [General Control Options](#general-control-options) as well as any valid HTML attributes.
 
@@ -1882,7 +1930,7 @@ field errors and when necessary display customized error messages.
 `method` Cake\\View\\Helper\\FormHelper::**error**(string $fieldName, mixed $text, array $options): string
 
 - `$fieldName` - A field name in the form `'Modelname.fieldname'`.
-- `$text` - Optional. A string or array providing the error message(s). If an
+- `$text` - Optional. A string, `HtmlStringable` value, or array providing the error message(s). If an
   array, then it should be a hash of key names => messages. Defaults to
   `null`.
 - `$options` - An optional array that can only contain a boolean with the key
@@ -2053,15 +2101,15 @@ more complex button content you should use `button()`.
 
 ### Creating Button Elements
 
-`method` Cake\\View\\Helper\\FormHelper::**button**(string $title, array $options = []): string
+`method` Cake\\View\\Helper\\FormHelper::**button**(HtmlStringable|string $content, array $options = []): string
 
-- `$title` - Mandatory string providing the button's text caption.
+- `$content` - Mandatory string or `HtmlStringable` value providing the button's caption.
 - `$options` - An optional array including any of the
   [General Control Options](#general-control-options), or of the specific button options (see below)
   as well as any valid HTML attributes.
 
-Creates an HTML button with the specified title and a default type
-of `'button'`.
+Creates an HTML button with the specified content and a default type
+of `'submit'`.
 
 **Options for Button**
 
@@ -2072,9 +2120,9 @@ of `'button'`.
       as `submit()` does. This is the default type.
   2. `'reset'` - Creates a form reset button.
   3. `'button'` - Creates a standard push button.
-- `escapeTitle` - Boolean. If set to `true` it will HTML encode
-  the value provided inside `$title`. Defaults to `true`.
 - `escape` - Boolean. If set to `true` it will HTML encode
+  ordinary strings provided inside `$content`. Defaults to `true`.
+- `escapeAttributes` - Boolean. If set to `true` it will HTML encode
   all the HTML attributes generated for the button. Defaults to `true`.
 - `confirm` - The confirmation message to display on click. Defaults to
   `null`.
@@ -2097,13 +2145,13 @@ Will output:
 <button type="submit">Submit Form</button>
 ```
 
-Example use of the `'escapeTitle'` option:
+Example use of the `'escape'` option:
 
 ```php
 // Will render unescaped HTML.
 echo $this->Form->button('<em>Submit Form</em>', [
     'type' => 'submit',
-    'escapeTitle' => false,
+    'escape' => false,
 ]);
 ```
 
@@ -2165,10 +2213,10 @@ template option on `FormHelper`.
 
 ### Creating POST Buttons
 
-`method` Cake\\View\\Helper\\FormHelper::**postButton**(string $title, mixed $url, array $options = []): string
+`method` Cake\\View\\Helper\\FormHelper::**postButton**(HtmlStringable|string $content, array|string $url, array $options = []): string
 
-- `$title` - Mandatory string providing the button's text caption. By default
-  not HTML encoded.
+- `$content` - Mandatory string or `HtmlStringable` value providing the button's
+  caption. Ordinary strings are HTML encoded by default.
 - `$url` - The URL of the form provided as a string or as array.
 - `$options` - An optional array including any of the
   [General Control Options](#general-control-options), or of the specific options (see below) as well
@@ -2218,9 +2266,9 @@ inside opened forms.
 
 ### Creating POST Links
 
-`method` Cake\\View\\Helper\\FormHelper::**postLink**(string $title, array|string|null $url = null, array $options = []): string
+`method` Cake\\View\\Helper\\FormHelper::**postLink**(HtmlStringable|string $content, array|string|null $url = null, array $options = []): string
 
-- `$title` - Mandatory string providing the text to be wrapped in `<a>`
+- `$content` - Mandatory string or `HtmlStringable` value to be wrapped in `<a>`
   tags.
 - `$url` - Optional. String or array which contains the URL
   of the form (Cake-relative or external URL starting with `http://`).
@@ -2269,9 +2317,9 @@ use `Cake\View\Helper\FormHelper::button()` or
 
 ### Creating DELETE Links
 
-`method` Cake\\View\\Helper\\FormHelper::**deleteLink**(string $title, array|string|null $url = null, array $options = []): string
+`method` Cake\\View\\Helper\\FormHelper::**deleteLink**(HtmlStringable|string $content, array|string|null $url = null, array $options = []): string
 
-- `$title` - Mandatory string providing the text to be wrapped in `<a>`
+- `$content` - Mandatory string or `HtmlStringable` value to be wrapped in `<a>`
   tags.
 - `$url` - Optional. String or array which contains the URL
   of the form (Cake-relative or external URL starting with `http://`).

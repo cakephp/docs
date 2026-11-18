@@ -313,11 +313,11 @@ Will output:
 
 ### Creating Links
 
-`method` Cake\\View\\Helper\\HtmlHelper::**link**(array|string $title, array|string|null $url = null, array $options = []): string
+`method` Cake\\View\\Helper\\HtmlHelper::**link**(HtmlStringable|array|string $content, array|string|null $url = null, array $options = []): string
 
 General purpose method for creating HTML links. Use `$options` to
 specify attributes for the element and whether or not the
-`$title` should be escaped.
+`$content` should be escaped.
 
 ```php
 echo $this->Html->link(
@@ -387,7 +387,7 @@ Will output:
 <a href="/images/view/1?height=400&width=500">View image</a>
 ```
 
-HTML special characters in `$title` will be converted to HTML
+HTML special characters in string `$content` will be converted to HTML
 entities. To disable this conversion, set the escape option to
 `false` in the `$options` array.
 
@@ -407,15 +407,14 @@ Will output:
 </a>
 ```
 
-Setting `escape` to `false` will also disable escaping of attributes of the
-link. You can use the option `escapeTitle` to disable just
-escaping of title and not the attributes.
+The `escape` option controls the link content, while `escapeAttributes`
+controls attribute escaping independently. Attributes are escaped by default:
 
 ```php
 echo $this->Html->link(
     $this->Html->image('recipes/6.jpg', ['alt' => 'Brownies']),
     'recipes/view/6',
-    ['escapeTitle' => false, 'title' => 'hi "howdy"'],
+    ['escape' => false, 'title' => 'hi "howdy"'],
 );
 ```
 
@@ -427,12 +426,35 @@ Will output:
 </a>
 ```
 
+You can also wrap trusted content in an [HtmlString](../../views#rendering-trusted-html)
+to render it without changing the escaping options:
+
+```php
+use function Cake\View\html;
+
+echo $this->Html->link(
+    html($this->Html->image('recipes/6.jpg', ['alt' => 'Brownies'])),
+    'recipes/view/6',
+    ['title' => 'hi "howdy"'],
+);
+```
+
+When the content implements `Cake\View\HtmlStringable`, an explicit URL is
+required. Omitting the URL throws an `InvalidArgumentException`.
+`linkFromPath()` also accepts trusted HTML content. The `tag()`, `div()`, and
+`para()` methods accept it as their text argument and preserve its markup even
+when `'escape' => true`. Attribute escaping is unaffected.
+
+::: info Added in version 6.0.0
+Support for `HtmlStringable` content was added.
+:::
+
 Also check `Cake\View\Helper\UrlHelper::build()` method
 for more examples of different types of URLs.
 
 ### Creating Links from Route Paths
 
-`method` Cake\\View\\Helper\\HtmlHelper::**linkFromPath**(string $title, string $path, array $params = [], array $options = []): string
+`method` Cake\\View\\Helper\\HtmlHelper::**linkFromPath**(HtmlStringable|string $content, string $path, array $params = [], array $options = []): string
 
 If you want to use route path strings, you can do that using this method:
 
