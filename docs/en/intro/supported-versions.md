@@ -4,34 +4,46 @@ See [CakePHP Development Process](../appendices/cakephp-development-process.md) 
 
 ## CakePHP Supported Versions
 
-This table was last updated in February 2026.
+This table was last updated in November 2026.
+See the [CakePHP wiki](https://github.com/cakephp/cakephp/wiki#supported-versions)
+for the latest support status.
 
-| Major Version | Supported Version | PHP-Version    | Active Support | Security Support     |
-|---------------|-------------------|----------------|----------------|----------------------|
-| `5.x`         | `5.1` to `5.3`    | `8.1` to `8.5` | `5.3+`         | ✅                    |
-| `4.x`         | `4.4` to `4.6`    | `7.2` to `8.3` | ❌              | September 10th, 2026 |
-| `3.x`         | None              | `5.6` to `7.4` | ❌              | ❌                    |
-| `2.x`         | None              | `5.4` to `7.4` | ❌              | ❌                    |
-| `1.x`         | None              | `¯\_(ツ)_/¯`    | ❌              | ❌                    |
+| Major Version | Supported Version | PHP Version    | Active Support | Security Support        |
+|---------------|-------------------|----------------|----------------|-------------------------|
+| `6.x`         | In development    | `8.5`          | Not released   | Not released            |
+| `5.x`         | `5.4`             | `8.2` to `8.5` | ✅              | Until the release of `5.7` |
+| `5.x`         | `5.3`             | `8.2` to `8.5` | ❌              | Until the release of `5.6` |
+| `5.x`         | `5.2`             | `8.1` to `8.5` | ❌              | Until the release of `5.5` |
+| `4.x`         | `4.6`             | `7.4` to `8.5` | Until `6.0`    | Until the release of `6.0` |
+| `3.x`         | None              | `5.6` to `7.4` | ❌              | ❌                       |
+| `2.x`         | None              | `5.3` to `7.4` | ❌              | ❌                       |
+| `1.x`         | None              | `¯\_(ツ)_/¯`    | ❌              | ❌                       |
+
+CakePHP 5.5 and 6.0 are in development and do not have release dates yet.
+CakePHP 5.5 requires PHP 8.2 or later.
 
 ### Major Version Support
 
-We follow the rule to support the previous major version for
+We generally support the previous major version for
+
 - 24 months of `active support` (includes new features and bugfixes) and
 - 36 months of `security support`
-after the release of a new major version.
 
-E.g. [CakePHP 5.0](https://github.com/cakephp/cakephp/releases/tag/5.0.0) released on September 10th 2023,
-so we will support CakePHP 4.x until September 10th 2025 and provide security updates until September 10th 2026.
+after the release of a new major version. These periods can be extended.
+
+CakePHP 4.4 and 4.5 reached the end of security support on September 9th 2026.
+CakePHP 4.6 continues to receive bug fixes and security fixes until CakePHP 6.0 is released.
 
 ### Minor Version Support
 
-`Active support` for a minor branch ends the moment a new minor branch is released.
-E.g. when CakePHP 4.2 is released, active support for CakePHP 4.1 will end and only security updates will be provided.
+`Active support` for a minor branch ends when a new minor branch is released,
+unless an extension is announced. For example, active support for CakePHP 5.3
+ended when CakePHP 5.4 was released. CakePHP 4.6 is an exception, as described above.
 
-`Security updates` will be provided
-- till the end of the support period for the major version, or
-- 3 new minor releases have been published (e.g. `4.2` support ended when `4.5` was released)
+`Security updates` will be provided until
+
+- the end of the support period for the major version, or
+- 3 new minor releases have been published (e.g. `5.2` support ends when `5.5` is released)
 
 whichever comes first.
 
