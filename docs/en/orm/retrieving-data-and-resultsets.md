@@ -334,6 +334,32 @@ The `keyField`, `valueField`, and `groupField` expression will operate on
 entity attribute paths not the database columns. This means that you can use
 virtual fields in the results of `find(list)`.
 
+### Getting The List Directly
+
+`Table::list()` runs the `list` finder and returns the executed key/value
+result set. It takes the same `keyField`, `valueField`, `groupField` and `valueSeparator`
+options as the finder:
+
+```php
+$data = $articles->list(valueField: 'label');
+
+// Build the query first to add conditions or stack other finders
+$data = $articles->list(
+    $articles->find()->where(['published' => true])->orderBy(['title' => 'ASC']),
+    keyField: 'slug',
+    valueField: 'label',
+);
+```
+
+Unlike `find('list')`, which is statically typed as a query of entities,
+`list()` is typed as returning a `ResultSetInterface` of key/value pairs, so
+static analysis tools see the real result. The result set can be passed to
+form helpers as options directly, or turned into an array with `toArray()`.
+
+::: info Added in version 5.5.0
+`Table::list()` was added.
+:::
+
 ### Customize Key-Value Output
 
 Lastly it is possible to use closures to access entity accessor methods in your
