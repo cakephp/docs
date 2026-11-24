@@ -278,6 +278,20 @@ $selection = $io->askChoice('Red or Green?', ['R', 'G'], 'R');
 
 Selection validation is case-insensitive.
 
+When a command runs with `--quiet` or `--no-interaction`, prompts are not
+shown and `ask()` and `askChoice()` return their default value. Use
+`$io->isInteractive()` to check whether prompts are enabled, for example to
+skip a confirmation step. Options defined with `prompt` are not asked either;
+a required option without a value then fails with a missing option error.
+
+```text
+bin/cake my_command --no-interaction
+```
+
+::: info Added in version 5.5.0
+`ConsoleIo::isInteractive()` and the `--no-interaction` option were added.
+:::
+
 ## Creating Files
 
 `method` Cake\\Console\\ConsoleIo::**createFile**(string $path, string $contents, bool $forceOverwrite = false): bool
@@ -408,6 +422,9 @@ $io->verbose('Verbose output');
 You can control the output level of commands, by using the `--quiet` and
 `--verbose` options. These options are added by default, and allow you to
 consistently control output levels inside your CakePHP commands.
+
+`--quiet` also disables interactive prompts. To disable prompts but keep the
+normal output, use `--no-interaction` instead.
 
 The `--quiet` and `--verbose` options also control how logging data is
 output to stdout/stderr. Normally info and higher log messages are output to
