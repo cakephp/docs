@@ -14,7 +14,7 @@ queries using unions and subqueries with ease.
 Underneath the covers, the query builder uses PDO prepared statements which
 protect against SQL injection attacks.
 
-For comparisons in condition arrays, import the predicate functions from
+For comparisons in condition arrays, you can import the predicate functions from
 `Cake\Database\Expression` with `use function`. The array key supplies the field,
 and the predicate supplies the operator and values. See
 [Predicate Functions](#predicate-functions) for the available functions.
@@ -1093,10 +1093,21 @@ WHERE published = true
     AND title LIKE '%cake%'
 ```
 
-The values are bound as parameters. Condition keys must contain only the field
-or a trusted SQL expression. CakePHP 6 no longer accepts operators in array keys
-such as `'view_count >'` or `'title LIKE'`; these raise an
-`InvalidArgumentException`.
+The values are bound as parameters. Operators in condition-array keys, such as
+`'view_count >'` or `'title LIKE'`, remain supported. You can mix both styles:
+
+```php
+use function Cake\Database\Expression\greaterThan;
+
+$query = $articles->find()->where([
+    'view_count' => greaterThan(1000),
+    'title LIKE' => '%cake%',
+]);
+```
+
+When the value is a predicate, the key must contain only the field or a trusted
+SQL expression. Combining an operator in the key with a predicate, such as
+`['view_count >' => greaterThan(1000)]`, raises an `InvalidArgumentException`.
 
 The following predicate functions are available:
 
@@ -1740,7 +1751,8 @@ $query = $categories->find()
 The above will generate `parent_id = :c1` or `parent_id IS NULL` depending on
 whether `$parentId` is `null`. Use `isNull()` for an unconditional null check.
 A plain condition such as `['parent_id' => null]` raises an
-`InvalidArgumentException`; a null-aware predicate is required.
+`InvalidArgumentException`. Use a null-aware predicate or an explicit `IS`
+operator, such as `['parent_id IS' => $parentId]`.
 
 ### Automatic IS NOT NULL Creation
 
@@ -1755,7 +1767,8 @@ $query = $categories->find()
 
 The above will generate `parent_id != :c1` or `parent_id IS NOT NULL`
 depending on whether `$parentId` is `null`. Use `isNotNull()` for an
-unconditional non-null check. Ordering and pattern predicates such as
+unconditional non-null check. You can also use an explicit `IS NOT` operator,
+such as `['parent_id IS NOT' => $parentId]`. Ordering and pattern predicates such as
 `greaterThan()` and `like()` reject `null` values.
 
 ### Raw Expressions
