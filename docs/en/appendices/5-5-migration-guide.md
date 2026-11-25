@@ -43,6 +43,15 @@ bin/cake upgrade rector --rules cakephp55 <path/to/app/src>
   `BadRequestException` (HTTP 400). See
   [HTTP Method Overrides](../controllers/request-response#http-method-overrides).
 
+### Console
+
+- `--quiet` now also skips options defined with `prompt`. Previously these
+  were asked while arguments were parsed, before `--quiet` took effect. A
+  required option left without a value now fails with the usual missing option
+  error instead of waiting for input.
+- Commands are switched to non-interactive mode before `initialize()` runs, so
+  prompts in `initialize()` respect `--quiet` and `--no-interaction` too.
+
 ## Deprecations
 
 ### Database
@@ -64,6 +73,15 @@ bin/cake upgrade rector --rules cakephp55 <path/to/app/src>
   setting the return type without `JosnPathExpression`. The return type from
   the path expression is used if not set.
 - `FunctionsBuilder::jsonExists()` was added.
+
+### Console
+
+- `ConsoleIo::isInteractive()` was added.
+- `--no-interaction` was added to the default command options. It disables
+  prompts, which answer with their default value, while keeping the normal
+  output level. Unlike `--quiet` it does not hide output. If your application
+  already defines a `no-interaction` option, you can remove it, or keep it.
+  The option definition in your application replaces the default one.
 
 ### TestSuite
 
