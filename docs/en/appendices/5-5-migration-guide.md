@@ -80,9 +80,8 @@ bin/cake upgrade rector --rules cakephp55 <path/to/app/src>
 - `--no-interaction` was added to the default command options. It disables
   prompts, which answer with their default value, while keeping the normal
   output level. Unlike `--quiet` it does not hide output. If your application
-  already defines a `no-interaction` option, you can remove it, or keep it:
-  your definition replaces the default one, and CakePHP now switches the
-  command to non-interactive mode when it is passed.
+  already defines a `no-interaction` option, you can remove it, or keep it.
+  The option definition in your application replaces the default one.
 
 ### TestSuite
 
