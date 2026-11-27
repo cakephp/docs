@@ -130,7 +130,8 @@ use Cake\Routing\Route\DashedRoute;
 
 $routes->scope('/', function (RouteBuilder $routes) {
     // Connect the generic fallback routes.
-    $routes->fallbacks(DashedRoute::class);
+    $routes->connect('/{controller}', ['action' => 'index']);
+    $routes->connect('/{controller}/{action}/*');
 });
 ```
 
@@ -700,7 +701,8 @@ $routes->prefix('Admin', function (RouteBuilder $routes) {
     // All routes here will be prefixed with `/admin`, and
     // have the `'prefix' => 'Admin'` route element added that
     // will be required when generating URLs for these routes
-    $routes->fallbacks(DashedRoute::class);
+    $routes->connect('/{controller}', ['action' => 'index']);
+    $routes->connect('/{controller}/{action}/*');
 });
 ```
 
@@ -907,7 +909,8 @@ with the following router connection:
 use Cake\Routing\Route\DashedRoute;
 
 $routes->plugin('ToDo', ['path' => 'to-do'], function (RouteBuilder $routes) {
-    $routes->fallbacks(DashedRoute::class);
+    $routes->connect('/{controller}', ['action' => 'index']);
+    $routes->connect('/{controller}/{action}/*');
 });
 ```
 
@@ -1818,27 +1821,6 @@ Calling the method without an argument will return current default route class.
 
 `method` Cake\\Routing\\RouteBuilder::**fallbacks**(?string $routeClass = null): static
 
-The fallbacks method is a simple shortcut for defining default routes. The
-method uses the passed routing class for the defined rules or if no class is
-provided the class returned by `RouteBuilder::setRouteClass()` is used.
-
-Calling fallbacks like so:
-
-```php
-use Cake\Routing\Route\DashedRoute;
-
-$routes->fallbacks(DashedRoute::class);
-```
-
-Is equivalent to the following explicit calls:
-
-```php
-use Cake\Routing\Route\DashedRoute;
-
-$routes->connect('/{controller}', ['action' => 'index'], ['routeClass' => DashedRoute::class]);
-$routes->connect('/{controller}/{action}/*', [], ['routeClass' => DashedRoute::class]);
-```
-
 > [!NOTE]
 > Using the default route class (`Route`) with fallbacks, or any route
 > with `{plugin}` and/or `{controller}` route elements will result in
@@ -1851,6 +1833,10 @@ $routes->connect('/{controller}/{action}/*', [], ['routeClass' => DashedRoute::c
 >
 > As your application grows, it is recommended to move away from fallback URLs
 > and explicitly define the routes in your application.
+>
+> Using fallbacks() will emit warnings in non-debug mode to remind you about
+> not using them.
+
 
 ## Creating Persistent URL Parameters
 

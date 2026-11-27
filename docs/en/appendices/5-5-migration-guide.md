@@ -16,12 +16,29 @@ bin/cake upgrade rector --rules cakephp55 <path/to/app/src>
 
 ## Behavior Changes
 
+
+### Console
+
+- `--quiet` now also skips options defined with `prompt`. Previously these
+  were asked while arguments were parsed, before `--quiet` took effect. A
+  required option left without a value now fails with the usual missing option
+  error instead of waiting for input.
+- Commands are switched to non-interactive mode before `initialize()` runs, so
+  prompts in `initialize()` respect `--quiet` and `--no-interaction` too.
+
 ### Database
 
 - `Postgres` driver does not transform `CONCAT()` function expressions into `||` operations.
 - `Postgres` driver does not transform `JSON_VALUE()` function expression into `JSONB_PATH_QUERY()`
   for versions 17 and newer.
 - `BoolType` converts `t` to true to support how PostgreSQL returns boolean values from `JSON_VALUE()`.
+
+### Http
+
+- HTTP method overrides from `_method` or `X-Http-Method-Override` are normalized
+  to uppercase. Invalid syntax and non-string values now raise
+  `BadRequestException` (HTTP 400). See
+  [HTTP Method Overrides](../controllers/request-response#http-method-overrides).
 
 ### ORM
 
@@ -36,21 +53,12 @@ bin/cake upgrade rector --rules cakephp55 <path/to/app/src>
   this method must add the optional parameter to their signature and pass it
   through when calling `parent::addDefaultTypes()`.
 
-### Http
+### Routing
 
-- HTTP method overrides from `_method` or `X-Http-Method-Override` are normalized
-  to uppercase. Invalid syntax and non-string values now raise
-  `BadRequestException` (HTTP 400). See
-  [HTTP Method Overrides](../controllers/request-response#http-method-overrides).
-
-### Console
-
-- `--quiet` now also skips options defined with `prompt`. Previously these
-  were asked while arguments were parsed, before `--quiet` took effect. A
-  required option left without a value now fails with the usual missing option
-  error instead of waiting for input.
-- Commands are switched to non-interactive mode before `initialize()` runs, so
-  prompts in `initialize()` respect `--quiet` and `--no-interaction` too.
+- ``RouteBuilder::fallbacks()`` now emits a warning when used in development
+  mode. Routing fallbacks are not intended for production as they can allow
+  scoped middleware to be bypassed. Instead of using fallbacks, you should
+  declare all your routes explicitly.
 
 ## Deprecations
 
